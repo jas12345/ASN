@@ -1,2 +1,2 @@
 # ASN
-Adminsitracion de solicitudes de nomina
+Adminsitración de Solicitudes a Nómina
