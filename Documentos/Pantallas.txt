@@ -1,0 +1,45 @@
+Tablas
+
+Catálogo de Conceptos ASN/PeopleSoft
+Catálogo de Estatus/Transiciones de Solicitudes
+Catálogo Motivos de Solicitud
+Tabla Relación Cadena de Autorización por Concepto/Estructura Organizacional
+Tabla de Solicitudes
+Tabla Documentos-Solicitud
+Catálogo de Nóminas
+Tabla Histórico de Solicitudes
+Tabla de Notificaciones
+
+
+
+Pantallas/Procesos
+
+1. ABC Conceptos/Mapeo de Conceptos
+1.1. ABC Rol
+2. ABC Seguridad Concepto/Perfil
+3. ABC Cadena de Autorización
+4. ABC Estructura Organizacional/
+5. ABC Catalogo local Motivos Solicitud
+6. ABC Rol Coordinador de Nómina por Site
+7. Proceso Solicitudes
+8. ABC Carga de documentos (PDFs, etc.)
+9. Proceso Carga Masiva de Solicitudes (Excel)
+10. Proceso de Flujo de Autorización de Estatus/Transiciones
+11. ABC de Nóminas
+12. Proceso Mtto de Solicitudes Autorización/Cancelación/Rechazo...
+
+14. Proceso Envio de Notificaciones
+15. Generación de Archivos de Excel para carga a PeopleSoft (Por Coordinador de Nóminas)
+16. Consultas Solicitantes/Autorizadores
+17. Proceso Extracción de Estructura Organizacional
+18. Proceso Reporte General
+19. Proceso Reporte de Auditoría
+20. Proceso de Cierre de Movimientos
+
+
+
+
+
+
+
+
