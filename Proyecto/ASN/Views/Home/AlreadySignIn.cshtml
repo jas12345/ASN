@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Already signed";
+    //Layout = "~/Views/Shared/_LayoutLoginRegister.cshtml";
+    GAPP.Models.MyCustomIdentity usuario = (GAPP.Models.MyCustomIdentity) User.Identity;
+}
+<div class="col-md-12">
+    <div class="block-flat text-center" style="padding: 20px; margin-bottom: 0; padding-bottom: 0;">
+
+        <i class="glyphicon glyphicon-user"></i>
+        <br />
+        <label style="padding-bottom: 10px; padding-top: 10px; font-weight:normal;">You're already signed in as <strong>@usuario.UserInfo.Account_ID</strong></label>
+        @*<label style="padding-bottom: 5px; padding-top: 5px">@Html.ActionLink("Remain signed in with this account.", "Login", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</label>*@
+        <label style="padding-bottom: 5px; padding-top: 2px; font-weight:normal;">@Html.ActionLink("Click here ", "Logout", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })to sign out and sign with a different account</label>
+
+    </div>
+</div>

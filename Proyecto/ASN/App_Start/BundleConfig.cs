@@ -25,6 +25,21 @@ namespace ASN
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //Kendo Blundes
+            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+            "~/Scripts/kendo.all.min.js",
+            "~/Scripts/kendo.aspnetmvc.min.js",
+            "~/Scripts/jquery.blockUI.js",
+            "~/Scripts/jszip.min.js"));
+
+
+            bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
+            "~/Content/kendo.common.min.css",
+            "~/Content/kendo.default.min.css",
+            "~/Content/kendo.custom.css"
+            ));
+
         }
     }
 }
