@@ -1,0 +1,58 @@
+﻿@model ASN.Models.R2WViewModel
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="Action">Fecha</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownList()
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetDatesR2OPSCMB", "ProDepro");
+                    });
+                    //.ServerFiltering(true);
+                })
+                //.Filter("contains")
+                //.OptionLabel("- Action - ")
+                .DataValueField("Id")
+                .DataTextField("Valor")
+                .Name("FechaR2W")
+                .Enable(false)
+                .Events(s => s.DataBound("R2WOpen"))
+            //.HtmlAttributes(new { required = "required" })
+            )
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        //$("#pop a[class='k-grid-update']").on("click", function () {
+        $(".k-grid-update").on("click", function () {
+            try{
+                if ($("#ActionId").val() > 0) {
+                    $(".k-grid-update").css("display", "none");
+                    $(".k-grid-cancel").css("display", "none");
+                    //$(".k-window-actions").hide()
+                    //$("input").prop('disabled', true);
+                    $("#FechaR2W").data("kendoDropDownList").enable(false);
+                    $("#ActionId").data("kendoDropDownList").enable(false);
+                    $("#pop").append('<img id="loader" src="@Url.Content("~/Content/images/142loading.gif")" alt="Banner" />');
+                }
+            }
+            catch (ex) {
+
+            }
+        });
+    });
+</script>

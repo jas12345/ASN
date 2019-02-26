@@ -1,0 +1,58 @@
+﻿@model ASN.Models.NCNSViewModel
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="Action">Fecha</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownList()
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetDatesNCNSCMB", "ProDepro", new { CCMSNumber = Model.ccmsid });
+                    });
+                    //.ServerFiltering(true);
+                })
+                //.Filter("contains")
+                //.OptionLabel("- Action - ")
+                .DataValueField("Id")
+                .DataTextField("Valor")
+                .Name("FechaNCNS")
+                .Enable(false)
+                .Events(s => s.DataBound("NCNSOpen"))
+            //.HtmlAttributes(new { required = "required" })
+            )
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        //$("#pop a[class='k-grid-update']").on("click", function () {
+        $(".k-grid-update").on("click", function () {
+            try{
+                if ($("#ActionId").val() > 0) {
+                    $(".k-grid-update").css("display", "none");
+                    $(".k-grid-cancel").css("display", "none");
+                    //$(".k-window-actions").hide()
+                    //$("input").prop('disabled', true);
+                    $("#FechaNCNS").data("kendoDropDownList").enable(false);
+                    $("#ActionId").data("kendoDropDownList").enable(false);
+                    $("#pop").append('<img id="loader" src="@Url.Content("~/Content/images/142loading.gif")" alt="Banner" />');
+                }
+            }catch(ex)
+            {
+
+            }
+        });
+    });
+</script>

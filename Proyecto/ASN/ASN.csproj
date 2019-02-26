@@ -137,6 +137,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ASN.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProDeproController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -316,6 +317,7 @@
     <Compile Include="Models\CatUserInfoSel_Result.cs">
       <DependentUpon>InformationSecurity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ELAViewModel.cs" />
     <Compile Include="Models\GetNewEmployeeBadgeNumberSel_Result.cs">
       <DependentUpon>InformationSecurity.tt</DependentUpon>
     </Compile>
@@ -336,10 +338,14 @@
       <DependentUpon>InformationSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogError.cs" />
+    <Compile Include="Models\MailHelper.cs" />
     <Compile Include="Models\ManagersByHierarchySel_Result.cs">
       <DependentUpon>InformationSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MyCustomIdentity.cs" />
+    <Compile Include="Models\NCNSViewModel.cs" />
+    <Compile Include="Models\ProDepro.cs" />
+    <Compile Include="Models\R2WViewModel.cs" />
     <Compile Include="Models\RelConceptoPai.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -397,6 +403,8 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\Login.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\ASN.Context.tt">
@@ -459,6 +467,15 @@
     <Content Include="Models\InformationSecurity.edmx.diagram">
       <DependentUpon>InformationSecurity.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\formAnimation.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -513,6 +530,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\ProDepro\ELA.cshtml" />
+    <Content Include="Views\ProDepro\Index.cshtml" />
+    <Content Include="Views\ProDepro\MailNotification.cshtml" />
+    <Content Include="Views\ProDepro\NCNS.cshtml" />
+    <Content Include="Views\ProDepro\R2W.cshtml" />
+    <Content Include="Views\ProDepro\SubirFotoPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
