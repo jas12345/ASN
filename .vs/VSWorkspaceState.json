@@ -3,7 +3,10 @@
     "",
     "\\Documentos",
     "\\Proyecto",
-    "\\Proyecto\\ASN"
+    "\\Proyecto\\ASN",
+    "\\Proyecto\\ASN\\bin",
+    "\\Proyecto\\ASN\\obj"
   ],
+  "SelectedNode": "\\Proyecto\\ASN\\bin",
   "PreviewInSolutionExplorer": false
 }
