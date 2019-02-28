@@ -13,7 +13,7 @@ namespace ASN.Controllers
 {
     //[Authorize]
     [Authorize(Roles = "Desarrollo,Security,RH,ProDeproManager,Information Security")]  //hrcv
-    public class ProDeproController : Controller
+    public class Proceso : Controller
     {
         // GET: ProDepro
         public ActionResult Index()

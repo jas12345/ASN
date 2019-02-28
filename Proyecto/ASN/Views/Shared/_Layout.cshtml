@@ -1,43 +1,276 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <link rel="icon" href="@Url.Content("~/favicon.ico")" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Administrador de Solicitudes a Nómina</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/kendo/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/moment")
+
+    @using ASN.Models;
+
+    @{
+        var usuario = ((MyCustomIdentity)User.Identity).UserInfo;
+    }
+
+    <script src="~/Scripts/cultures/kendo.culture.en-US.min.js"></script>
+    <script>
+        kendo.culture("en-US");
+
+        function Timer(callback, time) {
+            this.setTimeout(callback, time);
+        }
+
+        Timer.prototype.setTimeout = function (callback, time) {
+            var self = this;
+            if (this.timer) {
+                clearTimeout(this.timer);
+            }
+            this.finished = false;
+            this.callback = callback;
+            this.time = time;
+            this.timer = setTimeout(function () {
+                self.finished = true;
+                callback();
+            }, time);
+            this.start = Date.now();
+        }
+
+        Timer.prototype.add = function (time) {
+            if (!this.finished) {
+                // add time to time left
+                //time = this.time - (Date.now() - this.start) + time;
+                this.setTimeout(this.callback, time);
+            }
+        }
+
+        Date.prototype.toString = function (e) {
+            //console.log(this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDay());
+            //return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDay();//this.getDate(); //+ " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
+            var numerin = new Date(this.toDateString()).getTime();
+            var d = new Date(numerin);
+            var e = d.toISOString();//"2017-03-15T12:00:00.000Z";
+            var f = e.substring(0, e.indexOf("T"));
+            return f;
+        }
+
+        //var x = 0;
+
+        // Checar el tiempo del timeout con un contador y
+        //setInterval(
+        //    function () {
+        //        x = x + 1;
+        //        $("#contador").html(x);
+        //    }, 1000);
+
+        @*setTimeout(
+            function () {
+                //alert("Hello");
+                $('#dialog').data("kendoDialog").open();
+            }, @int.Parse(System.Configuration.ConfigurationManager.AppSettings["TimeOutMinutes"].ToString()));*@
+
+        var timer = new Timer(function () {
+            $('#dialog').data("kendoDialog").open();
+            }, @int.Parse(System.Configuration.ConfigurationManager.AppSettings["TimeOutMinutes"].ToString())
+        );
+
+        $(document).ready(function () {
+            $.ajaxSetup({
+                error: handleXhrError,
+                complete: function (xhr, stat) {
+                    timer.add(@int.Parse(System.Configuration.ConfigurationManager.AppSettings["TimeOutMinutes"].ToString()));
+                }
+            });
+        });
+
+        function handleXhrError(xhr) {
+            //console.log("jojo");
+            //window.location = "@Url.Action("Logout", "Home")";
+        }
+
+        function onClose() {
+            location.reload();
+        }
+    </script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
-    </div>
+    <div id="wrapper">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        ASN
+                    </a>
+                </li>
+                @{
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("ProDeproManager") || User.IsInRole("Information Security") || User.IsInRole("RH")) //hrcv
+                    {
+                        <li>@Html.ActionLink("Conceptos", "Conceptos", "Catálogo")</li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("BadgeIn24DateCommitted"))
+                    {
+                        <li>@Html.ActionLink("Mapeo de Conceptos", "index", "Catálogos")</li>
+                        <li>@Html.ActionLink("Motivos de Solicitud", "index", "BadgeIn24")</li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("RH") || User.IsInRole("Clerical-ESV"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogs<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-header"><div class="fa fa-angellist"></div></li>
+                                @if (User.IsInRole("Desarrollo") || User.IsInRole("Security"))
+                                {
+                                    <li>@Html.ActionLink("Access Level", "index", "AccessLevel")</li>
+                                    <li>@Html.ActionLink("Card Range", "index", "CardRange")</li>
+                                    <li>@Html.ActionLink("Reposition Numbers", "index", "RepositionCat")</li>
+                                }
+                                else if (User.IsInRole("RH"))
+                                {
+                                    <li>@Html.ActionLink("Reposition Numbers", "index", "RepositionCat")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Users", "index", "Usuario")</li>
+                                    <li>@Html.ActionLink("Location-Employee", "index", "LocationEmployee")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+                                {
+                                    <li>@Html.ActionLink("Role-Client", "index", "RoleClient")</li>
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Report") || User.IsInRole("Information Security"))
+                    {
+                        <li>@Html.ActionLink("Coordinadores de Nómina", "index", "Report")</li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("RH"))
+                    {
+                        <li>@Html.ActionLink("Carga de Documentos", "index", "Reposition")</li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("RH") || (User.IsInRole("ProDeproManager") && usuario.Country_ident == 165))
+                    {
+                        <li>@Html.ActionLink("Carga masiva", "index", "APBajas")</li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+                    {
+                        < li > @Html.ActionLink("Estatus de Solicitud", "index", "Clerical") </ li >
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+                    {
+                        <li>@Html.ActionLink("Períodos de Nómina", "index", "Clerical")</li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+                    {
+                        <li>@Html.ActionLink("Notificaciones", "index", "Clerical")</li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+                    {
+                        <li>@Html.ActionLink("Descargas de EXCEL", "index", "Clerical")</li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+                    {
+                        <li> @Html.ActionLink("Reporte General", "index", "Clerical") </li >
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+                    {
+                        <li>@Html.ActionLink("Reporte de Auditoría", "index", "Clerical")</li>
+                    }
+
+                    if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+                    {
+                        <li>@Html.ActionLink("Depuración de Movimientos", "index", "Clerical")</li>
+                    }
+
+
+                }
+
+                <li>
+                    @Html.ActionLink("Exit", "Logout", "Home")
+                </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+        <div class="overlay"></div>
+        <div class="page-content-wrapper">
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+            <div class="">
+                @*<div>
+                    <label id="contador"></label>
+                </div>*@
+                <div class="col-lg-1" style="margin-left: 50px; margin-top: -40px;">
+                    @*<a href="@Url.Action("Index","Inicio")">*@
+                        <img src="@Url.Content("~/Content/images/logo.png")" , alt="Inicio" />
+                    @*</a>*@
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="wrapper">
+                @RenderBody()
+            </div>
+            @*<hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>*@
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+
+    @(Html.Kendo().Notification()
+    .Name("popupNotification")
+    .Position(p => p.Pinned(true).Top(30).Right(30))
+    .Stacking(NotificationStackingSettings.Down)
+    .Events(e => e.Show("onShow"))
+    //.AutoHideAfter(0)
+    //.HtmlAttributes( new { @style = "background:rgba(0%,60%,0%,.7);color:white;"})
+    )
+
+    @(Html.Kendo().Dialog()
+        .Name("dialog")
+        .Title("Gapp")
+        .Content("<center><p>Session expired</p></center>")
+        .Width(400)
+        .Modal(true)
+        .Actions(actions =>
+        {
+            actions.Add().Text("OK").Primary(true).Action("onClose");
+        })
+        .Visible(false)
+        .Events(ev => ev.Close("onClose"))
+    )
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

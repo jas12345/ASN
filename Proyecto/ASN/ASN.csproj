@@ -136,8 +136,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ASN.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Controllers\ProcesoController.cs" />
+    <Compile Include="Controllers\NominaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProDeproController.cs" />
+    <Compile Include="Controllers\CatalogoController.cs" />
+    <Compile Include="Controllers\SeguridadController.cs" />
+    <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -532,12 +537,22 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\ProDepro\ELA.cshtml" />
-    <Content Include="Views\ProDepro\Index.cshtml" />
-    <Content Include="Views\ProDepro\MailNotification.cshtml" />
-    <Content Include="Views\ProDepro\NCNS.cshtml" />
-    <Content Include="Views\ProDepro\R2W.cshtml" />
-    <Content Include="Views\ProDepro\SubirFotoPopup.cshtml" />
+    <Content Include="Views\Catalogo\Index.cshtml" />
+    <Content Include="Views\Catalogo\Conceptos.cshtml" />
+    <Content Include="Views\Catalogo\MapeoConceptos.cshtml" />
+    <Content Include="Views\Catalogo\ConceptosXPais.cshtml" />
+    <Content Include="Views\Seguridad\Roles.cshtml" />
+    <Content Include="Views\Catalogo\Motivos.cshtml" />
+    <Content Include="Views\Seguridad\CoordinadoresNomina.cshtml" />
+    <Content Include="Views\Solicitud\Captura.cshtml" />
+    <Content Include="Views\Solicitud\CargaDocumento.cshtml" />
+    <Content Include="Views\Solicitud\CargaMasiva.cshtml" />
+    <Content Include="Views\Nominas\Periodos.cshtml" />
+    <Content Include="Views\Solicitud\Notificaciones.cshtml" />
+    <Content Include="Views\Solicitud\Administracion.cshtml" />
+    <Content Include="Views\Procesos\GeneracionEXCEL.cshtml" />
+    <Content Include="Views\Reporte\Auditoria.cshtml" />
+    <Content Include="Views\Reporte\General.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

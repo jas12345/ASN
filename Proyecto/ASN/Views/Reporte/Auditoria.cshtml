@@ -1,0 +1,279 @@
+﻿@using ASN.Models;
+
+@{
+    ViewBag.Title = "Actions";
+
+    var usuario = ((MyCustomIdentity)User.Identity).UserInfo;
+}
+
+<style>
+    /*.k-list
+    {
+      white-space: nowrap;
+    }*/
+
+    /*.k-list-container .k-list .k-item
+      {
+          padding-right: 25px;
+      }*/
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row center-block">
+        <div class="col-lg-12" style="text-align:center;font-size:20px;">
+            <label>Actions</label>
+        </div>
+        <div class="row">
+            <div class="col-lg-12" style="text-align:center">
+                <label>@usuario.FullName - @usuario.Position_Code_Title</label>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12" style="text-align:center">
+                <label>Manager</label>
+            </div>
+            <div class="col-lg-12" style="text-align:center">
+                @(Html.Kendo().DropDownList()
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetManagerCMB", "ProDepro");
+                                });
+                            //.ServerFiltering(true);
+                        })
+                            .Filter("contains")
+                            //.OptionLabel("- Manager - ")
+                            .DataValueField("EmployeeId")
+                            .DataTextField("ManagerName")
+                            .Name("Manager")
+                            .Value(User.Identity.Name)
+                            //.Events(e => e.DataBound("adjustDropDownWidth"))
+                            .HtmlAttributes(new { style = "width:19em" })
+                        /*.Events(e =>
+                        {
+                            e.Select("onSelectManager");
+                        })*/
+                        /**
+                        .HeaderTemplate(" <div class=\"dropdown-header k-widget k-header\">" +
+                                            "<span>Photo</span>" +
+                                            "<span>Contact info</span>" +
+                                            "</div>")
+                        .Template(" #: data.EmployeeId # #: data.ManagerName # ")
+                        */
+                        /*
+                        .Template("<input type=\"checkbox\" id=\"#:data.EmployeeId#\" /> #: data.EmployeeId # #: data.ManagerName # ")
+
+                        .Template(" <span class=\"k-state-default\" style=\"background-image: url(\'../content/web/Customers/#:data.CustomerID#.jpg\')\"></span> " +
+                                    " <span class=\"k-state-default\"><h3>#: data.EmployeeId #</h3><p>#: data.ManagerName #</p></span> ")
+                        //.FooterTemplate(" Total #: instance.dataSource.total() # items found )
+                        /**/
+                )
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12" style="text-align:center">
+                <label>Account</label>
+            </div>
+            <div class="col-lg-12" style="text-align:center">
+                @(Html.Kendo().DropDownList()
+                                .DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetManagerEmployeesCMB", "ProDepro").Data("goEmpS");
+                                    })
+                                    .ServerFiltering(true);
+                                })
+                                //.Filter(FilterType.Contains)
+                                .OptionLabel("- Account - ")
+                                .DataValueField("EmployeeId")
+                                .DataTextField("EmployeeName")
+                                .Name("Accounts")
+                                .HtmlAttributes(new { style = "width:19em" })
+                                .CascadeFrom("Manager")
+                )
+            </div>
+        </div>
+        <br />
+        <div class="row" id="grisaseo" style="display:none;">
+            <div class="col-lg-12">
+                @(Html.Kendo().Grid<ASN.Models.ProDepro>()
+                            .Name("grid")
+                            .Columns(columns =>
+                            {
+                                columns.Bound(c => c.CatProDeproId).Title("id").Visible(false).Filterable(false);
+                                columns.Bound(c => c.FullName).Width(150).Title("Name");
+                                columns.Bound(c => c.CCMSID).Width(100).Title("EmployeeId").Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("gridFilterIntegerNumericTextbox")));
+                                columns.ForeignKey(c => c.ActionId, (System.Collections.IEnumerable)ViewData["Action"], "Id", "Valor").Width(80).Title("Action").Filterable(fil => fil.Cell(cc => cc.ShowOperators(false)));
+                            //columns.Bound(c => c.SubActionId).Width(125).Title("SubAction").Filterable(fil => fil.Cell(cc => cc.ShowOperators(false)));
+                            columns.ForeignKey(c => c.SubActionId, (System.Collections.IEnumerable)ViewData["SubAction"], "Id", "Valor").Width(80).Title("SubAction").Filterable(fil => fil.Cell(cc => cc.ShowOperators(false)));
+                            //columns.Bound(c => c.FechaIni).Width(150).Title("FechaIni").Format("{0:yyyy-MM-dd}").Filterable(true);
+                            //columns.Bound(c => c.FechaFin).Width(150).Title("FechaFin").Format("{0:yyyy-MM-dd}");
+                            //columns.Bound(c => c.FechaIni).Width(150).Title("FechaIni").Format("{0:yyyy-MM-dd}").Filterable(fil => fil.Operators(op => op.ForDate(d => d.Clear().IsEqualTo("Equals"))).Extra(false).UI("dateFilter"));
+                            //columns.Bound(c => c.FechaIni).Width(150).Title("DateIni").Format("{0:yyyy-MM-dd}").Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
+                            //columns.Bound(c => c.FechaFin).Width(150).Title("DateEnd").Format("{0:yyyy-MM-dd}").Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
+                            columns.Bound(c => c.FechaIni).Width(150).Title("DateIni");
+                                columns.Bound(c => c.FechaFin).Width(150).Title("DateEnd");
+                            //columns.Bound(c => c.Activo).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Activo  ? 'Si' : 'No' #");
+                            //columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
+                            columns.Bound(c => c.UPLOAD).Width(150).Title("Upload").Visible(false);
+                                columns.Bound(c => c.NombreFile).Width(150).Title("NombreFile").Visible(false);
+                                columns.Command(command => command.Custom("UPLOAD").Text("<span class='k-icon k-i-upload'></span>Upload").Click("uploadFotoPopup")).Width(75).HtmlAttributes(new { style = "text-align: center;" });
+                                columns.Command(command => command.Custom("VIEW").Text("<span class='k-icon k-i-preview'></span>View").Click("viewFotoPopup")).Width(75).HtmlAttributes(new { style = "text-align: center;" });
+
+
+                            // cambios::hrcv
+                            //// columns.Bound(c => c.Foto).HtmlAttributes(new { style = "text-align: center;" }).ClientTemplate("#= getDetails1(data) #"); //works
+                            //// columns.Command(command => command.Custom("AddKashf").Text("eeee").Click("EditData")); //works
+
+                            @* this works *@
+                            @**
+                                columns.Bound(c => c.CCMSID).Title("Foto").Filterable(false).Width(40).ClientTemplate(
+                                        "<span style='white-space:nowrap !important; width:40px !important;'>"
+                                        + "<a class='btn btn-inform' title='Upload Foto.' onClick='uploadFotoPopup(\"#=CCMSID#\")' style='' ><i class='glyphicon glyphicon-eye-open'></i></a>&nbsp;"
+                                        + "</span>").HeaderTemplate(" ");
+                                **@
+
+                            //columns.Bound(c => c.CCMSID).Title("Upload").Filterable(false).Width(70).ClientTemplate(
+                            //    "<span style='white-space:nowrap !important; width:40px !important;'>"
+                            //    + "<a class='btn btn-inform' title='Upload Image.' onClick='uploadFotoPopup(\"#=CCMSID#\",\"#=CatProDeproId#\",\"#=ActionId#\")' style='' ><i class='glyphicon glyphicon-arrow-up'></i></a>&nbsp;"
+                            //    + "</span>").HeaderTemplate("Upload");
+
+                            //columns.Bound(c => c.CCMSID).Title("View").Filterable(false).Width(70).ClientTemplate(
+                            //    "<span style='white-space:nowrap !important; width:40px !important;'>"
+                            //    + "<a class='btn btn-inform' title='View Image.' onClick='viewFotoPopup(\"#=CCMSID#\",\"#=CatProDeproId#\",\"#=ActionId#\")' style='' ><i class='glyphicon glyphicon-eye-open'></i></a>&nbsp;"
+                            //    + "</span>").HeaderTemplate("View");
+
+
+                        }
+                            )
+                            .ToolBar(toolBar =>
+                            {
+                                toolBar.Create().Text("New Action");
+                            //toolBar.Save();
+                            toolBar.Excel().Text("Export to Excel");
+                            })
+                            .AutoBind(false)
+                            .Excel(ex => ex.AllPages(true))
+                            .HtmlAttributes(new { style = "height: 600px;" })
+                            .Scrollable(sorteable => sorteable.Virtual(false))
+                            .Sortable()
+                            .Resizable(c => c.Columns(true))
+                            //.Editable(editable => editable.Mode(GridEditMode.InCell))
+                            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ProDeproPopUp"))
+                            .Events(eve => eve.SaveChanges("onSave").Edit("edit").DataBound("onDataBound"))
+                            .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                            .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Batch(true)
+                            .ServerOperation(false)
+                            .Model(model =>
+                            {
+                                model.Id(c => c.CatProDeproId);
+                                model.Field(c => c.CatProDeproId).Editable(false);
+                                model.Field(c => c.CCMSID).Editable(false);
+                                model.Field(c => c.ActionId).Editable(false);
+                                model.Field(c => c.SubActionId).Editable(false);
+                                model.Field(c => c.FechaIni).Editable(false);
+                                model.Field(c => c.FechaFin).Editable(false);
+
+                                model.Field(c => c.Foto).Editable(false); //cambios::hrcv
+                        })
+                            .Read(read => read.Action("GetProDepro", "ProDepro").Data("goSel"))
+                            //.Update(update => update.Action("UpdateUsuario", "Usuario").Type(HttpVerbs.Post))
+                            .Create(create => create.Action("CreateProDepro", "ProDepro").Type(HttpVerbs.Post).Data("goRecord"))
+                            .PageSize(10)
+                            .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
+                            )
+                            .Navigatable()
+                            .Pageable(pageable => pageable
+                            .Refresh(true)
+                            .PageSizes(true)
+                            .ButtonCount(5)
+                            .Numeric(true)
+                            .PreviousNext(true)
+                            //.Messages(messages =>
+                            //{
+                            //    messages.ItemsPerPage("Registros por página");
+                            //    messages.Empty("Sin información para mostrar");
+                            //    messages.First("Primera");
+                            //    messages.Page("Página");
+                            //    messages.Last("Última");
+                            //    messages.Previous("Anterior");
+                            //    messages.Next("Siguiente");
+                            //    messages.Refresh("Actualizar");
+                            //    messages.Of("De");
+                            //    messages.MorePages("Mas páginas");
+                            //    //messages.Display("Prueba");
+                            //    messages.Display("{0} a {1} de {2}");
+                            //})
+                            )
+                )
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <p>You are not logged in</p>
+}
+
+
+@(Html.Kendo().Notification()
+        .Name("centeredNotification")
+        .Stacking(NotificationStackingSettings.Down)
+        .Events(e => e.Show("onShow"))
+)
+
+
+
+<!-- hrcv -->
+<!-- div area to show the Upload Files Popup Window -->
+@*<div id="windowUploadFoto"></div>*@
+@(Html.Kendo().Window()
+        .Name("windowUploadFoto")
+        .Title("Upload")
+        .Content("")
+        //.LoadContentFrom("PopUpAddAll", "ItemDelivery", new { cuatro =  })
+        .Iframe(true)
+        .Draggable()
+        .Actions(a => a
+            //.Minimize()
+            //.Maximize()
+            .Close()
+        )
+        //.Resizable()
+        .Width(450)
+        //.Height(600)
+        .Visible(false)
+        .Modal(true)
+        .Events(e => e.Open("abreActions"))
+)
+
+<!-- hrcv -->
+<!-- div area to show the Image Preview Popup Window -->
+<div id="windowUploadFotoPreviewMainGrid">
+
+    <img id="imagePreviewMainGrid" style="width:600px;height:600px;display:none;" />
+
+</div>
+
+
+
+<script>
+    urls = '@Url.Action("MyGrid", "ProDepro")';
+
+    urlUserThatWillUploadFileProDepro = '@Url.Action("getUserThatWillUploadFile", "ProDepro")';
+    urlSaveImageUploadedInDBProDepro = '@Url.Action("saveImageUploadedInDB", "ProDepro")';
+    urlGetAllowedSeeImageProDepro = '@Url.Action("getAllowedSeeImage", "ProDepro")';
+    urlGetImagesUploadedByCatProDeproIdAsJsonProDepro = '@Url.Action("getImagesUploadedByCatProDeproIdAsJson", "ProDepro")';
+    urlGetImagesUploadedCountProDepro = '@Url.Action("getImagesUploadedCount", "ProDepro")';
+    urlImage = '@Url.Action("SubirFotoPopup","ProDepro")'
+</script>
+@Scripts.Render("~/bundles/ProDepro")
