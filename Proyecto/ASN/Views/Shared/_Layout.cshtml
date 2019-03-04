@@ -195,7 +195,7 @@
 
                     if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
                     {
-                        <li> @Html.ActionLink("Reporte General", "index", "Clerical") </li >
+                        <li> @Html.ActionLink("Reporte General", "index", "Clerical") </li>
                     }
 
                     if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
@@ -226,11 +226,11 @@
             </button>
             <div class="">
                 @*<div>
-                    <label id="contador"></label>
-                </div>*@
+                        <label id="contador"></label>
+                    </div>*@
                 <div class="col-lg-1" style="margin-left: 50px; margin-top: -40px;">
                     @*<a href="@Url.Action("Index","Inicio")">*@
-                        <img src="@Url.Content("~/Content/images/logo.png")" , alt="Inicio" />
+                    <img src="@Url.Content("~/Content/images/logo.png")" , alt="Inicio" />
                     @*</a>*@
                 </div>
             </div>
@@ -248,27 +248,38 @@
     </div>
     <!-- /#wrapper -->
 
-    @(Html.Kendo().Notification()
-    .Name("popupNotification")
-    .Position(p => p.Pinned(true).Top(30).Right(30))
-    .Stacking(NotificationStackingSettings.Down)
-    .Events(e => e.Show("onShow"))
-    //.AutoHideAfter(0)
-    //.HtmlAttributes( new { @style = "background:rgba(0%,60%,0%,.7);color:white;"})
+    <script>
+    urls = '@Url.Action("MyGrid", "ProDepro")';
+
+    urlUserThatWillUploadFileProDepro = '@Url.Action("getUserThatWillUploadFile", "ProDepro")';
+    urlSaveImageUploadedInDBProDepro = '@Url.Action("saveImageUploadedInDB", "ProDepro")';
+    urlGetAllowedSeeImageProDepro = '@Url.Action("getAllowedSeeImage", "ProDepro")';
+    urlGetImagesUploadedByCatProDeproIdAsJsonProDepro = '@Url.Action("getImagesUploadedByCatProDeproIdAsJson", "ProDepro")';
+    urlGetImagesUploadedCountProDepro = '@Url.Action("getImagesUploadedCount", "ProDepro")';
+    urlImage = '@Url.Action("SubirFotoPopup","ProDepro")'
+    </script>
+    
+    @Scripts.Render("~/bundles/ProDepro")    @(Html.Kendo().Notification()
+.Name("popupNotification")
+.Position(p => p.Pinned(true).Top(30).Right(30))
+.Stacking(NotificationStackingSettings.Down)
+.Events(e => e.Show("onShow"))
+//.AutoHideAfter(0)
+//.HtmlAttributes( new { @style = "background:rgba(0%,60%,0%,.7);color:white;"})
     )
 
     @(Html.Kendo().Dialog()
-        .Name("dialog")
-        .Title("Gapp")
-        .Content("<center><p>Session expired</p></center>")
-        .Width(400)
-        .Modal(true)
-        .Actions(actions =>
-        {
-            actions.Add().Text("OK").Primary(true).Action("onClose");
-        })
-        .Visible(false)
-        .Events(ev => ev.Close("onClose"))
+                .Name("dialog")
+                .Title("Gapp")
+                .Content("<center><p>Session expired</p></center>")
+                .Width(400)
+                .Modal(true)
+                .Actions(actions =>
+                {
+                    actions.Add().Text("OK").Primary(true).Action("onClose");
+                })
+                .Visible(false)
+                .Events(ev => ev.Close("onClose"))
     )
 
     @RenderSection("scripts", required: false)
