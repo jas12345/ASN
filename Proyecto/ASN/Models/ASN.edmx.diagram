@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="48c82a91b36f4235a357cb2940602d5a" Name="Diagram1">
         <EntityTypeShape EntityType="ASNModel.CatConcepto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASNModel.CatRole" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASNModel.CatRole" Width="1.5" PointX="2.75" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ASNModel.RelConceptoPai" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ASNModel.CatEstatusConceptos" Width="1.5" PointX="5.75" PointY="4.75" />
         <EntityTypeShape EntityType="ASNModel.CatParametroConceptos" Width="1.5" PointX="7.75" PointY="0.75" />

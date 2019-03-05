@@ -21,12 +21,115 @@
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <EntityType Name="CatRoles">
+        <EntityType Name="CatEstatusConceptos">
+          <Key>
+            <PropertyRef Name="EstatusConceptoId" />
+          </Key>
+          <Property Name="EstatusConceptoId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="DeactivatedDate" Type="datetime" />
+          <Property Name="DeactivatedBy" Type="int" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatParametroConceptos">
+          <Key>
+            <PropertyRef Name="ParametroConceptoId" />
+          </Key>
+          <Property Name="ParametroConceptoId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="DeactivatedDate" Type="datetime" />
+          <Property Name="DeactivatedBy" Type="int" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatPeriodicidadNomina">
+          <Key>
+            <PropertyRef Name="PeriodicidadNominaId" />
+          </Key>
+          <Property Name="PeriodicidadNominaId" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="DeactivatedDate" Type="datetime" />
+          <Property Name="DeactivatedBy" Type="int" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatPeriodosNomina">
+          <Key>
+            <PropertyRef Name="Año" />
+            <PropertyRef Name="Mes" />
+            <PropertyRef Name="Periodicidad" />
+            <PropertyRef Name="Consecutivo" />
+            <PropertyRef Name="TipoPeriodo" />
+          </Key>
+          <Property Name="Año" Type="int" Nullable="false" />
+          <Property Name="Mes" Type="int" Nullable="false" />
+          <Property Name="Periodicidad" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Consecutivo" Type="int" Nullable="false" />
+          <Property Name="TipoPeriodo" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="FechaCaptura" Type="datetime" Nullable="false" />
+          <Property Name="FechaCierre" Type="datetime" Nullable="false" />
+          <Property Name="CountryIdent" Type="int" Nullable="false" />
+          <Property Name="NombrePeriodo" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="DeactivatedBy" Type="int" />
+          <Property Name="DeactivatedDate" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatRole">
           <Key>
             <PropertyRef Name="CatRoleId" />
           </Key>
           <Property Name="CatRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="DeactivatedDate" Type="datetime" />
+          <Property Name="DeactivatedBy" Type="int" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatTipoConceptos">
+          <Key>
+            <PropertyRef Name="TipoConceptoId" />
+          </Key>
+          <Property Name="TipoConceptoId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="DeactivatedDate" Type="datetime" />
+          <Property Name="DeactivatedBy" Type="int" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatTiposPeriodo">
+          <Key>
+            <PropertyRef Name="TipoPeriodoId" />
+          </Key>
+          <Property Name="TipoPeriodoId" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -52,13 +155,22 @@
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ASN.dbo.Employee' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="Employee">
-          <Property Name="EmployeeID" Type="int" />
-          <Property Name="FullName" Type="varchar" MaxLength="255" />
-          <Property Name="ManagerID" Type="int" />
-        </EntityType>-->
+        <EntityType Name="RelUserRole">
+          <Key>
+            <PropertyRef Name="RelUserRoleId" />
+          </Key>
+          <Property Name="RelUserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatRoleId" Type="int" Nullable="false" />
+          <Property Name="UserCCMSId" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="DeactivatedDate" Type="datetime" />
+          <Property Name="DeactivatedBy" Type="int" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -77,6 +189,12 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatCityVw' no tiene definida una 
           <Property Name="CountryId" Type="int" />
         </EntityType>-->
         <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'ASN.app620.CatClientVw' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="CatClientVw">
+          <Property Name="ClientId" Type="int" />
+          <Property Name="ClientName" Type="varchar" MaxLength="250" />
+        </EntityType>-->
+        <!--Errores durante la generación:
 advertencia 6013: La tabla o vista 'ASN.app620.CatCountryVw' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="CatCountryVw">
           <Property Name="CountryId" Type="int" />
@@ -84,16 +202,211 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatCountryVw' no tiene definida u
           <Property Name="CountryAbbr" Type="varchar" MaxLength="80" />
         </EntityType>-->
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="CatEmployeeCCMSVw">
+          <Key>
+            <PropertyRef Name="Ident" />
+            <PropertyRef Name="Last_Update" />
+          </Key>
+          <Property Name="Ident" Type="int" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Middle_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Manager_Ident" Type="int" />
+          <Property Name="Manager_First_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Manager_Middle_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Manager_Last_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Current_Status" Type="varchar" MaxLength="100" />
+          <Property Name="Hire_Date" Type="date" />
+          <Property Name="Location_Ident" Type="int" />
+          <Property Name="Location_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Client_Ident" Type="int" />
+          <Property Name="Client_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Program_Ident" Type="int" />
+          <Property Name="Program_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Phone_Ident" Type="varchar" MaxLength="10" />
+          <Property Name="Account_ID" Type="varchar" MaxLength="250" />
+          <Property Name="position_code_company_name" Type="varchar" MaxLength="255" />
+          <Property Name="ETN_type" Type="varchar" MaxLength="16" />
+          <Property Name="ETN" Type="varchar" MaxLength="27" />
+          <Property Name="Company_Ident" Type="int" />
+          <Property Name="Company_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Contract_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Contract_Type_Ident" Type="int" />
+          <Property Name="Position_Code_Ident" Type="int" />
+          <Property Name="Departament" Type="varchar" MaxLength="50" />
+          <Property Name="Departament_Ident" Type="int" />
+          <Property Name="Gender" Type="varchar" MaxLength="100" />
+          <Property Name="email1" Type="varchar" MaxLength="80" />
+          <Property Name="last_day_worked" Type="date" />
+          <Property Name="Weekly_Hours" Type="varchar" MaxLength="10" />
+          <Property Name="Tenure_Date" Type="date" />
+          <Property Name="Birth_Date" Type="varchar" MaxLength="10" />
+          <Property Name="Term_Date" Type="date" />
+          <Property Name="Term_Reason_Type_Ident" Type="int" />
+          <Property Name="Term_Reason_Type" Type="varchar" MaxLength="100" />
+          <Property Name="Term_Reason_Ident" Type="int" />
+          <Property Name="term_reason" Type="varchar" MaxLength="150" />
+          <Property Name="Term_Status" Type="varchar" MaxLength="50" />
+          <Property Name="Term_Voluntary" Type="varchar" MaxLength="3" />
+          <Property Name="Term_Rehire" Type="varchar" MaxLength="3" />
+          <Property Name="switch_desc" Type="varchar" MaxLength="50" />
+          <Property Name="Last_Update" Type="datetime" Nullable="false" />
+          <Property Name="Position_Code_Title" Type="varchar" MaxLength="150" />
+          <Property Name="position_code_type_full_name" Type="varchar" MaxLength="150" />
+          <Property Name="country_ident" Type="int" />
+          <Property Name="country_full_name" Type="varchar" MaxLength="150" />
+          <Property Name="country_abbr_name" Type="varchar" MaxLength="80" />
+          <Property Name="position_code_company_ident" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="752" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'ASN.app620.CatProgramVw' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="CatProgramVw">
+          <Property Name="ProgramId" Type="int" />
+          <Property Name="ProgramName" Type="varchar" MaxLength="250" />
+        </EntityType>-->
+        <!--Errores durante la generación:
 advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="CatStateVw">
           <Property Name="State" Type="varchar" MaxLength="150" />
           <Property Name="CountryId" Type="int" />
         </EntityType>-->
+        <Association Name="FK_CatRoleRelUserRole">
+          <End Role="CatRole" Type="Self.CatRole" Multiplicity="1" />
+          <End Role="RelUserRole" Type="Self.RelUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatRole">
+              <PropertyRef Name="CatRoleId" />
+            </Principal>
+            <Dependent Role="RelUserRole">
+              <PropertyRef Name="CatRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CatClientCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConceptosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="TipoConcepto" Type="int" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatConceptosSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="TipoConcepto" Type="int" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatParametroConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatPeriodicidadNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatPeriodicidadNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatPeriodicidadNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatPeriodicidadNominaSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="PeriodicidadNominaId" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="CatProgramCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatRelUserRoleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="CCMSID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatTipoConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatTiposPeriodoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatTiposPeriodoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatTiposPeriodoSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="TipoPeriodoId" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatTiposPeriodoSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="TipoPeriodoId" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="CatUserInfoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="CCMSID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ASNModelStoreContainer">
           <EntitySet Name="CatConceptos" EntityType="Self.CatConceptos" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatRoles" EntityType="Self.CatRoles" Schema="app620" store:Type="Tables" />
+          <EntitySet Name="CatEstatusConceptos" EntityType="Self.CatEstatusConceptos" Schema="app620" store:Type="Tables" />
+          <EntitySet Name="CatParametroConceptos" EntityType="Self.CatParametroConceptos" Schema="app620" store:Type="Tables" />
+          <EntitySet Name="CatPeriodicidadNomina" EntityType="Self.CatPeriodicidadNomina" Schema="app620" store:Type="Tables" />
+          <EntitySet Name="CatPeriodosNomina" EntityType="Self.CatPeriodosNomina" Schema="app620" store:Type="Tables" />
+          <EntitySet Name="CatRole" EntityType="Self.CatRole" Schema="app620" store:Type="Tables" />
+          <EntitySet Name="CatTipoConceptos" EntityType="Self.CatTipoConceptos" Schema="app620" store:Type="Tables" />
+          <EntitySet Name="CatTiposPeriodo" EntityType="Self.CatTiposPeriodo" Schema="app620" store:Type="Tables" />
           <EntitySet Name="RelConceptoPais" EntityType="Self.RelConceptoPais" Schema="app620" store:Type="Tables" />
+          <EntitySet Name="RelUserRole" EntityType="Self.RelUserRole" Schema="app620" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CatEmployeeCCMSVw" EntityType="Self.CatEmployeeCCMSVw" store:Type="Views" store:Schema="app620">
+            <DefiningQuery>SELECT 
+    [CatEmployeeCCMSVw].[Ident] AS [Ident], 
+    [CatEmployeeCCMSVw].[First_Name] AS [First_Name], 
+    [CatEmployeeCCMSVw].[Middle_Name] AS [Middle_Name], 
+    [CatEmployeeCCMSVw].[Last_Name] AS [Last_Name], 
+    [CatEmployeeCCMSVw].[Manager_Ident] AS [Manager_Ident], 
+    [CatEmployeeCCMSVw].[Manager_First_Name] AS [Manager_First_Name], 
+    [CatEmployeeCCMSVw].[Manager_Middle_Name] AS [Manager_Middle_Name], 
+    [CatEmployeeCCMSVw].[Manager_Last_Name] AS [Manager_Last_Name], 
+    [CatEmployeeCCMSVw].[Current_Status] AS [Current_Status], 
+    [CatEmployeeCCMSVw].[Hire_Date] AS [Hire_Date], 
+    [CatEmployeeCCMSVw].[Location_Ident] AS [Location_Ident], 
+    [CatEmployeeCCMSVw].[Location_Name] AS [Location_Name], 
+    [CatEmployeeCCMSVw].[Client_Ident] AS [Client_Ident], 
+    [CatEmployeeCCMSVw].[Client_Name] AS [Client_Name], 
+    [CatEmployeeCCMSVw].[Program_Ident] AS [Program_Ident], 
+    [CatEmployeeCCMSVw].[Program_Name] AS [Program_Name], 
+    [CatEmployeeCCMSVw].[Phone_Ident] AS [Phone_Ident], 
+    [CatEmployeeCCMSVw].[Account_ID] AS [Account_ID], 
+    [CatEmployeeCCMSVw].[position_code_company_name] AS [position_code_company_name], 
+    [CatEmployeeCCMSVw].[ETN_type] AS [ETN_type], 
+    [CatEmployeeCCMSVw].[ETN] AS [ETN], 
+    [CatEmployeeCCMSVw].[Company_Ident] AS [Company_Ident], 
+    [CatEmployeeCCMSVw].[Company_Name] AS [Company_Name], 
+    [CatEmployeeCCMSVw].[Contract_Type] AS [Contract_Type], 
+    [CatEmployeeCCMSVw].[Contract_Type_Ident] AS [Contract_Type_Ident], 
+    [CatEmployeeCCMSVw].[Position_Code_Ident] AS [Position_Code_Ident], 
+    [CatEmployeeCCMSVw].[Departament] AS [Departament], 
+    [CatEmployeeCCMSVw].[Departament_Ident] AS [Departament_Ident], 
+    [CatEmployeeCCMSVw].[Gender] AS [Gender], 
+    [CatEmployeeCCMSVw].[email1] AS [email1], 
+    [CatEmployeeCCMSVw].[last_day_worked] AS [last_day_worked], 
+    [CatEmployeeCCMSVw].[Weekly_Hours] AS [Weekly_Hours], 
+    [CatEmployeeCCMSVw].[Tenure_Date] AS [Tenure_Date], 
+    [CatEmployeeCCMSVw].[Birth_Date] AS [Birth_Date], 
+    [CatEmployeeCCMSVw].[Term_Date] AS [Term_Date], 
+    [CatEmployeeCCMSVw].[Term_Reason_Type_Ident] AS [Term_Reason_Type_Ident], 
+    [CatEmployeeCCMSVw].[Term_Reason_Type] AS [Term_Reason_Type], 
+    [CatEmployeeCCMSVw].[Term_Reason_Ident] AS [Term_Reason_Ident], 
+    [CatEmployeeCCMSVw].[term_reason] AS [term_reason], 
+    [CatEmployeeCCMSVw].[Term_Status] AS [Term_Status], 
+    [CatEmployeeCCMSVw].[Term_Voluntary] AS [Term_Voluntary], 
+    [CatEmployeeCCMSVw].[Term_Rehire] AS [Term_Rehire], 
+    [CatEmployeeCCMSVw].[switch_desc] AS [switch_desc], 
+    [CatEmployeeCCMSVw].[Last_Update] AS [Last_Update], 
+    [CatEmployeeCCMSVw].[Position_Code_Title] AS [Position_Code_Title], 
+    [CatEmployeeCCMSVw].[position_code_type_full_name] AS [position_code_type_full_name], 
+    [CatEmployeeCCMSVw].[country_ident] AS [country_ident], 
+    [CatEmployeeCCMSVw].[country_full_name] AS [country_full_name], 
+    [CatEmployeeCCMSVw].[country_abbr_name] AS [country_abbr_name], 
+    [CatEmployeeCCMSVw].[position_code_company_ident] AS [position_code_company_ident], 
+    [CatEmployeeCCMSVw].[Nombre] AS [Nombre]
+    FROM [app620].[CatEmployeeCCMSVw] AS [CatEmployeeCCMSVw]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CatRoleRelUserRole" Association="Self.FK_CatRoleRelUserRole">
+            <End Role="CatRole" EntitySet="CatRole" />
+            <End Role="RelUserRole" EntitySet="RelUserRole" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -161,7 +474,341 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <EntitySet Name="CatRoles" EntityType="Self.CatRole" />
           <EntitySet Name="RelConceptoPais" EntityType="Self.RelConceptoPai" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="CatEstatusConceptos" EntityType="ASNModel.CatEstatusConceptos" />
+          <EntitySet Name="CatParametroConceptos" EntityType="ASNModel.CatParametroConceptos" />
+          <EntitySet Name="CatPeriodicidadNomina" EntityType="ASNModel.CatPeriodicidadNomina" />
+          <EntitySet Name="CatPeriodosNomina" EntityType="ASNModel.CatPeriodosNomina" />
+          <EntitySet Name="CatRole1" EntityType="ASNModel.CatRole1" />
+          <EntitySet Name="CatTipoConceptos" EntityType="ASNModel.CatTipoConceptos" />
+          <EntitySet Name="CatTiposPeriodo" EntityType="ASNModel.CatTiposPeriodo" />
+          <EntitySet Name="RelUserRole" EntityType="ASNModel.RelUserRole" />
+          <EntitySet Name="CatEmployeeCCMSVw" EntityType="ASNModel.CatEmployeeCCMSVw" />
+          <AssociationSet Name="FK_CatRoleRelUserRole" Association="ASNModel.FK_CatRoleRelUserRole">
+            <End Role="CatRole1" EntitySet="CatRole1" />
+            <End Role="RelUserRole" EntitySet="RelUserRole" />
+          </AssociationSet>
+          <FunctionImport Name="CatClientCMB" ReturnType="Collection(ASNModel.CatClientCMB_Result)" />
+          <FunctionImport Name="CatConceptosCMB" ReturnType="Collection(ASNModel.CatConceptosCMB_Result)" />
+          <FunctionImport Name="CatConceptosSel" ReturnType="Collection(ASNModel.CatConceptosSel_Result)" />
+          <FunctionImport Name="CatConceptosSi">
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="TipoConcepto" Mode="In" Type="Int32" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConceptosSu">
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="TipoConcepto" Mode="In" Type="Int32" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="CatCountryCMB" ReturnType="Collection(ASNModel.CatCountryCMB_Result)" />
+          <FunctionImport Name="CatParametroConceptosCMB" ReturnType="Collection(ASNModel.CatParametroConceptosCMB_Result)" />
+          <FunctionImport Name="CatPeriodicidadNominaCMB" ReturnType="Collection(ASNModel.CatPeriodicidadNominaCMB_Result)" />
+          <FunctionImport Name="CatPeriodicidadNominaSel" ReturnType="Collection(ASNModel.CatPeriodicidadNominaSel_Result)" />
+          <FunctionImport Name="CatPeriodicidadNominaSi">
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatPeriodicidadNominaSu">
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="CatProgramCMB" ReturnType="Collection(ASNModel.CatProgramCMB_Result)" />
+          <FunctionImport Name="CatRelUserRoleSel" ReturnType="Collection(String)">
+            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatTipoConceptosCMB" ReturnType="Collection(ASNModel.CatTipoConceptosCMB_Result)" />
+          <FunctionImport Name="CatTiposPeriodoCMB" ReturnType="Collection(ASNModel.CatTiposPeriodoCMB_Result)" />
+          <FunctionImport Name="CatTiposPeriodoSel" ReturnType="Collection(ASNModel.CatTiposPeriodoSel_Result)" />
+          <FunctionImport Name="CatTiposPeriodoSi">
+            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatTiposPeriodoSu">
+            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="CatUserInfoSel" ReturnType="Collection(ASNModel.CatUserInfoSel_Result)">
+            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <EntityType Name="CatEstatusConceptos">
+          <Key>
+            <PropertyRef Name="EstatusConceptoId" />
+          </Key>
+          <Property Name="EstatusConceptoId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CatParametroConceptos">
+          <Key>
+            <PropertyRef Name="ParametroConceptoId" />
+          </Key>
+          <Property Name="ParametroConceptoId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CatPeriodicidadNomina">
+          <Key>
+            <PropertyRef Name="PeriodicidadNominaId" />
+          </Key>
+          <Property Name="PeriodicidadNominaId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CatPeriodosNomina">
+          <Key>
+            <PropertyRef Name="Año" />
+            <PropertyRef Name="Mes" />
+            <PropertyRef Name="Periodicidad" />
+            <PropertyRef Name="Consecutivo" />
+            <PropertyRef Name="TipoPeriodo" />
+          </Key>
+          <Property Name="Año" Type="Int32" Nullable="false" />
+          <Property Name="Mes" Type="Int32" Nullable="false" />
+          <Property Name="Periodicidad" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Consecutivo" Type="Int32" Nullable="false" />
+          <Property Name="TipoPeriodo" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaCaptura" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CountryIdent" Type="Int32" Nullable="false" />
+          <Property Name="NombrePeriodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CatRole1">
+          <Key>
+            <PropertyRef Name="CatRoleId" />
+          </Key>
+          <Property Name="CatRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RelUserRole" Relationship="ASNModel.FK_CatRoleRelUserRole" FromRole="CatRole1" ToRole="RelUserRole" />
+        </EntityType>
+        <EntityType Name="CatTipoConceptos">
+          <Key>
+            <PropertyRef Name="TipoConceptoId" />
+          </Key>
+          <Property Name="TipoConceptoId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CatTiposPeriodo">
+          <Key>
+            <PropertyRef Name="TipoPeriodoId" />
+          </Key>
+          <Property Name="TipoPeriodoId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RelUserRole">
+          <Key>
+            <PropertyRef Name="RelUserRoleId" />
+          </Key>
+          <Property Name="RelUserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatRoleId" Type="Int32" Nullable="false" />
+          <Property Name="UserCCMSId" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CatRole" Relationship="ASNModel.FK_CatRoleRelUserRole" FromRole="RelUserRole" ToRole="CatRole1" />
+        </EntityType>
+        <EntityType Name="CatEmployeeCCMSVw">
+          <Key>
+            <PropertyRef Name="Ident" />
+            <PropertyRef Name="Last_Update" />
+          </Key>
+          <Property Name="Ident" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Manager_Ident" Type="Int32" />
+          <Property Name="Manager_First_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Manager_Middle_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Manager_Last_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Current_Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Hire_Date" Type="DateTime" Precision="0" />
+          <Property Name="Location_Ident" Type="Int32" />
+          <Property Name="Location_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Client_Ident" Type="Int32" />
+          <Property Name="Client_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Program_Ident" Type="Int32" />
+          <Property Name="Program_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_Ident" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Account_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="position_code_company_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ETN_type" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="ETN" Type="String" MaxLength="27" FixedLength="false" Unicode="false" />
+          <Property Name="Company_Ident" Type="Int32" />
+          <Property Name="Company_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Contract_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contract_Type_Ident" Type="Int32" />
+          <Property Name="Position_Code_Ident" Type="Int32" />
+          <Property Name="Departament" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Departament_Ident" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email1" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="last_day_worked" Type="DateTime" Precision="0" />
+          <Property Name="Weekly_Hours" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tenure_Date" Type="DateTime" Precision="0" />
+          <Property Name="Birth_Date" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Term_Date" Type="DateTime" Precision="0" />
+          <Property Name="Term_Reason_Type_Ident" Type="Int32" />
+          <Property Name="Term_Reason_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Term_Reason_Ident" Type="Int32" />
+          <Property Name="term_reason" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Term_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Term_Voluntary" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Term_Rehire" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="switch_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Update" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Position_Code_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="position_code_type_full_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="country_ident" Type="Int32" />
+          <Property Name="country_full_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="country_abbr_name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="position_code_company_ident" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="752" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_CatRoleRelUserRole">
+          <End Type="ASNModel.CatRole1" Role="CatRole1" Multiplicity="1" />
+          <End Type="ASNModel.RelUserRole" Role="RelUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatRole1">
+              <PropertyRef Name="CatRoleId" />
+            </Principal>
+            <Dependent Role="RelUserRole">
+              <PropertyRef Name="CatRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="CatClientCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosSel_Result">
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TipoConcepto" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatCountryCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="CatParametroConceptosCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatPeriodicidadNominaCMB_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatPeriodicidadNominaSel_Result">
+          <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatProgramCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatTipoConceptosCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatTiposPeriodoCMB_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatTiposPeriodoSel_Result">
+          <Property Type="String" Name="TipoPeriodoId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatUserInfoSel_Result">
+          <Property Type="Int32" Name="Ident" Nullable="true" />
+          <Property Type="String" Name="First_Name" Nullable="true" />
+          <Property Type="String" Name="Middle_Name" Nullable="true" />
+          <Property Type="String" Name="Last_Name" Nullable="true" />
+          <Property Type="Int32" Name="Manager_Ident" Nullable="true" />
+          <Property Type="String" Name="Manager_First_Name" Nullable="true" />
+          <Property Type="String" Name="Manager_Middle_Name" Nullable="true" />
+          <Property Type="String" Name="Manager_Last_Name" Nullable="true" />
+          <Property Type="DateTime" Name="Hire_Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Position_Code_Title" Nullable="true" />
+          <Property Type="Int32" Name="Location_Ident" Nullable="true" />
+          <Property Type="String" Name="Location_Name" Nullable="true" />
+          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
+          <Property Type="String" Name="Contract_Type" Nullable="true" />
+          <Property Type="String" Name="Account_ID" Nullable="true" />
+          <Property Type="Int32" Name="Country_ident" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -174,22 +821,6 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
                 <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="TipoConcepto" ColumnName="TipoConcepto" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatRoles">
-            <EntityTypeMapping TypeName="ASNModel.CatRole">
-              <MappingFragment StoreEntitySet="CatRoles">
-                <ScalarProperty Name="CatRoleId" ColumnName="CatRoleId" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -228,6 +859,320 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CatEstatusConceptos">
+            <EntityTypeMapping TypeName="ASNModel.CatEstatusConceptos">
+              <MappingFragment StoreEntitySet="CatEstatusConceptos">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="EstatusConceptoId" ColumnName="EstatusConceptoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatParametroConceptos">
+            <EntityTypeMapping TypeName="ASNModel.CatParametroConceptos">
+              <MappingFragment StoreEntitySet="CatParametroConceptos">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ParametroConceptoId" ColumnName="ParametroConceptoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatPeriodicidadNomina">
+            <EntityTypeMapping TypeName="ASNModel.CatPeriodicidadNomina">
+              <MappingFragment StoreEntitySet="CatPeriodicidadNomina">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatPeriodosNomina">
+            <EntityTypeMapping TypeName="ASNModel.CatPeriodosNomina">
+              <MappingFragment StoreEntitySet="CatPeriodosNomina">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
+                <ScalarProperty Name="CountryIdent" ColumnName="CountryIdent" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="FechaCaptura" ColumnName="FechaCaptura" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="TipoPeriodo" ColumnName="TipoPeriodo" />
+                <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+                <ScalarProperty Name="Periodicidad" ColumnName="Periodicidad" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatRole1">
+            <EntityTypeMapping TypeName="ASNModel.CatRole1">
+              <MappingFragment StoreEntitySet="CatRole">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CatRoleId" ColumnName="CatRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatTipoConceptos">
+            <EntityTypeMapping TypeName="ASNModel.CatTipoConceptos">
+              <MappingFragment StoreEntitySet="CatTipoConceptos">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TipoConceptoId" ColumnName="TipoConceptoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatTiposPeriodo">
+            <EntityTypeMapping TypeName="ASNModel.CatTiposPeriodo">
+              <MappingFragment StoreEntitySet="CatTiposPeriodo">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TipoPeriodoId" ColumnName="TipoPeriodoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelUserRole">
+            <EntityTypeMapping TypeName="ASNModel.RelUserRole">
+              <MappingFragment StoreEntitySet="RelUserRole">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UserCCMSId" ColumnName="UserCCMSId" />
+                <ScalarProperty Name="CatRoleId" ColumnName="CatRoleId" />
+                <ScalarProperty Name="RelUserRoleId" ColumnName="RelUserRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatEmployeeCCMSVw">
+            <EntityTypeMapping TypeName="ASNModel.CatEmployeeCCMSVw">
+              <MappingFragment StoreEntitySet="CatEmployeeCCMSVw">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="position_code_company_ident" ColumnName="position_code_company_ident" />
+                <ScalarProperty Name="country_abbr_name" ColumnName="country_abbr_name" />
+                <ScalarProperty Name="country_full_name" ColumnName="country_full_name" />
+                <ScalarProperty Name="country_ident" ColumnName="country_ident" />
+                <ScalarProperty Name="position_code_type_full_name" ColumnName="position_code_type_full_name" />
+                <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
+                <ScalarProperty Name="Last_Update" ColumnName="Last_Update" />
+                <ScalarProperty Name="switch_desc" ColumnName="switch_desc" />
+                <ScalarProperty Name="Term_Rehire" ColumnName="Term_Rehire" />
+                <ScalarProperty Name="Term_Voluntary" ColumnName="Term_Voluntary" />
+                <ScalarProperty Name="Term_Status" ColumnName="Term_Status" />
+                <ScalarProperty Name="term_reason" ColumnName="term_reason" />
+                <ScalarProperty Name="Term_Reason_Ident" ColumnName="Term_Reason_Ident" />
+                <ScalarProperty Name="Term_Reason_Type" ColumnName="Term_Reason_Type" />
+                <ScalarProperty Name="Term_Reason_Type_Ident" ColumnName="Term_Reason_Type_Ident" />
+                <ScalarProperty Name="Term_Date" ColumnName="Term_Date" />
+                <ScalarProperty Name="Birth_Date" ColumnName="Birth_Date" />
+                <ScalarProperty Name="Tenure_Date" ColumnName="Tenure_Date" />
+                <ScalarProperty Name="Weekly_Hours" ColumnName="Weekly_Hours" />
+                <ScalarProperty Name="last_day_worked" ColumnName="last_day_worked" />
+                <ScalarProperty Name="email1" ColumnName="email1" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Departament_Ident" ColumnName="Departament_Ident" />
+                <ScalarProperty Name="Departament" ColumnName="Departament" />
+                <ScalarProperty Name="Position_Code_Ident" ColumnName="Position_Code_Ident" />
+                <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
+                <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Company_Ident" ColumnName="Company_Ident" />
+                <ScalarProperty Name="ETN" ColumnName="ETN" />
+                <ScalarProperty Name="ETN_type" ColumnName="ETN_type" />
+                <ScalarProperty Name="position_code_company_name" ColumnName="position_code_company_name" />
+                <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+                <ScalarProperty Name="Phone_Ident" ColumnName="Phone_Ident" />
+                <ScalarProperty Name="Program_Name" ColumnName="Program_Name" />
+                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
+                <ScalarProperty Name="Hire_Date" ColumnName="Hire_Date" />
+                <ScalarProperty Name="Current_Status" ColumnName="Current_Status" />
+                <ScalarProperty Name="Manager_Last_Name" ColumnName="Manager_Last_Name" />
+                <ScalarProperty Name="Manager_Middle_Name" ColumnName="Manager_Middle_Name" />
+                <ScalarProperty Name="Manager_First_Name" ColumnName="Manager_First_Name" />
+                <ScalarProperty Name="Manager_Ident" ColumnName="Manager_Ident" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CatClientCMB" FunctionName="ASNModel.Store.CatClientCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatClientCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosCMB" FunctionName="ASNModel.Store.CatConceptosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosSel" FunctionName="ASNModel.Store.CatConceptosSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosSel_Result">
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TipoConcepto" ColumnName="TipoConcepto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosSi" FunctionName="ASNModel.Store.CatConceptosSi" />
+          <FunctionImportMapping FunctionImportName="CatConceptosSu" FunctionName="ASNModel.Store.CatConceptosSu" />
+          <FunctionImportMapping FunctionImportName="CatCountryCMB" FunctionName="ASNModel.Store.CatCountryCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCountryCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatParametroConceptosCMB" FunctionName="ASNModel.Store.CatParametroConceptosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatParametroConceptosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaCMB" FunctionName="ASNModel.Store.CatPeriodicidadNominaCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPeriodicidadNominaCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaSel" FunctionName="ASNModel.Store.CatPeriodicidadNominaSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPeriodicidadNominaSel_Result">
+                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaSi" FunctionName="ASNModel.Store.CatPeriodicidadNominaSi" />
+          <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaSu" FunctionName="ASNModel.Store.CatPeriodicidadNominaSu" />
+          <FunctionImportMapping FunctionImportName="CatProgramCMB" FunctionName="ASNModel.Store.CatProgramCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatProgramCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatRelUserRoleSel" FunctionName="ASNModel.Store.CatRelUserRoleSel" />
+          <FunctionImportMapping FunctionImportName="CatTipoConceptosCMB" FunctionName="ASNModel.Store.CatTipoConceptosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatTipoConceptosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatTiposPeriodoCMB" FunctionName="ASNModel.Store.CatTiposPeriodoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatTiposPeriodoCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatTiposPeriodoSel" FunctionName="ASNModel.Store.CatTiposPeriodoSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatTiposPeriodoSel_Result">
+                <ScalarProperty Name="TipoPeriodoId" ColumnName="TipoPeriodoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatTiposPeriodoSi" FunctionName="ASNModel.Store.CatTiposPeriodoSi" />
+          <FunctionImportMapping FunctionImportName="CatTiposPeriodoSu" FunctionName="ASNModel.Store.CatTiposPeriodoSu" />
+          <FunctionImportMapping FunctionImportName="CatUserInfoSel" FunctionName="ASNModel.Store.CatUserInfoSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatUserInfoSel_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Manager_Ident" ColumnName="Manager_Ident" />
+                <ScalarProperty Name="Manager_First_Name" ColumnName="Manager_First_Name" />
+                <ScalarProperty Name="Manager_Middle_Name" ColumnName="Manager_Middle_Name" />
+                <ScalarProperty Name="Manager_Last_Name" ColumnName="Manager_Last_Name" />
+                <ScalarProperty Name="Hire_Date" ColumnName="Hire_Date" />
+                <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
+                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
+                <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
+                <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+                <ScalarProperty Name="Country_ident" ColumnName="Country_ident" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -242,7 +1187,7 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
