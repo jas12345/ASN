@@ -26,6 +26,6 @@ namespace ASN.Models
         public System.DateTime LastModifiedDate { get; set; }
         public string LastModifiedFromPCName { get; set; }
     
-        public virtual CatRole1 CatRole { get; set; }
+        public virtual CatRole CatRole { get; set; }
     }
 }

@@ -28,18 +28,17 @@ namespace ASN.Models
         }
     
         public virtual DbSet<CatConcepto> CatConceptos { get; set; }
-        public virtual DbSet<CatRole> CatRoles { get; set; }
         public virtual DbSet<RelConceptoPai> RelConceptoPais { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<CatEstatusConceptos> CatEstatusConceptos { get; set; }
         public virtual DbSet<CatParametroConceptos> CatParametroConceptos { get; set; }
         public virtual DbSet<CatPeriodicidadNomina> CatPeriodicidadNomina { get; set; }
         public virtual DbSet<CatPeriodosNomina> CatPeriodosNomina { get; set; }
-        public virtual DbSet<CatRole1> CatRole1 { get; set; }
         public virtual DbSet<CatTipoConceptos> CatTipoConceptos { get; set; }
         public virtual DbSet<CatTiposPeriodo> CatTiposPeriodo { get; set; }
         public virtual DbSet<RelUserRole> RelUserRole { get; set; }
         public virtual DbSet<CatEmployeeCCMSVw> CatEmployeeCCMSVw { get; set; }
+        public virtual DbSet<CatRole> CatRole { get; set; }
     
         public virtual ObjectResult<CatClientCMB_Result> CatClientCMB()
         {

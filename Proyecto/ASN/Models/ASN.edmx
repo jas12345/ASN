@@ -428,21 +428,6 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedFromPCName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="CatRole">
-          <Key>
-            <PropertyRef Name="CatRoleId" />
-          </Key>
-          <Property Name="CatRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="RelConceptoPai">
           <Key>
             <PropertyRef Name="CountryId" />
@@ -471,22 +456,16 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
         </EntityType>
         <EntityContainer Name="ASNContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CatConceptos" EntityType="Self.CatConcepto" />
-          <EntitySet Name="CatRoles" EntityType="Self.CatRole" />
           <EntitySet Name="RelConceptoPais" EntityType="Self.RelConceptoPai" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="CatEstatusConceptos" EntityType="ASNModel.CatEstatusConceptos" />
           <EntitySet Name="CatParametroConceptos" EntityType="ASNModel.CatParametroConceptos" />
           <EntitySet Name="CatPeriodicidadNomina" EntityType="ASNModel.CatPeriodicidadNomina" />
           <EntitySet Name="CatPeriodosNomina" EntityType="ASNModel.CatPeriodosNomina" />
-          <EntitySet Name="CatRole1" EntityType="ASNModel.CatRole1" />
           <EntitySet Name="CatTipoConceptos" EntityType="ASNModel.CatTipoConceptos" />
           <EntitySet Name="CatTiposPeriodo" EntityType="ASNModel.CatTiposPeriodo" />
           <EntitySet Name="RelUserRole" EntityType="ASNModel.RelUserRole" />
           <EntitySet Name="CatEmployeeCCMSVw" EntityType="ASNModel.CatEmployeeCCMSVw" />
-          <AssociationSet Name="FK_CatRoleRelUserRole" Association="ASNModel.FK_CatRoleRelUserRole">
-            <End Role="CatRole1" EntitySet="CatRole1" />
-            <End Role="RelUserRole" EntitySet="RelUserRole" />
-          </AssociationSet>
           <FunctionImport Name="CatClientCMB" ReturnType="Collection(ASNModel.CatClientCMB_Result)" />
           <FunctionImport Name="CatConceptosCMB" ReturnType="Collection(ASNModel.CatConceptosCMB_Result)" />
           <FunctionImport Name="CatConceptosSel" ReturnType="Collection(ASNModel.CatConceptosSel_Result)" />
@@ -520,7 +499,7 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           </FunctionImport>
           <FunctionImport Name="CatProgramCMB" ReturnType="Collection(ASNModel.CatProgramCMB_Result)" />
           <FunctionImport Name="CatRelUserRoleSel" ReturnType="Collection(String)">
-            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatTipoConceptosCMB" ReturnType="Collection(ASNModel.CatTipoConceptosCMB_Result)" />
           <FunctionImport Name="CatTiposPeriodoCMB" ReturnType="Collection(ASNModel.CatTiposPeriodoCMB_Result)" />
@@ -537,8 +516,13 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="CatUserInfoSel" ReturnType="Collection(ASNModel.CatUserInfoSel_Result)">
-            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="CatRole" EntityType="ASNModel.CatRole" />
+          <AssociationSet Name="FK_CatRoleRelUserRole" Association="ASNModel.FK_CatRoleRelUserRole">
+            <End Role="CatRole" EntitySet="CatRole" />
+            <End Role="RelUserRole" EntitySet="RelUserRole" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CatEstatusConceptos">
           <Key>
@@ -613,22 +597,6 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="CatRole1">
-          <Key>
-            <PropertyRef Name="CatRoleId" />
-          </Key>
-          <Property Name="CatRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RelUserRole" Relationship="ASNModel.FK_CatRoleRelUserRole" FromRole="CatRole1" ToRole="RelUserRole" />
-        </EntityType>
         <EntityType Name="CatTipoConceptos">
           <Key>
             <PropertyRef Name="TipoConceptoId" />
@@ -674,7 +642,7 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CatRole" Relationship="ASNModel.FK_CatRoleRelUserRole" FromRole="RelUserRole" ToRole="CatRole1" />
+          <NavigationProperty Name="CatRole" Relationship="ASNModel.FK_CatRoleRelUserRole" FromRole="RelUserRole" ToRole="CatRole" />
         </EntityType>
         <EntityType Name="CatEmployeeCCMSVw">
           <Key>
@@ -733,18 +701,6 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Property Name="position_code_company_ident" Type="Int32" />
           <Property Name="Nombre" Type="String" MaxLength="752" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_CatRoleRelUserRole">
-          <End Type="ASNModel.CatRole1" Role="CatRole1" Multiplicity="1" />
-          <End Type="ASNModel.RelUserRole" Role="RelUserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CatRole1">
-              <PropertyRef Name="CatRoleId" />
-            </Principal>
-            <Dependent Role="RelUserRole">
-              <PropertyRef Name="CatRoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
@@ -809,6 +765,34 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Property Type="Int32" Name="Country_ident" Nullable="true" />
           <Property Type="String" Name="FullName" Nullable="true" />
         </ComplexType>
+        <EntityType Name="CatRole">
+          <Key>
+            <PropertyRef Name="CatRoleId" />
+          </Key>
+          <Property Name="CatRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RelUserRole" Relationship="ASNModel.FK_CatRoleRelUserRole" FromRole="CatRole" ToRole="RelUserRole" />
+        </EntityType>
+        <Association Name="FK_CatRoleRelUserRole">
+          <End Type="ASNModel.CatRole" Role="CatRole" Multiplicity="1" />
+          <End Type="ASNModel.RelUserRole" Role="RelUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatRole">
+              <PropertyRef Name="CatRoleId" />
+            </Principal>
+            <Dependent Role="RelUserRole">
+              <PropertyRef Name="CatRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -929,22 +913,6 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
                 <ScalarProperty Name="Periodicidad" ColumnName="Periodicidad" />
                 <ScalarProperty Name="Mes" ColumnName="Mes" />
                 <ScalarProperty Name="Año" ColumnName="Año" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatRole1">
-            <EntityTypeMapping TypeName="ASNModel.CatRole1">
-              <MappingFragment StoreEntitySet="CatRole">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="CatRoleId" ColumnName="CatRoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1173,6 +1141,22 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CatRole">
+            <EntityTypeMapping TypeName="ASNModel.CatRole">
+              <MappingFragment StoreEntitySet="CatRole">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CatRoleId" ColumnName="CatRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

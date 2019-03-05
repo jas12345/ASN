@@ -14,6 +14,12 @@ namespace ASN.Models
     
     public partial class CatRole
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CatRole()
+        {
+            this.RelUserRole = new HashSet<RelUserRole>();
+        }
+    
         public int CatRoleId { get; set; }
         public string Role { get; set; }
         public bool Active { get; set; }
@@ -24,5 +30,8 @@ namespace ASN.Models
         public int LastModifiedBy { get; set; }
         public System.DateTime LastModifiedDate { get; set; }
         public string LastModifiedFromPCName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RelUserRole> RelUserRole { get; set; }
     }
 }
