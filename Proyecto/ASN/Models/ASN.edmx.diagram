@@ -8,6 +8,16 @@
         <EntityTypeShape EntityType="ASNModel.CatConcepto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ASNModel.CatRole" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ASNModel.RelConceptoPai" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASNModel.CatEstatusConceptos" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ASNModel.CatParametroConceptos" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ASNModel.CatPeriodicidadNomina" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ASNModel.CatPeriodosNomina" Width="1.5" PointX="5.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ASNModel.CatRole1" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="ASNModel.CatTipoConceptos" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ASNModel.CatTiposPeriodo" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ASNModel.RelUserRole" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="ASNModel.CatEmployeeCCMSVw" Width="1.5" PointX="0.75" PointY="9.75" />
+        <AssociationConnector Association="ASNModel.FK_CatRoleRelUserRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
