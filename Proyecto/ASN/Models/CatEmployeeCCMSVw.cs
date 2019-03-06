@@ -7,63 +7,60 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASN.Models
+using System;
+using System.Collections.Generic;
+
+public partial class CatEmployeeCCMSVw
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class CatEmployeeCCMSVw
-    {
-        public int Ident { get; set; }
-        public string First_Name { get; set; }
-        public string Middle_Name { get; set; }
-        public string Last_Name { get; set; }
-        public Nullable<int> Manager_Ident { get; set; }
-        public string Manager_First_Name { get; set; }
-        public string Manager_Middle_Name { get; set; }
-        public string Manager_Last_Name { get; set; }
-        public string Current_Status { get; set; }
-        public Nullable<System.DateTime> Hire_Date { get; set; }
-        public Nullable<int> Location_Ident { get; set; }
-        public string Location_Name { get; set; }
-        public Nullable<int> Client_Ident { get; set; }
-        public string Client_Name { get; set; }
-        public Nullable<int> Program_Ident { get; set; }
-        public string Program_Name { get; set; }
-        public string Phone_Ident { get; set; }
-        public string Account_ID { get; set; }
-        public string position_code_company_name { get; set; }
-        public string ETN_type { get; set; }
-        public string ETN { get; set; }
-        public Nullable<int> Company_Ident { get; set; }
-        public string Company_Name { get; set; }
-        public string Contract_Type { get; set; }
-        public Nullable<int> Contract_Type_Ident { get; set; }
-        public Nullable<int> Position_Code_Ident { get; set; }
-        public string Departament { get; set; }
-        public Nullable<int> Departament_Ident { get; set; }
-        public string Gender { get; set; }
-        public string email1 { get; set; }
-        public Nullable<System.DateTime> last_day_worked { get; set; }
-        public string Weekly_Hours { get; set; }
-        public Nullable<System.DateTime> Tenure_Date { get; set; }
-        public string Birth_Date { get; set; }
-        public Nullable<System.DateTime> Term_Date { get; set; }
-        public Nullable<int> Term_Reason_Type_Ident { get; set; }
-        public string Term_Reason_Type { get; set; }
-        public Nullable<int> Term_Reason_Ident { get; set; }
-        public string term_reason { get; set; }
-        public string Term_Status { get; set; }
-        public string Term_Voluntary { get; set; }
-        public string Term_Rehire { get; set; }
-        public string switch_desc { get; set; }
-        public System.DateTime Last_Update { get; set; }
-        public string Position_Code_Title { get; set; }
-        public string position_code_type_full_name { get; set; }
-        public Nullable<int> country_ident { get; set; }
-        public string country_full_name { get; set; }
-        public string country_abbr_name { get; set; }
-        public Nullable<int> position_code_company_ident { get; set; }
-        public string Nombre { get; set; }
-    }
+    public int Ident { get; set; }
+    public string First_Name { get; set; }
+    public string Middle_Name { get; set; }
+    public string Last_Name { get; set; }
+    public Nullable<int> Manager_Ident { get; set; }
+    public string Manager_First_Name { get; set; }
+    public string Manager_Middle_Name { get; set; }
+    public string Manager_Last_Name { get; set; }
+    public string Current_Status { get; set; }
+    public Nullable<System.DateTime> Hire_Date { get; set; }
+    public Nullable<int> Location_Ident { get; set; }
+    public string Location_Name { get; set; }
+    public Nullable<int> Client_Ident { get; set; }
+    public string Client_Name { get; set; }
+    public Nullable<int> Program_Ident { get; set; }
+    public string Program_Name { get; set; }
+    public string Phone_Ident { get; set; }
+    public string Account_ID { get; set; }
+    public string position_code_company_name { get; set; }
+    public string ETN_type { get; set; }
+    public string ETN { get; set; }
+    public Nullable<int> Company_Ident { get; set; }
+    public string Company_Name { get; set; }
+    public string Contract_Type { get; set; }
+    public Nullable<int> Contract_Type_Ident { get; set; }
+    public Nullable<int> Position_Code_Ident { get; set; }
+    public string Departament { get; set; }
+    public Nullable<int> Departament_Ident { get; set; }
+    public string Gender { get; set; }
+    public string email1 { get; set; }
+    public Nullable<System.DateTime> last_day_worked { get; set; }
+    public string Weekly_Hours { get; set; }
+    public Nullable<System.DateTime> Tenure_Date { get; set; }
+    public string Birth_Date { get; set; }
+    public Nullable<System.DateTime> Term_Date { get; set; }
+    public Nullable<int> Term_Reason_Type_Ident { get; set; }
+    public string Term_Reason_Type { get; set; }
+    public Nullable<int> Term_Reason_Ident { get; set; }
+    public string term_reason { get; set; }
+    public string Term_Status { get; set; }
+    public string Term_Voluntary { get; set; }
+    public string Term_Rehire { get; set; }
+    public string switch_desc { get; set; }
+    public System.DateTime Last_Update { get; set; }
+    public string Position_Code_Title { get; set; }
+    public string position_code_type_full_name { get; set; }
+    public Nullable<int> country_ident { get; set; }
+    public string country_full_name { get; set; }
+    public string country_abbr_name { get; set; }
+    public Nullable<int> position_code_company_ident { get; set; }
+    public string Nombre { get; set; }
 }

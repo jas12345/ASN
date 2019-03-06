@@ -7,22 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASN.Models
+using System;
+using System.Collections.Generic;
+
+public partial class CatParametroConceptos
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class CatParametroConceptos
-    {
-        public int ParametroConceptoId { get; set; }
-        public string Descripcion { get; set; }
-        public bool Active { get; set; }
-        public int CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<System.DateTime> DeactivatedDate { get; set; }
-        public Nullable<int> DeactivatedBy { get; set; }
-        public int LastModifiedBy { get; set; }
-        public System.DateTime LastModifiedDate { get; set; }
-        public string LastModifiedFromPCName { get; set; }
-    }
+    public int ParametroConceptoId { get; set; }
+    public string Descripcion { get; set; }
+    public bool Active { get; set; }
+    public int CreatedBy { get; set; }
+    public System.DateTime CreatedDate { get; set; }
+    public Nullable<System.DateTime> DeactivatedDate { get; set; }
+    public Nullable<int> DeactivatedBy { get; set; }
+    public int LastModifiedBy { get; set; }
+    public System.DateTime LastModifiedDate { get; set; }
+    public string LastModifiedFromPCName { get; set; }
 }

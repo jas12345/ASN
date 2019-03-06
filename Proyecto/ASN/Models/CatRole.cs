@@ -7,31 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASN.Models
+using System;
+using System.Collections.Generic;
+
+public partial class CatRole
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class CatRole
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public CatRole()
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CatRole()
-        {
-            this.RelUserRole = new HashSet<RelUserRole>();
-        }
-    
-        public int CatRoleId { get; set; }
-        public string Role { get; set; }
-        public bool Active { get; set; }
-        public int CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<System.DateTime> DeactivatedDate { get; set; }
-        public Nullable<int> DeactivatedBy { get; set; }
-        public int LastModifiedBy { get; set; }
-        public System.DateTime LastModifiedDate { get; set; }
-        public string LastModifiedFromPCName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RelUserRole> RelUserRole { get; set; }
+        this.RelUserRole = new HashSet<RelUserRole>();
     }
+
+    public int CatRoleId { get; set; }
+    public string Role { get; set; }
+    public bool Active { get; set; }
+    public int CreatedBy { get; set; }
+    public System.DateTime CreatedDate { get; set; }
+    public Nullable<System.DateTime> DeactivatedDate { get; set; }
+    public Nullable<int> DeactivatedBy { get; set; }
+    public int LastModifiedBy { get; set; }
+    public System.DateTime LastModifiedDate { get; set; }
+    public string LastModifiedFromPCName { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<RelUserRole> RelUserRole { get; set; }
 }

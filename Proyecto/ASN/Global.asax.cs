@@ -45,7 +45,7 @@ namespace ASN
 
                 if (objIdentity.UserInfo == null)
                 {
-                    using (InformationSecurityEntities ctxx = new InformationSecurityEntities())
+                    using (ASNEntities ctxx = new ASNEntities())
                     {
                         ctxx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                         var user = new CatUserInfoSel_Result();
@@ -68,7 +68,7 @@ namespace ASN
             //var repo = new AccountRepository(); // In the real world, you would probably use service locator pattern and call DependencyResolver here
             //var user = repo.FindByName(name);
 
-            using (InformationSecurityEntities ctx = new InformationSecurityEntities())
+            using (ASNEntities ctx = new ASNEntities())
             {
                 ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                 var lstUserRoles = new List<CatRelUserRoleSel_Result>();

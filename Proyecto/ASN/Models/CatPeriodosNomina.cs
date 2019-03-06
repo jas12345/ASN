@@ -7,31 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASN.Models
+using System;
+using System.Collections.Generic;
+
+public partial class CatPeriodosNomina
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class CatPeriodosNomina
-    {
-        public int Año { get; set; }
-        public int Mes { get; set; }
-        public string Periodicidad { get; set; }
-        public int Consecutivo { get; set; }
-        public string TipoPeriodo { get; set; }
-        public System.DateTime FechaInicio { get; set; }
-        public System.DateTime FechaFin { get; set; }
-        public System.DateTime FechaCaptura { get; set; }
-        public System.DateTime FechaCierre { get; set; }
-        public int CountryIdent { get; set; }
-        public string NombrePeriodo { get; set; }
-        public bool Active { get; set; }
-        public int CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<int> DeactivatedBy { get; set; }
-        public Nullable<System.DateTime> DeactivatedDate { get; set; }
-        public int LastModifiedBy { get; set; }
-        public System.DateTime LastModifiedDate { get; set; }
-        public string LastModifiedFromPCName { get; set; }
-    }
+    public int Año { get; set; }
+    public int Mes { get; set; }
+    public string Periodicidad { get; set; }
+    public int Consecutivo { get; set; }
+    public string TipoPeriodo { get; set; }
+    public System.DateTime FechaInicio { get; set; }
+    public System.DateTime FechaFin { get; set; }
+    public System.DateTime FechaCaptura { get; set; }
+    public System.DateTime FechaCierre { get; set; }
+    public int CountryIdent { get; set; }
+    public string NombrePeriodo { get; set; }
+    public bool Active { get; set; }
+    public int CreatedBy { get; set; }
+    public System.DateTime CreatedDate { get; set; }
+    public Nullable<int> DeactivatedBy { get; set; }
+    public Nullable<System.DateTime> DeactivatedDate { get; set; }
+    public int LastModifiedBy { get; set; }
+    public System.DateTime LastModifiedDate { get; set; }
+    public string LastModifiedFromPCName { get; set; }
 }

@@ -234,5 +234,30 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatUserInfoSel_Result>("CatUserInfoSel", cCMSIDParameter);
         }
+    
+        public virtual int CatLogErrorSi(string logErrorMessage, string stackTrace, string ipAddress, string browser, Nullable<int> createdBy)
+        {
+            var logErrorMessageParameter = logErrorMessage != null ?
+                new ObjectParameter("LogErrorMessage", logErrorMessage) :
+                new ObjectParameter("LogErrorMessage", typeof(string));
+    
+            var stackTraceParameter = stackTrace != null ?
+                new ObjectParameter("StackTrace", stackTrace) :
+                new ObjectParameter("StackTrace", typeof(string));
+    
+            var ipAddressParameter = ipAddress != null ?
+                new ObjectParameter("IpAddress", ipAddress) :
+                new ObjectParameter("IpAddress", typeof(string));
+    
+            var browserParameter = browser != null ?
+                new ObjectParameter("Browser", browser) :
+                new ObjectParameter("Browser", typeof(string));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatLogErrorSi", logErrorMessageParameter, stackTraceParameter, ipAddressParameter, browserParameter, createdByParameter);
+        }
     }
 }

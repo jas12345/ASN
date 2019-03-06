@@ -7,25 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASN.Models
+using System;
+using System.Collections.Generic;
+
+public partial class RelUserRole
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class RelUserRole
-    {
-        public int RelUserRoleId { get; set; }
-        public int CatRoleId { get; set; }
-        public int UserCCMSId { get; set; }
-        public bool Active { get; set; }
-        public int CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<System.DateTime> DeactivatedDate { get; set; }
-        public Nullable<int> DeactivatedBy { get; set; }
-        public int LastModifiedBy { get; set; }
-        public System.DateTime LastModifiedDate { get; set; }
-        public string LastModifiedFromPCName { get; set; }
-    
-        public virtual CatRole CatRole { get; set; }
-    }
+    public int RelUserRoleId { get; set; }
+    public int CatRoleId { get; set; }
+    public int UserCCMSId { get; set; }
+    public bool Active { get; set; }
+    public int CreatedBy { get; set; }
+    public System.DateTime CreatedDate { get; set; }
+    public Nullable<System.DateTime> DeactivatedDate { get; set; }
+    public Nullable<int> DeactivatedBy { get; set; }
+    public int LastModifiedBy { get; set; }
+    public System.DateTime LastModifiedDate { get; set; }
+    public string LastModifiedFromPCName { get; set; }
+
+    public virtual CatRole CatRole { get; set; }
 }

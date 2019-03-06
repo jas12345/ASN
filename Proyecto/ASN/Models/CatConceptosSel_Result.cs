@@ -7,14 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASN.Models
+using System;
+using System.Collections.Generic;
+
+public partial class CatConceptosSel_Result
 {
-    using System;
-    
-    public partial class CatConceptosSel_Result
-    {
-        public int ConceptoId { get; set; }
-        public string Descripcion { get; set; }
-        public int TipoConcepto { get; set; }
-    }
+    public int ConceptoId { get; set; }
+    public string Descripcion { get; set; }
+    public int TipoConcepto { get; set; }
 }

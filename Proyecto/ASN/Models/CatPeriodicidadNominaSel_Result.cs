@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASN.Models
+using System;
+using System.Collections.Generic;
+
+public partial class CatPeriodicidadNominaSel_Result
 {
-    using System;
-    
-    public partial class CatPeriodicidadNominaSel_Result
-    {
-        public string PeriodicidadNominaId { get; set; }
-        public string Descripcion { get; set; }
-    }
+    public string PeriodicidadNominaId { get; set; }
+    public string Descripcion { get; set; }
 }

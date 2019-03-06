@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASN.Models
+using System;
+using System.Collections.Generic;
+
+public partial class CatTiposPeriodoCMB_Result
 {
-    using System;
-    
-    public partial class CatTiposPeriodoCMB_Result
-    {
-        public string Id { get; set; }
-        public string Value { get; set; }
-    }
+    public string Id { get; set; }
+    public string Value { get; set; }
 }

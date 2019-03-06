@@ -301,6 +301,13 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatLogErrorSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="LogErrorMessage" Type="varchar" Mode="In" />
+          <Parameter Name="StackTrace" Type="varchar" Mode="In" />
+          <Parameter Name="IpAddress" Type="varchar" Mode="In" />
+          <Parameter Name="Browser" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatParametroConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodicidadNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodicidadNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -523,6 +530,13 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
             <End Role="CatRole" EntitySet="CatRole" />
             <End Role="RelUserRole" EntitySet="RelUserRole" />
           </AssociationSet>
+          <FunctionImport Name="CatLogErrorSi">
+            <Parameter Name="LogErrorMessage" Mode="In" Type="String" />
+            <Parameter Name="StackTrace" Mode="In" Type="String" />
+            <Parameter Name="IpAddress" Mode="In" Type="String" />
+            <Parameter Name="Browser" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CatEstatusConceptos">
           <Key>
@@ -1157,6 +1171,7 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CatLogErrorSi" FunctionName="ASNModel.Store.CatLogErrorSi" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

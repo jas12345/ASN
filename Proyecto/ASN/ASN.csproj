@@ -136,11 +136,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ASN.cs" />
-    <Compile Include="Controllers\ReporteController.cs" />
-    <Compile Include="Controllers\ProcesoController.cs" />
-    <Compile Include="Controllers\NominaController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,235 +158,80 @@
       <DependentUpon>ASN.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Authentication.cs" />
-    <Compile Include="Models\CatAccessLevelCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatAccountIdByManagerIdSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatActionByAccessCardSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatActionCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatActionGRIDCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatAllActionCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatBadgeIn24AgentsClassCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatBadgeIn24AgentsEmployeeSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatBadgeIn24AgentsSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatBadgeIn24Sel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatBadgeIn24ValidateSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatCardRangeSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatClientByLocationCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatClientCCMSCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatClientsClericalCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatClientCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatConcepto.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatConceptosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatConceptosSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatCountryCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatDaysYearR2OPSCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatEmployeeCCMSVw.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatEmailBySiteSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatEstatusConceptos.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatEmployeeActiveCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatParametroConceptos.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatEmployeeCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatParametroConceptosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatEmployeeInfoRegistradoSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatPeriodicidadNomina.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatEmployeeInfoSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatPeriodicidadNominaCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatEmployeeManagerByEIdAPBajasSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatPeriodicidadNominaSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatEmployeeManagerByEIdSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatPeriodosNomina.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatEmployeeRepositionSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatEmployeInfoValidationSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatLocationByEmployeeIdSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatLocationCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatLocationEmployeeCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatLocationEmployeeSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatMotiveCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatNewHireEmployeeSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatPositionCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatPositionLevelSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatProDeproSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatProDeproSi_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatProgramByClientIdCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatProgramClientLocationVwCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatRelUserRoleSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatReportClericalSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatReportSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatRepositionNumberCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatRepositionNumberSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatProgramCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatRole.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatRoleCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatTipoConceptos.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatScheduleEmployeeCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatTipoConceptosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatServerConfigADCmb_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatTiposPeriodo.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatServerConfigLocationADSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatTiposPeriodoCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatSubActionCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatSubActionGRIDCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatTerminationTypeCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\CatTiposPeriodoSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatUserInfoSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ELAViewModel.cs" />
-    <Compile Include="Models\GetNewEmployeeBadgeNumberSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\InformationSecurity.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InformationSecurity.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\InformationSecurity.cs" />
-    <Compile Include="Models\InformationSecurity.Designer.cs">
-      <DependentUpon>InformationSecurity.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Models\InformationSecurity1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\LogError.cs" />
-    <Compile Include="Models\MailHelper.cs" />
-    <Compile Include="Models\ManagersByHierarchySel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\MyCustomIdentity.cs" />
-    <Compile Include="Models\NCNSViewModel.cs" />
-    <Compile Include="Models\ProDepro.cs" />
-    <Compile Include="Models\R2WViewModel.cs" />
     <Compile Include="Models\RelConceptoPai.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RelEmployeeAuthSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RelPositionAuthSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RelRoleClient.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RelRoleClientSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RelUserRoleSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
+    <Compile Include="Models\RelUserRole.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TraAPTerminationSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TraClericalImages.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TraClericalImagesSelByEmployeeId_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TraGeneraArchivoSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TraProgrammingSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TraRepositionCMB_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TraTerminationSel_Result.cs">
-      <DependentUpon>InformationSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -421,14 +261,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ASN.edmx</DependentUpon>
       <LastGenOutput>ASN.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\InformationSecurity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>InformationSecurity.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\InformationSecurity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>InformationSecurity1.cs</LastGenOutput>
     </Content>
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
@@ -464,13 +296,6 @@
     </EntityDeploy>
     <Content Include="Models\ASN.edmx.diagram">
       <DependentUpon>ASN.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\InformationSecurity.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>InformationSecurity.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\InformationSecurity.edmx.diagram">
-      <DependentUpon>InformationSecurity.edmx</DependentUpon>
     </Content>
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />

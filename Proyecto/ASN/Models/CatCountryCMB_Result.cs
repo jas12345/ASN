@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASN.Models
+using System;
+using System.Collections.Generic;
+
+public partial class CatCountryCMB_Result
 {
-    using System;
-    
-    public partial class CatCountryCMB_Result
-    {
-        public Nullable<int> Id { get; set; }
-        public string Value { get; set; }
-    }
+    public Nullable<int> Id { get; set; }
+    public string Value { get; set; }
 }
