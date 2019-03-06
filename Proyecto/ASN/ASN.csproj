@@ -369,6 +369,7 @@
     <Content Include="Views\Reporte\Auditoria.cshtml" />
     <Content Include="Views\Reporte\General.cshtml" />
     <Content Include="Views\Proceso\CierreMovimientos.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
