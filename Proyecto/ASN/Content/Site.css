@@ -18,7 +18,43 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select
+/*textarea*/ {
     max-width: 280px;
 }
+
+textarea {
+    resize: none;
+}
+
+.top-buffer { margin-top:20px; }
+
+
+    @media (min-width: 768px){
+      .seven-cols .col-md-1,
+      .seven-cols .col-sm-1,
+      .seven-cols .col-lg-1  {
+        width: 100%;
+        *width: 100%;
+      }
+    }
+
+
+    @media (min-width: 1250px) {
+      .seven-cols .col-md-1,
+      .seven-cols .col-sm-1,
+      .seven-cols .col-lg-1 {
+        width: 14.285714285714285714285714285714%;
+        *width: 14.285714285714285714285714285714%;
+      }
+    }
+
+
+    @media (min-width: 1300px) {
+      .seven-cols .col-md-1,
+      .seven-cols .col-sm-1,
+      .seven-cols .col-lg-1 {
+        width: 14.285714285714285714285714285714%;
+        *width: 14.285714285714285714285714285714%;
+      }
+    }

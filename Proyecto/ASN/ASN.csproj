@@ -66,9 +66,6 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -136,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Global.asax.cs">
@@ -245,9 +243,106 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Bootstrap\editor.png" />
+    <Content Include="Content\Bootstrap\imagebrowser.png" />
+    <Content Include="Content\Bootstrap\indeterminate.gif" />
+    <Content Include="Content\Bootstrap\loading-image.gif" />
+    <Content Include="Content\Bootstrap\loading.gif" />
+    <Content Include="Content\Bootstrap\loading_2x.gif" />
+    <Content Include="Content\Bootstrap\markers.png" />
+    <Content Include="Content\Bootstrap\markers_2x.png" />
+    <Content Include="Content\Bootstrap\slider-h.gif" />
+    <Content Include="Content\Bootstrap\slider-v.gif" />
+    <Content Include="Content\Bootstrap\sprite.png" />
+    <Content Include="Content\Bootstrap\sprite_2x.png" />
+    <Content Include="Content\Bootstrap\sprite_kpi.png" />
+    <Content Include="Content\Bootstrap\sprite_kpi_2x.png" />
+    <Content Include="Content\Catalogos.css" />
+    <Content Include="Content\Comentarios.css" />
+    <Content Include="Content\Default\editor.png" />
+    <Content Include="Content\Default\imagebrowser.png" />
+    <Content Include="Content\Default\indeterminate.gif" />
+    <Content Include="Content\Default\loading-image.gif" />
+    <Content Include="Content\Default\loading.gif" />
+    <Content Include="Content\Default\loading_2x.gif" />
+    <Content Include="Content\Default\markers.png" />
+    <Content Include="Content\Default\markers_2x.png" />
+    <Content Include="Content\Default\slider-h.gif" />
+    <Content Include="Content\Default\slider-v.gif" />
+    <Content Include="Content\Default\sprite.png" />
+    <Content Include="Content\Default\sprite_2x.png" />
+    <Content Include="Content\Default\sprite_kpi.png" />
+    <Content Include="Content\Default\sprite_kpi_2x.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\kendo.common-bootstrap.min.css" />
+    <Content Include="Content\kendo.common.min.css" />
+    <Content Include="Content\kendo.custom.css" />
+    <Content Include="Content\kendo.default.min.css" />
+    <Content Include="Content\kendo\Bootstrap\editor.png" />
+    <Content Include="Content\kendo\Bootstrap\imagebrowser.png" />
+    <Content Include="Content\kendo\Bootstrap\indeterminate.gif" />
+    <Content Include="Content\kendo\Bootstrap\loading-image.gif" />
+    <Content Include="Content\kendo\Bootstrap\loading.gif" />
+    <Content Include="Content\kendo\Bootstrap\loading_2x.gif" />
+    <Content Include="Content\kendo\Bootstrap\markers.png" />
+    <Content Include="Content\kendo\Bootstrap\markers_2x.png" />
+    <Content Include="Content\kendo\Bootstrap\slider-h.gif" />
+    <Content Include="Content\kendo\Bootstrap\slider-v.gif" />
+    <Content Include="Content\kendo\Bootstrap\sprite.png" />
+    <Content Include="Content\kendo\Bootstrap\sprite_2x.png" />
+    <Content Include="Content\kendo\Bootstrap\sprite_kpi.png" />
+    <Content Include="Content\kendo\Bootstrap\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\Default\editor.png" />
+    <Content Include="Content\kendo\Default\imagebrowser.png" />
+    <Content Include="Content\kendo\Default\indeterminate.gif" />
+    <Content Include="Content\kendo\Default\loading-image.gif" />
+    <Content Include="Content\kendo\Default\loading.gif" />
+    <Content Include="Content\kendo\Default\loading_2x.gif" />
+    <Content Include="Content\kendo\Default\markers.png" />
+    <Content Include="Content\kendo\Default\markers_2x.png" />
+    <Content Include="Content\kendo\Default\slider-h.gif" />
+    <Content Include="Content\kendo\Default\slider-v.gif" />
+    <Content Include="Content\kendo\Default\sprite.png" />
+    <Content Include="Content\kendo\Default\sprite_2x.png" />
+    <Content Include="Content\kendo\Default\sprite_kpi.png" />
+    <Content Include="Content\kendo\Default\sprite_kpi_2x.png" />
+    <Content Include="Content\fonts\glyphs\KendoUIGlyphs.svg" />
+    <Content Include="Content\fonts\glyphs\WebComponentsIcons.svg" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.svg" />
+    <Content Include="Content\kendo\fonts\glyphs\WebComponentsIcons.svg" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\simple-sidebar.css" />
+    <Content Include="Content\textures\brushed-metal.png" />
+    <Content Include="Content\textures\dots1.png" />
+    <Content Include="Content\textures\dots10.png" />
+    <Content Include="Content\textures\dots11.png" />
+    <Content Include="Content\textures\dots12.png" />
+    <Content Include="Content\textures\dots13.png" />
+    <Content Include="Content\textures\dots2.png" />
+    <Content Include="Content\textures\dots3.png" />
+    <Content Include="Content\textures\dots4.png" />
+    <Content Include="Content\textures\dots5.png" />
+    <Content Include="Content\textures\dots6.png" />
+    <Content Include="Content\textures\dots7.png" />
+    <Content Include="Content\textures\dots8.png" />
+    <Content Include="Content\textures\dots9.png" />
+    <Content Include="Content\textures\glass-lighter.png" />
+    <Content Include="Content\textures\glass.png" />
+    <Content Include="Content\textures\highlight.png" />
+    <Content Include="Content\textures\hsv-gradient.png" />
+    <Content Include="Content\textures\hue.png" />
+    <Content Include="Content\textures\leather1.png" />
+    <Content Include="Content\textures\leather2.png" />
+    <Content Include="Content\textures\noise.png" />
+    <Content Include="Content\textures\stripe1.png" />
+    <Content Include="Content\textures\stripe2.png" />
+    <Content Include="Content\textures\stripe3.png" />
+    <Content Include="Content\textures\stripe4.png" />
+    <Content Include="Content\textures\stripe5.png" />
+    <Content Include="Content\textures\stripe6.png" />
+    <Content Include="Content\textures\transparency.png" />
+    <Content Include="Content\textures\transtexture.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -263,13 +358,9 @@
       <DependentUpon>ASN.edmx</DependentUpon>
       <LastGenOutput>ASN.cs</LastGenOutput>
     </Content>
-    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
-    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
-    <Content Include="Rotativa\wkhtmltoimage.exe" />
-    <Content Include="Rotativa\wkhtmltopdf.exe" />
-    <Content Include="App_Browsers\qt.browser" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\DisableRMC.js" />
     <Content Include="Scripts\DisableRMCLogin.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -295,16 +386,37 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Content\fonts\glyphs\KendoUIGlyphs.eot" />
+    <Content Include="Content\fonts\glyphs\KendoUIGlyphs.ttf" />
+    <Content Include="Content\fonts\glyphs\KendoUIGlyphs.woff" />
+    <Content Include="Content\fonts\glyphs\WebComponentsIcons.eot" />
+    <Content Include="Content\fonts\glyphs\WebComponentsIcons.ttf" />
+    <Content Include="Content\fonts\glyphs\WebComponentsIcons.woff" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.eot" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.ttf" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.woff" />
+    <Content Include="Content\kendo\fonts\glyphs\WebComponentsIcons.eot" />
+    <Content Include="Content\kendo\fonts\glyphs\WebComponentsIcons.ttf" />
+    <Content Include="Content\kendo\fonts\glyphs\WebComponentsIcons.woff" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\kendo.common-bootstrap.min.css.map" />
+    <Content Include="Content\kendo.common.min.css.map" />
+    <Content Include="Content\kendo.custom.less" />
+    <Content Include="Content\kendo.default.min.css.map" />
     <Content Include="Scripts\formAnimation.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\General.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -337,8 +449,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo.aspnetmvc.min.js.map" />
@@ -369,6 +479,8 @@
     <Content Include="Views\Reporte\General.cshtml" />
     <Content Include="Views\Proceso\CierreMovimientos.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Inicio\Index.cshtml" />
+    <Content Include="Scripts\kendo.custom.dataviz.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -377,8 +489,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

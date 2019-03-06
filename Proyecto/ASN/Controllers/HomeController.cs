@@ -98,30 +98,9 @@ namespace GAPP.Controllers
 
         public ActionResult redirecciona(string ccms)
         {
-            if (User.IsInRole("Desarrollo") || User.IsInRole("ProDeproManager") || User.IsInRole("Information Security"))
+            if (User.IsInRole("Desarrollo"))
             {
-                return RedirectToAction("Index", "ProDepro");
-            }
-            else if (User.IsInRole("Security") || User.IsInRole("BadgeIn24DateCommitted"))
-            {
-                //return RedirectToAction("Index", "BadgeIn24");
-                return RedirectToAction("Index", "BadgeIn24Agents");
-            }
-            else if (User.IsInRole("BadgeIn24BadgeNumberReposition") || User.IsInRole("RH"))
-            {
-                return RedirectToAction("Index", "Reposition");
-            }
-            else if (User.IsInRole("Report"))
-            {
-                return RedirectToAction("Index", "Report");
-            }
-            else if (User.IsInRole("RH"))
-            {
-                return RedirectToAction("Index", "APBajas");
-            }
-            else if (User.IsInRole("Clerical-ESV"))
-            {
-                return RedirectToAction("Index", "Clerical");
+                return RedirectToAction("Index", "Inicio");
             }
             else
             {
