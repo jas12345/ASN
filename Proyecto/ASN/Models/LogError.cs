@@ -64,7 +64,7 @@ namespace ASN.Models
                     MessageInnerEx += string.Format(":_:[{0}]:_:[{1}]", ex.InnerException.Message, ex.InnerException.StackTrace);
                 }
 
-                using (ASNEntities ctx = new ASNEntities())
+                using (ASNContext ctx = new ASNContext())
                 {
                     ctx.CatLogErrorSi(MessageInnerEx, ex.StackTrace, IP, Browser, EID);
                 }

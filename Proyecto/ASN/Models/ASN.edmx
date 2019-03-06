@@ -505,7 +505,7 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
             <Parameter Name="Active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="CatProgramCMB" ReturnType="Collection(ASNModel.CatProgramCMB_Result)" />
-          <FunctionImport Name="CatRelUserRoleSel" ReturnType="Collection(String)">
+          <FunctionImport Name="CatRelUserRoleSel" ReturnType="Collection(ASNModel.CatRelUserRoleSel_Result)">
           <Parameter Name="CCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatTipoConceptosCMB" ReturnType="Collection(ASNModel.CatTipoConceptosCMB_Result)" />
@@ -807,6 +807,9 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="CatRelUserRoleSel_Result">
+          <Property Type="String" Name="Role" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1105,7 +1108,13 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatRelUserRoleSel" FunctionName="ASNModel.Store.CatRelUserRoleSel" />
+          <FunctionImportMapping FunctionImportName="CatRelUserRoleSel" FunctionName="ASNModel.Store.CatRelUserRoleSel" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatRelUserRoleSel_Result">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatTipoConceptosCMB" FunctionName="ASNModel.Store.CatTipoConceptosCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatTipoConceptosCMB_Result">

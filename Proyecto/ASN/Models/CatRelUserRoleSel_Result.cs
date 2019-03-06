@@ -11,9 +11,8 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class CatPeriodicidadNominaCMB_Result
+    public partial class CatRelUserRoleSel_Result
     {
-        public string Id { get; set; }
-        public string Value { get; set; }
+        public string Role { get; set; }
     }
 }
