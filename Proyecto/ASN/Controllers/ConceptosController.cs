@@ -124,7 +124,7 @@ namespace ASN.Controllers
 
                     if(res == -1)
                     {
-                        ModelState.AddModelError("error", "Ya existe una descripción en la base de datos.");
+                        ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
@@ -169,7 +169,7 @@ namespace ASN.Controllers
 
                     if (res == -1)
                     {
-                        ModelState.AddModelError("error", "Ya existe una descripción en la base de datos.");
+                        ModelState.AddModelError("error", "Ya existe otro concepto con la misma descripción.");
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
