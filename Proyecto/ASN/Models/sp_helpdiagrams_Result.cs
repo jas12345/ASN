@@ -11,9 +11,12 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class CatClientCMB_Result
+    public partial class sp_helpdiagrams_Result
     {
-        public Nullable<int> Id { get; set; }
-        public string Value { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

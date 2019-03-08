@@ -11,9 +11,9 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class CatClientCMB_Result
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public Nullable<int> Id { get; set; }
-        public string Value { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

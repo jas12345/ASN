@@ -12,26 +12,17 @@ namespace ASN.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CatPeriodosNomina
+    public partial class CatMeses
     {
-        public string TipoPeriodo { get; set; }
-        public System.DateTime FechaInicio { get; set; }
-        public System.DateTime FechaFin { get; set; }
-        public System.DateTime FechaCaptura { get; set; }
-        public System.DateTime FechaCierre { get; set; }
-        public string CountryIdents { get; set; }
-        public string NombrePeriodo { get; set; }
+        public int MesId { get; set; }
+        public string Descripcion { get; set; }
         public bool Active { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public Nullable<int> DeactivatedBy { get; set; }
         public Nullable<System.DateTime> DeactivatedDate { get; set; }
+        public Nullable<int> DeactivatedBy { get; set; }
         public int LastModifiedBy { get; set; }
         public System.DateTime LastModifiedDate { get; set; }
         public string LastModifiedFromPCName { get; set; }
-        public int AnioId { get; set; }
-        public int MesId { get; set; }
-        public int ConsecutivoId { get; set; }
-        public string PeriodicidadNominaId { get; set; }
     }
 }

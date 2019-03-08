@@ -11,9 +11,11 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class CatClientCMB_Result
+    public partial class CatAniosNominaSel_Result
     {
-        public Nullable<int> Id { get; set; }
-        public string Value { get; set; }
+        public int AnioId { get; set; }
+        public System.DateTime FechaInicio { get; set; }
+        public System.DateTime FechaCierre { get; set; }
+        public bool Active { get; set; }
     }
 }
