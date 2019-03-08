@@ -17,13 +17,13 @@ namespace ASN.Models
         public int Año { get; set; }
         public int Mes { get; set; }
         public string Periodicidad { get; set; }
-        public int Consecutivo { get; set; }
+        public string Consecutivo { get; set; }
         public string TipoPeriodo { get; set; }
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime FechaFin { get; set; }
         public System.DateTime FechaCaptura { get; set; }
         public System.DateTime FechaCierre { get; set; }
-        public int CountryIdent { get; set; }
+        public string CountryIdents { get; set; }
         public string NombrePeriodo { get; set; }
         public bool Active { get; set; }
         public int CreatedBy { get; set; }

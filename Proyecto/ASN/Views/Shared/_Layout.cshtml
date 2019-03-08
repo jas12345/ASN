@@ -116,49 +116,32 @@
                     </a>
                 </li>
                 @{
-                    if (User.IsInRole("Desarrollo") || User.IsInRole("ProDeproManager") || User.IsInRole("Information Security") || User.IsInRole("RH")) //hrcv
+                    @*if (User.IsInRole("Desarrollo"))
                     {
-                        <li>@Html.ActionLink("Conceptos", "Conceptos", "Catálogo")</li>
-                    }
+                        <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
+                    }*@
 
-                    if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("BadgeIn24DateCommitted"))
+                    @*if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("BadgeIn24DateCommitted"))
                     {
-                        <li>@Html.ActionLink("Mapeo de Conceptos", "index", "Catálogos")</li>
+                        <li>@Html.ActionLink("Mapeo de Conceptos", "index", "Catalogos")</li>
                         <li>@Html.ActionLink("Motivos de Solicitud", "index", "BadgeIn24")</li>
-                    }
+                    }*@
 
-                    if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("RH") || User.IsInRole("Clerical-ESV"))
+                    if (User.IsInRole("Desarrollo"))
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogs<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li class="dropdown-header"><div class="fa fa-angellist"></div></li>
-                                @if (User.IsInRole("Desarrollo") || User.IsInRole("Security"))
-                                {
-                                    <li>@Html.ActionLink("Access Level", "index", "AccessLevel")</li>
-                                    <li>@Html.ActionLink("Card Range", "index", "CardRange")</li>
-                                    <li>@Html.ActionLink("Reposition Numbers", "index", "RepositionCat")</li>
-                                }
-                                else if (User.IsInRole("RH"))
-                                {
-                                    <li>@Html.ActionLink("Reposition Numbers", "index", "RepositionCat")</li>
-                                }
-
                                 @if (User.IsInRole("Desarrollo"))
                                 {
-                                    <li>@Html.ActionLink("Users", "index", "Usuario")</li>
-                                    <li>@Html.ActionLink("Location-Employee", "index", "LocationEmployee")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
-                                {
-                                    <li>@Html.ActionLink("Role-Client", "index", "RoleClient")</li>
+                                    <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
                                 }
                             </ul>
                         </li>
                     }
 
-                    if (User.IsInRole("Desarrollo") || User.IsInRole("Report") || User.IsInRole("Information Security"))
+                    @*if (User.IsInRole("Desarrollo") || User.IsInRole("Report") || User.IsInRole("Information Security"))
                     {
                         <li>@Html.ActionLink("Coordinadores de Nómina", "index", "Report")</li>
                     }
@@ -206,7 +189,7 @@
                     if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
                     {
                         <li>@Html.ActionLink("Depuración de Movimientos", "index", "Clerical")</li>
-                    }
+                    }*@
 
 
                 }

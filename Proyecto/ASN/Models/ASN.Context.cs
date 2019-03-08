@@ -33,12 +33,12 @@ namespace ASN.Models
         public virtual DbSet<CatEstatusConceptos> CatEstatusConceptos { get; set; }
         public virtual DbSet<CatParametroConceptos> CatParametroConceptos { get; set; }
         public virtual DbSet<CatPeriodicidadNomina> CatPeriodicidadNomina { get; set; }
-        public virtual DbSet<CatPeriodosNomina> CatPeriodosNomina { get; set; }
         public virtual DbSet<CatTipoConceptos> CatTipoConceptos { get; set; }
         public virtual DbSet<CatTiposPeriodo> CatTiposPeriodo { get; set; }
         public virtual DbSet<RelUserRole> RelUserRole { get; set; }
         public virtual DbSet<CatEmployeeCCMSVw> CatEmployeeCCMSVw { get; set; }
         public virtual DbSet<CatRole> CatRole { get; set; }
+        public virtual DbSet<CatPeriodosNomina> CatPeriodosNomina { get; set; }
     
         public virtual ObjectResult<CatClientCMB_Result> CatClientCMB()
         {
@@ -55,12 +55,8 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosSel_Result>("CatConceptosSel");
         }
     
-        public virtual int CatConceptosSi(Nullable<int> conceptoId, string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId)
+        public virtual int CatConceptosSi(string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
-            var conceptoIdParameter = conceptoId.HasValue ?
-                new ObjectParameter("ConceptoId", conceptoId) :
-                new ObjectParameter("ConceptoId", typeof(int));
-    
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("Descripcion", descripcion) :
                 new ObjectParameter("Descripcion", typeof(string));
@@ -73,10 +69,10 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosSi", conceptoIdParameter, descripcionParameter, tipoConceptoParameter, userEmployeeIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosSi", descripcionParameter, tipoConceptoParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatConceptosSu(Nullable<int> conceptoId, string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId, Nullable<bool> active)
+        public virtual int CatConceptosSu(Nullable<int> conceptoId, string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
             var conceptoIdParameter = conceptoId.HasValue ?
                 new ObjectParameter("ConceptoId", conceptoId) :
@@ -98,7 +94,7 @@ namespace ASN.Models
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosSu", conceptoIdParameter, descripcionParameter, tipoConceptoParameter, userEmployeeIdParameter, activeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosSu", conceptoIdParameter, descripcionParameter, tipoConceptoParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
         public virtual ObjectResult<CatCountryCMB_Result> CatCountryCMB()

@@ -54,6 +54,9 @@ namespace ASN
             "~/Content/kendo.custom.css"
             ));
 
+            bundles.Add(new ScriptBundle("~/bundles/Conceptos").Include(
+            "~/Scripts/Conceptos.js"));
+
         }
     }
 }

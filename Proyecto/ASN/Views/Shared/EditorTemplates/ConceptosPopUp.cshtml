@@ -1,0 +1,44 @@
+﻿@model  ASN.Models.CatConceptosSel_Result
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="EID">CCMSID</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.Descripcion))
+        </div>
+        <div class="editor-label">
+            <label for="LocId">Location</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.TipoConcepto)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetConceptosCMB", "Conceptos");
+                            });
+                        //.ServerFiltering(true);
+                    })
+                        .Filter("contains")
+                        .OptionLabel("- Tipo de concepto - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("TipoConcepto")
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Active">Active</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("Active")
+        </div>
+    </div>
+</div>

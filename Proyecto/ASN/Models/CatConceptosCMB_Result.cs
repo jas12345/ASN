@@ -13,7 +13,7 @@ namespace ASN.Models
     
     public partial class CatConceptosCMB_Result
     {
-        public int Id { get; set; }
-        public string Value { get; set; }
+        public int Ident { get; set; }
+        public string Valor { get; set; }
     }
 }
