@@ -8,13 +8,13 @@
 <div>
     <div class="k-edit-form-container">
         <div class="editor-label">
-            <label for="EID">CCMSID</label>
+            <label for="Descripcion">Descripción</label>
         </div>
         <div class="editor-field">
             @(Html.Kendo().TextBoxFor(x => x.Descripcion))
         </div>
         <div class="editor-label">
-            <label for="LocId">Location</label>
+            <label for="TipoConcepto">Tipo de concepto</label>
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.TipoConcepto)
@@ -35,7 +35,7 @@
             )
         </div>
         <div class="editor-label">
-            <label for="Active">Active</label>
+            <label for="Active">Activo</label>
         </div>
         <div class="editor-field">
             @Html.CheckBox("Active")

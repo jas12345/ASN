@@ -106,8 +106,11 @@ namespace ASN.Controllers
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     int ccmsidAdmin = 0;
+                    int res = 0;
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                     resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
                     foreach (var obj in profiles)
                     {
@@ -115,6 +118,13 @@ namespace ASN.Controllers
                         {
                             context.CatConceptosSi(obj.Descripcion,obj.TipoConcepto,ccmsidAdmin, resultado);
                         }
+                    }
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    if(res == -1)
+                    {
+                        ModelState.AddModelError("error", "Ya existe una descripción en la base de datos.");
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
@@ -141,8 +151,11 @@ namespace ASN.Controllers
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     int ccmsidAdmin = 0;
+                    int res = 0;
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                     resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
                     foreach (var obj in profiles)
                     {
@@ -150,6 +163,13 @@ namespace ASN.Controllers
                         {
                             context.CatConceptosSu(obj.ConceptoId,obj.Descripcion,obj.TipoConcepto,ccmsidAdmin,obj.Active,resultado);
                         }
+                    }
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    if (res == -1)
+                    {
+                        ModelState.AddModelError("error", "Ya existe una descripción en la base de datos.");
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
