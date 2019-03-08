@@ -68,21 +68,21 @@
                             .ButtonCount(5)
                             .Numeric(true)
                             .PreviousNext(true)
-                        //.Messages(messages =>
-                        //{
-                        //    messages.ItemsPerPage("Registros por página");
-                        //    messages.Empty("Sin información para mostrar");
-                        //    messages.First("Primera");
-                        //    messages.Page("Página");
-                        //    messages.Last("Última");
-                        //    messages.Previous("Anterior");
-                        //    messages.Next("Siguiente");
-                        //    messages.Refresh("Actualizar");
-                        //    messages.Of("De");
-                        //    messages.MorePages("Mas páginas");
-                        //    //messages.Display("Prueba");
-                        //    messages.Display("{0} a {1} de {2}");
-                        //})
+                        .Messages(messages =>
+                        {
+                            messages.ItemsPerPage("Registros por página");
+                            messages.Empty("Sin información para mostrar");
+                            messages.First("Primera");
+                            messages.Page("Página");
+                            messages.Last("Última");
+                            messages.Previous("Anterior");
+                            messages.Next("Siguiente");
+                            messages.Refresh("Actualizar");
+                            messages.Of("De");
+                            messages.MorePages("Mas páginas");
+                            //messages.Display("Prueba");
+                            messages.Display("{0} a {1} de {2}");
+                        })
                         )
                 )
             </div>
