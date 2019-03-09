@@ -1,0 +1,66 @@
+﻿@model  ASN.Models.CatAniosNominaSel_Result
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="AnioNominaId">Año</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.AnioId))
+        </div>
+        <div class="editor-label">
+            <label for="FechaInicio">Fecha de Inicio</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DatePicker()
+                .Format("yyyy/MM/dd")
+                .ParseFormats(new string[]
+                    {
+                    "ddd, M/d/yyyy",
+                    "ddd, MM/dd/yyyy",
+                    "ddd, M/dd/yyyy"
+                    }
+                )
+                .Name("FechaInicio")
+                .Value(DateTime.Now)
+                .Min(DateTime.Now)
+                .Max(DateTime.Now)
+                .Enable(true)
+                .Events(e => e.Change("FechaInicioOpen"))
+            )
+        </div>
+        <div class="editor-label">
+            <label for="FechaCierre">Fecha de Cierre</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DatePicker()
+                .Format("yyyy/MM/dd")
+                .ParseFormats(new string[]
+                    {
+                "ddd, M/d/yyyy",
+                "ddd, MM/dd/yyyy",
+                "ddd, M/dd/yyyy"
+                    }
+                )
+                .Name("FechaCierre")
+                .Value(DateTime.Now)
+                .Min(DateTime.Now)
+                .Max(DateTime.Now)
+                .Enable(true)
+                .Events(e => e.Change("FechaCierreOpen"))
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Active">Activo</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("Active")
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/Nomina")

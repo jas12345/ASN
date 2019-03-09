@@ -9,12 +9,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+
 namespace ASN.Controllers
 {
-    public class AniosNominaController : Controller
+    public class NominaController : Controller
     {
-        // GET: Anios
-        public ActionResult Index()
+        // GET: AniosNomina
+        public ActionResult AniosNomina()
         {
             try
             {
@@ -23,10 +25,12 @@ namespace ASN.Controllers
                     using (ASNContext context = new ASNContext())
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                        ViewData["AñosNomina"] = context.CatAniosNominaSel().ToList();
+                        //ViewData["CatAniosNomina"] = context.CatAniosNominaSel().ToList();
                     }
 
                     return View();
+                    //return View("Nomina/CatAniosNomina");
+                    //return RedirectToAction("AniosNomina", "Nomina");
                 }
                 else
                 {
@@ -48,7 +52,7 @@ namespace ASN.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult GetAñosNomina([DataSourceRequest]DataSourceRequest request)
+        public ActionResult GetAniosNomina([DataSourceRequest]DataSourceRequest request)
         {
             try
             {
@@ -72,7 +76,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateAñoNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatAniosNominaSel_Result> profiles)
+        public ActionResult CreateAnioNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatAniosNominaSel_Result> profiles)
         {
             try
             {
@@ -113,7 +117,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateAñoNomina ([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatAniosNominaSel_Result> profiles)
+        public ActionResult UpdateAnioNomina ([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatAniosNominaSel_Result> profiles)
         {
             try
             {
