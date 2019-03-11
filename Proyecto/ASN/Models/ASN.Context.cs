@@ -42,8 +42,8 @@ namespace ASN.Models
         public virtual DbSet<CatConcecutivoPeriodicidad> CatConcecutivoPeriodicidad { get; set; }
         public virtual DbSet<CatConcecutivoPeriodos> CatConcecutivoPeriodos { get; set; }
         public virtual DbSet<CatMeses> CatMeses { get; set; }
-        public virtual DbSet<CatMesesNomina> CatMesesNomina { get; set; }
         public virtual DbSet<CatAniosNomina> CatAniosNomina { get; set; }
+        public virtual DbSet<CatMesesNomina> CatMesesNomina { get; set; }
     
         public virtual ObjectResult<CatClientCMB_Result> CatClientCMB()
         {
@@ -400,19 +400,19 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAniosNominaSel_Result>("CatAniosNominaSel");
         }
     
-        public virtual int CatAniosNominaSi(Nullable<int> anioId, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatAniosNominaSi(Nullable<int> anioId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
                 new ObjectParameter("AnioId", typeof(int));
     
-            var fechaInicioParameter = fechaInicio.HasValue ?
+            var fechaInicioParameter = fechaInicio != null ?
                 new ObjectParameter("FechaInicio", fechaInicio) :
-                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+                new ObjectParameter("FechaInicio", typeof(string));
     
-            var fechaCierreParameter = fechaCierre.HasValue ?
+            var fechaCierreParameter = fechaCierre != null ?
                 new ObjectParameter("FechaCierre", fechaCierre) :
-                new ObjectParameter("FechaCierre", typeof(System.DateTime));
+                new ObjectParameter("FechaCierre", typeof(string));
     
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
@@ -421,20 +421,20 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAniosNominaSi", anioIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatAniosNominaSu(Nullable<int> anioId, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatAniosNominaSu(Nullable<int> anioId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
                 new ObjectParameter("AnioId", typeof(int));
-    
-            var fechaInicioParameter = fechaInicio.HasValue ?
+
+            var fechaInicioParameter = fechaInicio != null ?
                 new ObjectParameter("FechaInicio", fechaInicio) :
-                new ObjectParameter("FechaInicio", typeof(System.DateTime));
-    
-            var fechaCierreParameter = fechaCierre.HasValue ?
+                new ObjectParameter("FechaInicio", typeof(string));
+
+            var fechaCierreParameter = fechaCierre != null ?
                 new ObjectParameter("FechaCierre", fechaCierre) :
-                new ObjectParameter("FechaCierre", typeof(System.DateTime));
-    
+                new ObjectParameter("FechaCierre", typeof(string));
+
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
@@ -547,6 +547,65 @@ namespace ASN.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<CatConcecutivoPeriodicidadSel_Result> CatConcecutivoPeriodicidadSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConcecutivoPeriodicidadSel_Result>("CatConcecutivoPeriodicidadSel");
+        }
+    
+        public virtual int CatMesesNominaSi(Nullable<int> anioId, Nullable<int> mesId, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        {
+            var anioIdParameter = anioId.HasValue ?
+                new ObjectParameter("AnioId", anioId) :
+                new ObjectParameter("AnioId", typeof(int));
+    
+            var mesIdParameter = mesId.HasValue ?
+                new ObjectParameter("MesId", mesId) :
+                new ObjectParameter("MesId", typeof(int));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaCierreParameter = fechaCierre.HasValue ?
+                new ObjectParameter("FechaCierre", fechaCierre) :
+                new ObjectParameter("FechaCierre", typeof(System.DateTime));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatMesesNominaSi", anioIdParameter, mesIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, estatus);
+        }
+    
+        public virtual int CatMesesNominaSu(Nullable<int> anioId, Nullable<int> mesId, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        {
+            var anioIdParameter = anioId.HasValue ?
+                new ObjectParameter("AnioId", anioId) :
+                new ObjectParameter("AnioId", typeof(int));
+    
+            var mesIdParameter = mesId.HasValue ?
+                new ObjectParameter("MesId", mesId) :
+                new ObjectParameter("MesId", typeof(int));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaCierreParameter = fechaCierre.HasValue ?
+                new ObjectParameter("FechaCierre", fechaCierre) :
+                new ObjectParameter("FechaCierre", typeof(System.DateTime));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatMesesNominaSu", anioIdParameter, mesIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     }
 }

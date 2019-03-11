@@ -11,12 +11,10 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class CatMesesNominaSel_Result
+    public partial class CatConcecutivoPeriodicidadSel_Result
     {
-        public int AnioId { get; set; }
-        public int MesId { get; set; }
-        public System.DateTime FechaInicio { get; set; }
-        public System.DateTime FechaCierre { get; set; }
+        public int ConsecutivoId { get; set; }
+        public string PeriodicidadNominaId { get; set; }
         public bool Active { get; set; }
     }
 }

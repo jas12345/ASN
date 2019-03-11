@@ -188,6 +188,18 @@ function ValidaDisplayNameVal(obj) {
     //}
 }
 
+function accionado() {
+    return {
+        fechaInicio: $("#FechaInicio").val(), fechaCierre: $("#FechaCierre").val()
+    };
+}
+
+function dateFilter(e) {
+    e.element.kendoDatePicker({
+        format: "yyyy-MM-dd",
+    });
+}
+
 
 $(document).ready(function () {
     //OcultaSave();
@@ -196,6 +208,4 @@ $(document).ready(function () {
         $("#FechaInicio").data('kendoDatePicker').value(Hoy);
         $("#FechaCierre").data('kendoDatePicker').value(Hoy);
     }, 0);
-    $("#FechaInicio").attr("readonly", true);
-    $("#FechaCierre").attr("readonly", true);
 });

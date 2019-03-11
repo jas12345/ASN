@@ -107,10 +107,10 @@
         </EntityType>
         <EntityType Name="CatMesesNomina">
           <Key>
-            <PropertyRef Name="AñoId" />
+            <PropertyRef Name="AnioId" />
             <PropertyRef Name="MesId" />
           </Key>
-          <Property Name="AñoId" Type="int" Nullable="false" />
+          <Property Name="AnioId" Type="int" Nullable="false" />
           <Property Name="MesId" Type="int" Nullable="false" />
           <Property Name="FechaInicio" Type="datetime" Nullable="false" />
           <Property Name="FechaCierre" Type="datetime" Nullable="false" />
@@ -269,26 +269,6 @@
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ASN.app620.CatCityVw' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="CatCityVw">
-          <Property Name="City" Type="varchar" MaxLength="100" />
-          <Property Name="State" Type="varchar" MaxLength="150" />
-          <Property Name="CountryId" Type="int" />
-        </EntityType>-->
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ASN.app620.CatClientVw' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="CatClientVw">
-          <Property Name="ClientId" Type="int" />
-          <Property Name="ClientName" Type="varchar" MaxLength="250" />
-        </EntityType>-->
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ASN.app620.CatCountryVw' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="CatCountryVw">
-          <Property Name="CountryId" Type="int" />
-          <Property Name="CountryName" Type="varchar" MaxLength="150" />
-          <Property Name="CountryAbbr" Type="varchar" MaxLength="80" />
-        </EntityType>-->
-        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CatEmployeeCCMSVw">
           <Key>
@@ -347,18 +327,6 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <Property Name="position_code_company_ident" Type="int" />
           <Property Name="Nombre" Type="varchar" MaxLength="752" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ASN.app620.CatProgramVw' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="CatProgramVw">
-          <Property Name="ProgramId" Type="int" />
-          <Property Name="ProgramName" Type="varchar" MaxLength="250" />
-        </EntityType>-->
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="CatStateVw">
-          <Property Name="State" Type="varchar" MaxLength="150" />
-          <Property Name="CountryId" Type="int" />
-        </EntityType>-->
         <Association Name="FK_CatRoleRelUserRole">
           <End Role="CatRole" Type="Self.CatRole" Multiplicity="1" />
           <End Role="RelUserRole" Type="Self.RelUserRole" Multiplicity="*" />
@@ -374,8 +342,8 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
         <Function Name="CatAniosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
-          <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
+          <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -388,6 +356,7 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatClientCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConcecutivoPeriodicidadSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -413,6 +382,23 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
         </Function>
         <Function Name="CatMesesNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatMesesNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+          <Parameter Name="MesId" Type="int" Mode="In" />
+          <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatMesesNominaSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+          <Parameter Name="MesId" Type="int" Mode="In" />
+          <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="CatParametroConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodicidadNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodicidadNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -711,7 +697,6 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <EntitySet Name="CatConcecutivoPeriodicidad" EntityType="ASNModel.CatConcecutivoPeriodicidad" />
           <EntitySet Name="CatConcecutivoPeriodos" EntityType="ASNModel.CatConcecutivoPeriodos" />
           <EntitySet Name="CatMeses" EntityType="ASNModel.CatMeses" />
-          <EntitySet Name="CatMesesNomina" EntityType="ASNModel.CatMesesNomina" />
           <FunctionImport Name="CatAñosNominaSel" />
           <FunctionImport Name="CatAñosNominaSi">
             <Parameter Name="AñoId" Mode="In" Type="Int32" />
@@ -753,8 +738,8 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <FunctionImport Name="CatAniosNominaSel" ReturnType="Collection(ASNModel.CatAniosNominaSel_Result)" />
           <FunctionImport Name="CatAniosNominaSi">
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
-            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaCierre" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -766,7 +751,6 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="CatAniosNomina" EntityType="ASNModel.CatAniosNomina" />
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -797,6 +781,26 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="CatConcecutivoPeriodicidadSel" ReturnType="Collection(ASNModel.CatConcecutivoPeriodicidadSel_Result)" />
+          <FunctionImport Name="CatMesesNominaSi">
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatMesesNominaSu">
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CatAniosNomina" EntityType="ASNModel.CatAniosNomina" />
+          <EntitySet Name="CatMesesNomina" EntityType="ASNModel.CatMesesNomina" />
         </EntityContainer>
         <EntityType Name="CatEstatusConceptos">
           <Key>
@@ -1089,12 +1093,12 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
         </EntityType>
         <EntityType Name="CatConcecutivoPeriodos">
           <Key>
-            <PropertyRef Name="AñoId" />
+            <PropertyRef Name="AnioId" />
             <PropertyRef Name="MesId" />
             <PropertyRef Name="ConsecutivoId" />
             <PropertyRef Name="PeriodicidadNominaId" />
           </Key>
-          <Property Name="AñoId" Type="Int32" Nullable="false" />
+          <Property Name="AnioId" Type="Int32" Nullable="false" />
           <Property Name="MesId" Type="Int32" Nullable="false" />
           <Property Name="ConsecutivoId" Type="Int32" Nullable="false" />
           <Property Name="PeriodicidadNominaId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
@@ -1124,12 +1128,51 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="CatMesesNominaSel_Result">
+          <Property Type="Int32" Name="AnioId" Nullable="false" />
+          <Property Type="Int32" Name="MesId" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicio" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaCierre" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatConcecutivoPeriodicidadSel_Result">
+          <Property Type="Int32" Name="ConsecutivoId" Nullable="false" />
+          <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="CatAniosNomina">
+          <Key>
+            <PropertyRef Name="AnioId" />
+          </Key>
+          <Property Name="AnioId" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeactivatedBy" Type="Int32" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="CatMesesNomina">
           <Key>
-            <PropertyRef Name="AñoId" />
+            <PropertyRef Name="AnioId" />
             <PropertyRef Name="MesId" />
           </Key>
-          <Property Name="AñoId" Type="Int32" Nullable="false" />
+          <Property Name="AnioId" Type="Int32" Nullable="false" />
           <Property Name="MesId" Type="Int32" Nullable="false" />
           <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
@@ -1142,45 +1185,11 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
-        <ComplexType Name="CatMesesNominaSel_Result">
-          <Property Type="Int32" Name="AñoId" Nullable="false" />
-          <Property Type="Int32" Name="MesId" Nullable="false" />
-          <Property Type="DateTime" Name="FechaInicio" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="FechaCierre" Nullable="false" Precision="23" />
-          <Property Type="Boolean" Name="Active" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="CatAniosNominaSel_Result">
+        <ComplexType Name="CatAniosNominaSel_Result" >
           <Property Type="Int32" Name="AnioId" Nullable="false" />
           <Property Type="DateTime" Name="FechaInicio" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="FechaCierre" Nullable="false" Precision="23" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="CatAniosNomina">
-          <Key>
-            <PropertyRef Name="AnioId" />
-          </Key>
-          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="AnioId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1586,7 +1595,7 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
                 <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
                 <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
                 <ScalarProperty Name="MesId" ColumnName="MesId" />
-                <ScalarProperty Name="AñoId" ColumnName="AñoId" />
+                <ScalarProperty Name="AnioId" ColumnName="AñoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1606,28 +1615,10 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CatMesesNomina">
-            <EntityTypeMapping TypeName="ASNModel.CatMesesNomina">
-              <MappingFragment StoreEntitySet="CatMesesNomina">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="MesId" ColumnName="MesId" />
-                <ScalarProperty Name="AñoId" ColumnName="AñoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CatMesesNominaSel" FunctionName="ASNModel.Store.CatMesesNominaSel">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatMesesNominaSel_Result">
-                <ScalarProperty Name="AñoId" ColumnName="AñoId" />
+                <ScalarProperty Name="AnioId" ColumnName="AñoId" />
                 <ScalarProperty Name="MesId" ColumnName="MesId" />
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
@@ -1637,35 +1628,6 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPeriodosNominaSel" FunctionName="ASNModel.Store.CatPeriodosNominaSel" />
           <FunctionImportMapping FunctionImportName="CatPeriodosNominaSi" FunctionName="ASNModel.Store.CatPeriodosNominaSi" />
-          <FunctionImportMapping FunctionImportName="CatAniosNominaSel" FunctionName="ASNModel.Store.CatAniosNominaSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatAniosNominaSel_Result">
-                <ScalarProperty Name="AnioId" ColumnName="AñoId" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatAniosNominaSi" FunctionName="ASNModel.Store.CatAniosNominaSi" />
-          <FunctionImportMapping FunctionImportName="CatAniosNominaSu" FunctionName="ASNModel.Store.CatAniosNominaSu" />
-          <EntitySetMapping Name="CatAniosNomina">
-            <EntityTypeMapping TypeName="ASNModel.CatAniosNomina">
-              <MappingFragment StoreEntitySet="CatAniosNomina">
-                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ASNModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ASNModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ASNModel.Store.sp_dropdiagram" />
@@ -1690,6 +1652,64 @@ advertencia 6013: La tabla o vista 'ASN.app620.CatStateVw' no tiene definida una
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ASNModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ASNModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="CatConcecutivoPeriodicidadSel" FunctionName="ASNModel.Store.CatConcecutivoPeriodicidadSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConcecutivoPeriodicidadSel_Result">
+                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
+                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatMesesNominaSi" FunctionName="ASNModel.Store.CatMesesNominaSi" />
+          <FunctionImportMapping FunctionImportName="CatMesesNominaSu" FunctionName="ASNModel.Store.CatMesesNominaSu" />
+          <EntitySetMapping Name="CatAniosNomina">
+            <EntityTypeMapping TypeName="ASNModel.CatAniosNomina">
+              <MappingFragment StoreEntitySet="CatAniosNomina">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatMesesNomina">
+            <EntityTypeMapping TypeName="ASNModel.CatMesesNomina">
+              <MappingFragment StoreEntitySet="CatMesesNomina">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="MesId" ColumnName="MesId" />
+                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CatAniosNominaSi" FunctionName="ASNModel.Store.CatAniosNominaSi" />
+          <FunctionImportMapping FunctionImportName="CatAniosNominaSel" FunctionName="ASNModel.Store.CatAniosNominaSel" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatAniosNominaSel_Result" >
+                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatAniosNominaSu" FunctionName="ASNModel.Store.CatAniosNominaSu" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

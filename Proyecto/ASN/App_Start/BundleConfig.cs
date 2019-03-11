@@ -57,6 +57,9 @@ namespace ASN
             bundles.Add(new ScriptBundle("~/bundles/Conceptos").Include(
             "~/Scripts/Conceptos.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/Nomina").Include(
+            "~/Scripts/Nominas.js"));
+
         }
     }
 }

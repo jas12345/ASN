@@ -14,7 +14,7 @@ namespace ASN.Models
     
     public partial class CatConcecutivoPeriodos
     {
-        public int AñoId { get; set; }
+        public int AnioId { get; set; }
         public int MesId { get; set; }
         public int ConsecutivoId { get; set; }
         public string PeriodicidadNominaId { get; set; }

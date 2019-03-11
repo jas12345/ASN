@@ -14,6 +14,7 @@ namespace ASN.Models
     
     public partial class CatAniosNomina
     {
+        public int AnioId { get; set; }
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime FechaCierre { get; set; }
         public bool Active { get; set; }
@@ -24,6 +25,5 @@ namespace ASN.Models
         public int LastModifiedBy { get; set; }
         public System.DateTime LastModifiedDate { get; set; }
         public string LastModifiedFromPCName { get; set; }
-        public int AnioId { get; set; }
     }
 }

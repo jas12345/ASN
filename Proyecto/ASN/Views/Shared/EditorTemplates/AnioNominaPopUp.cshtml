@@ -18,7 +18,7 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DatePicker()
-                .Format("yyyy/MM/dd")
+                .Format("yyyy-MM-dd")
                 .ParseFormats(new string[]
                     {
                     "ddd, M/d/yyyy",
@@ -28,8 +28,8 @@
                 )
                 .Name("FechaInicio")
                 .Value(DateTime.Now)
-                .Min(DateTime.Now)
-                .Max(DateTime.Now)
+                //.Min(DateTime.Now)
+                //.Max(DateTime.Now)
                 .Enable(true)
                 .Events(e => e.Change("FechaInicioOpen"))
             )
@@ -39,7 +39,7 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DatePicker()
-                .Format("yyyy/MM/dd")
+                .Format("yyyy-MM-dd")
                 .ParseFormats(new string[]
                     {
                 "ddd, M/d/yyyy",
@@ -49,8 +49,8 @@
                 )
                 .Name("FechaCierre")
                 .Value(DateTime.Now)
-                .Min(DateTime.Now)
-                .Max(DateTime.Now)
+                //.Min(DateTime.Now)
+                //.Max(DateTime.Now)
                 .Enable(true)
                 .Events(e => e.Change("FechaCierreOpen"))
             )
@@ -63,4 +63,3 @@
         </div>
     </div>
 </div>
-@Scripts.Render("~/bundles/Nomina")
