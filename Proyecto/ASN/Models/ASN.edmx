@@ -349,8 +349,8 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
         </Function>
         <Function Name="CatAniosNominaSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
-          <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
+          <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -706,9 +706,9 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatAñosNominaSu">
-            <Parameter Name="AñoId" Mode="In" Type="Int32" />
-            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaCierre" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -745,8 +745,8 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           </FunctionImport>
           <FunctionImport Name="CatAniosNominaSu">
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
-            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaCierre" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -1710,6 +1710,7 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatAniosNominaSu" FunctionName="ASNModel.Store.CatAniosNominaSu" />
+          <FunctionImportMapping FunctionImportName="CatAñosNominaSu" FunctionName="ASNModel.Store.CatAniosNominaSu" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

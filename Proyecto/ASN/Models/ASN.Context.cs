@@ -287,19 +287,19 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAñosNominaSi", añoIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatAñosNominaSu(Nullable<int> añoId, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatAñosNominaSu(Nullable<int> anioId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
-            var añoIdParameter = añoId.HasValue ?
-                new ObjectParameter("AñoId", añoId) :
-                new ObjectParameter("AñoId", typeof(int));
+            var anioIdParameter = anioId.HasValue ?
+                new ObjectParameter("AnioId", anioId) :
+                new ObjectParameter("AnioId", typeof(int));
     
-            var fechaInicioParameter = fechaInicio.HasValue ?
+            var fechaInicioParameter = fechaInicio != null ?
                 new ObjectParameter("FechaInicio", fechaInicio) :
-                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+                new ObjectParameter("FechaInicio", typeof(string));
     
-            var fechaCierreParameter = fechaCierre.HasValue ?
+            var fechaCierreParameter = fechaCierre != null ?
                 new ObjectParameter("FechaCierre", fechaCierre) :
-                new ObjectParameter("FechaCierre", typeof(System.DateTime));
+                new ObjectParameter("FechaCierre", typeof(string));
     
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
@@ -309,7 +309,7 @@ namespace ASN.Models
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAñosNominaSu", añoIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAñosNominaSu", anioIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
         public virtual ObjectResult<CatMesesNominaSel_Result> CatMesesNominaSel()
@@ -426,15 +426,15 @@ namespace ASN.Models
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
                 new ObjectParameter("AnioId", typeof(int));
-
+    
             var fechaInicioParameter = fechaInicio != null ?
                 new ObjectParameter("FechaInicio", fechaInicio) :
                 new ObjectParameter("FechaInicio", typeof(string));
-
+    
             var fechaCierreParameter = fechaCierre != null ?
                 new ObjectParameter("FechaCierre", fechaCierre) :
                 new ObjectParameter("FechaCierre", typeof(string));
-
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
