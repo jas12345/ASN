@@ -385,16 +385,16 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
         <Function Name="CatMesesNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
           <Parameter Name="MesId" Type="int" Mode="In" />
-          <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
+          <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatMesesNominaSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
           <Parameter Name="MesId" Type="int" Mode="In" />
-          <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
-          <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
+          <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -409,7 +409,7 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatPeriodicidadNominaSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="PeriodicidadNominaId" Type="int" Mode="In" />
+          <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
@@ -652,7 +652,7 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPeriodicidadNominaSu">
-            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
@@ -785,16 +785,16 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <FunctionImport Name="CatMesesNominaSi">
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
             <Parameter Name="MesId" Mode="In" Type="Int32" />
-            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaCierre" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatMesesNominaSu">
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
             <Parameter Name="MesId" Mode="In" Type="Int32" />
-            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaCierre" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -1129,11 +1129,12 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
         <ComplexType Name="CatMesesNominaSel_Result">
-          <Property Type="Int32" Name="AnioId" Nullable="false" />
           <Property Type="Int32" Name="MesId" Nullable="false" />
           <Property Type="DateTime" Name="FechaInicio" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="FechaCierre" Nullable="false" Precision="23" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="AnioMesId" Nullable="true" MaxLength="6" />
+          <Property Type="Int32" Name="AnioId" Nullable="false" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1618,11 +1619,12 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <FunctionImportMapping FunctionImportName="CatMesesNominaSel" FunctionName="ASNModel.Store.CatMesesNominaSel">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatMesesNominaSel_Result">
-                <ScalarProperty Name="AnioId" ColumnName="AñoId" />
                 <ScalarProperty Name="MesId" ColumnName="MesId" />
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AnioMesId" ColumnName="AnioMesId" />
+                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

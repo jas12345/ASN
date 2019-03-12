@@ -24,20 +24,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DatePicker()
-                                .Format("yyyy/MM/dd")
-                                .ParseFormats(new string[]
-                                    {
-                            "ddd, M/d/yyyy",
-                            "ddd, MM/dd/yyyy",
-                            "ddd, M/dd/yyyy"
-                                    }
-                                )
-                                .Name("FechaInicio")
-                                .Value(DateTime.Now)
-                                .Min(DateTime.Now)
-                                .Max(DateTime.Now)
-                                .Enable(true)
-                                .Events(e => e.Change("FechaInicioOpen"))
+                .Format("yyyy-MM-dd")
+                .ParseFormats(new string[]
+                    {
+                    "ddd, M/d/yyyy",
+                    "ddd, MM/dd/yyyy",
+                    "ddd, M/dd/yyyy"
+                    }
+                )
+                .Name("FechaInicio")
+                .Value(DateTime.Now)
+                //.Min(DateTime.Now)
+                //.Max(DateTime.Now)
+                .Enable(true)
+                .Events(e => e.Change("FechaInicioOpen"))
             )
         </div>
         <div class="editor-label">
@@ -45,20 +45,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DatePicker()
-                                .Format("yyyy/MM/dd")
-                                .ParseFormats(new string[]
-                                    {
-                        "ddd, M/d/yyyy",
-                        "ddd, MM/dd/yyyy",
-                        "ddd, M/dd/yyyy"
-                                    }
-                                )
-                                .Name("FechaCierre")
-                                .Value(DateTime.Now)
-                                .Min(DateTime.Now)
-                                .Max(DateTime.Now)
-                                .Enable(true)
-                                .Events(e => e.Change("FechaCierreOpen"))
+                .Format("yyyy-MM-dd")
+                .ParseFormats(new string[]
+                    {
+                "ddd, M/d/yyyy",
+                "ddd, MM/dd/yyyy",
+                "ddd, M/dd/yyyy"
+                    }
+                )
+                .Name("FechaCierre")
+                .Value(DateTime.Now)
+                //.Min(DateTime.Now)
+                //.Max(DateTime.Now)
+                .Enable(true)
+                .Events(e => e.Change("FechaCierreOpen"))
             )
         </div>
         <div class="editor-label">

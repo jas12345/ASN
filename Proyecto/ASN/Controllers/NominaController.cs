@@ -51,17 +51,16 @@ namespace ASN.Controllers
         {
             try
             {
+                //if (ctx.Request.IsAuthenticated)
+                //{
+                //    return redirecciona(User.Identity.Name);
+                //}
+                //return this.View();
+
                 if (User.Identity.IsAuthenticated)
                 {
-                    using (ASNContext context = new ASNContext())
-                    {
-                        context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                        //ViewData["CatAniosNomina"] = context.CatAniosNominaSel().ToList();
-                    }
 
                     return View();
-                    //return View("Nomina/CatAniosNomina");
-                    //return RedirectToAction("AniosNomina", "Nomina");
                 }
                 else
                 {
@@ -225,7 +224,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatMesNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatMesesNominaSel_Result> profiles)
+        public ActionResult CreateMesNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatMesesNominaSel_Result> profiles, string fechaInicio, string fechaCierre)
         {
             try
             {
@@ -237,18 +236,26 @@ namespace ASN.Controllers
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                     resultado.Value = 0;
 
-                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
-
-                    foreach (var obj in profiles)
+                    if (string.IsNullOrEmpty(fechaInicio) || string.IsNullOrEmpty(fechaCierre))
                     {
-                        context.CatMesesNominaSi(obj.AnioId, obj.MesId, obj.FechaInicio, obj.FechaCierre, ccmsidAdmin, resultado);
+                        ModelState.AddModelError("error", "Las fechas de Inicio y de cierre no deben estar vacias.");
                     }
 
-                    int.TryParse(resultado.Value.ToString(), out res);
-
-                    if (res == -1)
+                    else
                     {
-                        ModelState.AddModelError("error", "Ya existe un registro con el mismo año.");
+                        int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                        foreach (var obj in profiles)
+                        {
+                            context.CatMesesNominaSi(obj.AnioId, obj.MesId, fechaInicio, fechaCierre, ccmsidAdmin, resultado);
+                        }
+
+                        int.TryParse(resultado.Value.ToString(), out res);
+
+                        if (res == -1)
+                        {
+                            ModelState.AddModelError("error", "Ya existe un registro con el mismo año y mes.");
+                        }
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
@@ -266,7 +273,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateMesNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatMesesNominaSel_Result> profiles)
+        public ActionResult UpdateMesNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatMesesNominaSel_Result> profiles, string fechaInicio, string fechaCierre)
         {
             try
             {
@@ -278,18 +285,26 @@ namespace ASN.Controllers
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                     resultado.Value = 0;
 
-                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
-
-                    foreach (var obj in profiles)
+                    if (string.IsNullOrEmpty(fechaInicio) || string.IsNullOrEmpty(fechaCierre))
                     {
-                        context.CatMesesNominaSu(obj.AnioId, obj.MesId, obj.FechaInicio, obj.FechaCierre, ccmsidAdmin, obj.Active, resultado);
+                        ModelState.AddModelError("error", "Las fechas de Inicio y de cierre no deben estar vacias.");
                     }
 
-                    int.TryParse(resultado.Value.ToString(), out res);
-
-                    if (res == -4)
+                    else
                     {
-                        ModelState.AddModelError("error", "No existe el registro de año.");
+                        int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                        foreach (var obj in profiles)
+                        {
+                            context.CatMesesNominaSu(obj.AnioId, obj.MesId, fechaInicio, fechaCierre, ccmsidAdmin, obj.Active, resultado);
+                        }
+
+                        int.TryParse(resultado.Value.ToString(), out res);
+
+                        if (res == -4)
+                        {
+                            ModelState.AddModelError("error", "No existe el registro de año y mes.");
+                        }
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));

@@ -139,11 +139,11 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodicidadNominaSi", periodicidadNominaIdParameter, descripcionParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatPeriodicidadNominaSu(Nullable<int> periodicidadNominaId, string descripcion, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatPeriodicidadNominaSu(string periodicidadNominaId, string descripcion, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
-            var periodicidadNominaIdParameter = periodicidadNominaId.HasValue ?
+            var periodicidadNominaIdParameter = periodicidadNominaId != null ?
                 new ObjectParameter("PeriodicidadNominaId", periodicidadNominaId) :
-                new ObjectParameter("PeriodicidadNominaId", typeof(int));
+                new ObjectParameter("PeriodicidadNominaId", typeof(string));
     
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("Descripcion", descripcion) :
@@ -554,7 +554,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConcecutivoPeriodicidadSel_Result>("CatConcecutivoPeriodicidadSel");
         }
     
-        public virtual int CatMesesNominaSi(Nullable<int> anioId, Nullable<int> mesId, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatMesesNominaSi(Nullable<int> anioId, Nullable<int> mesId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
@@ -564,13 +564,13 @@ namespace ASN.Models
                 new ObjectParameter("MesId", mesId) :
                 new ObjectParameter("MesId", typeof(int));
     
-            var fechaInicioParameter = fechaInicio.HasValue ?
+            var fechaInicioParameter = fechaInicio != null ?
                 new ObjectParameter("FechaInicio", fechaInicio) :
-                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+                new ObjectParameter("FechaInicio", typeof(string));
     
-            var fechaCierreParameter = fechaCierre.HasValue ?
+            var fechaCierreParameter = fechaCierre != null ?
                 new ObjectParameter("FechaCierre", fechaCierre) :
-                new ObjectParameter("FechaCierre", typeof(System.DateTime));
+                new ObjectParameter("FechaCierre", typeof(string));
     
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
@@ -579,7 +579,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatMesesNominaSi", anioIdParameter, mesIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatMesesNominaSu(Nullable<int> anioId, Nullable<int> mesId, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatMesesNominaSu(Nullable<int> anioId, Nullable<int> mesId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
@@ -589,13 +589,13 @@ namespace ASN.Models
                 new ObjectParameter("MesId", mesId) :
                 new ObjectParameter("MesId", typeof(int));
     
-            var fechaInicioParameter = fechaInicio.HasValue ?
+            var fechaInicioParameter = fechaInicio != null ?
                 new ObjectParameter("FechaInicio", fechaInicio) :
-                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+                new ObjectParameter("FechaInicio", typeof(string));
     
-            var fechaCierreParameter = fechaCierre.HasValue ?
+            var fechaCierreParameter = fechaCierre != null ?
                 new ObjectParameter("FechaCierre", fechaCierre) :
-                new ObjectParameter("FechaCierre", typeof(System.DateTime));
+                new ObjectParameter("FechaCierre", typeof(string));
     
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :

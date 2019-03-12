@@ -201,11 +201,11 @@ function dateFilter(e) {
 }
 
 
-$(document).ready(function () {
-    //OcultaSave();
-    setTimeout(function () {
-        var Hoy = kendo.toString(new Date(), 'yyyy-MM-dd');
-        $("#FechaInicio").data('kendoDatePicker').value(Hoy);
-        $("#FechaCierre").data('kendoDatePicker').value(Hoy);
-    }, 0);
-});
+//$(document).ready(function () {
+//    //OcultaSave();
+//    setTimeout(function () {
+//        var Hoy = kendo.toString(new Date(), 'yyyy-MM-dd');
+//        $("#FechaInicio").data('kendoDatePicker').value(Hoy);
+//        $("#FechaCierre").data('kendoDatePicker').value(Hoy);
+//    }, 0);
+//});

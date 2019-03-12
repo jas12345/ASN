@@ -141,6 +141,10 @@
                                 {
                                     <li>@Html.ActionLink("Años Nómina", "AniosNomina", "Nomina")</li>
                                 }
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Meses Nómina", "MesesNomina", "Nomina")</li>
+                                }
                             </ul>
                         </li>
                     }
@@ -242,7 +246,7 @@
 
 @(Html.Kendo().Dialog()
 .Name("dialog")
-.Title("Gapp")
+.Title("ASN")
 .Content("<center><p>Session expired</p></center>")
 .Width(400)
 .Modal(true)
