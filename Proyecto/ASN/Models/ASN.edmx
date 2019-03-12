@@ -90,6 +90,30 @@
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASN.app620.CatLogError' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="CatLogError">
+          <Key>
+            <PropertyRef Name="LogErrorId" />
+            <PropertyRef Name="LogErrorMessage" />
+            <PropertyRef Name="StackTrace" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="LastModifiedBy" />
+            <PropertyRef Name="LastModifiedDate" />
+            <PropertyRef Name="LastModifiedFromPCName" />
+          </Key>
+          <Property Name="LogErrorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogErrorMessage" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="StackTrace" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Browser" Type="varchar" MaxLength="100" />
+          <Property Name="IpAddress" Type="varchar" MaxLength="20" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
         <EntityType Name="CatMeses">
           <Key>
             <PropertyRef Name="MesId" />
@@ -339,6 +363,7 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CatAniosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
@@ -381,6 +406,7 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <Parameter Name="Browser" Type="varchar" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatMesesCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatMesesNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatMesesNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
@@ -507,6 +533,20 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <EntitySet Name="RelConceptoPais" EntityType="Self.RelConceptoPais" Schema="app620" store:Type="Tables" />
           <EntitySet Name="RelUserRole" EntityType="Self.RelUserRole" Schema="app620" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CatLogError" EntityType="Self.CatLogError" store:Type="Tables" store:Schema="app620">
+            <DefiningQuery>SELECT 
+    [CatLogError].[LogErrorId] AS [LogErrorId], 
+    [CatLogError].[LogErrorMessage] AS [LogErrorMessage], 
+    [CatLogError].[StackTrace] AS [StackTrace], 
+    [CatLogError].[Browser] AS [Browser], 
+    [CatLogError].[IpAddress] AS [IpAddress], 
+    [CatLogError].[CreatedBy] AS [CreatedBy], 
+    [CatLogError].[CreatedDate] AS [CreatedDate], 
+    [CatLogError].[LastModifiedBy] AS [LastModifiedBy], 
+    [CatLogError].[LastModifiedDate] AS [LastModifiedDate], 
+    [CatLogError].[LastModifiedFromPCName] AS [LastModifiedFromPCName]
+    FROM [app620].[CatLogError] AS [CatLogError]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="CatEmployeeCCMSVw" EntityType="Self.CatEmployeeCCMSVw" store:Type="Views" store:Schema="app620">
             <DefiningQuery>SELECT 
     [CatEmployeeCCMSVw].[Ident] AS [Ident], 
@@ -801,6 +841,9 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           </FunctionImport>
           <EntitySet Name="CatAniosNomina" EntityType="ASNModel.CatAniosNomina" />
           <EntitySet Name="CatMesesNomina" EntityType="ASNModel.CatMesesNomina" />
+          <FunctionImport Name="CatAniosNominaCMB" ReturnType="Collection(ASNModel.CatAniosNominaCMB_Result)" />
+          <FunctionImport Name="CatMesesCMB" ReturnType="Collection(ASNModel.CatMesesCMB_Result)" />
+          <EntitySet Name="CatLogError" EntityType="ASNModel.CatLogError" />
         </EntityContainer>
         <EntityType Name="CatEstatusConceptos">
           <Key>
@@ -1192,6 +1235,36 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <Property Type="DateTime" Name="FechaCierre" Nullable="false" Precision="23" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="CatAniosNominaCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="Int32" Name="Valor" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatMesesCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="CatLogError">
+          <Key>
+            <PropertyRef Name="LogErrorId" />
+            <PropertyRef Name="LogErrorMessage" />
+            <PropertyRef Name="StackTrace" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="LastModifiedBy" />
+            <PropertyRef Name="LastModifiedDate" />
+            <PropertyRef Name="LastModifiedFromPCName" />
+          </Key>
+          <Property Name="LogErrorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogErrorMessage" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="StackTrace" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Browser" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IpAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1713,6 +1786,38 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatAniosNominaSu" FunctionName="ASNModel.Store.CatAniosNominaSu" />
           <FunctionImportMapping FunctionImportName="CatAñosNominaSu" FunctionName="ASNModel.Store.CatAniosNominaSu" />
+          <FunctionImportMapping FunctionImportName="CatAniosNominaCMB" FunctionName="ASNModel.Store.CatAniosNominaCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatAniosNominaCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatMesesCMB" FunctionName="ASNModel.Store.CatMesesCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatMesesCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CatLogError">
+            <EntityTypeMapping TypeName="ASNModel.CatLogError">
+              <MappingFragment StoreEntitySet="CatLogError">
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="Browser" ColumnName="Browser" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="LogErrorMessage" ColumnName="LogErrorMessage" />
+                <ScalarProperty Name="LogErrorId" ColumnName="LogErrorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

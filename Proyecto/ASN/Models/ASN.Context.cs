@@ -44,6 +44,7 @@ namespace ASN.Models
         public virtual DbSet<CatMeses> CatMeses { get; set; }
         public virtual DbSet<CatAniosNomina> CatAniosNomina { get; set; }
         public virtual DbSet<CatMesesNomina> CatMesesNomina { get; set; }
+        public virtual DbSet<CatLogError> CatLogError { get; set; }
     
         public virtual ObjectResult<CatClientCMB_Result> CatClientCMB()
         {
@@ -606,6 +607,16 @@ namespace ASN.Models
                 new ObjectParameter("Active", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatMesesNominaSu", anioIdParameter, mesIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, estatus);
+        }
+    
+        public virtual ObjectResult<CatAniosNominaCMB_Result> CatAniosNominaCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAniosNominaCMB_Result>("CatAniosNominaCMB");
+        }
+    
+        public virtual ObjectResult<CatMesesCMB_Result> CatMesesCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMesesCMB_Result>("CatMesesCMB");
         }
     }
 }

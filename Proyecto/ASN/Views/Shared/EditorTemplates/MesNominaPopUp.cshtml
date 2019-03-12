@@ -10,34 +10,66 @@
         <div class="editor-label">
             <label for="AnioNominaId">Año</label>
         </div>
+
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.AnioId))
+            @(Html.Kendo().DropDownListFor(x => x.AnioId)
+                                        .DataSource(source =>
+                                        {
+                                            source.Read(read =>
+                                            {
+                                                read.Action("GetAniosNominaCMB", "Nomina");
+                                            });
+                                    })
+                                        .Filter("contains")
+                                        .OptionLabel("- Año - ")
+                                        .DataValueField("Ident")
+                                        .DataTextField("Valor")
+                                        .Name("AnioId")
+                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+            )
         </div>
+
         <div class="editor-label">
             <label for="AnioNominaId">Mes</label>
         </div>
+
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.MesId))
+            @(Html.Kendo().DropDownListFor(x => x.MesId)
+                                        .DataSource(source =>
+                                        {
+                                            source.Read(read =>
+                                            {
+                                                read.Action("GetMesesCMB", "Nomina");
+                                            });
+                                    })
+                                        .Filter("contains")
+                                        .OptionLabel("- Mes - ")
+                                        .DataValueField("Ident")
+                                        .DataTextField("Valor")
+                                        .Name("MesId")
+                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+            )
         </div>
+
         <div class="editor-label">
             <label for="FechaInicio">Fecha de Inicio</label>
         </div>
         <div class="editor-field">
             @(Html.Kendo().DatePicker()
-                .Format("yyyy-MM-dd")
-                .ParseFormats(new string[]
-                    {
-                    "ddd, M/d/yyyy",
-                    "ddd, MM/dd/yyyy",
-                    "ddd, M/dd/yyyy"
-                    }
-                )
-                .Name("FechaInicio")
-                .Value(DateTime.Now)
-                //.Min(DateTime.Now)
-                //.Max(DateTime.Now)
-                .Enable(true)
-                .Events(e => e.Change("FechaInicioOpen"))
+                                .Format("yyyy-MM-dd")
+                                .ParseFormats(new string[]
+                                    {
+                            "ddd, M/d/yyyy",
+                            "ddd, MM/dd/yyyy",
+                            "ddd, M/dd/yyyy"
+                                    }
+                                )
+                                .Name("FechaInicio")
+                                .Value(DateTime.Now)
+                                //.Min(DateTime.Now)
+                                //.Max(DateTime.Now)
+                                .Enable(true)
+                                .Events(e => e.Change("FechaInicioOpen"))
             )
         </div>
         <div class="editor-label">
@@ -45,20 +77,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DatePicker()
-                .Format("yyyy-MM-dd")
-                .ParseFormats(new string[]
-                    {
-                "ddd, M/d/yyyy",
-                "ddd, MM/dd/yyyy",
-                "ddd, M/dd/yyyy"
-                    }
-                )
-                .Name("FechaCierre")
-                .Value(DateTime.Now)
-                //.Min(DateTime.Now)
-                //.Max(DateTime.Now)
-                .Enable(true)
-                .Events(e => e.Change("FechaCierreOpen"))
+                                .Format("yyyy-MM-dd")
+                                .ParseFormats(new string[]
+                                    {
+                        "ddd, M/d/yyyy",
+                        "ddd, MM/dd/yyyy",
+                        "ddd, M/dd/yyyy"
+                                    }
+                                )
+                                .Name("FechaCierre")
+                                .Value(DateTime.Now)
+                                //.Min(DateTime.Now)
+                                //.Max(DateTime.Now)
+                                .Enable(true)
+                                .Events(e => e.Change("FechaCierreOpen"))
             )
         </div>
         <div class="editor-label">
