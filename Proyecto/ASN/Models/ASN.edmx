@@ -974,8 +974,8 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatPeriodicidadNominaCMB_Result">
-          <Property Type="String" Name="Id" Nullable="false" MaxLength="5" />
-          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatPeriodicidadNominaSel_Result">
           <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
@@ -1444,8 +1444,8 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaCMB" FunctionName="ASNModel.Store.CatPeriodicidadNominaCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatPeriodicidadNominaCMB_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
