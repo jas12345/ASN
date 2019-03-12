@@ -137,7 +137,6 @@
     <Compile Include="Controllers\ConceptosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
-    <Compile Include="Controllers\PeriodicidadNominaController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,9 +160,6 @@
     </Compile>
     <Compile Include="Models\Authentication.cs" />
     <Compile Include="Models\CatAniosNomina.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatAniosNominaCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatAniosNominaSel_Result.cs">
@@ -199,13 +195,7 @@
     <Compile Include="Models\CatEstatusConceptos.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatLogError.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CatMeses.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatMesesCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatMesesNomina.cs">
@@ -476,7 +466,6 @@
     <Content Include="Scripts\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\PeriodicidadNomina.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -539,8 +528,6 @@
     <Content Include="Views\Shared\EditorTemplates\AnioNominaPopUp.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MesNominaPopUp.cshtml" />
     <Content Include="Views\Nomina\MesesNomina.cshtml" />
-    <Content Include="Views\PeriodicidadNomina\Index.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\PeriodNominaPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

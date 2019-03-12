@@ -137,13 +137,20 @@
                                 {
                                     <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
                                 }
+
                                 @if (User.IsInRole("Desarrollo"))
                                 {
                                     <li>@Html.ActionLink("Años Nómina", "AniosNomina", "Nomina")</li>
                                 }
+
                                 @if (User.IsInRole("Desarrollo"))
                                 {
                                     <li>@Html.ActionLink("Meses Nómina", "MesesNomina", "Nomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Periodicidad Nómina", "index", "PeriodicidadNomina")</li>
                                 }
                             </ul>
                         </li>

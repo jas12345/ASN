@@ -8,7 +8,7 @@ function edit(e) {
         //DispositionName != null ? DispositionName.enable(false) : "";
         //$("#CatProyectosId").attr("readonly", true);
         //$(e.form).find("#CatProyectosId").closest(".editor-field").prev().andSelf().remove();
-        //$("#EID").attr("disabled", "disabled");
+        $("#PeriodicidadNominaId").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Editar");
     }
     else {
@@ -16,14 +16,6 @@ function edit(e) {
         e.container.kendoWindow("title", "Nuevo");
 
     }
-
-    //var typeValueDropDown = $("[name=Rol]").data("kendoDropDownList");
-
-    //e.model.bind("set", function (e) {
-    //    if (e.field == "Rol") {
-    //        this.set(typeValueDropDown.text(), typeValueDropDown.text());
-    //    }
-    //});
 }
 
 function hola(e) {
@@ -142,13 +134,3 @@ function handleSaveChanges(e, grid) {
         }
     });
 })(jQuery, kendo);
-
-
-function ValidaDisplayNameVal(obj) {
-    //if (obj == "" || (obj.length > 150 || obj.length < 3) || obj.match(/^[a-z A-Z0-9 ñáéíóú\)\(]*$/) == null) {
-    //    return "El nombre del Mercado debe ser entre 3 y 150 caracteres y solo se aceptan numeros,letras y parentesis.";
-    //}
-    //else {
-    //    return 0;
-    //}
-}

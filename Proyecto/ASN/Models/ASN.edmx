@@ -292,8 +292,8 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatLogError' no tiene definida ni
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CatEmployeeCCMSVw">
           <Key>
             <PropertyRef Name="Ident" />
@@ -1017,12 +1017,13 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatPeriodicidadNominaCMB_Result">
-          <Property Type="String" Name="Id" Nullable="false" MaxLength="5" />
-          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatPeriodicidadNominaSel_Result">
           <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatProgramCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1516,8 +1517,8 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
           <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaCMB" FunctionName="ASNModel.Store.CatPeriodicidadNominaCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatPeriodicidadNominaCMB_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1526,6 +1527,7 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
               <ComplexTypeMapping TypeName="ASNModel.CatPeriodicidadNominaSel_Result">
                 <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

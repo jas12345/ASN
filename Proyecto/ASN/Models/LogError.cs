@@ -71,7 +71,7 @@ namespace ASN.Models
             }
             catch (Exception exs)
             {
-
+                Console.Write(exs.Message);
             }
         }
 
