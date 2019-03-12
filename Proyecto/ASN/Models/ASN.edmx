@@ -268,8 +268,8 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CatEmployeeCCMSVw">
           <Key>
             <PropertyRef Name="Ident" />
@@ -980,6 +980,7 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
         <ComplexType Name="CatPeriodicidadNominaSel_Result">
           <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatProgramCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1453,6 +1454,7 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatEmployeeCCMSVw' no tiene defin
               <ComplexTypeMapping TypeName="ASNModel.CatPeriodicidadNominaSel_Result">
                 <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -133,7 +133,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\NominaController.cs" />
+    <Compile Include="Controllers\AniosNominaController.cs" />
     <Compile Include="Controllers\ConceptosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
@@ -170,9 +170,6 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatConcecutivoPeriodicidad.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatConcecutivoPeriodicidadSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatConcecutivoPeriodos.cs">
@@ -394,6 +391,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\PeriodicidadNomina.js" />
     <Content Include="Scripts\Nominas.js" />
     <Content Include="Scripts\Conceptos.js" />
     <Content Include="Scripts\DisableRMC.js" />
@@ -467,7 +465,6 @@
     <Content Include="Scripts\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\PeriodicidadNomina.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -477,9 +474,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -528,8 +523,6 @@
     <Content Include="Views\Shared\EditorTemplates\ConceptosPopUp.cshtml" />
     <Content Include="Views\Nomina\AniosNomina.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AnioNominaPopUp.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\MesNominaPopUp.cshtml" />
-    <Content Include="Views\Nomina\MesesNomina.cshtml" />
     <Content Include="Views\PeriodicidadNomina\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PeriodNominaPopUp.cshtml" />
   </ItemGroup>

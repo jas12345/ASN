@@ -394,6 +394,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\PeriodicidadNomina.js" />
     <Content Include="Scripts\Nominas.js" />
     <Content Include="Scripts\Conceptos.js" />
     <Content Include="Scripts\DisableRMC.js" />
@@ -467,7 +468,6 @@
     <Content Include="Scripts\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\PeriodicidadNomina.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -528,10 +528,13 @@
     <Content Include="Views\Shared\EditorTemplates\ConceptosPopUp.cshtml" />
     <Content Include="Views\Nomina\AniosNomina.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AnioNominaPopUp.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Views\Shared\EditorTemplates\MesNominaPopUp.cshtml" />
     <Content Include="Views\Nomina\MesesNomina.cshtml" />
+=======
     <Content Include="Views\PeriodicidadNomina\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PeriodNominaPopUp.cshtml" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
