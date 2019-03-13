@@ -153,6 +153,10 @@ function FechaCierreOpen(e) {
     }
 }
 
+function AnioNominaChange(e) {
+    $("#FechaInicioAnio").val
+}
+
 function OcultaSave() {
     $(".k-grid-update").css("display", "none");
 }

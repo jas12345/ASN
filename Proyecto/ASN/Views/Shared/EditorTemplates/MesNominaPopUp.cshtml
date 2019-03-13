@@ -8,7 +8,7 @@
 <div>
     <div class="k-edit-form-container">
         <div class="editor-label">
-            <label for="AnioNominaId">Año</label>
+            <label for="AnioId">Año</label>
         </div>
 
         <div class="editor-field">
@@ -26,13 +26,14 @@
                 .DataTextField("Valor")
                 .Name("AnioId")
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                //.Events(e => e.Change("AnioNominaChange")
             )
         </div>
 
         <div class="editor-label">
             <label for="FechaInicioAnio">Fecha Inicio Año</label>
         </div>
-        <div class="editor-field">
+        <div class="editor-field" name="FechaInicioAnio">
             @(Html.Kendo().TextBoxFor(x => x.FechaInicioAnio).Enable(false))
         </div>
 
@@ -40,13 +41,13 @@
         <div class="editor-label">
             <label for="FechaCierreAnio">Fecha Cierre Año</label>
         </div>
-        <div class="editor-field">
+        <div class="editor-field" name="FechaCierreAnio">
             @(Html.Kendo().TextBoxFor(x => x.FechaCierreAnio).Enable(false))
         </div>
 
 
         <div class="editor-label">
-            <label for="MesNominaId">Mes</label>
+            <label for="MesId">Mes</label>
         </div>
 
         <div class="editor-field">

@@ -133,6 +133,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TiposPeriodoNominaController.cs" />
     <Compile Include="Controllers\NominaController.cs" />
     <Compile Include="Controllers\ConceptosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -434,6 +435,7 @@
     <Content Include="Scripts\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\TiposPeriodoNomina.js" />
     <Content Include="Scripts\PeriodicidadNomina.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -499,6 +501,8 @@
     <Content Include="Views\Nomina\MesesNomina.cshtml" />
     <Content Include="Views\PeriodicidadNomina\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PeriodNominaPopUp.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TiposPeriodoNominaPopUp.cshtml" />
+    <Content Include="Views\TiposPeriodoNomina\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

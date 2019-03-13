@@ -62,6 +62,9 @@ namespace ASN
 
             bundles.Add(new ScriptBundle("~/bundles/PeriodicidadNomina").Include(
             "~/Scripts/PeriodicidadNomina.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/TiposPeriodoNomina").Include(
+            "~/Scripts/TiposPeriodoNomina.js"));
         }
     }
 }

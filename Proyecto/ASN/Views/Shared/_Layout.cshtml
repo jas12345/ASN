@@ -150,6 +150,11 @@
 
                                 @if (User.IsInRole("Desarrollo"))
                                 {
+                                    <li>@Html.ActionLink("Tipos de Periodo de Nómina", "Index", "TiposPeriodoNomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
                                     <li>@Html.ActionLink("Periodicidad Nómina", "index", "PeriodicidadNomina")</li>
                                 }
                             </ul>
