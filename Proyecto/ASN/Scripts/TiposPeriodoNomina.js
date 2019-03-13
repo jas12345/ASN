@@ -2,12 +2,12 @@
 
 function edit(e) {
     if (e.model.isNew() === false) {
-        $("#TiposPeriodoNominaId").attr("disabled", "disabled");
+        $("#TipoPeriodoId").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Editar");
     }
     else {
+        $("#Active").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Nuevo");
-
     }
 }
 

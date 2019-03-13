@@ -60,6 +60,12 @@ namespace ASN
             bundles.Add(new ScriptBundle("~/bundles/Nomina").Include(
             "~/Scripts/Nominas.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/AniosNomina").Include(
+            "~/Scripts/AniosNomina.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/MesesNomina").Include(
+            "~/Scripts/MesesNomina.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/PeriodicidadNomina").Include(
             "~/Scripts/PeriodicidadNomina.js"));
 

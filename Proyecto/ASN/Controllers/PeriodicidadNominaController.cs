@@ -134,6 +134,10 @@ namespace ASN.Controllers
                     {
                         ModelState.AddModelError("error", "Ya existe una periodicidad de nomina con la misma clave.");
                     }
+                    else if (res == -3)
+                    {
+                        ModelState.AddModelError("error", "Ya existe un registro con la misma clave y / o descripción.");
+                    }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
                 }

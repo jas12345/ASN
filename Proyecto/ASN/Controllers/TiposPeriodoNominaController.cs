@@ -99,7 +99,7 @@ namespace ASN.Controllers
 
                         if (res == -3)
                         {
-                            ModelState.AddModelError("error", "Ya existe un Tipo de Período de Nómina con la misma clave y descripción.");
+                            ModelState.AddModelError("error", "Ya existe un Tipo de Período de Nómina con la misma clave y/o descripción.");
                         }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
