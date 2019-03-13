@@ -1,0 +1,29 @@
+﻿@model  ASN.Models.CatTiposPeriodoNominaSel_Result
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="TipoPeriodoId">Tipo de Período de Nómina</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.TipoPeriodoId).HtmlAttributes(new { MaxLength = "5" }))
+        </div>
+        <div class="editor-label">
+            <label for="Descripcion">Descripción</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.Descripcion).HtmlAttributes(new { MaxLength = "50" }))
+        </div>
+        <div class="editor-label">
+            <label for="Active">Activo</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("Active")
+        </div>
+    </div>
+</div>

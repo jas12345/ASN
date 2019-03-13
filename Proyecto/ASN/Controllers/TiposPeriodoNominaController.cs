@@ -11,9 +11,9 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
-    public class PeriodicidadNominaController : Controller
+    public class TiposPeriodoNominaController : Controller
     {
-        // GET: PeriodicidadNomina
+        // GET: TipoPeriodoNomina
         public ActionResult Index()
         {
             try
@@ -23,7 +23,6 @@ namespace ASN.Controllers
                     using (ASNContext context = new ASNContext())
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                        ViewData["TipoPeriodicidad"] = context.CatPeriodicidadNominaCMB().ToList();
                     }
 
                     return View();
@@ -42,46 +41,15 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetPeriodicidadNominaCMB()
-        {
-            try
-            {
-                var lstCMB = new List<CatPeriodicidadNominaCMB_Result>();
-                //MyCustomIdentity usuario = (MyCustomIdentity) User.Identity;
-
-                //int locIdUser = usuario.UserInfo.Location_Ident.Value;
-
-                using (ASNContext ctx = new ASNContext())
-                {
-                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatPeriodicidadNominaCMB().ToList();
-                }
-
-                return Json(lstCMB, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json("");
-            }
-        }
-
-        /// <summary>
-        /// Obtiene las registros actuales
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPost]
-        public ActionResult GetPeriodicidadNomina([DataSourceRequest]DataSourceRequest request)
+        public ActionResult GetTiposPeriodoNomina([DataSourceRequest] DataSourceRequest request)
         {
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var list2 = context.CatPeriodicidadNominaSel().ToList();
+                    var list2 = context.CatTiposPeriodoNominaSel().ToList();
 
                     DataSourceResult ok = list2.ToDataSourceResult(request);
 
@@ -98,7 +66,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePeriodicidadNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPeriodicidadNominaSel_Result> profiles)
+        public ActionResult CreateTiposPeriodoNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatTiposPeriodoNominaSel_Result> profiles)
         {
             try
             {
@@ -110,37 +78,33 @@ namespace ASN.Controllers
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                     resultado.Value = 0;
 
-                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+                        int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
-                    foreach (var obj in profiles)
-                    {
-                        if (!string.IsNullOrEmpty(obj.Descripcion) && !string.IsNullOrEmpty(obj.PeriodicidadNominaId))
+                        foreach (var obj in profiles)
                         {
-                            context.CatPeriodicidadNominaSi(obj.PeriodicidadNominaId,obj.Descripcion, ccmsidAdmin, resultado);
+                            context.CatTiposPeriodoNominaSi(obj.TipoPeriodoId, obj.Descripcion, ccmsidAdmin, resultado);
                         }
-                        else
+
+                        int.TryParse(resultado.Value.ToString(), out res);
+
+                        if (res == -1)
                         {
-                            ModelState.AddModelError("error", "La descripción y la periodicidadId no pueden estar vacios.");
+                            ModelState.AddModelError("error", "Ya existe un Tipo de Período de Nómina con la misma descripción.");
                         }
-                    }
 
-                    int.TryParse(resultado.Value.ToString(), out res);
+                        if (res == -2)
+                        {
+                            ModelState.AddModelError("error", "Ya existe un Tipo de Período de Nómina con la misma clave.");
+                        }
 
-                    if (res == -1)
-                    {
-                        ModelState.AddModelError("error", "Ya existe una periodicidad de nomina con la misma descripción.");
-                    }
-                    else if (res == -2)
-                    {
-                        ModelState.AddModelError("error", "Ya existe una periodicidad de nomina con la misma clave.");
-                    }
-                    else if (res == -3)
-                    {
-                        ModelState.AddModelError("error", "Ya existe un registro con la misma clave y / o descripción.");
-                    }
+                        if (res == -3)
+                        {
+                            ModelState.AddModelError("error", "Ya existe un Tipo de Período de Nómina con la misma clave y/o descripción.");
+                        }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
                 }
+
             }
             catch (Exception ex)
             {
@@ -153,7 +117,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdatePeriodicidadNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPeriodicidadNominaSel_Result> profiles)
+        public ActionResult UpdateTiposPeriodoNomina([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatTiposPeriodoNominaSel_Result> profiles)
         {
             try
             {
@@ -165,25 +129,28 @@ namespace ASN.Controllers
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                     resultado.Value = 0;
 
-                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+                        int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
-                    foreach (var obj in profiles)
-                    {
-                        if (!string.IsNullOrEmpty(obj.Descripcion) && !string.IsNullOrEmpty(obj.PeriodicidadNominaId))
+                        foreach (var obj in profiles)
                         {
-                            context.CatPeriodicidadNominaSu(obj.PeriodicidadNominaId, obj.Descripcion, ccmsidAdmin, obj.Active, resultado);
+                            context.CatTiposPeriodoNominaSu(obj.TipoPeriodoId, obj.Descripcion, ccmsidAdmin, obj.Active, resultado);
                         }
-                        else
-                        {
-                            ModelState.AddModelError("error", "La descripción y la periodicidadId no pueden estar vacios.");
-                        }
-                    }
 
-                    int.TryParse(resultado.Value.ToString(), out res);
+                        int.TryParse(resultado.Value.ToString(), out res);
 
                     if (res == -1)
                     {
-                        ModelState.AddModelError("error", "Ya existe una periodicidad de nomina con la misma descripción.");
+                        ModelState.AddModelError("error", "Ya existe un Tipo de Período de Nómina con la misma descripción.");
+                    }
+
+                    if (res == -2)
+                    {
+                        ModelState.AddModelError("error", "Ya existe un Tipo de Período de Nómina con la misma clave.");
+                    }
+
+                    if (res == -3)
+                    {
+                        ModelState.AddModelError("error", "Ya existe un Tipo de Período de Nómina con la misma clave y descripción.");
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
@@ -198,5 +165,6 @@ namespace ASN.Controllers
                 return Json(profiles.ToDataSourceResult(request, ModelState));
             }
         }
+
     }
 }

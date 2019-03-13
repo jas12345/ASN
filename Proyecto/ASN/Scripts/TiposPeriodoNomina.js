@@ -1,18 +1,18 @@
-﻿function edit(e) {
+﻿
+
+function edit(e) {
     if (e.model.isNew() === false) {
-        $("#AnioId").attr("disabled", "disabled");
-        $("#MesId").attr("disabled", "disabled");
-        e.container.kendoWindow("title", "Edit");
+        $("#TipoPeriodoId").attr("disabled", "disabled");
+        e.container.kendoWindow("title", "Editar");
     }
     else {
         $("#Active").attr("disabled", "disabled");
-        e.container.kendoWindow("title", "New");
-
+        e.container.kendoWindow("title", "Nuevo");
     }
 }
 
 function hola(e) {
-    if ((e.type === "create" || e.type === "update")) {
+    if (e.type === "create" || e.type === "update") {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
         $('#grid').data('kendoGrid').refresh();
@@ -67,7 +67,7 @@ function handleEditChanges(e, grid) {
     var valid = true;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
-        return (item.dirty);
+        return item.dirty;
     });
 
     for (var i = 0; i < objeto.length; i++) {
@@ -75,7 +75,6 @@ function handleEditChanges(e, grid) {
         var cols = $(rows[i]).find("td");
         //var disposition = objeto[i].Disposition;
         var displayname = objeto[i].Mercado;
-
     }
 
     if (!valid) {
@@ -97,25 +96,7 @@ function handleSaveChanges(e, grid) {
 
         if (model && model.id <= 0 && valid) {
 
-            //if (dispositionObj.text() == "") {
-            //    var notification = $("#popupNotification").data("kendoNotification");
-            //    notification.show("Invalid disposition name", "error");
-            //    grid.editCell(dispositionObj);
-            //    e.preventDefault(true);
-            //    valid = false;
-            //    //setTimeout($.unblockUI, 1000);
-            //    return false;
-            //}
-
-            //if (ValidaDisplayNameVal(displaynameObj.text()) != 0) {
-            //    var notification = $("#popupNotification").data("kendoNotification");
-            //    notification.show("Invalid disposition values", "error");
-            //    grid.editCell(displaynameObj);
-            //    e.preventDefault(true);
-            //    valid = false;
-            //    //setTimeout($.unblockUI, 1000);
-            //    return false;
-            //}
+            //nothing
 
         }
         else {
@@ -129,36 +110,6 @@ function handleSaveChanges(e, grid) {
     }
 }
 
-function FechaInicioOpen(e) {
-    if ($("#FechaInicio").data("kendoDatePicker")._oldText.length == 0) {
-        OcultaSave();
-    }
-    else {
-        MuestraSave()
-    }
-}
-
-
-function FechaCierreOpen(e) {
-    if ($("#FechaCierre").data("kendoDatePicker")._oldText.length == 0) {
-        OcultaSave();
-    }
-    else {
-        MuestraSave()
-    }
-}
-
-function AnioNominaChange(e) {
-    $("#FechaInicioAnio").val
-}
-
-function OcultaSave() {
-    $(".k-grid-update").css("display", "none");
-}
-
-function MuestraSave() {
-    $(".k-grid-update").css("display", "");
-}
 
 (function ($, kendo) {
     $.extend(true, kendo.ui.validator, {
@@ -176,35 +127,3 @@ function MuestraSave() {
         }
     });
 })(jQuery, kendo);
-
-
-function ValidaDisplayNameVal(obj) {
-    //if (obj == "" || (obj.length > 150 || obj.length < 3) || obj.match(/^[a-z A-Z0-9 ñáéíóú\)\(]*$/) == null) {
-    //    return "El nombre del Mercado debe ser entre 3 y 150 caracteres y solo se aceptan numeros,letras y parentesis.";
-    //}
-    //else {
-    //    return 0;
-    //}
-}
-
-function accionado() {
-    return {
-        fechaInicio: $("#FechaInicio").val(), fechaCierre: $("#FechaCierre").val()
-    };
-}
-
-function dateFilter(e) {
-    e.element.kendoDatePicker({
-        format: "yyyy-MM-dd",
-    });
-}
-
-
-//$(document).ready(function () {
-//    //OcultaSave();
-//    setTimeout(function () {
-//        var Hoy = kendo.toString(new Date(), 'yyyy-MM-dd');
-//        $("#FechaInicio").data('kendoDatePicker').value(Hoy);
-//        $("#FechaCierre").data('kendoDatePicker').value(Hoy);
-//    }, 0);
-//});
