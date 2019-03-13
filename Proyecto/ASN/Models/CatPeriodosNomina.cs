@@ -33,5 +33,6 @@ namespace ASN.Models
         public int MesId { get; set; }
         public int ConsecutivoId { get; set; }
         public string PeriodicidadNominaId { get; set; }
+        public int AnioId1 { get; set; }
     }
 }

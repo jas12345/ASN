@@ -12,10 +12,10 @@ namespace ASN.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CatTiposPeriodo
+    public partial class CatConsecutivoPeriodicidad
     {
-        public string TipoPeriodoId { get; set; }
-        public string Descripcion { get; set; }
+        public int ConsecutivoId { get; set; }
+        public string PeriodicidadNominaId { get; set; }
         public bool Active { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }

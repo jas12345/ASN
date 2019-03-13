@@ -12,15 +12,19 @@ namespace ASN.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CatLogError
+    public partial class CatConsecutivoPeriodos
     {
-        public int LogErrorId { get; set; }
-        public string LogErrorMessage { get; set; }
-        public string StackTrace { get; set; }
-        public string Browser { get; set; }
-        public string IpAddress { get; set; }
+        public int AnioId { get; set; }
+        public int MesId { get; set; }
+        public int ConsecutivoId { get; set; }
+        public string PeriodicidadNominaId { get; set; }
+        public System.DateTime FechaInicio { get; set; }
+        public System.DateTime FechaCierre { get; set; }
+        public bool Active { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public Nullable<System.DateTime> DeactivatedDate { get; set; }
+        public Nullable<int> DeactivatedBy { get; set; }
         public int LastModifiedBy { get; set; }
         public System.DateTime LastModifiedDate { get; set; }
         public string LastModifiedFromPCName { get; set; }
