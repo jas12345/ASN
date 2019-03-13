@@ -10,6 +10,10 @@ namespace ASN
         {
             BundleTable.EnableOptimizations = false;
 
+            bundles.Add(new ScriptBundle("~/bundles/ConsecutivosPeriodos").Include(
+            "~/Scripts/ConsecutivosPeriodos.js"));
+
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 

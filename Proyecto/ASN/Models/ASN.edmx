@@ -5,283 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ASNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="CatAniosNomina">
-          <Key>
-            <PropertyRef Name="AnioId" />
-          </Key>
-          <Property Name="AnioId" Type="int" Nullable="false" />
-          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="FechaCierre" Type="datetime" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatConcecutivoPeriodicidad">
-          <Key>
-            <PropertyRef Name="ConsecutivoId" />
-            <PropertyRef Name="PeriodicidadNominaId" />
-          </Key>
-          <Property Name="ConsecutivoId" Type="int" Nullable="false" />
-          <Property Name="PeriodicidadNominaId" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatConcecutivoPeriodos">
-          <Key>
-            <PropertyRef Name="AñoId" />
-            <PropertyRef Name="MesId" />
-            <PropertyRef Name="ConsecutivoId" />
-            <PropertyRef Name="PeriodicidadNominaId" />
-          </Key>
-          <Property Name="AñoId" Type="int" Nullable="false" />
-          <Property Name="MesId" Type="int" Nullable="false" />
-          <Property Name="ConsecutivoId" Type="int" Nullable="false" />
-          <Property Name="PeriodicidadNominaId" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="FechaCierre" Type="datetime" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatConceptos">
-          <Key>
-            <PropertyRef Name="ConceptoId" />
-          </Key>
-          <Property Name="ConceptoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="TipoConcepto" Type="int" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatEstatusConceptos">
-          <Key>
-            <PropertyRef Name="EstatusConceptoId" />
-          </Key>
-          <Property Name="EstatusConceptoId" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ASN.app620.CatLogError' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="CatLogError">
-          <Key>
-            <PropertyRef Name="LogErrorId" />
-            <PropertyRef Name="LogErrorMessage" />
-            <PropertyRef Name="StackTrace" />
-            <PropertyRef Name="CreatedBy" />
-            <PropertyRef Name="CreatedDate" />
-            <PropertyRef Name="LastModifiedBy" />
-            <PropertyRef Name="LastModifiedDate" />
-            <PropertyRef Name="LastModifiedFromPCName" />
-          </Key>
-          <Property Name="LogErrorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LogErrorMessage" Type="varchar" MaxLength="2000" Nullable="false" />
-          <Property Name="StackTrace" Type="varchar" MaxLength="2000" Nullable="false" />
-          <Property Name="Browser" Type="varchar" MaxLength="100" />
-          <Property Name="IpAddress" Type="varchar" MaxLength="20" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatMeses">
-          <Key>
-            <PropertyRef Name="MesId" />
-          </Key>
-          <Property Name="MesId" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatMesesNomina">
-          <Key>
-            <PropertyRef Name="AnioId" />
-            <PropertyRef Name="MesId" />
-          </Key>
-          <Property Name="AnioId" Type="int" Nullable="false" />
-          <Property Name="MesId" Type="int" Nullable="false" />
-          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="FechaCierre" Type="datetime" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatParametroConceptos">
-          <Key>
-            <PropertyRef Name="ParametroConceptoId" />
-          </Key>
-          <Property Name="ParametroConceptoId" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatPeriodicidadNomina">
-          <Key>
-            <PropertyRef Name="PeriodicidadNominaId" />
-          </Key>
-          <Property Name="PeriodicidadNominaId" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatPeriodosNomina">
-          <Key>
-            <PropertyRef Name="AñoId" />
-            <PropertyRef Name="MesId" />
-            <PropertyRef Name="ConsecutivoId" />
-            <PropertyRef Name="PeriodicidadNominaId" />
-            <PropertyRef Name="TipoPeriodo" />
-          </Key>
-          <Property Name="AñoId" Type="int" Nullable="false" />
-          <Property Name="MesId" Type="int" Nullable="false" />
-          <Property Name="ConsecutivoId" Type="int" Nullable="false" />
-          <Property Name="PeriodicidadNominaId" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="TipoPeriodo" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="FechaFin" Type="datetime" Nullable="false" />
-          <Property Name="FechaCaptura" Type="datetime" Nullable="false" />
-          <Property Name="FechaCierre" Type="datetime" Nullable="false" />
-          <Property Name="CountryIdents" Type="varchar" MaxLength="50" />
-          <Property Name="NombrePeriodo" Type="varchar" MaxLength="50" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatRole">
-          <Key>
-            <PropertyRef Name="CatRoleId" />
-          </Key>
-          <Property Name="CatRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Role" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatTipoConceptos">
-          <Key>
-            <PropertyRef Name="TipoConceptoId" />
-          </Key>
-          <Property Name="TipoConceptoId" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CatTiposPeriodo">
-          <Key>
-            <PropertyRef Name="TipoPeriodoId" />
-          </Key>
-          <Property Name="TipoPeriodoId" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RelConceptoPais">
-          <Key>
-            <PropertyRef Name="CountryId" />
-            <PropertyRef Name="ConceptoId" />
-          </Key>
-          <Property Name="CountryId" Type="int" Nullable="false" />
-          <Property Name="ConceptoId" Type="int" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RelUserRole">
-          <Key>
-            <PropertyRef Name="RelUserRoleId" />
-          </Key>
-          <Property Name="RelUserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CatRoleId" Type="int" Nullable="false" />
-          <Property Name="UserCCMSId" Type="int" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="DeactivatedDate" Type="datetime" />
-          <Property Name="DeactivatedBy" Type="int" />
-          <Property Name="LastModifiedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="LastModifiedFromPCName" Type="varchar" MaxLength="64" Nullable="false" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -292,77 +15,6 @@ advertencia 6002: La tabla o vista 'ASN.app620.CatLogError' no tiene definida ni
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="CatEmployeeCCMSVw">
-          <Key>
-            <PropertyRef Name="Ident" />
-            <PropertyRef Name="Last_Update" />
-          </Key>
-          <Property Name="Ident" Type="int" Nullable="false" />
-          <Property Name="First_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Middle_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Last_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Manager_Ident" Type="int" />
-          <Property Name="Manager_First_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Manager_Middle_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Manager_Last_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Current_Status" Type="varchar" MaxLength="100" />
-          <Property Name="Hire_Date" Type="date" />
-          <Property Name="Location_Ident" Type="int" />
-          <Property Name="Location_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Client_Ident" Type="int" />
-          <Property Name="Client_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Program_Ident" Type="int" />
-          <Property Name="Program_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Phone_Ident" Type="varchar" MaxLength="10" />
-          <Property Name="Account_ID" Type="varchar" MaxLength="250" />
-          <Property Name="position_code_company_name" Type="varchar" MaxLength="255" />
-          <Property Name="ETN_type" Type="varchar" MaxLength="16" />
-          <Property Name="ETN" Type="varchar" MaxLength="27" />
-          <Property Name="Company_Ident" Type="int" />
-          <Property Name="Company_Name" Type="varchar" MaxLength="250" />
-          <Property Name="Contract_Type" Type="varchar" MaxLength="50" />
-          <Property Name="Contract_Type_Ident" Type="int" />
-          <Property Name="Position_Code_Ident" Type="int" />
-          <Property Name="Departament" Type="varchar" MaxLength="50" />
-          <Property Name="Departament_Ident" Type="int" />
-          <Property Name="Gender" Type="varchar" MaxLength="100" />
-          <Property Name="email1" Type="varchar" MaxLength="80" />
-          <Property Name="last_day_worked" Type="date" />
-          <Property Name="Weekly_Hours" Type="varchar" MaxLength="10" />
-          <Property Name="Tenure_Date" Type="date" />
-          <Property Name="Birth_Date" Type="varchar" MaxLength="10" />
-          <Property Name="Term_Date" Type="date" />
-          <Property Name="Term_Reason_Type_Ident" Type="int" />
-          <Property Name="Term_Reason_Type" Type="varchar" MaxLength="100" />
-          <Property Name="Term_Reason_Ident" Type="int" />
-          <Property Name="term_reason" Type="varchar" MaxLength="150" />
-          <Property Name="Term_Status" Type="varchar" MaxLength="50" />
-          <Property Name="Term_Voluntary" Type="varchar" MaxLength="3" />
-          <Property Name="Term_Rehire" Type="varchar" MaxLength="3" />
-          <Property Name="switch_desc" Type="varchar" MaxLength="50" />
-          <Property Name="Last_Update" Type="datetime" Nullable="false" />
-          <Property Name="Position_Code_Title" Type="varchar" MaxLength="150" />
-          <Property Name="position_code_type_full_name" Type="varchar" MaxLength="150" />
-          <Property Name="country_ident" Type="int" />
-          <Property Name="country_full_name" Type="varchar" MaxLength="150" />
-          <Property Name="country_abbr_name" Type="varchar" MaxLength="80" />
-          <Property Name="position_code_company_ident" Type="int" />
-          <Property Name="Nombre" Type="varchar" MaxLength="752" />
-        </EntityType>
-        <Association Name="FK_CatRoleRelUserRole">
-          <End Role="CatRole" Type="Self.CatRole" Multiplicity="1" />
-          <End Role="RelUserRole" Type="Self.RelUserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CatRole">
-              <PropertyRef Name="CatRoleId" />
-            </Principal>
-            <Dependent Role="RelUserRole">
-              <PropertyRef Name="CatRoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="CatAniosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -381,7 +33,6 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatClientCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
-        <Function Name="CatConcecutivoPeriodicidadSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -398,6 +49,32 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatConsecutivoPeriodicidadCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="CatPeriodicidadNominaId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CatConsecutivoPeriodicidadSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConsecutivoPeriodosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConsecutivoPeriodosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+          <Parameter Name="MesId" Type="int" Mode="In" />
+          <Parameter Name="ConsecutivoId" Type="int" Mode="In" />
+          <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
+          <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatConsecutivoPeriodosSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+          <Parameter Name="MesId" Type="int" Mode="In" />
+          <Parameter Name="ConsecutivoId" Type="int" Mode="In" />
+          <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
+          <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLogErrorSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="LogErrorMessage" Type="varchar" Mode="In" />
@@ -406,7 +83,13 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Parameter Name="Browser" Type="varchar" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
         </Function>
-        <Function Name="CatMesesCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatMesesCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatMesesFechasCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="MesId" Type="int" Mode="In" />
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatMesesNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatMesesNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
@@ -442,16 +125,16 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatPeriodosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="Año" Type="int" Mode="In" />
-          <Parameter Name="Mes" Type="int" Mode="In" />
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+          <Parameter Name="MesId" Type="int" Mode="In" />
           <Parameter Name="Periodicidad" Type="varchar" Mode="In" />
           <Parameter Name="Consecutivo" Type="int" Mode="In" />
           <Parameter Name="TipoPeriodo" Type="varchar" Mode="In" />
         </Function>
         <Function Name="CatPeriodosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="Año" Type="int" Mode="In" />
-          <Parameter Name="Mes" Type="int" Mode="In" />
-          <Parameter Name="Periodicidad" Type="varchar" Mode="In" />
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+          <Parameter Name="MesId" Type="int" Mode="In" />
+          <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
           <Parameter Name="Consecutivo" Type="varchar" Mode="In" />
           <Parameter Name="TipoPeriodo" Type="varchar" Mode="In" />
           <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
@@ -467,15 +150,15 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
         <Function Name="CatTipoConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
-        <Function Name="CatTiposPeriodoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
-        <Function Name="CatTiposPeriodoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
-        <Function Name="CatTiposPeriodoSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+        <Function Name="CatTiposPeriodoNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatTiposPeriodoNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatTiposPeriodoNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="TipoPeriodoId" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
-        <Function Name="CatTiposPeriodoSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+        <Function Name="CatTiposPeriodoNominaSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="TipoPeriodoId" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -517,132 +200,12 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ASNModelStoreContainer">
-          <EntitySet Name="CatAniosNomina" EntityType="Self.CatAniosNomina" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatConcecutivoPeriodicidad" EntityType="Self.CatConcecutivoPeriodicidad" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatConcecutivoPeriodos" EntityType="Self.CatConcecutivoPeriodos" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatConceptos" EntityType="Self.CatConceptos" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatEstatusConceptos" EntityType="Self.CatEstatusConceptos" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatMeses" EntityType="Self.CatMeses" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatMesesNomina" EntityType="Self.CatMesesNomina" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatParametroConceptos" EntityType="Self.CatParametroConceptos" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatPeriodicidadNomina" EntityType="Self.CatPeriodicidadNomina" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatPeriodosNomina" EntityType="Self.CatPeriodosNomina" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatRole" EntityType="Self.CatRole" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatTipoConceptos" EntityType="Self.CatTipoConceptos" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="CatTiposPeriodo" EntityType="Self.CatTiposPeriodo" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="RelConceptoPais" EntityType="Self.RelConceptoPais" Schema="app620" store:Type="Tables" />
-          <EntitySet Name="RelUserRole" EntityType="Self.RelUserRole" Schema="app620" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CatLogError" EntityType="Self.CatLogError" store:Type="Tables" store:Schema="app620">
-            <DefiningQuery>SELECT 
-    [CatLogError].[LogErrorId] AS [LogErrorId], 
-    [CatLogError].[LogErrorMessage] AS [LogErrorMessage], 
-    [CatLogError].[StackTrace] AS [StackTrace], 
-    [CatLogError].[Browser] AS [Browser], 
-    [CatLogError].[IpAddress] AS [IpAddress], 
-    [CatLogError].[CreatedBy] AS [CreatedBy], 
-    [CatLogError].[CreatedDate] AS [CreatedDate], 
-    [CatLogError].[LastModifiedBy] AS [LastModifiedBy], 
-    [CatLogError].[LastModifiedDate] AS [LastModifiedDate], 
-    [CatLogError].[LastModifiedFromPCName] AS [LastModifiedFromPCName]
-    FROM [app620].[CatLogError] AS [CatLogError]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="CatEmployeeCCMSVw" EntityType="Self.CatEmployeeCCMSVw" store:Type="Views" store:Schema="app620">
-            <DefiningQuery>SELECT 
-    [CatEmployeeCCMSVw].[Ident] AS [Ident], 
-    [CatEmployeeCCMSVw].[First_Name] AS [First_Name], 
-    [CatEmployeeCCMSVw].[Middle_Name] AS [Middle_Name], 
-    [CatEmployeeCCMSVw].[Last_Name] AS [Last_Name], 
-    [CatEmployeeCCMSVw].[Manager_Ident] AS [Manager_Ident], 
-    [CatEmployeeCCMSVw].[Manager_First_Name] AS [Manager_First_Name], 
-    [CatEmployeeCCMSVw].[Manager_Middle_Name] AS [Manager_Middle_Name], 
-    [CatEmployeeCCMSVw].[Manager_Last_Name] AS [Manager_Last_Name], 
-    [CatEmployeeCCMSVw].[Current_Status] AS [Current_Status], 
-    [CatEmployeeCCMSVw].[Hire_Date] AS [Hire_Date], 
-    [CatEmployeeCCMSVw].[Location_Ident] AS [Location_Ident], 
-    [CatEmployeeCCMSVw].[Location_Name] AS [Location_Name], 
-    [CatEmployeeCCMSVw].[Client_Ident] AS [Client_Ident], 
-    [CatEmployeeCCMSVw].[Client_Name] AS [Client_Name], 
-    [CatEmployeeCCMSVw].[Program_Ident] AS [Program_Ident], 
-    [CatEmployeeCCMSVw].[Program_Name] AS [Program_Name], 
-    [CatEmployeeCCMSVw].[Phone_Ident] AS [Phone_Ident], 
-    [CatEmployeeCCMSVw].[Account_ID] AS [Account_ID], 
-    [CatEmployeeCCMSVw].[position_code_company_name] AS [position_code_company_name], 
-    [CatEmployeeCCMSVw].[ETN_type] AS [ETN_type], 
-    [CatEmployeeCCMSVw].[ETN] AS [ETN], 
-    [CatEmployeeCCMSVw].[Company_Ident] AS [Company_Ident], 
-    [CatEmployeeCCMSVw].[Company_Name] AS [Company_Name], 
-    [CatEmployeeCCMSVw].[Contract_Type] AS [Contract_Type], 
-    [CatEmployeeCCMSVw].[Contract_Type_Ident] AS [Contract_Type_Ident], 
-    [CatEmployeeCCMSVw].[Position_Code_Ident] AS [Position_Code_Ident], 
-    [CatEmployeeCCMSVw].[Departament] AS [Departament], 
-    [CatEmployeeCCMSVw].[Departament_Ident] AS [Departament_Ident], 
-    [CatEmployeeCCMSVw].[Gender] AS [Gender], 
-    [CatEmployeeCCMSVw].[email1] AS [email1], 
-    [CatEmployeeCCMSVw].[last_day_worked] AS [last_day_worked], 
-    [CatEmployeeCCMSVw].[Weekly_Hours] AS [Weekly_Hours], 
-    [CatEmployeeCCMSVw].[Tenure_Date] AS [Tenure_Date], 
-    [CatEmployeeCCMSVw].[Birth_Date] AS [Birth_Date], 
-    [CatEmployeeCCMSVw].[Term_Date] AS [Term_Date], 
-    [CatEmployeeCCMSVw].[Term_Reason_Type_Ident] AS [Term_Reason_Type_Ident], 
-    [CatEmployeeCCMSVw].[Term_Reason_Type] AS [Term_Reason_Type], 
-    [CatEmployeeCCMSVw].[Term_Reason_Ident] AS [Term_Reason_Ident], 
-    [CatEmployeeCCMSVw].[term_reason] AS [term_reason], 
-    [CatEmployeeCCMSVw].[Term_Status] AS [Term_Status], 
-    [CatEmployeeCCMSVw].[Term_Voluntary] AS [Term_Voluntary], 
-    [CatEmployeeCCMSVw].[Term_Rehire] AS [Term_Rehire], 
-    [CatEmployeeCCMSVw].[switch_desc] AS [switch_desc], 
-    [CatEmployeeCCMSVw].[Last_Update] AS [Last_Update], 
-    [CatEmployeeCCMSVw].[Position_Code_Title] AS [Position_Code_Title], 
-    [CatEmployeeCCMSVw].[position_code_type_full_name] AS [position_code_type_full_name], 
-    [CatEmployeeCCMSVw].[country_ident] AS [country_ident], 
-    [CatEmployeeCCMSVw].[country_full_name] AS [country_full_name], 
-    [CatEmployeeCCMSVw].[country_abbr_name] AS [country_abbr_name], 
-    [CatEmployeeCCMSVw].[position_code_company_ident] AS [position_code_company_ident], 
-    [CatEmployeeCCMSVw].[Nombre] AS [Nombre]
-    FROM [app620].[CatEmployeeCCMSVw] AS [CatEmployeeCCMSVw]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_CatRoleRelUserRole" Association="Self.FK_CatRoleRelUserRole">
-            <End Role="CatRole" EntitySet="CatRole" />
-            <End Role="RelUserRole" EntitySet="RelUserRole" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ASNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CatConcepto">
-          <Key>
-            <PropertyRef Name="ConceptoId" />
-          </Key>
-          <Property Name="ConceptoId" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TipoConcepto" Type="Int32" Nullable="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RelConceptoPai">
-          <Key>
-            <PropertyRef Name="CountryId" />
-            <PropertyRef Name="ConceptoId" />
-          </Key>
-          <Property Name="CountryId" Type="Int32" Nullable="false" />
-          <Property Name="ConceptoId" Type="Int32" Nullable="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -654,16 +217,7 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityContainer Name="ASNContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CatConceptos" EntityType="Self.CatConcepto" />
-          <EntitySet Name="RelConceptoPais" EntityType="Self.RelConceptoPai" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="CatEstatusConceptos" EntityType="ASNModel.CatEstatusConceptos" />
-          <EntitySet Name="CatParametroConceptos" EntityType="ASNModel.CatParametroConceptos" />
-          <EntitySet Name="CatPeriodicidadNomina" EntityType="ASNModel.CatPeriodicidadNomina" />
-          <EntitySet Name="CatTipoConceptos" EntityType="ASNModel.CatTipoConceptos" />
-          <EntitySet Name="CatTiposPeriodo" EntityType="ASNModel.CatTiposPeriodo" />
-          <EntitySet Name="RelUserRole" EntityType="ASNModel.RelUserRole" />
-          <EntitySet Name="CatEmployeeCCMSVw" EntityType="ASNModel.CatEmployeeCCMSVw" />
           <FunctionImport Name="CatClientCMB" ReturnType="Collection(ASNModel.CatClientCMB_Result)" />
           <FunctionImport Name="CatConceptosCMB" ReturnType="Collection(ASNModel.CatConceptosCMB_Result)" />
           <FunctionImport Name="CatConceptosSel" ReturnType="Collection(ASNModel.CatConceptosSel_Result)" />
@@ -703,29 +257,9 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Parameter Name="CCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatTipoConceptosCMB" ReturnType="Collection(ASNModel.CatTipoConceptosCMB_Result)" />
-          <FunctionImport Name="CatTiposPeriodoCMB" ReturnType="Collection(ASNModel.CatTiposPeriodoCMB_Result)" />
-          <FunctionImport Name="CatTiposPeriodoSel" ReturnType="Collection(ASNModel.CatTiposPeriodoSel_Result)" />
-          <FunctionImport Name="CatTiposPeriodoSi">
-            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatTiposPeriodoSu">
-            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="Active" Mode="In" Type="Boolean" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="CatUserInfoSel" ReturnType="Collection(ASNModel.CatUserInfoSel_Result)">
           <Parameter Name="CCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="CatRole" EntityType="ASNModel.CatRole" />
-          <AssociationSet Name="FK_CatRoleRelUserRole" Association="ASNModel.FK_CatRoleRelUserRole">
-            <End Role="CatRole" EntitySet="CatRole" />
-            <End Role="RelUserRole" EntitySet="RelUserRole" />
-          </AssociationSet>
           <FunctionImport Name="CatLogErrorSi">
             <Parameter Name="LogErrorMessage" Mode="In" Type="String" />
             <Parameter Name="StackTrace" Mode="In" Type="String" />
@@ -733,10 +267,6 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
             <Parameter Name="Browser" Mode="In" Type="String" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="CatPeriodosNomina" EntityType="ASNModel.CatPeriodosNomina" />
-          <EntitySet Name="CatConcecutivoPeriodicidad" EntityType="ASNModel.CatConcecutivoPeriodicidad" />
-          <EntitySet Name="CatConcecutivoPeriodos" EntityType="ASNModel.CatConcecutivoPeriodos" />
-          <EntitySet Name="CatMeses" EntityType="ASNModel.CatMeses" />
           <FunctionImport Name="CatAñosNominaSel" />
           <FunctionImport Name="CatAñosNominaSi">
             <Parameter Name="AñoId" Mode="In" Type="Int32" />
@@ -755,16 +285,16 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           </FunctionImport>
           <FunctionImport Name="CatMesesNominaSel" ReturnType="Collection(ASNModel.CatMesesNominaSel_Result)" />
           <FunctionImport Name="CatPeriodosNominaSel">
-            <Parameter Name="Año" Mode="In" Type="Int32" />
-            <Parameter Name="Mes" Mode="In" Type="Int32" />
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
             <Parameter Name="Periodicidad" Mode="In" Type="String" />
             <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
             <Parameter Name="TipoPeriodo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatPeriodosNominaSi">
-            <Parameter Name="Año" Mode="In" Type="Int32" />
-            <Parameter Name="Mes" Mode="In" Type="Int32" />
-            <Parameter Name="Periodicidad" Mode="In" Type="String" />
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
             <Parameter Name="Consecutivo" Mode="In" Type="String" />
             <Parameter Name="TipoPeriodo" Mode="In" Type="String" />
             <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
@@ -839,161 +369,56 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="CatAniosNomina" EntityType="ASNModel.CatAniosNomina" />
-          <EntitySet Name="CatMesesNomina" EntityType="ASNModel.CatMesesNomina" />
           <FunctionImport Name="CatAniosNominaCMB" ReturnType="Collection(ASNModel.CatAniosNominaCMB_Result)" />
-          <FunctionImport Name="CatMesesCMB" ReturnType="Collection(ASNModel.CatMesesCMB_Result)" />
-          <EntitySet Name="CatLogError" EntityType="ASNModel.CatLogError" />
+          <FunctionImport Name="CatMesesCMB" ReturnType="Collection(ASNModel.CatMesesCMB_Result)" >
+          <Parameter Name="AnioId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConsecutivoPeriodicidadSel" ReturnType="Collection(ASNModel.CatConsecutivoPeriodicidadSel_Result)" />
+          <FunctionImport Name="CatConsecutivoPeriodosSel" ReturnType="Collection(ASNModel.CatConsecutivoPeriodosSel_Result)" />
+          <FunctionImport Name="CatConsecutivoPeriodosSi">
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
+            <Parameter Name="ConsecutivoId" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaCierre" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConsecutivoPeriodosSu">
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
+            <Parameter Name="ConsecutivoId" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaCierre" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConsecutivoPeriodicidadCMB" ReturnType="Collection(ASNModel.CatConsecutivoPeriodicidadCMB_Result)">
+          <Parameter Name="CatPeriodicidadNominaId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CatTiposPeriodoNominaCMB" ReturnType="Collection(ASNModel.CatTiposPeriodoNominaCMB_Result)" />
+          <FunctionImport Name="CatTiposPeriodoNominaSel" ReturnType="Collection(ASNModel.CatTiposPeriodoNominaSel_Result)" />
+          <FunctionImport Name="CatTiposPeriodoNominaSi">
+            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatTiposPeriodoNominaSu">
+            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatMesesFechasCMB" ReturnType="Collection(ASNModel.CatMesesFechasCMB_Result)">
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="CatEstatusConceptos">
-          <Key>
-            <PropertyRef Name="EstatusConceptoId" />
-          </Key>
-          <Property Name="EstatusConceptoId" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CatParametroConceptos">
-          <Key>
-            <PropertyRef Name="ParametroConceptoId" />
-          </Key>
-          <Property Name="ParametroConceptoId" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CatPeriodicidadNomina">
-          <Key>
-            <PropertyRef Name="PeriodicidadNominaId" />
-          </Key>
-          <Property Name="PeriodicidadNominaId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CatTipoConceptos">
-          <Key>
-            <PropertyRef Name="TipoConceptoId" />
-          </Key>
-          <Property Name="TipoConceptoId" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CatTiposPeriodo">
-          <Key>
-            <PropertyRef Name="TipoPeriodoId" />
-          </Key>
-          <Property Name="TipoPeriodoId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="RelUserRole">
-          <Key>
-            <PropertyRef Name="RelUserRoleId" />
-          </Key>
-          <Property Name="RelUserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CatRoleId" Type="Int32" Nullable="false" />
-          <Property Name="UserCCMSId" Type="Int32" Nullable="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CatRole" Relationship="ASNModel.FK_CatRoleRelUserRole" FromRole="RelUserRole" ToRole="CatRole" />
-        </EntityType>
-        <EntityType Name="CatEmployeeCCMSVw">
-          <Key>
-            <PropertyRef Name="Ident" />
-            <PropertyRef Name="Last_Update" />
-          </Key>
-          <Property Name="Ident" Type="Int32" Nullable="false" />
-          <Property Name="First_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Middle_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Manager_Ident" Type="Int32" />
-          <Property Name="Manager_First_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Manager_Middle_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Manager_Last_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Current_Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Hire_Date" Type="DateTime" Precision="0" />
-          <Property Name="Location_Ident" Type="Int32" />
-          <Property Name="Location_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Client_Ident" Type="Int32" />
-          <Property Name="Client_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Program_Ident" Type="Int32" />
-          <Property Name="Program_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Phone_Ident" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Account_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="position_code_company_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ETN_type" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="ETN" Type="String" MaxLength="27" FixedLength="false" Unicode="false" />
-          <Property Name="Company_Ident" Type="Int32" />
-          <Property Name="Company_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Contract_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Contract_Type_Ident" Type="Int32" />
-          <Property Name="Position_Code_Ident" Type="Int32" />
-          <Property Name="Departament" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Departament_Ident" Type="Int32" />
-          <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="email1" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="last_day_worked" Type="DateTime" Precision="0" />
-          <Property Name="Weekly_Hours" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Tenure_Date" Type="DateTime" Precision="0" />
-          <Property Name="Birth_Date" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Term_Date" Type="DateTime" Precision="0" />
-          <Property Name="Term_Reason_Type_Ident" Type="Int32" />
-          <Property Name="Term_Reason_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Term_Reason_Ident" Type="Int32" />
-          <Property Name="term_reason" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Term_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Term_Voluntary" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="Term_Rehire" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="switch_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Last_Update" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Position_Code_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="position_code_type_full_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="country_ident" Type="Int32" />
-          <Property Name="country_full_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="country_abbr_name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="position_code_company_ident" Type="Int32" />
-          <Property Name="Nombre" Type="String" MaxLength="752" FixedLength="false" Unicode="false" />
-        </EntityType>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
@@ -1033,14 +458,6 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="CatTiposPeriodoCMB_Result">
-          <Property Type="String" Name="Id" Nullable="false" MaxLength="5" />
-          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="CatTiposPeriodoSel_Result">
-          <Property Type="String" Name="TipoPeriodoId" Nullable="false" MaxLength="5" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="CatUserInfoSel_Result">
           <Property Type="Int32" Name="Ident" Nullable="true" />
           <Property Type="String" Name="First_Name" Nullable="true" />
@@ -1060,118 +477,9 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Property Type="Int32" Name="Country_ident" Nullable="true" />
           <Property Type="String" Name="FullName" Nullable="true" />
         </ComplexType>
-        <EntityType Name="CatRole">
-          <Key>
-            <PropertyRef Name="CatRoleId" />
-          </Key>
-          <Property Name="CatRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RelUserRole" Relationship="ASNModel.FK_CatRoleRelUserRole" FromRole="CatRole" ToRole="RelUserRole" />
-        </EntityType>
-        <Association Name="FK_CatRoleRelUserRole">
-          <End Type="ASNModel.CatRole" Role="CatRole" Multiplicity="1" />
-          <End Type="ASNModel.RelUserRole" Role="RelUserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CatRole">
-              <PropertyRef Name="CatRoleId" />
-            </Principal>
-            <Dependent Role="RelUserRole">
-              <PropertyRef Name="CatRoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="CatRelUserRoleSel_Result">
           <Property Type="String" Name="Role" Nullable="false" />
         </ComplexType>
-        <EntityType Name="CatPeriodosNomina">
-          <Key>
-            <PropertyRef Name="TipoPeriodo" />
-            <PropertyRef Name="AnioId" />
-            <PropertyRef Name="MesId" />
-            <PropertyRef Name="ConsecutivoId" />
-            <PropertyRef Name="PeriodicidadNominaId" />
-          </Key>
-          <Property Name="TipoPeriodo" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaCaptura" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CountryIdents" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NombrePeriodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="AnioId" Type="Int32" Nullable="false" />
-          <Property Name="MesId" Type="Int32" Nullable="false" />
-          <Property Name="ConsecutivoId" Type="Int32" Nullable="false" />
-          <Property Name="PeriodicidadNominaId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CatConcecutivoPeriodicidad">
-          <Key>
-            <PropertyRef Name="ConsecutivoId" />
-            <PropertyRef Name="PeriodicidadNominaId" />
-          </Key>
-          <Property Name="ConsecutivoId" Type="Int32" Nullable="false" />
-          <Property Name="PeriodicidadNominaId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CatConcecutivoPeriodos">
-          <Key>
-            <PropertyRef Name="AnioId" />
-            <PropertyRef Name="MesId" />
-            <PropertyRef Name="ConsecutivoId" />
-            <PropertyRef Name="PeriodicidadNominaId" />
-          </Key>
-          <Property Name="AnioId" Type="Int32" Nullable="false" />
-          <Property Name="MesId" Type="Int32" Nullable="false" />
-          <Property Name="ConsecutivoId" Type="Int32" Nullable="false" />
-          <Property Name="PeriodicidadNominaId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CatMeses">
-          <Key>
-            <PropertyRef Name="MesId" />
-          </Key>
-          <Property Name="MesId" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
         <ComplexType Name="CatMesesNominaSel_Result">
           <Property Type="Int32" Name="MesId" Nullable="false" />
           <Property Type="DateTime" Name="FechaInicio" Nullable="false" Precision="23" />
@@ -1196,40 +504,6 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
-        <EntityType Name="CatAniosNomina">
-          <Key>
-            <PropertyRef Name="AnioId" />
-          </Key>
-          <Property Name="AnioId" Type="Int32" Nullable="false" />
-          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CatMesesNomina">
-          <Key>
-            <PropertyRef Name="AnioId" />
-            <PropertyRef Name="MesId" />
-          </Key>
-          <Property Name="AnioId" Type="Int32" Nullable="false" />
-          <Property Name="MesId" Type="Int32" Nullable="false" />
-          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeactivatedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeactivatedBy" Type="Int32" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
         <ComplexType Name="CatAniosNominaSel_Result" >
           <Property Type="Int32" Name="AnioId" Nullable="false" />
           <Property Type="DateTime" Name="FechaInicio" Nullable="false" Precision="23" />
@@ -1244,67 +518,46 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="CatLogError">
-          <Key>
-            <PropertyRef Name="LogErrorId" />
-            <PropertyRef Name="LogErrorMessage" />
-            <PropertyRef Name="StackTrace" />
-            <PropertyRef Name="CreatedBy" />
-            <PropertyRef Name="CreatedDate" />
-            <PropertyRef Name="LastModifiedBy" />
-            <PropertyRef Name="LastModifiedDate" />
-            <PropertyRef Name="LastModifiedFromPCName" />
-          </Key>
-          <Property Name="LogErrorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LogErrorMessage" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Name="StackTrace" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Name="Browser" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IpAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedFromPCName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
+        <ComplexType Name="CatConsecutivoPeriodicidadSel_Result">
+          <Property Type="Int32" Name="ConsecutivoId" Nullable="false" />
+          <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatConsecutivoPeriodicidadCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="Int32" Name="Valor" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatTiposPeriodoNominaCMB_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatTiposPeriodoNominaSel_Result">
+          <Property Type="String" Name="TipoPeriodoId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatConsecutivoPeriodosSel_Result">
+          <Property Type="String" Name="Ident" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="AnioId" Nullable="false" />
+          <Property Type="Int32" Name="MesId" Nullable="false" />
+          <Property Type="String" Name="DescripcionMes" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ConsecutivoId" Nullable="false" />
+          <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="DescripcionPeriodicidad" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="CatMesesFechasCMB_Result">
+          <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ASNModelStoreContainer" CdmEntityContainer="ASNContext">
-          <EntitySetMapping Name="CatConceptos">
-            <EntityTypeMapping TypeName="ASNModel.CatConcepto">
-              <MappingFragment StoreEntitySet="CatConceptos">
-                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="TipoConcepto" ColumnName="TipoConcepto" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RelConceptoPais">
-            <EntityTypeMapping TypeName="ASNModel.RelConceptoPai">
-              <MappingFragment StoreEntitySet="RelConceptoPais">
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="ASNModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1313,160 +566,6 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatEstatusConceptos">
-            <EntityTypeMapping TypeName="ASNModel.CatEstatusConceptos">
-              <MappingFragment StoreEntitySet="CatEstatusConceptos">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="EstatusConceptoId" ColumnName="EstatusConceptoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatParametroConceptos">
-            <EntityTypeMapping TypeName="ASNModel.CatParametroConceptos">
-              <MappingFragment StoreEntitySet="CatParametroConceptos">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="ParametroConceptoId" ColumnName="ParametroConceptoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatPeriodicidadNomina">
-            <EntityTypeMapping TypeName="ASNModel.CatPeriodicidadNomina">
-              <MappingFragment StoreEntitySet="CatPeriodicidadNomina">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatTipoConceptos">
-            <EntityTypeMapping TypeName="ASNModel.CatTipoConceptos">
-              <MappingFragment StoreEntitySet="CatTipoConceptos">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="TipoConceptoId" ColumnName="TipoConceptoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatTiposPeriodo">
-            <EntityTypeMapping TypeName="ASNModel.CatTiposPeriodo">
-              <MappingFragment StoreEntitySet="CatTiposPeriodo">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="TipoPeriodoId" ColumnName="TipoPeriodoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RelUserRole">
-            <EntityTypeMapping TypeName="ASNModel.RelUserRole">
-              <MappingFragment StoreEntitySet="RelUserRole">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="UserCCMSId" ColumnName="UserCCMSId" />
-                <ScalarProperty Name="CatRoleId" ColumnName="CatRoleId" />
-                <ScalarProperty Name="RelUserRoleId" ColumnName="RelUserRoleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatEmployeeCCMSVw">
-            <EntityTypeMapping TypeName="ASNModel.CatEmployeeCCMSVw">
-              <MappingFragment StoreEntitySet="CatEmployeeCCMSVw">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="position_code_company_ident" ColumnName="position_code_company_ident" />
-                <ScalarProperty Name="country_abbr_name" ColumnName="country_abbr_name" />
-                <ScalarProperty Name="country_full_name" ColumnName="country_full_name" />
-                <ScalarProperty Name="country_ident" ColumnName="country_ident" />
-                <ScalarProperty Name="position_code_type_full_name" ColumnName="position_code_type_full_name" />
-                <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
-                <ScalarProperty Name="Last_Update" ColumnName="Last_Update" />
-                <ScalarProperty Name="switch_desc" ColumnName="switch_desc" />
-                <ScalarProperty Name="Term_Rehire" ColumnName="Term_Rehire" />
-                <ScalarProperty Name="Term_Voluntary" ColumnName="Term_Voluntary" />
-                <ScalarProperty Name="Term_Status" ColumnName="Term_Status" />
-                <ScalarProperty Name="term_reason" ColumnName="term_reason" />
-                <ScalarProperty Name="Term_Reason_Ident" ColumnName="Term_Reason_Ident" />
-                <ScalarProperty Name="Term_Reason_Type" ColumnName="Term_Reason_Type" />
-                <ScalarProperty Name="Term_Reason_Type_Ident" ColumnName="Term_Reason_Type_Ident" />
-                <ScalarProperty Name="Term_Date" ColumnName="Term_Date" />
-                <ScalarProperty Name="Birth_Date" ColumnName="Birth_Date" />
-                <ScalarProperty Name="Tenure_Date" ColumnName="Tenure_Date" />
-                <ScalarProperty Name="Weekly_Hours" ColumnName="Weekly_Hours" />
-                <ScalarProperty Name="last_day_worked" ColumnName="last_day_worked" />
-                <ScalarProperty Name="email1" ColumnName="email1" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Departament_Ident" ColumnName="Departament_Ident" />
-                <ScalarProperty Name="Departament" ColumnName="Departament" />
-                <ScalarProperty Name="Position_Code_Ident" ColumnName="Position_Code_Ident" />
-                <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
-                <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
-                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
-                <ScalarProperty Name="Company_Ident" ColumnName="Company_Ident" />
-                <ScalarProperty Name="ETN" ColumnName="ETN" />
-                <ScalarProperty Name="ETN_type" ColumnName="ETN_type" />
-                <ScalarProperty Name="position_code_company_name" ColumnName="position_code_company_name" />
-                <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
-                <ScalarProperty Name="Phone_Ident" ColumnName="Phone_Ident" />
-                <ScalarProperty Name="Program_Name" ColumnName="Program_Name" />
-                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
-                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
-                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
-                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
-                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
-                <ScalarProperty Name="Hire_Date" ColumnName="Hire_Date" />
-                <ScalarProperty Name="Current_Status" ColumnName="Current_Status" />
-                <ScalarProperty Name="Manager_Last_Name" ColumnName="Manager_Last_Name" />
-                <ScalarProperty Name="Manager_Middle_Name" ColumnName="Manager_Middle_Name" />
-                <ScalarProperty Name="Manager_First_Name" ColumnName="Manager_First_Name" />
-                <ScalarProperty Name="Manager_Ident" ColumnName="Manager_Ident" />
-                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
-                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="Ident" ColumnName="Ident" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1556,24 +655,6 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatTiposPeriodoCMB" FunctionName="ASNModel.Store.CatTiposPeriodoCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatTiposPeriodoCMB_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatTiposPeriodoSel" FunctionName="ASNModel.Store.CatTiposPeriodoSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatTiposPeriodoSel_Result">
-                <ScalarProperty Name="TipoPeriodoId" ColumnName="TipoPeriodoId" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatTiposPeriodoSi" FunctionName="ASNModel.Store.CatTiposPeriodoSi" />
-          <FunctionImportMapping FunctionImportName="CatTiposPeriodoSu" FunctionName="ASNModel.Store.CatTiposPeriodoSu" />
           <FunctionImportMapping FunctionImportName="CatUserInfoSel" FunctionName="ASNModel.Store.CatUserInfoSel">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatUserInfoSel_Result">
@@ -1597,100 +678,7 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CatRole">
-            <EntityTypeMapping TypeName="ASNModel.CatRole">
-              <MappingFragment StoreEntitySet="CatRole">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="CatRoleId" ColumnName="CatRoleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CatLogErrorSi" FunctionName="ASNModel.Store.CatLogErrorSi" />
-          <EntitySetMapping Name="CatPeriodosNomina">
-            <EntityTypeMapping TypeName="ASNModel.CatPeriodosNomina">
-              <MappingFragment StoreEntitySet="CatPeriodosNomina">
-                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
-                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
-                <ScalarProperty Name="MesId" ColumnName="MesId" />
-                <ScalarProperty Name="AnioId" ColumnName="AñoId" />
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
-                <ScalarProperty Name="CountryIdents" ColumnName="CountryIdents" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="FechaCaptura" ColumnName="FechaCaptura" />
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="TipoPeriodo" ColumnName="TipoPeriodo" />
-                </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatConcecutivoPeriodicidad">
-            <EntityTypeMapping TypeName="ASNModel.CatConcecutivoPeriodicidad">
-              <MappingFragment StoreEntitySet="CatConcecutivoPeriodicidad">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
-                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatConcecutivoPeriodos">
-            <EntityTypeMapping TypeName="ASNModel.CatConcecutivoPeriodos">
-              <MappingFragment StoreEntitySet="CatConcecutivoPeriodos">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
-                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
-                <ScalarProperty Name="MesId" ColumnName="MesId" />
-                <ScalarProperty Name="AnioId" ColumnName="AñoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatMeses">
-            <EntityTypeMapping TypeName="ASNModel.CatMeses">
-              <MappingFragment StoreEntitySet="CatMeses">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="MesId" ColumnName="MesId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CatMesesNominaSel" FunctionName="ASNModel.Store.CatMesesNominaSel">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatMesesNominaSel_Result">
@@ -1729,52 +717,8 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ASNModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ASNModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="CatConcecutivoPeriodicidadSel" FunctionName="ASNModel.Store.CatConcecutivoPeriodicidadSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatConcecutivoPeriodicidadSel_Result">
-                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
-                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatMesesNominaSi" FunctionName="ASNModel.Store.CatMesesNominaSi" />
           <FunctionImportMapping FunctionImportName="CatMesesNominaSu" FunctionName="ASNModel.Store.CatMesesNominaSu" />
-          <EntitySetMapping Name="CatAniosNomina">
-            <EntityTypeMapping TypeName="ASNModel.CatAniosNomina">
-              <MappingFragment StoreEntitySet="CatAniosNomina">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatMesesNomina">
-            <EntityTypeMapping TypeName="ASNModel.CatMesesNomina">
-              <MappingFragment StoreEntitySet="CatMesesNomina">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="MesId" ColumnName="MesId" />
-                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CatAniosNominaSi" FunctionName="ASNModel.Store.CatAniosNominaSi" />
           <FunctionImportMapping FunctionImportName="CatAniosNominaSel" FunctionName="ASNModel.Store.CatAniosNominaSel" >
             <ResultMapping>
@@ -1804,22 +748,68 @@ warning 6002: The table/view 'ASN.app620.CatEmployeeCCMSVw' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CatLogError">
-            <EntityTypeMapping TypeName="ASNModel.CatLogError">
-              <MappingFragment StoreEntitySet="CatLogError">
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-                <ScalarProperty Name="Browser" ColumnName="Browser" />
-                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
-                <ScalarProperty Name="LogErrorMessage" ColumnName="LogErrorMessage" />
-                <ScalarProperty Name="LogErrorId" ColumnName="LogErrorId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodicidadSel" FunctionName="ASNModel.Store.CatConsecutivoPeriodicidadSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConsecutivoPeriodicidadSel_Result">
+                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
+                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodosSel" FunctionName="ASNModel.Store.CatConsecutivoPeriodosSel" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConsecutivoPeriodosSel_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
+                <ScalarProperty Name="MesId" ColumnName="MesId" />
+                <ScalarProperty Name="DescripcionMes" ColumnName="DescripcionMes" />
+                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
+                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
+                <ScalarProperty Name="DescripcionPeriodicidad" ColumnName="DescripcionPeriodicidad" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodosSi" FunctionName="ASNModel.Store.CatConsecutivoPeriodosSi" />
+          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodosSu" FunctionName="ASNModel.Store.CatConsecutivoPeriodosSu" />
+          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodicidadCMB" FunctionName="ASNModel.Store.CatConsecutivoPeriodicidadCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConsecutivoPeriodicidadCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatTiposPeriodoNominaCMB" FunctionName="ASNModel.Store.CatTiposPeriodoNominaCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatTiposPeriodoNominaCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatTiposPeriodoNominaSel" FunctionName="ASNModel.Store.CatTiposPeriodoNominaSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatTiposPeriodoNominaSel_Result">
+                <ScalarProperty Name="TipoPeriodoId" ColumnName="TipoPeriodoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatTiposPeriodoNominaSi" FunctionName="ASNModel.Store.CatTiposPeriodoNominaSi" />
+          <FunctionImportMapping FunctionImportName="CatTiposPeriodoNominaSu" FunctionName="ASNModel.Store.CatTiposPeriodoNominaSu" />
+          <FunctionImportMapping FunctionImportName="CatMesesFechasCMB" FunctionName="ASNModel.Store.CatMesesFechasCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatMesesFechasCMB_Result">
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -11,9 +11,10 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class CatTiposPeriodoSel_Result
+    public partial class CatConsecutivoPeriodicidadSel_Result
     {
-        public string TipoPeriodoId { get; set; }
-        public string Descripcion { get; set; }
+        public int ConsecutivoId { get; set; }
+        public string PeriodicidadNominaId { get; set; }
+        public bool Active { get; set; }
     }
 }

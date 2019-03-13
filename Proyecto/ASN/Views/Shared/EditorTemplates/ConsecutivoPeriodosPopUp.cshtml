@@ -1,0 +1,151 @@
+﻿@model  ASN.Models.CatConsecutivoPeriodosSel_Result
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="AnioId">Año</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.AnioId)
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetAniosCMB", "ConsecutivoPeriodos");
+                        });
+                    //.ServerFiltering(true);
+                })
+                    .Filter("contains")
+                    .OptionLabel("- Año - ")
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .Name("AnioId")
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="MesId">Mes</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.MesId)
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetMesCMB", "ConsecutivoPeriodos").Data("Anio");
+                        })
+                    .ServerFiltering(true);
+                })
+                    .Filter("contains")
+                    .OptionLabel("- Mes - ")
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .Name("MesId")
+                    .Events(x => x.Change("rellenaFechasMes").DataBound("validando"))
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                    .CascadeFrom("AnioId")
+            )
+        </div>
+        <div class="editor-label">
+            <label for="FechaInicioMes">Fecha Inicio Mes</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBox().Name("FechaInicioMes"))
+        </div>
+        <div class="editor-label">
+            <label for="FechaCierreMes">Fecha Cierre Mes</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBox().Name("FechaCierreMes"))
+        </div>
+        <div class="editor-label">
+            <label for="PeriodicidadNominaId">Tipo de concepto</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.PeriodicidadNominaId)
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetTipoDePeriodicidadCMB", "ConsecutivoPeriodos");
+                        });
+                    //.ServerFiltering(true);
+                })
+                    .Filter("contains")
+                    .OptionLabel("- Tipo de periodicidad - ")
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .Name("PeriodicidadNominaId")
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="ConsecutivoId">Consecutivo</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.ConsecutivoId)
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetConsecutivosPeriodicidadCMB", "ConsecutivoPeriodos").Data("tipoPerio");
+                        })
+                    .ServerFiltering(true);
+                    })
+                    .Filter("contains")
+                    .OptionLabel("- Consecutivo - ")
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .Name("ConsecutivoId")
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                    .CascadeFrom("PeriodicidadNominaId")
+                    .Events(x => x.DataBound("validando"))
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Descripcion">Fecha Inicio</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DatePicker()
+                    .Name("FechaInicio")
+                    .Format("yyyy-MM-dd")
+                    .ParseFormats(new string[] {
+                        "ddd, M/d/yyyy",
+                        "ddd, MM/dd/yyyy",
+                        "ddd, M/dd/yyyy",
+                        })
+                    .Min(DateTime.Now.AddMonths(-6))
+                    .Max(DateTime.Now)
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Descripcion">Fecha Cierre</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DatePicker()
+                    .Name("FechaCierre")
+                    .Format("yyyy-MM-dd")
+                    .ParseFormats(new string[] {
+                        "ddd, M/d/yyyy",
+                        "ddd, MM/dd/yyyy",
+                        "ddd, M/dd/yyyy",
+                        })
+                    .Min(DateTime.Now.AddMonths(-6))
+                    .Max(DateTime.Now)
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Active">Activo</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("Active")
+        </div>
+    </div>
+</div>

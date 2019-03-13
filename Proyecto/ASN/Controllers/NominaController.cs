@@ -108,7 +108,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatMesesCMB().ToList();
+                    lstCMB = ctx.CatMesesCMB(0).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);

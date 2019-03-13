@@ -10,23 +10,18 @@
 namespace ASN.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CatConcecutivoPeriodos
+    public partial class CatConsecutivoPeriodosSel_Result
     {
+        public string Ident { get; set; }
         public int AnioId { get; set; }
         public int MesId { get; set; }
+        public string DescripcionMes { get; set; }
         public int ConsecutivoId { get; set; }
         public string PeriodicidadNominaId { get; set; }
-        public System.DateTime FechaInicio { get; set; }
-        public System.DateTime FechaCierre { get; set; }
+        public string DescripcionPeriodicidad { get; set; }
         public bool Active { get; set; }
-        public int CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<System.DateTime> DeactivatedDate { get; set; }
-        public Nullable<int> DeactivatedBy { get; set; }
-        public int LastModifiedBy { get; set; }
-        public System.DateTime LastModifiedDate { get; set; }
-        public string LastModifiedFromPCName { get; set; }
+        public string FechaInicio { get; set; }
+        public string FechaCierre { get; set; }
     }
 }

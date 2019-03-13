@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <label>Catálogo de periodos consecutivos</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @(Html.Kendo().Grid<ASN.Models.CatConsecutivoPeriodosSel_Result>()
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(c => c.Ident).Title("id").Visible(true).Filterable(false).Width(50);
+                        //columns.Bound(c => c.AnioId).Width(150).Title("Descripción");
+                        columns.ForeignKey(c => c.AnioId, (System.Collections.IEnumerable)ViewData["AniosCMB"], "Ident", "Valor").Width(125).Title("Año");
+                        columns.ForeignKey(c => c.MesId, (System.Collections.IEnumerable)ViewData["MesCMB"], "Ident", "Valor").Width(125).Title("Mes");
+                        columns.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Ident", "Valor").Width(125).Title("Tipo de peridicidad");
+                        columns.ForeignKey(c => c.ConsecutivoId, (System.Collections.IEnumerable)ViewData["ConsecutivosPeriodo"], "Ident", "Valor").Width(125).Title("Consecutivo");
+                        columns.Bound(c => c.FechaInicio).Width(150).Title("FechaInicio");
+                        columns.Bound(c => c.FechaCierre).Width(150).Title("FechaCierre");
+                        //columns.Bound(c => c.EID).Width(75).Title("s");
+                        //columns.Bound(c => c.Nombre).Width(175).Title("Name");
+                        //columns.Bound(c => c.Locacion).Width(150).Title("Locacion");
+                        columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
+                        columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
+                    }
+                    )
+                    .ToolBar(toolBar =>
+                    {
+                        toolBar.Create().Text("Nuevo");
+                        //toolBar.Save();
+                        toolBar.Excel().Text("Exportar a excel");
+                    })
+                    .Excel(ex => ex.AllPages(true))
+                    .HtmlAttributes(new { style = "height: 700px;" })
+                    .Scrollable(sorteable => sorteable.Virtual(false))
+                    .Sortable()
+                    .Resizable(c => c.Columns(true))
+                    //.Editable(editable => editable.Mode(GridEditMode.InCell))
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConsecutivoPeriodosPopUp"))
+                    .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
+                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Batch(true)
+                        .ServerOperation(false)
+                        .Model(model =>
+                        {
+                            model.Id(c => c.Ident);
+                            model.Field(c => c.AnioId).Editable(true);
+                            model.Field(c => c.MesId).Editable(true);
+                            model.Field(c => c.PeriodicidadNominaId).Editable(true);
+                            model.Field(c => c.ConsecutivoId).Editable(true);
+                            model.Field(c => c.FechaInicio).Editable(true);
+                            model.Field(c => c.FechaCierre).Editable(true);
+                            model.Field(c => c.Active).Editable(true).DefaultValue(true);
+                        })
+                        .Read(read => read.Action("GetConsecutivoPeriodos", "ConsecutivoPeriodos"))
+                        .Update(update => update.Action("UpdateConsecutivoPeriodos", "ConsecutivoPeriodos").Type(HttpVerbs.Post).Data("fechasValor"))
+                        .Create(create => create.Action("CreateConsecutivoPeriodos", "ConsecutivoPeriodos").Type(HttpVerbs.Post).Data("fechasValor"))
+                        .PageSize(10)
+                    .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
+                    )
+                    .Navigatable()
+                    .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(true)
+                        .ButtonCount(5)
+                        .Numeric(true)
+                        .PreviousNext(true)
+                    .Messages(messages =>
+                    {
+                        messages.ItemsPerPage("Registros por página");
+                        messages.Empty("Sin información para mostrar");
+                        messages.First("Primera");
+                        messages.Page("Página");
+                        messages.Last("Última");
+                        messages.Previous("Anterior");
+                        messages.Next("Siguiente");
+                        messages.Refresh("Actualizar");
+                        messages.Of("De");
+                        messages.MorePages("Mas páginas");
+                        //messages.Display("Prueba");
+                        messages.Display("{0} a {1} de {2}");
+                    })
+                    )
+                )
+            </div>
+        </div>
+    </div>
+    <script>
+        var urlFechasMes = '@Url.Action("GetFechasMes","ConsecutivoPeriodos")';
+    </script>
+}
+else
+{
+    <p>You are not logged in</p>
+}
+
+@Scripts.Render("~/bundles/ConsecutivosPeriodos")

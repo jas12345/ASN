@@ -10,19 +10,11 @@
 namespace ASN.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CatTiposPeriodo
+    public partial class CatTiposPeriodoNominaSel_Result
     {
         public string TipoPeriodoId { get; set; }
         public string Descripcion { get; set; }
         public bool Active { get; set; }
-        public int CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<System.DateTime> DeactivatedDate { get; set; }
-        public Nullable<int> DeactivatedBy { get; set; }
-        public int LastModifiedBy { get; set; }
-        public System.DateTime LastModifiedDate { get; set; }
-        public string LastModifiedFromPCName { get; set; }
     }
 }
