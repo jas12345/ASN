@@ -160,9 +160,6 @@
       <DependentUpon>ASN.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Authentication.cs" />
-    <Compile Include="Models\CatAniosNomina.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CatAniosNominaCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -172,16 +169,7 @@
     <Compile Include="Models\CatClientCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatConcecutivoPeriodicidad.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CatConcecutivoPeriodicidadSel_Result.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatConcecutivoPeriodos.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatConcepto.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatConceptosCMB_Result.cs">
@@ -190,37 +178,25 @@
     <Compile Include="Models\CatConceptosSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatConsecutivoPeriodicidadCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatConsecutivoPeriodicidadSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatConsecutivoPeriodosSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatCountryCMB_Result.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatEmployeeCCMSVw.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatEstatusConceptos.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatLogError.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatMeses.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatMesesCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatMesesNomina.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CatMesesNominaSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatParametroConceptos.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CatParametroConceptosCMB_Result.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatPeriodicidadNomina.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatPeriodicidadNominaCMB_Result.cs">
@@ -229,31 +205,19 @@
     <Compile Include="Models\CatPeriodicidadNominaSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatPeriodosNomina.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CatProgramCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatRelUserRoleSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatRole.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatTipoConceptos.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CatTipoConceptosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatTiposPeriodo.cs">
+    <Compile Include="Models\CatTiposPeriodoNominaCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatTiposPeriodoCMB_Result.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CatTiposPeriodoSel_Result.cs">
+    <Compile Include="Models\CatTiposPeriodoNominaSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatUserInfoSel_Result.cs">
@@ -262,12 +226,6 @@
     <Compile Include="Models\ELAViewModel.cs" />
     <Compile Include="Models\LogError.cs" />
     <Compile Include="Models\MyCustomIdentity.cs" />
-    <Compile Include="Models\RelConceptoPai.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RelUserRole.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

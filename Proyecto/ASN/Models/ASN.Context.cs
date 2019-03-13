@@ -27,26 +27,7 @@ namespace ASN.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CatConcepto> CatConceptos { get; set; }
-        public virtual DbSet<RelConceptoPai> RelConceptoPais { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<CatEstatusConceptos> CatEstatusConceptos { get; set; }
-        public virtual DbSet<CatParametroConceptos> CatParametroConceptos { get; set; }
-        public virtual DbSet<CatPeriodicidadNomina> CatPeriodicidadNomina { get; set; }
-        public virtual DbSet<CatTipoConceptos> CatTipoConceptos { get; set; }
-        public virtual DbSet<RelUserRole> RelUserRole { get; set; }
-        public virtual DbSet<CatEmployeeCCMSVw> CatEmployeeCCMSVw { get; set; }
-        public virtual DbSet<CatRole> CatRole { get; set; }
-        public virtual DbSet<CatPeriodosNomina> CatPeriodosNomina { get; set; }
-        public virtual DbSet<CatConcecutivoPeriodicidad> CatConcecutivoPeriodicidad { get; set; }
-        public virtual DbSet<CatConcecutivoPeriodos> CatConcecutivoPeriodos { get; set; }
-        public virtual DbSet<CatMeses> CatMeses { get; set; }
-        public virtual DbSet<CatAniosNomina> CatAniosNomina { get; set; }
-        public virtual DbSet<CatMesesNomina> CatMesesNomina { get; set; }
-        public virtual DbSet<CatLogError> CatLogError { get; set; }
-        public virtual DbSet<CatConsecutivoPeriodicidad> CatConsecutivoPeriodicidad { get; set; }
-        public virtual DbSet<CatConsecutivoPeriodos> CatConsecutivoPeriodos { get; set; }
-        public virtual DbSet<CatTiposPeriodoNomina> CatTiposPeriodoNomina { get; set; }
     
         public virtual ObjectResult<CatClientCMB_Result> CatClientCMB()
         {
