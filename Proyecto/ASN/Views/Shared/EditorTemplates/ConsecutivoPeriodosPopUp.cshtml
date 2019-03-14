@@ -40,14 +40,14 @@
                             read.Action("GetMesCMB", "ConsecutivoPeriodos").Data("Anio");
                         })
                     .ServerFiltering(true);
-                })
+                    })
                     .Filter("contains")
                     .OptionLabel("- Mes - ")
                     .DataValueField("Ident")
                     .DataTextField("Valor")
                     .Name("MesId")
                     .Events(x => x.Change("rellenaFechasMes").DataBound("validando"))
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em"})
                     .CascadeFrom("AnioId")
             )
         </div>
@@ -74,14 +74,14 @@
                         {
                             read.Action("GetTipoDePeriodicidadCMB", "ConsecutivoPeriodos");
                         });
-                    //.ServerFiltering(true);
-                })
+                        //.ServerFiltering(true);
+                    })
                     .Filter("contains")
                     .OptionLabel("- Tipo de periodicidad - ")
                     .DataValueField("Ident")
                     .DataTextField("Valor")
                     .Name("PeriodicidadNominaId")
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" ,validationMessage = "Este campo es requerido." })
             )
         </div>
         <div class="editor-label">

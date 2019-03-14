@@ -1,6 +1,18 @@
 ﻿
 
 function edit(e) {
+
+    var validator = e.container.data('kendoValidator');
+
+    $('input[name="Descripcion"]').blur(function () {
+        validator.validateInput(this);
+    });
+
+    $('input[name="TipoConcepto"]').change(function () {
+        validator.validateInput(this);
+    });
+
+
     if (e.model.isNew() === false) {
         //var DispositionName = $("#CatProyectosId").data("kendoDropDownList");
         //var proyecto = $("#Proyecto").data("kendoDropDownList");

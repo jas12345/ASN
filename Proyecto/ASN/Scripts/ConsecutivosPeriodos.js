@@ -5,6 +5,24 @@ function edit(e) {
     var meses = $("#MesId").data("kendoDropDownList");
     var tipoPerio = $("#PeriodicidadNominaId").data("kendoDropDownList");
 
+    var validator = e.container.data('kendoValidator');
+
+    $('input[name="AnioId"]').change(function () {
+        validator.validateInput(this);
+    });
+
+    $('input[name="MesId"]').change(function () {
+        validator.validateInput(this);
+    });
+
+    $('input[name="PeriodicidadNominaId"]').change(function () {
+        validator.validateInput(this);
+    });
+
+    $('input[name="ConsecutivoId"]').change(function () {
+        validator.validateInput(this);
+    });
+
     if (e.model.isNew() === false) {
         anios.enable(false);
         meses.enable(false);
@@ -175,8 +193,8 @@ function tipoPerio() {
 
 function fechasValor() {
     return {
-        fechainicio: $("#fechainicio").val(),
-        fechacierre: $("#fechaCierre").val()
+        fechainicio: $("#FechaInicio").val(),
+        fechacierre: $("#FechaCierre").val()
     };
 }
 
@@ -212,14 +230,6 @@ function rellenaFechasMes() {
             $("#FechaInicioMes").val(data[0].FechaInicio);
             $("#FechaCierreMes").val(data[0].FechaCierre);
 
-            if (editando === 0) {
-                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
-                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
-                //datePicker.value("2019-03-01");
-                fechaCierre.value(data[0].FechaCierre);
-                fechaInicio.value(data[0].FechaInicio);
-            }
-
             var FInicio = $("#FechaInicio").data("kendoDatePicker");
             var FCierre = $("#FechaCierre").data("kendoDatePicker");
 
@@ -232,6 +242,14 @@ function rellenaFechasMes() {
                 max: data[0].FechaCierre,
                 min: data[0].FechaInicio
             });
+
+            if (editando === 0) {
+                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
+                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
+                //datePicker.value("2019-03-01");
+                fechaCierre.value(data[0].FechaCierre);
+                fechaInicio.value(data[0].FechaInicio);
+            }
 
         }).fail(function (ex) {
             console.log("fail" + ex);

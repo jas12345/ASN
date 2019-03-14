@@ -43,10 +43,10 @@
                     </a>
                 </li>
                 @{
-                    @*if (User.IsInRole("Desarrollo"))
-            {
-                <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
-            }*@
+                if (User.IsInRole("Desarrollo"))
+                {
+                    <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+                }
 
                     @*if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("BadgeIn24DateCommitted"))
             {
@@ -173,9 +173,9 @@
                         <label id="contador"></label>
                     </div>*@
                 <div class="col-lg-1" style="margin-left: 50px; margin-top: -40px;">
-                    @*<a href="@Url.Action("Index","Inicio")">*@
+                    <a href="@Url.Action("Index","Inicio")">
                     <img src="@Url.Content("~/Content/images/logo.png")" , alt="Inicio" />
-                    @*</a>*@
+                    </a>
                 </div>
             </div>
             <br />
