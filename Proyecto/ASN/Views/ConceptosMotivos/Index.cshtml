@@ -36,7 +36,7 @@
                         .Sortable()
                         .Resizable(c => c.Columns(true))
                         //.Editable(editable => editable.Mode(GridEditMode.InCell))
-                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConceptosPopUp"))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConceptosMotivosPopUp"))
                         .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                         .DataSource(dataSource => dataSource
@@ -50,9 +50,9 @@
                                 model.Field(c => c.Descripcion).Editable(true);
                                 model.Field(c => c.Active).Editable(true).DefaultValue(true);
                             })
-                            .Read(read => read.Action("GetConceptos", "Conceptos"))
-                            .Update(update => update.Action("UpdateConcepto", "Conceptos").Type(HttpVerbs.Post))
-                            .Create(create => create.Action("CreateConcepto", "Conceptos").Type(HttpVerbs.Post))
+                            .Read(read => read.Action("GetConceptosMotivos", "ConceptosMotivos"))
+                            .Update(update => update.Action("UpdateConceptoMotivos", "ConceptosMotivos").Type(HttpVerbs.Post))
+                            .Create(create => create.Action("CreateConceptoMotivos", "ConceptosMotivos").Type(HttpVerbs.Post))
                             .PageSize(10)
                         .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
                         )

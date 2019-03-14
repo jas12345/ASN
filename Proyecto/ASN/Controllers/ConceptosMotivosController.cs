@@ -71,7 +71,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateConcepto([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosMotivosSel_Result> profiles)
+        public ActionResult CreateConceptoMotivos([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosMotivosSel_Result> profiles)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateConcepto ([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosMotivosSel_Result> profiles)
+        public ActionResult UpdateConceptoMotivos ([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosMotivosSel_Result> profiles)
         {
             try
             {
