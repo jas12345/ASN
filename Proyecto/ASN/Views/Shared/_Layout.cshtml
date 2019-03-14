@@ -43,10 +43,10 @@
                     </a>
                 </li>
                 @{
-                    @*if (User.IsInRole("Desarrollo"))
-            {
-                <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
-            }*@
+                if (User.IsInRole("Desarrollo"))
+                {
+                    <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+                }
 
                     @*if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("BadgeIn24DateCommitted"))
             {
