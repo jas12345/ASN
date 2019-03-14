@@ -5,6 +5,24 @@ function edit(e) {
     var meses = $("#MesId").data("kendoDropDownList");
     var tipoPerio = $("#PeriodicidadNominaId").data("kendoDropDownList");
 
+    var validator = e.container.data('kendoValidator');
+
+    $('input[name="AnioId"]').change(function () {
+        validator.validateInput(this);
+    });
+
+    $('input[name="MesId"]').change(function () {
+        validator.validateInput(this);
+    });
+
+    $('input[name="PeriodicidadNominaId"]').change(function () {
+        validator.validateInput(this);
+    });
+
+    $('input[name="ConsecutivoId"]').change(function () {
+        validator.validateInput(this);
+    });
+
     if (e.model.isNew() === false) {
         anios.enable(false);
         meses.enable(false);

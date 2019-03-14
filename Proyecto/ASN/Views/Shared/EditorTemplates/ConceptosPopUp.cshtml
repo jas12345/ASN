@@ -11,7 +11,7 @@
             <label for="Descripcion">Descripción</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.Descripcion))
+            @(Html.Kendo().TextBoxFor(x => x.Descripcion).HtmlAttributes(new { required = "required"}))
         </div>
         <div class="editor-label">
             <label for="TipoConcepto">Tipo de concepto</label>

@@ -74,14 +74,14 @@
                         {
                             read.Action("GetTipoDePeriodicidadCMB", "ConsecutivoPeriodos");
                         });
-                    //.ServerFiltering(true);
-                })
+                        //.ServerFiltering(true);
+                    })
                     .Filter("contains")
                     .OptionLabel("- Tipo de periodicidad - ")
                     .DataValueField("Ident")
                     .DataTextField("Valor")
                     .Name("PeriodicidadNominaId")
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" ,validationMessage = "Este campo es requerido." })
             )
         </div>
         <div class="editor-label">
