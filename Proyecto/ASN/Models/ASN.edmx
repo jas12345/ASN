@@ -34,6 +34,20 @@
         </Function>
         <Function Name="CatClientCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConceptosMotivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConceptosMotivosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConceptosMotivosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatConceptosMotivosSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="ConceptoMotivoId" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="CatConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -418,6 +432,20 @@
             <Parameter Name="MesId" Mode="In" Type="Int32" />
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatConceptosMotivoCMB" ReturnType="Collection(ASNModel.CatConceptosMotivoCMB_Result)" />
+          <FunctionImport Name="CatConceptosMotivosSel" ReturnType="Collection(ASNModel.CatConceptosMotivosSel_Result)" />
+          <FunctionImport Name="CatConceptosMotivosSi">
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConceptosMotivosSu">
+            <Parameter Name="ConceptoMotivoId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -487,6 +515,9 @@
           <Property Type="Boolean" Name="Active" Nullable="false" />
           <Property Type="String" Name="AnioMesId" Nullable="true" MaxLength="6" />
           <Property Type="Int32" Name="AnioId" Nullable="false" />
+          <Property Type="String" Name="FechaInicioAnio" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FechaCierreAnio" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DescripcionMes" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -551,6 +582,15 @@
         <ComplexType Name="CatMesesFechasCMB_Result">
           <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosMotivoCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosMotivosSel_Result">
+          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -688,6 +728,9 @@
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="AnioMesId" ColumnName="AnioMesId" />
                 <ScalarProperty Name="AnioId" ColumnName="AnioId" />
+                <ScalarProperty Name="FechaInicioAnio" ColumnName="FechaInicioAnio" />
+                <ScalarProperty Name="FechaCierreAnio" ColumnName="FechaCierreAnio" />
+                <ScalarProperty Name="DescripcionMes" ColumnName="DescripcionMes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -810,6 +853,25 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosMotivoCMB" FunctionName="ASNModel.Store.CatConceptosMotivoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosMotivoCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosMotivosSel" FunctionName="ASNModel.Store.CatConceptosMotivosSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosMotivosSel_Result">
+                <ScalarProperty Name="ConceptoMotivoId" ColumnName="ConceptoMotivoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosMotivosSi" FunctionName="ASNModel.Store.CatConceptosMotivosSi" />
+          <FunctionImportMapping FunctionImportName="CatConceptosMotivosSu" FunctionName="ASNModel.Store.CatConceptosMotivosSu" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

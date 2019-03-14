@@ -133,6 +133,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ConceptosMotivosController.cs" />
     <Compile Include="Controllers\ConsecutivoPeriodosController.cs" />
     <Compile Include="Controllers\NominaController.cs" />
     <Compile Include="Controllers\ConceptosController.cs" />
@@ -174,6 +175,12 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatConceptosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatConceptosMotivoCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatConceptosMotivosSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatConceptosSel_Result.cs">
@@ -365,6 +372,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ConceptosMotivos.js" />
     <Content Include="Scripts\ConsecutivosPeriodos.js" />
     <Content Include="Scripts\Nominas.js" />
     <Content Include="Scripts\Conceptos.js" />
@@ -506,6 +514,8 @@
     <Content Include="Views\Shared\EditorTemplates\PeriodNominaPopUp.cshtml" />
     <Content Include="Views\ConsecutivoPeriodos\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ConsecutivoPeriodosPopUp.cshtml" />
+    <Content Include="Views\ConceptosMotivos\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ConceptosMotivosPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

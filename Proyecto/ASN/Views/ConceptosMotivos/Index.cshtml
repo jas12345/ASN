@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "MesesNomina";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,20 +9,17 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <label>Catálogo Meses de Nómina</label>
+                <label>Catálogo de conceptos</label>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                @(Html.Kendo().Grid<ASN.Models.CatMesesNominaSel_Result>()
+                @(Html.Kendo().Grid<ASN.Models.CatConceptosMotivosSel_Result>()
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Bound(c => c.AnioMesId).Title("AñoMesId").Visible(true).Filterable(false).Width(50);
-                            columns.Bound(c => c.AnioId).Title("Año").Visible(true).Filterable(false).Width(50);
-                            columns.Bound(c => c.DescripcionMes).Title("Mes").Visible(true).Filterable(false).Width(50);
-                            columns.Bound(c => c.FechaInicio).Width(150).Title("Fecha Inicio").Format("{0:yyyy-MM-dd}").Filterable(false);
-                            columns.Bound(c => c.FechaCierre).Width(150).Title("Fecha Cierre").Format("{0:yyyy-MM-dd}").Filterable(false);
+                            columns.Bound(c => c.ConceptoMotivoId).Title("id").Visible(true).Filterable(false).Width(50);
+                            columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
                             columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
                             columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
                         }
@@ -30,17 +27,16 @@
                         .ToolBar(toolBar =>
                         {
                             toolBar.Create().Text("Nuevo");
-                            //toolBar.Save();
-                            toolBar.Excel().Text("Exportar a excel");
-                        }
-                        )
+                        //toolBar.Save();
+                        toolBar.Excel().Text("Exportar a excel");
+                        })
                         .Excel(ex => ex.AllPages(true))
                         .HtmlAttributes(new { style = "height: 700px;" })
                         .Scrollable(sorteable => sorteable.Virtual(false))
                         .Sortable()
                         .Resizable(c => c.Columns(true))
                         //.Editable(editable => editable.Mode(GridEditMode.InCell))
-                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("MesNominaPopUp"))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConceptosPopUp"))
                         .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                         .DataSource(dataSource => dataSource
@@ -49,16 +45,14 @@
                             .ServerOperation(false)
                             .Model(model =>
                             {
-                                model.Id(c => c.AnioMesId);
-                                model.Field(c => c.AnioId);
-                                model.Field(c => c.MesId);
-                                model.Field(c => c.FechaInicio).Editable(false);
-                                model.Field(c => c.FechaCierre).Editable(true);
+                                model.Id(c => c.ConceptoMotivoId);
+                                model.Field(c => c.ConceptoMotivoId).Editable(false);
+                                model.Field(c => c.Descripcion).Editable(true);
                                 model.Field(c => c.Active).Editable(true).DefaultValue(true);
                             })
-                            .Read(read => read.Action("GetMesesNomina", "Nomina"))
-                            .Update(update => update.Action("UpdateMesNomina", "Nomina").Type(HttpVerbs.Post).Data("accionado"))
-                            .Create(create => create.Action("CreateMesNomina", "Nomina").Type(HttpVerbs.Post).Data("accionado"))
+                            .Read(read => read.Action("GetConceptos", "Conceptos"))
+                            .Update(update => update.Action("UpdateConcepto", "Conceptos").Type(HttpVerbs.Post))
+                            .Create(create => create.Action("CreateConcepto", "Conceptos").Type(HttpVerbs.Post))
                             .PageSize(10)
                         .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
                         )
@@ -96,4 +90,4 @@ else
     <p>You are not logged in</p>
 }
 
-@Scripts.Render("~/bundles/MesesNomina")
+@Scripts.Render("~/bundles/ConceptosMotivos")
