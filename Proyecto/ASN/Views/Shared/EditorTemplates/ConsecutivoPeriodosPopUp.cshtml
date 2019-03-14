@@ -40,14 +40,14 @@
                             read.Action("GetMesCMB", "ConsecutivoPeriodos").Data("Anio");
                         })
                     .ServerFiltering(true);
-                })
+                    })
                     .Filter("contains")
                     .OptionLabel("- Mes - ")
                     .DataValueField("Ident")
                     .DataTextField("Valor")
                     .Name("MesId")
                     .Events(x => x.Change("rellenaFechasMes").DataBound("validando"))
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em"})
                     .CascadeFrom("AnioId")
             )
         </div>

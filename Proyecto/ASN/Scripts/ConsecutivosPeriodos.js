@@ -175,8 +175,8 @@ function tipoPerio() {
 
 function fechasValor() {
     return {
-        fechainicio: $("#fechainicio").val(),
-        fechacierre: $("#fechaCierre").val()
+        fechainicio: $("#FechaInicio").val(),
+        fechacierre: $("#FechaCierre").val()
     };
 }
 
@@ -212,14 +212,6 @@ function rellenaFechasMes() {
             $("#FechaInicioMes").val(data[0].FechaInicio);
             $("#FechaCierreMes").val(data[0].FechaCierre);
 
-            if (editando === 0) {
-                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
-                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
-                //datePicker.value("2019-03-01");
-                fechaCierre.value(data[0].FechaCierre);
-                fechaInicio.value(data[0].FechaInicio);
-            }
-
             var FInicio = $("#FechaInicio").data("kendoDatePicker");
             var FCierre = $("#FechaCierre").data("kendoDatePicker");
 
@@ -232,6 +224,14 @@ function rellenaFechasMes() {
                 max: data[0].FechaCierre,
                 min: data[0].FechaInicio
             });
+
+            if (editando === 0) {
+                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
+                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
+                //datePicker.value("2019-03-01");
+                fechaCierre.value(data[0].FechaCierre);
+                fechaInicio.value(data[0].FechaInicio);
+            }
 
         }).fail(function (ex) {
             console.log("fail" + ex);
