@@ -1,4 +1,6 @@
-﻿function edit(e) {
+﻿var editando = 0;
+
+function edit(e) {
     if (e.model.isNew() === false) {
         $("#AnioId").attr("disabled", "disabled");
         $("#MesId").attr("disabled", "disabled");
@@ -212,15 +214,14 @@ function Anio() {
     };
 }
 
+
 function rellenaFechasAnio() {
     var anioId = 0;
-    var mesId = 0;
 
     anioId = $("#AnioId").val();
-    mesId = $("#MesId").val();
 
-    if (anioId != 0 && mesId != 0) {
-        $.post(urlFechasMes + "/?mesId=" + mesId + "&anioId=" + anioId, function (data) {
+    if (anioId != 0) {
+        $.post(urlFechasAnio + "/?anioId=" + anioId, function (data) {
             //console.log(data);
             $("#FechaInicioAnio").val(data[0].FechaInicio);
             $("#FechaCierreAnio").val(data[0].FechaCierre);

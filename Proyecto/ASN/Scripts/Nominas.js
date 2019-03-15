@@ -255,10 +255,9 @@ function rellenaFechasAnio() {
     var mesId = 0;
 
     anioId = $("#AnioId").val();
-    mesId = $("#MesId").val();
 
     if (anioId != 0 && mesId != 0) {
-        $.post(urlFechasMes + "/?mesId=" + mesId + "&anioId=" + anioId, function (data) {
+        $.post(urlFechasMes + "/?anioId=" + anioId, function (data) {
             //console.log(data);
             $("#FechaInicioAnio").val(data[0].FechaInicio);
             $("#FechaCierreAnio").val(data[0].FechaCierre);
