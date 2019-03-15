@@ -14,8 +14,8 @@ namespace ASN.Models
     public partial class CatMesesNominaSel_Result
     {
         public int MesId { get; set; }
-        public System.DateTime FechaInicio { get; set; }
-        public System.DateTime FechaCierre { get; set; }
+        public string FechaInicio { get; set; }
+        public string FechaCierre { get; set; }
         public bool Active { get; set; }
         public string AnioMesId { get; set; }
         public int AnioId { get; set; }

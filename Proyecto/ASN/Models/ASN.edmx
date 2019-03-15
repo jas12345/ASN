@@ -450,7 +450,7 @@
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatAnioFechasCMB" ReturnType="Collection(ASNModel.CatAnioFechasCMB_Result)">
-            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+          <Parameter Name="AnioId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -516,8 +516,8 @@
         </ComplexType>
         <ComplexType Name="CatMesesNominaSel_Result">
           <Property Type="Int32" Name="MesId" Nullable="false" />
-          <Property Type="DateTime" Name="FechaInicio" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="FechaCierre" Nullable="false" Precision="23" />
+          <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
           <Property Type="String" Name="AnioMesId" Nullable="true" MaxLength="6" />
           <Property Type="Int32" Name="AnioId" Nullable="false" />
