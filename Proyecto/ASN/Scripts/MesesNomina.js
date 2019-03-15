@@ -199,12 +199,55 @@ function dateFilter(e) {
     });
 }
 
+function validandoCatMeses() {
+    if (editando === 1) {
+        var AnioId = $("#AnioId").data("kendoDropDownList");
+        AnioId.enable(false);
+    }
+}
 
-//$(document).ready(function () {
-//    //OcultaSave();
-//    setTimeout(function () {
-//        var Hoy = kendo.toString(new Date(), 'yyyy-MM-dd');
-//        $("#FechaInicio").data('kendoDatePicker').value(Hoy);
-//        $("#FechaCierre").data('kendoDatePicker').value(Hoy);
-//    }, 0);
-//});
+function Anio() {
+    return {
+        anioId: $("#AnioId").val()
+    };
+}
+
+function rellenaFechasAnio() {
+    var anioId = 0;
+    var mesId = 0;
+
+    anioId = $("#AnioId").val();
+    mesId = $("#MesId").val();
+
+    if (anioId != 0 && mesId != 0) {
+        $.post(urlFechasMes + "/?mesId=" + mesId + "&anioId=" + anioId, function (data) {
+            //console.log(data);
+            $("#FechaInicioAnio").val(data[0].FechaInicio);
+            $("#FechaCierreAnio").val(data[0].FechaCierre);
+
+            var FInicio = $("#FechaInicio").data("kendoDatePicker");
+            var FCierre = $("#FechaCierre").data("kendoDatePicker");
+
+            FInicio.setOptions({
+                max: data[0].FechaCierre,
+                min: data[0].FechaInicio
+            });
+
+            FCierre.setOptions({
+                max: data[0].FechaCierre,
+                min: data[0].FechaInicio
+            });
+
+            if (editando === 0) {
+                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
+                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
+                //datePicker.value("2019-03-01");
+                fechaCierre.value(data[0].FechaCierre);
+                fechaInicio.value(data[0].FechaInicio);
+            }
+
+        }).fail(function (ex) {
+            console.log("fail" + ex);
+        });
+    }
+}

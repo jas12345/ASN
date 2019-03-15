@@ -15,6 +15,9 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Function Name="CatAnioFechasCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatAniosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -446,6 +449,9 @@
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatAnioFechasCMB" ReturnType="Collection(ASNModel.CatAnioFechasCMB_Result)">
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -591,6 +597,10 @@
           <Property Type="Int32" Name="ConceptoMotivoId" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatAnioFechasCMB_Result">
+          <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -872,6 +882,14 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatConceptosMotivosSi" FunctionName="ASNModel.Store.CatConceptosMotivosSi" />
           <FunctionImportMapping FunctionImportName="CatConceptosMotivosSu" FunctionName="ASNModel.Store.CatConceptosMotivosSu" />
+          <FunctionImportMapping FunctionImportName="CatAnioFechasCMB" FunctionName="ASNModel.Store.CatAnioFechasCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatAnioFechasCMB_Result">
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
