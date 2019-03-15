@@ -60,6 +60,15 @@ namespace ASN.Controllers
                 if (User.Identity.IsAuthenticated)
                 {
 
+                    using (ASNContext context = new ASNContext())
+                    {
+                        context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                        //ViewData["TipoPeriodicidad"] = context.CatPeriodicidadNominaCMB().ToList();
+                        //ViewData["ConsecutivosPeriodo"] = context.CatConsecutivoPeriodicidadCMB("All").ToList();
+                        ViewData["AniosCMB"] = context.CatAniosNominaCMB().ToList();
+                        ViewData["MesCMB"] = context.CatMesesCMB(0).ToList();
+                    }
+
                     return View();
                 }
                 else
@@ -99,22 +108,48 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetMesesCMB()
+        public JsonResult GetMesesCMB(int anioId)
         {
             try
             {
                 var lstCMB = new List<CatMesesCMB_Result>();
+                //MyCustomIdentity usuario = (MyCustomIdentity) User.Identity;
+
+                //int locIdUser = usuario.UserInfo.Location_Ident.Value;
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatMesesCMB(0).ToList();
+                    lstCMB = ctx.CatMesesCMB(anioId).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetFechasAnio(int anioId)
+        {
+            try
+            {
+                var lstCMB = new List<CatAnioFechasCMB_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.CatAnioFechasCMB(anioId).ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);

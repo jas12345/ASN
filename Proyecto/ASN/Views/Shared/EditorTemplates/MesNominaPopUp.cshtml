@@ -25,6 +25,7 @@
                 .DataValueField("Ident")
                 .DataTextField("Valor")
                 .Name("AnioId")
+                .Events(x => x.Change("rellenaFechasAnio").DataBound("validandoCatMeses"))
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
                 //.Events(e => e.Change("AnioNominaChange")
             )
@@ -56,8 +57,9 @@
                 {
                     source.Read(read =>
                     {
-                        read.Action("GetMesesCMB", "Nomina");
-                    });
+                        read.Action("GetMesesCMB", "Nomina").Data("Anio");
+                    })
+                    .ServerFiltering(true);
                 })
                 .Filter("contains")
                 .OptionLabel("- Mes - ")

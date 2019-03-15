@@ -751,5 +751,14 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosMotivosSu", conceptoMotivoIdParameter, descripcionParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
+    
+        public virtual ObjectResult<CatAnioFechasCMB_Result> CatAnioFechasCMB(Nullable<int> anioId)
+        {
+            var anioIdParameter = anioId.HasValue ?
+                new ObjectParameter("AnioId", anioId) :
+                new ObjectParameter("AnioId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAnioFechasCMB_Result>("CatAnioFechasCMB", anioIdParameter);
+        }
     }
 }

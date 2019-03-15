@@ -142,6 +142,7 @@
     <Compile Include="Controllers\PeriodicidadNominaController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
+    <Compile Include="Controllers\TiposPeriodoNominaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -162,6 +163,9 @@
       <DependentUpon>ASN.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Authentication.cs" />
+    <Compile Include="Models\CatAnioFechasCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatAniosNominaCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -370,10 +374,12 @@
       <DependentUpon>ASN.edmx</DependentUpon>
       <LastGenOutput>ASN.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\AniosNomina.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ConceptosMotivos.js" />
     <Content Include="Scripts\ConsecutivosPeriodos.js" />
+    <Content Include="Scripts\MesesNomina.js" />
     <Content Include="Scripts\Nominas.js" />
     <Content Include="Scripts\Conceptos.js" />
     <Content Include="Scripts\DisableRMC.js" />
@@ -453,6 +459,7 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\shake.js" />
+    <Content Include="Scripts\TiposPeriodoNomina.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -516,6 +523,8 @@
     <Content Include="Views\Shared\EditorTemplates\ConsecutivoPeriodosPopUp.cshtml" />
     <Content Include="Views\ConceptosMotivos\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ConceptosMotivosPopUp.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TiposPeriodoNominaPopUp.cshtml" />
+    <Content Include="Views\TiposPeriodoNomina\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

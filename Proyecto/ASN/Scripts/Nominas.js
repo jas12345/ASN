@@ -208,3 +208,83 @@ function dateFilter(e) {
 //        $("#FechaCierre").data('kendoDatePicker').value(Hoy);
 //    }, 0);
 //});
+
+
+function rellenaFechasMes() {
+    var anioId = 0;
+    var mesId = 0;
+
+    anioId = $("#AnioId").val();
+    mesId = $("#MesId").val();
+
+    if (anioId != 0 && mesId != 0) {
+        $.post(urlFechasMes + "/?mesId=" + mesId + "&anioId=" + anioId, function (data) {
+            //console.log(data);
+            $("#FechaInicioMes").val(data[0].FechaInicio);
+            $("#FechaCierreMes").val(data[0].FechaCierre);
+
+            var FInicio = $("#FechaInicio").data("kendoDatePicker");
+            var FCierre = $("#FechaCierre").data("kendoDatePicker");
+
+            FInicio.setOptions({
+                max: data[0].FechaCierre,
+                min: data[0].FechaInicio
+            });
+
+            FCierre.setOptions({
+                max: data[0].FechaCierre,
+                min: data[0].FechaInicio
+            });
+
+            if (editando === 0) {
+                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
+                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
+                //datePicker.value("2019-03-01");
+                fechaCierre.value(data[0].FechaCierre);
+                fechaInicio.value(data[0].FechaInicio);
+            }
+
+        }).fail(function (ex) {
+            console.log("fail" + ex);
+        });
+    }
+}
+
+function rellenaFechasAnio() {
+    var anioId = 0;
+    var mesId = 0;
+
+    anioId = $("#AnioId").val();
+
+    if (anioId != 0 && mesId != 0) {
+        $.post(urlFechasMes + "/?anioId=" + anioId, function (data) {
+            //console.log(data);
+            $("#FechaInicioAnio").val(data[0].FechaInicio);
+            $("#FechaCierreAnio").val(data[0].FechaCierre);
+
+            var FInicio = $("#FechaInicio").data("kendoDatePicker");
+            var FCierre = $("#FechaCierre").data("kendoDatePicker");
+
+            FInicio.setOptions({
+                max: data[0].FechaCierre,
+                min: data[0].FechaInicio
+            });
+
+            FCierre.setOptions({
+                max: data[0].FechaCierre,
+                min: data[0].FechaInicio
+            });
+
+            if (editando === 0) {
+                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
+                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
+                //datePicker.value("2019-03-01");
+                fechaCierre.value(data[0].FechaCierre);
+                fechaInicio.value(data[0].FechaInicio);
+            }
+
+        }).fail(function (ex) {
+            console.log("fail" + ex);
+        });
+    }
+}
