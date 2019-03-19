@@ -17,7 +17,7 @@ namespace ASN.Models
         public int AnioId { get; set; }
         public int MesId { get; set; }
         public string DescripcionMes { get; set; }
-        public int ConsecutivoId { get; set; }
+        public string ConsecutivoId { get; set; }
         public string PeriodicidadNominaId { get; set; }
         public string DescripcionPeriodicidad { get; set; }
         public bool Active { get; set; }

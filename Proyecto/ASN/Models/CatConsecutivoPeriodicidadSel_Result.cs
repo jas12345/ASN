@@ -13,7 +13,7 @@ namespace ASN.Models
     
     public partial class CatConsecutivoPeriodicidadSel_Result
     {
-        public int ConsecutivoId { get; set; }
+        public string ConsecutivoId { get; set; }
         public string PeriodicidadNominaId { get; set; }
         public bool Active { get; set; }
     }

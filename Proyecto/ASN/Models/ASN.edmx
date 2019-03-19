@@ -74,7 +74,7 @@
         <Function Name="CatConsecutivoPeriodosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
           <Parameter Name="MesId" Type="int" Mode="In" />
-          <Parameter Name="ConsecutivoId" Type="int" Mode="In" />
+          <Parameter Name="ConsecutivoId" Type="varchar" Mode="In" />
           <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
           <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
           <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
@@ -84,7 +84,7 @@
         <Function Name="CatConsecutivoPeriodosSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
           <Parameter Name="MesId" Type="int" Mode="In" />
-          <Parameter Name="ConsecutivoId" Type="int" Mode="In" />
+          <Parameter Name="ConsecutivoId" Type="varchar" Mode="In" />
           <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
           <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
           <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
@@ -256,19 +256,6 @@
           <FunctionImport Name="CatParametroConceptosCMB" ReturnType="Collection(ASNModel.CatParametroConceptosCMB_Result)" />
           <FunctionImport Name="CatPeriodicidadNominaCMB" ReturnType="Collection(ASNModel.CatPeriodicidadNominaCMB_Result)" />
           <FunctionImport Name="CatPeriodicidadNominaSel" ReturnType="Collection(ASNModel.CatPeriodicidadNominaSel_Result)" />
-          <FunctionImport Name="CatPeriodicidadNominaSi">
-            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatPeriodicidadNominaSu">
-            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="Active" Mode="In" Type="Boolean" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="CatProgramCMB" ReturnType="Collection(ASNModel.CatProgramCMB_Result)" />
           <FunctionImport Name="CatRelUserRoleSel" ReturnType="Collection(ASNModel.CatRelUserRoleSel_Result)">
           <Parameter Name="CCMSID" Mode="In" Type="Int32" />
@@ -368,7 +355,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="CatConcecutivoPeriodicidadSel" ReturnType="Collection(ASNModel.CatConcecutivoPeriodicidadSel_Result)" />
           <FunctionImport Name="CatMesesNominaSi">
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
             <Parameter Name="MesId" Mode="In" Type="Int32" />
@@ -389,29 +375,6 @@
           <FunctionImport Name="CatAniosNominaCMB" ReturnType="Collection(ASNModel.CatAniosNominaCMB_Result)" />
           <FunctionImport Name="CatMesesCMB" ReturnType="Collection(ASNModel.CatMesesCMB_Result)" >
           <Parameter Name="AnioId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatConsecutivoPeriodicidadSel" ReturnType="Collection(ASNModel.CatConsecutivoPeriodicidadSel_Result)" />
-          <FunctionImport Name="CatConsecutivoPeriodosSel" ReturnType="Collection(ASNModel.CatConsecutivoPeriodosSel_Result)" />
-          <FunctionImport Name="CatConsecutivoPeriodosSi">
-            <Parameter Name="AnioId" Mode="In" Type="Int32" />
-            <Parameter Name="MesId" Mode="In" Type="Int32" />
-            <Parameter Name="ConsecutivoId" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
-            <Parameter Name="FechaInicio" Mode="In" Type="String" />
-            <Parameter Name="FechaCierre" Mode="In" Type="String" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatConsecutivoPeriodosSu">
-            <Parameter Name="AnioId" Mode="In" Type="Int32" />
-            <Parameter Name="MesId" Mode="In" Type="Int32" />
-            <Parameter Name="ConsecutivoId" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
-            <Parameter Name="FechaInicio" Mode="In" Type="String" />
-            <Parameter Name="FechaCierre" Mode="In" Type="String" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="Active" Mode="In" Type="Boolean" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConsecutivoPeriodicidadCMB" ReturnType="Collection(ASNModel.CatConsecutivoPeriodicidadCMB_Result)">
           <Parameter Name="CatPeriodicidadNominaId" Mode="In" Type="String" />
@@ -452,7 +415,43 @@
           <FunctionImport Name="CatAnioFechasCMB" ReturnType="Collection(ASNModel.CatAnioFechasCMB_Result)">
           <Parameter Name="AnioId" Mode="In" Type="Int32" />
           </FunctionImport>
-        </EntityContainer>
+          <FunctionImport Name="CatConsecutivoPeriodosSi">
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
+            <Parameter Name="ConsecutivoId" Mode="In" Type="String" />
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaCierre" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConsecutivoPeriodosSu">
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
+            <Parameter Name="ConsecutivoId" Mode="In" Type="String" />
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaCierre" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConsecutivoPeriodicidadSel" />
+          <FunctionImport Name="CatConsecutivoPeriodosSel" ReturnType="Collection(ASNModel.CatConsecutivoPeriodosSel_Result)" />
+          <FunctionImport Name="CatPeriodicidadNominaSi">
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatPeriodicidadNominaSu">
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
@@ -556,7 +555,7 @@
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatConsecutivoPeriodicidadSel_Result">
-          <Property Type="Int32" Name="ConsecutivoId" Nullable="false" />
+          <Property Type="String" Name="ConsecutivoId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
@@ -578,7 +577,7 @@
           <Property Type="Int32" Name="AnioId" Nullable="false" />
           <Property Type="Int32" Name="MesId" Nullable="false" />
           <Property Type="String" Name="DescripcionMes" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="ConsecutivoId" Nullable="false" />
+          <Property Type="String" Name="ConsecutivoId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="DescripcionPeriodicidad" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
@@ -602,7 +601,7 @@
           <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
         </ComplexType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -680,8 +679,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaSi" FunctionName="ASNModel.Store.CatPeriodicidadNominaSi" />
-          <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaSu" FunctionName="ASNModel.Store.CatPeriodicidadNominaSu" />
           <FunctionImportMapping FunctionImportName="CatProgramCMB" FunctionName="ASNModel.Store.CatProgramCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatProgramCMB_Result">
@@ -801,33 +798,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodicidadSel" FunctionName="ASNModel.Store.CatConsecutivoPeriodicidadSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatConsecutivoPeriodicidadSel_Result">
-                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
-                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodosSel" FunctionName="ASNModel.Store.CatConsecutivoPeriodosSel" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatConsecutivoPeriodosSel_Result">
-                <ScalarProperty Name="Ident" ColumnName="Ident" />
-                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
-                <ScalarProperty Name="MesId" ColumnName="MesId" />
-                <ScalarProperty Name="DescripcionMes" ColumnName="DescripcionMes" />
-                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
-                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
-                <ScalarProperty Name="DescripcionPeriodicidad" ColumnName="DescripcionPeriodicidad" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodosSi" FunctionName="ASNModel.Store.CatConsecutivoPeriodosSi" />
-          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodosSu" FunctionName="ASNModel.Store.CatConsecutivoPeriodosSu" />
           <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodicidadCMB" FunctionName="ASNModel.Store.CatConsecutivoPeriodicidadCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatConsecutivoPeriodicidadCMB_Result">
@@ -890,7 +860,28 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-        </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodosSi" FunctionName="ASNModel.Store.CatConsecutivoPeriodosSi" />
+          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodosSu" FunctionName="ASNModel.Store.CatConsecutivoPeriodosSu" />
+          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodicidadSel" FunctionName="ASNModel.Store.CatConsecutivoPeriodicidadSel" />
+          <FunctionImportMapping FunctionImportName="CatConsecutivoPeriodosSel" FunctionName="ASNModel.Store.CatConsecutivoPeriodosSel" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConsecutivoPeriodosSel_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
+                <ScalarProperty Name="MesId" ColumnName="MesId" />
+                <ScalarProperty Name="DescripcionMes" ColumnName="DescripcionMes" />
+                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
+                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
+                <ScalarProperty Name="DescripcionPeriodicidad" ColumnName="DescripcionPeriodicidad" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaSi" FunctionName="ASNModel.Store.CatPeriodicidadNominaSi" />
+          <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaSu" FunctionName="ASNModel.Store.CatPeriodicidadNominaSu" />
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
