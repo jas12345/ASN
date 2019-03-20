@@ -560,8 +560,8 @@
           <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatConsecutivoPeriodicidadCMB_Result">
-          <Property Type="Int32" Name="Ident" Nullable="false" />
-          <Property Type="Int32" Name="Valor" Nullable="false" />
+          <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="5" />
         </ComplexType>
         <ComplexType Name="CatTiposPeriodoNominaCMB_Result">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="5" />

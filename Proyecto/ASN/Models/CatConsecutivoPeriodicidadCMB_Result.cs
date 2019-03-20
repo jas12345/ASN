@@ -13,7 +13,7 @@ namespace ASN.Models
     
     public partial class CatConsecutivoPeriodicidadCMB_Result
     {
-        public int Ident { get; set; }
-        public int Valor { get; set; }
+        public string Ident { get; set; }
+        public string Valor { get; set; }
     }
 }

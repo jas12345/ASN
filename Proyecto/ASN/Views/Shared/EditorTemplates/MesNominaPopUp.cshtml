@@ -25,6 +25,7 @@
                 .DataValueField("Ident")
                 .DataTextField("Valor")
                 .Name("AnioId")
+                .Enable(false)
                 .Events(x => x.Change("rellenaFechasAnio").DataBound("validandoCatMeses"))
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
                 //.Events(e => e.Change("AnioNominaChange")
@@ -66,6 +67,7 @@
                 .DataValueField("Ident")
                 .DataTextField("Valor")
                 .Name("MesId")
+                .Enable(false)
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
             )
         </div>
