@@ -1,0 +1,124 @@
+﻿@model  ASN.Models.CatMesesNominaSel_Result
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="AnioId">Año</label>
+        </div>
+
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.AnioId)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetAniosNominaCMB", "Nomina");
+                    });
+                })
+                .Filter("contains")
+                .OptionLabel("- Año - ")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("AnioId")
+                .Enable(false)
+                .Events(x => x.Change("rellenaFechasAnio").DataBound("validandoCatMeses"))
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                //.Events(e => e.Change("AnioNominaChange")
+            )
+        </div>
+
+        <div class="editor-label">
+            <label for="FechaInicioAnio">Fecha Inicio Año</label>
+        </div>
+        <div class="editor-field" name="FechaInicioAnio">
+            @(Html.Kendo().TextBoxFor(x => x.FechaInicioAnio).Enable(false))
+        </div>
+
+
+        <div class="editor-label">
+            <label for="FechaCierreAnio">Fecha Cierre Año</label>
+        </div>
+        <div class="editor-field" name="FechaCierreAnio">
+            @(Html.Kendo().TextBoxFor(x => x.FechaCierreAnio).Enable(false))
+        </div>
+
+
+        <div class="editor-label">
+            <label for="MesId">Mes</label>
+        </div>
+
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.MesId)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetMesesCMB", "Nomina").Data("Anio");
+                    })
+                    .ServerFiltering(true);
+                })
+                .Filter("contains")
+                .OptionLabel("- Mes - ")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("MesId")
+                .Enable(false)
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+            )
+        </div>
+
+        <div class="editor-label">
+            <label for="FechaInicio">Fecha de Inicio</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DatePicker()
+                .Format("yyyy-MM-dd")
+                .ParseFormats(new string[]
+                    {
+                        "ddd, M/d/yyyy",
+                        "ddd, MM/dd/yyyy",
+                        "ddd, M/dd/yyyy"
+                    }
+                )
+                .Name("FechaInicio")
+                .Value(DateTime.Now)
+                //.Min(DateTime.Now)
+                //.Max(DateTime.Now)
+                .Enable(true)
+                .Events(e => e.Change("FechaInicioOpen"))
+            )
+        </div>
+        <div class="editor-label">
+            <label for="FechaCierre">Fecha de Cierre</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DatePicker()
+                .Format("yyyy-MM-dd")
+                .ParseFormats(new string[]
+                    {
+                        "ddd, M/d/yyyy",
+                        "ddd, MM/dd/yyyy",
+                        "ddd, M/dd/yyyy"
+                    }
+                )
+                .Name("FechaCierre")
+                .Value(DateTime.Now)
+                //.Min(DateTime.Now)
+                //.Max(DateTime.Now)
+                .Enable(true)
+                .Events(e => e.Change("FechaCierreOpen"))
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Active">Activo</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("Active")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <link rel="icon" href="@Url.Content("~/favicon.ico")" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Administrador de Solicitudes a Nómina</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/kendo/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+
+    @using ASN.Models;
+
+    @{
+        var usuario = ((MyCustomIdentity)User.Identity).UserInfo;
+    }
+
+    <script>
+
+        function onClose() {
+            location.reload();
+        }
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        ASN
+                    </a>
+                </li>
+                @{
+                if (User.IsInRole("Desarrollo"))
+                {
+                    <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+                }
+
+                    @*if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("BadgeIn24DateCommitted"))
+            {
+                <li>@Html.ActionLink("Mapeo de Conceptos", "index", "Catalogos")</li>
+                <li>@Html.ActionLink("Motivos de Solicitud", "index", "BadgeIn24")</li>
+            }*@
+
+                    if (User.IsInRole("Desarrollo"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-header"><div class="fa fa-angellist"></div></li>
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Años Nómina", "AniosNomina", "Nomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Meses Nómina", "MesesNomina", "Nomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Tipos de Periodo de Nómina", "Index", "TiposPeriodoNomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Periodicidad Nómina", "index", "PeriodicidadNomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Conceptos Motivos", "index", "ConceptosMotivos")</li>
+                                }
+
+
+
+
+
+
+
+
+
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Periodos consecutivos", "index", "ConsecutivoPeriodos")</li>
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                    @*if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("RH"))
+            {
+                <li>@Html.ActionLink("Carga de Documentos", "index", "Reposition")</li>
+            }
+
+            if (User.IsInRole("Desarrollo"))
+            {
+                <li>@Html.ActionLink("Carga masiva", "index", "APBajas")</li>
+            }
+
+            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+            {
+                <li> @Html.ActionLink("Estatus de Solicitud", "index", "Clerical") </li>
+            }
+
+            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+            {
+                <li>@Html.ActionLink("Períodos de Nómina", "index", "Clerical")</li>
+            }
+
+            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+            {
+                <li>@Html.ActionLink("Notificaciones", "index", "Clerical")</li>
+            }
+
+            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+            {
+                <li>@Html.ActionLink("Descargas de EXCEL", "index", "Clerical")</li>
+            }
+
+            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+            {
+                <li> @Html.ActionLink("Reporte General", "index", "Clerical") </li>
+            }
+
+            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+            {
+                <li>@Html.ActionLink("Reporte de Auditoría", "index", "Clerical")</li>
+            }
+
+            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
+            {
+                <li>@Html.ActionLink("Depuración de Movimientos", "index", "Clerical")</li>
+            }*@
+
+
+                }
+
+                <li>
+                    @Html.ActionLink("Exit", "Logout", "Home")
+                </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+        <div class="overlay"></div>
+        <div class="page-content-wrapper">
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+            <div class="">
+                @*<div>
+                        <label id="contador"></label>
+                    </div>*@
+                <div class="col-lg-1" style="margin-left: 50px; margin-top: -40px;">
+                    <a href="@Url.Action("Index","Inicio")">
+                    <img src="@Url.Content("~/Content/images/logo.png")" , alt="Inicio" />
+                    </a>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="wrapper">
+                @RenderBody()
+            </div>
+            @*<hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>*@
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+    
+    
+@(Html.Kendo().Notification()
+.Name("popupNotification")
+.Position(p => p.Pinned(true).Top(30).Right(30))
+.Stacking(NotificationStackingSettings.Down)
+.Events(e => e.Show("onShow"))
+//.AutoHideAfter(0)
+//.HtmlAttributes( new { @style = "background:rgba(0%,60%,0%,.7);color:white;"})
+)
+
+@(Html.Kendo().Dialog()
+.Name("dialog")
+.Title("ASN")
+.Content("<center><p>Session expired</p></center>")
+.Width(400)
+.Modal(true)
+.Actions(actions =>
+{
+    actions.Add().Text("OK").Primary(true).Action("onClose");
+})
+.Visible(false)
+.Events(ev => ev.Close("onClose"))
+)
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

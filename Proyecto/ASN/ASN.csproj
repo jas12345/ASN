@@ -429,6 +429,7 @@
     <Content Include="Content\kendo.custom.less" />
     <Content Include="Content\kendo.default.min.css.map" />
     <Content Include="Scripts\formAnimation.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\General.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "AniosNomina";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <label>Catálogo Años de Nómina</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @(Html.Kendo().Grid<ASN.Models.CatAniosNominaSel_Result>()
+                        .Name("grid")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(c => c.AnioId).Title("id").Visible(true).Filterable(true).Width(50);
+                            columns.Bound(c => c.FechaInicio).Width(150).Title("Fecha Inicio").Format("{0:yyyy-MM-dd}").Filterable(false);
+                            columns.Bound(c => c.FechaCierre).Width(150).Title("Fecha Cierre").Format("{0:yyyy-MM-dd}").Filterable(false);
+                            columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
+                            columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
+                        }
+                        )
+                        .ToolBar(toolBar =>
+                            {
+                                toolBar.Create().Text("Nuevo");
+                            //toolBar.Save();
+                            toolBar.Excel().Text("Exportar a excel");
+                            }
+                        )
+                        .Excel(ex => ex.AllPages(true))
+                        .HtmlAttributes(new { style = "height: 700px;" })
+                        .Scrollable(sorteable => sorteable.Virtual(false))
+                        .Sortable()
+                        .Resizable(c => c.Columns(true))
+                        //.Editable(editable => editable.Mode(GridEditMode.InCell))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("AnioNominaPopUp"))
+                        .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
+                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Batch(true)
+                            .ServerOperation(false)
+                            .Model(model =>
+                            {
+                                model.Id(c => c.AnioId);
+                                model.Field(c => c.FechaInicio).Editable(false);
+                                model.Field(c => c.FechaCierre).Editable(true);
+                                model.Field(c => c.Active).Editable(true).DefaultValue(true);
+                            })
+                            .Read(read => read.Action("GetAniosNomina", "Nomina"))
+                            .Update(update => update.Action("UpdateAnioNomina", "Nomina").Type(HttpVerbs.Post).Data("accionado"))
+                            .Create(create => create.Action("CreateAnioNomina", "Nomina").Type(HttpVerbs.Post).Data("accionado"))
+                            .PageSize(10)
+                        .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
+                        )
+                        .Navigatable()
+                        .Pageable(pageable => pageable
+                            .Refresh(true)
+                            .PageSizes(true)
+                            .ButtonCount(5)
+                            .Numeric(true)
+                            .PreviousNext(true)
+                        .Messages(messages =>
+                        {
+                            messages.ItemsPerPage("Registros por página");
+                            messages.Empty("Sin información para mostrar");
+                            messages.First("Primera");
+                            messages.Page("Página");
+                            messages.Last("Última");
+                            messages.Previous("Anterior");
+                            messages.Next("Siguiente");
+                            messages.Refresh("Actualizar");
+                            messages.Of("De");
+                            messages.MorePages("Mas páginas");
+                            //messages.Display("Prueba");
+                            messages.Display("{0} a {1} de {2}");
+                        })
+                        )
+                )
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <p>You are not logged in</p>
+}
+
+@Scripts.Render("~/bundles/AniosNomina")
