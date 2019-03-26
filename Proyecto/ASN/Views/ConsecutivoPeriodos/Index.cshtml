@@ -24,8 +24,8 @@
                         columns.ForeignKey(c => c.MesId, (System.Collections.IEnumerable)ViewData["MesCMB"], "Ident", "Valor").Width(125).Title("Mes");
                         columns.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Ident", "Valor").Width(125).Title("Tipo de peridicidad");
                         columns.ForeignKey(c => c.ConsecutivoId, (System.Collections.IEnumerable)ViewData["ConsecutivosPeriodo"], "Ident", "Valor").Width(125).Title("Consecutivo");
-                        columns.Bound(c => c.FechaInicio).Width(150).Title("FechaInicio");
-                        columns.Bound(c => c.FechaCierre).Width(150).Title("FechaCierre");
+                        columns.Bound(c => c.FechaInicio).Width(150).Title("Fecha de Inicio");
+                        columns.Bound(c => c.FechaCierre).Width(150).Title("Fecha de Cierre");
                         //columns.Bound(c => c.EID).Width(75).Title("s");
                         //columns.Bound(c => c.Nombre).Width(175).Title("Name");
                         //columns.Bound(c => c.Locacion).Width(150).Title("Locacion");

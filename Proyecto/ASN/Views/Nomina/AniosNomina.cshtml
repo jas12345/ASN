@@ -18,7 +18,7 @@
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Bound(c => c.AnioId).Title("id").Visible(true).Filterable(true).Width(50);
+                            columns.Bound(c => c.AnioId).Title("Año").Visible(true).Filterable(true).Width(50);
                             columns.Bound(c => c.FechaInicio).Width(150).Title("Fecha Inicio").Format("{0:yyyy-MM-dd}").Filterable(false);
                             columns.Bound(c => c.FechaCierre).Width(150).Title("Fecha Cierre").Format("{0:yyyy-MM-dd}").Filterable(false);
                             columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");

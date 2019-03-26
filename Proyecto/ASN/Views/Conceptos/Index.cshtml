@@ -18,7 +18,7 @@
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Bound(c => c.ConceptoId).Title("id").Visible(true).Filterable(false).Width(50);
+                            columns.Bound(c => c.ConceptoId).Title("Concepto").Visible(true).Filterable(false).Width(50);
                             columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
                             columns.ForeignKey(c => c.TipoConcepto, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(125).Title("Tipo de concepto");
                             //columns.Bound(c => c.EID).Width(75).Title("s");

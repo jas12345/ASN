@@ -4,11 +4,11 @@ function edit(e) {
     if (e.model.isNew() === false) {
         $("#AnioId").attr("disabled", "disabled");
         $("#MesId").attr("disabled", "disabled");
-        e.container.kendoWindow("title", "Edit");
+        e.container.kendoWindow("title", "Editar");
     }
     else {
         $("#Active").attr("disabled", "disabled");
-        e.container.kendoWindow("title", "New");
+        e.container.kendoWindow("title", "Nuevo");
 
     }
 }

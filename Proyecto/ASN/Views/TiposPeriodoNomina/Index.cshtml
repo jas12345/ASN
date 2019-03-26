@@ -17,7 +17,7 @@
                                 .Name("grid")
                                 .Columns(columns =>
                                 {
-                                    columns.Bound(c => c.TipoPeriodoId).Title("id").Visible(true).Filterable(false).Width(50);
+                                    columns.Bound(c => c.TipoPeriodoId).Title("Tipo de Período").Visible(true).Filterable(false).Width(50);
                                     columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
                                     columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
                                     columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);

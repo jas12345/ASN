@@ -8,7 +8,7 @@
 <div>
     <div class="k-edit-form-container">
         <div class="editor-label">
-            <label for="PeriodicidadNominaId">PeriodicidadId</label>
+            <label for="PeriodicidadNominaId">Periodicidad</label>
         </div>
         <div class="editor-field">
             @(Html.Kendo().TextBoxFor(x => x.PeriodicidadNominaId).HtmlAttributes(new { MaxLength = "5"}))
@@ -18,22 +18,6 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().TextBoxFor(x => x.Descripcion).HtmlAttributes(new { MaxLength = "50" }))
-            @*@(Html.Kendo().DropDownListFor(x => x.Descripcion)
-                    .DataSource(source =>
-                    {
-                        source.Read(read =>
-                        {
-                            read.Action("GetPeriodicidadNominaCMB", "PeriodicidadNomina");
-                        });
-                    //.ServerFiltering(true);
-                })
-                    .Filter("contains")
-                    .OptionLabel("- Tipo de concepto - ")
-                    .DataValueField("Ident")
-                    .DataTextField("Valor")
-                    .Name("Descripcion")
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
-            )*@
         </div>
         <div class="editor-label">
             <label for="Active">Activo</label>
