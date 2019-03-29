@@ -215,31 +215,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMesesNominaSel_Result>("CatMesesNominaSel");
         }
     
-        public virtual int CatPeriodosNominaSel(Nullable<int> anioId, Nullable<int> mesId, string periodicidad, Nullable<int> consecutivo, string tipoPeriodo)
-        {
-            var anioIdParameter = anioId.HasValue ?
-                new ObjectParameter("AnioId", anioId) :
-                new ObjectParameter("AnioId", typeof(int));
-    
-            var mesIdParameter = mesId.HasValue ?
-                new ObjectParameter("MesId", mesId) :
-                new ObjectParameter("MesId", typeof(int));
-    
-            var periodicidadParameter = periodicidad != null ?
-                new ObjectParameter("Periodicidad", periodicidad) :
-                new ObjectParameter("Periodicidad", typeof(string));
-    
-            var consecutivoParameter = consecutivo.HasValue ?
-                new ObjectParameter("Consecutivo", consecutivo) :
-                new ObjectParameter("Consecutivo", typeof(int));
-    
-            var tipoPeriodoParameter = tipoPeriodo != null ?
-                new ObjectParameter("TipoPeriodo", tipoPeriodo) :
-                new ObjectParameter("TipoPeriodo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodosNominaSel", anioIdParameter, mesIdParameter, periodicidadParameter, consecutivoParameter, tipoPeriodoParameter);
-        }
-    
         public virtual int CatPeriodosNominaSi(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<System.DateTime> fechaCaptura, Nullable<System.DateTime> fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> userEmployeeId)
         {
             var anioIdParameter = anioId.HasValue ?
@@ -754,6 +729,73 @@ namespace ASN.Models
                 new ObjectParameter("Active", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodicidadNominaSu", periodicidadNominaIdParameter, descripcionParameter, userEmployeeIdParameter, activeParameter, estatus);
+        }
+    
+        public virtual ObjectResult<CatPeriodosNominaCMB_Result> CatPeriodosNominaCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB");
+        }
+    
+        public virtual int CatPeriodosNominaSu(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, string fechaInicio, string fechaFin, string fechaCaptura, string fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        {
+            var anioIdParameter = anioId.HasValue ?
+                new ObjectParameter("AnioId", anioId) :
+                new ObjectParameter("AnioId", typeof(int));
+    
+            var mesIdParameter = mesId.HasValue ?
+                new ObjectParameter("MesId", mesId) :
+                new ObjectParameter("MesId", typeof(int));
+    
+            var periodicidadNominaIdParameter = periodicidadNominaId != null ?
+                new ObjectParameter("PeriodicidadNominaId", periodicidadNominaId) :
+                new ObjectParameter("PeriodicidadNominaId", typeof(string));
+    
+            var consecutivoParameter = consecutivo != null ?
+                new ObjectParameter("Consecutivo", consecutivo) :
+                new ObjectParameter("Consecutivo", typeof(string));
+    
+            var tipoPeriodoParameter = tipoPeriodo != null ?
+                new ObjectParameter("TipoPeriodo", tipoPeriodo) :
+                new ObjectParameter("TipoPeriodo", typeof(string));
+    
+            var fechaInicioParameter = fechaInicio != null ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(string));
+    
+            var fechaFinParameter = fechaFin != null ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(string));
+    
+            var fechaCapturaParameter = fechaCaptura != null ?
+                new ObjectParameter("FechaCaptura", fechaCaptura) :
+                new ObjectParameter("FechaCaptura", typeof(string));
+    
+            var fechaCierreParameter = fechaCierre != null ?
+                new ObjectParameter("FechaCierre", fechaCierre) :
+                new ObjectParameter("FechaCierre", typeof(string));
+    
+            var countryIdentsParameter = countryIdents != null ?
+                new ObjectParameter("CountryIdents", countryIdents) :
+                new ObjectParameter("CountryIdents", typeof(string));
+    
+            var nombrePeriodoParameter = nombrePeriodo != null ?
+                new ObjectParameter("NombrePeriodo", nombrePeriodo) :
+                new ObjectParameter("NombrePeriodo", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodosNominaSu", anioIdParameter, mesIdParameter, periodicidadNominaIdParameter, consecutivoParameter, tipoPeriodoParameter, fechaInicioParameter, fechaFinParameter, fechaCapturaParameter, fechaCierreParameter, countryIdentsParameter, nombrePeriodoParameter, userEmployeeIdParameter, activeParameter, estatus);
+        }
+    
+        public virtual ObjectResult<CatPeriodosNominaSel_Result> CatPeriodosNominaSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaSel_Result>("CatPeriodosNominaSel");
         }
     }
 }

@@ -141,12 +141,24 @@ function handleSaveChanges(e, grid) {
 (function ($, kendo) {
     $.extend(true, kendo.ui.validator, {
         rules: { // custom rules
+            customRule1: function (input, params) {
+                debugger;
+                if (input.is("[name=Descripcion]") && input.val().trim() === "") {
+                    return false;
+                }
+                return true;
+            },
             productnamevalidation: function (input, params) {
-
                 return true;
             }
         },
         messages: { //custom rules messages
+            customRule1: function (input) {
+                debugger;
+                // return the message text
+                return input.attr("data-val-required");
+                //"Ingrese una descripción"
+            },
             productnamevalidation: function (input) {
                 // return the message text
                 return input.attr("data-val-number");
@@ -163,4 +175,17 @@ function ValidaDisplayNameVal(obj) {
     //else {
     //    return 0;
     //}
+}
+
+function defaultValidate(e)
+{
+    debugger;
+    if (typeof this.Descripcion) {
+        var valor = $('input[name="Descripcion"]').val();
+        if (valor !== undefined && valor.trim() !== "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

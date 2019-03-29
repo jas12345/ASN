@@ -87,6 +87,11 @@
 
                                 @if (User.IsInRole("Desarrollo"))
                                 {
+                                    <li>@Html.ActionLink("Periodos de Nómina", "index", "PeriodoNomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
                                     <li>@Html.ActionLink("Conceptos Motivos", "index", "ConceptosMotivos")</li>
                                 }
 
