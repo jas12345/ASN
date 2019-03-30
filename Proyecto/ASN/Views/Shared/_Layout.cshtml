@@ -108,6 +108,11 @@
                                 {
                                     <li>@Html.ActionLink("Periodos consecutivos", "index", "ConsecutivoPeriodos")</li>
                                 }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Perfil de Empleados", "Index", "PerfilEmpleados")</li>
+                                }
                             </ul>
                         </li>
                     }

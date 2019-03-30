@@ -139,6 +139,7 @@
     <Compile Include="Controllers\ConceptosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\PerfilEmpleadosController.cs" />
     <Compile Include="Controllers\PeriodicidadNominaController.cs" />
     <Compile Include="Controllers\PeriodoNominaController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
