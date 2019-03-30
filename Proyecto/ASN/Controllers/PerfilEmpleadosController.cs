@@ -82,7 +82,7 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                            context.CatPerfilEmpleadosSi(obj.TipoPeriodoId, obj.Descripcion, ccmsidAdmin, resultado);
+                            context.CatPerfilEmpleadosSi(obj.NombrePerfilEmpleados, obj.Country_Ident, obj.City_Ident, obj.Company_Ident, obj.Location_Ident, obj.Client_Ident, obj.Program_Ident, obj.Contract_Type_Ident, ccmsidAdmin, resultado);
                         }
 
                         int.TryParse(resultado.Value.ToString(), out res);
@@ -133,7 +133,7 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                            context.CatPerfilEmpleadosSu(obj.TipoPeriodoId, obj.Descripcion, ccmsidAdmin, obj.Active, resultado);
+                            context.CatPerfilEmpleadosSu(obj.Perfil_Ident, obj.NombrePerfilEmpleados, ccmsidAdmin, obj.Active, resultado);
                         }
 
                         int.TryParse(resultado.Value.ToString(), out res);
