@@ -2,7 +2,6 @@
 
 @{
     ASN.Controllers.PeriodoNominaController control = new ASN.Controllers.PeriodoNominaController();
-    //var lstPaises = control.GetCountryDynamic();
     var lstPaises = control.GetCountryIdentsCMB();
     List<ASN.Models.CatCountryCMB_Result> resultado = (List<ASN.Models.CatCountryCMB_Result>)lstPaises.Data;
 }
@@ -18,20 +17,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.AnioId)
-                                                    .DataSource(source =>
-                                                    {
-                                                        source.Read(read =>
-                                                        {
-                                                            read.Action("GetAniosNominaCMB", "Nomina");
-                                                        });
-                                                    })
-                                                    .Filter("contains")
-                                                    .OptionLabel("- Año - ")
-                                                    .DataValueField("Ident")
-                                                    .DataTextField("Valor")
-                                                    .Name("AnioId")
-                                                    .Events(x => x.DataBound("getName"))
-                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetAniosNominaCMB", "Nomina");
+                            });
+                        })
+                        .Filter("contains")
+                        .OptionLabel("- Año - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("AnioId")
+                        .Events(x => x.DataBound("getName"))
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
             )
         </div>
         <div class="editor-label">
@@ -39,22 +38,22 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.MesId)
-                                                .DataSource(source =>
-                                                {
-                                                    source.Read(read =>
-                                                    {
-                                                        read.Action("GetMesCMB", "ConsecutivoPeriodos").Data("Anio");
-                                                    })
-                                                    .ServerFiltering(true);
-                                                })
-                                                .Filter("contains")
-                                                .OptionLabel("- Mes - ")
-                                                .DataValueField("Ident")
-                                                .DataTextField("Valor")
-                                                .Name("MesId")
-                                                .Events(x => x.Change("rellenaFechasMes").DataBound("getName").DataBound("validando"))//
-                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
-                                                .CascadeFrom("AnioId")
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetMesCMB", "ConsecutivoPeriodos").Data("Anio");
+                            })
+                            .ServerFiltering(true);
+                        })
+                        .Filter("contains")
+                        .OptionLabel("- Mes - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("MesId")
+                        .Events(x => x.Change("rellenaFechasMes").DataBound("getName").DataBound("validando"))//
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                        .CascadeFrom("AnioId")
             )
         </div>
         <div class="editor-label">
@@ -62,20 +61,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.PeriodicidadNominaId)
-                                            .DataSource(source =>
-                                            {
-                                                source.Read(read =>
-                                                {
-                                                    read.Action("GetTipoDePeriodicidadCMB", "ConsecutivoPeriodos");
-                                                });
-                                        })
-                                            .Filter("contains")
-                                            .OptionLabel("- Tipo de periodicidad - ")
-                                            .DataValueField("Ident")
-                                            .DataTextField("Valor")
-                                            .Name("PeriodicidadNominaId")
-                                            .Events(x => x.Change("getName"))
-                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Este campo es requerido." })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetTipoDePeriodicidadCMB", "ConsecutivoPeriodos");
+                            });
+                        })
+                        .Filter("contains")
+                        .OptionLabel("- Tipo de periodicidad - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("PeriodicidadNominaId")
+                        .Events(x => x.Change("getName"))
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Este campo es requerido." })
             )
         </div>
         <div class="editor-label">
@@ -83,25 +82,25 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.ConsecutivoId)
-                                            .DataSource(source =>
-                                            {
-                                                source.Read(read =>
-                                                {
-                                                    read.Action("GetConsecutivosPeriodicidadCMB", "ConsecutivoPeriodos").Data("tipoPerio");
-                                                })
-                                                .ServerFiltering(true);
-                                            })
-                                            .Filter("contains")
-                                            .OptionLabel("- Consecutivo - ")
-                                            .DataValueField("Ident")
-                                            .DataTextField("Valor")
-                                            .Name("ConsecutivoId")
-                                            .Events(x => x
-                                                .DataBound("validando")
-                                                .Change("getName"))
-                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
-                                            .CascadeFrom("PeriodicidadNominaId")
-                                            
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetConsecutivosPeriodicidadCMB", "ConsecutivoPeriodos").Data("tipoPerio");
+                            })
+                            .ServerFiltering(true);
+                        })
+                        .Filter("contains")
+                        .OptionLabel("- Consecutivo - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("ConsecutivoId")
+                        .Events(x => x
+                                    .DataBound("validando")
+                                    .Change("getName"))
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                        .CascadeFrom("PeriodicidadNominaId")
+
             )
         </div>
         <div class="editor-label">
@@ -115,7 +114,6 @@
                                 {
                                     read.Action("GetTipoPeriodicidadCMB", "PeriodoNomina");
                                 });
-                                //.ServerFiltering(true);
                             })
                             .Filter("contains")
                             .OptionLabel("- Tipo Periodicidad - ")
@@ -164,6 +162,7 @@
                                     })
                                     .Min(DateTime.Now.AddMonths(-6))
                                     .Max(DateTime.Now)
+                                    .Events(x => x.Change("delimitaRango"))
                                     .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
             )
         </div>
@@ -181,6 +180,7 @@
                             })
                             .Min(DateTime.Now.AddMonths(-6))
                             .Max(DateTime.Now)
+                            .Events(x => x.Change("delimitaRango"))
                             .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
             )
         </div>
@@ -191,9 +191,6 @@
             @(Html.Kendo().DateTimePicker()
                             .Name("FechaCaptura")
                             .Format("yyyy-MM-dd HH:mm")
-                            //.Min(DateTime.Now.AddMonths(-6))
-                            //.Max(DateTime.Now)
-                            .Events(x => x.Change("validaRango"))
                             .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em"})
                             .DateInput()
             )
@@ -205,10 +202,6 @@
             @(Html.Kendo().DateTimePicker()
                               .Name("FechaCierre")
                               .Format("yyyy-MM-dd HH:mm")
-                              //.Footer("Today - #=kendo.toString(data, 'd') #")
-                              //.Min(DateTime.Now.AddMonths(-6))
-                              //.Max(DateTime.Now)
-                              .Events(x => x.Change("validaRango"))
                               .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
                               .DateInput()
             )

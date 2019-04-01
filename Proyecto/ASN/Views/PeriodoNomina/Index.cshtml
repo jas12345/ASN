@@ -90,7 +90,6 @@
         messages.Refresh("Actualizar");
         messages.Of("De");
         messages.MorePages("Mas páginas");
-        //messages.Display("Prueba");
         messages.Display("{0} a {1} de {2}");
     })
     )
@@ -101,6 +100,7 @@
     </div>
     <script>
         var urlFechasMes = '@Url.Action("GetFechasMes","ConsecutivoPeriodos")';
+        var urlValidaPeriodoNomina = '@Url.Action("ValidaPeriodoNomina", "PeriodoNomina")';
     </script>
 }
 else

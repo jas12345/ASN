@@ -242,9 +242,17 @@ namespace ASN.Controllers
 
                     int.TryParse(resultado.Value.ToString(), out res);
 
-                    if (res == 1)
+                    switch (res)
                     {
-                        ModelState.AddModelError("error", "Existe un periodo de nomina con la misma descripción.");
+                        case -1:
+                            ModelState.AddModelError("error", "Existe un periodo de nomina con los mismos parametros");
+                            break;
+                        case -2:
+                            ModelState.AddModelError("error", "Existe un periodo de nomina con el mismo nombre.");
+                            break;
+                        case -3:
+                            ModelState.AddModelError("error", "Existe un periodo de nomina con el mismo nombre/parametro.");
+                            break;
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
@@ -253,9 +261,9 @@ namespace ASN.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                //MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                //LogError log = new LogError();
-                //log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json(profiles.ToDataSourceResult(request, ModelState));
             }
         }
@@ -302,9 +310,17 @@ namespace ASN.Controllers
 
                     int.TryParse(resultado.Value.ToString(), out res);
 
-                    if (res == 1)
+                    switch (res)
                     {
-                        ModelState.AddModelError("error", "Existe un periodo de nomina con la misma descripción.");
+                        case -1:
+                            ModelState.AddModelError("error", "Existe un periodo de nomina con el mismo nombre."); 
+                            break;
+                        case -2:
+                            ModelState.AddModelError("error", "Existe un periodo de nomina con los mismos parametros");
+                            break;
+                        case -3:
+                            ModelState.AddModelError("error", "Existe un periodo de nomina con el mismo nombre/parametro.");
+                            break;
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
@@ -314,9 +330,9 @@ namespace ASN.Controllers
             catch (Exception exception)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                //MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                //LogError log = new LogError();
-                //log.RecordError(exception, usuario.UserInfo.Ident.Value);
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(exception, usuario.UserInfo.Ident.Value);
                 return Json(profiles.ToDataSourceResult(request, ModelState));
             }
         }
@@ -326,7 +342,6 @@ namespace ASN.Controllers
             try
             {
                 var lstCMB = new List<CatMesesFechasCMB_Result>();
-
                 using (ASNContext context = new ASNContext())
                 {
                     lstCMB = context.CatMesesFechasCMB(mesId, anioId).ToList();
@@ -343,5 +358,7 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
+
     }
+    
 }

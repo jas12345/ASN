@@ -3,9 +3,9 @@ var editando = 0;
 var lstCountry = 0;
 var dtFechaInicio = "";
 var dtFechaFinal = "";
+var nombrePeriodo = "";
 
 function edit(e) {
-    //debugger;
     var validator = e.container.data('kendoValidator');
 
     $('input[name="NombrePeriodo"]').blur(function () {
@@ -31,7 +31,8 @@ function edit(e) {
         $("#FechaFin").val(e.model.FechaFin);
         $("#FechaCaptura").val(e.model.FechaCaptura);
         $("#FechaCierre").val(e.model.FechaCierre);
-
+        
+        nombrePeriodo = e.model.NombrePeriodo;
         var anios = $("#AnioId").data("kendoDropDownList");
         var Periodo = $("#PeriodicidadNominaId").data("kendoDropDownList");
         var tipoperiodo = $("#TipoPeriodo").data("kendoDropDownList");
@@ -53,7 +54,7 @@ function valida(e) {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
         $('#grid').data('kendoGrid').refresh();
-
+        debugger;
         if (e.response.Errors === null) {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("Saved", "success");
@@ -98,7 +99,6 @@ function onSave(e) {
         }
     }
 }
-
 
 function handleEditChanges(e, grid) {
     debugger;
@@ -148,13 +148,7 @@ function handleSaveChanges(e, grid) {
     }
 }
 
-
 (function ($, kendo) {
-    //var endDate = $("#FechaFin").data("kendoDatePicker");
-    //var today = new Date();
-    //today = new Date(today);
-    //today.setDate(today.getDate() + 1);
-    //endDate.Value(today);
 
     $.extend(true, kendo.ui.validator, {
         rules: { // custom rules
@@ -183,31 +177,20 @@ function handleSaveChanges(e, grid) {
     });
 })(jQuery, kendo);
 
-
-function ValidaDisplayNameVal(obj) {
-    //if (obj == "" || (obj.length > 150 || obj.length < 3) || obj.match(/^[a-z A-Z0-9 ñáéíóú\)\(]*$/) == null) {
-    //    return "El nombre del Mercado debe ser entre 3 y 150 caracteres y solo se aceptan numeros,letras y parentesis.";
-    //}
-    //else {
-    //    return 0;
-    //}
-}
-
 function rellenaFechasMes() {
     var anioId = 0;
     var mesId = 0;
-
+    debugger;
     anioId = $("#AnioId").val();
     mesId = $("#MesId").val();
 
     if (anioId != 0 && mesId != 0) {
         $.post(urlFechasMes + "/?mesId=" + mesId + "&anioId=" + anioId, function (data) {
-            //console.log(data);
             $("#FechaInicio").val(data[0].FechaInicio);
             $("#FechaFin").val(data[0].FechaCierre);
 
-            dtFechaInicio = data[0].FechaInicio;
-            dtFechaFinal = data[0].FechaCierre;
+            dtFechaInicio = formatDate(data[0].FechaInicio);
+            dtFechaFinal = formatDate(data[0].FechaCierre);
             var FInicio = $("#FechaInicio").data("kendoDatePicker");
             var FFin = $("#FechaFin").data("kendoDatePicker");
 
@@ -220,25 +203,21 @@ function rellenaFechasMes() {
                 max: data[0].FechaCierre,
                 min: data[0].FechaInicio
             });
-
+            delimitaRango();
             if (editando === 0) {
                 var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
                 var FechaFin = $("#FechaFin").data("kendoDatePicker");
-                FechaFin.value(data[0].FechaCierre);
-                fechaInicio.value(data[0].FechaInicio);
-
-                validaRango();
+                FechaFin.value(dtFechaFinal);
+                fechaInicio.value(dtFechaInicio);
 
             } else {
-                var FCaptura = $("#FechaCaptura").data("kendoDateTimePicker");
-                var FCierre = $("#FechaCierre").data("kendoDateTimePicker");
-
                 var meses = $("#MesId").data("kendoDropDownList");
                 var cnsecutivo = $("#ConsecutivoId").data("kendoDropDownList");
 
                 meses.enable(false);
                 cnsecutivo.enable(false);
 
+                $("#NombrePeriodo").val(nombrePeriodo);
                 dtFInicio = new Date($("#FechaCaptura").val());
                 dtFInicio.setDate(dtFInicio.getDate() + 1);
 
@@ -263,46 +242,28 @@ function validando() {
     }
 }
 
-function validaRango() {
-    debugger;
+function delimitaRango() {
     var FInicio = $("#FechaCaptura").data("kendoDateTimePicker");
     var FFin = $("#FechaCierre").data("kendoDateTimePicker");
 
     var dtFInicio = "";
+    var dtFinal = "";
 
-    if ($("#FechaCaptura").val() === "") {
+    dtFInicio = new Date(dtFechaInicio + " 00:00");
+    dtFInicio.setDate(dtFInicio.getDate());
 
-        dtFInicio = new Date(dtFechaInicio);
-        dtFInicio.setDate(dtFInicio.getDate() + 1);
-
-        FInicio.setOptions({
-            max: new Date(dtFechaFinal),
-            min: dtFInicio
-        });
-    } 
-
-    if ($("#FechaCaptura").val() !== "") {
-
-        dtFInicio = new Date($("#FechaCaptura").val());
-        dtFInicio.setDate(dtFInicio.getDate() + 1);
+    dtFinal = new Date(dtFechaFinal + " 23:55");
+    dtFinal.setDate(dtFinal.getDate());
 
         FInicio.setOptions({
-            max: new Date(dtFechaFinal),
+            max: dtFinal,
             min: dtFInicio
         });
 
-        //FFin.setOptions({
-        //    max: new Date(dtFechaFinal),
-        //    min: dtFInicio
-        //});
-    }
-
-    if ($("#FechaCierre").val() === "" && $("#FechaCaptura").val() === "") {
         FFin.setOptions({
-            max: new Date(dtFechaFinal),
+            max: dtFinal,
             min: dtFInicio
         });
-    }
 }
 
 function tipoPerio() {
@@ -348,6 +309,21 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
+function formatDateTime(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear(),
+        hour = d.getHours(),
+        minutes = d.getMinutes();
+
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-') + " " + hour + ":" + minutes;
+}
+
 function getName() {
     var anioVl = $("#AnioId").val();
     var mesVl = $("#MesId").val();
@@ -360,3 +336,20 @@ function getName() {
 
     $("#NombrePeriodo").val(propuesto).change();
 }
+
+function validaParametros() {
+    $.post(urlValidaPeriodoNomina + "/?mesId=" + mesId + "&anioId=" + anioId + "&periodicidadNominaId=" + PeriodicidadNominaId + "&consecutivoId=" + ConsecutivoId, function (data) {
+
+    }).fail(function (ex) {
+    console.log("fail" + ex);
+});
+}
+
+//function ValidaDisplayNameVal(obj) {
+//    //if (obj == "" || (obj.length > 150 || obj.length < 3) || obj.match(/^[a-z A-Z0-9 ñáéíóú\)\(]*$/) == null) {
+//    //    return "El nombre del Mercado debe ser entre 3 y 150 caracteres y solo se aceptan numeros,letras y parentesis.";
+//    //}
+//    //else {
+//    //    return 0;
+//    //}
+//}
