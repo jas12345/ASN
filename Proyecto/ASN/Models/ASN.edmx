@@ -35,7 +35,9 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatCityCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatClientCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatCompanyCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosMotivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosMotivosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -92,8 +94,10 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatContractTypeCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryVwCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatLocationCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLogErrorSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="LogErrorMessage" Type="varchar" Mode="In" />
           <Parameter Name="StackTrace" Type="varchar" Mode="In" />
@@ -162,6 +166,14 @@
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatPeriodoNominaFechasCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+          <Parameter Name="MesId" Type="int" Mode="In" />
+          <Parameter Name="ConsecutivoId" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
+          <Parameter Name="TipoPeriodo" Type="varchar" Mode="In" />
+          <Parameter Name="NombrePeriodo" Type="varchar" Mode="In" />
         </Function>
         <Function Name="CatPeriodosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -517,6 +529,18 @@
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatCityCMB" ReturnType="Collection(ASNModel.CatCityCMB_Result)" />
+          <FunctionImport Name="CatCompanyCMB" ReturnType="Collection(ASNModel.CatCompanyCMB_Result)" />
+          <FunctionImport Name="CatContractTypeCMB" ReturnType="Collection(ASNModel.CatContractTypeCMB_Result)" />
+          <FunctionImport Name="CatLocationCMB" ReturnType="Collection(ASNModel.CatLocationCMB_Result)" />
+          <FunctionImport Name="CatPeriodoNominaFechasCMB" ReturnType="Collection(Int32)">
+            <Parameter Name="AnioId" Mode="In" Type="Int32" />
+            <Parameter Name="MesId" Mode="In" Type="Int32" />
+            <Parameter Name="ConsecutivoId" Mode="In" Type="String" />
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="TipoPeriodo" Mode="In" Type="String" />
+            <Parameter Name="NombrePeriodo" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -710,6 +734,22 @@
           <Property Type="Int32" Name="Contract_Type_Ident" Nullable="false" />
           <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatCityCMB_Result">
+          <Property Type="String" Name="Id" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="CatCompanyCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatContractTypeCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatLocationCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="150" />
         </ComplexType>
        
         </Schema>
@@ -1058,6 +1098,39 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSi" FunctionName="ASNModel.Store.CatPerfilEmpleadosSi" />
           <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSu" FunctionName="ASNModel.Store.CatPerfilEmpleadosSu" />
+          <FunctionImportMapping FunctionImportName="CatCityCMB" FunctionName="ASNModel.Store.CatCityCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCityCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatCompanyCMB" FunctionName="ASNModel.Store.CatCompanyCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCompanyCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatContractTypeCMB" FunctionName="ASNModel.Store.CatContractTypeCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatContractTypeCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatLocationCMB" FunctionName="ASNModel.Store.CatLocationCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatLocationCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodoNominaFechasCMB" FunctionName="ASNModel.Store.CatPeriodoNominaFechasCMB" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

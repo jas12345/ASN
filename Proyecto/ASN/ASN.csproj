@@ -174,7 +174,13 @@
     <Compile Include="Models\CatAniosNominaSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatCityCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatClientCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatCompanyCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatConcecutivoPeriodicidadSel_Result.cs">
@@ -201,10 +207,16 @@
     <Compile Include="Models\CatConsecutivoPeriodosSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatContractTypeCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatCountryCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatCountryVwCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatLocationCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatMesesCMB_Result.cs">
@@ -547,6 +559,7 @@
     <Content Include="Views\TiposPeriodoNomina\Index.cshtml" />
     <Content Include="Views\PeriodoNomina\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PeriodoNominaPopUp.cshtml" />
+    <Content Include="Views\PerfilEmpleados\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
