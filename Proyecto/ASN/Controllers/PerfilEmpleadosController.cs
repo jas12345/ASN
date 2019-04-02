@@ -23,6 +23,14 @@ namespace ASN.Controllers
                     using (ASNContext context = new ASNContext())
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                        ViewData["Pais"] = context.CatCountryCMB().ToList();
+                        ViewData["Ciudad"] = context.CatCityCMB().ToList();
+                        ViewData["Mercado"] = context.CatCompanyCMB().ToList();
+                        ViewData["Site"] = context.CatLocationCMB().ToList();
+                        ViewData["Cliente"] = context.CatClientCMB().ToList();
+                        ViewData["Programa"] = context.CatProgramCMB().ToList();
+                        ViewData["TipoContrato"] = context.CatContractTypeCMB().ToList();
+
                     }
 
                     return View();
