@@ -184,6 +184,7 @@ namespace ASN.Controllers
                             FechaFin = item.FechaFin.ToString("MM/dd/yyyy"),
                             FechaCaptura = item.FechaCaptura.ToString("MM/dd/yyyy HH:mm tt"),
                             FechaCierre = item.FechaCierre.ToString("MM/dd/yyyy HH:mm tt"),
+                            EstatusPeriodo = item.Estatus,
                             Active = item.Active
                         });
                     }
@@ -236,7 +237,7 @@ namespace ASN.Controllers
                                 (string.IsNullOrEmpty(FechaCaptura) ? DateTime.Now : DateTime.Parse(FechaCaptura)),
                                 (string.IsNullOrEmpty(FechaCierre) ? DateTime.Now : Convert.ToDateTime(FechaCierre)),
                                 CountryIdents,
-                                item.NombrePeriodo, idAdmin);
+                                item.NombrePeriodo, idAdmin, resultado);
                         }
                     }
 

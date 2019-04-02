@@ -21,6 +21,7 @@ namespace ASN.Models
         public string CountryIdents { get; set; }
         public string NombrePeriodo { get; set; }
         public bool Active { get; set; }
+        public string EstatusPeriodo { get; set; }
     }
 
     public class selectModel

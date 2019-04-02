@@ -54,7 +54,7 @@ function valida(e) {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
         $('#grid').data('kendoGrid').refresh();
-        debugger;
+        
         if (e.response.Errors === null) {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("Saved", "success");
@@ -75,7 +75,7 @@ function errorsote(args) {
 }
 
 function onSave(e) {
-    debugger;
+    
     var hayCambios = false;
     var sonNuevos = false;
     jQuery.grep(e.sender._data, function (item) {
@@ -101,7 +101,7 @@ function onSave(e) {
 }
 
 function handleEditChanges(e, grid) {
-    debugger;
+    
     var valid = true;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
@@ -114,7 +114,7 @@ function handleEditChanges(e, grid) {
         //var disposition = objeto[i].Disposition;
         var displayname = objeto[i].Mercado;
     }
-    debugger;
+    
     if (!valid) {
         e.preventDefault(true);
         //setTimeout($.unblockUI, 1000);
@@ -122,7 +122,7 @@ function handleEditChanges(e, grid) {
 }
 
 function handleSaveChanges(e, grid) {
-    debugger;
+    
     var valid = true;
     var rows = grid.tbody.find("tr");
     for (var i = 0; i < rows.length; i++) {
@@ -132,7 +132,7 @@ function handleSaveChanges(e, grid) {
         var cols = $(rows[i]).find("td");
         var displaynameObj = $(cols[0]);
         //var dispositionObj = $(cols[1]);
-        debugger;
+        
         if (model && model.id <= 0 && valid) {
 
             //nothing
@@ -180,7 +180,7 @@ function handleSaveChanges(e, grid) {
 function rellenaFechasMes() {
     var anioId = 0;
     var mesId = 0;
-    debugger;
+    
     anioId = $("#AnioId").val();
     mesId = $("#MesId").val();
 
