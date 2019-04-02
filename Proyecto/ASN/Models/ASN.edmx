@@ -167,14 +167,6 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
-        <Function Name="CatPeriodoNominaFechasCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="AnioId" Type="int" Mode="In" />
-          <Parameter Name="MesId" Type="int" Mode="In" />
-          <Parameter Name="ConsecutivoId" Type="varchar" Mode="In" />
-          <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
-          <Parameter Name="TipoPeriodo" Type="varchar" Mode="In" />
-          <Parameter Name="NombrePeriodo" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="CatPeriodosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -190,6 +182,7 @@
           <Parameter Name="CountryIdents" Type="varchar" Mode="In" />
           <Parameter Name="NombrePeriodo" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatPeriodosNominaSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
@@ -346,6 +339,7 @@
             <Parameter Name="CountryIdents" Mode="In" Type="String" />
             <Parameter Name="NombrePeriodo" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatAniosNominaSel" ReturnType="Collection(ASNModel.CatAniosNominaSel_Result)" />
           <FunctionImport Name="CatAniosNominaSi">
@@ -708,6 +702,7 @@
           <Property Type="String" Name="CountryIdents" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="8" />
         </ComplexType>
         <ComplexType Name="CatCountryVwCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="true" />
@@ -1055,6 +1050,7 @@
                 <ScalarProperty Name="CountryIdents" ColumnName="CountryIdents" />
                 <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1130,7 +1126,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatPeriodoNominaFechasCMB" FunctionName="ASNModel.Store.CatPeriodoNominaFechasCMB" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

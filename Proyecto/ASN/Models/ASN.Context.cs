@@ -215,7 +215,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMesesNominaSel_Result>("CatMesesNominaSel");
         }
     
-        public virtual int CatPeriodosNominaSi(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<System.DateTime> fechaCaptura, Nullable<System.DateTime> fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> userEmployeeId)
+        public virtual int CatPeriodosNominaSi(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<System.DateTime> fechaCaptura, Nullable<System.DateTime> fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
@@ -265,7 +265,7 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodosNominaSi", anioIdParameter, mesIdParameter, periodicidadNominaIdParameter, consecutivoParameter, tipoPeriodoParameter, fechaInicioParameter, fechaFinParameter, fechaCapturaParameter, fechaCierreParameter, countryIdentsParameter, nombrePeriodoParameter, userEmployeeIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodosNominaSi", anioIdParameter, mesIdParameter, periodicidadNominaIdParameter, consecutivoParameter, tipoPeriodoParameter, fechaInicioParameter, fechaFinParameter, fechaCapturaParameter, fechaCierreParameter, countryIdentsParameter, nombrePeriodoParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual ObjectResult<CatAniosNominaSel_Result> CatAniosNominaSel()
