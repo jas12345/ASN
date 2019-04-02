@@ -955,5 +955,22 @@ namespace ASN.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatTiposConsecutivoCMB_Result>("CatTiposConsecutivoCMB");
         }
+    
+        public virtual ObjectResult<CatPeriodicidadNominaAnioMesConsecutivoCMB_Result> CatPeriodicidadNominaAnioMesConsecutivoCMB(Nullable<int> anioId, string mesId, string periodicidadNomina)
+        {
+            var anioIdParameter = anioId.HasValue ?
+                new ObjectParameter("anioId", anioId) :
+                new ObjectParameter("anioId", typeof(int));
+    
+            var mesIdParameter = mesId != null ?
+                new ObjectParameter("mesId", mesId) :
+                new ObjectParameter("mesId", typeof(string));
+    
+            var periodicidadNominaParameter = periodicidadNomina != null ?
+                new ObjectParameter("PeriodicidadNomina", periodicidadNomina) :
+                new ObjectParameter("PeriodicidadNomina", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodicidadNominaAnioMesConsecutivoCMB_Result>("CatPeriodicidadNominaAnioMesConsecutivoCMB", anioIdParameter, mesIdParameter, periodicidadNominaParameter);
+        }
     }
 }

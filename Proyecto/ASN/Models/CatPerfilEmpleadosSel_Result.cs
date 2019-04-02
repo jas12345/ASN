@@ -15,19 +15,23 @@ namespace ASN.Models
     {
         public int Perfil_Ident { get; set; }
         public string NombrePerfilEmpleados { get; set; }
-        public int Country_Ident { get; set; }
+        public Nullable<int> Country_Ident { get; set; }
         public string Country_Full_Name { get; set; }
         public string City_Ident { get; set; }
-        public int Company_Ident { get; set; }
+        public Nullable<int> Company_Ident { get; set; }
         public string Company_Name { get; set; }
-        public int Location_Ident { get; set; }
+        public Nullable<int> Location_Ident { get; set; }
         public string Location_Name { get; set; }
-        public int Client_Ident { get; set; }
+        public Nullable<int> Client_Ident { get; set; }
         public string Client_Name { get; set; }
-        public int Program_Ident { get; set; }
+        public Nullable<int> Program_Ident { get; set; }
         public string Program_Name { get; set; }
-        public int Contract_Type_Ident { get; set; }
+        public Nullable<int> Contract_Type_Ident { get; set; }
         public string Contract_Type { get; set; }
         public bool Active { get; set; }
+        public Nullable<int> ConceptoId { get; set; }
+        public string Concepto { get; set; }
+        public int TipoAccesoId { get; set; }
+        public string TipoAcceso { get; set; }
     }
 }

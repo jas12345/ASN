@@ -159,6 +159,11 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatPeriodicidadNominaAnioMesConsecutivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="anioId" Type="int" Mode="In" />
+          <Parameter Name="mesId" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodicidadNomina" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="CatPeriodicidadNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodicidadNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodicidadNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -553,6 +558,11 @@
           </FunctionImport>
           <FunctionImport Name="CatTiposAccesoCMB" ReturnType="Collection(ASNModel.CatTiposAccesoCMB_Result)" />
           <FunctionImport Name="CatTiposConsecutivoCMB" ReturnType="Collection(ASNModel.CatTiposConsecutivoCMB_Result)" />
+          <FunctionImport Name="CatPeriodicidadNominaAnioMesConsecutivoCMB" ReturnType="Collection(ASNModel.CatPeriodicidadNominaAnioMesConsecutivoCMB_Result)">
+            <Parameter Name="anioId" Mode="In" Type="Int32" />
+            <Parameter Name="mesId" Mode="In" Type="String" />
+            <Parameter Name="PeriodicidadNomina" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -733,20 +743,24 @@
         <ComplexType Name="CatPerfilEmpleadosSel_Result">
           <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
           <Property Type="String" Name="NombrePerfilEmpleados" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Country_Ident" Nullable="false" />
+          <Property Type="Int32" Name="Country_Ident" Nullable="true" />
           <Property Type="String" Name="Country_Full_Name" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="City_Ident" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="Company_Ident" Nullable="false" />
+          <Property Type="String" Name="City_Ident" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Company_Ident" Nullable="true" />
           <Property Type="String" Name="Company_Name" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="Location_Ident" Nullable="false" />
+          <Property Type="Int32" Name="Location_Ident" Nullable="true" />
           <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="Client_Ident" Nullable="false" />
+          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
           <Property Type="String" Name="Client_Name" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="Program_Ident" Nullable="false" />
+          <Property Type="Int32" Name="Program_Ident" Nullable="true" />
           <Property Type="String" Name="Program_Name" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="false" />
+          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
           <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
+          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
+          <Property Type="String" Name="TipoAcceso" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatCityCMB_Result">
           <Property Type="String" Name="Id" Nullable="true" MaxLength="100" />
@@ -779,6 +793,10 @@
         <ComplexType Name="CatTiposConsecutivoCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatPeriodicidadNominaAnioMesConsecutivoCMB_Result">
+          <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="5" />
         </ComplexType>
        
         </Schema>
@@ -1123,6 +1141,10 @@
                 <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
                 <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
+                <ScalarProperty Name="TipoAcceso" ColumnName="TipoAcceso" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1189,6 +1211,14 @@
               <ComplexTypeMapping TypeName="ASNModel.CatTiposConsecutivoCMB_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaAnioMesConsecutivoCMB" FunctionName="ASNModel.Store.CatPeriodicidadNominaAnioMesConsecutivoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPeriodicidadNominaAnioMesConsecutivoCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

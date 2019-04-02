@@ -18,20 +18,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Country_Ident)
-                                                                                .DataSource(source =>
-                                                                                {
-                                                                                    source.Read(read =>
-                                                                                    {
-                                                                                        read.Action("GetPaisesCMB", "PerfilEmpleados");
-                                                                                    });
-                                                                                //.ServerFiltering(true);
-                                                                            })
-                                                                                .Filter("contains")
-                                                                                .OptionLabel("- Pais - ")
-                                                                                .DataValueField("Id")
-                                                                                .DataTextField("Value")
-                                                                                .Name("Pais")
-                                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                                                                                .DataSource(source =>
+                                                                                                {
+                                                                                                    source.Read(read =>
+                                                                                                    {
+                                                                                                        read.Action("GetPaisesCMB", "PerfilEmpleados");
+                                                                                                    });
+                                                                                                //.ServerFiltering(true);
+                                                                                            })
+                                                                                                .Filter("contains")
+                                                                                                .OptionLabel("- Pais - ")
+                                                                                                .DataValueField("Id")
+                                                                                                .DataTextField("Value")
+                                                                                                .Name("Pais")
+                                                                                                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
         <div class="editor-label">
@@ -39,20 +39,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.City_Ident)
-                                                                        .DataSource(source =>
-                                                                        {
-                                                                            source.Read(read =>
-                                                                            {
-                                                                                read.Action("GetCiudadesCMB", "PerfilEmpleados");
-                                                                            });
-                                                                        //.ServerFiltering(true);
-                                                                    })
-                                                                        .Filter("contains")
-                                                                        .OptionLabel("- Ciudad - ")
-                                                                        .DataValueField("Id")
-                                                                        .DataTextField("Value")
-                                                                        .Name("Ciudad")
-                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                                                                        .DataSource(source =>
+                                                                                        {
+                                                                                            source.Read(read =>
+                                                                                            {
+                                                                                                read.Action("GetCiudadesCMB", "PerfilEmpleados");
+                                                                                            });
+                                                                                        //.ServerFiltering(true);
+                                                                                    })
+                                                                                        .Filter("contains")
+                                                                                        .OptionLabel("- Ciudad - ")
+                                                                                        .DataValueField("Id")
+                                                                                        .DataTextField("Value")
+                                                                                        .Name("Ciudad")
+                                                                                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
         <div class="editor-label">
@@ -60,20 +60,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Company_Ident)
-                                                                                .DataSource(source =>
-                                                                                {
-                                                                                    source.Read(read =>
-                                                                                    {
-                                                                                        read.Action("GetMercadosCMB", "PerfilEmpleados");
-                                                                                    });
-                                                                                //.ServerFiltering(true);
-                                                                            })
-                                                                                .Filter("contains")
-                                                                                .OptionLabel("- Mercado - ")
-                                                                                .DataValueField("Id")
-                                                                                .DataTextField("Value")
-                                                                                .Name("Mercado")
-                                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                                                                                .DataSource(source =>
+                                                                                                {
+                                                                                                    source.Read(read =>
+                                                                                                    {
+                                                                                                        read.Action("GetMercadosCMB", "PerfilEmpleados");
+                                                                                                    });
+                                                                                                //.ServerFiltering(true);
+                                                                                            })
+                                                                                                .Filter("contains")
+                                                                                                .OptionLabel("- Mercado - ")
+                                                                                                .DataValueField("Id")
+                                                                                                .DataTextField("Value")
+                                                                                                .Name("Mercado")
+                                                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
             )
         </div>
         <div class="editor-label">
@@ -81,20 +81,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Location_Ident)
-                                                                .DataSource(source =>
-                                                                {
-                                                                    source.Read(read =>
-                                                                    {
-                                                                        read.Action("GetSitesCMB", "PerfilEmpleados");
-                                                                    });
-                                                                //.ServerFiltering(true);
-                                                            })
-                                                                .Filter("contains")
-                                                                .OptionLabel("- Site - ")
-                                                                .DataValueField("Id")
-                                                                .DataTextField("Value")
-                                                                .Name("Site")
-                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                                                                .DataSource(source =>
+                                                                                {
+                                                                                    source.Read(read =>
+                                                                                    {
+                                                                                        read.Action("GetSitesCMB", "PerfilEmpleados");
+                                                                                    });
+                                                                                //.ServerFiltering(true);
+                                                                            })
+                                                                                .Filter("contains")
+                                                                                .OptionLabel("- Site - ")
+                                                                                .DataValueField("Id")
+                                                                                .DataTextField("Value")
+                                                                                .Name("Site")
+                                                                                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
         <div class="editor-label">
@@ -102,20 +102,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Client_Ident)
-                                                        .DataSource(source =>
-                                                        {
-                                                            source.Read(read =>
-                                                            {
-                                                                read.Action("GetClientesCMB", "PerfilEmpleados");
-                                                            });
-                                                        //.ServerFiltering(true);
-                                                    })
-                                                        .Filter("contains")
-                                                        .OptionLabel("- Clientes - ")
-                                                        .DataValueField("Id")
-                                                        .DataTextField("Value")
-                                                        .Name("Cliente")
-                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                                                        .DataSource(source =>
+                                                                        {
+                                                                            source.Read(read =>
+                                                                            {
+                                                                                read.Action("GetClientesCMB", "PerfilEmpleados");
+                                                                            });
+                                                                        //.ServerFiltering(true);
+                                                                    })
+                                                                        .Filter("contains")
+                                                                        .OptionLabel("- Clientes - ")
+                                                                        .DataValueField("Id")
+                                                                        .DataTextField("Value")
+                                                                        .Name("Cliente")
+                                                                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
         <div class="editor-label">
@@ -123,43 +123,87 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Program_Ident)
+                                                                .DataSource(source =>
+                                                                {
+                                                                    source.Read(read =>
+                                                                    {
+                                                                        read.Action("GetProgramasCMB", "PerfilEmpleados");
+                                                                    });
+                                                                //.ServerFiltering(true);
+                                                            })
+                                                                .Filter("contains")
+                                                                .OptionLabel("- Programa - ")
+                                                                .DataValueField("Id")
+                                                                .DataTextField("Value")
+                                                                .Name("Programa")
+                                                                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="TipoContrato">Tipo de contrato</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.Contract_Type_Ident)
+                                                        .DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetTiposContratoCMB", "PerfilEmpleados");
+                                                            });
+                                                        //.ServerFiltering(true);
+                                                    })
+                                                        .Filter("contains")
+                                                        .OptionLabel("- Tipo de contrato - ")
+                                                        .DataValueField("Id")
+                                                        .DataTextField("Value")
+                                                        .Name("TipoContrato")
+                                                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+            )
+        </div>
+
+        <div class="editor-label">
+            <label for="Concepto">Concepto de Nómina</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.ConceptoId)
+                                                        .DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetConceptosCMB", "PerfilEmpleados");
+                                                            });
+                                                        //.ServerFiltering(true);
+                                                    })
+                                                        .Filter("contains")
+                                                        .OptionLabel("- Conceptos - ")
+                                                        .DataValueField("Ident")
+                                                        .DataTextField("Valor")
+                                                        .Name("Concepto")
+                                                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="TipoAcceso">Tipo de consecutivo</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.TipoAccesoId)
                                                 .DataSource(source =>
                                                 {
                                                     source.Read(read =>
                                                     {
-                                                        read.Action("GetProgramasCMB", "PerfilEmpleados");
+                                                        read.Action("GetTiposAccesoCMB", "PerfilEmpleados");
                                                     });
                                                 //.ServerFiltering(true);
                                             })
                                                 .Filter("contains")
-                                                .OptionLabel("- Programa - ")
-                                                .DataValueField("Id")
-                                                .DataTextField("Value")
-                                                .Name("Programa")
-                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                                .OptionLabel("- Tipo de acceso - ")
+                                                .DataValueField("Ident")
+                                                .DataTextField("Valor")
+                                                .Name("TipoAcceso")
+                                                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
-        <div class="editor-label">
-            <label for="Tipocontrato">Tipo de contrato</label>
-        </div>
-        <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.Country_Ident)
-                                        .DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetTiposContratoCMB", "PerfilEmpleados");
-                                            });
-                                        //.ServerFiltering(true);
-                                    })
-                                        .Filter("contains")
-                                        .OptionLabel("- Tipo de contrato - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Value")
-                                        .Name("Tipocontrato")
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
-            )
-        </div>
+
         <div class="editor-label">
             <label for="Active">Activo</label>
         </div>
