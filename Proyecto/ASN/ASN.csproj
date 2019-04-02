@@ -410,6 +410,7 @@
     <Content Include="Scripts\ConceptosMotivos.js" />
     <Content Include="Scripts\ConsecutivosPeriodos.js" />
     <Content Include="Scripts\MesesNomina.js" />
+    <Content Include="Scripts\PerfilEmpleados.js" />
     <Content Include="Scripts\Nominas.js" />
     <Content Include="Scripts\Conceptos.js" />
     <Content Include="Scripts\DisableRMC.js" />
@@ -560,6 +561,7 @@
     <Content Include="Views\PeriodoNomina\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PeriodoNominaPopUp.cshtml" />
     <Content Include="Views\PerfilEmpleados\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PerfilEmpleadosPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

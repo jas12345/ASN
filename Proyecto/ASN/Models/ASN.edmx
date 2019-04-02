@@ -18,6 +18,13 @@
         <Function Name="CatAnioFechasCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatAnioMesesConsecutivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AnioId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatAnioMesPeriodicidadNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="anioId" Type="int" Mode="In" />
+          <Parameter Name="mesId" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="CatAniosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -205,6 +212,8 @@
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
         <Function Name="CatTipoConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatTiposAccesoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatTiposConsecutivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatTiposPeriodoNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatTiposPeriodoNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatTiposPeriodoNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -535,6 +544,15 @@
             <Parameter Name="TipoPeriodo" Mode="In" Type="String" />
             <Parameter Name="NombrePeriodo" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="CatAnioMesesConsecutivoCMB" ReturnType="Collection(ASNModel.CatAnioMesesConsecutivoCMB_Result)">
+          <Parameter Name="AnioId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatAnioMesPeriodicidadNominaCMB" ReturnType="Collection(ASNModel.CatAnioMesPeriodicidadNominaCMB_Result)">
+            <Parameter Name="anioId" Mode="In" Type="Int32" />
+            <Parameter Name="mesId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CatTiposAccesoCMB" ReturnType="Collection(ASNModel.CatTiposAccesoCMB_Result)" />
+          <FunctionImport Name="CatTiposConsecutivoCMB" ReturnType="Collection(ASNModel.CatTiposConsecutivoCMB_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -745,6 +763,22 @@
         <ComplexType Name="CatLocationCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="CatAnioMesesConsecutivoCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatAnioMesPeriodicidadNominaCMB_Result">
+          <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatTiposAccesoCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatTiposConsecutivoCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -1121,6 +1155,38 @@
           <FunctionImportMapping FunctionImportName="CatLocationCMB" FunctionName="ASNModel.Store.CatLocationCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatLocationCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatAnioMesesConsecutivoCMB" FunctionName="ASNModel.Store.CatAnioMesesConsecutivoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatAnioMesesConsecutivoCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatAnioMesPeriodicidadNominaCMB" FunctionName="ASNModel.Store.CatAnioMesPeriodicidadNominaCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatAnioMesPeriodicidadNominaCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatTiposAccesoCMB" FunctionName="ASNModel.Store.CatTiposAccesoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatTiposAccesoCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatTiposConsecutivoCMB" FunctionName="ASNModel.Store.CatTiposConsecutivoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatTiposConsecutivoCMB_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
               </ComplexTypeMapping>

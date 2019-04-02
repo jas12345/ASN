@@ -923,5 +923,37 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CatPeriodoNominaFechasCMB", anioIdParameter, mesIdParameter, consecutivoIdParameter, periodicidadNominaIdParameter, tipoPeriodoParameter, nombrePeriodoParameter);
         }
+    
+        public virtual ObjectResult<CatAnioMesesConsecutivoCMB_Result> CatAnioMesesConsecutivoCMB(Nullable<int> anioId)
+        {
+            var anioIdParameter = anioId.HasValue ?
+                new ObjectParameter("AnioId", anioId) :
+                new ObjectParameter("AnioId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAnioMesesConsecutivoCMB_Result>("CatAnioMesesConsecutivoCMB", anioIdParameter);
+        }
+    
+        public virtual ObjectResult<CatAnioMesPeriodicidadNominaCMB_Result> CatAnioMesPeriodicidadNominaCMB(Nullable<int> anioId, string mesId)
+        {
+            var anioIdParameter = anioId.HasValue ?
+                new ObjectParameter("anioId", anioId) :
+                new ObjectParameter("anioId", typeof(int));
+    
+            var mesIdParameter = mesId != null ?
+                new ObjectParameter("mesId", mesId) :
+                new ObjectParameter("mesId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAnioMesPeriodicidadNominaCMB_Result>("CatAnioMesPeriodicidadNominaCMB", anioIdParameter, mesIdParameter);
+        }
+    
+        public virtual ObjectResult<CatTiposAccesoCMB_Result> CatTiposAccesoCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatTiposAccesoCMB_Result>("CatTiposAccesoCMB");
+        }
+    
+        public virtual ObjectResult<CatTiposConsecutivoCMB_Result> CatTiposConsecutivoCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatTiposConsecutivoCMB_Result>("CatTiposConsecutivoCMB");
+        }
     }
 }

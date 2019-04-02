@@ -49,6 +49,167 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult GetPaisesCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatCountryCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatCountryCMB().ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetCiudadesCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatCityCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatCityCMB().ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetMercadosCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatCompanyCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatCompanyCMB().ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetSitesCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatLocationCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatLocationCMB().ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetClientesCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatClientCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatClientCMB().ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetProgramasCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatProgramCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatProgramCMB().ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetTiposContratoCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatContractTypeCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatContractTypeCMB().ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
         [HttpPost]
         public ActionResult GetPerfilEmpleados([DataSourceRequest] DataSourceRequest request)
         {
