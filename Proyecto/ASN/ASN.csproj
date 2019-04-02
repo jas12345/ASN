@@ -168,6 +168,12 @@
     <Compile Include="Models\CatAnioFechasCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatAnioMesesConsecutivoCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatAnioMesPeriodicidadNominaCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatAniosNominaCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -256,6 +262,12 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatTipoConceptosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatTiposAccesoCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatTiposConsecutivoCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatTiposPeriodoNominaCMB_Result.cs">
