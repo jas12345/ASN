@@ -30,6 +30,8 @@ namespace ASN.Controllers
                         ViewData["Cliente"] = context.CatClientCMB().ToList();
                         ViewData["Programa"] = context.CatProgramCMB().ToList();
                         ViewData["TipoContrato"] = context.CatContractTypeCMB().ToList();
+                        ViewData["Concepto"] = context.CatConceptosCMB().ToList();
+                        ViewData["TipoAcceso"] = context.CatTiposAccesoCMB().ToList();
 
                     }
 
@@ -297,7 +299,7 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                            context.CatPerfilEmpleadosSi(obj.NombrePerfilEmpleados, obj.Country_Ident, obj.City_Ident, obj.Company_Ident, obj.Location_Ident, obj.Client_Ident, obj.Program_Ident, obj.Contract_Type_Ident, ccmsidAdmin, resultado);
+                            context.CatPerfilEmpleadosSi(obj.NombrePerfilEmpleados, obj.Country_Ident, obj.City_Ident, obj.Company_Ident, obj.Location_Ident, obj.Client_Ident, obj.Program_Ident, obj.Contract_Type_Ident, obj.ConceptoId, obj.TipoAccesoId, ccmsidAdmin, resultado);
                         }
 
                         int.TryParse(resultado.Value.ToString(), out res);
