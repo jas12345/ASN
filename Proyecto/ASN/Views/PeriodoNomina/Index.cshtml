@@ -29,8 +29,9 @@
         column.Bound(c => c.FechaFin).Visible(false).Filterable(false);
         column.Bound(c => c.FechaCaptura).Visible(false).Filterable(false);
         column.Bound(c => c.FechaCierre).Visible(false).Filterable(false);
-        column.Bound(c => c.CountryIdents).Visible(false).Filterable(false);//LstCountryIdents
+        column.Bound(c => c.CountryIdents).Visible(false).Filterable(false);
         column.Bound(c => c.EstatusPeriodo).Visible(true).Title("Estatus").Filterable(false).Width(40);
+        column.Bound(c => c.TipoConsecutivoId).Visible(false);
         column.Bound(c => c.Active).Width(30).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
         column.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
     })

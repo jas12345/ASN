@@ -98,33 +98,33 @@ namespace ASN.Controllers
             }
         }
 
-        public List<dynamic> GetCountryDynamic()
-        {
-            try
-            {
-                var lstCMB = new List<CatCountryCMB_Result>();
-                var lstDynamic = new List<dynamic>();
-                using (ASNContext context = new ASNContext())
-                {
-                    lstCMB = context.CatCountryCMB().ToList();
-                }
+        //public List<dynamic> GetCountryDynamic()
+        //{
+        //    try
+        //    {
+        //        var lstCMB = new List<CatCountryCMB_Result>();
+        //        var lstDynamic = new List<dynamic>();
+        //        using (ASNContext context = new ASNContext())
+        //        {
+        //            lstCMB = context.CatCountryCMB().ToList();
+        //        }
 
-                foreach (var item in lstCMB)
-                {
-                    lstDynamic.Add(new { Text = item.Value, Value = item.Id });
-                }
+        //        foreach (var item in lstCMB)
+        //        {
+        //            lstDynamic.Add(new { Text = item.Value, Value = item.Id });
+        //        }
 
-                return lstDynamic;
-            }
-            catch (Exception excepcion)
-            {
-                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
-                return null;
-            }
-        }
+        //        return lstDynamic;
+        //    }
+        //    catch (Exception excepcion)
+        //    {
+        //        ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+        //        MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+        //        LogError log = new LogError();
+        //        log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+        //        return null;
+        //    }
+        //}
 
         /// <summary>
         /// Método para obtener el listado de los tipos de periodicidad
@@ -142,6 +142,100 @@ namespace ASN.Controllers
                 }
 
                 return Json(listTipoPeriodicidad, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        /// <summary>
+        /// Método para obtener los meses que se encuentran relacionados con los consecutivos de periodos
+        /// </summary>
+        /// <param name="anioId"></param>
+        /// <returns></returns>
+        public JsonResult GetAnioMesesConsecutivoCMB(int anioId)
+        {
+            try
+            {
+                var lstCMB = new List<CatAnioMesesConsecutivoCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatAnioMesesConsecutivoCMB(anioId).ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetAnioMesPeriodicidadNominaCMB(int anioId, string mesId)
+        {
+            try
+            {
+                var lstPeriodicidadNomina = new List<CatAnioMesPeriodicidadNominaCMB_Result>();
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstPeriodicidadNomina = ctx.CatAnioMesPeriodicidadNominaCMB(anioId, mesId).ToList();
+                }
+
+                return Json(lstPeriodicidadNomina, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetConsecutivoPeriodoNominaCMB(int anioId, string mesId, string perid)
+        {
+            try
+            {
+                var lstConsecutivo = new List<CatPeriodicidadNominaAnioMesConsecutivoCMB_Result>();
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstConsecutivo = ctx.CatPeriodicidadNominaAnioMesConsecutivoCMB(anioId, mesId, perid).ToList();
+                }
+
+                return Json(lstConsecutivo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetTipoConsecutivo()
+        {
+            try
+            {
+                var lstTipoConsecutivo = new List<CatTipoConceptosCMB_Result>();
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstTipoConsecutivo = ctx.CatTipoConceptosCMB().ToList();
+                }
+
+                return Json(lstTipoConsecutivo, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -185,6 +279,7 @@ namespace ASN.Controllers
                             FechaCaptura = item.FechaCaptura.ToString("MM/dd/yyyy HH:mm tt"),
                             FechaCierre = item.FechaCierre.ToString("MM/dd/yyyy HH:mm tt"),
                             EstatusPeriodo = item.Estatus,
+                            TipoConsecutivoId = item.TipoConsecutivoId,
                             Active = item.Active
                         });
                     }
@@ -237,7 +332,9 @@ namespace ASN.Controllers
                                 (string.IsNullOrEmpty(FechaCaptura) ? DateTime.Now : DateTime.Parse(FechaCaptura)),
                                 (string.IsNullOrEmpty(FechaCierre) ? DateTime.Now : Convert.ToDateTime(FechaCierre)),
                                 CountryIdents,
-                                item.NombrePeriodo, idAdmin, resultado);
+                                item.NombrePeriodo,
+                                item.TipoConsecutivoId,
+                                idAdmin, resultado);
                         }
                     }
 
@@ -303,6 +400,7 @@ namespace ASN.Controllers
                                 (string.IsNullOrEmpty(FechaCierre) ? DateTime.Now.ToString() : FechaCierre),
                                 CountryIdents,
                                 item.NombrePeriodo,
+                                item.TipoConsecutivoId,
                                 idAdmin,
                                 item.Active,
                                 resultado);

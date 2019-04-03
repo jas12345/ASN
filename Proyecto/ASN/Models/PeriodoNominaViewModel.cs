@@ -22,6 +22,7 @@ namespace ASN.Models
         public string NombrePeriodo { get; set; }
         public bool Active { get; set; }
         public string EstatusPeriodo { get; set; }
+        public int TipoConsecutivoId { get; set; }
     }
 
     public class selectModel
