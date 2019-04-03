@@ -244,8 +244,10 @@ function validando() {
     if (editando === 1) {
         var consecutivos = $("#ConsecutivoId").data("kendoDropDownList");
         var mesesId = $("#MesId").data("kendoDropDownList");
+        var periodicidad = $("#PeriodicidadNominaId").data("kendoDropDownList");
         consecutivos.enable(false);
         mesesId.enable(false);
+        periodicidad.enable(false);
     }
 }
 

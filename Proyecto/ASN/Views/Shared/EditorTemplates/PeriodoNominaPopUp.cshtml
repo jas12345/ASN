@@ -1,10 +1,5 @@
 ﻿@model  ASN.Models.PeriodoNominaViewModel
 
-@{
-    @*ASN.Controllers.PeriodoNominaController control = new ASN.Controllers.PeriodoNominaController();
-    var lstPaises = control.GetCountryIdentsCMB();
-    List<ASN.Models.CatCountryCMB_Result> resultado = (List<ASN.Models.CatCountryCMB_Result>)lstPaises.Data;*@
-}
 <style>
     tr.spaceUnder > td {
         padding-bottom: 1em;
@@ -30,7 +25,7 @@
                                 .DataTextField("Valor")
                                 .Name("AnioId")
                                 .Events(x => x.DataBound("getName"))
-                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
             )
         </div>
         <div class="editor-label">
@@ -52,7 +47,7 @@
                                 .DataTextField("Valor")
                                 .Name("MesId")
                                 .Events(x => x.Change("rellenaFechasMes").DataBound("getName").DataBound("validando"))//
-                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
                                 .CascadeFrom("AnioId")
             )
         </div>
@@ -75,7 +70,7 @@
                                 .DataTextField("Valor")
                                 .Name("PeriodicidadNominaId")
                                 .Events(x => x.Change("getName"))
-                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Este campo es requerido." })
+                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
                                 .CascadeFrom("MesId")
             )
         </div>
@@ -100,7 +95,7 @@
                                 .Events(x => x
                                             .DataBound("validando")
                                             .Change("getName"))
-                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
                                 .CascadeFrom("PeriodicidadNominaId")
 
             )
@@ -122,7 +117,7 @@
                                     .DataValueField("Id")
                                     .DataTextField("Value")
                                     .Name("TipoPeriodo")
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
                                     .Events(x => x.Change("getName"))
             )
         </div>
@@ -167,7 +162,7 @@
                             .DataValueField("Ident")
                             .DataTextField("Valor")
                             .Name("TipoConsecutivoId")
-                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
             )
         </div>
             <div class="editor-label">
@@ -185,7 +180,7 @@
                                                 .Min(DateTime.Now.AddMonths(-6))
                                                 .Max(DateTime.Now)
                                                 .Events(x => x.Change("delimitaRango"))
-                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
                 )
             </div>
             <div class="editor-label">
@@ -203,7 +198,7 @@
                                         .Min(DateTime.Now.AddMonths(-6))
                                         .Max(DateTime.Now)
                                         .Events(x => x.Change("delimitaRango"))
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
                 )
             </div>
             <div class="editor-label">
@@ -213,7 +208,7 @@
                 @(Html.Kendo().DateTimePicker()
                                         .Name("FechaCaptura")
                                         .Format("yyyy-MM-dd HH:mm")
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
                                         .DateInput()
                 )
             </div>
@@ -224,7 +219,7 @@
                 @(Html.Kendo().DateTimePicker()
                                           .Name("FechaCierre")
                                           .Format("yyyy-MM-dd HH:mm")
-                                          .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                                          .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
                                           .DateInput()
                 )
             </div>
@@ -232,7 +227,7 @@
                 <label for="NombrePeriodo">Nombre Periodo</label>
             </div>
             <div class="editor-field">
-                @(Html.Kendo().TextBox().Name("NombrePeriodo").HtmlAttributes(new { MaxLength = "50", style = "width: 16.4em" }))
+                @(Html.Kendo().TextBox().Name("NombrePeriodo").HtmlAttributes(new { MaxLength = "50", style = "width: 22.4em" }))
             </div>
             <div class="editor-label">
                 <label for="Active">Activo</label>

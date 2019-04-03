@@ -23,15 +23,15 @@ namespace ASN.Controllers
                     using (ASNContext context = new ASNContext())
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                        ViewData["Pais"] = context.CatCountryCMB().ToList();
-                        ViewData["Ciudad"] = context.CatCityCMB().ToList();
-                        ViewData["Mercado"] = context.CatCompanyCMB().ToList();
-                        ViewData["Site"] = context.CatLocationCMB().ToList();
-                        ViewData["Cliente"] = context.CatClientCMB().ToList();
-                        ViewData["Programa"] = context.CatProgramCMB().ToList();
-                        ViewData["TipoContrato"] = context.CatContractTypeCMB().ToList();
-                        ViewData["Concepto"] = context.CatConceptosCMB().ToList();
-                        ViewData["TipoAcceso"] = context.CatTiposAccesoCMB().ToList();
+                        ViewData["Pais"] = context.CatCountryTodosCMB().ToList();
+                        ViewData["Ciudad"] = context.CatCityTodosCMB().ToList();
+                        ViewData["Mercado"] = context.CatCompanyTodosCMB().ToList();
+                        ViewData["Site"] = context.CatLocationTodosCMB().ToList();
+                        ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
+                        ViewData["Programa"] = context.CatProgramTodosCMB().ToList();
+                        ViewData["TipoContrato"] = context.CatContractTypeTodosCMB().ToList();
+                        ViewData["Concepto"] = context.CatConceptosTodosCMB().ToList();
+                        ViewData["TipoAcceso"] = context.CatTiposAccesoTodosCMB().ToList();
 
                     }
 
@@ -60,7 +60,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatCountryCMB().ToList();
+                    lstCMB = ctx.CatCountryTodosCMB().ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -83,7 +83,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatCityCMB().ToList();
+                    lstCMB = ctx.CatCityTodosCMB().ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -106,7 +106,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatCompanyCMB().ToList();
+                    lstCMB = ctx.CatCompanyTodosCMB().ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -129,7 +129,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatLocationCMB().ToList();
+                    lstCMB = ctx.CatLocationTodosCMB().ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -152,7 +152,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatClientCMB().ToList();
+                    lstCMB = ctx.CatClientTodosCMB().ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -175,7 +175,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatProgramCMB().ToList();
+                    lstCMB = ctx.CatProgramTodosCMB().ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -198,7 +198,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatContractTypeCMB().ToList();
+                    lstCMB = ctx.CatContractTypeTodosCMB().ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
