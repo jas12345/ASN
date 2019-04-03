@@ -988,5 +988,40 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodicidadNominaAnioMesConsecutivoCMB_Result>("CatPeriodicidadNominaAnioMesConsecutivoCMB", anioIdParameter, mesIdParameter, periodicidadNominaParameter);
         }
+    
+        public virtual ObjectResult<CatCityTodosCMB_Result> CatCityTodosCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCityTodosCMB_Result>("CatCityTodosCMB");
+        }
+    
+        public virtual ObjectResult<CatClientTodosCMB_Result> CatClientTodosCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatClientTodosCMB_Result>("CatClientTodosCMB");
+        }
+    
+        public virtual ObjectResult<CatCompanyTodosCMB_Result> CatCompanyTodosCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCompanyTodosCMB_Result>("CatCompanyTodosCMB");
+        }
+    
+        public virtual ObjectResult<CatContractTypeTodosCMB_Result> CatContractTypeTodosCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatContractTypeTodosCMB_Result>("CatContractTypeTodosCMB");
+        }
+    
+        public virtual ObjectResult<CatCountryTodosCMB_Result> CatCountryTodosCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCountryTodosCMB_Result>("CatCountryTodosCMB");
+        }
+    
+        public virtual ObjectResult<CatLocationTodosCMB_Result> CatLocationTodosCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatLocationTodosCMB_Result>("CatLocationTodosCMB");
+        }
+    
+        public virtual ObjectResult<CatProgramTodosCMB_Result> CatProgramTodosCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatProgramTodosCMB_Result>("CatProgramTodosCMB");
+        }
     }
 }

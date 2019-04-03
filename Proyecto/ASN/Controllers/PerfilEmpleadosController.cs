@@ -30,9 +30,8 @@ namespace ASN.Controllers
                         ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
                         ViewData["Programa"] = context.CatProgramTodosCMB().ToList();
                         ViewData["TipoContrato"] = context.CatContractTypeTodosCMB().ToList();
-                        ViewData["Concepto"] = context.CatConceptosTodosCMB().ToList();
-                        ViewData["TipoAcceso"] = context.CatTiposAccesoTodosCMB().ToList();
-
+                        ViewData["Concepto"] = context.CatConceptosCMB().ToList();
+                        ViewData["TipoAcceso"] = context.CatTiposAccesoCMB().ToList();
                     }
 
                     return View();
@@ -55,7 +54,7 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstCMB = new List<CatCountryCMB_Result>();
+                var lstCMB = new List<CatCountryTodosCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
@@ -78,7 +77,7 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstCMB = new List<CatCityCMB_Result>();
+                var lstCMB = new List<CatCityTodosCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
@@ -101,7 +100,7 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstCMB = new List<CatCompanyCMB_Result>();
+                var lstCMB = new List<CatCompanyTodosCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
@@ -124,7 +123,7 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstCMB = new List<CatLocationCMB_Result>();
+                var lstCMB = new List<CatLocationTodosCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
@@ -147,7 +146,7 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstCMB = new List<CatClientCMB_Result>();
+                var lstCMB = new List<CatClientTodosCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
@@ -170,7 +169,7 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstCMB = new List<CatProgramCMB_Result>();
+                var lstCMB = new List<CatProgramTodosCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
@@ -193,7 +192,7 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstCMB = new List<CatContractTypeCMB_Result>();
+                var lstCMB = new List<CatContractTypeTodosCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {

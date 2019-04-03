@@ -43,8 +43,11 @@
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatCityCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatCityTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatClientCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatClientTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCompanyCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatCompanyTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosMotivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosMotivosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -102,9 +105,11 @@
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatContractTypeCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatContractTypeTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
-        <Function Name="CatCountryVwCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatCountryTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLocationCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatLocationTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLogErrorSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="LogErrorMessage" Type="varchar" Mode="In" />
           <Parameter Name="StackTrace" Type="varchar" Mode="In" />
@@ -217,6 +222,7 @@
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatProgramCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatProgramTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatRelUserRoleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
@@ -571,6 +577,13 @@
             <Parameter Name="mesId" Mode="In" Type="String" />
             <Parameter Name="PeriodicidadNomina" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="CatCityTodosCMB" ReturnType="Collection(ASNModel.CatCityTodosCMB_Result)" />
+          <FunctionImport Name="CatClientTodosCMB" ReturnType="Collection(ASNModel.CatClientTodosCMB_Result)" />
+          <FunctionImport Name="CatCompanyTodosCMB" ReturnType="Collection(ASNModel.CatCompanyTodosCMB_Result)" />
+          <FunctionImport Name="CatContractTypeTodosCMB" ReturnType="Collection(ASNModel.CatContractTypeTodosCMB_Result)" />
+          <FunctionImport Name="CatCountryTodosCMB" ReturnType="Collection(ASNModel.CatCountryTodosCMB_Result)" />
+          <FunctionImport Name="CatLocationTodosCMB" ReturnType="Collection(ASNModel.CatLocationTodosCMB_Result)" />
+          <FunctionImport Name="CatProgramTodosCMB" ReturnType="Collection(ASNModel.CatProgramTodosCMB_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -806,6 +819,34 @@
         <ComplexType Name="CatPeriodicidadNominaAnioMesConsecutivoCMB_Result">
           <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="5" />
+        </ComplexType>
+        <ComplexType Name="CatCityTodosCMB_Result">
+          <Property Type="String" Name="Id" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="CatClientTodosCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatCompanyTodosCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatContractTypeTodosCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatCountryTodosCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="CatLocationTodosCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="CatProgramTodosCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
         </ComplexType>
        
         </Schema>
@@ -1116,14 +1157,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatCountryVwCMB" FunctionName="ASNModel.Store.CatCountryVwCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatCountryVwCMB_Result">
-                <ScalarProperty Name="Ident" ColumnName="Ident" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosCMB" FunctionName="ASNModel.Store.CatPerfilEmpleadosCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatPerfilEmpleadosCMB_Result">
@@ -1229,6 +1262,62 @@
               <ComplexTypeMapping TypeName="ASNModel.CatPeriodicidadNominaAnioMesConsecutivoCMB_Result">
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatCityTodosCMB" FunctionName="ASNModel.Store.CatCityTodosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCityTodosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatClientTodosCMB" FunctionName="ASNModel.Store.CatClientTodosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatClientTodosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatCompanyTodosCMB" FunctionName="ASNModel.Store.CatCompanyTodosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCompanyTodosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatContractTypeTodosCMB" FunctionName="ASNModel.Store.CatContractTypeTodosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatContractTypeTodosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatCountryTodosCMB" FunctionName="ASNModel.Store.CatCountryTodosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCountryTodosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatLocationTodosCMB" FunctionName="ASNModel.Store.CatLocationTodosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatLocationTodosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatProgramTodosCMB" FunctionName="ASNModel.Store.CatProgramTodosCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatProgramTodosCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
