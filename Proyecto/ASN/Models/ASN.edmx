@@ -149,6 +149,8 @@
           <Parameter Name="Client_Ident" Type="int" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
           <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -193,6 +195,7 @@
           <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
           <Parameter Name="CountryIdents" Type="varchar" Mode="In" />
           <Parameter Name="NombrePeriodo" Type="varchar" Mode="In" />
+          <Parameter Name="TipoConsecutivoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -208,6 +211,7 @@
           <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
           <Parameter Name="CountryIdents" Type="varchar" Mode="In" />
           <Parameter Name="NombrePeriodo" Type="varchar" Mode="In" />
+          <Parameter Name="TipoConsecutivoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -352,6 +356,7 @@
             <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
             <Parameter Name="CountryIdents" Mode="In" Type="String" />
             <Parameter Name="NombrePeriodo" Mode="In" Type="String" />
+            <Parameter Name="TipoConsecutivoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -510,6 +515,7 @@
             <Parameter Name="FechaCierre" Mode="In" Type="String" />
             <Parameter Name="CountryIdents" Mode="In" Type="String" />
             <Parameter Name="NombrePeriodo" Mode="In" Type="String" />
+            <Parameter Name="TipoConsecutivoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -527,6 +533,8 @@
             <Parameter Name="Client_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -731,6 +739,7 @@
           <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
           <Property Type="String" Name="Estatus" Nullable="true" MaxLength="8" />
+          <Property Type="Int32" Name="TipoConsecutivoId" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatCountryVwCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="true" />
@@ -1103,6 +1112,7 @@
                 <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="TipoConsecutivoId" ColumnName="TipoConsecutivoId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
