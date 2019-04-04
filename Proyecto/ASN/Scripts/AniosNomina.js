@@ -130,6 +130,8 @@ function handleSaveChanges(e, grid) {
 }
 
 function FechaInicioOpen(e) {
+
+    DelimitaFechaFin();
     if ($("#FechaInicio").data("kendoDatePicker")._oldText.length == 0) {
         OcultaSave();
     }
@@ -138,8 +140,27 @@ function FechaInicioOpen(e) {
     }
 }
 
+function DelimitaFechaInicio() {
+    var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
+    var dtFInicio = new Date($("#FechaCierre").val() + " 00:00");
+    dtFInicio.setDate(dtFInicio.getDate());
+    fechaInicio.setOptions({
+        max: new Date(dtFInicio)
+    });
+}
+
+function DelimitaFechaFin() {
+    var fechafin = $("#FechaCierre").data("kendoDatePicker");
+    var dtFFin = new Date($("#FechaInicio").val()+" 00:00");
+    dtFFin.setDate(dtFFin.getDate());
+    fechafin.setOptions({
+        min: new Date(dtFFin)
+    });
+    $("#FechaCierre").val($("#FechaInicio").val());
+}
 
 function FechaCierreOpen(e) {
+    DelimitaFechaInicio();
     if ($("#FechaCierre").data("kendoDatePicker")._oldText.length == 0) {
         OcultaSave();
     }
@@ -198,16 +219,6 @@ function dateFilter(e) {
         format: "yyyy-MM-dd",
     });
 }
-
-
-//$(document).ready(function () {
-//    //OcultaSave();
-//    setTimeout(function () {
-//        var Hoy = kendo.toString(new Date(), 'yyyy-MM-dd');
-//        $("#FechaInicio").data('kendoDatePicker').value(Hoy);
-//        $("#FechaCierre").data('kendoDatePicker').value(Hoy);
-//    }, 0);
-//});
 
 function rellenaFechasAnio() {
     var anioId = 0;

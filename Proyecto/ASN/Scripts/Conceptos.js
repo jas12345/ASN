@@ -142,7 +142,6 @@ function handleSaveChanges(e, grid) {
     $.extend(true, kendo.ui.validator, {
         rules: { // custom rules
             customRule1: function (input, params) {
-                debugger;
                 if (input.is("[name=Descripcion]") && input.val().trim() === "") {
                     return false;
                 }
@@ -154,7 +153,6 @@ function handleSaveChanges(e, grid) {
         },
         messages: { //custom rules messages
             customRule1: function (input) {
-                debugger;
                 // return the message text
                 return input.attr("data-val-required");
                 //"Ingrese una descripción"
@@ -179,7 +177,6 @@ function ValidaDisplayNameVal(obj) {
 
 function defaultValidate(e)
 {
-    debugger;
     if (typeof this.Descripcion) {
         var valor = $('input[name="Descripcion"]').val();
         if (valor !== undefined && valor.trim() !== "") {

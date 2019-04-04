@@ -11,7 +11,7 @@
             <label for="Descripcion">Descripción</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.Descripcion).HtmlAttributes(new { required = "required"}))
+            @(Html.Kendo().TextBoxFor(x => x.Descripcion).HtmlAttributes(new { required = "required", validationMessage = "El campo descripción es requerido." }))
         </div>
         <div class="editor-label">
             <label for="TipoConcepto">Tipo de concepto</label>
@@ -31,7 +31,7 @@
                         .DataValueField("Ident")
                         .DataTextField("Valor")
                         .Name("TipoConcepto")
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un tipo de concepto." })
             )
         </div>
         <div class="editor-label">
