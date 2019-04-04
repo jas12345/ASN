@@ -45,6 +45,7 @@ function edit(e) {
     }
     else {
         e.container.kendoWindow("title", "Nuevo");
+        editando = 0;
     }
 
 }
@@ -343,15 +344,18 @@ function formatDateTime(date) {
 }
 
 function getName() {
-    var anioVl = $("#AnioId").val();
-    var mesVl = $("#MesId").val();
-    var periodisidadVl = $("#PeriodicidadNominaId").val();
-    var consecutivoVl = $("#ConsecutivoId").val();
-    var tipoPeriodoVl = $("#TipoPeriodo").val();
-    mesVl = mesVl >= 1 && mesVl < 10 ? ("0" + mesVl) : mesVl;
-    var propuesto = anioVl + "_" + mesVl + "_" + periodisidadVl + "_" + consecutivoVl + "_" + tipoPeriodoVl;
-    var nombrePeriodo = $("#NombrePeriodo").data("TextBox");
+    if (editando == 0)
+     {
+        var anioVl = $("#AnioId").val();
+        var mesVl = $("#MesId").val();
+        var periodisidadVl = $("#PeriodicidadNominaId").val();
+        var consecutivoVl = $("#ConsecutivoId").val();
+        var tipoPeriodoVl = $("#TipoPeriodo").val();
+        mesVl = mesVl >= 1 && mesVl < 10 ? ("0" + mesVl) : mesVl;
+        var propuesto = anioVl + "_" + mesVl + "_" + periodisidadVl + "_" + consecutivoVl + "_" + tipoPeriodoVl;
+        var nombrePeriodo = $("#NombrePeriodo").data("TextBox");
 
-    $("#NombrePeriodo").val(propuesto).change();
+            $("#NombrePeriodo").val(propuesto).change();
+     }
 }
 
