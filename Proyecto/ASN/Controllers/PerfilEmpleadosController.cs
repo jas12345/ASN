@@ -266,8 +266,35 @@ namespace ASN.Controllers
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     var list2 = context.CatPerfilEmpleadosSel().ToList();
-
-                    DataSourceResult ok = list2.ToDataSourceResult(request);
+                    List<CatPerfilEmpleadosViewModel> listado = new List<CatPerfilEmpleadosViewModel>();
+                    foreach (var item in list2)
+                    {
+                        CatPerfilEmpleadosViewModel element = new CatPerfilEmpleadosViewModel() {
+                            Perfil_Ident = item.Perfil_Ident,
+                            Country_Ident = (item.Country_Ident != null ? item.Country_Ident.ToString():"-1"),
+                            NombrePerfilEmpleados = item.NombrePerfilEmpleados,
+                            Country_Full_Name = item.Country_Full_Name,
+                            City_Ident = (item.City_Ident!= null ?item.City_Ident.ToString():"-1"),
+                            City_Name = item.City_Name,
+                            Company_Ident = (item.Company_Ident !=null ? item.Company_Ident.ToString(): "-1"),
+                            Company_Name = item.Company_Name,
+                            Location_Ident = (item.Location_Ident != null? item.Location_Ident.ToString():"-1"),
+                            Location_Name = item.Location_Name,
+                            Client_Ident = (item.Client_Ident != null ? item.Client_Ident.ToString():"-1"),
+                            Client_Name = item.Client_Name,
+                            Program_Ident = (item.Program_Ident != null ? item.Program_Ident.ToString():"-1"),
+                            Program_Name = item.Program_Name,
+                            Contract_Type_Ident = (item.Contract_Type_Ident != null ? item.Contract_Type_Ident.ToString():"-1"),
+                            Contract_Type = item.Contract_Type,
+                            ConceptoId = (item.ConceptoId != null ? item.ConceptoId.ToString():"-1"),
+                            Concepto = item.Concepto,
+                            TipoAccesoId = item.TipoAccesoId,
+                            TipoAcceso =item.TipoAcceso,
+                            Active = item.Active
+                        };
+                        listado.Add(element);
+                    }
+                    DataSourceResult ok = listado.ToDataSourceResult(request);
 
                     return Json(ok);
                 }
@@ -282,7 +309,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosSel_Result> profiles)
+        public ActionResult CreatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles)
         {
             try
             {
@@ -298,7 +325,17 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                            context.CatPerfilEmpleadosSi(obj.NombrePerfilEmpleados, obj.Country_Ident, obj.City_Ident, obj.Company_Ident, obj.Location_Ident, obj.Client_Ident, obj.Program_Ident, obj.Contract_Type_Ident, obj.ConceptoId, obj.TipoAccesoId, ccmsidAdmin, resultado);
+                        int i = 0;
+                            context.CatPerfilEmpleadosSi(
+                                obj.NombrePerfilEmpleados,
+                                (string.IsNullOrEmpty(obj.Country_Ident)?-1:int.Parse(obj.Country_Ident)), 
+                                obj.City_Ident,
+                                (string.IsNullOrEmpty(obj.Company_Ident) ?-1:int.Parse(obj.Company_Ident)),
+                                (string.IsNullOrEmpty(obj.Location_Ident) ?-1:int.Parse(obj.Location_Ident)),
+                                (string.IsNullOrEmpty(obj.Client_Ident)?-1:int.Parse(obj.Client_Ident)),
+                                (string.IsNullOrEmpty(obj.Program_Ident)?-1:int.Parse(obj.Program_Ident)),
+                                (string.IsNullOrEmpty(obj.Contract_Type_Ident) ?-1:int.Parse(obj.Contract_Type_Ident)), 
+                                ((Int32.TryParse(obj.ConceptoId, out i) ? i : (int?)null)), obj.TipoAccesoId, ccmsidAdmin, resultado);
                         }
 
                         int.TryParse(resultado.Value.ToString(), out res);
@@ -333,7 +370,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosSel_Result> profiles)
+        public ActionResult UpdatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles)
         {
             try
             {
