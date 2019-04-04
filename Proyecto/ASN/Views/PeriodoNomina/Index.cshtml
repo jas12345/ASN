@@ -21,7 +21,7 @@
     {
         column.ForeignKey(c => c.AnioId, (System.Collections.IEnumerable)ViewData["Anios"], "Ident", "Valor").Width(75).Title("Año").Visible(true).Filterable(true);
         column.ForeignKey(c => c.MesId, (System.Collections.IEnumerable)ViewData["Meses"], "Ident", "Valor").Width(75).Title("Mes").Visible(true).Filterable(true);
-        column.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["PeriodicidadNomina"], "Ident", "Valor").Width(85).Title("Periodicidad Nomina").Filterable(true).Visible(true);
+        column.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["PeriodicidadNomina"], "Ident", "Valor").Width(85).Title("Periodicidad").Filterable(true).Visible(true);
         column.ForeignKey(c => c.ConsecutivoId, (System.Collections.IEnumerable)ViewData["Consecutivos"], "Ident", "Valor").Width(70).Title("Consecutivo").Visible(true).Filterable(true);
         column.ForeignKey(c => c.TipoPeriodo, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Id", "Value").Width(85).Title("Tipo Periodo").Filterable(true);
         column.ForeignKey(c => c.TipoConsecutivoId, (System.Collections.IEnumerable)ViewData["TipoConsecutivo"], "Id", "Value").Width(85).Title("Tipo Consecutivo").Filterable(true);
