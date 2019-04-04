@@ -29,7 +29,6 @@
                 .DataValueField("Id")
                 .DataTextField("Value")
                 .Name("Country_Ident")
-                .Value("-1")
                 .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
@@ -48,7 +47,6 @@
                 .Filter("contains")
                 .DataValueField("Id")
                 .DataTextField("Value")
-                .Value("-1")
                 .Name("City_Ident")
                 .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
@@ -68,9 +66,8 @@
                 .Filter("contains")
                 .DataValueField("Id")
                 .DataTextField("Value")
-                .Value("-1")
-                .Name("Mercado")
-                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                .Name("Company_Ident")
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Este campo es requerido." })
             )
         </div>
         <div class="editor-label">
@@ -88,8 +85,7 @@
                 .Filter("contains")
                 .DataValueField("Id")
                 .DataTextField("Value")
-                .Value("-1")
-                .Name("Site")
+                .Name("Location_Ident")
                 .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
@@ -108,8 +104,7 @@
                 .Filter("contains")
                 .DataValueField("Id")
                 .DataTextField("Value")
-                .Value("-1")
-                .Name("Cliente")
+                .Name("Client_Ident")
                 .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
@@ -128,8 +123,7 @@
                 .Filter("contains")
                 .DataValueField("Id")
                 .DataTextField("Value")
-                .Value("-1")
-                .Name("Programa")
+                .Name("Program_Ident")
                 .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
@@ -148,8 +142,7 @@
                 .Filter("contains")
                 .DataValueField("Id")
                 .DataTextField("Value")
-                .Value("-1")
-                .Name("TipoContrato")
+                .Name("Contract_Type_Ident")
                 .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
@@ -165,12 +158,13 @@
                                                             {
                                                                 read.Action("GetConceptosCMB", "PerfilEmpleados");
                                                             });
-                                                    })
+                                                        })
                                                         .Filter("contains")
                                                         .DataValueField("Ident")
                                                         .DataTextField("Valor")
-                                                        .Name("Concepto")
-                                                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                                                        .Name("ConceptoId")
+                                                        .OptionLabel(" - Concepto - ")
+                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
             )
         </div>
         <div class="editor-label">
@@ -189,7 +183,7 @@
                                                 .OptionLabel("- Tipo de acceso - ")
                                                 .DataValueField("Ident")
                                                 .DataTextField("Valor")
-                                                .Name("TipoAcceso")
+                                                .Name("TipoAccesoId")
                                                 .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>

@@ -1,13 +1,49 @@
 ﻿function edit(e) {
+    var country = $("#Country_Ident").data("kendoDropDownList");
+    var city = $("#City_Ident").data("kendoDropDownList");
+    var company = $("#Company_Ident").data("kendoDropDownList");
+    var location = $("#Location_Ident").data("kendoDropDownList");
+    var client = $("#Client_Ident").data("kendoDropDownList");
+    var program = $("#Program_Ident").data("kendoDropDownList");
+    var contract_Type = $("#Contract_Type_Ident").data("kendoDropDownList");
+
     if (e.model.isNew() === false) {
+
+        $("#City_Ident").val(e.model.City_Ident).change();
+
+        country.enable(false);
+        city.enable(false);
+        company.enable(false);
+        location.enable(false);
+        client.enable(false);
+        program.enable(false);
+        contract_Type.enable(false);
+
         $("#Pais").attr("disabled", "disabled");
         //$("#MesId").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Editar");
     }
     else {
+        var valorDefault = "-1";
+
+        country.value(valorDefault);
+        city.value(valorDefault);
+        company.value(valorDefault);
+        location.value(valorDefault);
+        client.value(valorDefault);
+        program.value(valorDefault);
+        contract_Type.value(valorDefault);
+
+        country.trigger("change");
+        city.trigger("change");
+        company.trigger("change");
+        location.trigger("change");
+        client.trigger("change");
+        program.trigger("change");
+        contract_Type.trigger("change");
+
         $("#Active").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Nuevo");
-
     }
 }
 
@@ -96,27 +132,6 @@ function handleSaveChanges(e, grid) {
         //var dispositionObj = $(cols[1]);
 
         if (model && model.id <= 0 && valid) {
-
-            //if (dispositionObj.text() == "") {
-            //    var notification = $("#popupNotification").data("kendoNotification");
-            //    notification.show("Invalid disposition name", "error");
-            //    grid.editCell(dispositionObj);
-            //    e.preventDefault(true);
-            //    valid = false;
-            //    //setTimeout($.unblockUI, 1000);
-            //    return false;
-            //}
-
-            //if (ValidaDisplayNameVal(displaynameObj.text()) != 0) {
-            //    var notification = $("#popupNotification").data("kendoNotification");
-            //    notification.show("Invalid disposition values", "error");
-            //    grid.editCell(displaynameObj);
-            //    e.preventDefault(true);
-            //    valid = false;
-            //    //setTimeout($.unblockUI, 1000);
-            //    return false;
-            //}
-
         }
         else {
             break;
@@ -125,7 +140,6 @@ function handleSaveChanges(e, grid) {
 
     if (!valid) {
         e.preventDefault(true);
-        //setTimeout($.unblockUI, 1000);
     }
 }
 
@@ -156,12 +170,6 @@ function MuestraSave() {
 
 
 function ValidaDisplayNameVal(obj) {
-    //if (obj == "" || (obj.length > 150 || obj.length < 3) || obj.match(/^[a-z A-Z0-9 ñáéíóú\)\(]*$/) == null) {
-    //    return "El nombre del Mercado debe ser entre 3 y 150 caracteres y solo se aceptan numeros,letras y parentesis.";
-    //}
-    //else {
-    //    return 0;
-    //}
 }
 
 function accionado() {
