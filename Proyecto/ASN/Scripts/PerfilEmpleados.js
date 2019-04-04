@@ -6,7 +6,10 @@
     var client = $("#Client_Ident").data("kendoDropDownList");
     var program = $("#Program_Ident").data("kendoDropDownList");
     var contract_Type = $("#Contract_Type_Ident").data("kendoDropDownList");
+    var tipoAccesoId = $("#TipoAccesoId").data("kendoDropDownList");
+    var conceptoId = $("#ConceptoId").data("kendoDropDownList");
 
+    
     if (e.model.isNew() === false) {
 
         $("#City_Ident").val(e.model.City_Ident).change();
@@ -18,7 +21,9 @@
         client.enable(false);
         program.enable(false);
         contract_Type.enable(false);
-
+        tipoAccesoId.enable(false);
+        conceptoId.enable(false);
+        
         $("#Pais").attr("disabled", "disabled");
         //$("#MesId").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Editar");
@@ -34,13 +39,13 @@
         program.value(valorDefault);
         contract_Type.value(valorDefault);
 
-        country.trigger("change");
-        city.trigger("change");
-        company.trigger("change");
-        location.trigger("change");
-        client.trigger("change");
-        program.trigger("change");
-        contract_Type.trigger("change");
+        //country.trigger("change");
+        //city.trigger("change");
+        //company.trigger("change");
+        //location.trigger("change");
+        //client.trigger("change");
+        //program.trigger("change");
+        //contract_Type.trigger("change");
 
         $("#Active").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Nuevo");
@@ -155,7 +160,6 @@ function MuestraSave() {
     $.extend(true, kendo.ui.validator, {
         rules: { // custom rules
             productnamevalidation: function (input, params) {
-
                 return true;
             }
         },

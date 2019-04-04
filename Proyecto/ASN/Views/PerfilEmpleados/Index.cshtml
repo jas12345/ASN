@@ -19,7 +19,6 @@
                                 {
                                     columns.Bound(c => c.Perfil_Ident).Title("Perfil").Visible(false).Filterable(false).Width(50);
                                     columns.Bound(c => c.NombrePerfilEmpleados).Title("Nombre de Perfil").Width(150);
-
                                     columns.ForeignKey(c => c.Country_Ident, (System.Collections.IEnumerable)ViewData["Pais"], "Id", "Value").Title("Pais").Visible(true).Filterable(true).Width(80);
                                     columns.ForeignKey(c => c.City_Ident, (System.Collections.IEnumerable)ViewData["Ciudad"], "Id", "Value").Title("Ciudad").Visible(true).Filterable(true).Width(80);
                                     columns.ForeignKey(c => c.Company_Ident, (System.Collections.IEnumerable)ViewData["Mercado"], "Id", "Value").Title("Mercado").Visible(true).Filterable(true).Width(80);
@@ -32,12 +31,10 @@
 
                                     columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
                                     columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
-                                }
-                                )
+                                })
                                 .ToolBar(toolBar =>
                                 {
                                     toolBar.Create().Text("Nuevo");
-                                    //toolBar.Save();
                                     toolBar.Excel().Text("Exportar a excel");
                                 })
                                 .Excel(ex => ex.AllPages(true))
