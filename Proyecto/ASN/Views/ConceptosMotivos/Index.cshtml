@@ -9,7 +9,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <label>Catálogo de Motivos</label>
+                <label>Motivos de Incidencia</label>
             </div>
         </div>
         <div class="row">
@@ -19,7 +19,7 @@
                         .Columns(columns =>
                         {
                             columns.Bound(c => c.ConceptoMotivoId).Title("Motivo").Visible(true).Filterable(false).Width(50);
-                            columns.Bound(c => c.Descripcion).Width(150).Title("Descripción de Motivo");
+                            columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
                             columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
                             columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
                         }
