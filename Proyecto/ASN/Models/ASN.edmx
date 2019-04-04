@@ -25,7 +25,9 @@
           <Parameter Name="anioId" Type="int" Mode="In" />
           <Parameter Name="mesId" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="CatAniosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatAniosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AnioActivo" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatAniosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatAniosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
@@ -429,7 +431,9 @@
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CatAniosNominaCMB" ReturnType="Collection(ASNModel.CatAniosNominaCMB_Result)" />
+          <FunctionImport Name="CatAniosNominaCMB" ReturnType="Collection(ASNModel.CatAniosNominaCMB_Result)" >
+            <Parameter Name="AnioActivo" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="CatMesesCMB" ReturnType="Collection(ASNModel.CatMesesCMB_Result)" >
           <Parameter Name="AnioId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -656,6 +660,8 @@
           <Property Type="String" Name="FechaInicioAnio" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FechaCierreAnio" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="DescripcionMes" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Anio" Nullable="false" />
+          <Property Type="Boolean" Name="ActiveAnio" Nullable="false" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -987,6 +993,8 @@
                 <ScalarProperty Name="FechaInicioAnio" ColumnName="FechaInicioAnio" />
                 <ScalarProperty Name="FechaCierreAnio" ColumnName="FechaCierreAnio" />
                 <ScalarProperty Name="DescripcionMes" ColumnName="DescripcionMes" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="ActiveAnio" ColumnName="ActiveAnio" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

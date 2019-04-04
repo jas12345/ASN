@@ -25,7 +25,7 @@ namespace ASN.Controllers
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                         ViewData["TipoPeriodicidad"] = context.CatPeriodicidadNominaCMB().ToList();
                         ViewData["ConsecutivosPeriodo"] = context.CatConsecutivoPeriodicidadCMB("All").ToList();
-                        ViewData["AniosCMB"] = context.CatAniosNominaCMB().ToList();
+                        ViewData["AniosCMB"] = context.CatAniosNominaCMB(null).ToList();
                         ViewData["MesCMB"] = context.CatMesesCMB(0).ToList();
                     }
 
@@ -109,7 +109,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatAniosNominaCMB().ToList();
+                    lstCMB = ctx.CatAniosNominaCMB(null).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);

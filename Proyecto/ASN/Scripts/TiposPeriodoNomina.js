@@ -1,6 +1,18 @@
 ﻿
 
 function edit(e) {
+
+    var validator = e.container.data('kendoValidator');
+
+    $('input[name="TipoPeriodoId"]').blur(function () {
+        validator.validateInput(this);
+    });
+
+    $('input[name="Descripcion"]').change(function () {
+        validator.validateInput(this);
+    });
+
+
     if (e.model.isNew() === false) {
         $("#TipoPeriodoId").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Editar");
@@ -95,9 +107,7 @@ function handleSaveChanges(e, grid) {
         //var dispositionObj = $(cols[1]);
 
         if (model && model.id <= 0 && valid) {
-
             //nothing
-
         }
         else {
             break;
@@ -114,12 +124,25 @@ function handleSaveChanges(e, grid) {
 (function ($, kendo) {
     $.extend(true, kendo.ui.validator, {
         rules: { // custom rules
+            customRule1: function(input, params) {
+                if (input.is("[name=TipoPeriodoId]") && input.val().trim() === "") {
+                    var tipoPeriodo = $("#TipoPeriodoId").data("TextBox");
+                    //tipoPeriodo.messages
+                    return false;
+                }
+                if (input.is("[name=Descripcion]") && input.val().trim() === "") {
+                    return false;
+                }
+                return true;
+            },
             productnamevalidation: function (input, params) {
-
                 return true;
             }
         },
         messages: { //custom rules messages
+            customRule1: function (input) {
+                return input.attr("data-val-required");
+            },
             productnamevalidation: function (input) {
                 // return the message text
                 return input.attr("data-val-number");

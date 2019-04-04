@@ -27,8 +27,8 @@
                 .Name("AnioId")
                 .Enable(false)
                 .Events(x => x.Change("rellenaFechasAnio").DataBound("validandoCatMeses"))
-                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
-                //.Events(e => e.Change("AnioNominaChange")
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "El campo año es requerido." })
+            //.Events(e => e.Change("AnioNominaChange")
             )
         </div>
 
@@ -67,8 +67,7 @@
                 .DataValueField("Ident")
                 .DataTextField("Valor")
                 .Name("MesId")
-                .Enable(false)
-                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "El campo mes es requerido." })
             )
         </div>
 
@@ -77,20 +76,23 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DatePicker()
-                .Format("yyyy-MM-dd")
-                .ParseFormats(new string[]
-                    {
+        .Format("yyyy-MM-dd")
+        .ParseFormats(new string[]
+            {
                         "ddd, M/d/yyyy",
                         "ddd, MM/dd/yyyy",
                         "ddd, M/dd/yyyy"
-                    }
-                )
-                .Name("FechaInicio")
-                .Value(DateTime.Now)
-                //.Min(DateTime.Now)
-                //.Max(DateTime.Now)
-                .Enable(true)
-                .Events(e => e.Change("FechaInicioOpen"))
+            }
+        )
+        .Name("FechaInicio")
+        .Value(DateTime.Now)
+        .Enable(true)
+        .Events(e => e.Change("FechaInicioOpen"))
+        .HtmlAttributes(new
+        {
+            required = "required",
+            validationMessage = "El campo fecha inicio es requerido"
+        })
             )
         </div>
         <div class="editor-label">
@@ -108,10 +110,13 @@
                 )
                 .Name("FechaCierre")
                 .Value(DateTime.Now)
-                //.Min(DateTime.Now)
-                //.Max(DateTime.Now)
                 .Enable(true)
                 .Events(e => e.Change("FechaCierreOpen"))
+                .HtmlAttributes(new
+                {
+                    required = "required",
+                    validationMessage = "El campo fecha cierre es requerido"
+                })
             )
         </div>
         <div class="editor-label">

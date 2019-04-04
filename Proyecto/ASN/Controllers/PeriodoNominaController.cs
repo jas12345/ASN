@@ -28,7 +28,7 @@ namespace ASN.Controllers
                     using (ASNContext context = new ASNContext())
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                        ViewData["Anios"] = context.CatAniosNominaCMB().ToList();
+                        ViewData["Anios"] = context.CatAniosNominaCMB(null).ToList();
                         ViewData["Meses"] = context.CatMesesCMB(0).ToList();
                         ViewData["PeriodicidadNomina"] = context.CatPeriodicidadNominaCMB().ToList();
                         ViewData["Consecutivos"] = context.CatConsecutivoPeriodicidadCMB("All").ToList();
@@ -143,6 +143,29 @@ namespace ASN.Controllers
                 }
 
                 return Json(listTipoPeriodo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetAniosNominaCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatAniosNominaCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatAniosNominaCMB(null).ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

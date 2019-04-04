@@ -22,5 +22,7 @@ namespace ASN.Models
         public string FechaInicioAnio { get; set; }
         public string FechaCierreAnio { get; set; }
         public string DescripcionMes { get; set; }
+        public int Anio { get; set; }
+        public bool ActiveAnio { get; set; }
     }
 }
