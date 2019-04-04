@@ -152,19 +152,19 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.ConceptoId)
-                                                        .DataSource(source =>
-                                                        {
-                                                            source.Read(read =>
-                                                            {
-                                                                read.Action("GetConceptosCMB", "PerfilEmpleados");
-                                                            });
-                                                        })
-                                                        .Filter("contains")
-                                                        .DataValueField("Ident")
-                                                        .DataTextField("Valor")
-                                                        .Name("ConceptoId")
-                                                        .OptionLabel(" - Todos - ")
-                                                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetConceptosCMB", "PerfilEmpleados");
+                    });
+                })
+                .Filter("contains")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("ConceptoId")
+                .OptionLabel(" - Todos - ")
+                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
         <div class="editor-label">
@@ -172,19 +172,19 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.TipoAccesoId)
-                                                .DataSource(source =>
-                                                {
-                                                    source.Read(read =>
-                                                    {
-                                                        read.Action("GetTiposAccesoCMB", "PerfilEmpleados");
-                                                    });
-                                            })
-                                                .Filter("contains")
-                                                .OptionLabel("- Tipo de acceso - ")
-                                                .DataValueField("Ident")
-                                                .DataTextField("Valor")
-                                                .Name("TipoAccesoId")
-                                                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetTiposAccesoCMB", "PerfilEmpleados");
+                    });
+                })
+                .Filter("contains")
+                .OptionLabel("- Tipo de acceso - ")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("TipoAccesoId")
+                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
 

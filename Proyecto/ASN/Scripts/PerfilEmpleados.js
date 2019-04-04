@@ -23,6 +23,10 @@
         contract_Type.enable(false);
         tipoAccesoId.enable(false);
         conceptoId.enable(false);
+
+        if (e.model.ConceptoId === "-1") {
+            conceptoId.select(0);
+        }
         
         $("#Pais").attr("disabled", "disabled");
         //$("#MesId").attr("disabled", "disabled");

@@ -325,7 +325,7 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                        int i = 0;
+                            int i = 0;
                             context.CatPerfilEmpleadosSi(
                                 obj.NombrePerfilEmpleados,
                                 (string.IsNullOrEmpty(obj.Country_Ident)?-1:int.Parse(obj.Country_Ident)), 
