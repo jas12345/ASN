@@ -101,7 +101,7 @@
             )
         </div>
         <div class="editor-label">
-            <label for="TipoPeriodo">Tipo Periodo</label>
+            <label for="TipoPeriodo">Tipo de Periodo</label>
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.TipoPeriodo)
@@ -113,7 +113,7 @@
                                         });
                                     })
                                     .Filter("contains")
-                                    .OptionLabel("- Tipo Periodicidad - ")
+                                    .OptionLabel("- Tipo de Periodo - ")
                                     .DataValueField("Id")
                                     .DataTextField("Value")
                                     .Name("TipoPeriodo")
@@ -159,8 +159,8 @@
                             })
                             .Filter("contains")
                             .OptionLabel("- Tipo Consecutivo - ")
-                            .DataValueField("Ident")
-                            .DataTextField("Valor")
+                            .DataValueField("Id")
+                            .DataTextField("Value")
                             .Name("TipoConsecutivoId")
                             .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
             )

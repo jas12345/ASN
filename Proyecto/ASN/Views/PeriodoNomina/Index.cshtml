@@ -24,6 +24,7 @@
         column.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["PeriodicidadNomina"], "Ident", "Valor").Width(85).Title("Periodicidad Nomina").Filterable(true).Visible(true);
         column.ForeignKey(c => c.ConsecutivoId, (System.Collections.IEnumerable)ViewData["Consecutivos"], "Ident", "Valor").Width(70).Title("Consecutivo").Visible(true).Filterable(true);
         column.ForeignKey(c => c.TipoPeriodo, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Id", "Value").Width(85).Title("Tipo Periodo").Filterable(true);
+        column.ForeignKey(c => c.TipoConsecutivoId, (System.Collections.IEnumerable)ViewData["TipoConsecutivo"], "Id", "Value").Width(85).Title("Tipo Consecutivo").Filterable(true);
         column.Bound(c => c.NombrePeriodo).Width(85).Title("Nombre Periodo").Filterable(false);
         column.Bound(c => c.FechaInicio).Visible(false).Filterable(false);
         column.Bound(c => c.FechaFin).Visible(false).Filterable(false);

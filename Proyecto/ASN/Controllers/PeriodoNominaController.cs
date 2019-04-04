@@ -33,6 +33,7 @@ namespace ASN.Controllers
                         ViewData["PeriodicidadNomina"] = context.CatPeriodicidadNominaCMB().ToList();
                         ViewData["Consecutivos"] = context.CatConsecutivoPeriodicidadCMB("All").ToList();
                         ViewData["TipoPeriodicidad"] = context.CatTiposPeriodoNominaCMB().ToList();
+                        ViewData["TipoConsecutivo"] = context.CatTiposConsecutivoCMB().ToList();
                     }
                     return View();
                 }
@@ -127,21 +128,21 @@ namespace ASN.Controllers
         //}
 
         /// <summary>
-        /// Método para obtener el listado de los tipos de periodicidad
+        /// Método para obtener el listado de los tipos de período
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetTipoPeriodicidadCMB()
+        public JsonResult GetTipoPeriodoCMB()
         {
             try
             {
-                var listTipoPeriodicidad = new List<CatTiposPeriodoNominaCMB_Result>();
+                var listTipoPeriodo = new List<CatTiposPeriodoNominaCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listTipoPeriodicidad = context.CatTiposPeriodoNominaCMB().ToList();
+                    listTipoPeriodo = context.CatTiposPeriodoNominaCMB().ToList();
                 }
 
-                return Json(listTipoPeriodicidad, JsonRequestBehavior.AllowGet);
+                return Json(listTipoPeriodo, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -228,11 +229,11 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstTipoConsecutivo = new List<CatTipoConceptosCMB_Result>();
+                var lstTipoConsecutivo = new List<CatTiposConsecutivoCMB_Result>();
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstTipoConsecutivo = ctx.CatTipoConceptosCMB().ToList();
+                    lstTipoConsecutivo = ctx.CatTiposConsecutivoCMB().ToList();
                 }
 
                 return Json(lstTipoConsecutivo, JsonRequestBehavior.AllowGet);
