@@ -18,7 +18,7 @@
                     .Name("grid")
                     .Columns(columns =>
                     {
-                        columns.Bound(c => c.Ident).Title("id").Visible(true).Filterable(false).Width(50);
+                        columns.Bound(c => c.Ident).Title("id").Visible(false).Filterable(false).Width(50);
                         //columns.Bound(c => c.AnioId).Width(150).Title("Descripción");
                         columns.ForeignKey(c => c.AnioId, (System.Collections.IEnumerable)ViewData["AniosCMB"], "Ident", "Valor").Width(125).Title("Año");
                         columns.ForeignKey(c => c.MesId, (System.Collections.IEnumerable)ViewData["MesCMB"], "Ident", "Valor").Width(125).Title("Mes");

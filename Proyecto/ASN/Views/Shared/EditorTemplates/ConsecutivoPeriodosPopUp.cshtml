@@ -18,14 +18,13 @@
                         {
                             read.Action("GetAniosCMB", "ConsecutivoPeriodos");
                         });
-                    //.ServerFiltering(true);
                 })
                     .Filter("contains")
                     .OptionLabel("- Año - ")
                     .DataValueField("Ident")
                     .DataTextField("Valor")
                     .Name("AnioId")
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "El campo año es requerido." })
             )
         </div>
         <div class="editor-label">
@@ -47,7 +46,7 @@
                     .DataTextField("Valor")
                     .Name("MesId")
                     .Events(x => x.Change("rellenaFechasMes").DataBound("validando"))
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em"})
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "El campo mes es requerido." })
                     .CascadeFrom("AnioId")
             )
         </div>
