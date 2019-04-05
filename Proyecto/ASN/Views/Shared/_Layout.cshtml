@@ -48,23 +48,12 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
                 }
 
-                    @*if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("BadgeIn24DateCommitted"))
-            {
-                <li>@Html.ActionLink("Mapeo de Conceptos", "index", "Catalogos")</li>
-                <li>@Html.ActionLink("Motivos de Solicitud", "index", "BadgeIn24")</li>
-            }*@
-
                     if (User.IsInRole("Desarrollo"))
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li class="dropdown-header"><div class="fa fa-angellist"></div></li>
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
-                                }
-
                                 @if (User.IsInRole("Desarrollo"))
                                 {
                                     <li>@Html.ActionLink("Años Nómina", "AniosNomina", "Nomina")</li>
@@ -77,22 +66,7 @@
 
                                 @if (User.IsInRole("Desarrollo"))
                                 {
-                                    <li>@Html.ActionLink("Tipos de Periodo", "Index", "TiposPeriodoNomina")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
                                     <li>@Html.ActionLink("Periodicidad Nómina", "index", "PeriodicidadNomina")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Periodos de Nómina", "index", "PeriodoNomina")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Motivos de Incidencia", "index", "ConceptosMotivos")</li>
                                 }
 
                                 @if (User.IsInRole("Desarrollo"))
@@ -102,57 +76,31 @@
 
                                 @if (User.IsInRole("Desarrollo"))
                                 {
+                                    <li>@Html.ActionLink("Tipos de Periodo", "Index", "TiposPeriodoNomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Periodos de Nómina", "index", "PeriodoNomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Motivos de Incidencia", "index", "ConceptosMotivos")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
                                     <li>@Html.ActionLink("Perfil de Empleados", "Index", "PerfilEmpleados")</li>
                                 }
                             </ul>
                         </li>
                     }
-
-                    @*if (User.IsInRole("Desarrollo") || User.IsInRole("Security") || User.IsInRole("RH"))
-            {
-                <li>@Html.ActionLink("Carga de Documentos", "index", "Reposition")</li>
-            }
-
-            if (User.IsInRole("Desarrollo"))
-            {
-                <li>@Html.ActionLink("Carga masiva", "index", "APBajas")</li>
-            }
-
-            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
-            {
-                <li> @Html.ActionLink("Estatus de Solicitud", "index", "Clerical") </li>
-            }
-
-            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
-            {
-                <li>@Html.ActionLink("Períodos de Nómina", "index", "Clerical")</li>
-            }
-
-            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
-            {
-                <li>@Html.ActionLink("Notificaciones", "index", "Clerical")</li>
-            }
-
-            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
-            {
-                <li>@Html.ActionLink("Descargas de EXCEL", "index", "Clerical")</li>
-            }
-
-            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
-            {
-                <li> @Html.ActionLink("Reporte General", "index", "Clerical") </li>
-            }
-
-            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
-            {
-                <li>@Html.ActionLink("Reporte de Auditoría", "index", "Clerical")</li>
-            }
-
-            if (User.IsInRole("Desarrollo") || User.IsInRole("Clerical-ESV"))
-            {
-                <li>@Html.ActionLink("Depuración de Movimientos", "index", "Clerical")</li>
-            }*@
-
 
                 }
 
