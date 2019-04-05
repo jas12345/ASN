@@ -11,7 +11,8 @@
             <label for="Descripcion">Motivo de Incidencia</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.Descripcion))
+            @(Html.Kendo().TextBoxFor(x => x.Descripcion)
+                .HtmlAttributes(new { required = "required", validationMessage = "Este campo es requerido." }))
         </div>
         <div class="editor-label">
             <label for="Active">Activo</label>
