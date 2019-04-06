@@ -1,17 +1,22 @@
-﻿function edit(e) {
+﻿var editandoElemento = 0;
+function edit(e) {
     if (e.model.isNew() === false) {
         $("#AnioId").attr("disabled", "disabled");
-        $("#MesId").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Editar");
+        editandoElemento = 1;
     }
     else {
         $("#Active").attr("disabled", "disabled");
+        editandoElemento = 0;
+        var fecha = new Date();
+        $("#AnioId").val(fecha.getFullYear());
+
         e.container.kendoWindow("title", "Nuevo");
 
     }
 }
 
-function hola(e) {
+function validaAccion(e) {
     if ((e.type === "create" || e.type === "update")) {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
@@ -19,20 +24,17 @@ function hola(e) {
 
         if (e.response.Errors === null) {
             var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Saved", "success");
+            notification.show("Procesado correctamente", "success");
         }
     }
 }
 
 function errorsote(args) {
-
     if (args.errors) {
-
         $(document).ready(function () {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show(args.errors.error.errors[0], "error");
         });
-
     }
 }
 
@@ -48,11 +50,9 @@ function onSave(e) {
         if (item.id <= 0) {
             sonNuevos = true;
         }
-
     });
 
     if (hayCambios) {
-        //$.blockUI({ message: null });
         if (sonNuevos) {
             handleSaveChanges(e, this);
         }
@@ -62,7 +62,6 @@ function onSave(e) {
     }
 }
 
-
 function handleEditChanges(e, grid) {
     var valid = true;
     var rows = grid.tbody.find("tr");
@@ -71,11 +70,9 @@ function handleEditChanges(e, grid) {
     });
 
     for (var i = 0; i < objeto.length; i++) {
-
         var cols = $(rows[i]).find("td");
         //var disposition = objeto[i].Disposition;
         var displayname = objeto[i].Mercado;
-
     }
 
     if (!valid) {
@@ -96,27 +93,6 @@ function handleSaveChanges(e, grid) {
         //var dispositionObj = $(cols[1]);
 
         if (model && model.id <= 0 && valid) {
-
-            //if (dispositionObj.text() == "") {
-            //    var notification = $("#popupNotification").data("kendoNotification");
-            //    notification.show("Invalid disposition name", "error");
-            //    grid.editCell(dispositionObj);
-            //    e.preventDefault(true);
-            //    valid = false;
-            //    //setTimeout($.unblockUI, 1000);
-            //    return false;
-            //}
-
-            //if (ValidaDisplayNameVal(displaynameObj.text()) != 0) {
-            //    var notification = $("#popupNotification").data("kendoNotification");
-            //    notification.show("Invalid disposition values", "error");
-            //    grid.editCell(displaynameObj);
-            //    e.preventDefault(true);
-            //    valid = false;
-            //    //setTimeout($.unblockUI, 1000);
-            //    return false;
-            //}
-
         }
         else {
             break;
@@ -184,12 +160,27 @@ function MuestraSave() {
 (function ($, kendo) {
     $.extend(true, kendo.ui.validator, {
         rules: { // custom rules
+            customRule1: function (input, params) {
+                
+                var fechaPasada = new Date();
+                var fechaFutura = new Date();
+                var anioFuturo = fechaFutura.getFullYear() + 5;
+                var anioAnterior = fechaPasada.getFullYear() - 5;
+                
+                if (input.is("[name=AnioId]") && input.val().trim() === "" || (input.val().trim() < anioAnterior || input.val().trim() > anioFuturo)) {
+                    $("input[name=AnioId]").attr("validationMessage", "La fecha no puede ser menor ó mayor a 5 años de la fecha actual");
+                    return false;
+                }
+                return true;
+            },
             productnamevalidation: function (input, params) {
-
                 return true;
             }
         },
         messages: { //custom rules messages
+            customRule1: function (input) {                
+                return input.attr("data-val-required");
+            },
             productnamevalidation: function (input) {
                 // return the message text
                 return input.attr("data-val-number");
@@ -229,7 +220,6 @@ function rellenaFechasAnio() {
 
     if (anioId != 0 && mesId != 0) {
         $.post(urlFechasMes + "/?mesId=" + mesId + "&anioId=" + anioId, function (data) {
-            //console.log(data);
             $("#FechaInicioAnio").val(data[0].FechaInicio);
             $("#FechaCierreAnio").val(data[0].FechaCierre);
 
@@ -249,7 +239,6 @@ function rellenaFechasAnio() {
             if (editando === 0) {
                 var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
                 var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
-                //datePicker.value("2019-03-01");
                 fechaCierre.value(data[0].FechaCierre);
                 fechaInicio.value(data[0].FechaInicio);
             }

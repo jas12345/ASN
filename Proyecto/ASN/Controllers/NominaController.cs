@@ -203,7 +203,6 @@ namespace ASN.Controllers
                     {
                         ModelState.AddModelError("error", "Las fechas de Inicio y de cierre no deben estar vacias.");
                     }
-
                     else { 
                         int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
@@ -250,7 +249,6 @@ namespace ASN.Controllers
                     {
                         ModelState.AddModelError("error", "Las fechas de Inicio y de cierre no deben estar vacias.");
                     }
-
                     else
                     {
                         int.TryParse(User.Identity.Name, out ccmsidAdmin);
