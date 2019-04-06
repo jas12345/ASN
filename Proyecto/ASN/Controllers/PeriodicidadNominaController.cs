@@ -116,7 +116,7 @@ namespace ASN.Controllers
                     {
                         if (!string.IsNullOrEmpty(obj.Descripcion) && !string.IsNullOrEmpty(obj.PeriodicidadNominaId))
                         {
-                            context.CatPeriodicidadNominaSi(obj.PeriodicidadNominaId,obj.Descripcion, ccmsidAdmin, resultado);
+                            context.CatPeriodicidadNominaSi(obj.PeriodicidadNominaId,obj.Descripcion, obj.Consecutivos, ccmsidAdmin, resultado);
                         }
                         else
                         {

@@ -22,8 +22,8 @@
                         //columns.Bound(c => c.AnioId).Width(150).Title("Descripción");
                         columns.ForeignKey(c => c.AnioId, (System.Collections.IEnumerable)ViewData["AniosCMB"], "Ident", "Valor").Width(125).Title("Año");
                         columns.ForeignKey(c => c.MesId, (System.Collections.IEnumerable)ViewData["MesCMB"], "Ident", "Valor").Width(125).Title("Mes");
-                        columns.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Ident", "Valor").Width(125).Title("Periodicidad");
-                        columns.ForeignKey(c => c.ConsecutivoId, (System.Collections.IEnumerable)ViewData["ConsecutivosPeriodo"], "Ident", "Valor").Width(125).Title("Consecutivo");
+                        columns.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Ident", "Valor").Width(125).Title("Periodicidad").ClientTemplate("#:PeriodicidadActiva ? DescripcionPeriodicidad : DescripcionPeriodicidad #");
+                        columns.ForeignKey(c => c.ConsecutivoId, (System.Collections.IEnumerable)ViewData["ConsecutivosPeriodo"], "Ident", "Valor").Width(125).Title("Consecutivo").ClientTemplate("#:PeriodicidadActiva ? ConsecutivoId : Consecutivo #");
                         columns.Bound(c => c.FechaInicio).Width(150).Title("Fecha de Inicio");
                         columns.Bound(c => c.FechaCierre).Width(150).Title("Fecha de Cierre");
                         //columns.Bound(c => c.EID).Width(75).Title("s");

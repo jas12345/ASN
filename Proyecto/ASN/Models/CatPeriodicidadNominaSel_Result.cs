@@ -16,5 +16,6 @@ namespace ASN.Models
         public string PeriodicidadNominaId { get; set; }
         public string Descripcion { get; set; }
         public bool Active { get; set; }
+        public int Consecutivos { get; set; }
     }
 }

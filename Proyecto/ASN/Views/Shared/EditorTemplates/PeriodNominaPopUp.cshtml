@@ -12,14 +12,21 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().TextBoxFor(x => x.PeriodicidadNominaId)
-                .HtmlAttributes(new { required = "required", MaxLength = "5", validationMessage = "Este campo es requerido." }))
+                        .HtmlAttributes(new { required = "required", MaxLength = "5", validationMessage = "Este campo es requerido." }))
         </div>
         <div class="editor-label">
             <label for="Descripcion">Descripción</label>
         </div>
         <div class="editor-field">
             @(Html.Kendo().TextBoxFor(x => x.Descripcion)
-                .HtmlAttributes(new { required = "required", MaxLength = "50", validationMessage = "Este campo es requerido." }))
+                        .HtmlAttributes(new { required = "required", MaxLength = "50", validationMessage = "Este campo es requerido." }))
+        </div>
+        <div class="editor-label">
+            <label for="Consecutivos">Consecutivos</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.Consecutivos)
+                        .HtmlAttributes(new { required = "required", MaxLength = "50", validationMessage = "Este campo es requerido." }))
         </div>
         <div class="editor-label">
             <label for="Active">Activo</label>

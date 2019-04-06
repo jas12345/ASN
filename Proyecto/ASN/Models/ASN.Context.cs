@@ -701,7 +701,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConsecutivoPeriodosSel_Result>("CatConsecutivoPeriodosSel");
         }
     
-        public virtual int CatPeriodicidadNominaSi(string periodicidadNominaId, string descripcion, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatPeriodicidadNominaSi(string periodicidadNominaId, string descripcion, Nullable<int> consecutivos, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var periodicidadNominaIdParameter = periodicidadNominaId != null ?
                 new ObjectParameter("PeriodicidadNominaId", periodicidadNominaId) :
@@ -711,11 +711,15 @@ namespace ASN.Models
                 new ObjectParameter("Descripcion", descripcion) :
                 new ObjectParameter("Descripcion", typeof(string));
     
+            var consecutivosParameter = consecutivos.HasValue ?
+                new ObjectParameter("Consecutivos", consecutivos) :
+                new ObjectParameter("Consecutivos", typeof(int));
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodicidadNominaSi", periodicidadNominaIdParameter, descripcionParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodicidadNominaSi", periodicidadNominaIdParameter, descripcionParameter, consecutivosParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual int CatPeriodicidadNominaSu(string periodicidadNominaId, string descripcion, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
@@ -1026,6 +1030,15 @@ namespace ASN.Models
         public virtual ObjectResult<CatPerfilEmpleadosSel_Result> CatPerfilEmpleadosSel()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosSel_Result>("CatPerfilEmpleadosSel");
+        }
+    
+        public virtual int CargaPivote(Nullable<int> consecutivo)
+        {
+            var consecutivoParameter = consecutivo.HasValue ?
+                new ObjectParameter("Consecutivo", consecutivo) :
+                new ObjectParameter("Consecutivo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CargaPivote", consecutivoParameter);
         }
     }
 }

@@ -30,6 +30,9 @@ function edit(e) {
 
         editando = 1;
 
+        $("#FechaInicio").val(e.model.FechaInicio);
+        $("#FechaCierre").val(e.model.FechaCierre);
+
         $("#FechaInicio").attr("disabled", "disabled");
         $("#FechaCierre").attr("disabled", "disabled");
         $("#FechaInicioMes").attr("disabled", "disabled");
@@ -76,7 +79,7 @@ function hola(e) {
 
         if (e.response.Errors === null) {
             var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Saved", "success");
+            notification.show("Procesado Correctamente", "success");
         }
     }
 }

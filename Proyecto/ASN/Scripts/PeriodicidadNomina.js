@@ -2,17 +2,12 @@
 
 function edit(e) {
     if (e.model.isNew() === false) {
-        //var DispositionName = $("#CatProyectosId").data("kendoDropDownList");
-        //var proyecto = $("#Proyecto").data("kendoDropDownList");
-
-        //DispositionName != null ? DispositionName.enable(false) : "";
-        //$("#CatProyectosId").attr("readonly", true);
-        //$(e.form).find("#CatProyectosId").closest(".editor-field").prev().andSelf().remove();
         $("#PeriodicidadNominaId").attr("disabled", "disabled");
+        $("#Consecutivos").attr("disabled", "disabled");
+
         e.container.kendoWindow("title", "Editar");
     }
     else {
-        //$("#Active").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Nuevo");
 
     }
@@ -126,6 +121,9 @@ function handleSaveChanges(e, grid) {
                     return false;
                 }
                 if (input.is("[name=Descripcion]") && input.val().trim() === "") {
+                    return false;
+                }
+                if (input.is("[name=Consecutivos]") && input.val().trim() === "") {
                     return false;
                 }
                 return true;

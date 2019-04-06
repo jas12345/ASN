@@ -178,6 +178,7 @@
         <Function Name="CatPeriodicidadNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Consecutivos" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -248,6 +249,9 @@
         </Function>
         <Function Name="CatUserInfoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CargaPivote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Consecutivo" Type="int" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -432,7 +436,7 @@
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatAniosNominaCMB" ReturnType="Collection(ASNModel.CatAniosNominaCMB_Result)" >
-            <Parameter Name="AnioActivo" Mode="In" Type="Int32" />
+          <Parameter Name="AnioActivo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatMesesCMB" ReturnType="Collection(ASNModel.CatMesesCMB_Result)" >
           <Parameter Name="AnioId" Mode="In" Type="Int32" />
@@ -502,6 +506,7 @@
           <FunctionImport Name="CatPeriodicidadNominaSi">
             <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Consecutivos" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -588,6 +593,9 @@
           <FunctionImport Name="CatLocationTodosCMB" ReturnType="Collection(ASNModel.CatLocationTodosCMB_Result)" />
           <FunctionImport Name="CatProgramTodosCMB" ReturnType="Collection(ASNModel.CatProgramTodosCMB_Result)" />
           <FunctionImport Name="CatPerfilEmpleadosSel" ReturnType="Collection(ASNModel.CatPerfilEmpleadosSel_Result)" />
+          <FunctionImport Name="CargaPivote">
+          <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -619,6 +627,7 @@
           <Property Type="String" Name="PeriodicidadNominaId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="Int32" Name="Consecutivos" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatProgramCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -722,6 +731,8 @@
           <Property Type="Boolean" Name="Active" Nullable="false" />
           <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="PeriodicidadActiva" Nullable="false" />
+          <Property Type="String" Name="Consecutivo" Nullable="false" MaxLength="5" />
         </ComplexType>
         <ComplexType Name="CatMesesFechasCMB_Result">
           <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
@@ -931,6 +942,7 @@
                 <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Consecutivos" ColumnName="Consecutivos" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1132,6 +1144,8 @@
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="PeriodicidadActiva" ColumnName="PeriodicidadActiva" />
+                <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1331,6 +1345,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CargaPivote" FunctionName="ASNModel.Store.CargaPivote" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

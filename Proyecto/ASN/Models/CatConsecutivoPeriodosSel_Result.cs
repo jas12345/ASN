@@ -23,5 +23,7 @@ namespace ASN.Models
         public bool Active { get; set; }
         public string FechaInicio { get; set; }
         public string FechaCierre { get; set; }
+        public bool PeriodicidadActiva { get; set; }
+        public string Consecutivo { get; set; }
     }
 }
