@@ -24,7 +24,6 @@
         column.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["PeriodicidadNomina"], "Ident", "Valor").Width(85).Title("Periodicidad").Filterable(true).Visible(true);
         column.ForeignKey(c => c.ConsecutivoId, (System.Collections.IEnumerable)ViewData["Consecutivos"], "Ident", "Valor").Width(70).Title("Consecutivo").Visible(true).Filterable(true);
         column.ForeignKey(c => c.TipoPeriodo, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Id", "Value").Width(85).Title("Tipo Periodo").Filterable(true);
-        column.ForeignKey(c => c.TipoConsecutivoId, (System.Collections.IEnumerable)ViewData["TipoConsecutivo"], "Id", "Value").Width(85).Title("Tipo Consecutivo").Filterable(true);
         column.Bound(c => c.NombrePeriodo).Width(85).Title("Nombre Periodo").Filterable(false);
         column.Bound(c => c.FechaInicio).Visible(false).Filterable(false);
         column.Bound(c => c.FechaFin).Visible(false).Filterable(false);
@@ -32,7 +31,6 @@
         column.Bound(c => c.FechaCierre).Visible(false).Filterable(false);
         column.Bound(c => c.CountryIdents).Visible(false).Filterable(false);
         column.Bound(c => c.EstatusPeriodo).Visible(true).Title("Estatus").Filterable(false).Width(40);
-        column.Bound(c => c.TipoConsecutivoId).Visible(false);
         column.Bound(c => c.Active).Width(30).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
         column.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
     })

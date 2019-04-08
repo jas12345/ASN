@@ -25,6 +25,7 @@ namespace ASN.Controllers
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                         ViewData["TipoPeriodicidad"] = context.CatPeriodicidadNominaCMB().ToList();
                         ViewData["ConsecutivosPeriodo"] = context.CatConsecutivoPeriodicidadCMB("All").ToList();
+                        ViewData["TipoConsecutivo"] = context.CatTiposConsecutivoCMB().ToList();
                         ViewData["AniosCMB"] = context.CatAniosNominaCMB(null).ToList();
                         ViewData["MesCMB"] = context.CatMesesCMB(0).ToList();
                     }
@@ -197,7 +198,7 @@ namespace ASN.Controllers
                     {
                         if (!string.IsNullOrEmpty(fechainicio) && !string.IsNullOrEmpty(fechacierre))
                         {
-                            context.CatConsecutivoPeriodosSi(obj.AnioId, obj.MesId, obj.ConsecutivoId, obj.PeriodicidadNominaId, fechainicio, fechacierre, ccmsidAdmin, resultado);
+                            context.CatConsecutivoPeriodosSi(obj.AnioId, obj.MesId, obj.ConsecutivoId, obj.PeriodicidadNominaId, obj.TipoConsecutivoId, fechainicio, fechacierre, ccmsidAdmin, resultado);
                         }
                     }
 
@@ -242,7 +243,7 @@ namespace ASN.Controllers
                     {
                         if (!string.IsNullOrEmpty(fechainicio) && !string.IsNullOrEmpty(fechacierre))
                         {
-                            context.CatConsecutivoPeriodosSu(obj.AnioId, obj.MesId,obj.ConsecutivoId, obj.PeriodicidadNominaId, fechainicio, fechacierre, ccmsidAdmin, obj.Active, resultado);
+                            context.CatConsecutivoPeriodosSu(obj.AnioId, obj.MesId,obj.ConsecutivoId, obj.PeriodicidadNominaId, obj.TipoConsecutivoId, fechainicio, fechacierre, ccmsidAdmin, obj.Active, resultado);
                         }
                     }
 

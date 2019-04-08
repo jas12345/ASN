@@ -146,94 +146,74 @@
             @Html.HiddenFor(x => x.CountryIdents)
         </div>
         <div class="editor-label">
-            <label for="TipoConsecutivoId">Tipo de consecutivo</label>
+            <label for="FechaInicio">Fecha Inicio</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.TipoConsecutivoId)
-                            .DataSource(source =>
-                            {
-                                source.Read(read =>
-                                {
-                                    read.Action("GetTipoConsecutivo", "PeriodoNomina");
-                                });
-                            })
-                            .Filter("contains")
-                            .OptionLabel("- Tipo Consecutivo - ")
-                            .DataValueField("Id")
-                            .DataTextField("Value")
-                            .Name("TipoConsecutivoId")
-                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
+            @(Html.Kendo().DatePicker()
+                                            .Name("FechaInicio")
+                                            .Format("yyyy-MM-dd")
+                                            .ParseFormats(new string[] {
+                                        "ddd, M/d/yyyy",
+                                        "ddd, MM/dd/yyyy",
+                                        "ddd, M/dd/yyyy"
+                                            })
+                                            .Min(DateTime.Now.AddMonths(-6))
+                                            .Max(DateTime.Now)
+                                            .Events(x => x.Change("delimitaRango"))
+                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
             )
         </div>
-            <div class="editor-label">
-                <label for="FechaInicio">Fecha Inicio</label>
-            </div>
-            <div class="editor-field">
-                @(Html.Kendo().DatePicker()
-                                                .Name("FechaInicio")
-                                                .Format("yyyy-MM-dd")
-                                                .ParseFormats(new string[] {
-                                            "ddd, M/d/yyyy",
-                                            "ddd, MM/dd/yyyy",
-                                            "ddd, M/dd/yyyy"
-                                                })
-                                                .Min(DateTime.Now.AddMonths(-6))
-                                                .Max(DateTime.Now)
-                                                .Events(x => x.Change("delimitaRango"))
-                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
-                )
-            </div>
-            <div class="editor-label">
-                <label for="FechaFin">Fecha Fin</label>
-            </div>
-            <div class="editor-field">
-                @(Html.Kendo().DatePicker()
-                                        .Name("FechaFin")
-                                        .Format("yyyy-MM-dd")
-                                        .ParseFormats(new string[] {
-                                    "ddd, M/d/yyyy",
-                                    "ddd, MM/dd/yyyy",
-                                    "ddd, M/dd/yyyy"
-                                        })
-                                        .Min(DateTime.Now.AddMonths(-6))
-                                        .Max(DateTime.Now)
-                                        .Events(x => x.Change("delimitaRango"))
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
-                )
-            </div>
-            <div class="editor-label">
-                <label for="FechaCaptura">Fecha de Captura</label>
-            </div>
-            <div class="editor-field">
-                @(Html.Kendo().DateTimePicker()
-                                        .Name("FechaCaptura")
+        <div class="editor-label">
+            <label for="FechaFin">Fecha Fin</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DatePicker()
+                                    .Name("FechaFin")
+                                    .Format("yyyy-MM-dd")
+                                    .ParseFormats(new string[] {
+                                "ddd, M/d/yyyy",
+                                "ddd, MM/dd/yyyy",
+                                "ddd, M/dd/yyyy"
+                                    })
+                                    .Min(DateTime.Now.AddMonths(-6))
+                                    .Max(DateTime.Now)
+                                    .Events(x => x.Change("delimitaRango"))
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="FechaCaptura">Fecha de Captura</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DateTimePicker()
+                                    .Name("FechaCaptura")
+                                    .Format("yyyy-MM-dd HH:mm")
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
+                                    .DateInput()
+            )
+        </div>
+        <div class="editor-label">
+            <label for="FechaCierre">Fecha Autorización</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DateTimePicker()
+                                        .Name("FechaCierre")
                                         .Format("yyyy-MM-dd HH:mm")
                                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
                                         .DateInput()
-                )
-            </div>
-            <div class="editor-label">
-                <label for="FechaCierre">Fecha Autorización</label>
-            </div>
-            <div class="editor-field">
-                @(Html.Kendo().DateTimePicker()
-                                          .Name("FechaCierre")
-                                          .Format("yyyy-MM-dd HH:mm")
-                                          .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
-                                          .DateInput()
-                )
-            </div>
-            <div class="editor-label">
-                <label for="NombrePeriodo">Nombre Periodo</label>
-            </div>
-            <div class="editor-field">
-                @(Html.Kendo().TextBox().Name("NombrePeriodo").HtmlAttributes(new { MaxLength = "50", style = "width: 22.4em" }))
-            </div>
-            <div class="editor-label">
-                <label for="Active">Activo</label>
-            </div>
-            <div class="editor-field">
-                @Html.CheckBox("Active")
-            </div>
+            )
+        </div>
+        <div class="editor-label">
+            <label for="NombrePeriodo">Nombre Periodo</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBox().Name("NombrePeriodo").HtmlAttributes(new { MaxLength = "50", style = "width: 22.4em" }))
+        </div>
+        <div class="editor-label">
+            <label for="Active">Activo</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("Active")
         </div>
     </div>
+</div>

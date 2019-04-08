@@ -27,5 +27,6 @@ namespace ASN.Models
         public bool Active { get; set; }
         public string Estatus { get; set; }
         public int TipoConsecutivoId { get; set; }
+        public string Descripcion { get; set; }
     }
 }

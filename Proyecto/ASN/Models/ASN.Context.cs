@@ -27,7 +27,6 @@ namespace ASN.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual ObjectResult<CatClientCMB_Result> CatClientCMB()
         {
@@ -215,7 +214,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMesesNominaSel_Result>("CatMesesNominaSel");
         }
     
-        public virtual int CatPeriodosNominaSi(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<System.DateTime> fechaCaptura, Nullable<System.DateTime> fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> tipoConsecutivoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatPeriodosNominaSi(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<System.DateTime> fechaCaptura, Nullable<System.DateTime> fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
@@ -261,15 +260,11 @@ namespace ASN.Models
                 new ObjectParameter("NombrePeriodo", nombrePeriodo) :
                 new ObjectParameter("NombrePeriodo", typeof(string));
     
-            var tipoConsecutivoIdParameter = tipoConsecutivoId.HasValue ?
-                new ObjectParameter("TipoConsecutivoId", tipoConsecutivoId) :
-                new ObjectParameter("TipoConsecutivoId", typeof(int));
-    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodosNominaSi", anioIdParameter, mesIdParameter, periodicidadNominaIdParameter, consecutivoParameter, tipoPeriodoParameter, fechaInicioParameter, fechaFinParameter, fechaCapturaParameter, fechaCierreParameter, countryIdentsParameter, nombrePeriodoParameter, tipoConsecutivoIdParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodosNominaSi", anioIdParameter, mesIdParameter, periodicidadNominaIdParameter, consecutivoParameter, tipoPeriodoParameter, fechaInicioParameter, fechaFinParameter, fechaCapturaParameter, fechaCierreParameter, countryIdentsParameter, nombrePeriodoParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual ObjectResult<CatAniosNominaSel_Result> CatAniosNominaSel()
@@ -621,7 +616,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAnioFechasCMB_Result>("CatAnioFechasCMB", anioIdParameter);
         }
     
-        public virtual int CatConsecutivoPeriodosSi(Nullable<int> anioId, Nullable<int> mesId, string consecutivoId, string periodicidadNominaId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatConsecutivoPeriodosSi(Nullable<int> anioId, Nullable<int> mesId, string consecutivoId, string periodicidadNominaId, Nullable<int> tipoConsecutivoId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
@@ -638,6 +633,10 @@ namespace ASN.Models
             var periodicidadNominaIdParameter = periodicidadNominaId != null ?
                 new ObjectParameter("PeriodicidadNominaId", periodicidadNominaId) :
                 new ObjectParameter("PeriodicidadNominaId", typeof(string));
+    
+            var tipoConsecutivoIdParameter = tipoConsecutivoId.HasValue ?
+                new ObjectParameter("TipoConsecutivoId", tipoConsecutivoId) :
+                new ObjectParameter("TipoConsecutivoId", typeof(int));
     
             var fechaInicioParameter = fechaInicio != null ?
                 new ObjectParameter("FechaInicio", fechaInicio) :
@@ -651,10 +650,10 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConsecutivoPeriodosSi", anioIdParameter, mesIdParameter, consecutivoIdParameter, periodicidadNominaIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConsecutivoPeriodosSi", anioIdParameter, mesIdParameter, consecutivoIdParameter, periodicidadNominaIdParameter, tipoConsecutivoIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatConsecutivoPeriodosSu(Nullable<int> anioId, Nullable<int> mesId, string consecutivoId, string periodicidadNominaId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatConsecutivoPeriodosSu(Nullable<int> anioId, Nullable<int> mesId, string consecutivoId, string periodicidadNominaId, Nullable<int> tipoConsecutivoId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
@@ -671,6 +670,10 @@ namespace ASN.Models
             var periodicidadNominaIdParameter = periodicidadNominaId != null ?
                 new ObjectParameter("PeriodicidadNominaId", periodicidadNominaId) :
                 new ObjectParameter("PeriodicidadNominaId", typeof(string));
+    
+            var tipoConsecutivoIdParameter = tipoConsecutivoId.HasValue ?
+                new ObjectParameter("TipoConsecutivoId", tipoConsecutivoId) :
+                new ObjectParameter("TipoConsecutivoId", typeof(int));
     
             var fechaInicioParameter = fechaInicio != null ?
                 new ObjectParameter("FechaInicio", fechaInicio) :
@@ -688,7 +691,7 @@ namespace ASN.Models
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConsecutivoPeriodosSu", anioIdParameter, mesIdParameter, consecutivoIdParameter, periodicidadNominaIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConsecutivoPeriodosSu", anioIdParameter, mesIdParameter, consecutivoIdParameter, periodicidadNominaIdParameter, tipoConsecutivoIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
         public virtual int CatConsecutivoPeriodicidadSel()
@@ -748,7 +751,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB");
         }
     
-        public virtual int CatPeriodosNominaSu(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, string fechaInicio, string fechaFin, string fechaCaptura, string fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> tipoConsecutivoId, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatPeriodosNominaSu(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, string fechaInicio, string fechaFin, string fechaCaptura, string fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
@@ -794,10 +797,6 @@ namespace ASN.Models
                 new ObjectParameter("NombrePeriodo", nombrePeriodo) :
                 new ObjectParameter("NombrePeriodo", typeof(string));
     
-            var tipoConsecutivoIdParameter = tipoConsecutivoId.HasValue ?
-                new ObjectParameter("TipoConsecutivoId", tipoConsecutivoId) :
-                new ObjectParameter("TipoConsecutivoId", typeof(int));
-    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
@@ -806,7 +805,7 @@ namespace ASN.Models
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodosNominaSu", anioIdParameter, mesIdParameter, periodicidadNominaIdParameter, consecutivoParameter, tipoPeriodoParameter, fechaInicioParameter, fechaFinParameter, fechaCapturaParameter, fechaCierreParameter, countryIdentsParameter, nombrePeriodoParameter, tipoConsecutivoIdParameter, userEmployeeIdParameter, activeParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodosNominaSu", anioIdParameter, mesIdParameter, periodicidadNominaIdParameter, consecutivoParameter, tipoPeriodoParameter, fechaInicioParameter, fechaFinParameter, fechaCapturaParameter, fechaCierreParameter, countryIdentsParameter, nombrePeriodoParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
         public virtual ObjectResult<CatPeriodosNominaSel_Result> CatPeriodosNominaSel()

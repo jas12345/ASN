@@ -25,5 +25,7 @@ namespace ASN.Models
         public string FechaCierre { get; set; }
         public bool PeriodicidadActiva { get; set; }
         public string Consecutivo { get; set; }
+        public int TipoConsecutivoId { get; set; }
+        public string Descripcion { get; set; }
     }
 }

@@ -357,7 +357,6 @@ namespace ASN.Controllers
                                 (string.IsNullOrEmpty(FechaCierre) ? DateTime.Now : Convert.ToDateTime(FechaCierre)),
                                 CountryIdents,
                                 item.NombrePeriodo,
-                                item.TipoConsecutivoId,
                                 idAdmin, resultado);
                         }
                     }
@@ -424,7 +423,6 @@ namespace ASN.Controllers
                                 (string.IsNullOrEmpty(FechaCierre) ? DateTime.Now.ToString() : FechaCierre),
                                 CountryIdents,
                                 item.NombrePeriodo,
-                                item.TipoConsecutivoId,
                                 idAdmin,
                                 item.Active,
                                 resultado);
