@@ -20,10 +20,14 @@
                         {
                             columns.Bound(c => c.ConceptoId).Title("Concepto").Visible(true).Filterable(false).Width(50);
                             columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
+                            columns.ForeignKey(c => c.PaisId, (System.Collections.IEnumerable)ViewData["Paises"], "Ident", "Valor").Width(70).Title("Pais").Visible(true).Filterable(true);
+                            column.ForeignKey(c => c.MercadoId, (System.Collections.IEnumerable)ViewData["Mercados"], "Ident", "Valor").Width(70).Title("Mercado").Visible(true).Filterable(true);
+                            column.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Ident", "Valor").Width(70).Title("Cliente").Visible(true).Filterable(true);
+                            column.ForeignKey(c => c.PeopleSoftId, (System.Collections.IEnumerable)ViewData["PeopleSoft"], "Ident", "Valor").Width(70).Title("PeopleSoft").Visible(true).Filterable(true);
                             columns.ForeignKey(c => c.TipoConcepto, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(125).Title("Tipo de concepto");
-                            //columns.Bound(c => c.EID).Width(75).Title("s");
-                            //columns.Bound(c => c.Nombre).Width(175).Title("Name");
-                            //columns.Bound(c => c.Locacion).Width(150).Title("Locacion");
+                            columns.Bound(c => c.NumeroNivelAutorizante).Width(50).Title("Número de Nivel de Autorizante").Filterable(false);
+                            columns.Bound(c => c.AutorizacionAutomatica).Width(50).Title("AutorizacionAutomatica").Filterable(false).ClientTemplate("#:AutorizacionAutomatica  ? 'Si' : 'No' #");
+                            columns.Bound(c => c.AutorizacionObligatoria).Width(50).Title("AutorizacionObligatoria").Filterable(false).ClientTemplate("#:AutorizacionObligatoria  ? 'Si' : 'No' #");
                             columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
                             columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
                         }
@@ -52,7 +56,15 @@
                                 model.Id(c => c.ConceptoId);
                                 model.Field(c => c.ConceptoId).Editable(false);
                                 model.Field(c => c.Descripcion).Editable(true);
+                                model.Field(c => c.PaisId).Editable(true);
+                                model.Field(c => c.MercadoId).Editable(true);
+                                model.Field(c => c.ClienteId).Editable(true);
+                                model.Field(c => c.PeopleSoftId).Editable(true);
+                                model.Field(c => c.TipoPeriodoId).Editable(true);
                                 model.Field(c => c.TipoConcepto).Editable(true);
+                                model.Field(c => c.NumeroNivelAutorizante).Editable(true);
+                                model.Field(c => c.AutorizacionAutomatica).Editable(true);
+                                model.Field(c => c.AutorizacionObligatoria).Editable(true);
                                 model.Field(c => c.Active).Editable(true).DefaultValue(true);
                             })
                             .Read(read => read.Action("GetConceptos", "Conceptos"))

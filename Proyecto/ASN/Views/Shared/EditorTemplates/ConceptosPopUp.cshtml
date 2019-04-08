@@ -6,6 +6,7 @@
     }
 </style>
 <div>
+    @Html.HiddenFor(x => x.ConceptoId)
     <div class="k-edit-form-container">
         <div class="editor-label">
             <label for="Descripcion">Descripción</label>
@@ -14,25 +15,151 @@
             @(Html.Kendo().TextBoxFor(x => x.Descripcion).HtmlAttributes(new { required = "required", validationMessage = "El campo descripción es requerido." }))
         </div>
         <div class="editor-label">
+            <label for="PaisId">País</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.PaisId)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetPaisCMB", "Conceptos");
+                    });
+                    //.ServerFiltering(true);
+                })
+                .Filter("contains")
+                .OptionLabel("- País - ")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("PaisId")
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un país." })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="MercadoId">Mercado</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.MercadoId)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetMercadoCMB", "Conceptos");
+                    });
+                    //.ServerFiltering(true);
+                })
+                .Filter("contains")
+                .OptionLabel("- Mercado - ")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("MercadoId")
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un mercado." })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="ClienteId">Cliente</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.ClienteId)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetClienteCMB", "Conceptos");
+                    });
+                    //.ServerFiltering(true);
+                })
+                .Filter("contains")
+                .OptionLabel("- Cliente - ")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("ClienteId")
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un cliente." })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="PeopleSoftId">PeopleSoft</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.PeopleSoftId)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetPeopleSoftCMB", "Conceptos");
+                    });
+                    //.ServerFiltering(true);
+                })
+                .Filter("contains")
+                .OptionLabel("- PeopleSoft - ")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("PeopleSoftId")
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione una opción" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="TipoPeriodoId">Tipo de periodo</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.TipoPeriodoId)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetTipoPeriodoCMB", "Conceptos");
+                    });
+                    //.ServerFiltering(true);
+                })
+                .Filter("contains")
+                .OptionLabel("- Tipo de periodo - ")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("TipoPeriodoId")
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un tipo de periodo." })
+            )
+        </div>
+        <div class="editor-label">
             <label for="TipoConcepto">Tipo de concepto</label>
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.TipoConcepto)
-                        .DataSource(source =>
-                        {
-                            source.Read(read =>
-                            {
-                                read.Action("GetConceptosCMB", "Conceptos");
-                            });
-                        //.ServerFiltering(true);
-                    })
-                        .Filter("contains")
-                        .OptionLabel("- Tipo de concepto - ")
-                        .DataValueField("Ident")
-                        .DataTextField("Valor")
-                        .Name("TipoConcepto")
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un tipo de concepto." })
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetConceptosCMB", "Conceptos");
+                    });
+                    //.ServerFiltering(true);
+                })
+                .Filter("contains")
+                .OptionLabel("- Tipo de concepto - ")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Name("TipoConcepto")
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un tipo de concepto." })
             )
+        </div>
+        <div class="editor-label">
+            <label for="NumeroNivelAutorizante">Número de Nivel Autorizante</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.NumeroNivelAutorizante)
+                .Name("NumeroNivelAutorizante")
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+            )
+        </div>
+        <div class="editor-label">
+            <label for="AutorizacionAutomatica">Autorización Automática</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("AutorizacionAutomatica")
+        </div>
+        <div class="editor-label">
+            <label for="AutorizacionObligatoria">Autorización Obligatoria</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("AutorizacionObligatoria")
         </div>
         <div class="editor-label">
             <label for="Active">Activo</label>

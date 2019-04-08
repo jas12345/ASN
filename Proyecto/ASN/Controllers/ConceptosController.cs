@@ -116,7 +116,18 @@ namespace ASN.Controllers
                     {
                         if (!string.IsNullOrEmpty(obj.Descripcion))
                         {
-                            context.CatConceptosSi(obj.Descripcion,obj.TipoConcepto,ccmsidAdmin, resultado);
+                            context.CatConceptosSi(
+                                obj.Descripcion,
+                                obj.TipoConcepto,
+                                ccmsidAdmin,
+                                obj.PaisId,
+                                obj.MercadoId,
+                                obj.ClienteId,
+                                obj.PeopleSoftId,
+                                obj.TipoPeriodoId,
+                                obj.NumeroNivelAutorizante,
+                                obj.AutorizacionAutomatica,
+                                obj.AutorizacionObligatoria, resultado);
                         }
                     }
 
@@ -161,7 +172,20 @@ namespace ASN.Controllers
                     {
                         if (!string.IsNullOrEmpty(obj.Descripcion))
                         {
-                            context.CatConceptosSu(obj.ConceptoId,obj.Descripcion,obj.TipoConcepto,ccmsidAdmin,obj.Active,resultado);
+                            context.CatConceptosSu(
+                                obj.ConceptoId,
+                                obj.Descripcion,
+                                obj.TipoConcepto,
+                                ccmsidAdmin,
+                                obj.PaisId,
+                                obj.MercadoId,
+                                obj.ClienteId,
+                                obj.PeopleSoftId,
+                                obj.TipoPeriodoId,
+                                obj.NumeroNivelAutorizante,
+                                obj.AutorizacionAutomatica,
+                                obj.AutorizacionObligatoria,
+                                obj.Active,resultado);
                         }
                     }
 
