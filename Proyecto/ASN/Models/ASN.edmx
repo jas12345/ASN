@@ -60,11 +60,11 @@
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="TipoConcepto" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
-          <Parameter Name="PaisId" Type="int" Mode="In" />
+          <Parameter Name="PaisId" Type="varchar" Mode="In" />
           <Parameter Name="MercadoId" Type="int" Mode="In" />
           <Parameter Name="ClienteId" Type="int" Mode="In" />
           <Parameter Name="PeopleSoftId" Type="int" Mode="In" />
-          <Parameter Name="TipoPeriodoId" Type="int" Mode="In" />
+          <Parameter Name="TipoPeriodoId" Type="varchar" Mode="In" />
           <Parameter Name="NumeroNivelAutorizante" Type="int" Mode="In" />
           <Parameter Name="AutorizacionAutomatica" Type="bit" Mode="In" />
           <Parameter Name="AutorizacionObligatoria" Type="bit" Mode="In" />
@@ -75,11 +75,11 @@
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="TipoConcepto" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
-          <Parameter Name="PaisId" Type="int" Mode="In" />
+          <Parameter Name="PaisId" Type="varchar" Mode="In" />
           <Parameter Name="MercadoId" Type="int" Mode="In" />
           <Parameter Name="ClienteId" Type="int" Mode="In" />
           <Parameter Name="PeopleSoftId" Type="int" Mode="In" />
-          <Parameter Name="TipoPeriodoId" Type="int" Mode="In" />
+          <Parameter Name="TipoPeriodoId" Type="varchar" Mode="In" />
           <Parameter Name="NumeroNivelAutorizante" Type="int" Mode="In" />
           <Parameter Name="AutorizacionAutomatica" Type="bit" Mode="In" />
           <Parameter Name="AutorizacionObligatoria" Type="bit" Mode="In" />
@@ -269,11 +269,11 @@
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="TipoConcepto" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="PaisId" Mode="In" Type="Int32" />
+            <Parameter Name="PaisId" Mode="In" Type="String" />
             <Parameter Name="MercadoId" Mode="In" Type="Int32" />
             <Parameter Name="ClienteId" Mode="In" Type="Int32" />
             <Parameter Name="PeopleSoftId" Mode="In" Type="Int32" />
-            <Parameter Name="TipoPeriodoId" Mode="In" Type="Int32" />
+            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
             <Parameter Name="NumeroNivelAutorizante" Mode="In" Type="Int32" />
             <Parameter Name="AutorizacionAutomatica" Mode="In" Type="Boolean" />
             <Parameter Name="AutorizacionObligatoria" Mode="In" Type="Boolean" />
@@ -284,11 +284,11 @@
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="TipoConcepto" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="PaisId" Mode="In" Type="Int32" />
+            <Parameter Name="PaisId" Mode="In" Type="String" />
             <Parameter Name="MercadoId" Mode="In" Type="Int32" />
             <Parameter Name="ClienteId" Mode="In" Type="Int32" />
             <Parameter Name="PeopleSoftId" Mode="In" Type="Int32" />
-            <Parameter Name="TipoPeriodoId" Mode="In" Type="Int32" />
+            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
             <Parameter Name="NumeroNivelAutorizante" Mode="In" Type="Int32" />
             <Parameter Name="AutorizacionAutomatica" Mode="In" Type="Boolean" />
             <Parameter Name="AutorizacionObligatoria" Mode="In" Type="Boolean" />
@@ -584,15 +584,16 @@
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="TipoConcepto" Nullable="false" />
-          <Property Type="Boolean" Name="Active" Nullable="false" />
-          <Property Type="Int32" Name="PaisId" Nullable="true" />
-          <Property Type="Int32" Name="MercadoId" Nullable="true" />
-          <Property Type="Int32" Name="ClienteId" Nullable="true" />
-          <Property Type="Int32" Name="PeopleSoftId" Nullable="true" />
-          <Property Type="Int32" Name="TipoPeriodoId" Nullable="true" />
+          <Property Type="String" Name="PaisId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Paises" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="MercadoId" Nullable="false" />
+          <Property Type="Int32" Name="ClienteId" Nullable="false" />
+          <Property Type="Int32" Name="PeopleSoftId" Nullable="false" />
+          <Property Type="String" Name="TipoPeriodoId" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="NumeroNivelAutorizante" Nullable="true" />
           <Property Type="Boolean" Name="AutorizacionAutomatica" Nullable="true" />
           <Property Type="Boolean" Name="AutorizacionObligatoria" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatCountryCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -881,8 +882,8 @@
                 <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="TipoConcepto" ColumnName="TipoConcepto" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+                <ScalarProperty Name="Paises" ColumnName="Paises" />
                 <ScalarProperty Name="MercadoId" ColumnName="MercadoId" />
                 <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
                 <ScalarProperty Name="PeopleSoftId" ColumnName="PeopleSoftId" />
@@ -890,10 +891,12 @@
                 <ScalarProperty Name="NumeroNivelAutorizante" ColumnName="NumeroNivelAutorizante" />
                 <ScalarProperty Name="AutorizacionAutomatica" ColumnName="AutorizacionAutomatica" />
                 <ScalarProperty Name="AutorizacionObligatoria" ColumnName="AutorizacionObligatoria" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatConceptosSi" FunctionName="ASNModel.Store.CatConceptosSi" />
+          <FunctionImportMapping FunctionImportName="CatConceptosSi" FunctionName="ASNModel.Store.CatConceptosSi" >
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatConceptosSu" FunctionName="ASNModel.Store.CatConceptosSu" />
           <FunctionImportMapping FunctionImportName="CatCountryCMB" FunctionName="ASNModel.Store.CatCountryCMB">
             <ResultMapping>

@@ -18,33 +18,31 @@
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Bound(c => c.ConceptoId).Title("Concepto").Visible(true).Filterable(false).Width(50);
+                            columns.Bound(c => c.ConceptoId).Title("Concepto").Visible(false).Filterable(false);
                             columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
-                            columns.ForeignKey(c => c.PaisId, (System.Collections.IEnumerable)ViewData["Paises"], "Ident", "Valor").Width(70).Title("Pais").Visible(true).Filterable(true);
-                            column.ForeignKey(c => c.MercadoId, (System.Collections.IEnumerable)ViewData["Mercados"], "Ident", "Valor").Width(70).Title("Mercado").Visible(true).Filterable(true);
-                            column.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Ident", "Valor").Width(70).Title("Cliente").Visible(true).Filterable(true);
-                            column.ForeignKey(c => c.PeopleSoftId, (System.Collections.IEnumerable)ViewData["PeopleSoft"], "Ident", "Valor").Width(70).Title("PeopleSoft").Visible(true).Filterable(true);
-                            columns.ForeignKey(c => c.TipoConcepto, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(125).Title("Tipo de concepto");
-                            columns.Bound(c => c.NumeroNivelAutorizante).Width(50).Title("Número de Nivel de Autorizante").Filterable(false);
-                            columns.Bound(c => c.AutorizacionAutomatica).Width(50).Title("AutorizacionAutomatica").Filterable(false).ClientTemplate("#:AutorizacionAutomatica  ? 'Si' : 'No' #");
-                            columns.Bound(c => c.AutorizacionObligatoria).Width(50).Title("AutorizacionObligatoria").Filterable(false).ClientTemplate("#:AutorizacionObligatoria  ? 'Si' : 'No' #");
-                            columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
+                            columns.ForeignKey(c => c.Paises, (System.Collections.IEnumerable)ViewData["Paises"], "Id", "Value").Width(70).Title("Pais").Visible(false);
+                            columns.ForeignKey(c => c.MercadoId, (System.Collections.IEnumerable)ViewData["Mercados"], "Id", "Value").Width(70).Title("Mercado").Visible(true).Filterable(true);
+                            columns.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Id", "Value").Width(70).Title("Cliente").Visible(true).Filterable(true);
+                            columns.ForeignKey(c => c.PeopleSoftId, (System.Collections.IEnumerable)ViewData["PeopleSoft"], "Ident", "Valor").Width(90).Title("PeopleSoft").Visible(true).Filterable(true);
+                            columns.ForeignKey(c => c.TipoConcepto, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(50).Title("Tipo concepto");
+                            columns.ForeignKey(c => c.TipoPeriodoId, (System.Collections.IEnumerable)ViewData["TipoPeriodo"], "Id", "Value").Width(50).Title("Tipo periodo");
+                            columns.Bound(c => c.NumeroNivelAutorizante).Width(65).Title("Número de Nivel de Autorizante").Filterable(false);
+                            columns.Bound(c => c.AutorizacionAutomatica).Width(65).Title("AutorizacionAutomatica").Filterable(false).ClientTemplate("#:AutorizacionAutomatica  ? 'Si' : 'No' #");
+                            columns.Bound(c => c.AutorizacionObligatoria).Width(60).Title("AutorizacionObligatoria").Filterable(false).ClientTemplate("#:AutorizacionObligatoria  ? 'Si' : 'No' #");
+                            columns.Bound(c => c.Active).Width(20).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
                             columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
-                        }
-                        )
+                        })
                         .ToolBar(toolBar =>
                         {
                             toolBar.Create().Text("Nuevo");
-                        //toolBar.Save();
-                        toolBar.Excel().Text("Exportar a excel");
+                            toolBar.Excel().Text("Exportar a excel");
                         })
                         .Excel(ex => ex.AllPages(true))
                         .HtmlAttributes(new { style = "height: 700px;" })
                         .Scrollable(sorteable => sorteable.Virtual(false))
                         .Sortable()
                         .Resizable(c => c.Columns(true))
-                        //.Editable(editable => editable.Mode(GridEditMode.InCell))
-                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConceptosPopUp"))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConceptosPopUp").Window(x => x.Width(500).HtmlAttributes(new { style = "width: 500px" })))
                         .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                         .DataSource(dataSource => dataSource
@@ -92,7 +90,6 @@
                             messages.Refresh("Actualizar");
                             messages.Of("De");
                             messages.MorePages("Mas páginas");
-                            //messages.Display("Prueba");
                             messages.Display("{0} a {1} de {2}");
                         })
                         )

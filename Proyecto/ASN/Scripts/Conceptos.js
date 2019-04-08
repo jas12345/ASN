@@ -11,31 +11,18 @@ function edit(e) {
     $('input[name="TipoConcepto"]').change(function () {
         validator.validateInput(this);
     });
-
-
+    
     if (e.model.isNew() === false) {
-        //var DispositionName = $("#CatProyectosId").data("kendoDropDownList");
-        //var proyecto = $("#Proyecto").data("kendoDropDownList");
+        var lstCountryIdents = $("#Paises").data("kendoMultiSelect");
+        var paises = e.model.Paises.split(',');
+        lstCountryIdents.value(paises);
 
-        //DispositionName != null ? DispositionName.enable(false) : "";
-        //$("#CatProyectosId").attr("readonly", true);
-        //$(e.form).find("#CatProyectosId").closest(".editor-field").prev().andSelf().remove();
-        //$("#EID").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Editar");
     }
     else {
         //$("#Active").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Nuevo");
-
     }
-
-    //var typeValueDropDown = $("[name=Rol]").data("kendoDropDownList");
-
-    //e.model.bind("set", function (e) {
-    //    if (e.field == "Rol") {
-    //        this.set(typeValueDropDown.text(), typeValueDropDown.text());
-    //    }
-    //});
 }
 
 function hola(e) {
@@ -46,7 +33,7 @@ function hola(e) {
 
         if (e.response.Errors === null) {
             var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Saved", "success");
+            notification.show(" Procesado correctamente", "success");
         }
     }
 }
@@ -66,6 +53,8 @@ function errorsote(args) {
 function onSave(e) {
     var hayCambios = false;
     var sonNuevos = false;
+
+    debugger;
     jQuery.grep(e.sender._data, function (item) {
 
         if (item.dirty || item.id <= 0) {
@@ -93,6 +82,8 @@ function onSave(e) {
 function handleEditChanges(e, grid) {
     var valid = true;
     var rows = grid.tbody.find("tr");
+    debugger;
+
     var objeto = jQuery.grep(grid._data, function (item) {
         return item.dirty;
     });
@@ -113,6 +104,7 @@ function handleEditChanges(e, grid) {
 function handleSaveChanges(e, grid) {
     var valid = true;
     var rows = grid.tbody.find("tr");
+    debugger;
     for (var i = 0; i < rows.length; i++) {
 
         var model = grid.dataItem(rows[i]);
@@ -122,9 +114,7 @@ function handleSaveChanges(e, grid) {
         //var dispositionObj = $(cols[1]);
 
         if (model && model.id <= 0 && valid) {
-
             //nothing
-
         }
         else {
             break;
@@ -167,12 +157,6 @@ function handleSaveChanges(e, grid) {
 
 
 function ValidaDisplayNameVal(obj) {
-    //if (obj == "" || (obj.length > 150 || obj.length < 3) || obj.match(/^[a-z A-Z0-9 ñáéíóú\)\(]*$/) == null) {
-    //    return "El nombre del Mercado debe ser entre 3 y 150 caracteres y solo se aceptan numeros,letras y parentesis.";
-    //}
-    //else {
-    //    return 0;
-    //}
 }
 
 function defaultValidate(e)

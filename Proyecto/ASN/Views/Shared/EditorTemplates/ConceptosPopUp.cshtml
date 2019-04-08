@@ -5,7 +5,7 @@
         padding-bottom: 1em;
     }
 </style>
-<div>
+<div class="col-lg-12 col-md-12">
     @Html.HiddenFor(x => x.ConceptoId)
     <div class="k-edit-form-container">
         <div class="editor-label">
@@ -18,21 +18,23 @@
             <label for="PaisId">País</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.PaisId)
+            @(Html.Kendo().MultiSelect()
+                .ValuePrimitive(true)
+                .Filter("contains")
+                .DataValueField("Id")
+                .DataTextField("Value")
+                .Name("Paises")
+                .AutoBind(true)
+                .ClearButton(true)
                 .DataSource(source =>
                 {
                     source.Read(read =>
                     {
-                        read.Action("GetPaisCMB", "Conceptos");
-                    });
-                    //.ServerFiltering(true);
+                        read.Action("GetCountryCMB", "Conceptos");
+                    })
+                    .ServerFiltering(true);
                 })
-                .Filter("contains")
-                .OptionLabel("- País - ")
-                .DataValueField("Ident")
-                .DataTextField("Valor")
-                .Name("PaisId")
-                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un país." })
+                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Seleccione un país." })
             )
         </div>
         <div class="editor-label">
@@ -44,14 +46,14 @@
                 {
                     source.Read(read =>
                     {
-                        read.Action("GetMercadoCMB", "Conceptos");
+                        read.Action("GetCompanyCMB", "Conceptos");
                     });
                     //.ServerFiltering(true);
                 })
                 .Filter("contains")
                 .OptionLabel("- Mercado - ")
-                .DataValueField("Ident")
-                .DataTextField("Valor")
+                .DataValueField("Id")
+                .DataTextField("Value")
                 .Name("MercadoId")
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un mercado." })
             )
@@ -65,14 +67,13 @@
                 {
                     source.Read(read =>
                     {
-                        read.Action("GetClienteCMB", "Conceptos");
-                    });
-                    //.ServerFiltering(true);
+                        read.Action("GetClientCMB", "Conceptos");
+                    }).ServerFiltering(true);
                 })
                 .Filter("contains")
                 .OptionLabel("- Cliente - ")
-                .DataValueField("Ident")
-                .DataTextField("Valor")
+                .DataValueField("Id")
+                .DataTextField("Value")
                 .Name("ClienteId")
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un cliente." })
             )
@@ -86,7 +87,7 @@
                 {
                     source.Read(read =>
                     {
-                        read.Action("GetPeopleSoftCMB", "Conceptos");
+                        read.Action("GetConceptosMotivoCMB", "Conceptos");
                     });
                     //.ServerFiltering(true);
                 })
@@ -109,14 +110,13 @@
                     {
                         read.Action("GetTipoPeriodoCMB", "Conceptos");
                     });
-                    //.ServerFiltering(true);
                 })
                 .Filter("contains")
                 .OptionLabel("- Tipo de periodo - ")
-                .DataValueField("Ident")
-                .DataTextField("Valor")
+                .DataValueField("Id")
+                .DataTextField("Value")
                 .Name("TipoPeriodoId")
-                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un tipo de periodo." })
+                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })//, validationMessage = "Seleccione un tipo de periodo."
             )
         </div>
         <div class="editor-label">

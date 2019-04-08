@@ -24,6 +24,11 @@ namespace ASN.Controllers
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                         ViewData["TiposConceptos"] = context.CatTipoConceptosCMB().ToList();
+                        ViewData["Paises"] = context.CatCountryCMB().ToList();
+                        ViewData["Mercados"] = context.CatCompanyCMB().ToList();
+                        ViewData["Clientes"] = context.CatClientCMB().ToList();
+                        ViewData["PeopleSoft"] = context.CatConceptosMotivoCMB().ToList();
+                        ViewData["TipoPeriodo"] = context.CatTiposPeriodoNominaCMB().ToList();
                     }
 
                     return View();
@@ -42,6 +47,7 @@ namespace ASN.Controllers
             }
         }
 
+        #region Conjunto de metodos para cargas de combos
         public JsonResult GetConceptosCMB()
         {
             try
@@ -68,6 +74,112 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult GetCountryCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatCountryCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.CatCountryCMB().ToList();
+                }
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetCompanyCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatCompanyCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.CatCompanyCMB().ToList();
+                }
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetClientCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatClientCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.CatClientCMB().ToList();
+                }
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetConceptosMotivoCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatConceptosMotivoCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.CatConceptosMotivoCMB().ToList();
+                }
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetTipoPeriodoCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatTiposPeriodoNominaCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.CatTiposPeriodoNominaCMB().ToList();
+                }
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Obtiene las registros actuales
         /// </summary>
@@ -81,10 +193,9 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var list2 = context.CatConceptosSel().ToList();
+                    var listado = context.CatConceptosSel().ToList();
 
-                    DataSourceResult ok = list2.ToDataSourceResult(request);
-
+                    DataSourceResult ok = listado.ToDataSourceResult(request);
                     return Json(ok);
                 }
             }
@@ -120,7 +231,7 @@ namespace ASN.Controllers
                                 obj.Descripcion,
                                 obj.TipoConcepto,
                                 ccmsidAdmin,
-                                obj.PaisId,
+                                obj.Paises,
                                 obj.MercadoId,
                                 obj.ClienteId,
                                 obj.PeopleSoftId,
@@ -133,7 +244,7 @@ namespace ASN.Controllers
 
                     int.TryParse(resultado.Value.ToString(), out res);
 
-                    if(res == -1)
+                    if (res == -1)
                     {
                         ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
                     }
@@ -154,7 +265,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateConcepto ([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosSel_Result> profiles)
+        public ActionResult UpdateConcepto([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosSel_Result> profiles)
         {
             try
             {
@@ -177,7 +288,7 @@ namespace ASN.Controllers
                                 obj.Descripcion,
                                 obj.TipoConcepto,
                                 ccmsidAdmin,
-                                obj.PaisId,
+                                obj.Paises,
                                 obj.MercadoId,
                                 obj.ClienteId,
                                 obj.PeopleSoftId,
@@ -185,7 +296,7 @@ namespace ASN.Controllers
                                 obj.NumeroNivelAutorizante,
                                 obj.AutorizacionAutomatica,
                                 obj.AutorizacionObligatoria,
-                                obj.Active,resultado);
+                                obj.Active, resultado);
                         }
                     }
 

@@ -43,7 +43,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosSel_Result>("CatConceptosSel");
         }
     
-        public virtual int CatConceptosSi(string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId, Nullable<int> paisId, Nullable<int> mercadoId, Nullable<int> clienteId, Nullable<int> peopleSoftId, Nullable<int> tipoPeriodoId, Nullable<int> numeroNivelAutorizante, Nullable<bool> autorizacionAutomatica, Nullable<bool> autorizacionObligatoria, ObjectParameter estatus)
+        public virtual int CatConceptosSi(string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId, string paisId, Nullable<int> mercadoId, Nullable<int> clienteId, Nullable<int> peopleSoftId, string tipoPeriodoId, Nullable<int> numeroNivelAutorizante, Nullable<bool> autorizacionAutomatica, Nullable<bool> autorizacionObligatoria, ObjectParameter estatus)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("Descripcion", descripcion) :
@@ -57,9 +57,9 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            var paisIdParameter = paisId.HasValue ?
+            var paisIdParameter = paisId != null ?
                 new ObjectParameter("PaisId", paisId) :
-                new ObjectParameter("PaisId", typeof(int));
+                new ObjectParameter("PaisId", typeof(string));
     
             var mercadoIdParameter = mercadoId.HasValue ?
                 new ObjectParameter("MercadoId", mercadoId) :
@@ -73,9 +73,9 @@ namespace ASN.Models
                 new ObjectParameter("PeopleSoftId", peopleSoftId) :
                 new ObjectParameter("PeopleSoftId", typeof(int));
     
-            var tipoPeriodoIdParameter = tipoPeriodoId.HasValue ?
+            var tipoPeriodoIdParameter = tipoPeriodoId != null ?
                 new ObjectParameter("TipoPeriodoId", tipoPeriodoId) :
-                new ObjectParameter("TipoPeriodoId", typeof(int));
+                new ObjectParameter("TipoPeriodoId", typeof(string));
     
             var numeroNivelAutorizanteParameter = numeroNivelAutorizante.HasValue ?
                 new ObjectParameter("NumeroNivelAutorizante", numeroNivelAutorizante) :
@@ -92,7 +92,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosSi", descripcionParameter, tipoConceptoParameter, userEmployeeIdParameter, paisIdParameter, mercadoIdParameter, clienteIdParameter, peopleSoftIdParameter, tipoPeriodoIdParameter, numeroNivelAutorizanteParameter, autorizacionAutomaticaParameter, autorizacionObligatoriaParameter, estatus);
         }
     
-        public virtual int CatConceptosSu(Nullable<int> conceptoId, string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId, Nullable<int> paisId, Nullable<int> mercadoId, Nullable<int> clienteId, Nullable<int> peopleSoftId, Nullable<int> tipoPeriodoId, Nullable<int> numeroNivelAutorizante, Nullable<bool> autorizacionAutomatica, Nullable<bool> autorizacionObligatoria, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatConceptosSu(Nullable<int> conceptoId, string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId, string paisId, Nullable<int> mercadoId, Nullable<int> clienteId, Nullable<int> peopleSoftId, string tipoPeriodoId, Nullable<int> numeroNivelAutorizante, Nullable<bool> autorizacionAutomatica, Nullable<bool> autorizacionObligatoria, Nullable<bool> active, ObjectParameter estatus)
         {
             var conceptoIdParameter = conceptoId.HasValue ?
                 new ObjectParameter("ConceptoId", conceptoId) :
@@ -110,9 +110,9 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            var paisIdParameter = paisId.HasValue ?
+            var paisIdParameter = paisId != null ?
                 new ObjectParameter("PaisId", paisId) :
-                new ObjectParameter("PaisId", typeof(int));
+                new ObjectParameter("PaisId", typeof(string));
     
             var mercadoIdParameter = mercadoId.HasValue ?
                 new ObjectParameter("MercadoId", mercadoId) :
@@ -126,9 +126,9 @@ namespace ASN.Models
                 new ObjectParameter("PeopleSoftId", peopleSoftId) :
                 new ObjectParameter("PeopleSoftId", typeof(int));
     
-            var tipoPeriodoIdParameter = tipoPeriodoId.HasValue ?
+            var tipoPeriodoIdParameter = tipoPeriodoId != null ?
                 new ObjectParameter("TipoPeriodoId", tipoPeriodoId) :
-                new ObjectParameter("TipoPeriodoId", typeof(int));
+                new ObjectParameter("TipoPeriodoId", typeof(string));
     
             var numeroNivelAutorizanteParameter = numeroNivelAutorizante.HasValue ?
                 new ObjectParameter("NumeroNivelAutorizante", numeroNivelAutorizante) :

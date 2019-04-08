@@ -16,14 +16,15 @@ namespace ASN.Models
         public int ConceptoId { get; set; }
         public string Descripcion { get; set; }
         public int TipoConcepto { get; set; }
-        public bool Active { get; set; }
-        public Nullable<int> PaisId { get; set; }
-        public Nullable<int> MercadoId { get; set; }
-        public Nullable<int> ClienteId { get; set; }
-        public Nullable<int> PeopleSoftId { get; set; }
-        public Nullable<int> TipoPeriodoId { get; set; }
+        public string PaisId { get; set; }
+        public string Paises { get; set; }
+        public int MercadoId { get; set; }
+        public int ClienteId { get; set; }
+        public int PeopleSoftId { get; set; }
+        public string TipoPeriodoId { get; set; }
         public Nullable<int> NumeroNivelAutorizante { get; set; }
         public Nullable<bool> AutorizacionAutomatica { get; set; }
         public Nullable<bool> AutorizacionObligatoria { get; set; }
+        public bool Active { get; set; }
     }
 }
