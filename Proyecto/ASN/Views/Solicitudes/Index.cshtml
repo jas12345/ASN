@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div id="tab1">
+                <div class="container-fluid">
+                    <div class="col-lg-12 col-md-12">
+                        @Html.Label("Catálogo de personal")
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            @(Html.Kendo().Grid<ASN.Models.CatEmployeeSel_Result>()
+                                            .Name("grid")
+                                            .Columns(column =>
+                                            {
+                                                column.Bound(c => c.Ident).ClientTemplate("<input type='checkbox' class='checkbox' />")@*Template(@<text><input type='checkbox' class='checkbox' /></text>)*@
+                                                     .HeaderTemplate(@<text><input id="Idents" type="checkbox" title="Seleccionar todos"/></text>)
+                                                     .Width(10).HtmlAttributes(new { style = "text-align:center" }).Sortable(false)
+                                                     .HeaderHtmlAttributes(new { style = "text-align:center" }).Filterable(false);
+                                                column.Bound(c => c.Ident).Width(40).Title("Año").Visible(false).Filterable(true);
+                                                column.Bound(c => c.First_Name).Width(40).Title("Nombre Periodo").Filterable(false);
+                                                column.Bound(c => c.Middle_Name).Visible(true).Filterable(true).Width(40);
+                                                column.Bound(c => c.Last_Name).Visible(true).Filterable(true).Width(40);
+                                                column.Bound(c => c.Location_Name).Visible(true).Filterable(true).Width(50);
+                                                column.Bound(c => c.Client_Name).Visible(true).Filterable(true).Width(60);
+                                                column.Bound(c => c.Program_Name).Visible(false).Title("Programa").Filterable(true).Width(50);
+                                                column.Bound(c => c.Phone_Ident).Visible(false).Title("Teléfono").Filterable(true).Width(40);
+                                                column.Bound(c => c.Company_Name).Width(30).Title("Empresa").Filterable(true);//.ClientTemplate("#:Active  ? 'Si' : 'No' #");
+                                            })
+                                //.ToolBar(toolBar =>
+                                //{
+                                //    toolBar.Create().Text("Nuevo");
+                                //    toolBar.Excel().Text("Exportar a excel");
+                                //})
+                                .Excel(ex => ex.AllPages(true))
+                                .HtmlAttributes(new { style = "height: 700px;" })
+                                .Scrollable(sorteable => sorteable.Virtual(false))
+                                .Sortable()
+                                .Resizable(c => c.Columns(true))
+                                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("SolicitudesPopUp").Window(x => x.Width(530).HtmlAttributes(new { style = "width: 530px" })))//
+                                .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
+                                .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .Batch(true)
+                                    .ServerOperation(false)
+                                    .Model(model =>
+                                    {
+                                        model.Id(c => c.Ident);
+                                        model.Field(c => c.First_Name).Editable(true);
+                                        model.Field(c => c.Middle_Name).Editable(true);
+                                        model.Field(c => c.Last_Name).Editable(true);
+                                        model.Field(c => c.Location_Name).Editable(true);
+                                        model.Field(c => c.Client_Name).Editable(true);
+                                        model.Field(c => c.Program_Name).Editable(false);
+                                        model.Field(c => c.Phone_Ident).Editable(true);
+                                        model.Field(c => c.Company_Name).Editable(true);
+                                    })
+                                    .Read(read => read.Action("GetEmployee", "Solicitudes"))
+                                    .Update(update => update.Action("UpdatePerdiodoNomina", "Solicitudes").Type(HttpVerbs.Post))
+                                    .Create(create => create.Action("CreatePeriodoNomina", "Solicitudes").Type(HttpVerbs.Post))
+                                    .PageSize(50)
+                                    .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                                )
+                                .Navigatable()
+                                .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(true)
+                                .ButtonCount(5)
+                                .Numeric(true)
+                                .PreviousNext(true)
+                                .Messages(messages =>
+                                {
+                                    messages.ItemsPerPage("Registros por página");
+                                    messages.Empty("Sin información para mostrar");
+                                    messages.First("Primera");
+                                    messages.Page("Página");
+                                    messages.Last("Última");
+                                    messages.Previous("Anterior");
+                                    messages.Next("Siguiente");
+                                    messages.Refresh("Actualizar");
+                                    messages.Of("De");
+                                    messages.MorePages("Mas páginas");
+                                    messages.Display("{0} a {1} de {2}");
+                                })
+                                )
+                            )
+                        </div>
+                    </div>
+                </div>
+                @*<input type="button" value="Anterior" onclick="accion(4);" /> <button class="success" onclick="accion(3);">Siguiente</button>*@
+            </div>
+
+            <div id="tab2" hidden><h1>TAB 2 DEMO</h1><input type="button" value="Anterior" onclick="accion(4);" /> <button class="success" onclick="accion(3);">Siguiente</button></div>
+            
+            <div id="tab3" hidden><h1>TAB 3 DEMO</h1><input type="button" value="Anterior" onclick="accion(5);" /> <button class="success" onclick="">Siguiente</button></div>
+        </div>
+    </div>
+    <script>
+    </script>
+}
+else
+{
+    <p>You are not logged in</p>
+}
+
+@Scripts.Render("~/bundles/Solicitudes")
+

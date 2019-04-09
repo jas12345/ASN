@@ -118,6 +118,7 @@
         <Function Name="CatContractTypeTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatEmployeeSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLocationCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLocationTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLogErrorSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -571,6 +572,7 @@
           <FunctionImport Name="CargaPivote">
           <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatEmployeeSel" ReturnType="Collection(ASNModel.CatEmployeeSel_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -852,6 +854,27 @@
           <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
           <Property Type="String" Name="TipoAcceso" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatEmployeeSel_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Middle_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Location_Ident" Nullable="true" />
+          <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
+          <Property Type="String" Name="Client_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Program_Ident" Nullable="true" />
+          <Property Type="String" Name="Program_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Phone_Ident" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Account_ID" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="position_code_company_name" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Company_Ident" Nullable="true" />
+          <Property Type="String" Name="Company_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Departament" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Departament_Ident" Nullable="true" />
+          <Property Type="String" Name="Gender" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="email1" Nullable="true" MaxLength="80" />
         </ComplexType>
        
         </Schema>
@@ -1307,6 +1330,31 @@
                 <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
                 <ScalarProperty Name="TipoAcceso" ColumnName="TipoAcceso" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatEmployeeSel" FunctionName="ASNModel.Store.CatEmployeeSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatEmployeeSel_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
+                <ScalarProperty Name="Program_Name" ColumnName="Program_Name" />
+                <ScalarProperty Name="Phone_Ident" ColumnName="Phone_Ident" />
+                <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+                <ScalarProperty Name="position_code_company_name" ColumnName="position_code_company_name" />
+                <ScalarProperty Name="Company_Ident" ColumnName="Company_Ident" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Departament" ColumnName="Departament" />
+                <ScalarProperty Name="Departament_Ident" ColumnName="Departament_Ident" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="email1" ColumnName="email1" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

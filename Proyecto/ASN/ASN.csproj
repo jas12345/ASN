@@ -144,6 +144,7 @@
     <Compile Include="Controllers\PeriodoNominaController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
+    <Compile Include="Controllers\SolicitudesController.cs" />
     <Compile Include="Controllers\TiposPeriodoNominaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -237,6 +238,9 @@
     <Compile Include="Models\CatCountryVwCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatEmployeeSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatLocationCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -308,6 +312,7 @@
     <Compile Include="Models\LogError.cs" />
     <Compile Include="Models\MyCustomIdentity.cs" />
     <Compile Include="Models\PeriodoNominaViewModel.cs" />
+    <Compile Include="Models\ProDepro.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -526,6 +531,7 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\shake.js" />
+    <Content Include="Scripts\Solicitudes.js" />
     <Content Include="Scripts\TiposPeriodoNomina.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
@@ -596,6 +602,8 @@
     <Content Include="Views\Shared\EditorTemplates\PeriodoNominaPopUp.cshtml" />
     <Content Include="Views\PerfilEmpleados\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PerfilEmpleadosPopUp.cshtml" />
+    <Content Include="Views\Solicitudes\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SolicitudesPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

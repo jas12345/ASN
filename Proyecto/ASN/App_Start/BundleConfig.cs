@@ -84,6 +84,9 @@ namespace ASN
 
             bundles.Add(new ScriptBundle("~/bundles/PerfilEmpleados").Include(
             "~/Scripts/PerfilEmpleados.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Solicitudes").Include(
+            "~/Scripts/Solicitudes.js"));
         }
     }
 }

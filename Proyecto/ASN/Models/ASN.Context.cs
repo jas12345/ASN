@@ -1103,5 +1103,10 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CargaPivote", consecutivoParameter);
         }
+    
+        public virtual ObjectResult<CatEmployeeSel_Result> CatEmployeeSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmployeeSel_Result>("CatEmployeeSel");
+        }
     }
 }
