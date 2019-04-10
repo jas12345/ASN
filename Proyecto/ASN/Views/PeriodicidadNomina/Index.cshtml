@@ -20,7 +20,6 @@
                                     columns.Bound(c => c.PeriodicidadNominaId).Title("Periodicidad").Visible(true).Filterable(false).Width(50);
                                     columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
                                     columns.Bound(c => c.Consecutivos).Width(150).Title("Consecutivos");
-                                    columns.ForeignKey(c => c.Descripcion, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Ident", "Valor").Width(125).Title("Tipo de periodicidad");
                                     columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
                                     columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
                                 }
