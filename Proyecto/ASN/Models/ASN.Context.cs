@@ -1108,5 +1108,14 @@ namespace ASN.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmployeeSel_Result>("CatEmployeeSel");
         }
+    
+        public virtual ObjectResult<EmpleadosxPerfilSel_Result> EmpleadosxPerfilSel(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpleadosxPerfilSel_Result>("EmpleadosxPerfilSel", perfil_IdentParameter);
+        }
     }
 }

@@ -257,6 +257,9 @@
         <Function Name="CatUserInfoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
+        <Function Name="EmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ASNModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -573,6 +576,9 @@
           <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatEmployeeSel" ReturnType="Collection(ASNModel.CatEmployeeSel_Result)" />
+          <FunctionImport Name="EmpleadosxPerfilSel" ReturnType="Collection(ASNModel.EmpleadosxPerfilSel_Result)">
+            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -875,6 +881,30 @@
           <Property Type="Int32" Name="Departament_Ident" Nullable="true" />
           <Property Type="String" Name="Gender" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="email1" Nullable="true" MaxLength="80" />
+        </ComplexType>
+        <ComplexType Name="EmpleadosxPerfilSel_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Manager_Ident" Nullable="true" />
+          <Property Type="String" Name="Manager_First_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Manager_Last_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Program_Ident" Nullable="true" />
+          <Property Type="String" Name="Program_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
+          <Property Type="String" Name="Client_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Company_Ident" Nullable="true" />
+          <Property Type="String" Name="Company_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
+          <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Location_Ident" Nullable="false" />
+          <Property Type="String" Name="full_name" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="country_ident" Nullable="true" />
+          <Property Type="String" Name="country_full_name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Position_Code_Ident" Nullable="true" />
+          <Property Type="String" Name="Position_Code_Title" Nullable="true" MaxLength="150" />
         </ComplexType>
        
         </Schema>
@@ -1355,6 +1385,34 @@
                 <ScalarProperty Name="Departament_Ident" ColumnName="Departament_Ident" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="email1" ColumnName="email1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EmpleadosxPerfilSel" FunctionName="ASNModel.Store.EmpleadosxPerfilSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.EmpleadosxPerfilSel_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Manager_Ident" ColumnName="Manager_Ident" />
+                <ScalarProperty Name="Manager_First_Name" ColumnName="Manager_First_Name" />
+                <ScalarProperty Name="Manager_Last_Name" ColumnName="Manager_Last_Name" />
+                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
+                <ScalarProperty Name="Program_Name" ColumnName="Program_Name" />
+                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="Company_Ident" ColumnName="Company_Ident" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
+                <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
+                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="country_ident" ColumnName="country_ident" />
+                <ScalarProperty Name="country_full_name" ColumnName="country_full_name" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="Position_Code_Ident" ColumnName="Position_Code_Ident" />
+                <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

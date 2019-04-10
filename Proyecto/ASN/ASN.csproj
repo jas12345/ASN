@@ -309,6 +309,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ELAViewModel.cs" />
+    <Compile Include="Models\EmpleadosxPerfilSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LogError.cs" />
     <Compile Include="Models\MyCustomIdentity.cs" />
     <Compile Include="Models\PeriodoNominaViewModel.cs" />

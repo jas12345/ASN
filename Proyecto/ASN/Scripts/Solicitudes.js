@@ -147,6 +147,17 @@ function accion(tab)
             $("#tab3").hide();
             break;
         case 2:
+            debugger;
+
+            var masterGrid = $("#grid").data("kendoGrid");
+            var detailRows = masterGrid.element.find(".k-detail-row");
+            var informacion = null;
+            for (var i = 0; i < detailRows.length; i++) {
+                var detailGrid = $(detailRows[i]).find(".k-grid").data("kendoGrid");
+                informacion.push(detailGrid.dataSource.view());
+            }
+
+            debugger;
             $("#tab2").show();
             $("#tab1").hide();
             $("#tab3").hide();
@@ -157,6 +168,7 @@ function accion(tab)
             $("#tab2").hide();
             break;
         case 4:
+            GuardarBorrador();
             $("#tab1").show();
             $("#tab2").hide();
             $("#tab3").hide();
@@ -220,6 +232,7 @@ function edit(e) {
     }
 
 }
+
 
 function valida(e) {
     if (e.type === "create" || e.type === "update") {
@@ -349,183 +362,29 @@ function handleSaveChanges(e, grid) {
     });
 })(jQuery, kendo);
 
-function rellenaFechasMes() {
-    var anioId = 0;
-    var mesId = 0;
 
-    anioId = $("#AnioId").val();
-    mesId = $("#MesId").val();
-
-    if (anioId != 0 && mesId != 0) {
-        $.post(urlFechasMes + "/?mesId=" + mesId + "&anioId=" + anioId, function (data) {
-
-            dtFechaInicio = formatDate(data[0].FechaInicio);
-            dtFechaFinal = formatDate(data[0].FechaCierre);
-
-            var meses = $("#MesId").data("kendoDropDownList");
-            var cnsecutivo = $("#ConsecutivoId").data("kendoDropDownList");
-
-            var FInicio = $("#FechaInicio").data("kendoDatePicker");
-            var FFin = $("#FechaFin").data("kendoDatePicker");
-
-            FInicio.setOptions({
-                max: data[0].FechaCierre,
-                min: data[0].FechaInicio
-            });
-
-            FFin.setOptions({
-                max: data[0].FechaCierre,
-                min: data[0].FechaInicio
-            });
-
-            if (editando === 0) {
-                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
-                fechaInicio.value(dtFechaInicio);
-
-                var FechaFin = $("#FechaFin").data("kendoDatePicker");
-                FechaFin.value(dtFechaFinal);
-
-                $("#FechaInicio").val(data[0].FechaInicio);
-                $("#FechaFin").val(data[0].FechaCierre);
-                meses.enable(true);
-                cnsecutivo.enable(true);
-            } else {
-
-
-                meses.enable(false);
-                cnsecutivo.enable(false);
-
-                $("#NombrePeriodo").val(nombrePeriodo);
-                dtFInicio = new Date(dtFechaInicio);
-                dtFInicio.setDate(dtFInicio.getDate() + 1);
-
-                FInicio.setOptions({
-                    max: new Date(dtFechaFinal),
-                    min: dtFInicio
-                });
-            }
-            delimitaRango();
-
-        }).fail(function (ex) {
-            console.log("fail" + ex);
-        });
-    }
+function actualizaGrid() {
+    $("#grid").data("kendoGrid").dataSource.read();
+    $("#grid").data("kendoGrid").refresh();
 }
 
-function validando() {
-    if (editando === 1) {
-        var consecutivos = $("#ConsecutivoId").data("kendoDropDownList");
-        var mesesId = $("#MesId").data("kendoDropDownList");
-        var periodicidad = $("#PeriodicidadNominaId").data("kendoDropDownList");
-        consecutivos.enable(false);
-        mesesId.enable(false);
-        periodicidad.enable(false);
-    }
+function GetPerfil() {
+    return {
+        perfil: $("#PerfilUsuarioId").val()
+    };
 }
 
-function delimitaRango() {
-    var FInicio = $("#FechaCaptura").data("kendoDateTimePicker");
-    var FFin = $("#FechaCierre").data("kendoDateTimePicker");
-
-    var dtFInicio = "";
-    var dtFinal = "";
-
-    dtFInicio = new Date(dtFechaInicio + " 00:00");
-    dtFInicio.setDate(dtFInicio.getDate());
-
-    dtFinal = new Date(dtFechaFinal + " 23:55");
-    dtFinal.setDate(dtFinal.getDate());
-
-    FInicio.setOptions({
-        max: dtFinal,
-        min: dtFInicio
+function GuardarBorrador() {
+    debugger;
+    var valoresGrid = $("#grid").data("kendoGrid");
+    var listado = valoresGrid.selectedKeyNames().join(", ") 
+    var data = {};
+    $.ajax({
+        type: "POST",
+        url: urlSolicitud,
+        data: data,
+        success: success,
+        dataType: dataType
     });
-
-    FFin.setOptions({
-        max: dtFinal,
-        min: dtFInicio
-    });
-}
-
-function tipoPerio() {
-    return {
-        anioId: $("#AnioId").val(),
-        mesId: $("#MesId").val(),
-        perid: $("#PeriodicidadNominaId").val()
-    };
-}
-
-function Anio() {
-    return {
-        anioId: $("#AnioId").val()
-    };
-}
-
-function AnioMes() {
-    return {
-        anioId: $("#AnioId").val(),
-        mesId: $("#MesId").val()
-    };
-}
-
-function onChangeCountry(e) {
-    if ("kendoConsole" in window) {
-        var dataItem = e.dataItem;
-        // kendoConsole.log("event :: select (" + dataItem.Text + " : " + dataItem.Value + ")");
-        $("#CountryIdents").val(dataItem.Value);
-        alert(dataItem.Value);
-    }
-
-}
-
-function fechasValor() {
-    return {
-        fechainicio: $("#FechaInicio").val(),
-        fechaFin: $("#FechaFin").val(),
-        fechaCaptura: $("#FechaCaptura").val(),
-        fechaCierre: $("#FechaCierre").val()
-    };
-}
-
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-}
-
-function formatDateTime(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear(),
-        hour = d.getHours(),
-        minutes = d.getMinutes();
-
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-') + " " + hour + ":" + minutes;
-}
-
-function getName() {
-    if (editando == 0) {
-        var anioVl = $("#AnioId").val();
-        var mesVl = $("#MesId").val();
-        var periodisidadVl = $("#PeriodicidadNominaId").val();
-        var consecutivoVl = $("#ConsecutivoId").val();
-        var tipoPeriodoVl = $("#TipoPeriodo").val();
-        mesVl = mesVl >= 1 && mesVl < 10 ? ("0" + mesVl) : mesVl;
-        var propuesto = anioVl + "_" + mesVl + "_" + periodisidadVl + "_" + consecutivoVl + "_" + tipoPeriodoVl;
-        var nombrePeriodo = $("#NombrePeriodo").data("TextBox");
-
-        $("#NombrePeriodo").val(propuesto).change();
-    }
 }
 
