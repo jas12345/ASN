@@ -98,6 +98,10 @@
                                 {
                                     <li>@Html.ActionLink("Perfil de Empleados", "Index", "PerfilEmpleados")</li>
                                 }
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("Crear Solicitud", "Index", "Solicitudes")</li>
+                                }
                             </ul>
                         </li>
                     }
