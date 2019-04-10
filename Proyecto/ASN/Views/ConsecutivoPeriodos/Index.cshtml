@@ -24,7 +24,7 @@
                         columns.ForeignKey(c => c.MesId, (System.Collections.IEnumerable)ViewData["MesCMB"], "Ident", "Valor").Width(125).Title("Mes");
                         columns.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Ident", "Valor").Width(125).Title("Periodicidad").ClientTemplate("#:PeriodicidadActiva ? DescripcionPeriodicidad : DescripcionPeriodicidad #");
                         columns.ForeignKey(c => c.ConsecutivoId, (System.Collections.IEnumerable)ViewData["ConsecutivosPeriodo"], "Ident", "Valor").Width(125).Title("Consecutivo").ClientTemplate("#:PeriodicidadActiva ? ConsecutivoId : Consecutivo #");
-                        columns.ForeignKey(c => c.TipoConsecutivoId, (System.Collections.IEnumerable)ViewData["TipoConsecutivo"], "Id", "Value").Width(125).Title("TipoConsecutivo");
+                        columns.ForeignKey(c => c.TipoConsecutivoId, (System.Collections.IEnumerable)ViewData["TipoConsecutivo"], "Id", "Value").Width(125).Title("Tipo de Consecutivo");
                         columns.Bound(c => c.FechaInicio).Width(150).Title("Fecha de Inicio");
                         columns.Bound(c => c.FechaCierre).Width(150).Title("Fecha de Cierre");
                         columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");

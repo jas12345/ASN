@@ -33,7 +33,7 @@
                                 .Scrollable(sorteable => sorteable.Virtual(false))
                                 .Sortable()
                                 .Resizable(c => c.Columns(true))
-                                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TipoPeriodoNominaPopUp"))
+                                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TiposPeriodoNominaPopUp"))
                                 .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
                                 .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                 .DataSource(dataSource => dataSource
