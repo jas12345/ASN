@@ -1,0 +1,19 @@
+Semana 10
+Asignar Empleados a los Perfiles por Tipos de Acceso
+Captura de Solicitudes
+Asignación Empleado-Perfil
+
+Semana 11
+Configuración de Roles
+Cargas masivas de solicitudes
+Mantenimiento a Solicitudes
+Generación de archivo PeopleSoft
+
+Semana 12
+Proceso de Cierre Manual de Solicitudes
+Proceso de Cierre Automático de Solicitudes
+Reporte de Auditoria
+Reporte General
+
+
+
