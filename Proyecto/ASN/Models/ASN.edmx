@@ -64,10 +64,16 @@
           <Parameter Name="MercadoId" Type="int" Mode="In" />
           <Parameter Name="ClienteId" Type="int" Mode="In" />
           <Parameter Name="PeopleSoftId" Type="int" Mode="In" />
-          <Parameter Name="TipoPeriodoId" Type="varchar" Mode="In" />
           <Parameter Name="NumeroNivelAutorizante" Type="int" Mode="In" />
           <Parameter Name="AutorizacionAutomatica" Type="bit" Mode="In" />
           <Parameter Name="AutorizacionObligatoria" Type="bit" Mode="In" />
+          <Parameter Name="Vigencia" Type="varchar" Mode="In" />
+          <Parameter Name="PagosFijos" Type="bit" Mode="In" />
+          <Parameter Name="Tope" Type="decimal" Mode="In" />
+          <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
+          <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
+          <Parameter Name="FechaFin" Type="varchar" Mode="In" />
+          <Parameter Name="ParametroConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatConceptosSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -79,10 +85,16 @@
           <Parameter Name="MercadoId" Type="int" Mode="In" />
           <Parameter Name="ClienteId" Type="int" Mode="In" />
           <Parameter Name="PeopleSoftId" Type="int" Mode="In" />
-          <Parameter Name="TipoPeriodoId" Type="varchar" Mode="In" />
           <Parameter Name="NumeroNivelAutorizante" Type="int" Mode="In" />
           <Parameter Name="AutorizacionAutomatica" Type="bit" Mode="In" />
           <Parameter Name="AutorizacionObligatoria" Type="bit" Mode="In" />
+          <Parameter Name="Vigencia" Type="varchar" Mode="In" />
+          <Parameter Name="PagosFijos" Type="bit" Mode="In" />
+          <Parameter Name="Tope" Type="decimal" Mode="In" />
+          <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
+          <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
+          <Parameter Name="FechaFin" Type="varchar" Mode="In" />
+          <Parameter Name="ParametroConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -277,10 +289,16 @@
             <Parameter Name="MercadoId" Mode="In" Type="Int32" />
             <Parameter Name="ClienteId" Mode="In" Type="Int32" />
             <Parameter Name="PeopleSoftId" Mode="In" Type="Int32" />
-            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
             <Parameter Name="NumeroNivelAutorizante" Mode="In" Type="Int32" />
             <Parameter Name="AutorizacionAutomatica" Mode="In" Type="Boolean" />
             <Parameter Name="AutorizacionObligatoria" Mode="In" Type="Boolean" />
+            <Parameter Name="Vigencia" Mode="In" Type="String" />
+            <Parameter Name="PagosFijos" Mode="In" Type="Boolean" />
+            <Parameter Name="Tope" Mode="In" Type="Decimal" />
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaFin" Mode="In" Type="String" />
+            <Parameter Name="ParametroConceptoId" Mode="In" Type="String" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConceptosSu">
@@ -292,10 +310,16 @@
             <Parameter Name="MercadoId" Mode="In" Type="Int32" />
             <Parameter Name="ClienteId" Mode="In" Type="Int32" />
             <Parameter Name="PeopleSoftId" Mode="In" Type="Int32" />
-            <Parameter Name="TipoPeriodoId" Mode="In" Type="String" />
             <Parameter Name="NumeroNivelAutorizante" Mode="In" Type="Int32" />
             <Parameter Name="AutorizacionAutomatica" Mode="In" Type="Boolean" />
             <Parameter Name="AutorizacionObligatoria" Mode="In" Type="Boolean" />
+            <Parameter Name="Vigencia" Mode="In" Type="String" />
+            <Parameter Name="PagosFijos" Mode="In" Type="Boolean" />
+            <Parameter Name="Tope" Mode="In" Type="Decimal" />
+            <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
+            <Parameter Name="FechaInicio" Mode="In" Type="String" />
+            <Parameter Name="FechaFin" Mode="In" Type="String" />
+            <Parameter Name="ParametroConceptoId" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -577,7 +601,7 @@
           </FunctionImport>
           <FunctionImport Name="CatEmployeeSel" ReturnType="Collection(ASNModel.CatEmployeeSel_Result)" />
           <FunctionImport Name="EmpleadosxPerfilSel" ReturnType="Collection(ASNModel.EmpleadosxPerfilSel_Result)">
-            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -597,11 +621,17 @@
           <Property Type="Int32" Name="MercadoId" Nullable="false" />
           <Property Type="Int32" Name="ClienteId" Nullable="false" />
           <Property Type="Int32" Name="PeopleSoftId" Nullable="false" />
-          <Property Type="String" Name="TipoPeriodoId" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="NumeroNivelAutorizante" Nullable="true" />
           <Property Type="Boolean" Name="AutorizacionAutomatica" Nullable="true" />
           <Property Type="Boolean" Name="AutorizacionObligatoria" Nullable="true" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="Vigencia" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="PagosFijos" Nullable="true" />
+          <Property Type="Decimal" Name="Tope" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="PeriodicidadNominaId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="FechaFin" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ParametroConceptoId" Nullable="true" MaxLength="5" />
         </ComplexType>
         <ComplexType Name="CatCountryCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -940,11 +970,17 @@
                 <ScalarProperty Name="MercadoId" ColumnName="MercadoId" />
                 <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
                 <ScalarProperty Name="PeopleSoftId" ColumnName="PeopleSoftId" />
-                <ScalarProperty Name="TipoPeriodoId" ColumnName="TipoPeriodoId" />
                 <ScalarProperty Name="NumeroNivelAutorizante" ColumnName="NumeroNivelAutorizante" />
                 <ScalarProperty Name="AutorizacionAutomatica" ColumnName="AutorizacionAutomatica" />
                 <ScalarProperty Name="AutorizacionObligatoria" ColumnName="AutorizacionObligatoria" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Vigencia" ColumnName="Vigencia" />
+                <ScalarProperty Name="PagosFijos" ColumnName="PagosFijos" />
+                <ScalarProperty Name="Tope" ColumnName="Tope" />
+                <ScalarProperty Name="PeriodicidadNominaId" ColumnName="PeriodicidadNominaId" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="ParametroConceptoId" ColumnName="ParametroConceptoId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

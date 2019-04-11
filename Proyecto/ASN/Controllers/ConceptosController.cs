@@ -178,6 +178,27 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
+
+        public JsonResult GetPeriodoNominaCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatPeriodosNominaCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.CatPeriodosNominaCMB().ToList();
+                }
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
         #endregion
 
         /// <summary>
@@ -235,10 +256,17 @@ namespace ASN.Controllers
                                 obj.MercadoId,
                                 obj.ClienteId,
                                 obj.PeopleSoftId,
-                                obj.TipoPeriodoId,
                                 obj.NumeroNivelAutorizante,
                                 obj.AutorizacionAutomatica,
-                                obj.AutorizacionObligatoria, resultado);
+                                obj.AutorizacionObligatoria,
+                                obj.Vigencia,
+                                obj.PagosFijos,
+                                obj.Tope,
+                                obj.PeriodicidadNominaId,
+                                obj.FechaInicio,
+                                obj.FechaFin,
+                                obj.ParametroConceptoId,
+                                resultado);
                         }
                     }
 
@@ -292,11 +320,18 @@ namespace ASN.Controllers
                                 obj.MercadoId,
                                 obj.ClienteId,
                                 obj.PeopleSoftId,
-                                obj.TipoPeriodoId,
                                 obj.NumeroNivelAutorizante,
                                 obj.AutorizacionAutomatica,
                                 obj.AutorizacionObligatoria,
-                                obj.Active, resultado);
+                                obj.Vigencia,
+                                obj.PagosFijos,
+                                obj.Tope,
+                                obj.PeriodicidadNominaId,
+                                obj.FechaInicio,
+                                obj.FechaFin,
+                                obj.ParametroConceptoId,
+                                obj.Active,
+                                resultado);
                         }
                     }
 

@@ -170,3 +170,14 @@ function defaultValidate(e)
         }
     }
 }
+
+function MuestraMultiSelect() {
+    if ($("#Vigencia").val() === "") {
+        $("#PeriodoNominaCnt").show();
+        $("#PeriodoNomina").show();
+    } else {
+        $("#PeriodoNomina").hide();
+        $("#PeriodoNominaCnt").hide();
+    }
+    
+}

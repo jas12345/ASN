@@ -21,10 +21,16 @@ namespace ASN.Models
         public int MercadoId { get; set; }
         public int ClienteId { get; set; }
         public int PeopleSoftId { get; set; }
-        public string TipoPeriodoId { get; set; }
         public Nullable<int> NumeroNivelAutorizante { get; set; }
         public Nullable<bool> AutorizacionAutomatica { get; set; }
         public Nullable<bool> AutorizacionObligatoria { get; set; }
         public bool Active { get; set; }
+        public string Vigencia { get; set; }
+        public Nullable<bool> PagosFijos { get; set; }
+        public Nullable<decimal> Tope { get; set; }
+        public string PeriodicidadNominaId { get; set; }
+        public string FechaInicio { get; set; }
+        public string FechaFin { get; set; }
+        public string ParametroConceptoId { get; set; }
     }
 }
