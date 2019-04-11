@@ -251,7 +251,6 @@ namespace ASN.Controllers
                             context.CatConceptosSi(
                                 obj.Descripcion,
                                 obj.TipoConcepto,
-                                ccmsidAdmin,
                                 obj.Paises,
                                 obj.MercadoId,
                                 obj.ClienteId,
@@ -266,6 +265,7 @@ namespace ASN.Controllers
                                 obj.FechaInicio,
                                 obj.FechaFin,
                                 obj.ParametroConceptoId,
+                                ccmsidAdmin,
                                 resultado);
                         }
                     }
@@ -315,7 +315,6 @@ namespace ASN.Controllers
                                 obj.ConceptoId,
                                 obj.Descripcion,
                                 obj.TipoConcepto,
-                                ccmsidAdmin,
                                 obj.Paises,
                                 obj.MercadoId,
                                 obj.ClienteId,
@@ -331,6 +330,7 @@ namespace ASN.Controllers
                                 obj.FechaFin,
                                 obj.ParametroConceptoId,
                                 obj.Active,
+                                ccmsidAdmin,
                                 resultado);
                         }
                     }

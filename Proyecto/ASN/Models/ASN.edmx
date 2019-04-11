@@ -59,7 +59,6 @@
         <Function Name="CatConceptosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="TipoConcepto" Type="int" Mode="In" />
-          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="PaisId" Type="varchar" Mode="In" />
           <Parameter Name="MercadoId" Type="int" Mode="In" />
           <Parameter Name="ClienteId" Type="int" Mode="In" />
@@ -73,14 +72,14 @@
           <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
           <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
           <Parameter Name="FechaFin" Type="varchar" Mode="In" />
-          <Parameter Name="ParametroConceptoId" Type="varchar" Mode="In" />
+          <Parameter Name="ParametroConceptoId" Type="int" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatConceptosSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="TipoConcepto" Type="int" Mode="In" />
-          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="PaisId" Type="varchar" Mode="In" />
           <Parameter Name="MercadoId" Type="int" Mode="In" />
           <Parameter Name="ClienteId" Type="int" Mode="In" />
@@ -94,8 +93,9 @@
           <Parameter Name="PeriodicidadNominaId" Type="varchar" Mode="In" />
           <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
           <Parameter Name="FechaFin" Type="varchar" Mode="In" />
-          <Parameter Name="ParametroConceptoId" Type="varchar" Mode="In" />
+          <Parameter Name="ParametroConceptoId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatConsecutivoPeriodicidadCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -284,7 +284,6 @@
           <FunctionImport Name="CatConceptosSi">
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="TipoConcepto" Mode="In" Type="Int32" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="PaisId" Mode="In" Type="String" />
             <Parameter Name="MercadoId" Mode="In" Type="Int32" />
             <Parameter Name="ClienteId" Mode="In" Type="Int32" />
@@ -298,14 +297,14 @@
             <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
             <Parameter Name="FechaInicio" Mode="In" Type="String" />
             <Parameter Name="FechaFin" Mode="In" Type="String" />
-            <Parameter Name="ParametroConceptoId" Mode="In" Type="String" />
+            <Parameter Name="ParametroConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConceptosSu">
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="TipoConcepto" Mode="In" Type="Int32" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="PaisId" Mode="In" Type="String" />
             <Parameter Name="MercadoId" Mode="In" Type="Int32" />
             <Parameter Name="ClienteId" Mode="In" Type="Int32" />
@@ -319,8 +318,9 @@
             <Parameter Name="PeriodicidadNominaId" Mode="In" Type="String" />
             <Parameter Name="FechaInicio" Mode="In" Type="String" />
             <Parameter Name="FechaFin" Mode="In" Type="String" />
-            <Parameter Name="ParametroConceptoId" Mode="In" Type="String" />
+            <Parameter Name="ParametroConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatCountryCMB" ReturnType="Collection(ASNModel.CatCountryCMB_Result)" />
@@ -631,7 +631,7 @@
           <Property Type="String" Name="PeriodicidadNominaId" Nullable="true" MaxLength="5" />
           <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="FechaFin" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="ParametroConceptoId" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="ParametroConceptoId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="CatCountryCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />

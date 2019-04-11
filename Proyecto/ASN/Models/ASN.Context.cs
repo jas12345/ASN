@@ -43,7 +43,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosSel_Result>("CatConceptosSel");
         }
     
-        public virtual int CatConceptosSi(string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId, string paisId, Nullable<int> mercadoId, Nullable<int> clienteId, Nullable<int> peopleSoftId, Nullable<int> numeroNivelAutorizante, Nullable<bool> autorizacionAutomatica, Nullable<bool> autorizacionObligatoria, string vigencia, Nullable<bool> pagosFijos, Nullable<decimal> tope, string periodicidadNominaId, string fechaInicio, string fechaFin, string parametroConceptoId, ObjectParameter estatus)
+        public virtual int CatConceptosSi(string descripcion, Nullable<int> tipoConcepto, string paisId, Nullable<int> mercadoId, Nullable<int> clienteId, Nullable<int> peopleSoftId, Nullable<int> numeroNivelAutorizante, Nullable<bool> autorizacionAutomatica, Nullable<bool> autorizacionObligatoria, string vigencia, Nullable<bool> pagosFijos, Nullable<decimal> tope, string periodicidadNominaId, string fechaInicio, string fechaFin, Nullable<int> parametroConceptoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("Descripcion", descripcion) :
@@ -52,10 +52,6 @@ namespace ASN.Models
             var tipoConceptoParameter = tipoConcepto.HasValue ?
                 new ObjectParameter("TipoConcepto", tipoConcepto) :
                 new ObjectParameter("TipoConcepto", typeof(int));
-    
-            var userEmployeeIdParameter = userEmployeeId.HasValue ?
-                new ObjectParameter("UserEmployeeId", userEmployeeId) :
-                new ObjectParameter("UserEmployeeId", typeof(int));
     
             var paisIdParameter = paisId != null ?
                 new ObjectParameter("PaisId", paisId) :
@@ -109,14 +105,18 @@ namespace ASN.Models
                 new ObjectParameter("FechaFin", fechaFin) :
                 new ObjectParameter("FechaFin", typeof(string));
     
-            var parametroConceptoIdParameter = parametroConceptoId != null ?
+            var parametroConceptoIdParameter = parametroConceptoId.HasValue ?
                 new ObjectParameter("ParametroConceptoId", parametroConceptoId) :
-                new ObjectParameter("ParametroConceptoId", typeof(string));
+                new ObjectParameter("ParametroConceptoId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosSi", descripcionParameter, tipoConceptoParameter, userEmployeeIdParameter, paisIdParameter, mercadoIdParameter, clienteIdParameter, peopleSoftIdParameter, numeroNivelAutorizanteParameter, autorizacionAutomaticaParameter, autorizacionObligatoriaParameter, vigenciaParameter, pagosFijosParameter, topeParameter, periodicidadNominaIdParameter, fechaInicioParameter, fechaFinParameter, parametroConceptoIdParameter, estatus);
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosSi", descripcionParameter, tipoConceptoParameter, paisIdParameter, mercadoIdParameter, clienteIdParameter, peopleSoftIdParameter, numeroNivelAutorizanteParameter, autorizacionAutomaticaParameter, autorizacionObligatoriaParameter, vigenciaParameter, pagosFijosParameter, topeParameter, periodicidadNominaIdParameter, fechaInicioParameter, fechaFinParameter, parametroConceptoIdParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatConceptosSu(Nullable<int> conceptoId, string descripcion, Nullable<int> tipoConcepto, Nullable<int> userEmployeeId, string paisId, Nullable<int> mercadoId, Nullable<int> clienteId, Nullable<int> peopleSoftId, Nullable<int> numeroNivelAutorizante, Nullable<bool> autorizacionAutomatica, Nullable<bool> autorizacionObligatoria, string vigencia, Nullable<bool> pagosFijos, Nullable<decimal> tope, string periodicidadNominaId, string fechaInicio, string fechaFin, string parametroConceptoId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatConceptosSu(Nullable<int> conceptoId, string descripcion, Nullable<int> tipoConcepto, string paisId, Nullable<int> mercadoId, Nullable<int> clienteId, Nullable<int> peopleSoftId, Nullable<int> numeroNivelAutorizante, Nullable<bool> autorizacionAutomatica, Nullable<bool> autorizacionObligatoria, string vigencia, Nullable<bool> pagosFijos, Nullable<decimal> tope, string periodicidadNominaId, string fechaInicio, string fechaFin, Nullable<int> parametroConceptoId, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var conceptoIdParameter = conceptoId.HasValue ?
                 new ObjectParameter("ConceptoId", conceptoId) :
@@ -130,10 +130,6 @@ namespace ASN.Models
                 new ObjectParameter("TipoConcepto", tipoConcepto) :
                 new ObjectParameter("TipoConcepto", typeof(int));
     
-            var userEmployeeIdParameter = userEmployeeId.HasValue ?
-                new ObjectParameter("UserEmployeeId", userEmployeeId) :
-                new ObjectParameter("UserEmployeeId", typeof(int));
-    
             var paisIdParameter = paisId != null ?
                 new ObjectParameter("PaisId", paisId) :
                 new ObjectParameter("PaisId", typeof(string));
@@ -186,15 +182,19 @@ namespace ASN.Models
                 new ObjectParameter("FechaFin", fechaFin) :
                 new ObjectParameter("FechaFin", typeof(string));
     
-            var parametroConceptoIdParameter = parametroConceptoId != null ?
+            var parametroConceptoIdParameter = parametroConceptoId.HasValue ?
                 new ObjectParameter("ParametroConceptoId", parametroConceptoId) :
-                new ObjectParameter("ParametroConceptoId", typeof(string));
+                new ObjectParameter("ParametroConceptoId", typeof(int));
     
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosSu", conceptoIdParameter, descripcionParameter, tipoConceptoParameter, userEmployeeIdParameter, paisIdParameter, mercadoIdParameter, clienteIdParameter, peopleSoftIdParameter, numeroNivelAutorizanteParameter, autorizacionAutomaticaParameter, autorizacionObligatoriaParameter, vigenciaParameter, pagosFijosParameter, topeParameter, periodicidadNominaIdParameter, fechaInicioParameter, fechaFinParameter, parametroConceptoIdParameter, activeParameter, estatus);
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosSu", conceptoIdParameter, descripcionParameter, tipoConceptoParameter, paisIdParameter, mercadoIdParameter, clienteIdParameter, peopleSoftIdParameter, numeroNivelAutorizanteParameter, autorizacionAutomaticaParameter, autorizacionObligatoriaParameter, vigenciaParameter, pagosFijosParameter, topeParameter, periodicidadNominaIdParameter, fechaInicioParameter, fechaFinParameter, parametroConceptoIdParameter, activeParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual ObjectResult<CatCountryCMB_Result> CatCountryCMB()
