@@ -31,6 +31,6 @@ namespace ASN.Models
         public string PeriodicidadNominaId { get; set; }
         public string FechaInicio { get; set; }
         public string FechaFin { get; set; }
-        public Nullable<int> ParametroConceptoId { get; set; }
+        public int ParametroConceptoId { get; set; }
     }
 }

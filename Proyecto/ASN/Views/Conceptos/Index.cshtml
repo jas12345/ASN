@@ -21,10 +21,10 @@
                             columns.Bound(c => c.ConceptoId).Title("Concepto").Visible(false).Filterable(false);
                             columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
                             columns.ForeignKey(c => c.Paises, (System.Collections.IEnumerable)ViewData["Paises"], "Id", "Value").Width(70).Title("Pais").Visible(false);
-                            columns.ForeignKey(c => c.MercadoId, (System.Collections.IEnumerable)ViewData["Mercados"], "Id", "Value").Width(70).Title("Mercado").Visible(true).Filterable(true);
+                            columns.ForeignKey(c => c.MercadoId, (System.Collections.IEnumerable)ViewData["Mercados"], "Id", "Value").Width(90).Title("Mercado").Visible(true).Filterable(true);
                             columns.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Id", "Value").Width(70).Title("Cliente").Visible(true).Filterable(true);
                             columns.ForeignKey(c => c.PeopleSoftId, (System.Collections.IEnumerable)ViewData["PeopleSoft"], "Ident", "Valor").Width(90).Title("PeopleSoft").Visible(true).Filterable(true);
-                            columns.ForeignKey(c => c.TipoConcepto, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(50).Title("Tipo concepto");
+                            columns.ForeignKey(c => c.TipoConcepto, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(70).Title("Tipo concepto");
                             columns.Bound(c => c.NumeroNivelAutorizante).Width(65).Title("Número de Nivel de Autorizante").Filterable(false);
 
                             columns.Bound(c => c.Vigencia).Visible(false);
@@ -50,7 +50,7 @@
                         .Scrollable(sorteable => sorteable.Virtual(false))
                         .Sortable()
                         .Resizable(c => c.Columns(true))
-                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConceptosPopUp").Window(x => x.Width(500).HtmlAttributes(new { style = "width: 500px" })))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConceptosPopUp").Window(x => x.Width(900).HtmlAttributes(new { style = "width: 900px" })))
                         .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                         .DataSource(dataSource => dataSource
@@ -83,8 +83,8 @@
 
                             })
                             .Read(read => read.Action("GetConceptos", "Conceptos"))
-                            .Update(update => update.Action("UpdateConcepto", "Conceptos").Type(HttpVerbs.Post))
-                            .Create(create => create.Action("CreateConcepto", "Conceptos").Type(HttpVerbs.Post))
+                            .Update(update => update.Action("UpdateConcepto", "Conceptos").Type(HttpVerbs.Post).Data("fechasValor"))
+                            .Create(create => create.Action("CreateConcepto", "Conceptos").Type(HttpVerbs.Post).Data("fechasValor"))
                             .PageSize(10)
                         .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
                         )

@@ -13,14 +13,36 @@ function edit(e) {
     });
     
     if (e.model.isNew() === false) {
+
         var lstCountryIdents = $("#Paises").data("kendoMultiSelect");
         var paises = e.model.Paises.split(',');
         lstCountryIdents.value(paises);
 
+        if (e.model.FechaInicio !== null) {
+            var fInicio = formatDate(e.model.FechaInicio);
+            $("#FechaInicio").val(fInicio);
+            $("#FechaFin").val(formatDate(e.model.FechaFin));
+        }
+
+        $("#Vigencia").val(e.model.Vigencia);
+        $("#PeriodicidadNominaId").val(e.model.PeriodicidadNominaId);
+        var periodicidad = $("#PeriodicidadNominaId").data("kendoDropDownList");
+        periodicidad.value(e.model.PeriodicidadNominaId);
+
         e.container.kendoWindow("title", "Editar");
+
+        if (e.model.PagosFijos === true) {
+            $("#PagosFijos").prop("checked", true);
+            $("#PagosFijos input:checkbox").trigger("click");
+            $("#PagosFijos").attr("checked", "checked");
+            $("label[for=PagosFijos]").html("Sí");
+            //$("#PagosFijos").click();
+            AdministraControles();
+        }
     }
     else {
         //$("#Active").attr("disabled", "disabled");
+        $("label[for=PagosFijos]").html("No");
         e.container.kendoWindow("title", "Nuevo");
     }
 }
@@ -155,8 +177,16 @@ function handleSaveChanges(e, grid) {
     });
 })(jQuery, kendo);
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
-function ValidaDisplayNameVal(obj) {
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
 }
 
 function defaultValidate(e)
@@ -172,12 +202,36 @@ function defaultValidate(e)
 }
 
 function MuestraMultiSelect() {
-    if ($("#Vigencia").val() === "") {
+    if ($("#Vigencia").val() === "") {        
         $("#PeriodoNominaCnt").show();
         $("#PeriodoNomina").show();
-    } else {
+    } else {        
         $("#PeriodoNomina").hide();
         $("#PeriodoNominaCnt").hide();
     }
     
+}
+
+function AdministraControles() {
+    var valorSeleccionado = $("#PagosFijos").is(':checked');
+    if (valorSeleccionado) {
+        $("label[for=PagosFijos]").html("Sí");
+        $(".cntHidden").show();
+        $("#Tope").attr("required", "required");
+        $("#PeriodicidadNominaId").attr("required", "required");
+        $("#FechaInicio").attr("required", "required");
+    } else {
+        $("label[for=PagosFijos]").html("No");
+        $("#Tope").removeAttr("required");
+        $("#PeriodicidadNominaId").removeAttr("required");
+        $("#FechaInicio").removeAttr("required");
+        $(".cntHidden").hide();
+    }
+}
+
+function fechasValor() {
+    return {
+    FechaInicio: $("#FechaInicio").val(),
+        FechaFin: $("#FechaFin").val()
+    };
 }

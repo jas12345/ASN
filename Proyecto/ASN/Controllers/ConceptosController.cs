@@ -199,6 +199,49 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
+
+        public JsonResult GetPeriodicidadCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatPeriodicidadNominaCMB_Result>();
+
+                lstCMB.Add(new CatPeriodicidadNominaCMB_Result() { Ident= "Catorcenal", Valor= "Catorcenal" });
+                lstCMB.Add(new CatPeriodicidadNominaCMB_Result() { Ident = "Quincenal", Valor = "Quincenal" });
+                lstCMB.Add(new CatPeriodicidadNominaCMB_Result() { Ident = "Mensual", Valor = "Mensual" });
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetParametrosConceptosCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatParametroConceptosCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.CatParametroConceptosCMB().ToList();
+                }
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
         #endregion
 
         /// <summary>
@@ -293,7 +336,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateConcepto([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosSel_Result> profiles)
+        public ActionResult UpdateConcepto([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosSel_Result> profiles, string FechaInicio, string FechaFin)
         {
             try
             {
@@ -326,8 +369,8 @@ namespace ASN.Controllers
                                 obj.PagosFijos,
                                 obj.Tope,
                                 obj.PeriodicidadNominaId,
-                                obj.FechaInicio,
-                                obj.FechaFin,
+                                FechaInicio,
+                                FechaFin,
                                 obj.ParametroConceptoId,
                                 obj.Active,
                                 ccmsidAdmin,

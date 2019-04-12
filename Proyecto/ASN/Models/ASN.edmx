@@ -628,10 +628,10 @@
           <Property Type="String" Name="Vigencia" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="PagosFijos" Nullable="true" />
           <Property Type="Decimal" Name="Tope" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="PeriodicidadNominaId" Nullable="true" MaxLength="5" />
-          <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="FechaFin" Nullable="true" MaxLength="30" />
-          <Property Type="Int32" Name="ParametroConceptoId" Nullable="true" />
+          <Property Type="String" Name="PeriodicidadNominaId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FechaFin" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="ParametroConceptoId" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatCountryCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
