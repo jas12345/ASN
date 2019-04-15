@@ -1165,5 +1165,216 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpleadosxPerfilSel_Result>("EmpleadosxPerfilSel", perfil_IdentParameter);
         }
+    
+        public virtual int CatSolicitudesSi(Nullable<int> folioSolicitud, Nullable<System.DateTime> fecha_Solicitud, Nullable<int> perfil_Ident, Nullable<int> solicitante_Ident, string solicintante_Nombre, Nullable<int> puesto_solicitante_Ident, Nullable<int> periodoNominaAnio_Id, Nullable<int> periodoNominaMes_Id, string periodoNominaConsecutivoid, string periodoNominaPeriodicidadNomina_Id, string periodoNominaTipoPeriodo_Id, Nullable<int> conceptoId, Nullable<int> motivoId, string justficacion, Nullable<int> conceptoMotivoId, Nullable<int> responsable_Id, Nullable<int> detalle, Nullable<int> periodoOriginal_AnioId, Nullable<int> periodoOriginal_MesId, string periodoOriginal_ConsecutivoId, string periodoOriginal_PeriodicidadId, string periodoOriginal_TipoPeriodoId, string autorizantes, ObjectParameter estatus, Nullable<int> userEmployeeId)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var fecha_SolicitudParameter = fecha_Solicitud.HasValue ?
+                new ObjectParameter("Fecha_Solicitud", fecha_Solicitud) :
+                new ObjectParameter("Fecha_Solicitud", typeof(System.DateTime));
+    
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            var solicitante_IdentParameter = solicitante_Ident.HasValue ?
+                new ObjectParameter("Solicitante_Ident", solicitante_Ident) :
+                new ObjectParameter("Solicitante_Ident", typeof(int));
+    
+            var solicintante_NombreParameter = solicintante_Nombre != null ?
+                new ObjectParameter("Solicintante_Nombre", solicintante_Nombre) :
+                new ObjectParameter("Solicintante_Nombre", typeof(string));
+    
+            var puesto_solicitante_IdentParameter = puesto_solicitante_Ident.HasValue ?
+                new ObjectParameter("Puesto_solicitante_Ident", puesto_solicitante_Ident) :
+                new ObjectParameter("Puesto_solicitante_Ident", typeof(int));
+    
+            var periodoNominaAnio_IdParameter = periodoNominaAnio_Id.HasValue ?
+                new ObjectParameter("PeriodoNominaAnio_Id", periodoNominaAnio_Id) :
+                new ObjectParameter("PeriodoNominaAnio_Id", typeof(int));
+    
+            var periodoNominaMes_IdParameter = periodoNominaMes_Id.HasValue ?
+                new ObjectParameter("PeriodoNominaMes_Id", periodoNominaMes_Id) :
+                new ObjectParameter("PeriodoNominaMes_Id", typeof(int));
+    
+            var periodoNominaConsecutivoidParameter = periodoNominaConsecutivoid != null ?
+                new ObjectParameter("PeriodoNominaConsecutivoid", periodoNominaConsecutivoid) :
+                new ObjectParameter("PeriodoNominaConsecutivoid", typeof(string));
+    
+            var periodoNominaPeriodicidadNomina_IdParameter = periodoNominaPeriodicidadNomina_Id != null ?
+                new ObjectParameter("PeriodoNominaPeriodicidadNomina_Id", periodoNominaPeriodicidadNomina_Id) :
+                new ObjectParameter("PeriodoNominaPeriodicidadNomina_Id", typeof(string));
+    
+            var periodoNominaTipoPeriodo_IdParameter = periodoNominaTipoPeriodo_Id != null ?
+                new ObjectParameter("PeriodoNominaTipoPeriodo_Id", periodoNominaTipoPeriodo_Id) :
+                new ObjectParameter("PeriodoNominaTipoPeriodo_Id", typeof(string));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var motivoIdParameter = motivoId.HasValue ?
+                new ObjectParameter("MotivoId", motivoId) :
+                new ObjectParameter("MotivoId", typeof(int));
+    
+            var justficacionParameter = justficacion != null ?
+                new ObjectParameter("Justficacion", justficacion) :
+                new ObjectParameter("Justficacion", typeof(string));
+    
+            var conceptoMotivoIdParameter = conceptoMotivoId.HasValue ?
+                new ObjectParameter("ConceptoMotivoId", conceptoMotivoId) :
+                new ObjectParameter("ConceptoMotivoId", typeof(int));
+    
+            var responsable_IdParameter = responsable_Id.HasValue ?
+                new ObjectParameter("Responsable_Id", responsable_Id) :
+                new ObjectParameter("Responsable_Id", typeof(int));
+    
+            var detalleParameter = detalle.HasValue ?
+                new ObjectParameter("Detalle", detalle) :
+                new ObjectParameter("Detalle", typeof(int));
+    
+            var periodoOriginal_AnioIdParameter = periodoOriginal_AnioId.HasValue ?
+                new ObjectParameter("PeriodoOriginal_AnioId", periodoOriginal_AnioId) :
+                new ObjectParameter("PeriodoOriginal_AnioId", typeof(int));
+    
+            var periodoOriginal_MesIdParameter = periodoOriginal_MesId.HasValue ?
+                new ObjectParameter("PeriodoOriginal_MesId", periodoOriginal_MesId) :
+                new ObjectParameter("PeriodoOriginal_MesId", typeof(int));
+    
+            var periodoOriginal_ConsecutivoIdParameter = periodoOriginal_ConsecutivoId != null ?
+                new ObjectParameter("PeriodoOriginal_ConsecutivoId", periodoOriginal_ConsecutivoId) :
+                new ObjectParameter("PeriodoOriginal_ConsecutivoId", typeof(string));
+    
+            var periodoOriginal_PeriodicidadIdParameter = periodoOriginal_PeriodicidadId != null ?
+                new ObjectParameter("PeriodoOriginal_PeriodicidadId", periodoOriginal_PeriodicidadId) :
+                new ObjectParameter("PeriodoOriginal_PeriodicidadId", typeof(string));
+    
+            var periodoOriginal_TipoPeriodoIdParameter = periodoOriginal_TipoPeriodoId != null ?
+                new ObjectParameter("PeriodoOriginal_TipoPeriodoId", periodoOriginal_TipoPeriodoId) :
+                new ObjectParameter("PeriodoOriginal_TipoPeriodoId", typeof(string));
+    
+            var autorizantesParameter = autorizantes != null ?
+                new ObjectParameter("Autorizantes", autorizantes) :
+                new ObjectParameter("Autorizantes", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSi", folioSolicitudParameter, fecha_SolicitudParameter, perfil_IdentParameter, solicitante_IdentParameter, solicintante_NombreParameter, puesto_solicitante_IdentParameter, periodoNominaAnio_IdParameter, periodoNominaMes_IdParameter, periodoNominaConsecutivoidParameter, periodoNominaPeriodicidadNomina_IdParameter, periodoNominaTipoPeriodo_IdParameter, conceptoIdParameter, motivoIdParameter, justficacionParameter, conceptoMotivoIdParameter, responsable_IdParameter, detalleParameter, periodoOriginal_AnioIdParameter, periodoOriginal_MesIdParameter, periodoOriginal_ConsecutivoIdParameter, periodoOriginal_PeriodicidadIdParameter, periodoOriginal_TipoPeriodoIdParameter, autorizantesParameter, estatus, userEmployeeIdParameter);
+        }
+    
+        public virtual int CatSolicitudesSu(Nullable<int> folioSolicitud, Nullable<System.DateTime> fecha_Solicitud, Nullable<int> perfil_Ident, Nullable<int> solicitante_Ident, string solicintante_Nombre, Nullable<int> puesto_solicitante_Ident, Nullable<int> periodoNominaAnio_Id, Nullable<int> periodoNominaMes_Id, string periodoNominaConsecutivoid, string periodoNominaPeriodicidadNomina_Id, string periodoNominaTipoPeriodo_Id, Nullable<int> conceptoId, Nullable<int> motivoId, string justficacion, Nullable<int> conceptoMotivoId, Nullable<int> responsable_Id, Nullable<int> detalle, Nullable<int> periodoOriginal_AnioId, Nullable<int> periodoOriginal_MesId, string periodoOriginal_ConsecutivoId, string periodoOriginal_PeriodicidadId, string periodoOriginal_TipoPeriodoId, string autorizantes, ObjectParameter estatus, Nullable<int> userEmployeeId)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var fecha_SolicitudParameter = fecha_Solicitud.HasValue ?
+                new ObjectParameter("Fecha_Solicitud", fecha_Solicitud) :
+                new ObjectParameter("Fecha_Solicitud", typeof(System.DateTime));
+    
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            var solicitante_IdentParameter = solicitante_Ident.HasValue ?
+                new ObjectParameter("Solicitante_Ident", solicitante_Ident) :
+                new ObjectParameter("Solicitante_Ident", typeof(int));
+    
+            var solicintante_NombreParameter = solicintante_Nombre != null ?
+                new ObjectParameter("Solicintante_Nombre", solicintante_Nombre) :
+                new ObjectParameter("Solicintante_Nombre", typeof(string));
+    
+            var puesto_solicitante_IdentParameter = puesto_solicitante_Ident.HasValue ?
+                new ObjectParameter("Puesto_solicitante_Ident", puesto_solicitante_Ident) :
+                new ObjectParameter("Puesto_solicitante_Ident", typeof(int));
+    
+            var periodoNominaAnio_IdParameter = periodoNominaAnio_Id.HasValue ?
+                new ObjectParameter("PeriodoNominaAnio_Id", periodoNominaAnio_Id) :
+                new ObjectParameter("PeriodoNominaAnio_Id", typeof(int));
+    
+            var periodoNominaMes_IdParameter = periodoNominaMes_Id.HasValue ?
+                new ObjectParameter("PeriodoNominaMes_Id", periodoNominaMes_Id) :
+                new ObjectParameter("PeriodoNominaMes_Id", typeof(int));
+    
+            var periodoNominaConsecutivoidParameter = periodoNominaConsecutivoid != null ?
+                new ObjectParameter("PeriodoNominaConsecutivoid", periodoNominaConsecutivoid) :
+                new ObjectParameter("PeriodoNominaConsecutivoid", typeof(string));
+    
+            var periodoNominaPeriodicidadNomina_IdParameter = periodoNominaPeriodicidadNomina_Id != null ?
+                new ObjectParameter("PeriodoNominaPeriodicidadNomina_Id", periodoNominaPeriodicidadNomina_Id) :
+                new ObjectParameter("PeriodoNominaPeriodicidadNomina_Id", typeof(string));
+    
+            var periodoNominaTipoPeriodo_IdParameter = periodoNominaTipoPeriodo_Id != null ?
+                new ObjectParameter("PeriodoNominaTipoPeriodo_Id", periodoNominaTipoPeriodo_Id) :
+                new ObjectParameter("PeriodoNominaTipoPeriodo_Id", typeof(string));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var motivoIdParameter = motivoId.HasValue ?
+                new ObjectParameter("MotivoId", motivoId) :
+                new ObjectParameter("MotivoId", typeof(int));
+    
+            var justficacionParameter = justficacion != null ?
+                new ObjectParameter("Justficacion", justficacion) :
+                new ObjectParameter("Justficacion", typeof(string));
+    
+            var conceptoMotivoIdParameter = conceptoMotivoId.HasValue ?
+                new ObjectParameter("ConceptoMotivoId", conceptoMotivoId) :
+                new ObjectParameter("ConceptoMotivoId", typeof(int));
+    
+            var responsable_IdParameter = responsable_Id.HasValue ?
+                new ObjectParameter("Responsable_Id", responsable_Id) :
+                new ObjectParameter("Responsable_Id", typeof(int));
+    
+            var detalleParameter = detalle.HasValue ?
+                new ObjectParameter("Detalle", detalle) :
+                new ObjectParameter("Detalle", typeof(int));
+    
+            var periodoOriginal_AnioIdParameter = periodoOriginal_AnioId.HasValue ?
+                new ObjectParameter("PeriodoOriginal_AnioId", periodoOriginal_AnioId) :
+                new ObjectParameter("PeriodoOriginal_AnioId", typeof(int));
+    
+            var periodoOriginal_MesIdParameter = periodoOriginal_MesId.HasValue ?
+                new ObjectParameter("PeriodoOriginal_MesId", periodoOriginal_MesId) :
+                new ObjectParameter("PeriodoOriginal_MesId", typeof(int));
+    
+            var periodoOriginal_ConsecutivoIdParameter = periodoOriginal_ConsecutivoId != null ?
+                new ObjectParameter("PeriodoOriginal_ConsecutivoId", periodoOriginal_ConsecutivoId) :
+                new ObjectParameter("PeriodoOriginal_ConsecutivoId", typeof(string));
+    
+            var periodoOriginal_PeriodicidadIdParameter = periodoOriginal_PeriodicidadId != null ?
+                new ObjectParameter("PeriodoOriginal_PeriodicidadId", periodoOriginal_PeriodicidadId) :
+                new ObjectParameter("PeriodoOriginal_PeriodicidadId", typeof(string));
+    
+            var periodoOriginal_TipoPeriodoIdParameter = periodoOriginal_TipoPeriodoId != null ?
+                new ObjectParameter("PeriodoOriginal_TipoPeriodoId", periodoOriginal_TipoPeriodoId) :
+                new ObjectParameter("PeriodoOriginal_TipoPeriodoId", typeof(string));
+    
+            var autorizantesParameter = autorizantes != null ?
+                new ObjectParameter("Autorizantes", autorizantes) :
+                new ObjectParameter("Autorizantes", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSu", folioSolicitudParameter, fecha_SolicitudParameter, perfil_IdentParameter, solicitante_IdentParameter, solicintante_NombreParameter, puesto_solicitante_IdentParameter, periodoNominaAnio_IdParameter, periodoNominaMes_IdParameter, periodoNominaConsecutivoidParameter, periodoNominaPeriodicidadNomina_IdParameter, periodoNominaTipoPeriodo_IdParameter, conceptoIdParameter, motivoIdParameter, justficacionParameter, conceptoMotivoIdParameter, responsable_IdParameter, detalleParameter, periodoOriginal_AnioIdParameter, periodoOriginal_MesIdParameter, periodoOriginal_ConsecutivoIdParameter, periodoOriginal_PeriodicidadIdParameter, periodoOriginal_TipoPeriodoIdParameter, autorizantesParameter, estatus, userEmployeeIdParameter);
+        }
+    
+        public virtual ObjectResult<RelPeriodicidadPaisCMB_Result> RelPeriodicidadPaisCMB(string country)
+        {
+            var countryParameter = country != null ?
+                new ObjectParameter("country", country) :
+                new ObjectParameter("country", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RelPeriodicidadPaisCMB_Result>("RelPeriodicidadPaisCMB", countryParameter);
+        }
     }
 }

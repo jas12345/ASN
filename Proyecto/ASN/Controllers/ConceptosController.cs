@@ -200,15 +200,43 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetPeriodicidadCMB()
+        public JsonResult GetPeriodicidadCMB(string pais)
         {
             try
             {
-                var lstCMB = new List<CatPeriodicidadNominaCMB_Result>();
+                var lstCMB = new List<RelPeriodicidadPaisCMB_Result>();
 
-                lstCMB.Add(new CatPeriodicidadNominaCMB_Result() { Ident= "Catorcenal", Valor= "Catorcenal" });
-                lstCMB.Add(new CatPeriodicidadNominaCMB_Result() { Ident = "Quincenal", Valor = "Quincenal" });
-                lstCMB.Add(new CatPeriodicidadNominaCMB_Result() { Ident = "Mensual", Valor = "Mensual" });
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.RelPeriodicidadPaisCMB(pais).ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetVigenciaCMB(string periodicidad)
+        {
+            try
+            {
+                var lstCMB = new List<RelPeriodicidadPaisCMB_Result>();
+
+                
+                lstCMB.Add(new RelPeriodicidadPaisCMB_Result() { Valor = "Inicio", Ident = "Inicio" });
+                lstCMB.Add(new RelPeriodicidadPaisCMB_Result() { Valor = "Fin", Ident = "Fin" });
+                if (string.IsNullOrEmpty(periodicidad) || periodicidad !="Q")
+                {
+                    lstCMB.Add(new RelPeriodicidadPaisCMB_Result() { Valor = "Periodo de nomina", Ident = "Periodo nomina" });
+                    lstCMB.Add(new RelPeriodicidadPaisCMB_Result() { Valor = "Todos", Ident = "Todos" });
+                }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
             }
@@ -273,7 +301,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateConcepto([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosSel_Result> profiles)
+        public ActionResult CreateConcepto([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatConceptosSel_Result> profiles, string fechaInicio, string fechaFin)
         {
             try
             {
@@ -305,8 +333,8 @@ namespace ASN.Controllers
                                 obj.PagosFijos,
                                 obj.Tope,
                                 obj.PeriodicidadNominaId,
-                                obj.FechaInicio,
-                                obj.FechaFin,
+                                fechaInicio,
+                                fechaFin,
                                 obj.ParametroConceptoId,
                                 ccmsidAdmin,
                                 resultado);

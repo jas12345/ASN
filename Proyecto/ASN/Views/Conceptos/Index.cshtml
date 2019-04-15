@@ -35,8 +35,8 @@
                             columns.Bound(c => c.FechaFin).Visible(false);
                             columns.Bound(c => c.ParametroConceptoId).Visible(false);
 
-                            columns.Bound(c => c.AutorizacionAutomatica).Width(65).Title("AutorizacionAutomatica").Filterable(false).ClientTemplate("#:AutorizacionAutomatica  ? 'Si' : 'No' #");
-                            columns.Bound(c => c.AutorizacionObligatoria).Width(60).Title("AutorizacionObligatoria").Filterable(false).ClientTemplate("#:AutorizacionObligatoria  ? 'Si' : 'No' #");
+                            columns.Bound(c => c.AutorizacionAutomatica).Width(65).Title("Autorización Automatica").Filterable(false).ClientTemplate("#:AutorizacionAutomatica  ? 'Si' : 'No' #");
+                            columns.Bound(c => c.AutorizacionObligatoria).Width(60).Title("Autorización Obligatoria").Filterable(false).ClientTemplate("#:AutorizacionObligatoria  ? 'Si' : 'No' #");
                             columns.Bound(c => c.Active).Width(20).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
                             columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
                         })
