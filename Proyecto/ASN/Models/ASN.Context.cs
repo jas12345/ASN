@@ -1376,5 +1376,10 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RelPeriodicidadPaisCMB_Result>("RelPeriodicidadPaisCMB", countryParameter);
         }
+    
+        public virtual ObjectResult<CatSolicitudesSel_Result> CatSolicitudesSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudesSel_Result>("CatSolicitudesSel");
+        }
     }
 }

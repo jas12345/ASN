@@ -378,13 +378,19 @@ function GuardarBorrador() {
     debugger;
     var valoresGrid = $("#grid").data("kendoGrid");
     var listado = valoresGrid.selectedKeyNames().join(", ") 
-    var data = {};
+    var profiles = {
+        FolioSolicitud:0,
+        Fecha_Solicitud:new Date("yyyy-MM-dd"),
+        Perfil_Ident : $("#PerfilUsuarioId").val()
+    };
     $.ajax({
         type: "POST",
         url: urlSolicitud,
-        data: data,
-        success: success,
-        dataType: dataType
+        data: JSON.stringify({ "profiles": profiles,"listaEmpleados":listado }),
+        contentType: 'application/json',
+        success: function (resultData) {
+            alert("Save Complete");
+        }        
     });
 }
 

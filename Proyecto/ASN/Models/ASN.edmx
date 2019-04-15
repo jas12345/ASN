@@ -248,6 +248,7 @@
         <Function Name="CatRelUserRoleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatSolicitudesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatSolicitudesSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Fecha_Solicitud" Type="date" Mode="In" />
@@ -715,8 +716,9 @@
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RelPeriodicidadPaisCMB" ReturnType="Collection(ASNModel.RelPeriodicidadPaisCMB_Result)">
-            <Parameter Name="country" Mode="In" Type="String" />
+          <Parameter Name="country" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="CatSolicitudesSel" ReturnType="Collection(ASNModel.CatSolicitudesSel_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1053,6 +1055,32 @@
         <ComplexType Name="RelPeriodicidadPaisCMB_Result">
           <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatSolicitudesSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="String" Name="Fecha_Solicitud" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Perfil_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
+          <Property Type="String" Name="Solicintante_Nombre" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Puesto_solicitante_Ident" Nullable="true" />
+          <Property Type="Int32" Name="PeriodoNominaAnio_Id" Nullable="true" />
+          <Property Type="Int32" Name="PeriodoNominaMes_Id" Nullable="true" />
+          <Property Type="String" Name="PeriodoNominaConsecutivoid" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PeriodoNominaPeriodicidadNomina_Id" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PeriodoNominaTipoPeriodo_Id" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
+          <Property Type="Int32" Name="MotivoId" Nullable="true" />
+          <Property Type="String" Name="Justficacion" Nullable="true" MaxLength="1024" />
+          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="true" />
+          <Property Type="Int32" Name="Responsable_Id" Nullable="true" />
+          <Property Type="Int32" Name="Detalle" Nullable="true" />
+          <Property Type="Int32" Name="PeriodoOriginal_AnioId" Nullable="true" />
+          <Property Type="Int32" Name="PeriodoOriginal_MesId" Nullable="true" />
+          <Property Type="String" Name="PeriodoOriginal_ConsecutivoId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PeriodoOriginal_PeriodicidadId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PeriodoOriginal_TipoPeriodoId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="Autorizantes" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
        
         </Schema>
@@ -1577,6 +1605,36 @@
               <ComplexTypeMapping TypeName="ASNModel.RelPeriodicidadPaisCMB_Result">
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatSolicitudesSel" FunctionName="ASNModel.Store.CatSolicitudesSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudesSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
+                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
+                <ScalarProperty Name="Solicintante_Nombre" ColumnName="Solicintante_Nombre" />
+                <ScalarProperty Name="Puesto_solicitante_Ident" ColumnName="Puesto_solicitante_Ident" />
+                <ScalarProperty Name="PeriodoNominaAnio_Id" ColumnName="PeriodoNominaAnio_Id" />
+                <ScalarProperty Name="PeriodoNominaMes_Id" ColumnName="PeriodoNominaMes_Id" />
+                <ScalarProperty Name="PeriodoNominaConsecutivoid" ColumnName="PeriodoNominaConsecutivoid" />
+                <ScalarProperty Name="PeriodoNominaPeriodicidadNomina_Id" ColumnName="PeriodoNominaPeriodicidadNomina_Id" />
+                <ScalarProperty Name="PeriodoNominaTipoPeriodo_Id" ColumnName="PeriodoNominaTipoPeriodo_Id" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="MotivoId" ColumnName="MotivoId" />
+                <ScalarProperty Name="Justficacion" ColumnName="Justficacion" />
+                <ScalarProperty Name="ConceptoMotivoId" ColumnName="ConceptoMotivoId" />
+                <ScalarProperty Name="Responsable_Id" ColumnName="Responsable_Id" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="PeriodoOriginal_AnioId" ColumnName="PeriodoOriginal_AnioId" />
+                <ScalarProperty Name="PeriodoOriginal_MesId" ColumnName="PeriodoOriginal_MesId" />
+                <ScalarProperty Name="PeriodoOriginal_ConsecutivoId" ColumnName="PeriodoOriginal_ConsecutivoId" />
+                <ScalarProperty Name="PeriodoOriginal_PeriodicidadId" ColumnName="PeriodoOriginal_PeriodicidadId" />
+                <ScalarProperty Name="PeriodoOriginal_TipoPeriodoId" ColumnName="PeriodoOriginal_TipoPeriodoId" />
+                <ScalarProperty Name="Autorizantes" ColumnName="Autorizantes" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
