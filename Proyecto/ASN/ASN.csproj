@@ -371,6 +371,7 @@
     <Content Include="Content\Default\sprite_kpi.png" />
     <Content Include="Content\Default\sprite_kpi_2x.png" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\images\ASNInicio.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\kendo.common-bootstrap.min.css" />
     <Content Include="Content\kendo.common.min.css" />
