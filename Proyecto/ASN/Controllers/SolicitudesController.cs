@@ -89,40 +89,50 @@ namespace ASN.Controllers
 
                     int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
-                    //foreach (var obj in profiles)
-                    //{
-                    //    if (!string.IsNullOrEmpty(obj.Descripcion))
-                    //    {
-                    //        context.CatConceptosSi(
-                    //            obj.Descripcion,
-                    //            obj.TipoConcepto,
-                    //            obj.Paises,
-                    //            obj.MercadoId,
-                    //            obj.ClienteId,
-                    //            obj.PeopleSoftId,
-                    //            obj.NumeroNivelAutorizante,
-                    //            obj.AutorizacionAutomatica,
-                    //            obj.AutorizacionObligatoria,
-                    //            obj.Vigencia,
-                    //            obj.PagosFijos,
-                    //            obj.Tope,
-                    //            obj.PeriodicidadNominaId,
-                    //            fechaInicio,
-                    //            fechaFin,
-                    //            obj.ParametroConceptoId,
-                    //            ccmsidAdmin,
-                    //            resultado);
-                    //    }
-                    //}
+                    if (profiles != null)
+                    {
 
-                    //int.TryParse(resultado.Value.ToString(), out res);
+                    }
+                    {
+                        if (profiles.FolioSolicitud == 0)
+                        {
+                            context.CatSolicitudesSi(
+                                profiles.FolioSolicitud,
+                                profiles.Fecha_Solicitud,
+                                profiles.Perfil_Ident,
+                                profiles.Solicitante_Ident,
+                                profiles.Solicintante_Nombre,
+                                profiles.Puesto_solicitante_Ident,
+                                profiles.PeriodoNominaAnio_Id,
+                                profiles.PeriodoNominaMes_Id,
+                                profiles.PeriodoOriginal_ConsecutivoId,
+                                profiles.PeriodoNominaPeriodicidadNomina_Id,
+                                profiles.PeriodoNominaTipoPeriodo_Id,
+                                profiles.ConceptoId,
+                                profiles.MotivoId,
+                                profiles.Justficacion,
+                                profiles.ConceptoMotivoId,
+                                profiles.Responsable_Id,
+                                profiles.Detalle,
+                                profiles.PeriodoOriginal_AnioId,
+                                profiles.PeriodoOriginal_MesId,
+                                profiles.PeriodoOriginal_ConsecutivoId,
+                                profiles.PeriodoOriginal_PeriodicidadId,
+                                profiles.PeriodoOriginal_TipoPeriodoId,
+                                profiles.Autorizantes,
+                                ccmsidAdmin,
+                                resultado);
+                        }
+                    }
 
-                    //if (res == -1)
-                    //{
-                    //    ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
-                    //}
+                    int.TryParse(resultado.Value.ToString(), out res);
 
-                    return Json("");//(profiles.ToDataSourceResult(request, ModelState));
+                    if (res == -1)
+                    {
+                        ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
+                    }
+
+                    return Json("Ok");// (profiles.ToDataSourceResult(request, ModelState));
                 }
 
                 //return Json("");
