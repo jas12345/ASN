@@ -1,5 +1,6 @@
-﻿
-
+﻿var editor = 0;
+var valorVigencia = "";
+var valorPeriodicidad = "";
 function edit(e) {
 
     var validator = e.container.data('kendoValidator');
@@ -25,22 +26,26 @@ function edit(e) {
         }
 
         $("#Vigencia").val(e.model.Vigencia);
-        $("#PeriodicidadNominaId").val(e.model.PeriodicidadNominaId);
-        var periodicidad = $("#PeriodicidadNominaId").data("kendoDropDownList");
-        periodicidad.value(e.model.PeriodicidadNominaId);
-
-        e.container.kendoWindow("title", "Editar");
-
+        
         if (e.model.PagosFijos === true) {
             $("#PagosFijos").prop("checked", true);
             $("#PagosFijos input:checkbox").trigger("click");
             $("#PagosFijos").attr("checked", "checked");
             $("label[for=PagosFijos]").html("Sí");
-            //$("#PagosFijos").click();
+
+            editor = 1;
+            valorVigencia = e.model.Vigencia;
+            valorPeriodicidad = e.model.PeriodicidadNominaId;
             AdministraControles();
+            GetPeriodicidad();
         }
+
+        var periodicidad = $("#PeriodicidadNominaId").data("kendoDropDownList");
+        periodicidad.value(e.model.PeriodicidadNominaId);
+        e.container.kendoWindow("title", "Editar");
     }
     else {
+        editor = 0;
         //$("#Active").attr("disabled", "disabled");
         $("label[for=PagosFijos]").html("No");
         e.container.kendoWindow("title", "Nuevo");
@@ -202,7 +207,7 @@ function defaultValidate(e)
 }
 
 function MuestraMultiSelect() {
-    if ($("#Vigencia").val() === "") {        
+    if ($("#Vigencia").val() === "Periodo nomina") {        
         $("#PeriodoNominaCnt").show();
         $("#PeriodoNomina").show();
     } else {        
@@ -231,7 +236,52 @@ function AdministraControles() {
 
 function fechasValor() {
     return {
-    FechaInicio: $("#FechaInicio").val(),
-        FechaFin: $("#FechaFin").val()
+    fechaInicio: $("#FechaInicio").val(),
+        fechaFin: $("#FechaFin").val()
     };
+}
+
+function GetPeriodicidad() {
+    $("#PeriodicidadNominaId").data("kendoDropDownList").dataSource.read();
+    $("#Vigencia").data("kendoDropDownList").dataSource.read();    
+}
+
+function GetPaises() {
+    var paises = "";
+    if ($("#Paises").val() !==null & $("#Paises").val() !== "") {
+        var paiseslst = $("#Paises").val();
+        for (key = 0; key < paiseslst.length; key++) {
+            
+            paises += $("#Paises").val()[key]+",";
+        }
+        paises = paises.substr(0, paises.length-1);
+    }
+
+    return {
+        pais: paises
+    }
+}
+
+function GetVigencia() {
+    return { periodicidad: $("#PeriodicidadNominaId").val() }
+}
+
+function ValidaPeriodicidad() {    
+    if (editor == 1) {
+        var vigencias = $("#Vigencia").data("kendoDropDownList");
+        var periodicidad = $("#PeriodicidadNominaId").data("kendoDropDownList");
+        vigencias.value(valorVigencia);
+        //periodicidad.value(valorPeriodicidad);
+    }
+    else {
+
+        var selector = $("#PeriodicidadNominaId").val();
+
+        if (selector === "Q") {
+            var dropdownlist = $("#Vigencia").data("kendoDropDownList");
+            dropdownlist.value("");
+        }
+
+        $("#Vigencia").data("kendoDropDownList").dataSource.read();
+    }
 }

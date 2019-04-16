@@ -12,14 +12,14 @@
             <label for="Descripcion">Descripción</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.Descripcion).HtmlAttributes(new { required = "required", validationMessage = "El campo descripción es requerido." }))
+            @(Html.Kendo().TextBoxFor(x => x.Descripcion).HtmlAttributes(new { required = "required", validationMessage = "El campo descripción es requerido.", style = "text-align:center;width: 16.4em" }))
         </div>
 
         <div class="editor-label">
             <label for="PaisId">País</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().MultiSelect()
+            @(Html.Kendo().MultiSelectFor(x => x.Paises)
                 .ValuePrimitive(true)
                 .Filter("contains")
                 .DataValueField("Id")
@@ -32,9 +32,10 @@
                     source.Read(Read =>
                     {
                         Read.Action("GetCountryCMB", "Conceptos");
-                    })
-                    .ServerFiltering(true);
+                    });
+                    //.ServerFiltering(true);
                 })
+                .Events(x => x.Change("GetPeriodicidad"))
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un país." })
             )
         </div>
@@ -109,15 +110,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Vigencia)
-                .BindTo(new List<SelectListItem>()
-                {
-                    new SelectListItem(){ Text="Todos", Value="todos"},
-                    new SelectListItem(){ Text="Inicio", Value="inicio"},
-                    new SelectListItem(){ Text="Fin", Value="fin"},
-                    new SelectListItem(){ Text="Periodo de nomina", Value=""} })
+                .DataSource(source =>
+                        {
+                            source.Read(Read =>
+                            {
+                                Read.Action("GetVigenciaCMB", "Conceptos").Data("GetVigencia");
+                            })
+                            .ServerFiltering(true);
+                        })
                     .Filter("contains")
                     .Name("Vigencia")
-                    .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .OptionLabel("- Vigencia - ")
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
                     .Events(x => x.Change("MuestraMultiSelect"))
             )
         </div>
@@ -181,7 +187,7 @@
                         {
                             source.Read(Read =>
                             {
-                                Read.Action("GetPeriodicidadCMB", "Conceptos");
+                                Read.Action("GetPeriodicidadCMB", "Conceptos").Data("GetPaises");
                             })
                             .ServerFiltering(true);
                         })
@@ -191,6 +197,7 @@
                         .DataTextField("Valor")
                         .Name("PeriodicidadNominaId")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em", validationmessage = "Seleccione periodicidad." })
+                        .Events(x => x.Change("ValidaPeriodicidad"))
             )
         </div>
 
@@ -201,6 +208,11 @@
             @(Html.Kendo().DatePicker()
                         .Name("FechaInicio")
                         .Format("yyyy-MM-dd")
+                        .ParseFormats(new string[] {
+                                        "ddd, M/d/yyyy",
+                                        "ddd, MM/dd/yyyy",
+                                        "ddd, M/dd/yyyy"
+                                            })
                         .Min(DateTime.Now.AddMonths(-6))
                         .Max(DateTime.Now.AddMonths(6))
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
@@ -215,6 +227,11 @@
             @(Html.Kendo().DatePicker()
                         .Name("FechaFin")
                         .Format("yyyy-MM-dd")
+                        .ParseFormats(new string[] {
+                                        "ddd, M/d/yyyy",
+                                        "ddd, MM/dd/yyyy",
+                                        "ddd, M/dd/yyyy"
+                                            })
                         .Min(DateTime.Now.AddMonths(-6))
                         .Max(DateTime.Now.AddMonths(6))
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })

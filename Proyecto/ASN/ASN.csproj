@@ -290,6 +290,9 @@
     <Compile Include="Models\CatRelUserRoleSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatSolicitudesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatTipoConceptosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -316,6 +319,9 @@
     <Compile Include="Models\MyCustomIdentity.cs" />
     <Compile Include="Models\PeriodoNominaViewModel.cs" />
     <Compile Include="Models\ProDepro.cs" />
+    <Compile Include="Models\RelPeriodicidadPaisCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

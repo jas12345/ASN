@@ -14,7 +14,7 @@ namespace ASN.Models
     public partial class CatSolicitudesSel_Result
     {
         public int FolioSolicitud { get; set; }
-        public Nullable<System.DateTime> Fecha_Solicitud { get; set; }
+        public string Fecha_Solicitud { get; set; }
         public Nullable<int> Perfil_Ident { get; set; }
         public Nullable<int> Solicitante_Ident { get; set; }
         public string Solicintante_Nombre { get; set; }

@@ -4,6 +4,7 @@ using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -69,6 +70,70 @@ namespace ASN.Controllers
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json("");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CreateSolicitud(CatSolicitudesSel_Result profiles, string listaEmpleados)
+        {
+            //[DataSourceRequest]DataSourceRequest request, IEnumerable< [Bind(Prefix = "models")]IEnumerable<
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    int ccmsidAdmin = 0;
+                    int res = 0;
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                    //foreach (var obj in profiles)
+                    //{
+                    //    if (!string.IsNullOrEmpty(obj.Descripcion))
+                    //    {
+                    //        context.CatConceptosSi(
+                    //            obj.Descripcion,
+                    //            obj.TipoConcepto,
+                    //            obj.Paises,
+                    //            obj.MercadoId,
+                    //            obj.ClienteId,
+                    //            obj.PeopleSoftId,
+                    //            obj.NumeroNivelAutorizante,
+                    //            obj.AutorizacionAutomatica,
+                    //            obj.AutorizacionObligatoria,
+                    //            obj.Vigencia,
+                    //            obj.PagosFijos,
+                    //            obj.Tope,
+                    //            obj.PeriodicidadNominaId,
+                    //            fechaInicio,
+                    //            fechaFin,
+                    //            obj.ParametroConceptoId,
+                    //            ccmsidAdmin,
+                    //            resultado);
+                    //    }
+                    //}
+
+                    //int.TryParse(resultado.Value.ToString(), out res);
+
+                    //if (res == -1)
+                    //{
+                    //    ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
+                    //}
+
+                    return Json("");//(profiles.ToDataSourceResult(request, ModelState));
+                }
+
+                //return Json("");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");// (profiles.ToDataSourceResult(request, ModelState));
             }
         }
 
