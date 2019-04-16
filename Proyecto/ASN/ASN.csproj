@@ -139,11 +139,11 @@
     <Compile Include="Controllers\ConceptosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\PerfilEmpleadosAccesosController.cs" />
     <Compile Include="Controllers\PerfilEmpleadosController.cs" />
     <Compile Include="Controllers\PeriodicidadNominaController.cs" />
     <Compile Include="Controllers\PeriodoNominaController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
-    <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\SolicitudesController.cs" />
     <Compile Include="Controllers\TiposPeriodoNominaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -257,6 +257,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatParametroConceptosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatPerfilEmpleadosAccesosSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatPerfilEmpleadosCMB_Result.cs">
@@ -533,6 +536,7 @@
     <Content Include="Scripts\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PerfilEmpleadosAccesos.js" />
     <Content Include="Scripts\PeriodicidadNomina.js" />
     <Content Include="Scripts\PeriodoNomina.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -613,6 +617,7 @@
     <Content Include="Views\Shared\EditorTemplates\PerfilEmpleadosPopUp.cshtml" />
     <Content Include="Views\Solicitudes\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SolicitudesPopUp.cshtml" />
+    <Content Include="Views\PerfilEmpleadosAccesos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

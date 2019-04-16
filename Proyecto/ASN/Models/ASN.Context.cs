@@ -1381,5 +1381,52 @@ namespace ASN.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudesSel_Result>("CatSolicitudesSel");
         }
+    
+        public virtual ObjectResult<CatPerfilEmpleadosAccesosSel_Result> CatPerfilEmpleadosAccesosSel(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosAccesosSel_Result>("CatPerfilEmpleadosAccesosSel", perfil_IdentParameter);
+        }
+    
+        public virtual int CatPerfilEmpleadosAccesosSi(Nullable<int> perfil_Ident, Nullable<int> empleadoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            var empleadoIdParameter = empleadoId.HasValue ?
+                new ObjectParameter("EmpleadoId", empleadoId) :
+                new ObjectParameter("EmpleadoId", typeof(int));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosAccesosSi", perfil_IdentParameter, empleadoIdParameter, userEmployeeIdParameter, estatus);
+        }
+    
+        public virtual int CatPerfilEmpleadosAccesosSu(Nullable<int> perfil_Ident, Nullable<int> empleadoId, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            var empleadoIdParameter = empleadoId.HasValue ?
+                new ObjectParameter("EmpleadoId", empleadoId) :
+                new ObjectParameter("EmpleadoId", typeof(int));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosAccesosSu", perfil_IdentParameter, empleadoIdParameter, userEmployeeIdParameter, activeParameter, estatus);
+        }
     }
 }

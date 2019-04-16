@@ -15,6 +15,8 @@ namespace ASN.Models
     {
         public int Ident { get; set; }
         public string Nombre { get; set; }
+        public int Perfil_Ident { get; set; }
+        public string NombrePerfilEmpleados { get; set; }
         public bool PerfilActivo { get; set; }
         public Nullable<bool> PerfilEmpleadoAcceso_Activo { get; set; }
     }
