@@ -375,6 +375,12 @@
         <Function Name="EmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
+        <Function Name="ProcesaSolicitudEmpleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="SolicitudId" Type="int" Mode="In" />
+          <Parameter Name="Autorizantes" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="ListaEmpleados" Type="varchar(max)" Mode="In" />
+        </Function>
         <Function Name="RelPeriodicidadPaisCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="country" Type="varchar" Mode="In" />
         </Function>
@@ -785,7 +791,7 @@
           </FunctionImport>
           <FunctionImport Name="CatSolicitudesSel" ReturnType="Collection(ASNModel.CatSolicitudesSel_Result)" />
           <FunctionImport Name="CatEmpleadosSolicitudesSel" ReturnType="Collection(ASNModel.CatEmpleadosSolicitudesSel_Result)">
-            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+          <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatEmpleadosSolicitudesSi">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
@@ -814,6 +820,12 @@
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcesaSolicitudEmpleados">
+            <Parameter Name="SolicitudId" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizantes" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="ListaEmpleados" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1814,6 +1826,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatEmpleadosSolicitudesSi" FunctionName="ASNModel.Store.CatEmpleadosSolicitudesSi" />
           <FunctionImportMapping FunctionImportName="CatEmpleadosSolicitudesSu" FunctionName="ASNModel.Store.CatEmpleadosSolicitudesSu" />
+          <FunctionImportMapping FunctionImportName="ProcesaSolicitudEmpleados" FunctionName="ASNModel.Store.ProcesaSolicitudEmpleados" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

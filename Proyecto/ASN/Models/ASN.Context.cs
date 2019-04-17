@@ -1539,5 +1539,26 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSu", folioSolicitudParameter, empleado_IdentParameter, activeParameter, userEmployeeIdParameter, estatus);
         }
+    
+        public virtual int ProcesaSolicitudEmpleados(Nullable<int> solicitudId, string autorizantes, Nullable<int> userEmployeeId, string listaEmpleados)
+        {
+            var solicitudIdParameter = solicitudId.HasValue ?
+                new ObjectParameter("SolicitudId", solicitudId) :
+                new ObjectParameter("SolicitudId", typeof(int));
+    
+            var autorizantesParameter = autorizantes != null ?
+                new ObjectParameter("Autorizantes", autorizantes) :
+                new ObjectParameter("Autorizantes", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            var listaEmpleadosParameter = listaEmpleados != null ?
+                new ObjectParameter("ListaEmpleados", listaEmpleados) :
+                new ObjectParameter("ListaEmpleados", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcesaSolicitudEmpleados", solicitudIdParameter, autorizantesParameter, userEmployeeIdParameter, listaEmpleadosParameter);
+        }
     }
 }

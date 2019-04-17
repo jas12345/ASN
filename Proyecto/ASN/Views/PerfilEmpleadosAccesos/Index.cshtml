@@ -47,81 +47,75 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 @(Html.Kendo().Grid<ASN.Models.CatPerfilEmpleadosAccesosSel_Result>()
-                                        .Name("grid")
-                                        .Columns(column =>
-                                        {
-                                             column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });
-                                                                                @*Template(@<text><input type='checkbox' class='checkbox' /></text>)*@
-                                                                                @*column.Bound(c => c.Ident).ClientTemplate("<input type='checkbox' class='checkbox' />")
-                                                                             .HeaderTemplate(@<text><input id="Idents" type="checkbox" title="Seleccionar todos" /></text>)
-                                                                .Width(10).HtmlAttributes(new { style = "text-align:center" }).Sortable(false)
-                                                                .HeaderHtmlAttributes(new { style = "text-align:center" }).Filterable(false);*@
-                                             column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(false).Filterable(true);
-                                             column.Bound(c => c.Nombre).Width(50).Title("Nombre").Filterable(true);
-                                             column.Bound(c => c.PerfilEmpleadoAcceso_Activo).Title("PerfilEmpleadoAcceso_Activo").Visible(false).Filterable(true).Width(50);
-                                        })
-                                       .HtmlAttributes(new { style = "height: 700px;" })
-                                       .Scrollable(sorteable => sorteable.Virtual(false))
-                                       .Sortable()
-                                       .PersistSelection()
-                                       .Events(eve => eve.SaveChanges("onSave"))
-                                       .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
-                                       .DataSource(dataSource => dataSource
-                                           .Ajax()
-                                           .Model(model =>
-                                           {
-                                               model.Id(c => c.Ident);
-                                               model.Field(c => c.Nombre).Editable(true);
-                                               model.Field(c => c.PerfilEmpleadoAcceso_Activo).Editable(true);
-                                           })
-                                           .Read(read => read.Action("GetPerfilEmpleadosAccesos", "PerfilEmpleadosAccesos").Data("GetPerfil"))
-                                       //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
-                                       )
-                                       .Navigatable()
-                                       .Pageable(pageable => pageable
-                                       .Refresh(true)
-                                       .PageSizes(true)
-                                       .ButtonCount(5)
-                                       .Numeric(true)
-                                       .PreviousNext(true)
-                                       .Messages(messages =>
-                                       {
-                                           messages.ItemsPerPage("Registros por página");
-                                           messages.Empty("Sin información para mostrar");
-                                           messages.First("Primera");
-                                           messages.Page("Página");
-                                           messages.Last("Última");
-                                           messages.Previous("Anterior");
-                                           messages.Next("Siguiente");
-                                           messages.Refresh("Actualizar");
-                                           messages.Of("De");
-                                           messages.MorePages("Mas páginas");
-                                           messages.Display("{0} a {1} de {2}");
-                                       })
-                                       )
+                                                .Name("grid")
+                                                .Columns(column =>
+                                                {
+                                                    column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });
+                                                    column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(false).Filterable(true);
+                                                    column.Bound(c => c.Nombre).Width(50).Title("Nombre").Filterable(true);
+                                                    column.Bound(c => c.PerfilEmpleadoAcceso_Activo).Title("PerfilEmpleadoAcceso_Activo").Visible(false).Filterable(true).Width(50);
+                                                })
+                                               .HtmlAttributes(new { style = "height: 700px;" })
+                                               .Scrollable(sorteable => sorteable.Virtual(false))
+                                               .Sortable()
+                                               .PersistSelection()
+                                               .Events(eve => eve.SaveChanges("onSave"))
+                                               .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                               .DataSource(dataSource => dataSource
+                                                   .Ajax()
+                                                   .Model(model =>
+                                                   {
+                                                       model.Id(c => c.Ident);
+                                                       model.Field(c => c.Nombre).Editable(true);
+                                                       model.Field(c => c.PerfilEmpleadoAcceso_Activo).Editable(true);
+                                                   })
+                                                   .Read(read => read.Action("GetPerfilEmpleadosAccesos", "PerfilEmpleadosAccesos").Data("GetPerfil"))
+                                               //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                                               )
+                                               .Navigatable()
+                                               .Pageable(pageable => pageable
+                                               .Refresh(true)
+                                               .PageSizes(true)
+                                               .ButtonCount(5)
+                                               .Numeric(true)
+                                               .PreviousNext(true)
+                                               .Messages(messages =>
+                                               {
+                                                   messages.ItemsPerPage("Registros por página");
+                                                   messages.Empty("Sin información para mostrar");
+                                                   messages.First("Primera");
+                                                   messages.Page("Página");
+                                                   messages.Last("Última");
+                                                   messages.Previous("Anterior");
+                                                   messages.Next("Siguiente");
+                                                   messages.Refresh("Actualizar");
+                                                   messages.Of("De");
+                                                   messages.MorePages("Mas páginas");
+                                                   messages.Display("{0} a {1} de {2}");
+                                               })
+                                               )
                                 )
+                                <script>
+                                    function onChange(arg) {
+                                        listaEmpleados = this.selectedKeyNames().join(", ");
+                                    }
+                                </script>
                             </div>
                         </div>
                         <div class="row">
                             <div class="k-form-field" style="float:right; margin-right:15px;">
-                                <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(4);" role="button" aria-disabled="false" tabindex="0">
-                                    <span class="k-icon k-i-save"></span>Guardar Borrador
-                                </button>
-                                <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext primary" onclick="accion(2);" role="button" aria-disabled="false" tabindex="0">
-                                    <span class="k-icon k-i-redo"></span>Siguiente
+                                <button id="Guardar" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(4);" role="button" aria-disabled="false" tabindex="0">
+                                    <span class="k-icon k-i-save"></span>Guardar
                                 </button>
                             </div>
                         </div>
-                    </div>
-                
+                    </div>               
             </div>
-
-            <div id="tab2" hidden><h1>TAB 2 DEMO</h1><input type="button" value="Anterior" onclick="accion(4);" /> <button class="success" onclick="accion(3);">Siguiente</button></div>
-            <div id="tab3" hidden><h1>TAB 3 DEMO</h1><input type="button" value="Anterior" onclick="accion(5);" /> <button class="success" onclick="">Siguiente</button></div>
         </div>
     </div>
     <script>
         var urlSolicitud = '@Url.Action("ValidaPeriodoNomina", "PeriodoNomina")';
+        var listaEmpleados = ""
     </script>
 }
 else
