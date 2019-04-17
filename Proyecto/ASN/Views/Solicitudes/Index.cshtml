@@ -40,7 +40,6 @@
                                             .Icon("search")
                                             .Content("Buscar")
                                             .Events(x => x.Click("actualizaGrid")))
-                                @*<button type="button" class="k-button k-button-icontext" onclick="actualizaGrid()"><span class="k-icon k-i-find" /></button>*@
                             </div>
                         </div>
                         </div>
@@ -51,21 +50,17 @@
                                         .Columns(column =>
                                         {
                                              column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });
-                                                                                @*Template(@<text><input type='checkbox' class='checkbox' /></text>)*@
-                                                                                @*column.Bound(c => c.Ident).ClientTemplate("<input type='checkbox' class='checkbox' />")
-                                                                             .HeaderTemplate(@<text><input id="Idents" type="checkbox" title="Seleccionar todos" /></text>)
-                                                                .Width(10).HtmlAttributes(new { style = "text-align:center" }).Sortable(false)
-                                                                .HeaderHtmlAttributes(new { style = "text-align:center" }).Filterable(false);*@
                                              column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(false).Filterable(true);
                                              column.Bound(c => c.First_Name).Width(50).Title("Nombre").Filterable(true);
                                              column.Bound(c => c.Last_Name).Title("Apellido(s)").Visible(true).Filterable(true).Width(50);
                                              column.Bound(c => c.Position_Code_Title).Title("Puesto").Visible(true).Filterable(true).Width(70);
+                                            column.Bound(c => c.Current_Status).Width(50).Visible(true);
                                         })
                                        .HtmlAttributes(new { style = "height: 700px;" })
                                        .Scrollable(sorteable => sorteable.Virtual(false))
                                        .Sortable()
                                        .PersistSelection()
-                                       .Events(eve => eve.SaveChanges("onSave"))
+                                       .Events(eve => eve.SaveChanges("onSave").Change("onChange"))
                                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                        .DataSource(dataSource => dataSource
                                            .Ajax()
@@ -118,7 +113,11 @@
                 
             </div>
 
-            <div id="tab2" hidden><h1>TAB 2 DEMO</h1><input type="button" value="Anterior" onclick="accion(4);" /> <button class="success" onclick="accion(3);">Siguiente</button></div>
+            <div id="tab2" hidden>
+                <div id="cuerpo2" class="row">
+                    @Html.Partial("~/Views/EmpleadosSolicitudes/GridEmpleados.cshtml")
+                </div>
+            <input type="button" value="Anterior" onclick="accion(4);" /> <button class="success" onclick="accion(3);">Siguiente</button></div>
             <div id="tab3" hidden><h1>TAB 3 DEMO</h1><input type="button" value="Anterior" onclick="accion(5);" /> <button class="success" onclick="">Siguiente</button></div>
         </div>
     </div>

@@ -1,0 +1,65 @@
+﻿<div class="col-lg-12 col-md-12 col-sm-12">
+    @(Html.Kendo().Grid<ASN.Models.CatEmpleadosSolicitudesSel_Result>()
+                    .Name("gridEmpleados")
+                    .Columns(column =>
+                    {
+                        column.Bound(c => c.FolioSolicitud).Title("SolicitudId").Visible(false).Filterable(true);
+                        column.Bound(c => c.Empleado_Ident).Title("CCMS ID").Visible(false).Filterable(true);
+                        column.Bound(c => c.Empleado_Middle_Name).Width(100).Title("Nombre").Visible(false).Filterable(true);
+                        column.Bound(c => c.CatConceptoMotivoId).Width(50).Title("Apellido(s)").Visible(true).Filterable(true).Width(50);
+                        column.Bound(c => c.Manager_Ident).Title("CCMS ID").Visible(true).Filterable(true).Width(70);
+                        column.Bound(c => c.Manager_Middle_Name).Width(100).Visible(true);
+                        column.Bound(c => c.Manager_Position_Code_Title).Width(50).Visible(true);
+                        column.Bound(c => c.ParametroConceptoMonto).Width(50).Visible(true);
+                        column.Bound(c => c.PeriodoNomina).Width(50).Visible(true);
+                        column.Bound(c => c.Detalle).Width(50).Visible(true);
+                    })
+                   .HtmlAttributes(new { style = "height: 700px;" })
+                   .Scrollable(sorteable => sorteable.Virtual(false))
+                   .Sortable()
+                   .PersistSelection()
+                   .Events(eve => eve.SaveChanges("onSave").Change("onChange"))
+                   .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                   .DataSource(dataSource => dataSource
+                       .Ajax()
+                       .Model(model =>
+                       {
+                           model.Id(c => c.FolioSolicitud);
+                           model.Field(c => c.Empleado_Ident).Editable(true);
+                           model.Field(c => c.Empleado_Middle_Name).Editable(true);
+                           model.Field(c => c.CatConceptoMotivoId).Editable(true);
+                           model.Field(c => c.CatConceptoMotivoId).Editable(true);
+                           model.Field(c => c.Manager_Ident).Editable(true);
+                           model.Field(c => c.Manager_Middle_Name).Editable(false);
+                           model.Field(c => c.Manager_Position_Code_Title).Editable(true);
+                           model.Field(c => c.ParametroConceptoMonto).Editable(true);
+                           model.Field(c => c.PeriodoNomina).Editable(true);
+                           model.Field(c => c.Detalle).Editable(true);
+                       })
+                       .Read(read => read.Action("GetEmpleadosSolicitudesSel", "EmpleadosSolicitudes").Data("GetPerfil"))
+                   //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                   )
+                   .Navigatable()
+                   .Pageable(pageable => pageable
+                   .Refresh(true)
+                   .PageSizes(true)
+                   .ButtonCount(5)
+                   .Numeric(true)
+                   .PreviousNext(true)
+                   .Messages(messages =>
+                   {
+                       messages.ItemsPerPage("Registros por página");
+                       messages.Empty("Sin información para mostrar");
+                       messages.First("Primera");
+                       messages.Page("Página");
+                       messages.Last("Última");
+                       messages.Previous("Anterior");
+                       messages.Next("Siguiente");
+                       messages.Refresh("Actualizar");
+                       messages.Of("De");
+                       messages.MorePages("Mas páginas");
+                       messages.Display("{0} a {1} de {2}");
+                   })
+                   )
+    )
+</div>

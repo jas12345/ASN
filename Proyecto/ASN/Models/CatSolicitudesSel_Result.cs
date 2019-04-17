@@ -36,6 +36,7 @@ namespace ASN.Models
         public string PeriodoOriginal_PeriodicidadId { get; set; }
         public string PeriodoOriginal_TipoPeriodoId { get; set; }
         public string Autorizantes { get; set; }
+        public string ListaEmpleados { get; set; }
         public bool Active { get; set; }
     }
 }

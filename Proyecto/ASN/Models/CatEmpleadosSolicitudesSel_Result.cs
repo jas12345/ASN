@@ -30,6 +30,10 @@ namespace ASN.Models
         public string Manager_Position_Code_Title { get; set; }
         public int Manager_Contract_Type_Ident { get; set; }
         public string Manager_Contract_Type { get; set; }
+        public int CatConceptoMotivoId { get; set; }
+        public int ParametroConceptoMonto { get; set; }
+        public string Detalle { get; set; }
+        public string PeriodoNomina { get; set; }
         public bool Active { get; set; }
     }
 }

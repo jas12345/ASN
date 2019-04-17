@@ -135,6 +135,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ConceptosMotivosController.cs" />
     <Compile Include="Controllers\ConsecutivoPeriodosController.cs" />
+    <Compile Include="Controllers\EmpleadosSolicitudesController.cs" />
     <Compile Include="Controllers\NominaController.cs" />
     <Compile Include="Controllers\ConceptosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -299,9 +300,6 @@
     <Compile Include="Models\CatSolicitudesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CatSolicitudesSel_Result1.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CatTipoConceptosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -338,7 +336,6 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserViewModel.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -625,6 +622,8 @@
     <Content Include="Views\Solicitudes\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SolicitudesPopUp.cshtml" />
     <Content Include="Views\PerfilEmpleadosAccesos\Index.cshtml" />
+    <Content Include="Views\EmpleadosSolicitudes\Index.cshtml" />
+    <Content Include="Views\EmpleadosSolicitudes\GridEmpleados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

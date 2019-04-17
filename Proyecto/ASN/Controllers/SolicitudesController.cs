@@ -120,6 +120,7 @@ namespace ASN.Controllers
                                 profiles.PeriodoOriginal_PeriodicidadId,
                                 profiles.PeriodoOriginal_TipoPeriodoId,
                                 profiles.Autorizantes,
+                                listaEmpleados,
                                 ccmsidAdmin,
                                 resultado);
                         }
