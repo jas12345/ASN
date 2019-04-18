@@ -18,6 +18,12 @@ namespace ASN.Controllers
             return View();
         }
 
+        public PartialViewResult MuestraEmpleados(string id)
+        {
+            var lista = GetEmpleadosSolicitudesSel(new DataSourceRequest(), id);
+            return PartialView("GridEmpleados");
+        }
+
         public JsonResult GetEmpleadosSolicitudesSel([DataSourceRequest]DataSourceRequest request,string SolicitudId)
         {
             try

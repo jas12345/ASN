@@ -18,7 +18,7 @@
                    .Scrollable(sorteable => sorteable.Virtual(false))
                    .Sortable()
                    .PersistSelection()
-                   .Events(eve => eve.SaveChanges("onSave").Change("onChange"))
+                   .Events(eve => eve.SaveChanges("onSave"))
                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                    .DataSource(dataSource => dataSource
                        .Ajax()
@@ -36,7 +36,7 @@
                            model.Field(c => c.PeriodoNomina).Editable(true);
                            model.Field(c => c.Detalle).Editable(true);
                        })
-                       .Read(read => read.Action("GetEmpleadosSolicitudesSel", "EmpleadosSolicitudes").Data("GetPerfil"))
+                       .Read(read => read.Action("GetEmpleadosSolicitudesSel", "EmpleadosSolicitudes").Data("GetSolicitudId"))
                    //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
                    )
                    .Navigatable()
