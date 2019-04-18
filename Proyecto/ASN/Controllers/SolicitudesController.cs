@@ -74,7 +74,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateSolicitud(CatSolicitudesSel_Result profiles, string listaEmpleados)
+        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, string listaEmpleados)
         {
             //[DataSourceRequest]DataSourceRequest request, IEnumerable< [Bind(Prefix = "models")]IEnumerable<
             try
@@ -126,17 +126,28 @@ namespace ASN.Controllers
                         }
                     }
 
-                    int.TryParse(resultado.Value.ToString(), out res);
+                    var lstResultado = resultado.Value.ToString().Split('_');
+                    int.TryParse(lstResultado[0], out res);
+                    var resultadoAccion = "";
+                    int SolicitudId = 0;
+                    object Error = null;
 
                     if (res == -1)
                     {
+                        resultadoAccion = "Ya existe un concepto con la misma descripción.";
+                        Error = new { Errors = resultadoAccion };
                         ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
+                    } else
+                    {
+                        if (lstResultado.Length >1)
+                        {
+                            SolicitudId = int.Parse(lstResultado[1].ToString());
+                        }
                     }
 
-                    return Json("Ok");// (profiles.ToDataSourceResult(request, ModelState));
+                    return Json(new { Id =SolicitudId,type= "create", response = Error }, JsonRequestBehavior.AllowGet);// (profiles.ToDataSourceResult(request, ModelState));
                 }
 
-                //return Json("");
             }
             catch (Exception ex)
             {
@@ -144,7 +155,9 @@ namespace ASN.Controllers
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json("");// (profiles.ToDataSourceResult(request, ModelState));
+                var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
+                //return Json(profiles.ToDataSourceResult(request, ModelState));
+                return Json(new { Id = 0,type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
             }
         }
 

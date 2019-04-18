@@ -60,7 +60,7 @@
                                        .Scrollable(sorteable => sorteable.Virtual(false))
                                        .Sortable()
                                        .PersistSelection()
-                                       .Events(eve => eve.SaveChanges("onSave").Change("onChange"))
+                                       .Events(eve => eve.SaveChanges("onSave"))//.Change("onChange")
                                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                        .DataSource(dataSource => dataSource
                                            .Ajax()
@@ -72,7 +72,7 @@
                                                model.Field(c => c.Position_Code_Title).Editable(true);
                                            })
                                            .Read(read => read.Action("GetEmployee", "Solicitudes").Data("GetPerfil"))
-                                       //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                                           .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
                                        )
                                        .Navigatable()
                                        .Pageable(pageable => pageable
@@ -115,7 +115,7 @@
 
             <div id="tab2" hidden>
                 <div id="cuerpo2" class="row">
-                    @Html.Partial("~/Views/EmpleadosSolicitudes/GridEmpleados.cshtml")
+                    @*@Html.Partial("~/Views/EmpleadosSolicitudes/GridEmpleados.cshtml")*@
                 </div>
             <input type="button" value="Anterior" onclick="accion(4);" /> <button class="success" onclick="accion(3);">Siguiente</button></div>
             <div id="tab3" hidden><h1>TAB 3 DEMO</h1><input type="button" value="Anterior" onclick="accion(5);" /> <button class="success" onclick="">Siguiente</button></div>

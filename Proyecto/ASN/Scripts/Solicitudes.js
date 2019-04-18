@@ -3,7 +3,8 @@ var lstCountry = 0;
 var dtFechaInicio = "";
 var dtFechaFinal = "";
 var nombrePeriodo = "";
-
+var continuaAccion = false;
+var SolicitudNueva = 0;
 function accion(tab)
 {
     switch (tab) {
@@ -24,9 +25,12 @@ function accion(tab)
             //}
 
             GuardarBorrador();
-            $("#tab2").show();
-            $("#tab1").hide();
-            $("#tab3").hide();
+            if (continuaAccion) {
+                $("#tab2").show();
+                $("#tab1").hide();
+                $("#tab3").hide();
+            }
+            
             break;
         case 3:
             $("#tab3").show();
@@ -94,30 +98,31 @@ function edit(e) {
 }
 
 
-//function valida(e) {
-//    if (e.type === "create" || e.type === "update") {
-//        $('#grid').data('kendoGrid').dataSource.data([]);
-//        $('#grid').data('kendoGrid').dataSource.read();
-//        $('#grid').data('kendoGrid').refresh();
+function valida(e) {
+    if (e.type === "create" || e.type === "update") {
+        $('#grid').data('kendoGrid').dataSource.data([]);
+        $('#grid').data('kendoGrid').dataSource.read();
+        $('#grid').data('kendoGrid').refresh();
+        debugger;
+        if (e.response.Errors === null) {
+            continuaAccion = true;
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Saved", "success");
+        }
+    }
+}
 
-//        if (e.response.Errors === null) {
-//            var notification = $("#popupNotification").data("kendoNotification");
-//            notification.show("Saved", "success");
-//        }
-//    }
-//}
+function errorsote(args) {
+    debugger;
+    if (args.errors) {
+        
+        $(document).ready(function () {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show(args.errors.error.errors[0], "error");
+        });
 
-//function errorsote(args) {
-
-//    if (args.errors) {
-
-//        $(document).ready(function () {
-//            var notification = $("#popupNotification").data("kendoNotification");
-//            notification.show(args.errors.error.errors[0], "error");
-//        });
-
-//    }
-//}
+    }
+}
 
 function onSave(e) {
 
@@ -224,6 +229,15 @@ function handleSaveChanges(e, grid) {
 
 
 function actualizaGrid() {
+
+    var grid = $("#grid").data("kendoGrid");
+    var options = grid.options;    
+    grid.destroy();
+
+    $("#grid")
+        .empty()
+        .kendoGrid(options);
+
     $("#grid").data("kendoGrid").dataSource.read();
     $("#grid").data("kendoGrid").refresh();
 }
@@ -233,9 +247,13 @@ function GetPerfil() {
         perfil: $("#PerfilUsuarioId").val()
     };
 }
+function GetSolicitudId() {
+    return {
+        SolicitudId: SolicitudNueva
+    };
+}
 
 function GuardarBorrador() {
-    debugger;
     var valoresGrid = $("#grid").data("kendoGrid");
     var listado = valoresGrid.selectedKeyNames().join(", ") 
     var profiles = {
@@ -243,26 +261,48 @@ function GuardarBorrador() {
         Fecha_Solicitud:new Date("yyyy-MM-dd"),
         Perfil_Ident : $("#PerfilUsuarioId").val()
     };
+    continuaAccion = false;
     $.ajax({
         type: "POST",
         url: urlSolicitud,
         data: JSON.stringify({ "profiles": profiles,"listaEmpleados":listado }),
         contentType: 'application/json',
         success: function (resultData) {
-            alert("Save Complete");
+            debugger;
+            if (resultData.response !== null) {
+                continuaAccion = false;
+                var notification = $("#popupNotification").data("kendoNotification");
+                notification.show(resultData.response.Errors, "error");
+            } else {
+                continuaAccion = true
+                SolicitudNueva = resultData.Id;
+                alert(resultData.Id);
+                var notification = $("#popupNotification").data("kendoNotification");
+                CargaEmpleadosSolicitud();
+                notification.show("Procesado Correctamente", "success");
+                
+            }
         }        
     });
 }
 
-function onChange(arg) {
-    debugger;
-
-    var valoresGrid = $("#grid").data("kendoGrid");
-    var listado = valoresGrid.selectedKeyNames();//.join(", ") 
-
-    var selected = $.map(this.select(), function (item) {
-        return $(item).text();
-    });
-
-    //kendoConsole.log("Selected: " + selected.length + " item(s), [" + selected.join(", ") + "]");
+function CargaEmpleadosSolicitud() {
+    //$.get('@Url.Action("details","user", new { id = ' + SolicitudNueva+' } )', function (data) {
+    //    $('#cuerpo2').html(data);
+    //}); 
+    $.ajax({
+        url: '/EmpleadosSolicitudes/MuestraEmpleados?id=' + SolicitudNueva,
+        contentType: 'application/html; charset=utf-8',
+        type: 'GET',
+        dataType: 'html'
+    })
+        .success(function (result) {
+            $('#cuerpo2').html(result);
+            $("#tab2").show();
+            $("#tab1").hide();
+            $("#tab3").hide();
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        }) 
 }
