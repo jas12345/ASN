@@ -858,9 +858,13 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodicidadNominaSu", periodicidadNominaIdParameter, descripcionParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
-        public virtual ObjectResult<CatPeriodosNominaCMB_Result> CatPeriodosNominaCMB()
+        public virtual ObjectResult<CatPeriodosNominaCMB_Result> CatPeriodosNominaCMB(Nullable<int> active)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB");
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB", activeParameter);
         }
     
         public virtual int CatPeriodosNominaSu(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, string fechaInicio, string fechaFin, string fechaCaptura, string fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
@@ -1538,6 +1542,20 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSu", folioSolicitudParameter, empleado_IdentParameter, activeParameter, userEmployeeIdParameter, estatus);
+        }
+    
+        public virtual ObjectResult<CatEmployeeCMB_Result> CatEmployeeCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmployeeCMB_Result>("CatEmployeeCMB");
+        }
+    
+        public virtual ObjectResult<CatEmpleadosPerfilEmpleadosCMB_Result> CatEmpleadosPerfilEmpleadosCMB(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosPerfilEmpleadosCMB_Result>("CatEmpleadosPerfilEmpleadosCMB", perfil_IdentParameter);
         }
     }
 }

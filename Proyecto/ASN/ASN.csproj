@@ -239,7 +239,13 @@
     <Compile Include="Models\CatCountryVwCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatEmpleadosPerfilEmpleadosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatEmpleadosSolicitudesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatEmployeeCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatEmployeeSel_Result.cs">
@@ -464,6 +470,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ConceptosMotivos.js" />
     <Content Include="Scripts\ConsecutivosPeriodos.js" />
+    <Content Include="Scripts\EmpleadosSolicitudes.js" />
     <Content Include="Scripts\MesesNomina.js" />
     <Content Include="Scripts\PerfilEmpleados.js" />
     <Content Include="Scripts\Nominas.js" />
@@ -624,6 +631,7 @@
     <Content Include="Views\PerfilEmpleadosAccesos\Index.cshtml" />
     <Content Include="Views\EmpleadosSolicitudes\Index.cshtml" />
     <Content Include="Views\EmpleadosSolicitudes\GridEmpleados.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmpleadosSolicitudesPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -90,7 +90,10 @@ namespace ASN
 
             bundles.Add(new ScriptBundle("~/bundles/PerfilEmpleadosAccesos").Include(
             "~/Scripts/PerfilEmpleadosAccesos.js"));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/EmpleadosSolicitudes").Include(
+            "~/Scripts/EmpleadosSolicitudes.js"));
+
 
         }
     }

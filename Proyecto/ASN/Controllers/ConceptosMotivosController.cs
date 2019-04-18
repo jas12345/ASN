@@ -41,6 +41,28 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult GetConceptosMotivosCMB()
+        {
+            try
+            {
+                var listConceptosMotivo = new List<CatConceptosMotivoCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    listConceptosMotivo = context.CatConceptosMotivoCMB().ToList();
+                }
+
+                return Json(listConceptosMotivo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
         /// <summary>
         /// Obtiene las registros actuales
         /// </summary>

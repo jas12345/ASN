@@ -287,11 +287,8 @@ function GuardarBorrador() {
 }
 
 function CargaEmpleadosSolicitud() {
-    //$.get('@Url.Action("details","user", new { id = ' + SolicitudNueva+' } )', function (data) {
-    //    $('#cuerpo2').html(data);
-    //}); 
     $.ajax({
-        url: '/EmpleadosSolicitudes/MuestraEmpleados?id=' + SolicitudNueva,
+        url: '/EmpleadosSolicitudes/MuestraEmpleados?id=' + SolicitudNueva + "&perfilId=" + $("#PerfilUsuarioId").val(),
         contentType: 'application/html; charset=utf-8',
         type: 'GET',
         dataType: 'html'

@@ -60,7 +60,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB().ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(1).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
