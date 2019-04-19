@@ -76,7 +76,6 @@ namespace ASN.Controllers
         [HttpPost]
         public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, string listaEmpleados)
         {
-            //[DataSourceRequest]DataSourceRequest request, IEnumerable< [Bind(Prefix = "models")]IEnumerable<
             try
             {
                 using (ASNContext context = new ASNContext())
@@ -90,9 +89,6 @@ namespace ASN.Controllers
                     int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
                     if (profiles != null)
-                    {
-
-                    }
                     {
                         if (profiles.FolioSolicitud == 0)
                         {

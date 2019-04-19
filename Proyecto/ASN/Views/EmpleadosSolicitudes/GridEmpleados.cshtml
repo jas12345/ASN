@@ -1,5 +1,5 @@
 ﻿<div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-4"></div><div class="col-lg-4 col-md-4 col-sm-4"></div><div class="col-lg-4 col-md-4 col-sm-4"><button type="button" id="ViewForm">Configurar Todos</button></div>
+    <div class="col-lg-4 col-md-4 col-sm-4"></div><div class="col-lg-4 col-md-4 col-sm-4"></div><div class="col-lg-4 col-md-4 col-sm-4"></div>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12">
     @(Html.Kendo().Grid<ASN.Models.CatEmpleadosSolicitudesSel_Result>()
@@ -43,8 +43,7 @@
                                            model.Field(c => c.Detalle).Editable(true);
                                        })
                                        .Read(read => read.Action("GetEmpleadosSolicitudesSel", "EmpleadosSolicitudes").Data("GetSolicitudId"))
-                                       .Update(update => update.Action("EditingInline_Update", "Grid"))
-                                   //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                                       .Update(update => update.Action("EditingInline_Update", "EmpleadosSolicitudes").Data("GetParametros"))
                                    )
                                    .Navigatable()
                                    .Pageable(pageable => pageable

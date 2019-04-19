@@ -24,7 +24,7 @@ namespace ASN.Controllers
             if (!string.IsNullOrEmpty(id))
             {
                 ViewBag.SolicitudBaseId = id;
-                ViewBag.PerfilId = perfilId;
+                TempData["PerfilId"] = perfilId;
             }
             
             return PartialView("GridEmpleados");
@@ -89,8 +89,9 @@ namespace ASN.Controllers
                 var listEmpleados = new List<CatEmpleadosPerfilEmpleadosCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
+                    TempData["PerfilId"] = (!string.IsNullOrEmpty(TempData["PerfilId"].ToString()) ? TempData["PerfilId"] :0);
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listEmpleados = context.CatEmpleadosPerfilEmpleadosCMB(int.Parse(ViewBag.PerfilId)).ToList();
+                    listEmpleados = context.CatEmpleadosPerfilEmpleadosCMB(int.Parse(TempData["PerfilId"].ToString())).ToList();
                 }
 
                 return Json(listEmpleados, JsonRequestBehavior.AllowGet);
@@ -105,7 +106,7 @@ namespace ASN.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditingInline_Update([DataSourceRequest] DataSourceRequest request, CatEmpleadosSolicitudesSel_Result model)
+        public ActionResult EditingInline_Update([DataSourceRequest] DataSourceRequest request, CatEmpleadosSolicitudesSel_Result model, string TTConceptoMotivoId, string TTManager_Ident, string TTMonto, string TTDetalleId, string TTPeriodoNomina)
         {
             try
             {

@@ -303,3 +303,13 @@ function CargaEmpleadosSolicitud() {
             alert(status);
         }) 
 }
+
+function GetParametros() {
+    return {
+        TTConceptoMotivoId: $('input#TTConceptoMotivoId').is(':checked').toString(),
+        TTManager_Ident: $("#TTManager_Ident").is(':checked').toString(),
+        TTMonto: $("#TTMonto").is(':checked').toString(),
+        TTDetalleId: $("#TTDetalleId").is(':checked').toString(),
+        TTPeriodoNomina: $("#TTPeriodoNomina").is(':checked').toString()
+    };
+}

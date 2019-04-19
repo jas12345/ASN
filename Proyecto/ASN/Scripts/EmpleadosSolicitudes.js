@@ -125,7 +125,7 @@ function valida(e) {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
         $('#grid').data('kendoGrid').refresh();
-        debugger;
+
         if (e.response.Errors === null) {
             continuaAccion = true;
             var notification = $("#popupNotification").data("kendoNotification");
@@ -157,10 +157,10 @@ function edit(e) {
         validator.validateInput(this);
     });
 
+    if (e.model.isNew() === false) {
         e.container.kendoWindow("title", "Editar");
     }
     else {
         e.container.kendoWindow("title", "Nuevo");
     }
-
 }

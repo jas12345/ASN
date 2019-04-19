@@ -20,12 +20,9 @@
                     });
                 })
                 .Filter("contains")
-                //.OptionLabel("- Concepto de motivo - ")
                 .DataValueField("Ident")
                 .DataTextField("Valor")
                 .Name("CatConceptoMotivoId")
-                //.Events(x => x.DataBound("getName"))      
-                //.HtmlAttributes(new { onchange = "AdministraControles()" }))
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
             )
             @(Html.Kendo().CheckBox().Name("TTConceptoMotivoId").Label("(Todos)")) 
@@ -44,10 +41,9 @@
                 })
                 .Filter("contains")
                 .OptionLabel("- Responsable - ")
-                .DataValueField("Ident")
-                .DataTextField("Nombre")
+                .DataValueField("Id")
+                .DataTextField("Value")
                 .Name("Manager_Ident")
-                // .Events(x => x.Change("rellenaFechasMes").DataBound("getName").DataBound("validando"))//
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
             )
             @(Html.Kendo().CheckBox().Name("TTManager_Ident").Label("(Todos)")) 
@@ -65,23 +61,6 @@
         <div class="editor-field">
             @(Html.Kendo().TextBox().Name("DetalleId").HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
             @(Html.Kendo().CheckBox().Name("TTDetalleId").Label("(Todos)"))
-            @*@(Html.Kendo().DropDownList()
-            .DataSource(source =>
-            {
-                source.Read(read =>
-                {
-                    read.Action("GetConsecutivoPeriodoNominaCMB", "PeriodoNomina");
-                })
-                .ServerFiltering(true);
-            })
-            .Filter("contains")
-            .OptionLabel("- Consecutivo - ")
-            .DataValueField("Ident")
-            .DataTextField("Valor")
-            .Name("ConsecutivoId")
-            //.Events(x => x.DataBound("validando").Change("getName"))
-            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
-        )*@
         </div>
         <div class="editor-label">
             <label for="TipoPeriodo">Periodo original</label>
@@ -101,14 +80,9 @@
                 .DataTextField("Valor")
                 .Name("PeriodoNominaId")
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
-            //.Events(x => x.Change("getName"))
             )
             @(Html.Kendo().CheckBox().Name("TTPeriodoNomina").Label("(Todos)"))
         </div>
         <input type="hidden" id="PeriodicidadId" value=""/>
-        @*<p>
-            Nota:
-            <b>Todos los registros heredaran la misma información que se configure en el formulario.</b>
-        </p>*@
 </div>
 </div>
