@@ -206,8 +206,9 @@
         </Function>
         <Function Name="CatPerfilEmpleadosAccesosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
-          <Parameter Name="EmpleadoId" Type="int" Mode="In" />
+          <Parameter Name="SelectedKeyNames" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatPerfilEmpleadosAccesosSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -301,6 +302,30 @@
         <Function Name="CatRelUserRoleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatSolicitudEmpleadosDetalleSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="SolicitudId" Type="int" Mode="In" />
+          <Parameter Name="CatEmpleadoId" Type="int" Mode="In" />
+          <Parameter Name="CatConceptoMotivoId" Type="int" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatSolicitudEmpleadosDetalleSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="SolicitudId" Type="int" Mode="In" />
+          <Parameter Name="CatEmpleadoId" Type="int" Mode="In" />
+          <Parameter Name="CatConceptoMotivoId" Type="varchar" Mode="In" />
+          <Parameter Name="ResponsableId" Type="int" Mode="In" />
+          <Parameter Name="ParametroConceptoMonto" Type="decimal" Mode="In" />
+          <Parameter Name="Detalle" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodoNomina" Type="varchar" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="TTConceptoMotivoId" Type="bit" Mode="In" />
+          <Parameter Name="TTManager_Ident" Type="bit" Mode="In" />
+          <Parameter Name="TTMonto" Type="bit" Mode="In" />
+          <Parameter Name="TTDetalle" Type="bit" Mode="In" />
+          <Parameter Name="TTPeriodoNomina" Type="bit" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="CatSolicitudesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatSolicitudesSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
@@ -380,6 +405,15 @@
         </Function>
         <Function Name="EmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ProcesaSolicitudEmpleadoDetalleSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="SolicitudId" Type="int" Mode="In" />
+          <Parameter Name="ListaEmpleados" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ConceptoMotivoId" Type="int" Mode="In" />
+          <Parameter Name="ListaConceptoMotivo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="AplicaAtodos" Type="bit" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="RelPeriodicidadPaisCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="country" Type="varchar" Mode="In" />
@@ -634,7 +668,7 @@
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPeriodosNominaCMB" ReturnType="Collection(ASNModel.CatPeriodosNominaCMB_Result)" >
-            <Parameter Name="Active" Mode="In" Type="Int32" />
+          <Parameter Name="Active" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPeriodosNominaSu">
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
@@ -752,8 +786,9 @@
           </FunctionImport>
           <FunctionImport Name="CatPerfilEmpleadosAccesosSi">
             <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="EmpleadoId" Mode="In" Type="Int32" />
+            <Parameter Name="SelectedKeyNames" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPerfilEmpleadosAccesosSu">
@@ -826,6 +861,39 @@
           <FunctionImport Name="CatEmployeeCMB" ReturnType="Collection(ASNModel.CatEmployeeCMB_Result)" />
           <FunctionImport Name="CatEmpleadosPerfilEmpleadosCMB" ReturnType="Collection(ASNModel.CatEmpleadosPerfilEmpleadosCMB_Result)">
           <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatSolicitudEmpleadosDetalleSu">
+            <Parameter Name="SolicitudId" Mode="In" Type="Int32" />
+            <Parameter Name="CatEmpleadoId" Mode="In" Type="Int32" />
+            <Parameter Name="CatConceptoMotivoId" Mode="In" Type="String" />
+            <Parameter Name="ResponsableId" Mode="In" Type="Int32" />
+            <Parameter Name="ParametroConceptoMonto" Mode="In" Type="Decimal" />
+            <Parameter Name="Detalle" Mode="In" Type="String" />
+            <Parameter Name="PeriodoNomina" Mode="In" Type="String" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="TTConceptoMotivoId" Mode="In" Type="Boolean" />
+            <Parameter Name="TTManager_Ident" Mode="In" Type="Boolean" />
+            <Parameter Name="TTMonto" Mode="In" Type="Boolean" />
+            <Parameter Name="TTDetalle" Mode="In" Type="Boolean" />
+            <Parameter Name="TTPeriodoNomina" Mode="In" Type="Boolean" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProcesaSolicitudEmpleadoDetalleSi">
+            <Parameter Name="SolicitudId" Mode="In" Type="Int32" />
+            <Parameter Name="ListaEmpleados" Mode="In" Type="String" />
+            <Parameter Name="ConceptoMotivoId" Mode="In" Type="Int32" />
+            <Parameter Name="ListaConceptoMotivo" Mode="In" Type="String" />
+            <Parameter Name="AplicaAtodos" Mode="In" Type="Boolean" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatSolicitudEmpleadosDetalleSi">
+            <Parameter Name="SolicitudId" Mode="In" Type="Int32" />
+            <Parameter Name="CatEmpleadoId" Mode="In" Type="Int32" />
+            <Parameter Name="CatConceptoMotivoId" Mode="In" Type="Int32" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1218,10 +1286,10 @@
           <Property Type="String" Name="Manager_Position_Code_Title" Nullable="false" MaxLength="150" />
           <Property Type="Int32" Name="Manager_Contract_Type_Ident" Nullable="false" />
           <Property Type="String" Name="Manager_Contract_Type" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="CatConceptoMotivoId" Nullable="false" />
-          <Property Type="Int32" Name="ParametroConceptoMonto" Nullable="false" />
-          <Property Type="String" Name="Detalle" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="PeriodoNomina" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CatConceptoMotivoId" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="ParametroConceptoMonto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Detalle" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PeriodoNomina" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatEmployeeCMB_Result">
@@ -1850,6 +1918,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosDetalleSu" FunctionName="ASNModel.Store.CatSolicitudEmpleadosDetalleSu" />
+          <FunctionImportMapping FunctionImportName="ProcesaSolicitudEmpleadoDetalleSi" FunctionName="ASNModel.Store.ProcesaSolicitudEmpleadoDetalleSi" />
+          <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosDetalleSi" FunctionName="ASNModel.Store.CatSolicitudEmpleadosDetalleSi" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

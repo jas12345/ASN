@@ -325,6 +325,7 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ELAViewModel.cs" />
+    <Compile Include="Models\EmpleadosSolicitudesViewModel.cs" />
     <Compile Include="Models\EmpleadosxPerfilSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -632,6 +633,7 @@
     <Content Include="Views\EmpleadosSolicitudes\Index.cshtml" />
     <Content Include="Views\EmpleadosSolicitudes\GridEmpleados.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EmpleadosSolicitudesPopUp.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmpleadoMotivoConceptoPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

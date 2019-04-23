@@ -19,6 +19,10 @@ namespace ASN.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Método que retorna un listado de los Perfiles activos
+        /// </summary>
+        /// <returns></returns>
         public JsonResult GetPerfilCMB()
         {
             try
@@ -42,6 +46,12 @@ namespace ASN.Controllers
             }
         }
 
+        /// <summary>
+        /// Método que retorna todos los empleados relacionados con un perfil
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="perfil"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult GetEmployee([DataSourceRequest]DataSourceRequest request, string perfil)
         {
@@ -73,6 +83,13 @@ namespace ASN.Controllers
             }
         }
 
+        /// <summary>
+        /// Método para crear la solicitud y los registros de CatEmpleadosSolicitudes
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="profiles"></param>
+        /// <param name="listaEmpleados"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, string listaEmpleados)
         {

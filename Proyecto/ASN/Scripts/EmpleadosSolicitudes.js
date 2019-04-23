@@ -46,6 +46,16 @@ function GetPerfil() {
     };
 }
 
+function GetParametros() {
+    return {
+        TTConceptoMotivoId: $("#TTConceptoMotivoId").is(':checked'),
+        TTManager_Ident: $("#TTManager_Ident").is(':checked'),
+        TTMonto: $("#TTMonto").is(':checked'),
+        TTDetalle: $("#TTDetalle").is(':checked'),
+        TTPeriodoNomina: $("#TTPeriodoNomina").is(':checked')
+    };
+}
+
 function onSave(e) {
 
     var hayCambios = false;
@@ -59,7 +69,6 @@ function onSave(e) {
         if (item.id <= 0) {
             sonNuevos = true;
         }
-
     });
 
     if (hayCambios) {

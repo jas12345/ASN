@@ -71,8 +71,8 @@ function edit(e) {
     if (e.model.isNew() === false) {
         e.container.kendoWindow("title", "Editar");
 
-        var paises = e.model.CountryIdents.split(',');
-        lstCountryIdents.value(paises);
+        //var paises = e.model.CountryIdents.split(',');
+        //lstCountryIdents.value(paises);
 
         $("#FechaInicio").val(e.model.FechaInicio);
         $("#FechaFin").val(e.model.FechaFin);
@@ -80,13 +80,6 @@ function edit(e) {
         $("#FechaCierre").val(e.model.FechaCierre);
 
         nombrePeriodo = e.model.NombrePeriodo;
-        var anios = $("#AnioId").data("kendoDropDownList");
-        var Periodo = $("#PeriodicidadNominaId").data("kendoDropDownList");
-        var tipoperiodo = $("#TipoPeriodo").data("kendoDropDownList");
-
-        anios.enable(false);
-        Periodo.enable(false);
-        tipoperiodo.enable(false);
 
         editando = 1;
     }
@@ -253,6 +246,18 @@ function GetSolicitudId() {
     };
 }
 
+function GetParametrosAlta() {
+
+    var valoresGrid = $("#gridEmpleados").data("kendoGrid");
+    var listado = valoresGrid.selectedKeyNames().join(", ")
+
+    return {
+        aplicaTodos: $("#TTConceptoMotivoId").is(':checked'),
+        listEmpleados: listado,
+        listConceptosMotivo: listado
+    };
+}
+
 function GuardarBorrador() {
     var valoresGrid = $("#grid").data("kendoGrid");
     var listado = valoresGrid.selectedKeyNames().join(", ") 
@@ -268,15 +273,15 @@ function GuardarBorrador() {
         data: JSON.stringify({ "profiles": profiles,"listaEmpleados":listado }),
         contentType: 'application/json',
         success: function (resultData) {
-            debugger;
             if (resultData.response !== null) {
                 continuaAccion = false;
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show(resultData.response.Errors, "error");
             } else {
+                debugger;
                 continuaAccion = true
                 SolicitudNueva = resultData.Id;
-                alert(resultData.Id);
+
                 var notification = $("#popupNotification").data("kendoNotification");
                 CargaEmpleadosSolicitud();
                 notification.show("Procesado Correctamente", "success");

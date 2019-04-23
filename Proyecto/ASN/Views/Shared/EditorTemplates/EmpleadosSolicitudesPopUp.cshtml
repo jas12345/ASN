@@ -1,4 +1,4 @@
-﻿@model  ASN.Models.CatEmpleadosSolicitudesSel_Result
+﻿@model  ASN.Models.EmpleadosSolicitudesViewModel
 
 <style>
     tr.spaceUnder > td {
@@ -11,7 +11,13 @@
             <label for="MotivoId">Concepto de motivo</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().MultiSelectFor(x => x.CatConceptoMotivoId)
+            @(Html.Kendo().MultiSelect()
+                .Name("CatConceptoMotivoId")
+                .DataValueField("Ident")
+                .DataTextField("Valor")
+                .Placeholder("- Concepto de motivo -")
+                .Filter("contains")
+                .AutoBind(true)
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -19,10 +25,7 @@
                         read.Action("GetConceptosMotivosCMB", "ConceptosMotivos");
                     });
                 })
-                .Filter("contains")
-                .DataValueField("Ident")
-                .DataTextField("Valor")
-                .Name("CatConceptoMotivoId")
+                
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
             )
             @(Html.Kendo().CheckBox().Name("TTConceptoMotivoId").Label("(Todos)")) 
@@ -52,21 +55,21 @@
             <label for="Monto">Parámetro: Monto</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().NumericTextBox().Name("Monto").Min(0).HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
+            @(Html.Kendo().NumericTextBoxFor(x => x.ParametroConceptoMonto).Name("ParametroConceptoMonto").Min(0).HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
             @(Html.Kendo().CheckBox().Name("TTMonto").Label("(Todos)"))
         </div>
         <div class="editor-label">
             <label for="DetalleId">Detalle</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBox().Name("DetalleId").HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
-            @(Html.Kendo().CheckBox().Name("TTDetalleId").Label("(Todos)"))
+            @(Html.Kendo().TextBox().Name("Detalle").HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
+            @(Html.Kendo().CheckBox().Name("TTDetalle").Label("(Todos)"))
         </div>
         <div class="editor-label">
             <label for="TipoPeriodo">Periodo original</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownList()
+            @(Html.Kendo().DropDownListFor(x => x.PeriodoNomina)
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -78,7 +81,7 @@
                 .OptionLabel("- Periodo original - ")
                 .DataValueField("Ident")
                 .DataTextField("Valor")
-                .Name("PeriodoNominaId")
+                .Name("PeriodoNomina")
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
             )
             @(Html.Kendo().CheckBox().Name("TTPeriodoNomina").Label("(Todos)"))
