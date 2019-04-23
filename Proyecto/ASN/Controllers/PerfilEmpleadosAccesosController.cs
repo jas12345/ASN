@@ -4,6 +4,7 @@ using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -72,5 +73,64 @@ namespace ASN.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult CreatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, string Perfil_Ident, string selectedKeyNames)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    int idAdmin = 0, res = 0;
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out idAdmin);
+
+                    context.CatPerfilEmpleadosAccesosSi(
+                        int.Parse(Perfil_Ident),
+                        selectedKeyNames,
+                        idAdmin, 
+                        true,
+                        resultado);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    switch (res)
+                    {
+                        case -1:
+                            ModelState.AddModelError("error", "Error general.");
+                            break;
+                        case -2:
+                            ModelState.AddModelError("error", "Error general.");
+                            break;
+                        case -3:
+                            ModelState.AddModelError("error", "Error general.");
+                            break;
+                    }
+
+                    return Json(Perfil_Ident);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(Perfil_Ident);
+            }
+        }
+
+        public ActionResult Checkbox_Selection()
+        {
+            return View();
+        }
+
+        //public ActionResult Selection_Read([DataSourceRequest] DataSourceRequest request)
+        //{
+        //    return Json(productService.Read().ToDataSourceResult(request));
+        //}
     }
 }
