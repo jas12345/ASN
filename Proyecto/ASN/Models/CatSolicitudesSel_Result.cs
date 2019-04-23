@@ -27,7 +27,6 @@ namespace ASN.Models
         public Nullable<int> ConceptoId { get; set; }
         public Nullable<int> MotivoId { get; set; }
         public string Justficacion { get; set; }
-        public Nullable<int> ConceptoMotivoId { get; set; }
         public Nullable<int> Responsable_Id { get; set; }
         public Nullable<int> Detalle { get; set; }
         public Nullable<int> PeriodoOriginal_AnioId { get; set; }
@@ -38,5 +37,8 @@ namespace ASN.Models
         public string Autorizantes { get; set; }
         public string ListaEmpleados { get; set; }
         public bool Active { get; set; }
+        public string NombrePerfilEmpleados { get; set; }
+        public string NombreConcepto { get; set; }
+        public string NombreMotivo { get; set; }
     }
 }

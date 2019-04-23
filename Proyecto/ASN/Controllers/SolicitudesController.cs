@@ -19,6 +19,38 @@ namespace ASN.Controllers
             return View();
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        public ActionResult SeleccionaPersonal(string id)
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult GetSolicitudes([DataSourceRequest]DataSourceRequest request)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    var lstSolicitudes = context.CatSolicitudesSel().ToList();
+                    DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
+                    return Json(ok);
+                }                
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
         /// <summary>
         /// Método que retorna un listado de los Perfiles activos
         /// </summary>
@@ -124,7 +156,6 @@ namespace ASN.Controllers
                                 profiles.ConceptoId,
                                 profiles.MotivoId,
                                 profiles.Justficacion,
-                                profiles.ConceptoMotivoId,
                                 profiles.Responsable_Id,
                                 profiles.Detalle,
                                 profiles.PeriodoOriginal_AnioId,

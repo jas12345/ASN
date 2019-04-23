@@ -87,6 +87,7 @@ namespace ASN.Controllers
                             Manager_Contract_Type_Ident = item.Manager_Contract_Type_Ident,
                             Manager_Contract_Type = item.Manager_Contract_Type,
                             CatConceptoMotivoId = item.CatConceptoMotivoId,
+                            ConceptoMotivo = item.ConceptoMotivo,
                             ParametroConceptoMonto = item.ParametroConceptoMonto,
                             Detalle = item.Detalle,
                             PeriodoNomina = item.PeriodoNomina,
@@ -161,7 +162,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CreateSolicitudEmpleadosDetalle([DataSourceRequest] DataSourceRequest request, EmpleadosSolicitudesViewModel model)//,string aplicaTodos, string listEmpleados, string listConceptosMotivo)
+        public ActionResult CreateSolicitudEmpleadosDetalle([DataSourceRequest] DataSourceRequest request, EmpleadosSolicitudesViewModel profiles)//,string aplicaTodos, string listEmpleados, string listConceptosMotivo)
         {
             try
             {
@@ -173,40 +174,43 @@ namespace ASN.Controllers
                     resultado.Value = 0;
                     var ConceptosMotivos = string.Empty;
 
-                    if (model.LstConceptoMotivo.Count() > 0)
-                    {
-                        ConceptosMotivos = string.Empty;
-                        foreach (var itemElement in model.LstConceptoMotivo) { ConceptosMotivos += itemElement.Ident + ","; }
+                    
+                        if (profiles.LstConceptoMotivo.Count() > 0)
+                        {
+                            ConceptosMotivos = string.Empty;
+                            foreach (var itemElement in profiles.LstConceptoMotivo) { ConceptosMotivos += itemElement.Ident + ","; }
 
-                    }
-                    ConceptosMotivos = ConceptosMotivos.TrimEnd(',');
+                        }
+                        ConceptosMotivos = ConceptosMotivos.TrimEnd(',');
 
-                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+                        int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
-                    foreach (var item in model.LstConceptoMotivo)
-                    {
-                        context.CatSolicitudEmpleadosDetalleSi(
-                        model.FolioSolicitud, model.Empleado_Ident,
-                        item.Ident,
-                        ccmsidAdmin, resultado);
-                    }
+                        foreach (var element in profiles.LstConceptoMotivo)
+                        {
+                            context.CatSolicitudEmpleadosDetalleSi(
+                            profiles.FolioSolicitud, profiles.Empleado_Ident,
+                            element.Ident,
+                            ccmsidAdmin, resultado);
+                        }
+                 
+                    int.TryParse(resultado.Value.ToString(), out res);
 
                     if (res == -1)
                     {
                         ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
                     }
 
-                    return Json("");
+                    return Json("Ok");//(profiles.ToDataSourceResult(request, ModelState));
                 }
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                //MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                //LogError log = new LogError();
-                //log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
-                //return Json(model.ToDataSourceResult(request, ModelState));
+                //return Json(profiles.ToDataSourceResult(request, ModelState));
                 return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -223,7 +227,7 @@ namespace ASN.Controllers
         /// <param name="TTPeriodoNomina">Check para determinar si aplica a todos los empleados relacionados con la solicitud</param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult UpdateSolicitudEmpleadosDetalle([DataSourceRequest] DataSourceRequest request, EmpleadosSolicitudesViewModel model, 
+        public ActionResult UpdateSolicitudEmpleadosDetalle([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EmpleadosSolicitudesViewModel> profiles, 
             string TTConceptoMotivoId, string TTManager_Ident, string TTMonto, string TTDetalle, string TTPeriodoNomina)
         {
             try
@@ -237,35 +241,38 @@ namespace ASN.Controllers
                     resultado.Value = 0;
 
                     int.TryParse(User.Identity.Name, out ccmsidAdmin);
-                    context.CatSolicitudEmpleadosDetalleSu(
-                        model.FolioSolicitud,model.Empleado_Ident,
-                        model.CatConceptoMotivoId, model.Manager_Ident,
-                        model.ParametroConceptoMonto, model.Detalle,
-                        model.PeriodoNomina, model.Active,
-                        (string.IsNullOrEmpty(TTConceptoMotivoId) || TTConceptoMotivoId =="false" ? false:true),
-                        (string.IsNullOrEmpty(TTManager_Ident) || TTManager_Ident == "false" ? false :true),
-                        (string.IsNullOrEmpty(TTMonto) || TTMonto == "false" ? false :true),
+                    foreach (var item in profiles)
+                    {
+                        context.CatSolicitudEmpleadosDetalleSu(
+                        item.FolioSolicitud, item.Empleado_Ident,
+                        item.CatConceptoMotivoId, item.Manager_Ident,
+                        item.ParametroConceptoMonto, item.Detalle,
+                        item.PeriodoNomina, item.Active,
+                        (string.IsNullOrEmpty(TTConceptoMotivoId) || TTConceptoMotivoId == "false" ? false : true),
+                        (string.IsNullOrEmpty(TTManager_Ident) || TTManager_Ident == "false" ? false : true),
+                        (string.IsNullOrEmpty(TTMonto) || TTMonto == "false" ? false : true),
                         (string.IsNullOrEmpty(TTDetalle) || TTDetalle == "false" ? false : true),
                         (string.IsNullOrEmpty(TTPeriodoNomina) || TTPeriodoNomina == "false" ? false : true),
                         ccmsidAdmin, resultado);
+                }
 
                     if (res == -1)
                     {
                         ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
                     }
 
-                    return Json("");
+                    return Json(profiles.ToDataSourceResult(request, ModelState));
                 }
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                //MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                //LogError log = new LogError();
-                //log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
-                //return Json(model.ToDataSourceResult(request, ModelState));
-                return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                //var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
+                return Json(profiles.ToDataSourceResult(request, ModelState));
+               // return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
             }
         }
     }

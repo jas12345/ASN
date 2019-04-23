@@ -10,7 +10,7 @@
                                         column.Bound(c => c.Empleado_Ident).Title("CCMS ID").Width(50).Visible(true).Filterable(true);
                                         column.Bound(c => c.Empleado_Middle_Name).Width(80).Title("Nombre").Visible(true).Filterable(true);
                                         //column.Bound(c => c.CatConceptoMotivoId).Width(50).Title("Concepto de motivo").Visible(true).Filterable(true).Width(50);//,(System.Collections.IEnumerable)ViewData["ConceptoMotivo"], "Ident", "Valor"
-                                        column.ForeignKey(c => c.CatConceptoMotivoId, (System.Collections.IEnumerable)ViewData["ConceptoMotivo"], "Ident", "Valor").Width(90).Title("Mercado").Visible(true).Filterable(true);
+                                        column.Bound(c => c.ConceptoMotivo).Width(90).Title("Concepto de Motivo").Visible(true).Filterable(true);
                                         //column.Bound(c => c.Manager_Ident).Title("Responsable ID").Visible(true).Filterable(true).Width(50);
                                         //column.Bound(c => c.Manager_Middle_Name).Title("Nombre responsable").Width(80).Visible(true);
                                         //column.Bound(c => c.Manager_Position_Code_Title).Title("Puesto responsable").Width(50).Visible(true);
@@ -44,7 +44,7 @@
                                        })
                                        .Read(read => read.Action("GetEmpleadosSolicitudesSel", "EmpleadosSolicitudes").Data("GetSolicitudId"))
                                        .Create(create => create.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes").Data("GetParametrosAlta"))
-                                       .Update(update => update.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes").Data("GetParametros"))
+                                       .Update(update => update.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes"))//.Data("GetParametros")
                                    )
                                    .Navigatable()
                                    .Pageable(pageable => pageable

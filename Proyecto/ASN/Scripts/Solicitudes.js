@@ -92,6 +92,7 @@ function edit(e) {
 
 
 function valida(e) {
+    debugger;
     if (e.type === "create" || e.type === "update") {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
@@ -118,7 +119,7 @@ function errorsote(args) {
 }
 
 function onSave(e) {
-
+    debugger;
     var hayCambios = false;
     var sonNuevos = false;
     jQuery.grep(e.sender._data, function (item) {
@@ -144,7 +145,7 @@ function onSave(e) {
 }
 
 function handleEditChanges(e, grid) {
-
+    debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
@@ -165,7 +166,7 @@ function handleEditChanges(e, grid) {
 }
 
 function handleSaveChanges(e, grid) {
-
+    debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     for (var i = 0; i < rows.length; i++) {
@@ -292,12 +293,12 @@ function GuardarBorrador() {
 }
 
 function CargaEmpleadosSolicitud() {
-    $.ajax({
-        url: '/EmpleadosSolicitudes/MuestraEmpleados?id=' + SolicitudNueva + "&perfilId=" + $("#PerfilUsuarioId").val(),
-        contentType: 'application/html; charset=utf-8',
-        type: 'GET',
-        dataType: 'html'
-    })
+        $.ajax({
+            url: '/EmpleadosSolicitudes/MuestraEmpleados?id=' + SolicitudNueva + "&perfilId=" + $("#PerfilUsuarioId").val(),
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html'
+        })
         .success(function (result) {
             $('#cuerpo2').html(result);
             $("#tab2").show();
@@ -317,4 +318,12 @@ function GetParametros() {
         TTDetalleId: $("#TTDetalleId").is(':checked').toString(),
         TTPeriodoNomina: $("#TTPeriodoNomina").is(':checked').toString()
     };
+}
+
+function EditaSolicitud(e) {
+    e.preventDefault();
+    debugger;
+    var d = this.dataItem($(e.currentTarget).closest("tr"));
+    //alert("Selected item ID is:" + d.Id);
+    window.location.href = 'Create';//?id=' + d.Id;
 }

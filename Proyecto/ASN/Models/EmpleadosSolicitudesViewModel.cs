@@ -25,6 +25,7 @@ namespace ASN.Models
         public int Manager_Contract_Type_Ident { get; set; }
         public string Manager_Contract_Type { get; set; }
         public string CatConceptoMotivoId { get; set; }
+        public string ConceptoMotivo { get; set; }
         public List<selectModelConceptoMotivo> LstConceptoMotivo { get; set; }
         public Nullable<decimal> ParametroConceptoMonto { get; set; }
         public string Detalle { get; set; }

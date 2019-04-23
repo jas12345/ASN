@@ -634,6 +634,8 @@
     <Content Include="Views\EmpleadosSolicitudes\GridEmpleados.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EmpleadosSolicitudesPopUp.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EmpleadoMotivoConceptoPopUp.cshtml" />
+    <Content Include="Views\Solicitudes\Create.cshtml" />
+    <Content Include="Views\Solicitudes\SeleccionaPersonal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,54 +7,40 @@
 {
     <div class="container-fluid">
         <div class="row">
-            <div id="tab1">
                 <div class="container-fluid">
                     <div class="col-lg-12 col-md-12">
-                        <div class="row"><div style="display: inline-block;">@Html.Label("Captura de solicitud", new { style = "font-size: 15px" }) - @Html.Label("Empleados por perfil", new { style = "font-size: 15px" })</div></div>
+                        <div class="row">
+                            @Html.Label("Mis Solicitudes", new { style = "font-size: 15px" })
+                            <a href="@Url.Action("Create","Solicitudes")" data-role="button" class="k-button k-button-icontext" style="float:right; margin-right:10px;" role="button"  aria-disabled="false" tabindex="0">
+                                <span class="k-ico fa-plus"></span> Crear Solicitud
+                            </a>
+                        </div>
                     </div>
-                    <div class="k-form-inline" style="padding:5px;">
-                        <div class="k-form-field">
-                            <div class="editor-label">
-                                <label for="perfilId">Perfil de usuario</label>
-                            </div>
-                            <div class="editor-field">
-                                @(Html.Kendo().DropDownList()
-                                                        .DataSource(source =>
-                                                        {
-                                                            source.Read(read =>
-                                                            {
-                                                                read.Action("GetPerfilCMB", "Solicitudes");
-                                                            })
-                                                            .ServerFiltering(true);
-                                                        })
-                                                        .Filter("contains")
-                                                        .OptionLabel("- Seleccione Perfil - ")
-                                                        .DataValueField("Ident")
-                                                        .DataTextField("Valor")
-                                                        .Name("PerfilUsuarioId")
-                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
-                                )
-                                @(Html.Kendo().Button()
-                                            .Name("kendoIconButton")
-                                            .HtmlAttributes(new { type = "button" })
-                                            .Icon("search")
-                                            .Content("Buscar")
-                                            .Events(x => x.Click("actualizaGrid")))
-                            </div>
-                        </div>
-                        </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                @(Html.Kendo().Grid<ASN.Models.EmpleadosxPerfilSel_Result>()
-                                        .Name("grid")
+                                @(Html.Kendo().Grid<ASN.Models.CatSolicitudesSel_Result>()
+                                        .Name("gridSolicitud")
                                         .Columns(column =>
                                         {
-                                             column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });
-                                             column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(false).Filterable(true);
-                                             column.Bound(c => c.First_Name).Width(50).Title("Nombre").Filterable(true);
-                                             column.Bound(c => c.Last_Name).Title("Apellido(s)").Visible(true).Filterable(true).Width(50);
-                                             column.Bound(c => c.Position_Code_Title).Title("Puesto").Visible(true).Filterable(true).Width(70);
-                                            column.Bound(c => c.Current_Status).Width(50).Visible(true);
+                                            column.Bound(c => c.FolioSolicitud).Width(40).Title("Solicitud").Visible(false).Filterable(true);
+                                            column.Bound(c => c.Solicintante_Nombre).Width(50).Title("Solicitante").Filterable(true).Width(70);
+                                            column.Bound(c => c.NombrePerfilEmpleados).Width(50).Title("Perfil").Filterable(true).Width(70);
+                                            column.Bound(c => c.NombreConcepto).Width(50).Title("Concepto").Filterable(true).Width(70);
+                                            column.Bound(c => c.NombreMotivo).Width(50).Title("Motivo").Filterable(true).Width(70);
+                                            column.Bound(c => c.Fecha_Solicitud).Title("Fecha Solicitud").Visible(true).Filterable(true).Width(50);
+                                            column.Bound(c => c.Solicitante_Ident).Visible(false);
+                                            column.Bound(c => c.Puesto_solicitante_Ident).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaAnio_Id).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaMes_Id).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaConsecutivoid).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaPeriodicidadNomina_Id).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaTipoPeriodo_Id).Visible(false);
+                                            column.Bound(c => c.ConceptoId).Visible(false);
+                                            column.Bound(c => c.MotivoId).Visible(false);
+                                            column.Bound(c => c.Justficacion).Title("Justificanción").Visible(true).Width(70);
+                                            column.Bound(c => c.Responsable_Id).Visible(false);
+                                            column.Command(command => { command.Custom("Editar").Click("EditaSolicitud"); }).Width(35);
+                                            //column.Bound(c => c.Current_Status).Width(50).Visible(true);
                                         })
                                        .HtmlAttributes(new { style = "height: 700px;" })
                                        .Scrollable(sorteable => sorteable.Virtual(false))
@@ -66,12 +52,22 @@
                                            .Ajax()
                                            .Model(model =>
                                            {
-                                               model.Id(c => c.Ident);
-                                               model.Field(c => c.First_Name).Editable(true);
-                                               model.Field(c => c.Last_Name).Editable(true);
-                                               model.Field(c => c.Position_Code_Title).Editable(true);
+                                               model.Id(c => c.FolioSolicitud);
+                                               model.Field(c => c.Solicitante_Ident).Editable(true);
+                                               model.Field(c => c.Puesto_solicitante_Ident).Editable(true);
+                                               model.Field(c => c.PeriodoNominaAnio_Id).Editable(true);
+                                               model.Field(c => c.PeriodoNominaMes_Id).Editable(true);
+                                               model.Field(c => c.PeriodoNominaConsecutivoid).Editable(true);
+                                               model.Field(c => c.PeriodoNominaPeriodicidadNomina_Id).Editable(true);
+                                               model.Field(c => c.PeriodoNominaTipoPeriodo_Id).Editable(true);
+                                               model.Field(c => c.ConceptoId).Editable(true);
+                                               model.Field(c => c.MotivoId).Editable(true);
+                                               model.Field(c => c.Justficacion).Editable(true);
+                                               model.Field(c => c.Responsable_Id).Editable(true);
                                            })
-                                           .Read(read => read.Action("GetEmployee", "Solicitudes").Data("GetPerfil"))
+                                           .Read(read => read.Action("GetSolicitudes", "Solicitudes").Data("GetPerfil"))
+                                           .Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
+                                           .Create(create => create.Action("CreatePeriodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
                                            .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
                                        )
                                        .Navigatable()
@@ -111,14 +107,6 @@
                         </div>
                     </div>
                 
-            </div>
-
-            <div id="tab2" hidden>
-                <div id="cuerpo2" class="row">
-                    @*@Html.Partial("~/Views/EmpleadosSolicitudes/GridEmpleados.cshtml")*@
-                </div>
-            <input type="button" value="Anterior" onclick="accion(4);" /> <button class="success" onclick="accion(3);">Siguiente</button></div>
-            <div id="tab3" hidden><h1>TAB 3 DEMO</h1><input type="button" value="Anterior" onclick="accion(5);" /> <button class="success" onclick="">Siguiente</button></div>
         </div>
     </div>
     <script>

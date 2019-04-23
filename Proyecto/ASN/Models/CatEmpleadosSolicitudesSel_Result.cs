@@ -35,5 +35,6 @@ namespace ASN.Models
         public string Detalle { get; set; }
         public string PeriodoNomina { get; set; }
         public bool Active { get; set; }
+        public string ConceptoMotivo { get; set; }
     }
 }

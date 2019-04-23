@@ -56,8 +56,36 @@ function GetParametros() {
     };
 }
 
-function onSave(e) {
 
+function valida(e) {
+    debugger;
+    if (e.type === "create" || e.type === "update") {
+        $('#gridEmpleados').data('kendoGrid').dataSource.data([]);
+        $('#gridEmpleados').data('kendoGrid').dataSource.read();
+        $('#gridEmpleados').data('kendoGrid').refresh();
+
+        if (e.response.Errors === null) {
+            continuaAccion = true;
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Saved", "success");
+        }
+    }
+}
+
+function errorsote(args) {
+    debugger;
+    if (args.errors) {
+
+        $(document).ready(function () {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show(args.errors.error.errors[0], "error");
+        });
+
+    }
+}
+
+function onSave(e) {
+    debugger;
     var hayCambios = false;
     var sonNuevos = false;
     jQuery.grep(e.sender._data, function (item) {
@@ -82,7 +110,7 @@ function onSave(e) {
 }
 
 function handleEditChanges(e, grid) {
-
+    debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
@@ -129,42 +157,18 @@ function handleSaveChanges(e, grid) {
     }
 }
 
-function valida(e) {
-    if (e.type === "create" || e.type === "update") {
-        $('#grid').data('kendoGrid').dataSource.data([]);
-        $('#grid').data('kendoGrid').dataSource.read();
-        $('#grid').data('kendoGrid').refresh();
-
-        if (e.response.Errors === null) {
-            continuaAccion = true;
-            var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Saved", "success");
-        }
-    }
-}
-
-function errorsote(args) {
-    debugger;
-    if (args.errors) {
-
-        $(document).ready(function () {
-            var notification = $("#popupNotification").data("kendoNotification");
-            notification.show(args.errors.error.errors[0], "error");
-        });
-
-    }
-}
 
 function edit(e) {
+    debugger;
     var validator = e.container.data('kendoValidator');
 
-    $('input[name="NombrePeriodo"]').blur(function () {
-        validator.validateInput(this);
-    });
+    //$('input[name="NombrePeriodo"]').blur(function () {
+    //    validator.validateInput(this);
+    //});
 
-    $('input[name="TipoPeriodo"]').change(function () {
-        validator.validateInput(this);
-    });
+    //$('input[name="TipoPeriodo"]').change(function () {
+    //    validator.validateInput(this);
+    //});
 
     if (e.model.isNew() === false) {
         e.container.kendoWindow("title", "Editar");
