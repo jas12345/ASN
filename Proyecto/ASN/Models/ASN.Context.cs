@@ -1142,9 +1142,13 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatProgramTodosCMB_Result>("CatProgramTodosCMB");
         }
     
-        public virtual ObjectResult<CatPerfilEmpleadosSel_Result> CatPerfilEmpleadosSel()
+        public virtual ObjectResult<CatPerfilEmpleadosSel_Result> CatPerfilEmpleadosSel(Nullable<int> perfil_Ident)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosSel_Result>("CatPerfilEmpleadosSel");
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosSel_Result>("CatPerfilEmpleadosSel", perfil_IdentParameter);
         }
     
         public virtual int CargaPivote(Nullable<int> consecutivo)

@@ -13,7 +13,7 @@ namespace ASN.Models
     
     public partial class CatCityTodosCMB_Result
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Value { get; set; }
     }
 }

@@ -219,7 +219,9 @@
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatPerfilEmpleadosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
-        <Function Name="CatPerfilEmpleadosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatPerfilEmpleadosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatPerfilEmpleadosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="NombrePerfilEmpleados" Type="varchar" Mode="In" />
           <Parameter Name="Country_Ident" Type="int" Mode="In" />
@@ -741,7 +743,9 @@
           <FunctionImport Name="CatCountryTodosCMB" ReturnType="Collection(ASNModel.CatCountryTodosCMB_Result)" />
           <FunctionImport Name="CatLocationTodosCMB" ReturnType="Collection(ASNModel.CatLocationTodosCMB_Result)" />
           <FunctionImport Name="CatProgramTodosCMB" ReturnType="Collection(ASNModel.CatProgramTodosCMB_Result)" />
-          <FunctionImport Name="CatPerfilEmpleadosSel" ReturnType="Collection(ASNModel.CatPerfilEmpleadosSel_Result)" />
+          <FunctionImport Name="CatPerfilEmpleadosSel" ReturnType="Collection(ASNModel.CatPerfilEmpleadosSel_Result)" >
+          <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="CargaPivote">
           <Parameter Name="Consecutivo" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1129,8 +1133,8 @@
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="5" />
         </ComplexType>
         <ComplexType Name="CatCityTodosCMB_Result">
-          <Property Type="String" Name="Id" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatClientTodosCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
