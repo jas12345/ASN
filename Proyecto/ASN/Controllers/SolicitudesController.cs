@@ -29,7 +29,7 @@ namespace ASN.Controllers
 
             return View();
         }
-
+        #region Métodos para carga de combos
         [HttpPost]
         public JsonResult GetSolicitudes([DataSourceRequest]DataSourceRequest request)
         {
@@ -104,6 +104,78 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult GetConceptosCMB()
+        {
+            try
+            {
+                var listConceptos = new List<CatConceptosCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    listConceptos = context.CatConceptosCMB().ToList();
+                }
+
+                return Json(listConceptos, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        /// <summary>
+        /// Método para obtener el listado de los conceptos de motivos
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetMotivoSolicitudCMB()
+        {
+            try
+            {
+                var listMotivos = new List<CatConceptosMotivoCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    listMotivos = context.CatConceptosMotivoCMB().ToList();
+                }
+
+                return Json(listMotivos, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+        #endregion
+
+        [HttpPost]
+        public JsonResult GetPerfil(string perfilId)
+        {
+            try
+            {
+                var perfil = new CatPerfilEmpleadosSel_Result();
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    var lstPerfil = context.CatPerfilEmpleadosSel(int.Parse(perfilId)).ToList();
+                    perfil = lstPerfil.FirstOrDefault();                    
+                }
+
+                return Json(perfil, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
         /// <summary>
         /// Método que retorna todos los empleados relacionados con un perfil
         /// </summary>
@@ -149,7 +221,7 @@ namespace ASN.Controllers
         /// <param name="listaEmpleados"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, string listaEmpleados)
+        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, IEnumerable<HttpPostedFileBase> files, string listaEmpleados)
         {
             try
             {
@@ -215,7 +287,7 @@ namespace ASN.Controllers
                         }
                     }
 
-                    return Json(new { Id =SolicitudId,type= "create", response = Error }, JsonRequestBehavior.AllowGet);// (profiles.ToDataSourceResult(request, ModelState));
+                  //  return Json(new { Id =SolicitudId,type= "create", response = Error }, JsonRequestBehavior.AllowGet);// (profiles.ToDataSourceResult(request, ModelState));
                 }
 
             }
@@ -227,8 +299,9 @@ namespace ASN.Controllers
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
                 //return Json(profiles.ToDataSourceResult(request, ModelState));
-                return Json(new { Id = 0,type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+               // return Json(new { Id = 0,type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
             }
+            return View(profiles);
         }
 
     }

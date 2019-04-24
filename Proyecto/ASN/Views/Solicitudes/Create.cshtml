@@ -1,157 +1,188 @@
-﻿
+﻿@model ASN.Models.CatSolicitudesSel_Result
 @{
     ViewBag.Title = "Crear Solicitud";
 }
 
 @if (User.Identity.IsAuthenticated)
 {
+    @*<h2 class="ra-well-title">Profile Setup</h2>*@
     <div class="container-fluid">
         <div class="col-lg-12 col-md-12">
             <div class="row">
-            <div style="display: inline-block;">
-                @Html.Label("Captura de solicitud", new { style = "font-size: 15px" }) - @Html.Label("Empleados por perfil", new { style = "font-size: 15px" })
+                <div style="display: inline-block;">
+                    @Html.Label("Captura de solicitud", new { style = "font-size: 15px" }) - @Html.Label("Selección de empleados", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px; color:darkgrey;" })
                 </div>
             </div>
-            <div id="Formulario">
-                <div class="k-form-field">                    
+            @*<form id="Formulario" method="post" action='@Url.Action("CreateSolicitud")'>*@
+            @using (Ajax.BeginForm("CreateSolicitud", "Solicitudes", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.InsertBefore, OnSuccess = "valida", OnFailure = "OnFailure" }, new { @class = "AjaxForm" }))
+            {
+                 @Html.ValidationSummary(true)
+                <div class="k-form-field">
                     <section class="well">
-                        @*<h2 class="ra-well-title">Profile Setup</h2>*@
-
-                        <div class="form-horizontal form-widgets col-sm-4">
+                        <div class="form-horizontal form-widgets col-sm-12">
                             <div class="form-group">
-                                <label class="control-label col-sm-4" for="PerfilId">Perfil de usuario</label>
-                                <div class="col-sm-6 col-md-6">
+                                @(Html.HiddenFor(x => x.FolioSolicitud))
+                                <label class="control-label col-sm-2" for="PerfilId">Perfil de usuario</label>
+                                <div class="col-sm-12 col-md-12">
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                                    {
-                                                        source.Read(read =>
                                                         {
-                                                            read.Action("GetPerfilCMB", "Solicitudes");
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetPerfilCMB", "Solicitudes");
+                                                            })
+                                                            .ServerFiltering(true);
                                                         })
-                                                        .ServerFiltering(true);
-                                                    })
                                                         .Filter("contains")
                                                         .OptionLabel("- Seleccione Perfil - ")
                                                         .DataValueField("Ident")
                                                         .DataTextField("Valor")
-                                                        .Name("PerfilUsuarioId")
+                                                        .Name("Perfil_Ident")
                                                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                                        .Events(x => x.Change("GetInformacionPerfil"))
                                     )
                                 </div>
                             </div>
                         </div>
-                        <div class="form-horizontal form-widgets col-sm-8">
+                        <div class="row infoPerfil" style="display:none;">
+                            <div class="form-horizontal form-widgets col-sm-4 ">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="Fecha">Fecha</label>
+                                    <div class="col-sm-4 col-md-4">
+                                        <input type="text" id="FechaSolicitud" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="pais">País</label>
+                                    <div class="col-sm-4 col-md-4">
+                                        <input type="text" id="paisName" value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-horizontal form-widgets col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="site">Site</label>
+                                    <div class="col-sm-4 col-md-4">
+                                        <input type="text" id="siteName" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="cliente">Cliente</label>
+                                    <div class="col-sm-4 col-md-4">
+                                        <input type="text" id="clienteName" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-horizontal form-widgets col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="programa">Programa</label>
+                                    <div class="col-sm-4 col-md-4">
+                                        <input type="text" id="programaName" value="" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-horizontal form-widgets col-sm-12">
+
+                        <div class="form-horizontal form-widgets col-sm-6">
                             <div class="form-group">
-                                <label class="control-label col-sm-4" for="Fecha">Fecha</label>
-                                <div class="col-sm-6 col-md-6">
-                                    <input type="text" readonly id="FechaSolicitud"/>
-                                </div>
-                            </div>
-                                
-                                @*<label for="fechaSolicitud"></label>
-                                <label for="paisName"></label>
-                                Site
-                                <label for="siteName"></label>
-                                Cliente<label for="clienteName"></label>Programa</td>*@
-                            </div>
-                            <div class="form-horizontal form-widgets col-sm-6">
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="PeriodoNominaId">Periodo de Nomina</label>
-                                    <div class="col-sm-6 col-md-6">
-                                        @(Html.Kendo().DropDownList().DataSource(source =>
+                                <label class="control-label col-sm-2" for="PeriodoNominaId">Periodo de Nomina</label>
+                                <div class="col-sm-4 col-md-4">
+                                    @(Html.Kendo().DropDownList().DataSource(source =>
+                                                            {
+                                                                source.Read(read =>
                                                                 {
-                                                                    source.Read(read =>
-                                                                    {
-                                                                        read.Action("GetPeriodoNominaCMB", "Solicitudes");
-                                                                    })
-                                                                    .ServerFiltering(true);
+                                                                    read.Action("GetPeriodoNominaCMB", "Solicitudes");
                                                                 })
-                                                                .Filter("contains")
-                                                                .OptionLabel("- Seleccione Periodo de Nomina - ")
-                                                                .DataValueField("Ident")
-                                                                .DataTextField("Valor")
-                                                                .Name("PeriodoNominaId")
-                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
-                                        )
-                                        @*<input id="name" value="Johnatan Dodsworth" class="k-textbox">*@
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="Concepto">Concepto</label>
-                                    <div class="col-sm-6 col-md-6">
-                                        @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                        {
-                                                                            source.Read(read =>
-                                                                            {
-                                                                                read.Action("GetPeriodoNominaCMB", "Solicitudes");
-                                                                            })
-                                                                            .ServerFiltering(true);
-                                                                        })
-                                                                        .Filter("contains")
-                                                                        .OptionLabel("- Concepto - ")
-                                                                        .DataValueField("Ident")
-                                                                        .DataTextField("Valor")
-                                                                        .Name("PeriodoNominaId")
-                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
-                                        )
-                                        @*<span class="k-widget k-datepicker" style="">
-                    <span class="k-picker-wrap k-state-default">
-                    <input type="text" value="10/09/1979" data-role="datepicker" class="k-input sessioncamexclude" role="combobox" aria-expanded="false" autocomplete="off" aria-disabled="false" style="width: 100%;"><span unselectable="on" class="k-select" aria-label="select" role="button"><span class="k-icon k-i-calendar"></span></span></span></span>*@
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="gender" id="gender_label">Motivo</label>
-                                    <div class="col-sm-6 col-md-6">
-                                        @*<span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="gender_listbox" aria-labelledby="gender_label" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="a452cf8d-a446-430d-ae18-99b442d1dc66" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">Male</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="gender" data-role="dropdownlist" style="display: none;"><option value="Male" selected="selected">Male</option><option value="Female">Female</option></select></span>*@
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="language" id="language_label">Justificación</label>
-                                    <div class="col-sm-6 col-md-6">
-                                        <textarea></textarea>
-                                        @*<span title="" class="k-widget k-dropdown" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-owns="language_listbox" aria-labelledby="language_label" aria-live="polite" aria-disabled="false" aria-busy="false" aria-activedescendant="5dc459e1-1568-4111-b20c-e88d1ad751a0" style=""><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">English</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><select id="language" data-role="dropdownlist" style="display: none;"><option value="English" selected="selected">English</option><option value="German">German</option></select></span>*@
-                                    </div>
+                                                                .ServerFiltering(true);
+                                                            })
+                                                            .Filter("contains")
+                                                            .OptionLabel("- Seleccione Periodo de Nomina - ")
+                                                            .DataValueField("Ident")
+                                                            .DataTextField("Valor")
+                                                            .Name("PeriodoNominaMes_Id")
+                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                    )
                                 </div>
                             </div>
 
-                            <div class="form-horizontal form-widgets col-sm-6">
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="occupation">Occupation</label>
-                                    <div class="col-sm-6 col-md-6">
-                                        <input id="occupation" placeholder="e.g. Developer" class="k-textbox">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="skills" id="skills_label">Skills</label>
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="k-widget k-multiselect k-multiselect-clearable" unselectable="on" title="" style=""><div class="k-multiselect-wrap k-floatwrap" unselectable="on"><ul role="listbox" unselectable="on" class="k-reset" id="skills_taglist"><li class="k-button" unselectable="on"><span unselectable="on">C#</span><span unselectable="on" aria-label="delete" class="k-select"><span class="k-icon k-i-close"></span></span></li><li class="k-button" unselectable="on"><span unselectable="on">jQuery</span><span unselectable="on" aria-label="delete" class="k-select"><span class="k-icon k-i-close"></span></span></li></ul><input class="k-input k-textbox" style="width: 25px" accesskey="" autocomplete="off" role="listbox" title="" aria-expanded="false" tabindex="0" aria-describedby="skills_taglist" aria-owns="skills_taglist skills_listbox" aria-labelledby="skills_label" aria-disabled="false" aria-busy="false"><span unselectable="on" class="k-icon k-clear-value k-i-close" title="clear" role="button" tabindex="-1"></span><span class="k-icon k-i-loading k-hidden"></span></div><select id="skills" multiple="multiple" data-role="multiselect" aria-disabled="false" style="display: none;"><option value="C">C</option><option value="C++">C++</option><option value="C#" selected="">C#</option><option value="JavaScript">JavaScript</option><option value="jQuery" selected="">jQuery</option><option value="Git">Git</option><option value="Node.js">Node.js</option><option value="Ruby">Ruby</option><option value="Ruby on Rails">Ruby on Rails</option><option value="Kendo UI">Kendo UI</option></select><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; font-stretch: 100%; font-style: normal; font-weight: 400; letter-spacing: normal; text-transform: none; line-height: 27.1px; position: absolute; visibility: hidden; top: -3333px; left: -3333px;"></span></div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="experience">Experience</label>
-                                    <div class="col-sm-6 col-md-6">
-                                        <span class="k-widget k-numerictextbox" style=""><span class="k-numeric-wrap k-state-default"><input type="text" class="k-formatted-value k-input sessioncamexclude" title="4 years" tabindex="0" role="spinbutton" autocomplete="off" aria-valuenow="4" aria-disabled="false" style="display: inline-block;"><input id="experience" type="text" value="4" data-role="numerictextbox" role="spinbutton" class="k-input sessioncamexclude" aria-valuenow="4" aria-disabled="false" style="display: none;"><span class="k-icon k-i-warning" style="display: none;"></span><span class="k-select"><span unselectable="on" class="k-link k-link-increase" aria-label="Increase value" title="Increase value"><span unselectable="on" class="k-icon k-i-arrow-60-up"></span></span><span unselectable="on" class="k-link k-link-decrease" aria-label="Decrease value" title="Decrease value"><span unselectable="on" class="k-icon k-i-arrow-60-down"></span></span></span></span></span>
-                                    </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Concepto">Concepto</label>
+                                <div class="col-sm-4 col-md-4">
+                                    @(Html.Kendo().DropDownList().DataSource(source =>
+                                                            {
+                                                                source.Read(read =>
+                                                                {
+                                                                    read.Action("GetConceptosCMB", "Solicitudes");
+                                                                })
+                                                                .ServerFiltering(true);
+                                                            })
+                                                            .Filter("contains")
+                                                            .OptionLabel("- Concepto - ")
+                                                            .DataValueField("Ident")
+                                                            .DataTextField("Valor")
+                                                            .Name("ConceptoId")
+                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                    )
                                 </div>
                             </div>
 
-                            <div class="form-horizontal form-widgets col-sm-12">
-                                <div class="buttons-wrap" style="float:right;">
-                                    <button class="k-button k-state-default">Cancel</button>
-                                    <button class="k-button k-state-default">Update</button>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="gender" id="gender_label">Motivo</label>
+                                <div class="col-sm-4 col-md-4">
+                                    @(Html.Kendo().DropDownList().DataSource(source =>
+                                                            {
+                                                                source.Read(read =>
+                                                                {
+                                                                    read.Action("GetMotivoSolicitudCMB", "Solicitudes");
+                                                                })
+                                                                .ServerFiltering(true);
+                                                            })
+                                                            .Filter("contains")
+                                                            .OptionLabel("- Motivo - ")
+                                                            .DataValueField("Ident")
+                                                            .DataTextField("Valor")
+                                                            .Name("MotivoId")
+                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                    )
                                 </div>
                             </div>
-</section>
 
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="language" id="language_label">Justificación</label>
+                                <div class="col-sm-6 col-md-6">
+                                    @Html.TextArea("Justficacion", "", new { @class = "k-textbox", style = "width: 100%;" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="EstatusSolicitud">Estatus de Solicitud</label>
+                                <div class="col-sm-4 col-md-4">
+                                    @(Html.Kendo().TextBox().Name("EstatusSolicitud").Value("Solicitud").HtmlAttributes(new { disabled = "disabled" }))
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal form-widgets col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="skills" id="Anexo1">Anexo</label>
+                                <div class="col-sm-9 col-md-9">
+                                    @(Html.Kendo().Upload().Name("files").HtmlAttributes(new { aria_label = "Archivo anexo 1" }))
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-horizontal form-widgets col-sm-12">
+                            <div class="buttons-wrap" style="float:right;">
+                                <button type="reset" class="k-button k-state-default"><span class="k-icon k-i-close"></span> Cancelar</button>
+                                <button type="submit" class="k-button k-state-default"><span class="k-icon k-i-save"></span> Guardar Borrador</button>
+                                <button class="k-button k-state-default"><span class="k-icon k-i-redo"></span> Siguiente</button>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-            </div>
+            }@*</form>*@
         </div>
     </div>
 }
+
+@Scripts.Render("~/bundles/Solicitudes")

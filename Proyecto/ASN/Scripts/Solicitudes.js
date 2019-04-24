@@ -51,7 +51,6 @@ function accion(tab)
     }
 }
 
-
 function edit(e) {
     var validator = e.container.data('kendoValidator');
 
@@ -87,9 +86,7 @@ function edit(e) {
         e.container.kendoWindow("title", "Nuevo");
         editando = 0;
     }
-
 }
-
 
 function valida(e) {
     debugger;
@@ -142,6 +139,11 @@ function onSave(e) {
             handleEditChanges(e, this);
         }
     }
+}
+
+function OnFailure(data) {
+    debugger;
+    alert('HTTP Status Code: ' + data.param1 + '  Error Message: ' + data.param2);  
 }
 
 function handleEditChanges(e, grid) {
@@ -326,4 +328,78 @@ function EditaSolicitud(e) {
     var d = this.dataItem($(e.currentTarget).closest("tr"));
     //alert("Selected item ID is:" + d.Id);
     window.location.href = 'Create';//?id=' + d.Id;
+}
+
+//#Inicio Funciones de Solicitud
+
+function GetInformacionPerfil() {
+
+    $(".infoPerfil").hide();
+    //$("div#Formulario input#FechaSolicitud").removeAttr("disabled");
+    //$("#Formulario #paisName").removeAttr("disabled");
+    //$("#Formulario #siteName").removeAttr("disabled");
+    //$("Formulario #clienteName").removeAttr("disabled");
+    //$("#Formulario input#programaName").removeAttr("disabled");
+
+    $.ajax({
+        url: '/Solicitudes/GetPerfil?perfilId=' + $("#Perfil_Ident").val(),
+        contentType: 'application/json; charset=utf-8',
+        type: 'POST',
+        dataType: 'JSON'
+    })
+        .success(function (result) {
+
+            if (result !== "") {
+                var pais = (result.City_Name == "-1" || result.City_Name === null ? "TODOS" : result.City_Name);
+                var site = (result.Location_Name == "-1" || result.Location_Name === null ? "TODOS" : result.Location_Name);
+                var cliente = (result.Client_Name === "-1" || result.Client_Name === null ? "TODOS" : result.Client_Name);
+                var programa = (result.Program_Name === '-1' || result.Program_Name === null ? "TODOS" : result.Program_Name);
+
+
+                $("#Formulario input#FechaSolicitud").val();
+                $("#Formulario #paisName").val(pais);
+                $("#Formulario #siteName").val(site);
+                $("#Formulario #clienteName").val(cliente);
+                $("#Formulario input#programaName").val(programa);
+
+                $("#Formulario input#FechaSolicitud").attr("disabled","disabled");
+                $("#Formulario #paisName").attr("disabled", "disabled");
+                $("#Formulario #siteName").attr("disabled", "disabled");
+                $("#Formulario #clienteName").attr("disabled", "disabled");
+                $("#Formulario input#programaName").attr("disabled", "disabled");
+
+                $(".infoPerfil").show();
+            } else {
+                $(".infoPerfil").hide();
+            }
+           
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        }) 
+}
+
+function SaveSolicitud() {
+    var modelo = {
+        FolioSolicitud: $("#FolioSolicitud").val(),
+        Perfil_Ident: $("#Perfil_Ident").val(),
+        PeriodoNominaMes_Id: $("#PeriodoNominaMes_Id").val(),
+        ConceptoId: $("#ConceptoId").val(),
+        MotivoId: $("#MotivoId").val(),
+        Justficacion: $("#Justficacion").val()
+    };
+    jQuery.ajax({
+        url: php_file_path,
+        type: "POST",
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: function (result) {
+            debugger;
+            // if all is well
+            // play the audio file
+        }, error: function (jqXHR, textStatus, error) {
+            alert("Estado: Error inesperado");
+        }  
+    });
 }

@@ -265,7 +265,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var list2 = context.CatPerfilEmpleadosSel().ToList();
+                    var list2 = context.CatPerfilEmpleadosSel(0).ToList();
                     List<CatPerfilEmpleadosViewModel> listado = new List<CatPerfilEmpleadosViewModel>();
                     foreach (var item in list2)
                     {
