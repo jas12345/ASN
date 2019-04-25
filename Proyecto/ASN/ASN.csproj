@@ -268,6 +268,9 @@
     <Compile Include="Models\CatMesesNominaSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatMotivoSolicitudCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatParametroConceptosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -473,6 +476,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ConceptosMotivos.js" />
     <Content Include="Scripts\ConsecutivosPeriodos.js" />
+    <Content Include="Scripts\CrearSolicitud.js" />
     <Content Include="Scripts\EmpleadosSolicitudes.js" />
     <Content Include="Scripts\MesesNomina.js" />
     <Content Include="Scripts\PerfilEmpleados.js" />

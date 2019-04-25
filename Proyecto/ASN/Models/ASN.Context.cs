@@ -1668,5 +1668,10 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSi", solicitudIdParameter, catEmpleadoIdParameter, catConceptoMotivoIdParameter, userEmployeeIdParameter, estatus);
         }
+    
+        public virtual ObjectResult<CatMotivoSolicitudCMB_Result> CatMotivoSolicitudCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMotivoSolicitudCMB_Result>("CatMotivoSolicitudCMB");
+        }
     }
 }

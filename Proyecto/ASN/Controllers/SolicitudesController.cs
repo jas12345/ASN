@@ -134,11 +134,11 @@ namespace ASN.Controllers
         {
             try
             {
-                var listMotivos = new List<CatConceptosMotivoCMB_Result>();
+                var listMotivos = new List<CatMotivoSolicitudCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listMotivos = context.CatConceptosMotivoCMB().ToList();
+                    listMotivos = context.CatMotivoSolicitudCMB().ToList();
                 }
 
                 return Json(listMotivos, JsonRequestBehavior.AllowGet);
@@ -221,7 +221,7 @@ namespace ASN.Controllers
         /// <param name="listaEmpleados"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, IEnumerable<HttpPostedFileBase> files, string listaEmpleados)
+        public JsonResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, IEnumerable<HttpPostedFileBase> files, string listaEmpleados)
         {
             try
             {
@@ -287,7 +287,7 @@ namespace ASN.Controllers
                         }
                     }
 
-                  //  return Json(new { Id =SolicitudId,type= "create", response = Error }, JsonRequestBehavior.AllowGet);// (profiles.ToDataSourceResult(request, ModelState));
+                    return Json(profiles);//(new { Id =SolicitudId,type= "create", response = Error }, JsonRequestBehavior.AllowGet);// (profiles.ToDataSourceResult(request, ModelState));
                 }
 
             }
@@ -299,9 +299,9 @@ namespace ASN.Controllers
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
                 //return Json(profiles.ToDataSourceResult(request, ModelState));
-               // return Json(new { Id = 0,type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+               return Json(new { Id = 0,type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
             }
-            return View(profiles);
+            //return View(profiles);
         }
 
     }

@@ -1,56 +1,4 @@
-﻿var editando = 0;
-var lstCountry = 0;
-var dtFechaInicio = "";
-var dtFechaFinal = "";
-var nombrePeriodo = "";
-var continuaAccion = false;
-var SolicitudNueva = 0;
-function accion(tab)
-{
-    switch (tab) {
-        case 1:
-            $("#tab1").show();
-            $("#tab2").hide();
-            $("#tab3").hide();
-            break;
-        case 2:
-            //debugger;
-
-            //var masterGrid = $("#grid").data("kendoGrid");
-            //var detailRows = masterGrid.element.find(".k-detail-row");
-            var informacion = null;
-            //for (var i = 0; i < detailRows.length; i++) {
-            //    var detailGrid = $(detailRows[i]).find(".k-grid").data("kendoGrid");
-            //    informacion.push(detailGrid.dataSource.view());
-            //}
-
-            GuardarBorrador();
-            if (continuaAccion) {
-                $("#tab2").show();
-                $("#tab1").hide();
-                $("#tab3").hide();
-            }
-            
-            break;
-        case 3:
-            $("#tab3").show();
-            $("#tab1").hide();
-            $("#tab2").hide();
-            break;
-        case 4:
-            GuardarBorrador();
-            $("#tab1").show();
-            $("#tab2").hide();
-            $("#tab3").hide();
-            break;
-        case 5:
-            $("#tab2").show();
-            $("#tab1").hide();
-            $("#tab3").hide();
-            break;
-    }
-}
-
+﻿
 function edit(e) {
     var validator = e.container.data('kendoValidator');
 
@@ -88,6 +36,7 @@ function edit(e) {
     }
 }
 
+
 function valida(e) {
     if (e.type === "create" || e.type === "update") {
         $('#grid').data('kendoGrid').dataSource.data([]);
@@ -105,44 +54,13 @@ function valida(e) {
 function errorsote(args) {
     debugger;
     if (args.errors) {
-        
+
         $(document).ready(function () {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show(args.errors.error.errors[0], "error");
         });
 
     }
-}
-
-function onSave(e) {
-    debugger;
-    var hayCambios = false;
-    var sonNuevos = false;
-    jQuery.grep(e.sender._data, function (item) {
-
-        if (item.dirty || item.id <= 0) {
-            hayCambios = true;
-        }
-
-        if (item.id <= 0) {
-            sonNuevos = true;
-        }
-
-    });
-
-    if (hayCambios) {
-        if (sonNuevos) {
-            handleSaveChanges(e, this);
-        }
-        else {
-            handleEditChanges(e, this);
-        }
-    }
-}
-
-function OnFailure(data) {
-    debugger;
-    alert('HTTP Status Code: ' + data.param1 + '  Error Message: ' + data.param2);  
 }
 
 function handleEditChanges(e, grid) {
@@ -223,113 +141,6 @@ function handleSaveChanges(e, grid) {
 })(jQuery, kendo);
 
 
-function actualizaGrid() {
-
-    var grid = $("#grid").data("kendoGrid");
-    var options = grid.options;    
-    grid.destroy();
-
-    $("#grid")
-        .empty()
-        .kendoGrid(options);
-
-    $("#grid").data("kendoGrid").dataSource.read();
-    $("#grid").data("kendoGrid").refresh();
-}
-
-function GetPerfil() {
-    return {
-        perfil: $("#PerfilUsuarioId").val()
-    };
-}
-function GetSolicitudId() {
-    return {
-        SolicitudId: SolicitudNueva
-    };
-}
-
-function GetParametrosAlta() {
-
-    var valoresGrid = $("#gridEmpleados").data("kendoGrid");
-    var listado = valoresGrid.selectedKeyNames().join(", ")
-
-    return {
-        aplicaTodos: $("#TTConceptoMotivoId").is(':checked'),
-        listEmpleados: listado,
-        listConceptosMotivo: listado
-    };
-}
-
-function GuardarBorrador() {
-    var valoresGrid = $("#grid").data("kendoGrid");
-    var listado = valoresGrid.selectedKeyNames().join(", ") 
-    var profiles = {
-        FolioSolicitud:0,
-        Fecha_Solicitud:new Date("yyyy-MM-dd"),
-        Perfil_Ident : $("#PerfilUsuarioId").val()
-    };
-    continuaAccion = false;
-    $.ajax({
-        type: "POST",
-        url: urlSolicitud,
-        data: JSON.stringify({ "profiles": profiles,"listaEmpleados":listado }),
-        contentType: 'application/json',
-        success: function (resultData) {
-            if (resultData.response !== null) {
-                continuaAccion = false;
-                var notification = $("#popupNotification").data("kendoNotification");
-                notification.show(resultData.response.Errors, "error");
-            } else {
-                debugger;
-                continuaAccion = true
-                SolicitudNueva = resultData.Id;
-
-                var notification = $("#popupNotification").data("kendoNotification");
-                CargaEmpleadosSolicitud();
-                notification.show("Procesado Correctamente", "success");
-                
-            }
-        }        
-    });
-}
-
-function CargaEmpleadosSolicitud() {
-        $.ajax({
-            url: '/EmpleadosSolicitudes/MuestraEmpleados?id=' + SolicitudNueva + "&perfilId=" + $("#PerfilUsuarioId").val(),
-            contentType: 'application/html; charset=utf-8',
-            type: 'GET',
-            dataType: 'html'
-        })
-        .success(function (result) {
-            $('#cuerpo2').html(result);
-            $("#tab2").show();
-            $("#tab1").hide();
-            $("#tab3").hide();
-        })
-        .error(function (xhr, status) {
-            alert(status);
-        }) 
-}
-
-function GetParametros() {
-    return {
-        TTConceptoMotivoId: $('input#TTConceptoMotivoId').is(':checked').toString(),
-        TTManager_Ident: $("#TTManager_Ident").is(':checked').toString(),
-        TTMonto: $("#TTMonto").is(':checked').toString(),
-        TTDetalleId: $("#TTDetalleId").is(':checked').toString(),
-        TTPeriodoNomina: $("#TTPeriodoNomina").is(':checked').toString()
-    };
-}
-
-function EditaSolicitud(e) {
-    e.preventDefault();
-    debugger;
-    var d = this.dataItem($(e.currentTarget).closest("tr"));
-    //alert("Selected item ID is:" + d.Id);
-    window.location.href = 'Create';//?id=' + d.Id;
-}
-
-//#Inicio Funciones de Solicitud
 function GetInformacionPerfil() {
 
     $(".infoPerfil").hide();
@@ -392,11 +203,10 @@ function SaveSolicitud() {
     $.ajax({
         type: "POST",
         url: '/Solicitudes/CreateSolicitud',
-        //contentType: "application/json; charset=utf-8", //For posting uploaded files use as below instead of this
         data: formdata,
         dataType: "json",
-        processData: false, //For posting uploaded files we add this
-        contentType: false, //For posting uploaded files we add this
+        processData: false, 
+        contentType: false,
         success: function (response) {
             if (response.success) {
                 window.location.href = response.url;
@@ -422,6 +232,7 @@ function SaveSolicitud() {
     //jQuery.ajax({
     //    url: php_file_path,
     //    type: "POST",
+    +-
     //    data: formdata,
     //    processData: false,
     //    contentType: false,
@@ -433,4 +244,18 @@ function SaveSolicitud() {
     //        alert("Estado: Error inesperado");
     //    }
     //});
+}
+
+function OnSuccess(response) {
+    debugger;
+    //var message = "Person Id: " + response.PersonId;
+    //message += "\nName: " + response.Name;
+    //message += "\nGender: " + response.Gender;
+    //message += "\nCity: " + response.City;
+    alert("EXITOSO");
+}
+
+function OnFailure(response) {
+    debugger;
+    alert("Error occured.");
 }
