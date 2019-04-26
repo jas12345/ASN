@@ -21,10 +21,23 @@ namespace ASN.Controllers
             return View();
         }
 
-        public ActionResult Create()
+        public ActionResult Create(string id)
         {
-            return View();
+            if (string.IsNullOrEmpty(id))
+            {
+                return View();
+            }
+            else
+            {
+                var modelo = new CatSolicitudesSel_Result();
+                using (ASNContext context = new ASNContext())
+                {
+                    modelo = context.CatSolicitudesSel(int.Parse(id)).FirstOrDefault();
+                }
+                return View(modelo);
+            }
         }
+
 
         public ActionResult SeleccionaPersonal(string id)
         {
@@ -40,7 +53,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.CatSolicitudesSel().ToList();
+                    var lstSolicitudes = context.CatSolicitudesSel(0).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok);
                 }
@@ -84,7 +97,7 @@ namespace ASN.Controllers
         /// Método que devuelve todos los periodos de nomina para un ComboBox
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetPeriodoNominaCMB()
+        public JsonResult GetPeriodoNominaCMB(int filtra=0)
         {
             try
             {
@@ -92,7 +105,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB(0).ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(filtra).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
@@ -250,21 +263,13 @@ namespace ASN.Controllers
                                 profiles.Solicitante_Ident,
                                 profiles.Solicintante_Nombre,
                                 profiles.Puesto_solicitante_Ident,
-                                profiles.PeriodoNominaAnio_Id,
-                                profiles.PeriodoNominaMes_Id,
-                                profiles.PeriodoOriginal_ConsecutivoId,
-                                profiles.PeriodoNominaPeriodicidadNomina_Id,
-                                profiles.PeriodoNominaTipoPeriodo_Id,
+                                profiles.PeriodoNomina_Id,
                                 profiles.ConceptoId,
                                 profiles.MotivoId,
                                 profiles.Justficacion,
                                 profiles.Responsable_Id,
                                 profiles.Detalle,
-                                profiles.PeriodoOriginal_AnioId,
-                                profiles.PeriodoOriginal_MesId,
-                                profiles.PeriodoOriginal_ConsecutivoId,
-                                profiles.PeriodoOriginal_PeriodicidadId,
-                                profiles.PeriodoOriginal_TipoPeriodoId,
+                                profiles.PeriodoNominaOriginal_Id,
                                 profiles.Autorizantes,
                                 listaEmpleados,
                                 ccmsidAdmin,
@@ -388,7 +393,7 @@ namespace ASN.Controllers
 
                                     foreach (var obj in lista)
                                     {
-                                        context.ProcesaSolicitudEmpleados(obj.solicitudId,obj.catEmployeeId,string.Empty,obj.userEmployeeId,string.Empty,obj.parametro,obj.detalle);
+                                        context.ProcesaSolicitudEmpleados(obj.solicitudId,obj.catEmployeeId,string.Empty,obj.userEmployeeId,string.Empty,obj.parametro,obj.detalle,resultado);
                                         //context.CatEmpleadosSolicitudesSi(obj.solicitudId, obj.catEmployeeId,);
                                         // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
                                         obj.estatus = resultado.Value.ToString();

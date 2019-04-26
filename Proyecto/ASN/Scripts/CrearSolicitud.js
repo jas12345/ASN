@@ -1,4 +1,16 @@
-﻿
+﻿$(document).ready(function () {
+    $("#CargaMasiva").change(function () {
+        if ($(this).is(":checked")) {
+            $("#seccionCargaMasiva").show();
+        } else {
+            var upload = $("#files2").data("kendoUpload");
+            upload.clearAllFiles();
+            upload.removeAllFiles();
+            $("#seccionCargaMasiva").hide();
+        }
+    });
+});
+
 function edit(e) {
     var validator = e.container.data('kendoValidator');
 
@@ -188,53 +200,73 @@ function GetInformacionPerfil() {
         })
 }
 
-function SaveSolicitud() {
-    var modelo = {
-        FolioSolicitud: $("#FolioSolicitud").val(),
-        Perfil_Ident: $("#Perfil_Ident").val(),
-        PeriodoNominaMes_Id: $("#PeriodoNominaMes_Id").val(),
-        ConceptoId: $("#ConceptoId").val(),
-        MotivoId: $("#MotivoId").val(),
-        Justficacion: $("#Justficacion").val()
-    };
+function SaveSolicitud(accion) {
 
-    var myWindow = $("#windowNotifica").data("kendoWindow");
-    
+    var validator = $("#Formulario").kendoValidator().data("kendoValidator"),
+        status = $(".status");
+    if ($("#FolioSolicitud").val() > 0)
+    {
+        $("#FolioSolicitud").val(0);
+        $("#FolioSolicitud").removeAttr("required");
 
-    var formdata = new FormData($('#Formulario').get(0));
-    debugger;
-    $.ajax({
-        type: "POST",
-        url: '/Solicitudes/CreateSolicitud',
-        data: formdata,
-        dataType: "json",
-        processData: false, 
-        contentType: false,
-        success: function (response) {
-            debugger;
-            //myWindow.close();
-            var contenido = "";
-            if (response.status === "0") {
-                if (response.listaEmpleados !== null && response.listaEmpleados.length >0) {
-                    contenido += "<table border='1'><tr><td>CCMS ID</td><td>Resultado Acción</td></tr>"
-                    for (var i = 0; i < response.listaEmpleados.length; i++) {
-                        contenido += "<tr><td>" + response.listaEmpleados[i].catEmployeeId + "</td><td>" + response.listaEmpleados[i].estatus.replace("-1_", "").replace("-2_","") + "</td></tr>";
+        if (validator.validate()) {
+            var modelo = {
+                FolioSolicitud: $("#FolioSolicitud").val(),
+                Perfil_Ident: $("#Perfil_Ident").val(),
+                PeriodoNominaMes_Id: $("#PeriodoNominaMes_Id").val(),
+                ConceptoId: $("#ConceptoId").val(),
+                MotivoId: $("#MotivoId").val(),
+                Justficacion: $("#Justficacion").val()
+            };
+
+            var myWindow = $("#windowNotifica").data("kendoWindow");
+            kendo.ui.progress($(".chart-loading"), true);
+            var formdata = new FormData($('#Formulario').get(0));
+            var solicitud = 0;
+        
+            $.ajax({
+                type: "POST",
+                url: '/Solicitudes/CreateSolicitud',
+                data: formdata,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    debugger;
+                    //myWindow.close();
+                    var contenido = "";
+
+                    kendo.ui.progress($(".chart-loading"), false);
+
+                    if (response.status === "0") {
+                        if (response.listaEmpleados !== null && response.listaEmpleados.length > 0) {
+                            contenido += "Acontinuación se enlistas los estatus de los empleados procesados.<br /><table border='1'><tr><td>CCMS ID</td><td>Resultado Acción</td></tr>"
+                            for (var i = 0; i < response.listaEmpleados.length; i++) {
+                                contenido += "<tr><td>" + response.listaEmpleados[i].catEmployeeId + "</td><td>" + response.listaEmpleados[i].estatus.replace("-1_", "").replace("-2_", "") + "</td></tr>";
+                            }
+                            contenido += "</table>";
+
+                        } else {
+                            contenido += "Se creo correctamente la solicitud con estatus Borrador.<br>";
+                        }
+                        solicitud = response.Id
+
+                        contenido += "<br /><div style='float:right;margin-right:5px;margin-top:15px;'><button type='button' class='k-button k-state-default' onclick='cierraModal();'>Cerrar</button><button type='button' class='k-button k-state-default' style='margin-left:5px;' onclick='cargaEmpleados(" + accion + "," + solicitud + "," + $("#Perfil_Ident").val() + ");'>Continuar</button></div>";
+
+
+                        $("#windowNotifica").html(contenido);
+
+                        myWindow.center().open();
                     }
-                    contenido += "</table>";
+                    else {
+                        var notification = $("#popupNotification").data("kendoNotification");
+                        notification.show(response.responseError.Errors, "error");
 
+                    }
                 }
-                $("#windowNotifica").html(contenido);
-
-                myWindow.center().open();
-                
-                //window.location.href = response.url;
-            }
-            else {
-                var notification = $("#popupNotification").data("kendoNotification");
-                notification.show(response.responseError.Errors, "error");
-            }
+                });
         }
-    });
+    }
 
 }
 
@@ -250,4 +282,25 @@ function OnSuccess(response) {
 function OnFailure(response) {
     debugger;
     alert("Error occured.");
+}
+
+function cargaEmpleados(accion, solicitud, perfil) {
+    if (accion ===1) {
+        window.location.href = "/Index";
+    } else if (accion ===2) {
+        window.location.href = "EmpleadosSolicitudes/MuestraEmpleados?id=" + solicitud + "&perfilId=" + perfil;
+    }    
+}
+
+function cierraModal() {
+    var myWindow = $("#windowNotifica").data("kendoWindow");
+    myWindow.close();
+}
+
+function displayLoading(target) {
+    var element = $(target);
+    kendo.ui.progress(element, true);
+    setTimeout(function () {
+        kendo.ui.progress(element, false);
+    }, 2000);
 }

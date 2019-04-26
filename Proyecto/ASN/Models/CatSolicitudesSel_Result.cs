@@ -40,5 +40,7 @@ namespace ASN.Models
         public string NombrePerfilEmpleados { get; set; }
         public string NombreConcepto { get; set; }
         public string NombreMotivo { get; set; }
+        public string PeriodoNomina_Id { get; set; }
+        public string PeriodoNominaOriginal_Id { get; set; }
     }
 }

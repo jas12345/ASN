@@ -344,7 +344,9 @@
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="varchar" Mode="InOut" />
         </Function>
-        <Function Name="CatSolicitudesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatSolicitudesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatSolicitudesSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Fecha_Solicitud" Type="varchar" Mode="In" />
@@ -352,21 +354,13 @@
           <Parameter Name="Solicitante_Ident" Type="int" Mode="In" />
           <Parameter Name="Solicintante_Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Puesto_solicitante_Ident" Type="int" Mode="In" />
-          <Parameter Name="PeriodoNominaAnio_Id" Type="int" Mode="In" />
-          <Parameter Name="PeriodoNominaMes_Id" Type="int" Mode="In" />
-          <Parameter Name="PeriodoNominaConsecutivoid" Type="varchar" Mode="In" />
-          <Parameter Name="PeriodoNominaPeriodicidadNomina_Id" Type="varchar" Mode="In" />
-          <Parameter Name="PeriodoNominaTipoPeriodo_Id" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodoNomina_Id" Type="varchar" Mode="In" />
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
           <Parameter Name="MotivoId" Type="int" Mode="In" />
           <Parameter Name="Justficacion" Type="varchar" Mode="In" />
           <Parameter Name="Responsable_Id" Type="int" Mode="In" />
           <Parameter Name="Detalle" Type="int" Mode="In" />
-          <Parameter Name="PeriodoOriginal_AnioId" Type="int" Mode="In" />
-          <Parameter Name="PeriodoOriginal_MesId" Type="int" Mode="In" />
-          <Parameter Name="PeriodoOriginal_ConsecutivoId" Type="varchar" Mode="In" />
-          <Parameter Name="PeriodoOriginal_PeriodicidadId" Type="varchar" Mode="In" />
-          <Parameter Name="PeriodoOriginal_TipoPeriodoId" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodoNominaOriginal_Id" Type="varchar" Mode="In" />
           <Parameter Name="Autorizantes" Type="varchar" Mode="In" />
           <Parameter Name="ListaEmpleados" Type="varchar(max)" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -379,21 +373,13 @@
           <Parameter Name="Solicitante_Ident" Type="int" Mode="In" />
           <Parameter Name="Solicintante_Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Puesto_solicitante_Ident" Type="int" Mode="In" />
-          <Parameter Name="PeriodoNominaAnio_Id" Type="int" Mode="In" />
-          <Parameter Name="PeriodoNominaMes_Id" Type="int" Mode="In" />
-          <Parameter Name="PeriodoNominaConsecutivoid" Type="varchar" Mode="In" />
-          <Parameter Name="PeriodoNominaPeriodicidadNomina_Id" Type="varchar" Mode="In" />
-          <Parameter Name="PeriodoNominaTipoPeriodo_Id" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodoNomina_Id" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodoNominaOriginal_Id" Type="varchar" Mode="In" />
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
           <Parameter Name="MotivoId" Type="int" Mode="In" />
           <Parameter Name="Justficacion" Type="varchar" Mode="In" />
           <Parameter Name="Responsable_Id" Type="int" Mode="In" />
           <Parameter Name="Detalle" Type="int" Mode="In" />
-          <Parameter Name="PeriodoOriginal_AnioId" Type="int" Mode="In" />
-          <Parameter Name="PeriodoOriginal_MesId" Type="int" Mode="In" />
-          <Parameter Name="PeriodoOriginal_ConsecutivoId" Type="varchar" Mode="In" />
-          <Parameter Name="PeriodoOriginal_PeriodicidadId" Type="varchar" Mode="In" />
-          <Parameter Name="PeriodoOriginal_TipoPeriodoId" Type="varchar" Mode="In" />
           <Parameter Name="Autorizantes" Type="varchar" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -439,6 +425,7 @@
           <Parameter Name="ListaEmpleados" Type="varchar(max)" Mode="In" />
           <Parameter Name="ParametroConceptoMonto" Type="decimal" Mode="In" />
           <Parameter Name="Detalle" Type="varchar" Mode="In" />
+          <Parameter Name="Estatus" Type="varchar(max)" Mode="InOut" />
         </Function>
         <Function Name="RelPeriodicidadPaisCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="country" Type="varchar" Mode="In" />
@@ -785,21 +772,13 @@
             <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Solicintante_Nombre" Mode="In" Type="String" />
             <Parameter Name="Puesto_solicitante_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoNominaAnio_Id" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoNominaMes_Id" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoNominaConsecutivoid" Mode="In" Type="String" />
-            <Parameter Name="PeriodoNominaPeriodicidadNomina_Id" Mode="In" Type="String" />
-            <Parameter Name="PeriodoNominaTipoPeriodo_Id" Mode="In" Type="String" />
+            <Parameter Name="PeriodoNomina_Id" Mode="In" Type="String" />
+            <Parameter Name="PeriodoNominaOriginal_Id" Mode="In" Type="String" />
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="MotivoId" Mode="In" Type="Int32" />
             <Parameter Name="Justficacion" Mode="In" Type="String" />
             <Parameter Name="Responsable_Id" Mode="In" Type="Int32" />
             <Parameter Name="Detalle" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoOriginal_AnioId" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoOriginal_MesId" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoOriginal_ConsecutivoId" Mode="In" Type="String" />
-            <Parameter Name="PeriodoOriginal_PeriodicidadId" Mode="In" Type="String" />
-            <Parameter Name="PeriodoOriginal_TipoPeriodoId" Mode="In" Type="String" />
             <Parameter Name="Autorizantes" Mode="In" Type="String" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
@@ -831,27 +810,21 @@
             <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Solicintante_Nombre" Mode="In" Type="String" />
             <Parameter Name="Puesto_solicitante_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoNominaAnio_Id" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoNominaMes_Id" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoNominaConsecutivoid" Mode="In" Type="String" />
-            <Parameter Name="PeriodoNominaPeriodicidadNomina_Id" Mode="In" Type="String" />
-            <Parameter Name="PeriodoNominaTipoPeriodo_Id" Mode="In" Type="String" />
+            <Parameter Name="PeriodoNomina_Id" Mode="In" Type="String" />
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="MotivoId" Mode="In" Type="Int32" />
             <Parameter Name="Justficacion" Mode="In" Type="String" />
             <Parameter Name="Responsable_Id" Mode="In" Type="Int32" />
             <Parameter Name="Detalle" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoOriginal_AnioId" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoOriginal_MesId" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoOriginal_ConsecutivoId" Mode="In" Type="String" />
-            <Parameter Name="PeriodoOriginal_PeriodicidadId" Mode="In" Type="String" />
-            <Parameter Name="PeriodoOriginal_TipoPeriodoId" Mode="In" Type="String" />
+            <Parameter Name="PeriodoNominaOriginal_Id" Mode="In" Type="String" />
             <Parameter Name="Autorizantes" Mode="In" Type="String" />
             <Parameter Name="ListaEmpleados" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="CatSolicitudesSel" ReturnType="Collection(ASNModel.CatSolicitudesSel_Result)" />
+          <FunctionImport Name="CatSolicitudesSel" ReturnType="Collection(ASNModel.CatSolicitudesSel_Result)" >
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="CatEmpleadosSolicitudesSel" ReturnType="Collection(ASNModel.CatEmpleadosSolicitudesSel_Result)">
           <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -944,6 +917,7 @@
             <Parameter Name="ListaEmpleados" Mode="In" Type="String" />
             <Parameter Name="ParametroConceptoMonto" Mode="In" Type="Decimal" />
             <Parameter Name="Detalle" Mode="In" Type="String" />
+            <Parameter Name="Estatus" Mode="InOut" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1319,6 +1293,8 @@
           <Property Type="String" Name="NombrePerfilEmpleados" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="NombreConcepto" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="NombreMotivo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PeriodoNomina_Id" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PeriodoNominaOriginal_Id" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatEmpleadosSolicitudesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -1928,6 +1904,8 @@
                 <ScalarProperty Name="NombrePerfilEmpleados" ColumnName="NombrePerfilEmpleados" />
                 <ScalarProperty Name="NombreConcepto" ColumnName="NombreConcepto" />
                 <ScalarProperty Name="NombreMotivo" ColumnName="NombreMotivo" />
+                <ScalarProperty Name="PeriodoNomina_Id" ColumnName="PeriodoNomina_Id" />
+                <ScalarProperty Name="PeriodoNominaOriginal_Id" ColumnName="PeriodoNominaOriginal_Id" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

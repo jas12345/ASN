@@ -1174,7 +1174,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpleadosxPerfilSel_Result>("EmpleadosxPerfilSel", perfil_IdentParameter);
         }
     
-        public virtual int CatSolicitudesSu(Nullable<int> folioSolicitud, Nullable<System.DateTime> fecha_Solicitud, Nullable<int> perfil_Ident, Nullable<int> solicitante_Ident, string solicintante_Nombre, Nullable<int> puesto_solicitante_Ident, Nullable<int> periodoNominaAnio_Id, Nullable<int> periodoNominaMes_Id, string periodoNominaConsecutivoid, string periodoNominaPeriodicidadNomina_Id, string periodoNominaTipoPeriodo_Id, Nullable<int> conceptoId, Nullable<int> motivoId, string justficacion, Nullable<int> responsable_Id, Nullable<int> detalle, Nullable<int> periodoOriginal_AnioId, Nullable<int> periodoOriginal_MesId, string periodoOriginal_ConsecutivoId, string periodoOriginal_PeriodicidadId, string periodoOriginal_TipoPeriodoId, string autorizantes, ObjectParameter estatus, Nullable<int> userEmployeeId)
+        public virtual int CatSolicitudesSu(Nullable<int> folioSolicitud, Nullable<System.DateTime> fecha_Solicitud, Nullable<int> perfil_Ident, Nullable<int> solicitante_Ident, string solicintante_Nombre, Nullable<int> puesto_solicitante_Ident, string periodoNomina_Id, string periodoNominaOriginal_Id, Nullable<int> conceptoId, Nullable<int> motivoId, string justficacion, Nullable<int> responsable_Id, Nullable<int> detalle, string autorizantes, ObjectParameter estatus, Nullable<int> userEmployeeId)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -1200,25 +1200,13 @@ namespace ASN.Models
                 new ObjectParameter("Puesto_solicitante_Ident", puesto_solicitante_Ident) :
                 new ObjectParameter("Puesto_solicitante_Ident", typeof(int));
     
-            var periodoNominaAnio_IdParameter = periodoNominaAnio_Id.HasValue ?
-                new ObjectParameter("PeriodoNominaAnio_Id", periodoNominaAnio_Id) :
-                new ObjectParameter("PeriodoNominaAnio_Id", typeof(int));
+            var periodoNomina_IdParameter = periodoNomina_Id != null ?
+                new ObjectParameter("PeriodoNomina_Id", periodoNomina_Id) :
+                new ObjectParameter("PeriodoNomina_Id", typeof(string));
     
-            var periodoNominaMes_IdParameter = periodoNominaMes_Id.HasValue ?
-                new ObjectParameter("PeriodoNominaMes_Id", periodoNominaMes_Id) :
-                new ObjectParameter("PeriodoNominaMes_Id", typeof(int));
-    
-            var periodoNominaConsecutivoidParameter = periodoNominaConsecutivoid != null ?
-                new ObjectParameter("PeriodoNominaConsecutivoid", periodoNominaConsecutivoid) :
-                new ObjectParameter("PeriodoNominaConsecutivoid", typeof(string));
-    
-            var periodoNominaPeriodicidadNomina_IdParameter = periodoNominaPeriodicidadNomina_Id != null ?
-                new ObjectParameter("PeriodoNominaPeriodicidadNomina_Id", periodoNominaPeriodicidadNomina_Id) :
-                new ObjectParameter("PeriodoNominaPeriodicidadNomina_Id", typeof(string));
-    
-            var periodoNominaTipoPeriodo_IdParameter = periodoNominaTipoPeriodo_Id != null ?
-                new ObjectParameter("PeriodoNominaTipoPeriodo_Id", periodoNominaTipoPeriodo_Id) :
-                new ObjectParameter("PeriodoNominaTipoPeriodo_Id", typeof(string));
+            var periodoNominaOriginal_IdParameter = periodoNominaOriginal_Id != null ?
+                new ObjectParameter("PeriodoNominaOriginal_Id", periodoNominaOriginal_Id) :
+                new ObjectParameter("PeriodoNominaOriginal_Id", typeof(string));
     
             var conceptoIdParameter = conceptoId.HasValue ?
                 new ObjectParameter("ConceptoId", conceptoId) :
@@ -1240,26 +1228,6 @@ namespace ASN.Models
                 new ObjectParameter("Detalle", detalle) :
                 new ObjectParameter("Detalle", typeof(int));
     
-            var periodoOriginal_AnioIdParameter = periodoOriginal_AnioId.HasValue ?
-                new ObjectParameter("PeriodoOriginal_AnioId", periodoOriginal_AnioId) :
-                new ObjectParameter("PeriodoOriginal_AnioId", typeof(int));
-    
-            var periodoOriginal_MesIdParameter = periodoOriginal_MesId.HasValue ?
-                new ObjectParameter("PeriodoOriginal_MesId", periodoOriginal_MesId) :
-                new ObjectParameter("PeriodoOriginal_MesId", typeof(int));
-    
-            var periodoOriginal_ConsecutivoIdParameter = periodoOriginal_ConsecutivoId != null ?
-                new ObjectParameter("PeriodoOriginal_ConsecutivoId", periodoOriginal_ConsecutivoId) :
-                new ObjectParameter("PeriodoOriginal_ConsecutivoId", typeof(string));
-    
-            var periodoOriginal_PeriodicidadIdParameter = periodoOriginal_PeriodicidadId != null ?
-                new ObjectParameter("PeriodoOriginal_PeriodicidadId", periodoOriginal_PeriodicidadId) :
-                new ObjectParameter("PeriodoOriginal_PeriodicidadId", typeof(string));
-    
-            var periodoOriginal_TipoPeriodoIdParameter = periodoOriginal_TipoPeriodoId != null ?
-                new ObjectParameter("PeriodoOriginal_TipoPeriodoId", periodoOriginal_TipoPeriodoId) :
-                new ObjectParameter("PeriodoOriginal_TipoPeriodoId", typeof(string));
-    
             var autorizantesParameter = autorizantes != null ?
                 new ObjectParameter("Autorizantes", autorizantes) :
                 new ObjectParameter("Autorizantes", typeof(string));
@@ -1268,7 +1236,7 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSu", folioSolicitudParameter, fecha_SolicitudParameter, perfil_IdentParameter, solicitante_IdentParameter, solicintante_NombreParameter, puesto_solicitante_IdentParameter, periodoNominaAnio_IdParameter, periodoNominaMes_IdParameter, periodoNominaConsecutivoidParameter, periodoNominaPeriodicidadNomina_IdParameter, periodoNominaTipoPeriodo_IdParameter, conceptoIdParameter, motivoIdParameter, justficacionParameter, responsable_IdParameter, detalleParameter, periodoOriginal_AnioIdParameter, periodoOriginal_MesIdParameter, periodoOriginal_ConsecutivoIdParameter, periodoOriginal_PeriodicidadIdParameter, periodoOriginal_TipoPeriodoIdParameter, autorizantesParameter, estatus, userEmployeeIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSu", folioSolicitudParameter, fecha_SolicitudParameter, perfil_IdentParameter, solicitante_IdentParameter, solicintante_NombreParameter, puesto_solicitante_IdentParameter, periodoNomina_IdParameter, periodoNominaOriginal_IdParameter, conceptoIdParameter, motivoIdParameter, justficacionParameter, responsable_IdParameter, detalleParameter, autorizantesParameter, estatus, userEmployeeIdParameter);
         }
     
         public virtual ObjectResult<RelPeriodicidadPaisCMB_Result> RelPeriodicidadPaisCMB(string country)
@@ -1331,7 +1299,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosAccesosSu", perfil_IdentParameter, empleadoIdParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
-        public virtual int CatSolicitudesSi(Nullable<int> folioSolicitud, string fecha_Solicitud, Nullable<int> perfil_Ident, Nullable<int> solicitante_Ident, string solicintante_Nombre, Nullable<int> puesto_solicitante_Ident, Nullable<int> periodoNominaAnio_Id, Nullable<int> periodoNominaMes_Id, string periodoNominaConsecutivoid, string periodoNominaPeriodicidadNomina_Id, string periodoNominaTipoPeriodo_Id, Nullable<int> conceptoId, Nullable<int> motivoId, string justficacion, Nullable<int> responsable_Id, Nullable<int> detalle, Nullable<int> periodoOriginal_AnioId, Nullable<int> periodoOriginal_MesId, string periodoOriginal_ConsecutivoId, string periodoOriginal_PeriodicidadId, string periodoOriginal_TipoPeriodoId, string autorizantes, string listaEmpleados, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatSolicitudesSi(Nullable<int> folioSolicitud, string fecha_Solicitud, Nullable<int> perfil_Ident, Nullable<int> solicitante_Ident, string solicintante_Nombre, Nullable<int> puesto_solicitante_Ident, string periodoNomina_Id, Nullable<int> conceptoId, Nullable<int> motivoId, string justficacion, Nullable<int> responsable_Id, Nullable<int> detalle, string periodoNominaOriginal_Id, string autorizantes, string listaEmpleados, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -1357,25 +1325,9 @@ namespace ASN.Models
                 new ObjectParameter("Puesto_solicitante_Ident", puesto_solicitante_Ident) :
                 new ObjectParameter("Puesto_solicitante_Ident", typeof(int));
     
-            var periodoNominaAnio_IdParameter = periodoNominaAnio_Id.HasValue ?
-                new ObjectParameter("PeriodoNominaAnio_Id", periodoNominaAnio_Id) :
-                new ObjectParameter("PeriodoNominaAnio_Id", typeof(int));
-    
-            var periodoNominaMes_IdParameter = periodoNominaMes_Id.HasValue ?
-                new ObjectParameter("PeriodoNominaMes_Id", periodoNominaMes_Id) :
-                new ObjectParameter("PeriodoNominaMes_Id", typeof(int));
-    
-            var periodoNominaConsecutivoidParameter = periodoNominaConsecutivoid != null ?
-                new ObjectParameter("PeriodoNominaConsecutivoid", periodoNominaConsecutivoid) :
-                new ObjectParameter("PeriodoNominaConsecutivoid", typeof(string));
-    
-            var periodoNominaPeriodicidadNomina_IdParameter = periodoNominaPeriodicidadNomina_Id != null ?
-                new ObjectParameter("PeriodoNominaPeriodicidadNomina_Id", periodoNominaPeriodicidadNomina_Id) :
-                new ObjectParameter("PeriodoNominaPeriodicidadNomina_Id", typeof(string));
-    
-            var periodoNominaTipoPeriodo_IdParameter = periodoNominaTipoPeriodo_Id != null ?
-                new ObjectParameter("PeriodoNominaTipoPeriodo_Id", periodoNominaTipoPeriodo_Id) :
-                new ObjectParameter("PeriodoNominaTipoPeriodo_Id", typeof(string));
+            var periodoNomina_IdParameter = periodoNomina_Id != null ?
+                new ObjectParameter("PeriodoNomina_Id", periodoNomina_Id) :
+                new ObjectParameter("PeriodoNomina_Id", typeof(string));
     
             var conceptoIdParameter = conceptoId.HasValue ?
                 new ObjectParameter("ConceptoId", conceptoId) :
@@ -1397,25 +1349,9 @@ namespace ASN.Models
                 new ObjectParameter("Detalle", detalle) :
                 new ObjectParameter("Detalle", typeof(int));
     
-            var periodoOriginal_AnioIdParameter = periodoOriginal_AnioId.HasValue ?
-                new ObjectParameter("PeriodoOriginal_AnioId", periodoOriginal_AnioId) :
-                new ObjectParameter("PeriodoOriginal_AnioId", typeof(int));
-    
-            var periodoOriginal_MesIdParameter = periodoOriginal_MesId.HasValue ?
-                new ObjectParameter("PeriodoOriginal_MesId", periodoOriginal_MesId) :
-                new ObjectParameter("PeriodoOriginal_MesId", typeof(int));
-    
-            var periodoOriginal_ConsecutivoIdParameter = periodoOriginal_ConsecutivoId != null ?
-                new ObjectParameter("PeriodoOriginal_ConsecutivoId", periodoOriginal_ConsecutivoId) :
-                new ObjectParameter("PeriodoOriginal_ConsecutivoId", typeof(string));
-    
-            var periodoOriginal_PeriodicidadIdParameter = periodoOriginal_PeriodicidadId != null ?
-                new ObjectParameter("PeriodoOriginal_PeriodicidadId", periodoOriginal_PeriodicidadId) :
-                new ObjectParameter("PeriodoOriginal_PeriodicidadId", typeof(string));
-    
-            var periodoOriginal_TipoPeriodoIdParameter = periodoOriginal_TipoPeriodoId != null ?
-                new ObjectParameter("PeriodoOriginal_TipoPeriodoId", periodoOriginal_TipoPeriodoId) :
-                new ObjectParameter("PeriodoOriginal_TipoPeriodoId", typeof(string));
+            var periodoNominaOriginal_IdParameter = periodoNominaOriginal_Id != null ?
+                new ObjectParameter("PeriodoNominaOriginal_Id", periodoNominaOriginal_Id) :
+                new ObjectParameter("PeriodoNominaOriginal_Id", typeof(string));
     
             var autorizantesParameter = autorizantes != null ?
                 new ObjectParameter("Autorizantes", autorizantes) :
@@ -1429,12 +1365,16 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSi", folioSolicitudParameter, fecha_SolicitudParameter, perfil_IdentParameter, solicitante_IdentParameter, solicintante_NombreParameter, puesto_solicitante_IdentParameter, periodoNominaAnio_IdParameter, periodoNominaMes_IdParameter, periodoNominaConsecutivoidParameter, periodoNominaPeriodicidadNomina_IdParameter, periodoNominaTipoPeriodo_IdParameter, conceptoIdParameter, motivoIdParameter, justficacionParameter, responsable_IdParameter, detalleParameter, periodoOriginal_AnioIdParameter, periodoOriginal_MesIdParameter, periodoOriginal_ConsecutivoIdParameter, periodoOriginal_PeriodicidadIdParameter, periodoOriginal_TipoPeriodoIdParameter, autorizantesParameter, listaEmpleadosParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSi", folioSolicitudParameter, fecha_SolicitudParameter, perfil_IdentParameter, solicitante_IdentParameter, solicintante_NombreParameter, puesto_solicitante_IdentParameter, periodoNomina_IdParameter, conceptoIdParameter, motivoIdParameter, justficacionParameter, responsable_IdParameter, detalleParameter, periodoNominaOriginal_IdParameter, autorizantesParameter, listaEmpleadosParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual ObjectResult<CatSolicitudesSel_Result> CatSolicitudesSel()
+        public virtual ObjectResult<CatSolicitudesSel_Result> CatSolicitudesSel(Nullable<int> folioSolicitud)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudesSel_Result>("CatSolicitudesSel");
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudesSel_Result>("CatSolicitudesSel", folioSolicitudParameter);
         }
     
         public virtual ObjectResult<CatEmpleadosSolicitudesSel_Result> CatEmpleadosSolicitudesSel(Nullable<int> folioSolicitud)
@@ -1720,7 +1660,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleMasivoSi", solicitudIdParameter, catEmpleadoIdParameter, detalleParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int ProcesaSolicitudEmpleados(Nullable<int> solicitudId, Nullable<int> empleado_Ident, string autorizantes, Nullable<int> userEmployeeId, string listaEmpleados, Nullable<decimal> parametroConceptoMonto, string detalle)
+        public virtual int ProcesaSolicitudEmpleados(Nullable<int> solicitudId, Nullable<int> empleado_Ident, string autorizantes, Nullable<int> userEmployeeId, string listaEmpleados, Nullable<decimal> parametroConceptoMonto, string detalle, ObjectParameter estatus)
         {
             var solicitudIdParameter = solicitudId.HasValue ?
                 new ObjectParameter("SolicitudId", solicitudId) :
@@ -1750,7 +1690,7 @@ namespace ASN.Models
                 new ObjectParameter("Detalle", detalle) :
                 new ObjectParameter("Detalle", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcesaSolicitudEmpleados", solicitudIdParameter, empleado_IdentParameter, autorizantesParameter, userEmployeeIdParameter, listaEmpleadosParameter, parametroConceptoMontoParameter, detalleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcesaSolicitudEmpleados", solicitudIdParameter, empleado_IdentParameter, autorizantesParameter, userEmployeeIdParameter, listaEmpleadosParameter, parametroConceptoMontoParameter, detalleParameter, estatus);
         }
     }
 }
