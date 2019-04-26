@@ -144,6 +144,7 @@
     <Compile Include="Controllers\ConceptosMotivosController.cs" />
     <Compile Include="Controllers\ConsecutivoPeriodosController.cs" />
     <Compile Include="Controllers\EmpleadosSolicitudesController.cs" />
+    <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Controllers\NominaController.cs" />
     <Compile Include="Controllers\ConceptosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -478,6 +479,7 @@
       <DependentUpon>ASN.edmx</DependentUpon>
       <LastGenOutput>ASN.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\ToDo.js" />
     <Content Include="Scripts\AniosNomina.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -649,6 +651,7 @@
     <Content Include="Views\Shared\EditorTemplates\EmpleadoMotivoConceptoPopUp.cshtml" />
     <Content Include="Views\Solicitudes\Create.cshtml" />
     <Content Include="Views\Solicitudes\SeleccionaPersonal.cshtml" />
+    <Content Include="Views\ToDo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
