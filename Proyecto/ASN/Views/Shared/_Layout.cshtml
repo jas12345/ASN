@@ -21,7 +21,7 @@
     @using ASN.Models;
 
     @{
-        var usuario = ((MyCustomIdentity)User.Identity).UserInfo;
+        //var usuario = ((MyCustomIdentity)User.Identity).UserInfo;
     }
 
     <script>
@@ -43,10 +43,10 @@
                     </a>
                 </li>
                 @{
-                if (User.IsInRole("Desarrollo"))
-                {
-                    <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
-                }
+                    if (User.IsInRole("Desarrollo"))
+                    {
+                        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+                    }
 
                     if (User.IsInRole("Desarrollo"))
                     {
@@ -112,6 +112,35 @@
                         </li>
                     }
 
+                    if (User.IsInRole("Desarrollo"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vistas / Consultas<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-header"><div class="fa fa-angellist"></div></li>
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("5.9.1 To-Do (Acciones pendientes)", "AniosNomina", "Nomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("5.9.2 Mis solicitudes", "MesesNomina", "Nomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("5.9.3 Solicitudes (todas)", "index", "PeriodicidadNomina")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
+                                    <li>@Html.ActionLink("5.9.4 Búsquedas varias.", "index", "ConsecutivoPeriodos")</li>
+                                }
+                            </ul>
+                        </li>
+
+                    }
                 }
 
                 <li>
