@@ -1,10 +1,12 @@
 ﻿using ASN.Models;
+using CsvHelper;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Core.Objects;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -41,7 +43,7 @@ namespace ASN.Controllers
                     var lstSolicitudes = context.CatSolicitudesSel().ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok);
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -163,7 +165,7 @@ namespace ASN.Controllers
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     var lstPerfil = context.CatPerfilEmpleadosSel(int.Parse(perfilId)).ToList();
-                    perfil = lstPerfil.FirstOrDefault();                    
+                    perfil = lstPerfil.FirstOrDefault();
                 }
 
                 return Json(perfil, JsonRequestBehavior.AllowGet);
@@ -221,15 +223,17 @@ namespace ASN.Controllers
         /// <param name="listaEmpleados"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, IEnumerable<HttpPostedFileBase> files, string listaEmpleados)
+        public JsonResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, IEnumerable<HttpPostedFileBase> files, IEnumerable<HttpPostedFileBase> files2, string listaEmpleados)
         {
             try
             {
+                var lista = new List<CargaMasivaRegistroViewModel>();
+                int res = 0;
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     int ccmsidAdmin = 0;
-                    int res = 0;
+                   
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                     resultado.Value = 0;
 
@@ -274,20 +278,34 @@ namespace ASN.Controllers
                     int SolicitudId = 0;
                     object Error = null;
 
+                    if (res != -1)
+                    {
+                        if (files != null)
+                        {
+                            GuardaArchivos(lstResultado[1].ToString(), files, ccmsidAdmin);
+                        }
+                        if (files2 != null)
+                        {
+                            lista = Save(files2, int.Parse(lstResultado[1].ToString()), ccmsidAdmin);
+                        }
+
+                    }
+
                     if (res == -1)
                     {
                         resultadoAccion = "Ya existe un concepto con la misma descripción.";
                         Error = new { Errors = resultadoAccion };
                         ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
-                    } else
+                    }
+                    else
                     {
-                        if (lstResultado.Length >1)
+                        if (lstResultado.Length > 1)
                         {
                             SolicitudId = int.Parse(lstResultado[1].ToString());
                         }
                     }
 
-                    return Json(profiles);//(new { Id =SolicitudId,type= "create", response = Error }, JsonRequestBehavior.AllowGet);// (profiles.ToDataSourceResult(request, ModelState));
+                    return Json(new { Id =SolicitudId,type= "create", responseError = Error, listaEmpleados = lista, status= res.ToString() }, JsonRequestBehavior.AllowGet);// (profiles.ToDataSourceResult(request, ModelState)); //(profiles);//
                 }
 
             }
@@ -299,9 +317,141 @@ namespace ASN.Controllers
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
                 //return Json(profiles.ToDataSourceResult(request, ModelState));
-               return Json(new { Id = 0,type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+                return Json(new { Id = 0, type = "create", responseError = new { Errors = resultadoAccion }, listaEmpleados ="", status ="-1" }, JsonRequestBehavior.AllowGet);
             }
             //return View(profiles);
+        }
+
+        public List<CargaMasivaRegistroViewModel> Save(IEnumerable<HttpPostedFileBase> files, int solicitudid, int useremployeeid)
+        {
+            try
+            {
+                int solicitudId = solicitudid;
+                int userEmployeeId = useremployeeid;
+                int ccmsId = 0;
+                int parametro = 0;
+                string detalle = string.Empty;
+
+                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
+                resultado.Value = String.Empty;
+
+                var lista = new List<CargaMasivaRegistroViewModel>();
+
+                if (files != null)
+                {
+                    foreach (var file in files)
+                    {
+                        if (file != null)
+                        { 
+                            var fileName = Path.GetFileName(file.FileName);
+                            var ext = Path.GetExtension(fileName);
+
+                            if (ext.ToUpper() == ".CSV")
+                            {
+                                var postedFile = file;
+
+                                if (postedFile.ContentLength > 0)
+                                {
+
+                                    using (var csvReader = new StreamReader(postedFile.InputStream))
+                                    {
+
+                                        using (var csv = new CsvReader(csvReader))
+                                        {
+
+                                            while (csv.Read())
+                                            {
+
+                                                var objeton = new CargaMasivaRegistroViewModel();
+
+                                                if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
+                                                {
+
+                                                    objeton.parametro = parametro;
+                                                    objeton.detalle = detalle;
+                                                    objeton.solicitudId = solicitudId;
+                                                    objeton.userEmployeeId = userEmployeeId;
+                                                    objeton.catEmployeeId = ccmsId;
+                                                    objeton.estatus = string.Empty;
+
+                                                    lista.Add(objeton);
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                using (ASNContext context = new ASNContext())
+                                {
+
+                                    foreach (var obj in lista)
+                                    {
+                                        context.ProcesaSolicitudEmpleados(obj.solicitudId,obj.catEmployeeId,string.Empty,obj.userEmployeeId,string.Empty,obj.parametro,obj.detalle);
+                                        //context.CatEmpleadosSolicitudesSi(obj.solicitudId, obj.catEmployeeId,);
+                                        // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
+                                        obj.estatus = resultado.Value.ToString();
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return lista;
+            }
+            catch (Exception e)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(e, usuario.UserInfo.Ident.Value);
+
+                var lista = new List<CargaMasivaRegistroViewModel>();
+                return lista;
+            }
+        }
+
+        public string GuardaArchivos(string solicitudId, IEnumerable<HttpPostedFileBase> files, int useremployeeid)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    string fullPath = Request.MapPath("~/Evidencias/");
+                    if (!System.IO.File.Exists(fullPath))
+                    {
+                        ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                        resultado.Value = 0;
+
+                        Directory.CreateDirectory(fullPath);
+                        foreach (var item in files)
+                        {
+                            if (item != null)
+                            {
+                                var nombreArchivo = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + item.FileName;
+                                item.SaveAs(fullPath + Path.GetFileName(nombreArchivo));
+
+                                context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                                context.CatSolicitudesArchivosSi(int.Parse(solicitudId), nombreArchivo, useremployeeid, resultado);
+                            }
+
+                        }
+                    }
+
+                    return "Ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return "Error";
+
+            }
         }
 
     }

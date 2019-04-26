@@ -398,6 +398,7 @@ function SaveSolicitud() {
         processData: false, //For posting uploaded files we add this
         contentType: false, //For posting uploaded files we add this
         success: function (response) {
+            debugger;
             if (response.success) {
                 window.location.href = response.url;
                         }

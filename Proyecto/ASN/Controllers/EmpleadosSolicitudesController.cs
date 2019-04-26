@@ -246,7 +246,7 @@ namespace ASN.Controllers
                         context.CatSolicitudEmpleadosDetalleSu(
                         item.FolioSolicitud, item.Empleado_Ident,
                         item.CatConceptoMotivoId, item.Manager_Ident,
-                        item.ParametroConceptoMonto, item.Detalle,
+                        //item.ParametroConceptoMonto, item.Detalle,
                         item.PeriodoNomina, item.Active,
                         (string.IsNullOrEmpty(TTConceptoMotivoId) || TTConceptoMotivoId == "false" ? false : true),
                         (string.IsNullOrEmpty(TTManager_Ident) || TTManager_Ident == "false" ? false : true),

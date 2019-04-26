@@ -198,6 +198,9 @@ function SaveSolicitud() {
         Justficacion: $("#Justficacion").val()
     };
 
+    var myWindow = $("#windowNotifica").data("kendoWindow");
+    
+
     var formdata = new FormData($('#Formulario').get(0));
     debugger;
     $.ajax({
@@ -208,42 +211,31 @@ function SaveSolicitud() {
         processData: false, 
         contentType: false,
         success: function (response) {
-            if (response.success) {
-                window.location.href = response.url;
-                        }
-            else if (!response.success) {
-                hideKendoLoading();
-                //Scroll top of the page and div over a period of one second (1,000 milliseconds = 1 second).
-                $('html, body').animate({ scrollTop: (0) }, 1000);
-                $('#popupDiv').animate({ scrollTop: (0) }, 1000);
-                var errorMsg = response.message;
-                $('#divMessage').html(errorMsg).attr('class', 'alert alert-danger fade in');
-                $('#divMessage').show();
+            debugger;
+            //myWindow.close();
+            var contenido = "";
+            if (response.status === "0") {
+                if (response.listaEmpleados !== null && response.listaEmpleados.length >0) {
+                    contenido += "<table border='1'><tr><td>CCMS ID</td><td>Resultado Acción</td></tr>"
+                    for (var i = 0; i < response.listaEmpleados.length; i++) {
+                        contenido += "<tr><td>" + response.listaEmpleados[i].catEmployeeId + "</td><td>" + response.listaEmpleados[i].estatus.replace("-1_", "").replace("-2_","") + "</td></tr>";
+                    }
+                    contenido += "</table>";
+
+                }
+                $("#windowNotifica").html(contenido);
+
+                myWindow.center().open();
+                
+                //window.location.href = response.url;
             }
             else {
-                var errorMsg = null;
-                $('#divMessage').html(errorMsg).attr('class', 'empty-alert');
-                $('#divMessage').hide();
+                var notification = $("#popupNotification").data("kendoNotification");
+                notification.show(response.responseError.Errors, "error");
             }
         }
     });
 
-
-    //jQuery.ajax({
-    //    url: php_file_path,
-    //    type: "POST",
-    +-
-    //    data: formdata,
-    //    processData: false,
-    //    contentType: false,
-    //    success: function (result) {
-    //        debugger;
-    //        // if all is well
-    //        // play the audio file
-    //    }, error: function (jqXHR, textStatus, error) {
-    //        alert("Estado: Error inesperado");
-    //    }
-    //});
 }
 
 function OnSuccess(response) {

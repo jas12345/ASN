@@ -1446,7 +1446,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosSolicitudesSel_Result>("CatEmpleadosSolicitudesSel", folioSolicitudParameter);
         }
     
-        public virtual int CatEmpleadosSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, string empleado_First_Name, string empleado_Middle_Name, string empleado_Last_Name, Nullable<int> empleado_Position_Code_Ident, string empleado_Position_Code_Title, Nullable<int> empleado_Contract_Type_Ident, string empleado_Contract_Type, Nullable<int> manager_Ident, string manager_First_Name, string manager_Middle_Name, string manager_Last_Name, Nullable<int> manager_Position_Code_Ident, string manager_Position_Code_Title, Nullable<int> manager_Contract_Type_Ident, string manager_Contract_Type, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatEmpleadosSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, string empleado_First_Name, string empleado_Middle_Name, string empleado_Last_Name, Nullable<int> empleado_Position_Code_Ident, string empleado_Position_Code_Title, Nullable<int> empleado_Contract_Type_Ident, string empleado_Contract_Type, Nullable<int> manager_Ident, string manager_First_Name, string manager_Middle_Name, string manager_Last_Name, Nullable<int> manager_Position_Code_Ident, string manager_Position_Code_Title, Nullable<int> manager_Contract_Type_Ident, string manager_Contract_Type, Nullable<decimal> parametroConceptoMonto, string detalle, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -1516,14 +1516,22 @@ namespace ASN.Models
                 new ObjectParameter("Manager_Contract_Type", manager_Contract_Type) :
                 new ObjectParameter("Manager_Contract_Type", typeof(string));
     
+            var parametroConceptoMontoParameter = parametroConceptoMonto.HasValue ?
+                new ObjectParameter("ParametroConceptoMonto", parametroConceptoMonto) :
+                new ObjectParameter("ParametroConceptoMonto", typeof(decimal));
+    
+            var detalleParameter = detalle != null ?
+                new ObjectParameter("Detalle", detalle) :
+                new ObjectParameter("Detalle", typeof(string));
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSi", folioSolicitudParameter, empleado_IdentParameter, empleado_First_NameParameter, empleado_Middle_NameParameter, empleado_Last_NameParameter, empleado_Position_Code_IdentParameter, empleado_Position_Code_TitleParameter, empleado_Contract_Type_IdentParameter, empleado_Contract_TypeParameter, manager_IdentParameter, manager_First_NameParameter, manager_Middle_NameParameter, manager_Last_NameParameter, manager_Position_Code_IdentParameter, manager_Position_Code_TitleParameter, manager_Contract_Type_IdentParameter, manager_Contract_TypeParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSi", folioSolicitudParameter, empleado_IdentParameter, empleado_First_NameParameter, empleado_Middle_NameParameter, empleado_Last_NameParameter, empleado_Position_Code_IdentParameter, empleado_Position_Code_TitleParameter, empleado_Contract_Type_IdentParameter, empleado_Contract_TypeParameter, manager_IdentParameter, manager_First_NameParameter, manager_Middle_NameParameter, manager_Last_NameParameter, manager_Position_Code_IdentParameter, manager_Position_Code_TitleParameter, manager_Contract_Type_IdentParameter, manager_Contract_TypeParameter, parametroConceptoMontoParameter, detalleParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatEmpleadosSolicitudesSu(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatEmpleadosSolicitudesSu(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<decimal> parametroConceptoMonto, string detalle, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -1533,6 +1541,14 @@ namespace ASN.Models
                 new ObjectParameter("Empleado_Ident", empleado_Ident) :
                 new ObjectParameter("Empleado_Ident", typeof(int));
     
+            var parametroConceptoMontoParameter = parametroConceptoMonto.HasValue ?
+                new ObjectParameter("ParametroConceptoMonto", parametroConceptoMonto) :
+                new ObjectParameter("ParametroConceptoMonto", typeof(decimal));
+    
+            var detalleParameter = detalle != null ?
+                new ObjectParameter("Detalle", detalle) :
+                new ObjectParameter("Detalle", typeof(string));
+    
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
@@ -1541,7 +1557,7 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSu", folioSolicitudParameter, empleado_IdentParameter, activeParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSu", folioSolicitudParameter, empleado_IdentParameter, parametroConceptoMontoParameter, detalleParameter, activeParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual ObjectResult<CatEmployeeCMB_Result> CatEmployeeCMB()
@@ -1558,7 +1574,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosPerfilEmpleadosCMB_Result>("CatEmpleadosPerfilEmpleadosCMB", perfil_IdentParameter);
         }
     
-        public virtual int CatSolicitudEmpleadosDetalleSu(Nullable<int> solicitudId, Nullable<int> catEmpleadoId, string catConceptoMotivoId, Nullable<int> responsableId, Nullable<decimal> parametroConceptoMonto, string detalle, string periodoNomina, Nullable<bool> active, Nullable<bool> tTConceptoMotivoId, Nullable<bool> tTManager_Ident, Nullable<bool> tTMonto, Nullable<bool> tTDetalle, Nullable<bool> tTPeriodoNomina, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatSolicitudEmpleadosDetalleSu(Nullable<int> solicitudId, Nullable<int> catEmpleadoId, string catConceptoMotivoId, Nullable<int> responsableId, string periodoNomina, Nullable<bool> active, Nullable<bool> tTConceptoMotivoId, Nullable<bool> tTManager_Ident, Nullable<bool> tTMonto, Nullable<bool> tTDetalle, Nullable<bool> tTPeriodoNomina, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var solicitudIdParameter = solicitudId.HasValue ?
                 new ObjectParameter("SolicitudId", solicitudId) :
@@ -1575,14 +1591,6 @@ namespace ASN.Models
             var responsableIdParameter = responsableId.HasValue ?
                 new ObjectParameter("ResponsableId", responsableId) :
                 new ObjectParameter("ResponsableId", typeof(int));
-    
-            var parametroConceptoMontoParameter = parametroConceptoMonto.HasValue ?
-                new ObjectParameter("ParametroConceptoMonto", parametroConceptoMonto) :
-                new ObjectParameter("ParametroConceptoMonto", typeof(decimal));
-    
-            var detalleParameter = detalle != null ?
-                new ObjectParameter("Detalle", detalle) :
-                new ObjectParameter("Detalle", typeof(string));
     
             var periodoNominaParameter = periodoNomina != null ?
                 new ObjectParameter("PeriodoNomina", periodoNomina) :
@@ -1616,7 +1624,7 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSu", solicitudIdParameter, catEmpleadoIdParameter, catConceptoMotivoIdParameter, responsableIdParameter, parametroConceptoMontoParameter, detalleParameter, periodoNominaParameter, activeParameter, tTConceptoMotivoIdParameter, tTManager_IdentParameter, tTMontoParameter, tTDetalleParameter, tTPeriodoNominaParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSu", solicitudIdParameter, catEmpleadoIdParameter, catConceptoMotivoIdParameter, responsableIdParameter, periodoNominaParameter, activeParameter, tTConceptoMotivoIdParameter, tTManager_IdentParameter, tTMontoParameter, tTDetalleParameter, tTPeriodoNominaParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual int ProcesaSolicitudEmpleadoDetalleSi(Nullable<int> solicitudId, string listaEmpleados, Nullable<int> conceptoMotivoId, string listaConceptoMotivo, Nullable<bool> aplicaAtodos, Nullable<int> userEmployeeId, ObjectParameter estatus)
@@ -1672,6 +1680,77 @@ namespace ASN.Models
         public virtual ObjectResult<CatMotivoSolicitudCMB_Result> CatMotivoSolicitudCMB()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMotivoSolicitudCMB_Result>("CatMotivoSolicitudCMB");
+        }
+    
+        public virtual int CatSolicitudesArchivosSi(Nullable<int> folioSolicitud, string nombreArchivo, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var nombreArchivoParameter = nombreArchivo != null ?
+                new ObjectParameter("NombreArchivo", nombreArchivo) :
+                new ObjectParameter("NombreArchivo", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesArchivosSi", folioSolicitudParameter, nombreArchivoParameter, userEmployeeIdParameter, estatus);
+        }
+    
+        public virtual int CatSolicitudEmpleadosDetalleMasivoSi(Nullable<int> solicitudId, Nullable<int> catEmpleadoId, string detalle, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        {
+            var solicitudIdParameter = solicitudId.HasValue ?
+                new ObjectParameter("SolicitudId", solicitudId) :
+                new ObjectParameter("SolicitudId", typeof(int));
+    
+            var catEmpleadoIdParameter = catEmpleadoId.HasValue ?
+                new ObjectParameter("CatEmpleadoId", catEmpleadoId) :
+                new ObjectParameter("CatEmpleadoId", typeof(int));
+    
+            var detalleParameter = detalle != null ?
+                new ObjectParameter("Detalle", detalle) :
+                new ObjectParameter("Detalle", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleMasivoSi", solicitudIdParameter, catEmpleadoIdParameter, detalleParameter, userEmployeeIdParameter, estatus);
+        }
+    
+        public virtual int ProcesaSolicitudEmpleados(Nullable<int> solicitudId, Nullable<int> empleado_Ident, string autorizantes, Nullable<int> userEmployeeId, string listaEmpleados, Nullable<decimal> parametroConceptoMonto, string detalle)
+        {
+            var solicitudIdParameter = solicitudId.HasValue ?
+                new ObjectParameter("SolicitudId", solicitudId) :
+                new ObjectParameter("SolicitudId", typeof(int));
+    
+            var empleado_IdentParameter = empleado_Ident.HasValue ?
+                new ObjectParameter("Empleado_Ident", empleado_Ident) :
+                new ObjectParameter("Empleado_Ident", typeof(int));
+    
+            var autorizantesParameter = autorizantes != null ?
+                new ObjectParameter("Autorizantes", autorizantes) :
+                new ObjectParameter("Autorizantes", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            var listaEmpleadosParameter = listaEmpleados != null ?
+                new ObjectParameter("ListaEmpleados", listaEmpleados) :
+                new ObjectParameter("ListaEmpleados", typeof(string));
+    
+            var parametroConceptoMontoParameter = parametroConceptoMonto.HasValue ?
+                new ObjectParameter("ParametroConceptoMonto", parametroConceptoMonto) :
+                new ObjectParameter("ParametroConceptoMonto", typeof(decimal));
+    
+            var detalleParameter = detalle != null ?
+                new ObjectParameter("Detalle", detalle) :
+                new ObjectParameter("Detalle", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcesaSolicitudEmpleados", solicitudIdParameter, empleado_IdentParameter, autorizantesParameter, userEmployeeIdParameter, listaEmpleadosParameter, parametroConceptoMontoParameter, detalleParameter);
         }
     }
 }
