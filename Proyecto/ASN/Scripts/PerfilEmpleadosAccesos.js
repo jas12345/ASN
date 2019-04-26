@@ -264,6 +264,7 @@ function onChange(event) {
     //$("#grid").data("kendoGrid")
 
     var perfil_Ident = $("#PerfilUsuarioId")[0].value;
+    debugger;
     //$('#kendoSeleccion')[0].textContent = listaEmpleados;
     $.ajax({
         type: 'POST',
@@ -275,6 +276,27 @@ function onChange(event) {
         success: function (resultData) { debugger}
     })    
 }
+
+function onDataBound(event) {
+    var grid = event.sender;
+    var allRows = grid.items();
+    var selectedEmpleados = [];
+    var idField = "PerfilEmpleadoAcceso_Activo";
+
+    var rowsToSelect = [];
+    debugger;
+    allRows.each(function (idx, row) {
+        var dataItem = grid.dataItem(row);
+        debugger;
+        if (dataItem[idField].toString()=="true") {
+            debugger;
+            rowsToSelect.push(row);
+        }
+    });
+    debugger;
+    event.sender.select(rowsToSelect);
+}
+
 
 function onSave(e) {
 

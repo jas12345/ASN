@@ -53,7 +53,8 @@ namespace ASN.Controllers
                     using (ASNContext context = new ASNContext())
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                        listPerfilEmpleadosAccesos = context.CatPerfilEmpleadosAccesosSel(int.Parse(perfil)).ToList();
+                        int perfil_Ident = int.Parse(perfil);
+                        listPerfilEmpleadosAccesos = context.CatPerfilEmpleadosAccesosSel(perfil_Ident).ToList();
                         DataSourceResult ok = listPerfilEmpleadosAccesos.ToDataSourceResult(request);
 
                         return Json(ok);
