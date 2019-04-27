@@ -111,11 +111,16 @@
     </div>
     <script>
         var urlSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';
+		var urlEditar = '@Url.Action("Editar", "Solicitudes")'
     </script>
 }
 else
 {
-    <p>You are not logged in</p>
+    <script type="text/javascript">
+$(function(){
+    window.location.href = "@Url.Action("Index","Inicio")";
+});
+    </script>
 }
 
 @Scripts.Render("~/bundles/Solicitudes")
