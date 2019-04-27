@@ -323,10 +323,8 @@ function GetParametros() {
 
 function EditaSolicitud(e) {
     e.preventDefault();
-    debugger;
     var d = this.dataItem($(e.currentTarget).closest("tr"));
-    //alert("Selected item ID is:" + d.Id);
-    window.location.href = 'Create?id=' + d.FolioSolicitud;
+    window.location.href = urlEditar +"?id="+ d.FolioSolicitud;
 }
 
 //#Inicio Funciones de Solicitud

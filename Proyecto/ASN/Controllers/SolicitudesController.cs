@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace ASN.Controllers
 {
@@ -21,21 +22,25 @@ namespace ASN.Controllers
             return View();
         }
 
-        public ActionResult Create(string id)
+         public ActionResult Create()
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                return View();
-            }
-            else
-            {
+            return View();            
+        }
+
+        public ActionResult EditaSolicitud(string id)
+        {
+            return RedirectToAction("Editar","Solicitudes", id);//, new RouteValueDictionary( new { controller = "Solicitudes", action = "Editar", id = id }));
+        }
+
+        public ActionResult Editar(string id)
+        {
+            
                 var modelo = new CatSolicitudesSel_Result();
                 using (ASNContext context = new ASNContext())
                 {
                     modelo = context.CatSolicitudesSel(int.Parse(id)).FirstOrDefault();
                 }
                 return View(modelo);
-            }
         }
 
 
