@@ -239,7 +239,8 @@ function actualizaGrid() {
 
 function GetPerfil() {
     return {
-        perfil: $("#PerfilUsuarioId").val()
+        perfil: 0,
+        solicitud: $("#SolicitudId").val()
     };
 }
 function GetSolicitudId() {

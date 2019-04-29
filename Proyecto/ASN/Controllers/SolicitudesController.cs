@@ -45,7 +45,7 @@ namespace ASN.Controllers
 
         public ActionResult SeleccionaPersonal(string id)
         {
-
+            TempData["SolicitudId"] = id;
             return View();
         }
         #region Métodos para carga de combos
@@ -202,7 +202,7 @@ namespace ASN.Controllers
         /// <param name="perfil"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult GetEmployee([DataSourceRequest]DataSourceRequest request, string perfil)
+        public JsonResult GetEmployee([DataSourceRequest]DataSourceRequest request, string perfil, string solicitud)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace ASN.Controllers
                     using (ASNContext context = new ASNContext())
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                        listPeriodoNomina = context.EmpleadosxPerfilSel(int.Parse(perfil)).ToList();
+                        listPeriodoNomina = context.EmpleadosxPerfilSel(0,int.Parse(solicitud)).ToList();
                         DataSourceResult ok = listPeriodoNomina.ToDataSourceResult(request);
 
                         return Json(ok);
