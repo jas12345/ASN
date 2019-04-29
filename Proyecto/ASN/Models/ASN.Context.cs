@@ -1165,13 +1165,17 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmployeeSel_Result>("CatEmployeeSel");
         }
     
-        public virtual ObjectResult<EmpleadosxPerfilSel_Result> EmpleadosxPerfilSel(Nullable<int> perfil_Ident)
+        public virtual ObjectResult<EmpleadosxPerfilSel_Result> EmpleadosxPerfilSel(Nullable<int> perfil_Ident, Nullable<int> solicitud)
         {
             var perfil_IdentParameter = perfil_Ident.HasValue ?
                 new ObjectParameter("Perfil_Ident", perfil_Ident) :
                 new ObjectParameter("Perfil_Ident", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpleadosxPerfilSel_Result>("EmpleadosxPerfilSel", perfil_IdentParameter);
+            var solicitudParameter = solicitud.HasValue ?
+                new ObjectParameter("Solicitud", solicitud) :
+                new ObjectParameter("Solicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpleadosxPerfilSel_Result>("EmpleadosxPerfilSel", perfil_IdentParameter, solicitudParameter);
         }
     
         public virtual int CatSolicitudesSu(Nullable<int> folioSolicitud, Nullable<System.DateTime> fecha_Solicitud, Nullable<int> perfil_Ident, Nullable<int> solicitante_Ident, string solicintante_Nombre, Nullable<int> puesto_solicitante_Ident, string periodoNomina_Id, string periodoNominaOriginal_Id, Nullable<int> conceptoId, Nullable<int> motivoId, string justficacion, Nullable<int> responsable_Id, Nullable<int> detalle, string autorizantes, ObjectParameter estatus, Nullable<int> userEmployeeId)
@@ -1257,7 +1261,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosAccesosSel_Result>("CatPerfilEmpleadosAccesosSel", perfil_IdentParameter);
         }
     
-        public virtual int CatPerfilEmpleadosAccesosSi(Nullable<int> perfil_Ident, string selectedKeyNames, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatPerfilEmpleadosAccesosSi(Nullable<int> perfil_Ident, string selectedKeyNames, string selectedEmpleados, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
             var perfil_IdentParameter = perfil_Ident.HasValue ?
                 new ObjectParameter("Perfil_Ident", perfil_Ident) :
@@ -1267,6 +1271,10 @@ namespace ASN.Models
                 new ObjectParameter("SelectedKeyNames", selectedKeyNames) :
                 new ObjectParameter("SelectedKeyNames", typeof(string));
     
+            var selectedEmpleadosParameter = selectedEmpleados != null ?
+                new ObjectParameter("SelectedEmpleados", selectedEmpleados) :
+                new ObjectParameter("SelectedEmpleados", typeof(string));
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
@@ -1275,7 +1283,7 @@ namespace ASN.Models
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosAccesosSi", perfil_IdentParameter, selectedKeyNamesParameter, userEmployeeIdParameter, activeParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosAccesosSi", perfil_IdentParameter, selectedKeyNamesParameter, selectedEmpleadosParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
         public virtual int CatPerfilEmpleadosAccesosSu(Nullable<int> perfil_Ident, Nullable<int> empleadoId, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)

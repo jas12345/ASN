@@ -75,7 +75,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, string Perfil_Ident, string selectedKeyNames)
+        public ActionResult CreatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, string Perfil_Ident, string selectedKeyNames, string selectedEmpleados)
         {
             try
             {
@@ -92,6 +92,7 @@ namespace ASN.Controllers
                     context.CatPerfilEmpleadosAccesosSi(
                         int.Parse(Perfil_Ident),
                         selectedKeyNames,
+                        selectedEmpleados,
                         idAdmin, 
                         true,
                         resultado);
