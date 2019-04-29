@@ -212,6 +212,7 @@
         <Function Name="CatPerfilEmpleadosAccesosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
           <Parameter Name="SelectedKeyNames" Type="varchar" Mode="In" />
+          <Parameter Name="SelectedEmpleados" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -407,6 +408,7 @@
         </Function>
         <Function Name="EmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+          <Parameter Name="Solicitud" Type="int" Mode="In" />
         </Function>
         <Function Name="ProcesaSolicitudEmpleadoDetalleSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="SolicitudId" Type="int" Mode="In" />
@@ -764,6 +766,7 @@
           <FunctionImport Name="CatEmployeeSel" ReturnType="Collection(ASNModel.CatEmployeeSel_Result)" />
           <FunctionImport Name="EmpleadosxPerfilSel" ReturnType="Collection(ASNModel.EmpleadosxPerfilSel_Result)">
           <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Solicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatSolicitudesSu">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
@@ -792,6 +795,7 @@
           <FunctionImport Name="CatPerfilEmpleadosAccesosSi">
             <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
             <Parameter Name="SelectedKeyNames" Mode="In" Type="String" />
+            <Parameter Name="SelectedEmpleados" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -823,7 +827,7 @@
             <Parameter Name="Estatus" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatSolicitudesSel" ReturnType="Collection(ASNModel.CatSolicitudesSel_Result)" >
-            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+          <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatEmpleadosSolicitudesSel" ReturnType="Collection(ASNModel.CatEmpleadosSolicitudesSel_Result)">
           <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
