@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace ASN.Controllers
 {
@@ -247,6 +246,7 @@ namespace ASN.Controllers
             {
                 var lista = new List<CargaMasivaRegistroViewModel>();
                 int res = 0;
+                var result = new object();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
@@ -298,7 +298,6 @@ namespace ASN.Controllers
                         {
                             lista = Save(files2, int.Parse(lstResultado[1].ToString()), ccmsidAdmin);
                         }
-
                     }
 
                     if (res == -1)
@@ -315,8 +314,9 @@ namespace ASN.Controllers
                         }
                     }
 
-                    return Json(new { Id =SolicitudId,type= "create", responseError = Error, listaEmpleados = lista, status= res.ToString() }, JsonRequestBehavior.AllowGet);// (profiles.ToDataSourceResult(request, ModelState)); //(profiles);//
+                    result = new { Id = SolicitudId, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };
                 }
+                return Json(result);// (profiles.ToDataSourceResult(request, ModelState)); //(profiles);//
 
             }
             catch (Exception ex)
