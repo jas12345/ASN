@@ -125,17 +125,17 @@
 
                                 @if (User.IsInRole("Desarrollo"))
                                 {
-                                    <li>@Html.ActionLink("5.9.2 Mis solicitudes", "MesesNomina", "Nomina")</li>
+                                    <li>@Html.ActionLink("5.9.2 Mis solicitudes", "Index", "MisSolicitudes")</li>
                                 }
 
                                 @if (User.IsInRole("Desarrollo"))
                                 {
-                                    <li>@Html.ActionLink("5.9.3 Solicitudes (todas)", "index", "PeriodicidadNomina")</li>
+                                    <li>@Html.ActionLink("5.9.3 Solicitudes (todas)", "index", "SolicitudesTodas")</li>
                                 }
 
                                 @if (User.IsInRole("Desarrollo"))
                                 {
-                                    <li>@Html.ActionLink("5.9.4 Búsquedas varias.", "index", "ConsecutivoPeriodos")</li>
+                                    <li>@Html.ActionLink("5.9.4 Búsquedas varias.", "index", "BusquedasVarias")</li>
                                 }
                             </ul>
                         </li>

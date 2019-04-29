@@ -260,7 +260,8 @@ function errorsote(args) {
 }
 
 function onChange(event) {
-    var listaEmpleados = $("#grid").data("kendoGrid").selectedKeyNames().join(", ");
+    var listaEmpleados = $("#selectedEmpleados").join(", ");
+    var listaSelectedEmpleados = $("#grid").data("kendoGrid").selectedKeyNames().join(", ");
     //$("#grid").data("kendoGrid")
 
     var perfil_Ident = $("#PerfilUsuarioId")[0].value;
@@ -269,8 +270,8 @@ function onChange(event) {
     $.ajax({
         type: 'POST',
         url: '/PerfilEmpleadosAccesos/CreatePerfilEmpleadosAccesos',
-        data: JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados.trim() }),
-        //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
+        data: JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados.trim(), "SelectedEmpleados": selectedEmpleados }),
+            //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function (resultData) { debugger}
@@ -280,17 +281,24 @@ function onChange(event) {
 function onDataBound(event) {
     var grid = event.sender;
     var allRows = grid.items();
-    var selectedEmpleados = [];
+    var selectedEmpleados = new Array();
+    var totalEmpleados = 0;
     var idField = "PerfilEmpleadoAcceso_Activo";
+    var idFieldIdent = "CCMSId";
 
     var rowsToSelect = [];
     debugger;
     allRows.each(function (idx, row) {
         var dataItem = grid.dataItem(row);
         debugger;
-        if (dataItem[idField].toString()=="true") {
+        if (dataItem[idField].toString() == "true") {
             debugger;
+            totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent]);
             rowsToSelect.push(row);
+        }
+        else {
+            debugger;
+            totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent] * -1);
         }
     });
     debugger;

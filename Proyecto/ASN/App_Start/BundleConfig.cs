@@ -99,6 +99,14 @@ namespace ASN
             bundles.Add(new ScriptBundle("~/bundles/ToDo").Include(
             "~/Scripts/ToDo.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/MisSolicitudes").Include(
+            "~/Scripts/MisSolicitudes.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/SolicitudesTodas").Include(
+            "~/Scripts/SolicitudesTodas.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/BusquedasVarias").Include(
+            "~/Scripts/BusquedasVarias.js"));
 
         }
     }

@@ -142,8 +142,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ConceptosMotivosController.cs" />
+    <Compile Include="Controllers\BusquedasVariasController.cs" />
     <Compile Include="Controllers\ConsecutivoPeriodosController.cs" />
     <Compile Include="Controllers\EmpleadosSolicitudesController.cs" />
+    <Compile Include="Controllers\MisSolicitudesController.cs" />
+    <Compile Include="Controllers\SolicitudesTodasController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Controllers\NominaController.cs" />
     <Compile Include="Controllers\ConceptosController.cs" />
@@ -479,6 +482,9 @@
       <DependentUpon>ASN.edmx</DependentUpon>
       <LastGenOutput>ASN.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\BusquedasVarias.js" />
+    <Content Include="Scripts\MisSolicitudes.js" />
+    <Content Include="Scripts\SolicitudesTodas.js" />
     <Content Include="Scripts\ToDo.js" />
     <Content Include="Scripts\AniosNomina.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -652,6 +658,10 @@
     <Content Include="Views\Solicitudes\Create.cshtml" />
     <Content Include="Views\Solicitudes\SeleccionaPersonal.cshtml" />
     <Content Include="Views\ToDo\Index.cshtml" />
+    <Content Include="Views\MisSolicitudes\Index.cshtml" />
+    <Content Include="Views\PeriodoNomina - Copy\Index.cshtml" />
+    <Content Include="Views\SolicitudesTodas\Index.cshtml" />
+    <Content Include="Views\BusquedasVarias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
