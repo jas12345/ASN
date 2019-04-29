@@ -58,13 +58,15 @@
                                                         column.Bound(c => c.Last_Name).Title("Apellido(s)").Visible(true).Filterable(true).Width(50);
                                                         column.Bound(c => c.Position_Code_Title).Title("Puesto").Visible(true).Filterable(true).Width(70);
                                                         column.Bound(c => c.Current_Status).Width(50).Visible(false);
+                                                        column.Bound(c => c.Existe).Width(50).Visible(false);
+                                                        column.Bound(c => c.EsNuevo).Width(50).Visible(false);
                                                         column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
                                                     })
                                                    .HtmlAttributes(new { style = "height: 700px;" })
                                                    .Scrollable(sorteable => sorteable.Virtual(false))
                                                    .Sortable()
                                                    .PersistSelection()
-                                                   .Events(eve => eve.SaveChanges("onSave"))//.Change("onChange")
+                                                   .Events(eve => eve.SaveChanges("onSave").DataBound("validacheckdefault"))//.Change("onChange")
                                                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                                    .DataSource(dataSource => dataSource
                                                        .Ajax()
@@ -128,7 +130,7 @@
         </div>
     </div>
     <script>
-        var urlSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';
+        var urlSolicitudEmpleados = '@Url.Action("GuardaEmpleados", "Solicitudes")';
     </script>
 }
 else

@@ -765,7 +765,7 @@
           </FunctionImport>
           <FunctionImport Name="CatEmployeeSel" ReturnType="Collection(ASNModel.CatEmployeeSel_Result)" />
           <FunctionImport Name="EmpleadosxPerfilSel" ReturnType="Collection(ASNModel.EmpleadosxPerfilSel_Result)">
-          <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Solicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatSolicitudesSu">
@@ -1252,10 +1252,13 @@
           <Property Type="String" Name="full_name" Nullable="true" MaxLength="150" />
           <Property Type="Int32" Name="country_ident" Nullable="true" />
           <Property Type="String" Name="country_full_name" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="city" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Position_Code_Ident" Nullable="true" />
           <Property Type="String" Name="Position_Code_Title" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="Current_Status" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="city_Ident" Nullable="false" />
+          <Property Type="Int32" Name="Existe" Nullable="false" />
+          <Property Type="Int32" Name="EsNuevo" Nullable="false" />
         </ComplexType>
         <ComplexType Name="RelPeriodicidadPaisCMB_Result">
           <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
@@ -1851,6 +1854,9 @@
                 <ScalarProperty Name="Position_Code_Ident" ColumnName="Position_Code_Ident" />
                 <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
                 <ScalarProperty Name="Current_Status" ColumnName="Current_Status" />
+                <ScalarProperty Name="city_Ident" ColumnName="city_Ident" />
+                <ScalarProperty Name="Existe" ColumnName="Existe" />
+                <ScalarProperty Name="EsNuevo" ColumnName="EsNuevo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

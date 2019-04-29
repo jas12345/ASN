@@ -194,7 +194,7 @@ function handleSaveChanges(e, grid) {
 }
 
 (function ($, kendo) {
-
+    
     $.extend(true, kendo.ui.validator, {
         rules: { // custom rules
             customRule1: function (input, params) {
@@ -220,8 +220,22 @@ function handleSaveChanges(e, grid) {
             }
         }
     });
+
 })(jQuery, kendo);
 
+
+function validacheckdefault(e) {
+    var grid = this;
+    var rows = grid.items();
+    $(rows).each(function (e) {
+        var row = this;
+        var dataItem = grid.dataItem(row);
+
+        if (dataItem.Existe) {
+            grid.select(row);
+        }
+    });
+}
 
 function actualizaGrid() {
 
@@ -272,7 +286,7 @@ function GuardarBorrador() {
     continuaAccion = false;
     $.ajax({
         type: "POST",
-        url: urlSolicitud,
+        url: urlSolicitudEmpleados,
         data: JSON.stringify({ "profiles": profiles,"listaEmpleados":listado }),
         contentType: 'application/json',
         success: function (resultData) {

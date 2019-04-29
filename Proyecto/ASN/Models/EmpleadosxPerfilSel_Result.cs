@@ -36,5 +36,8 @@ namespace ASN.Models
         public Nullable<int> Position_Code_Ident { get; set; }
         public string Position_Code_Title { get; set; }
         public string Current_Status { get; set; }
+        public int city_Ident { get; set; }
+        public int Existe { get; set; }
+        public int EsNuevo { get; set; }
     }
 }

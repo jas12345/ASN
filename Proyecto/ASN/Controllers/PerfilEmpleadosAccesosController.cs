@@ -89,12 +89,12 @@ namespace ASN.Controllers
 
                     int.TryParse(User.Identity.Name, out idAdmin);
 
-                    context.CatPerfilEmpleadosAccesosSi(
-                        int.Parse(Perfil_Ident),
-                        selectedKeyNames,
-                        idAdmin, 
-                        true,
-                        resultado);
+                    //context.CatPerfilEmpleadosAccesosSi(
+                    //    int.Parse(Perfil_Ident),
+                    //    selectedKeyNames,
+                    //    idAdmin, 
+                    //    true,
+                    //    resultado);
 
                     int.TryParse(resultado.Value.ToString(), out res);
 
