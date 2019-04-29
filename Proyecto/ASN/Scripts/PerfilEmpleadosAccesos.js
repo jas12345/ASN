@@ -260,7 +260,7 @@ function errorsote(args) {
 }
 
 function onChange(event) {
-    var listaEmpleados = $("#selectedEmpleados").join(", ");
+    //var listaEmpleados = $("#selectedEmpleados").join(", ");
     var listaSelectedEmpleados = $("#grid").data("kendoGrid").selectedKeyNames().join(", ");
     //$("#grid").data("kendoGrid")
 
@@ -270,7 +270,7 @@ function onChange(event) {
     $.ajax({
         type: 'POST',
         url: '/PerfilEmpleadosAccesos/CreatePerfilEmpleadosAccesos',
-        data: JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados.trim(), "SelectedEmpleados": selectedEmpleados }),
+        data: JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaSelectedEmpleados.trim(), "SelectedEmpleados": listaEmpleados }),
             //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
@@ -281,28 +281,35 @@ function onChange(event) {
 function onDataBound(event) {
     var grid = event.sender;
     var allRows = grid.items();
-    var selectedEmpleados = new Array();
+    listaEmpleados = "";
+    selectedEmpleados.length = 0;
     var totalEmpleados = 0;
     var idField = "PerfilEmpleadoAcceso_Activo";
-    var idFieldIdent = "CCMSId";
+    var idFieldIdent = "Ident";
 
     var rowsToSelect = [];
     debugger;
     allRows.each(function (idx, row) {
         var dataItem = grid.dataItem(row);
         debugger;
-        if (dataItem[idField].toString() == "true") {
-            debugger;
-            totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent]);
-            rowsToSelect.push(row);
-        }
-        else {
-            debugger;
-            totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent] * -1);
+        if (dataItem[idField] != null)
+        {
+            if (dataItem[idField].toString() == "true") {
+                debugger;
+                totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent]);
+                rowsToSelect.push(row);
+            }
+            else {
+                debugger;
+                totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent] * -1);
+            }
         }
     });
     debugger;
     event.sender.select(rowsToSelect);
+
+    listaEmpleados = selectedEmpleados.join(", ")
+    debugger;
 }
 
 
