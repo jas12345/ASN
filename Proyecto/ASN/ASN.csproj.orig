@@ -658,11 +658,14 @@
     <Content Include="Views\Solicitudes\Create.cshtml" />
     <Content Include="Views\Solicitudes\SeleccionaPersonal.cshtml" />
     <Content Include="Views\ToDo\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\MisSolicitudes\Index.cshtml" />
     <Content Include="Views\PeriodoNomina - Copy\Index.cshtml" />
     <Content Include="Views\SolicitudesTodas\Index.cshtml" />
     <Content Include="Views\BusquedasVarias\Index.cshtml" />
+=======
     <Content Include="Views\Solicitudes\Editar.cshtml" />
+>>>>>>> 37d183e194f9f1800cc1896604cdd90c6e834c09
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

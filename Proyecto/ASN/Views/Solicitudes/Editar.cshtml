@@ -10,10 +10,10 @@
         <div class="col-lg-12 col-md-12">
             <div class="row">
                 <div style="display: inline-block;">
-                    @Html.Label("Captura de solicitud", new { style = "font-size: 15px" }) - @Html.Label("Selección de empleados", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px; color:darkgrey;" })
+                    @Html.Label("Editar solicitud", new { style = "font-size: 15px" }) - @Html.Label("Selección de empleados", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px; color:darkgrey;" })
                 </div>
             </div>
-            <form id="Formulario" method="post" action='@Url.Action("CreateSolicitud")'>
+            <form id="Formulario">
                 @Html.ValidationSummary(true)
                 <div class="k-form-field">
                     <section class="well">
@@ -148,7 +148,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-3" for="language" id="language_label">Justificación</label>
                                 <div class="col-sm-6 col-md-6">
-                                    @Html.TextArea("Justficacion", "", new { @class = "k-textbox", style = "width: 100%;" })
+                                    @Html.TextArea("Justficacion", Model.Justficacion, new { @class = "k-textbox", style = "width: 100%;" })
                                 </div>
                             </div>
 
@@ -184,7 +184,7 @@
 
                         <div class="form-horizontal form-widgets col-sm-12">
                             <div class="buttons-wrap" style="float:right;">
-                                <button type="reset" class="k-button k-state-default" onclick="cargaEmpleados(1,0,0);"><span class="k-icon k-i-close"></span> Cancelar</button>
+                                <button type="reset" class="k-button k-state-default" onclick="cargaEmpleados(1,0,0);"><span class="k-icon k-i-close"></span> Salir</button>
                                 <button type="button" onclick="SaveSolicitud(1);" class="k-button k-state-default"><span class="k-icon k-i-save"></span> Guardar Borrador</button>
                                 <button class="k-button k-state-default" onclick="SaveSolicitud(2);"><span class="k-icon k-i-redo"></span> Siguiente</button>
                             </div>
@@ -201,7 +201,6 @@
                             .Name("windowNotifica")
                             .Title("Notificación")
                             .Content("")
-                            //.LoadContentFrom("PopUpAddAll", "ItemDelivery", new { cuatro =  })
                             .Iframe(true)
                             .Draggable()
                             .Actions(a => a
@@ -212,13 +211,7 @@
                             .Height(300)
                             .Visible(false)
                             .Modal(true)
-
             //.Events(e => e.Open("abreActions"))
     )
-
-    <script>
-        var urlSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';
-    </script>
 }
-@*@Scripts.Render("~/bundles/Solicitudes")*@
 @Scripts.Render("~/bundles/CrearSolicitud")
