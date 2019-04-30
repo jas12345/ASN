@@ -1,4 +1,4 @@
-﻿@model  ASN.Models.EmpleadosSolicitudesViewModel
+﻿@model  ASN.Models.EmpleadosxPerfilSel_Result
 
 <style>
     tr.spaceUnder > td {
@@ -55,7 +55,7 @@
             <label for="Monto">Parámetro: Monto</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().NumericTextBoxFor(x => x.ParametroConceptoMonto).Name("ParametroConceptoMonto").Min(0).HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
+            @*@(Html.Kendo().NumericTextBoxFor(x => x.ParametroConceptoMonto).Name("ParametroConceptoMonto").Min(0).HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))*@
             @(Html.Kendo().CheckBox().Name("TTMonto").Label("(Todos)"))
         </div>
         <div class="editor-label">
@@ -69,21 +69,21 @@
             <label for="TipoPeriodo">Periodo original</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.PeriodoNomina)
-                .DataSource(source =>
+            @*@(Html.Kendo().DropDownListFor(x => x.PeriodoNomina)
+            .DataSource(source =>
+            {
+                source.Read(read =>
                 {
-                    source.Read(read =>
-                    {
-                        read.Action("GetPeriodoNominaCMB", "EmpleadosSolicitudes");
-                    });
-                })
-                .Filter("contains")
-                .OptionLabel("- Periodo original - ")
-                .DataValueField("Ident")
-                .DataTextField("Valor")
-                .Name("PeriodoNomina")
-                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
-            )
+                    read.Action("GetPeriodoNominaCMB", "EmpleadosSolicitudes");
+                });
+            })
+            .Filter("contains")
+            .OptionLabel("- Periodo original - ")
+            .DataValueField("Ident")
+            .DataTextField("Valor")
+            .Name("PeriodoNomina")
+            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
+        )*@
             @(Html.Kendo().CheckBox().Name("TTPeriodoNomina").Label("(Todos)"))
         </div>
         <input type="hidden" id="PeriodicidadId" value=""/>

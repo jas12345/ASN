@@ -1,5 +1,4 @@
-﻿var accionRealizada = 0;
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $("#CargaMasiva").change(function () {
         if ($(this).is(":checked")) {
             $("#seccionCargaMasiva").show();
@@ -10,40 +9,6 @@ $(document).ready(function () {
             $("#seccionCargaMasiva").hide();
         }
     });
-
-    //$("button.accionwizard").one("click", function () {
-    //    var $this = $(this);
-    //    var accion = $this.data('accionBoton');
-    //    if (accion === undefined) {
-    //        accion = $this.attr("data-accionBoton");
-    //    }
-    //    accionRealizada = accionRealizada +1;
-    //    SaveSolicitud(accion);
-
-    //});
-});
-
-$(document).on('click', '.accionwizard', function () {
-    accionRealizada++;
-    var $this = $(this);
-        var accion = $this.data('accionBoton');
-        if (accion === undefined) {
-            accion = $this.attr("data-accionBoton");
-        }
-        SaveSolicitud(accion);
-});
-
-$(document).one('click', '.accionwizardSeleccion', function (e) {
-    debugger;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    accionRealizada++;
-    var $this = $(this);
-    var accion = $this.data('accionBoton');
-    if (accion === undefined) {
-        accion = $this.attr("data-accionBoton");
-    }
-    SaveSolicitud(accion);
 });
 
 function edit(e) {
@@ -190,6 +155,11 @@ function handleSaveChanges(e, grid) {
 function GetInformacionPerfil() {
 
     $(".infoPerfil").hide();
+    //$("div#Formulario input#FechaSolicitud").removeAttr("disabled");
+    //$("#Formulario #paisName").removeAttr("disabled");
+    //$("#Formulario #siteName").removeAttr("disabled");
+    //$("Formulario #clienteName").removeAttr("disabled");
+    //$("#Formulario input#programaName").removeAttr("disabled");
 
     $.ajax({
         url: '/Solicitudes/GetPerfil?perfilId=' + $("#Perfil_Ident").val(),
@@ -204,26 +174,24 @@ function GetInformacionPerfil() {
                 var site = (result.Location_Name == "-1" || result.Location_Name === null ? "TODOS" : result.Location_Name);
                 var cliente = (result.Client_Name === "-1" || result.Client_Name === null ? "TODOS" : result.Client_Name);
                 var programa = (result.Program_Name === '-1' || result.Program_Name === null ? "TODOS" : result.Program_Name);
-                var concepto = "DEMOSTRATIVO";//(result.Program_Name === '-1' || result.Program_Name === null ? "TODOS" : result.Program_Name);
 
                 $("#Formulario input#FechaSolicitud").val(formattedDate());
                 $("#Formulario #paisName").val(pais);
                 $("#Formulario #siteName").val(site);
                 $("#Formulario #clienteName").val(cliente);
                 $("#Formulario input#programaName").val(programa);
-                $("#Formulario input#ConceptoName").val(concepto);
 
                 $("#Formulario input#FechaSolicitud").attr("disabled", "disabled");
                 $("#Formulario #paisName").attr("disabled", "disabled");
                 $("#Formulario #siteName").attr("disabled", "disabled");
                 $("#Formulario #clienteName").attr("disabled", "disabled");
                 $("#Formulario input#programaName").attr("disabled", "disabled");
-                $("#Formulario input#ConceptoName").attr("disabled", "disabled");
 
                 $(".infoPerfil").show();
             } else {
                 $(".infoPerfil").hide();
             }
+
         })
         .error(function (xhr, status) {
             alert(status);
@@ -233,13 +201,10 @@ function GetInformacionPerfil() {
 function SaveSolicitud(accion) {
 
     var validator = $("#Formulario").kendoValidator().data("kendoValidator"), status = $(".status");
+    debugger;
 
-    $("#FolioSolicitud").val(0);
-    $("#FolioSolicitud").removeAttr("required");
+    if ($("#FolioSolicitud").val() !== "0") {
 
-    if ($("#FolioSolicitud").val() === "0")
-    {
-        
         if (validator.validate()) {
             var modelo = {
                 FolioSolicitud: $("#FolioSolicitud").val(),
@@ -255,12 +220,10 @@ function SaveSolicitud(accion) {
             var formdata = new FormData($('#Formulario').get(0));
             var solicitud = 0;
 
-            if (accionRealizada <=1)
-            {
             //$.ajax({ url: urlSolicitud, data: formdata, contentType: 'application/json; charset=utf-8', type: 'POST', dataType: 'JSON' }).success(function (response) {
-                $.ajax({
+            $.ajax({
                 type: "POST",
-                url: '/Solicitudes/CreateSolicitud',
+                url: urlEdita,
                 data: formdata,
                 dataType: "json",
                 processData: false,
@@ -273,22 +236,22 @@ function SaveSolicitud(accion) {
                     kendo.ui.progress($(".chart-loading"), false);
 
                     if (response.status === "0") {
-                        if (response.listaEmpleados !== null && response.listaEmpleados.length > 0) {
-                            contenido += "Acontinuación se enlistas los estatus de los empleados procesados.<br /><table border='1'><tr><td>CCMS ID</td><td>Resultado Acción</td></tr>"
-                            for (var i = 0; i < response.listaEmpleados.length; i++) {
-                                contenido += "<tr><td>" + response.listaEmpleados[i].catEmployeeId + "</td><td>" + response.listaEmpleados[i].estatus.replace("-1_", "").replace("-2_", "") + "</td></tr>";
-                            }
-                            contenido += "</table>";
+                        //if (response.listaEmpleados !== null && response.listaEmpleados.length > 0) {
+                        //    contenido += "Acontinuación se enlistas los estatus de los empleados procesados.<br /><table border='1'><tr><td>CCMS ID</td><td>Resultado Acción</td></tr>"
+                        //    for (var i = 0; i < response.listaEmpleados.length; i++) {
+                        //        contenido += "<tr><td>" + response.listaEmpleados[i].catEmployeeId + "</td><td>" + response.listaEmpleados[i].estatus.replace("-1_", "").replace("-2_", "") + "</td></tr>";
+                        //    }
+                        //    contenido += "</table>";
 
-                        } else {
-                            contenido += "Se creo correctamente la solicitud con estatus Borrador.<br>";
-                        }
+                        //} else {
+                            contenido += "<b>Se actualizo correctamente la solicitud.</b><br>";
+                        //}
                         solicitud = response.Id
 
                         contenido += "<br /><div style='float:right;margin-right:5px;margin-top:15px;'><button type='button' class='k-button k-state-default' onclick='cierraModal();'>Cerrar</button><button type='button' class='k-button k-state-default' style='margin-left:5px;' onclick='cargaEmpleados(" + accion + "," + solicitud + "," + $("#Perfil_Ident").val() + ");'>Continuar</button></div>";
 
 
-                        $("#windowNotifica").html(contenido);
+                        $("#windowNotifica").html("");
 
                         myWindow.center().open();
                     }
@@ -297,18 +260,14 @@ function SaveSolicitud(accion) {
                         notification.show(response.responseError.Errors, "error");
 
                     }
-                    accionRealizada = 0;
                 },
                 failure: function (response) {
-                    accionRealizada = 0;
                     alert(response.responseText);
                 },
                 error: function (response) {
-                    accionRealizada = 0;
                     alert(response.responseText);
                 }
             });
-            }
         }
     }
 
@@ -329,11 +288,11 @@ function OnFailure(response) {
 }
 
 function cargaEmpleados(accion, solicitud, perfil) {
-    if (accion ===1) {
+    if (accion === 1) {
         window.location.href = "/Solicitudes/Index";
-    } else if (accion ===2) {
-        window.location.href = "/Solicitudes/SeleccionaPersonal?id=" + solicitud;
-    }    
+    } else if (accion === 2) {
+        window.location.href = "EmpleadosSolicitudes/MuestraEmpleados?id=" + solicitud + "&perfilId=" + perfil;
+    }
 }
 
 function cierraModal() {

@@ -79,6 +79,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-horizontal form-widgets col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="concepto">Concepto</label>
+                                    <div class="col-sm-4 col-md-4">
+                                        <input type="text" id="ConceptoName" value="" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-horizontal form-widgets col-sm-6">
@@ -103,7 +111,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <label class="control-label col-sm-3" for="Concepto">Concepto</label>
                                 <div class="col-sm-4 col-md-4">
                                     @(Html.Kendo().DropDownList().DataSource(source =>
@@ -122,7 +130,7 @@
                                                                                                             .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
-                            </div>
+                            </div>*@
 
                             <div class="form-group">
                                 <label class="control-label col-sm-3" for="gender" id="gender_label">Motivo</label>
@@ -185,8 +193,8 @@
                         <div class="form-horizontal form-widgets col-sm-12">
                             <div class="buttons-wrap" style="float:right;">
                                 <button type="reset" class="k-button k-state-default" onclick="cargaEmpleados(1,0,0);"><span class="k-icon k-i-close"></span> Cancelar</button>
-                                <button type="button" onclick="SaveSolicitud(1);" class="k-button k-state-default"><span class="k-icon k-i-save"></span> Guardar Borrador</button>
-                                <button class="k-button k-state-default" onclick="SaveSolicitud(2);"><span class="k-icon k-i-redo"></span> Siguiente</button>
+                                <button type="button" class="k-button k-state-default accionwizard" data-accionBoton="1"><span class="k-icon k-i-save"></span> Guardar Borrador</button>
+                                <button class="k-button k-state-default accionwizardSeleccion" data-accionBoton="2"><span class="k-icon k-i-redo"></span> Siguiente</button>
                             </div>
                         </div>
                     </section>

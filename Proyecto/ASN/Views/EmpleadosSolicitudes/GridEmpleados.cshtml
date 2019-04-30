@@ -20,7 +20,7 @@
                                         column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
                                     })
                                    .HtmlAttributes(new { style = "height: 700px;" }) //EmpleadosSolicitudesPopUp
-                                   .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadoMotivoConceptoPopUp").Window(x => x.Width(630).HtmlAttributes(new { style = "width: 630px" })))
+                                   //.Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadoMotivoConceptoPopUp").Window(x => x.Width(630).HtmlAttributes(new { style = "width: 630px" })))
                                    .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
                                    .Scrollable(sorteable => sorteable.Virtual(false))
                                    .Sortable()

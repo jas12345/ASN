@@ -484,6 +484,7 @@
     </Content>
     <Content Include="Scripts\BusquedasVarias.js" />
     <Content Include="Scripts\MisSolicitudes.js" />
+    <Content Include="Scripts\SolicitudEditar.js" />
     <Content Include="Scripts\SolicitudesTodas.js" />
     <Content Include="Scripts\ToDo.js" />
     <Content Include="Scripts\AniosNomina.js" />
@@ -659,6 +660,7 @@
     <Content Include="Views\Solicitudes\SeleccionaPersonal.cshtml" />
     <Content Include="Views\ToDo\Index.cshtml" />
     <Content Include="Views\MisSolicitudes\Index.cshtml" />
+    <Content Include="Views\PeriodoNomina - Copy\Index.cshtml" />
     <Content Include="Views\SolicitudesTodas\Index.cshtml" />
     <Content Include="Views\BusquedasVarias\Index.cshtml" />
     <Content Include="Views\Solicitudes\Editar.cshtml" />

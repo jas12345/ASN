@@ -1,6 +1,6 @@
 ﻿@model ASN.Models.CatSolicitudesSel_Result
 @{
-    ViewBag.Title = "Crear Solicitud";
+    ViewBag.Title = "Editar Solicitud";
 }
 
 @if (User.Identity.IsAuthenticated)
@@ -19,24 +19,24 @@
                     <section class="well">
                         <div class="form-horizontal form-widgets col-sm-12">
                             <div class="form-group">
-                                @(Html.HiddenFor(x => x.FolioSolicitud, new { required = "false" }))
+                                @(Html.HiddenFor(x => x.FolioSolicitud, new { required = "required" }))
                                 <label class="control-label col-sm-3" for="PerfilId">Perfil de usuario</label>
                                 <div class="col-sm-12 col-md-12">
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                                        {
-                                                            source.Read(read =>
-                                                            {
-                                                                read.Action("GetPerfilCMB", "Solicitudes");
-                                                            })
-                                                            .ServerFiltering(true);
-                                                        })
-                                                        .Filter("contains")
-                                                        .OptionLabel("- Seleccione Perfil - ")
-                                                        .DataValueField("Ident")
-                                                        .DataTextField("Valor")
-                                                        .Name("Perfil_Ident")
-                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
-                                                        .Events(x => x.Change("GetInformacionPerfil"))
+                                                                {
+                                                                    source.Read(read =>
+                                                                    {
+                                                                        read.Action("GetPerfilCMB", "Solicitudes");
+                                                                    })
+                                                                    .ServerFiltering(true);
+                                                                })
+                                                                .Filter("contains")
+                                                                .OptionLabel("- Seleccione Perfil - ")
+                                                                .DataValueField("Ident")
+                                                                .DataTextField("Valor")
+                                                                .Name("Perfil_Ident")
+                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                                                .Events(x => x.Change("GetInformacionPerfil"))
                                     )
                                 </div>
                             </div>
@@ -86,19 +86,19 @@
                                 <label class="control-label col-sm-3" for="PeriodoNominaId">Periodo de Nomina</label>
                                 <div class="col-sm-4 col-md-4">
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                                {
-                                                    source.Read(read =>
-                                                    {
-                                                        read.Action("GetPeriodoNominaCMB", "Solicitudes");
-                                                    })
-                                                    .ServerFiltering(true);
-                                                })
-                                                .Filter("contains")
-                                                .OptionLabel("- Seleccione Periodo de Nomina - ")
-                                                .DataValueField("Ident")
-                                                .DataTextField("Valor")
-                                                .Name("PeriodoNomina_Id")
-                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetPeriodoNominaCMB", "Solicitudes");
+                                                            })
+                                                            .ServerFiltering(true);
+                                                        })
+                                                        .Filter("contains")
+                                                        .OptionLabel("- Seleccione Periodo de Nomina - ")
+                                                        .DataValueField("Ident")
+                                                        .DataTextField("Valor")
+                                                        .Name("PeriodoNomina_Id")
+                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </div>
@@ -107,19 +107,19 @@
                                 <label class="control-label col-sm-3" for="Concepto">Concepto</label>
                                 <div class="col-sm-4 col-md-4">
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                                                            {
-                                                                                                                source.Read(read =>
-                                                                                                                {
-                                                                                                                    read.Action("GetConceptosCMB", "Solicitudes");
-                                                                                                                })
-                                                                                                                .ServerFiltering(true);
-                                                                                                            })
-                                                                                                            .Filter("contains")
-                                                                                                            .OptionLabel("- Concepto - ")
-                                                                                                            .DataValueField("Ident")
-                                                                                                            .DataTextField("Valor")
-                                                                                                            .Name("ConceptoId")
-                                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                        {
+                                            source.Read(read =>
+                                            {
+                                                read.Action("GetConceptosCMB", "Solicitudes");
+                                            })
+                                            .ServerFiltering(true);
+                                        })
+                                        .Filter("contains")
+                                        .OptionLabel("- Concepto - ")
+                                        .DataValueField("Ident")
+                                        .DataTextField("Valor")
+                                                                                                                    .Name("ConceptoId")
+                                                                                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </div>
@@ -128,19 +128,19 @@
                                 <label class="control-label col-sm-3" for="gender" id="gender_label">Motivo</label>
                                 <div class="col-sm-4 col-md-4">
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                                                            {
-                                                                                                                source.Read(read =>
-                                                                                                                {
-                                                                                                                    read.Action("GetMotivoSolicitudCMB", "Solicitudes");
-                                                                                                                })
-                                                                                                                .ServerFiltering(true);
-                                                                                                            })
-                                                                                                            .Filter("contains")
-                                                                                                            .OptionLabel("- Motivo - ")
-                                                                                                            .DataValueField("Id")
-                                                                                                            .DataTextField("Value")
-                                                                                                            .Name("MotivoId")
-                                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                                                                                                    {
+                                                                                                                        source.Read(read =>
+                                                                                                                        {
+                                                                                                                            read.Action("GetMotivoSolicitudCMB", "Solicitudes");
+                                                                                                                        })
+                                                                                                                        .ServerFiltering(true);
+                                                                                                                    })
+                                                                                                                    .Filter("contains")
+                                                                                                                    .OptionLabel("- Motivo - ")
+                                                                                                                    .DataValueField("Id")
+                                                                                                                    .DataTextField("Value")
+                                                                                                                    .Name("MotivoId")
+                                                                                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </div>
@@ -193,7 +193,6 @@
                 </div>
                 <div class="status">
                 </div>
-                @*}*@
             </form>
         </div>
     </div>
@@ -206,12 +205,13 @@
                             .Actions(a => a
                                 .Minimize()
                             )
-                            //.Resizable()
-                            .Width(450)
-                            .Height(300)
+                            .Width(350)
+                            .Height(200)
                             .Visible(false)
                             .Modal(true)
-            //.Events(e => e.Open("abreActions"))
     )
+    <script>
+        var urlEdita = '@Url.Action("EditaSolicitud", "Solicitudes")';
+    </script>
 }
-@Scripts.Render("~/bundles/CrearSolicitud")
+@Scripts.Render("~/bundles/EditarSolicitud")

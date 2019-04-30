@@ -316,7 +316,7 @@ namespace ASN.Controllers
 
                     result = new { Id = SolicitudId, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };
                 }
-                return Json(result);// (profiles.ToDataSourceResult(request, ModelState)); //(profiles);//
+                return Json(result,JsonRequestBehavior.AllowGet);// (profiles.ToDataSourceResult(request, ModelState)); //(profiles);//
 
             }
             catch (Exception ex)
@@ -328,6 +328,99 @@ namespace ASN.Controllers
                 var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
                 //return Json(profiles.ToDataSourceResult(request, ModelState));
                 return Json(new { Id = 0, type = "create", responseError = new { Errors = resultadoAccion }, listaEmpleados ="", status ="-1" }, JsonRequestBehavior.AllowGet);
+            }
+            //return View(profiles);
+        }
+
+        [HttpPost]
+        public JsonResult EditaSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, IEnumerable<HttpPostedFileBase> files, IEnumerable<HttpPostedFileBase> files2, string listaEmpleados)
+        {
+            try
+            {
+                var lista = new List<CargaMasivaRegistroViewModel>();
+                int res = 0;
+                var result = new object();
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    int ccmsidAdmin = 0;
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                    if (profiles != null)
+                    {
+                        if (profiles.FolioSolicitud != 0)
+                        {
+                            context.CatSolicitudesSu(
+                                profiles.FolioSolicitud,
+                                DateTime.Now,
+                                profiles.Perfil_Ident,
+                                profiles.Solicitante_Ident,
+                                profiles.Solicintante_Nombre,
+                                profiles.Puesto_solicitante_Ident,
+                                profiles.PeriodoNomina_Id,
+                                profiles.PeriodoNominaOriginal_Id,
+                                profiles.ConceptoId,
+                                profiles.MotivoId,
+                                profiles.Justficacion,
+                                profiles.Responsable_Id,
+                                profiles.Detalle,
+                                profiles.Autorizantes,
+                                resultado,
+                                ccmsidAdmin
+                                );
+                        }
+                    }
+
+                    var lstResultado = resultado.Value.ToString().Split('_');
+                    int.TryParse(lstResultado[0], out res);
+                    var resultadoAccion = "";
+                    int SolicitudId = 0;
+                    object Error = null;
+
+                    if (res != -1)
+                    {
+                        if (files != null)
+                        {
+                            GuardaArchivos(lstResultado[1].ToString(), files, ccmsidAdmin);
+                        }
+                        if (files2 != null)
+                        {
+                            lista = Save(files2, int.Parse(lstResultado[1].ToString()), ccmsidAdmin);
+                        }
+                    }
+
+                    if (res == -1)
+                    {
+                        resultadoAccion = "Ya existe un concepto con la misma descripción.";
+                        Error = new { Errors = resultadoAccion };
+                        ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
+                    }
+                    else
+                    {
+                        if (lstResultado.Length > 1)
+                        {
+                            SolicitudId = int.Parse(lstResultado[1].ToString());
+                        }
+                    }
+
+                    result = new { Id = SolicitudId, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };
+                }
+                return Json(result);// (profiles.ToDataSourceResult(request, ModelState)); //(profiles);//
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
+                //return Json(profiles.ToDataSourceResult(request, ModelState));
+                return Json(new { Id = 0, type = "create", responseError = new { Errors = resultadoAccion }, listaEmpleados = "", status = "-1" }, JsonRequestBehavior.AllowGet);
             }
             //return View(profiles);
         }

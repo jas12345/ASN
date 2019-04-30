@@ -11,7 +11,7 @@
             <div id="tab1">
                 <div class="container-fluid">
                     <div class="col-lg-12 col-md-12">
-                        <div class="row"><div style="display: inline-block;">@Html.Label("Captura de solicitud", new { style = "font-size: 15px" }) - @Html.Label("Empleados por perfil", new { style = "font-size: 15px" })</div></div>
+                        <div class="row"><div style="display: inline-block;">@Html.Label("Captura de solicitud", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Selección de Empleados", new { style = "font-size: 15px" }) - @Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px; color:darkgrey;" })</div></div>
                     </div>
                     <div class="k-form-inline" style="padding:5px; display:none;" >
                         <div class="k-form-field">
@@ -48,39 +48,40 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             @(Html.Kendo().Grid<ASN.Models.EmpleadosxPerfilSel_Result>()
-                                                    .Name("grid")
-                                                    .Columns(column =>
-                                                    {
-                                                        column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });
-                                                        //column.Bound(c => c.Existe).ClientTemplate("<input type='checkbox' disabled #= " + Existe + "== 'True' ? checked='checked' : '' # />");
-                                                        column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(false).Filterable(true);
-                                                        column.Bound(c => c.First_Name).Width(50).Title("Nombre").Filterable(true);
-                                                        column.Bound(c => c.Last_Name).Title("Apellido(s)").Visible(true).Filterable(true).Width(50);
-                                                        column.Bound(c => c.Position_Code_Title).Title("Puesto").Visible(true).Filterable(true).Width(70);
-                                                        column.Bound(c => c.Current_Status).Width(50).Visible(false);
-                                                        column.Bound(c => c.Existe).Width(50).Visible(false);
-                                                        column.Bound(c => c.EsNuevo).Width(50).Visible(false);
-                                                        column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
-                                                    })
-                                                   .HtmlAttributes(new { style = "height: 700px;" })
-                                                   .Scrollable(sorteable => sorteable.Virtual(false))
-                                                   .Sortable()
-                                                   .PersistSelection()
-                                                   .Events(eve => eve.SaveChanges("onSave").DataBound("validacheckdefault"))//.Change("onChange")
-                                                   .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
-                                                   .DataSource(dataSource => dataSource
-                                                       .Ajax()
-                                                       .Model(model =>
-                                                       {
-                                                           model.Id(c => c.Ident);
-                                                           model.Field(c => c.First_Name).Editable(true);
-                                                           model.Field(c => c.Last_Name).Editable(true);
-                                                           model.Field(c => c.Position_Code_Title).Editable(true);
-                                                       })
-                                                       .Read(read => read.Action("GetEmployee", "Solicitudes").Data("GetPerfil"))
-                                                       .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
-                                                       .Update(update => update.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes"))//.Data("GetParametros")
-                                                   )
+                                    .Name("grid")
+                                    .Columns(column =>
+                                    {
+                                        column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });
+                                        column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(false).Filterable(true);
+                                        column.Bound(c => c.First_Name).Width(50).Title("Nombre").Filterable(true);
+                                        column.Bound(c => c.Last_Name).Title("Apellido(s)").Visible(true).Filterable(true).Width(50);
+                                        column.Bound(c => c.Position_Code_Title).Title("Puesto").Visible(true).Filterable(true).Width(70);
+                                        column.Bound(c => c.Current_Status).Width(50).Visible(false);
+                                        column.Bound(c => c.Existe).Width(50).Visible(false);
+                                        column.Bound(c => c.EsNuevo).Width(50).Visible(false);
+                                        column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
+                                    })
+                                    .HtmlAttributes(new { style = "height: 700px;" })
+                                    .Scrollable(sorteable => sorteable.Virtual(false))
+                                    .Sortable()
+                                    .PersistSelection()
+                                    .Resizable(c => c.Columns(true))
+                                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadosSolicitudesPopUp").Window(x => x.Width(530).HtmlAttributes(new { style = "width: 530px" })))
+                                    .Events(eve => eve.SaveChanges("onSave").Edit("edit").DataBound("validacheckdefault"))//.Change("onChange")
+                                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                    .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Model(model =>
+                                            {
+                                                model.Id(c => c.Ident);
+                                                model.Field(c => c.First_Name).Editable(true);
+                                                model.Field(c => c.Last_Name).Editable(true);
+                                                model.Field(c => c.Position_Code_Title).Editable(true);
+                                            })
+                                            .Read(read => read.Action("GetEmployee", "Solicitudes").Data("GetPerfil"))
+                                            .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                                            .Update(update => update.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes"))//.Data("GetParametros")
+                                            )
                                                    .Navigatable()
                                                    .Pageable(pageable => pageable
                                                    .Refresh(true)
