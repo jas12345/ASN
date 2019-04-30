@@ -206,13 +206,13 @@ namespace ASN.Controllers
         {
             try
             {
-                var listPeriodoNomina = new List<EmpleadosxPerfilSel_Result>();
+                var listPeriodoNomina = new List<SolicitudEmpleadosxPerfilSel_Result>();
                 if (!string.IsNullOrEmpty(perfil))
                 {
                     using (ASNContext context = new ASNContext())
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                        listPeriodoNomina = context.EmpleadosxPerfilSel(0,int.Parse(solicitud)).ToList();
+                        listPeriodoNomina = context.SolicitudEmpleadosxPerfilSel(0,int.Parse(solicitud)).ToList();
                         DataSourceResult ok = listPeriodoNomina.ToDataSourceResult(request);
 
                         return Json(ok);
@@ -557,5 +557,52 @@ namespace ASN.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult GuardaEmpleados([DataSourceRequest]DataSourceRequest request, string solicitud, string listaEmpleados)
+        {
+            try
+            {
+                int res = 0;
+                var result = new object();
+                var resultadoAccion = "";
+                if (!string.IsNullOrEmpty(listaEmpleados))
+                {
+                    object Error = null;
+
+                    using (ASNContext context = new ASNContext())
+                    {
+                        context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                        int ccmsidAdmin = 0;
+
+                        ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                        resultado.Value = 0;
+
+                        int.TryParse(User.Identity.Name, out ccmsidAdmin);
+                        context.ProcesaSolicitudEmpleados(int.Parse(solicitud),0,string.Empty,ccmsidAdmin,listaEmpleados,0,string.Empty,resultado);
+
+                        int.TryParse(resultado.Value.ToString(), out res);
+
+                        if (res == -1)
+                        {
+                            resultadoAccion = "Ya existe un concepto con la misma descripción.";
+                            Error = new { Errors = resultadoAccion };
+                            ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
+                        }
+                    }
+
+                    result = new { Id = solicitud, responseError = Error, status = res.ToString() };
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
+                return Json(new { Id = 0, responseError = new { Errors = resultadoAccion }, status = "-1" }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

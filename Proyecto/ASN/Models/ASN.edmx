@@ -408,7 +408,6 @@
         </Function>
         <Function Name="EmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
-          <Parameter Name="Solicitud" Type="int" Mode="In" />
         </Function>
         <Function Name="ProcesaSolicitudEmpleadoDetalleSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="SolicitudId" Type="int" Mode="In" />
@@ -431,6 +430,10 @@
         </Function>
         <Function Name="RelPeriodicidadPaisCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="country" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SolicitudEmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+          <Parameter Name="Solicitud" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="ASNModelStoreContainer" />
       </Schema></edmx:StorageModels>
@@ -766,7 +769,6 @@
           <FunctionImport Name="CatEmployeeSel" ReturnType="Collection(ASNModel.CatEmployeeSel_Result)" />
           <FunctionImport Name="EmpleadosxPerfilSel" ReturnType="Collection(ASNModel.EmpleadosxPerfilSel_Result)">
             <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Solicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatSolicitudesSu">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
@@ -922,6 +924,10 @@
             <Parameter Name="ParametroConceptoMonto" Mode="In" Type="Decimal" />
             <Parameter Name="Detalle" Mode="In" Type="String" />
             <Parameter Name="Estatus" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SolicitudEmpleadosxPerfilSel" ReturnType="Collection(ASNModel.SolicitudEmpleadosxPerfilSel_Result)">
+            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Solicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1194,7 +1200,7 @@
           <Property Type="Int32" Name="Country_Ident" Nullable="true" />
           <Property Type="String" Name="Country_Full_Name" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="City_Ident" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="City_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="City_Name" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Company_Ident" Nullable="true" />
           <Property Type="String" Name="Company_Name" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="Location_Ident" Nullable="true" />
@@ -1210,6 +1216,7 @@
           <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
           <Property Type="String" Name="TipoAcceso" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="ConceptoNombre" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatEmployeeSel_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
@@ -1259,6 +1266,7 @@
           <Property Type="Int32" Name="city_Ident" Nullable="false" />
           <Property Type="Int32" Name="Existe" Nullable="false" />
           <Property Type="Int32" Name="EsNuevo" Nullable="false" />
+          <Property Type="String" Name="ConceptoNombre" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="RelPeriodicidadPaisCMB_Result">
           <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
@@ -1339,6 +1347,35 @@
         <ComplexType Name="CatMotivoSolicitudCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SolicitudEmpleadosxPerfilSel_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Manager_Ident" Nullable="true" />
+          <Property Type="String" Name="Manager_First_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Manager_Last_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Program_Ident" Nullable="true" />
+          <Property Type="String" Name="Program_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
+          <Property Type="String" Name="Client_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Company_Ident" Nullable="true" />
+          <Property Type="String" Name="Company_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
+          <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Position_Code_Ident" Nullable="true" />
+          <Property Type="String" Name="Position_Code_Title" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Location_Ident" Nullable="false" />
+          <Property Type="String" Name="full_name" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="country_ident" Nullable="true" />
+          <Property Type="String" Name="country_full_name" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="city_Ident" Nullable="false" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Current_Status" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Existe" Nullable="false" />
+          <Property Type="Int32" Name="EsNuevo" Nullable="false" />
+          <Property Type="String" Name="ConceptoNombre" Nullable="true" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -1800,6 +1837,7 @@
                 <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
                 <ScalarProperty Name="TipoAcceso" ColumnName="TipoAcceso" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ConceptoNombre" ColumnName="ConceptoNombre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1857,6 +1895,7 @@
                 <ScalarProperty Name="city_Ident" ColumnName="city_Ident" />
                 <ScalarProperty Name="Existe" ColumnName="Existe" />
                 <ScalarProperty Name="EsNuevo" ColumnName="EsNuevo" />
+                <ScalarProperty Name="ConceptoNombre" ColumnName="ConceptoNombre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1980,6 +2019,39 @@
           <FunctionImportMapping FunctionImportName="CatSolicitudesArchivosSi" FunctionName="ASNModel.Store.CatSolicitudesArchivosSi" />
           <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosDetalleMasivoSi" FunctionName="ASNModel.Store.CatSolicitudEmpleadosDetalleMasivoSi" />
           <FunctionImportMapping FunctionImportName="ProcesaSolicitudEmpleados" FunctionName="ASNModel.Store.ProcesaSolicitudEmpleados" />
+          <FunctionImportMapping FunctionImportName="SolicitudEmpleadosxPerfilSel" FunctionName="ASNModel.Store.SolicitudEmpleadosxPerfilSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.SolicitudEmpleadosxPerfilSel_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Manager_Ident" ColumnName="Manager_Ident" />
+                <ScalarProperty Name="Manager_First_Name" ColumnName="Manager_First_Name" />
+                <ScalarProperty Name="Manager_Last_Name" ColumnName="Manager_Last_Name" />
+                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
+                <ScalarProperty Name="Program_Name" ColumnName="Program_Name" />
+                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="Company_Ident" ColumnName="Company_Ident" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
+                <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
+                <ScalarProperty Name="Position_Code_Ident" ColumnName="Position_Code_Ident" />
+                <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
+                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="country_ident" ColumnName="country_ident" />
+                <ScalarProperty Name="country_full_name" ColumnName="country_full_name" />
+                <ScalarProperty Name="city_Ident" ColumnName="city_Ident" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="Current_Status" ColumnName="Current_Status" />
+                <ScalarProperty Name="Existe" ColumnName="Existe" />
+                <ScalarProperty Name="EsNuevo" ColumnName="EsNuevo" />
+                <ScalarProperty Name="ConceptoNombre" ColumnName="ConceptoNombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

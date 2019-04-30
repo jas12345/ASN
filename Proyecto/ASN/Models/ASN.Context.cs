@@ -1165,17 +1165,13 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmployeeSel_Result>("CatEmployeeSel");
         }
     
-        public virtual ObjectResult<EmpleadosxPerfilSel_Result> EmpleadosxPerfilSel(Nullable<int> perfil_Ident, Nullable<int> solicitud)
+        public virtual ObjectResult<EmpleadosxPerfilSel_Result> EmpleadosxPerfilSel(Nullable<int> perfil_Ident)
         {
             var perfil_IdentParameter = perfil_Ident.HasValue ?
                 new ObjectParameter("Perfil_Ident", perfil_Ident) :
                 new ObjectParameter("Perfil_Ident", typeof(int));
     
-            var solicitudParameter = solicitud.HasValue ?
-                new ObjectParameter("Solicitud", solicitud) :
-                new ObjectParameter("Solicitud", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpleadosxPerfilSel_Result>("EmpleadosxPerfilSel", perfil_IdentParameter, solicitudParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpleadosxPerfilSel_Result>("EmpleadosxPerfilSel", perfil_IdentParameter);
         }
     
         public virtual int CatSolicitudesSu(Nullable<int> folioSolicitud, Nullable<System.DateTime> fecha_Solicitud, Nullable<int> perfil_Ident, Nullable<int> solicitante_Ident, string solicintante_Nombre, Nullable<int> puesto_solicitante_Ident, string periodoNomina_Id, string periodoNominaOriginal_Id, Nullable<int> conceptoId, Nullable<int> motivoId, string justficacion, Nullable<int> responsable_Id, Nullable<int> detalle, string autorizantes, ObjectParameter estatus, Nullable<int> userEmployeeId)
@@ -1699,6 +1695,19 @@ namespace ASN.Models
                 new ObjectParameter("Detalle", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcesaSolicitudEmpleados", solicitudIdParameter, empleado_IdentParameter, autorizantesParameter, userEmployeeIdParameter, listaEmpleadosParameter, parametroConceptoMontoParameter, detalleParameter, estatus);
+        }
+    
+        public virtual ObjectResult<SolicitudEmpleadosxPerfilSel_Result> SolicitudEmpleadosxPerfilSel(Nullable<int> perfil_Ident, Nullable<int> solicitud)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            var solicitudParameter = solicitud.HasValue ?
+                new ObjectParameter("Solicitud", solicitud) :
+                new ObjectParameter("Solicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SolicitudEmpleadosxPerfilSel_Result>("SolicitudEmpleadosxPerfilSel", perfil_IdentParameter, solicitudParameter);
         }
     }
 }

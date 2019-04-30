@@ -10,17 +10,6 @@ $(document).ready(function () {
             $("#seccionCargaMasiva").hide();
         }
     });
-
-    //$("button.accionwizard").one("click", function () {
-    //    var $this = $(this);
-    //    var accion = $this.data('accionBoton');
-    //    if (accion === undefined) {
-    //        accion = $this.attr("data-accionBoton");
-    //    }
-    //    accionRealizada = accionRealizada +1;
-    //    SaveSolicitud(accion);
-
-    //});
 });
 
 $(document).on('click', '.accionwizard', function () {
@@ -204,14 +193,14 @@ function GetInformacionPerfil() {
                 var site = (result.Location_Name == "-1" || result.Location_Name === null ? "TODOS" : result.Location_Name);
                 var cliente = (result.Client_Name === "-1" || result.Client_Name === null ? "TODOS" : result.Client_Name);
                 var programa = (result.Program_Name === '-1' || result.Program_Name === null ? "TODOS" : result.Program_Name);
-                var concepto = "DEMOSTRATIVO";//(result.Program_Name === '-1' || result.Program_Name === null ? "TODOS" : result.Program_Name);
+                //var concepto = (result.ConceptoNombre === '-1' || result.Program_Name === null ? "TODOS" : result.Program_Name);
 
                 $("#Formulario input#FechaSolicitud").val(formattedDate());
                 $("#Formulario #paisName").val(pais);
                 $("#Formulario #siteName").val(site);
                 $("#Formulario #clienteName").val(cliente);
                 $("#Formulario input#programaName").val(programa);
-                $("#Formulario input#ConceptoName").val(concepto);
+                $("#Formulario input#ConceptoName").val(result.ConceptoNombre);
 
                 $("#Formulario input#FechaSolicitud").attr("disabled", "disabled");
                 $("#Formulario #paisName").attr("disabled", "disabled");

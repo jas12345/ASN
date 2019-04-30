@@ -34,5 +34,6 @@ namespace ASN.Models
         public int TipoAccesoId { get; set; }
         public string TipoAcceso { get; set; }
         public bool Active { get; set; }
+        public string ConceptoNombre { get; set; }
     }
 }

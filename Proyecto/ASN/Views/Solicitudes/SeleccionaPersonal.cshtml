@@ -41,7 +41,8 @@
                                                             .HtmlAttributes(new { type = "button" })
                                                             .Icon("search")
                                                             .Content("Buscar")
-                                                            .Events(x => x.Click("actualizaGrid")))
+                                                            //.Events(x => x.Click("actualizaGrid"))
+                                                            )
                             </div>
                         </div>
                     </div>
@@ -59,7 +60,7 @@
                                         column.Bound(c => c.Current_Status).Width(50).Visible(false);
                                         column.Bound(c => c.Existe).Width(50).Visible(false);
                                         column.Bound(c => c.EsNuevo).Width(50).Visible(false);
-                                        column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
+                                        //column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
                                     })
                                     .HtmlAttributes(new { style = "height: 700px;" })
                                     .Scrollable(sorteable => sorteable.Virtual(false))
@@ -67,7 +68,7 @@
                                     .PersistSelection()
                                     .Resizable(c => c.Columns(true))
                                     .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadosSolicitudesPopUp").Window(x => x.Width(530).HtmlAttributes(new { style = "width: 530px" })))
-                                    .Events(eve => eve.SaveChanges("onSave").Edit("edit").DataBound("validacheckdefault"))//.Change("onChange")
+                                    .Events(eve => eve.SaveChanges("onSave").Edit("edit").DataBound("validacheckdefault"))
                                     .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                     .DataSource(dataSource => dataSource
                                             .Ajax()
@@ -136,7 +137,11 @@
 }
 else
 {
-    <p>You are not logged in</p>
+    <script type="text/javascript">
+    $(function(){
+        window.location.href = "@Url.Action("Index","Inicio")";
+    });
+    </script>
 }
 
 @Scripts.Render("~/bundles/Solicitudes")

@@ -52,33 +52,23 @@ function accion(tab)
 }
 
 function edit(e) {
-    var validator = e.container.data('kendoValidator');
+    //var validator = e.container.data('kendoValidator');
 
-    $('input[name="NombrePeriodo"]').blur(function () {
-        validator.validateInput(this);
-    });
+    //$('input[name="NombrePeriodo"]').blur(function () {
+    //    validator.validateInput(this);
+    //});
 
-    $('input[name="TipoPeriodo"]').change(function () {
-        validator.validateInput(this);
-    });
+    //$('input[name="TipoPeriodo"]').change(function () {
+    //    validator.validateInput(this);
+    //});
 
-    var lstCountryIdents = $("#LstCountryIdents").data("kendoMultiSelect");
+    //var lstCountryIdents = $("#LstCountryIdents").data("kendoMultiSelect");
 
-    $("#FechaCaptura").attr("readonly", true);
-    $("#FechaCierre").attr("readonly", true);
+    //$("#FechaCaptura").attr("readonly", true);
+    //$("#FechaCierre").attr("readonly", true);
 
     if (e.model.isNew() === false) {
         e.container.kendoWindow("title", "Editar");
-
-        //var paises = e.model.CountryIdents.split(',');
-        //lstCountryIdents.value(paises);
-
-        $("#FechaInicio").val(e.model.FechaInicio);
-        $("#FechaFin").val(e.model.FechaFin);
-        $("#FechaCaptura").val(e.model.FechaCaptura);
-        $("#FechaCierre").val(e.model.FechaCierre);
-
-        nombrePeriodo = e.model.NombrePeriodo;
 
         editando = 1;
     }
@@ -93,7 +83,7 @@ function valida(e) {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
         $('#grid').data('kendoGrid').refresh();
-        //debugger;
+
         if (e.response.Errors === null) {
             continuaAccion = true;
             var notification = $("#popupNotification").data("kendoNotification");
@@ -103,9 +93,7 @@ function valida(e) {
 }
 
 function errorsote(args) {
-    //debugger;
-    if (args.errors) {
-        
+    if (args.errors) {        
         $(document).ready(function () {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show(args.errors.error.errors[0], "error");
@@ -115,7 +103,6 @@ function errorsote(args) {
 }
 
 function onSave(e) {
-    //debugger;
     var hayCambios = false;
     var sonNuevos = false;
     jQuery.grep(e.sender._data, function (item) {
@@ -140,13 +127,7 @@ function onSave(e) {
     }
 }
 
-function OnFailure(data) {
-    //debugger;
-    alert('HTTP Status Code: ' + data.param1 + '  Error Message: ' + data.param2);  
-}
-
 function handleEditChanges(e, grid) {
-    //debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
@@ -167,7 +148,6 @@ function handleEditChanges(e, grid) {
 }
 
 function handleSaveChanges(e, grid) {
-    //debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     for (var i = 0; i < rows.length; i++) {
@@ -179,8 +159,6 @@ function handleSaveChanges(e, grid) {
         //var dispositionObj = $(cols[1]);
 
         if (model && model.id <= 0 && valid) {
-
-            //nothing
         }
         else {
             break;
@@ -193,8 +171,7 @@ function handleSaveChanges(e, grid) {
     }
 }
 
-(function ($, kendo) {
-    
+(function ($, kendo) {    
     $.extend(true, kendo.ui.validator, {
         rules: { // custom rules
             customRule1: function (input, params) {
@@ -223,7 +200,6 @@ function handleSaveChanges(e, grid) {
 
 })(jQuery, kendo);
 
-
 function validacheckdefault(e) {
     var grid = this;
     var rows = grid.items();
@@ -237,19 +213,15 @@ function validacheckdefault(e) {
     });
 }
 
-function actualizaGrid() {
+//function actualizaGrid() {
+//    var grid = $("#grid").data("kendoGrid");
+//    var options = grid.options;    
+//    grid.destroy();
 
-    var grid = $("#grid").data("kendoGrid");
-    var options = grid.options;    
-    grid.destroy();
-
-    $("#grid")
-        .empty()
-        .kendoGrid(options);
-
-    $("#grid").data("kendoGrid").dataSource.read();
-    $("#grid").data("kendoGrid").refresh();
-}
+//    $("#grid").empty().kendoGrid(options);
+//    $("#grid").data("kendoGrid").dataSource.read();
+//    $("#grid").data("kendoGrid").refresh();
+//}
 
 function GetPerfil() {
     return {
@@ -278,16 +250,17 @@ function GetParametrosAlta() {
 function GuardarBorrador() {
     var valoresGrid = $("#grid").data("kendoGrid");
     var listado = valoresGrid.selectedKeyNames().join(", ") 
-    var profiles = {
-        FolioSolicitud:0,
-        Fecha_Solicitud:new Date("yyyy-MM-dd"),
-        Perfil_Ident : $("#PerfilUsuarioId").val()
-    };
+    var solicitud = $("#SolicitudId").val();
+    //{FolioSolicitud:0,
+    //    Fecha_Solicitud:new Date("yyyy-MM-dd"),
+    //    Perfil_Ident : $("#PerfilUsuarioId").val()
+    //};
+
     continuaAccion = false;
     $.ajax({
         type: "POST",
         url: urlSolicitudEmpleados,
-        data: JSON.stringify({ "profiles": profiles,"listaEmpleados":listado }),
+        data: JSON.stringify({ "solicitud": solicitud,"listaEmpleados":listado }),
         contentType: 'application/json',
         success: function (resultData) {
             if (resultData.response !== null) {

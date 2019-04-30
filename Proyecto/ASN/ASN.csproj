@@ -352,6 +352,9 @@
     <Compile Include="Models\RelPeriodicidadPaisCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SolicitudEmpleadosxPerfilSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

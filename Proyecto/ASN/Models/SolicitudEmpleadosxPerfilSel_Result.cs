@@ -11,7 +11,7 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class EmpleadosxPerfilSel_Result
+    public partial class SolicitudEmpleadosxPerfilSel_Result
     {
         public int Ident { get; set; }
         public string Nombre { get; set; }
@@ -28,15 +28,15 @@ namespace ASN.Models
         public string Company_Name { get; set; }
         public Nullable<int> Contract_Type_Ident { get; set; }
         public string Contract_Type { get; set; }
+        public Nullable<int> Position_Code_Ident { get; set; }
+        public string Position_Code_Title { get; set; }
         public int Location_Ident { get; set; }
         public string full_name { get; set; }
         public Nullable<int> country_ident { get; set; }
         public string country_full_name { get; set; }
-        public string city { get; set; }
-        public Nullable<int> Position_Code_Ident { get; set; }
-        public string Position_Code_Title { get; set; }
-        public string Current_Status { get; set; }
         public int city_Ident { get; set; }
+        public string city { get; set; }
+        public string Current_Status { get; set; }
         public int Existe { get; set; }
         public int EsNuevo { get; set; }
         public string ConceptoNombre { get; set; }
