@@ -93,7 +93,7 @@ function valida(e) {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
         $('#grid').data('kendoGrid').refresh();
-        debugger;
+        //debugger;
         if (e.response.Errors === null) {
             continuaAccion = true;
             var notification = $("#popupNotification").data("kendoNotification");
@@ -103,7 +103,7 @@ function valida(e) {
 }
 
 function errorsote(args) {
-    debugger;
+    //debugger;
     if (args.errors) {
         
         $(document).ready(function () {
@@ -115,7 +115,7 @@ function errorsote(args) {
 }
 
 function onSave(e) {
-    debugger;
+    //debugger;
     var hayCambios = false;
     var sonNuevos = false;
     jQuery.grep(e.sender._data, function (item) {
@@ -141,12 +141,12 @@ function onSave(e) {
 }
 
 function OnFailure(data) {
-    debugger;
+    //debugger;
     alert('HTTP Status Code: ' + data.param1 + '  Error Message: ' + data.param2);  
 }
 
 function handleEditChanges(e, grid) {
-    debugger;
+    //debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
@@ -167,7 +167,7 @@ function handleEditChanges(e, grid) {
 }
 
 function handleSaveChanges(e, grid) {
-    debugger;
+    //debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     for (var i = 0; i < rows.length; i++) {
@@ -295,7 +295,7 @@ function GuardarBorrador() {
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show(resultData.response.Errors, "error");
             } else {
-                debugger;
+                //debugger;
                 continuaAccion = true
                 SolicitudNueva = resultData.Id;
 
@@ -401,7 +401,7 @@ function SaveSolicitud() {
     };
 
     var formdata = new FormData($('#Formulario').get(0));
-    debugger;
+    //debugger;
     $.ajax({
         type: "POST",
         url: '/Solicitudes/CreateSolicitud',
@@ -411,7 +411,7 @@ function SaveSolicitud() {
         processData: false, //For posting uploaded files we add this
         contentType: false, //For posting uploaded files we add this
         success: function (response) {
-            debugger;
+            //debugger;
             if (response.success) {
                 window.location.href = response.url;
                         }

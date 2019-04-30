@@ -58,7 +58,7 @@ function GetParametros() {
 
 
 function valida(e) {
-    debugger;
+    //debugger;
     if (e.type === "create" || e.type === "update") {
         $('#gridEmpleados').data('kendoGrid').dataSource.data([]);
         $('#gridEmpleados').data('kendoGrid').dataSource.read();
@@ -73,7 +73,7 @@ function valida(e) {
 }
 
 function errorsote(args) {
-    debugger;
+    //debugger;
     if (args.errors) {
 
         $(document).ready(function () {
@@ -85,7 +85,7 @@ function errorsote(args) {
 }
 
 function onSave(e) {
-    debugger;
+    //debugger;
     var hayCambios = false;
     var sonNuevos = false;
     jQuery.grep(e.sender._data, function (item) {
@@ -110,7 +110,7 @@ function onSave(e) {
 }
 
 function handleEditChanges(e, grid) {
-    debugger;
+    //debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
@@ -159,7 +159,7 @@ function handleSaveChanges(e, grid) {
 
 
 function edit(e) {
-    debugger;
+    //debugger;
     var validator = e.container.data('kendoValidator');
 
     //$('input[name="NombrePeriodo"]').blur(function () {

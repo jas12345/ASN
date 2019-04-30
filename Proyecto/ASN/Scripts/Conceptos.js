@@ -81,7 +81,7 @@ function onSave(e) {
     var hayCambios = false;
     var sonNuevos = false;
 
-    debugger;
+    //debugger;
     jQuery.grep(e.sender._data, function (item) {
 
         if (item.dirty || item.id <= 0) {
@@ -109,7 +109,7 @@ function onSave(e) {
 function handleEditChanges(e, grid) {
     var valid = true;
     var rows = grid.tbody.find("tr");
-    debugger;
+    //debugger;
 
     var objeto = jQuery.grep(grid._data, function (item) {
         return item.dirty;
@@ -131,7 +131,7 @@ function handleEditChanges(e, grid) {
 function handleSaveChanges(e, grid) {
     var valid = true;
     var rows = grid.tbody.find("tr");
-    debugger;
+    //debugger;
     for (var i = 0; i < rows.length; i++) {
 
         var model = grid.dataItem(rows[i]);
