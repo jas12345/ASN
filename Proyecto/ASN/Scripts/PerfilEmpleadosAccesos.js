@@ -274,7 +274,8 @@ function onChange(event) {
             //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function (resultData) { //debugger}
+        success: function (resultData) { //debugger
+        }
     })    
 }
 
