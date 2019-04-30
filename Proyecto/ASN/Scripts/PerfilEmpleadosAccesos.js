@@ -147,7 +147,7 @@ function accion(tab)
             $("#tab3").hide();
             break;
         case 2:
-            debugger;
+            //debugger;
 
             var masterGrid = $("#grid").data("kendoGrid");
             var detailRows = masterGrid.element.find(".k-detail-row");
@@ -157,7 +157,7 @@ function accion(tab)
                 informacion.push(detailGrid.dataSource.view());
             }
 
-            debugger;
+            //debugger;
             $("#tab2").show();
             $("#tab1").hide();
             $("#tab3").hide();
@@ -265,7 +265,7 @@ function onChange(event) {
     //$("#grid").data("kendoGrid")
 
     var perfil_Ident = $("#PerfilUsuarioId")[0].value;
-    debugger;
+    //debugger;
     //$('#kendoSeleccion')[0].textContent = listaEmpleados;
     $.ajax({
         type: 'POST',
@@ -274,7 +274,7 @@ function onChange(event) {
             //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function (resultData) { debugger}
+        success: function (resultData) { //debugger}
     })    
 }
 
@@ -288,28 +288,28 @@ function onDataBound(event) {
     var idFieldIdent = "Ident";
 
     var rowsToSelect = [];
-    debugger;
+    //debugger;
     allRows.each(function (idx, row) {
         var dataItem = grid.dataItem(row);
-        debugger;
+        //debugger;
         if (dataItem[idField] != null)
         {
             if (dataItem[idField].toString() == "true") {
-                debugger;
+                //debugger;
                 totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent]);
                 rowsToSelect.push(row);
             }
             else {
-                debugger;
+                //debugger;
                 totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent] * -1);
             }
         }
     });
-    debugger;
+    //debugger;
     event.sender.select(rowsToSelect);
 
     listaEmpleados = selectedEmpleados.join(", ")
-    debugger;
+    //debugger;
 }
 
 
@@ -429,7 +429,7 @@ function GetPerfil() {
 }
 
 function GuardarBorrador() {
-    debugger;
+    //debugger;
     var valoresGrid = $("#grid").data("kendoGrid");
     var listado = valoresGrid.selectedKeyNames().join(", ") 
     var data = {};
