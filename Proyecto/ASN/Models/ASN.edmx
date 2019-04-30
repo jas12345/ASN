@@ -224,7 +224,9 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
-        <Function Name="CatPerfilEmpleadosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatPerfilEmpleadosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatPerfilEmpleadosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
@@ -705,7 +707,9 @@
           </FunctionImport>
           <FunctionImport Name="CatPeriodosNominaSel" ReturnType="Collection(ASNModel.CatPeriodosNominaSel_Result)" />
           <FunctionImport Name="CatCountryVwCMB" ReturnType="Collection(ASNModel.CatCountryVwCMB_Result)" />
-          <FunctionImport Name="CatPerfilEmpleadosCMB" ReturnType="Collection(ASNModel.CatPerfilEmpleadosCMB_Result)" />
+          <FunctionImport Name="CatPerfilEmpleadosCMB" ReturnType="Collection(ASNModel.CatPerfilEmpleadosCMB_Result)" >
+            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="CatPerfilEmpleadosSi">
             <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
             <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
@@ -768,7 +772,7 @@
           </FunctionImport>
           <FunctionImport Name="CatEmployeeSel" ReturnType="Collection(ASNModel.CatEmployeeSel_Result)" />
           <FunctionImport Name="EmpleadosxPerfilSel" ReturnType="Collection(ASNModel.EmpleadosxPerfilSel_Result)">
-            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatSolicitudesSu">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />

@@ -934,9 +934,13 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCountryVwCMB_Result>("CatCountryVwCMB");
         }
     
-        public virtual ObjectResult<CatPerfilEmpleadosCMB_Result> CatPerfilEmpleadosCMB()
+        public virtual ObjectResult<CatPerfilEmpleadosCMB_Result> CatPerfilEmpleadosCMB(Nullable<int> tipoAccesoId)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosCMB_Result>("CatPerfilEmpleadosCMB");
+            var tipoAccesoIdParameter = tipoAccesoId.HasValue ?
+                new ObjectParameter("TipoAccesoId", tipoAccesoId) :
+                new ObjectParameter("TipoAccesoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosCMB_Result>("CatPerfilEmpleadosCMB", tipoAccesoIdParameter);
         }
     
         public virtual int CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, string city_Ident, Nullable<int> company_Ident, Nullable<int> location_Ident, Nullable<int> client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, Nullable<int> conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
