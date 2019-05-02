@@ -19,31 +19,6 @@
                                 <label for="perfilId">Perfil de usuario</label>
                             </div>
                             <input type="hidden" id="SolicitudId" value="@SolicitudId" />
-                            <div class="editor-field">
-                                @(Html.Kendo().DropDownList()
-                                                                        .DataSource(source =>
-                                                                        {
-                                                                            source.Read(read =>
-                                                                            {
-                                                                                read.Action("GetPerfilCMB", "Solicitudes");
-                                                                            })
-                                                                            .ServerFiltering(true);
-                                                                        })
-                                                                        .Filter("contains")
-                                                                        .OptionLabel("- Seleccione Perfil - ")
-                                                                        .DataValueField("Ident")
-                                                                        .DataTextField("Valor")
-                                                                        .Name("PerfilUsuarioId")
-                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
-                                )
-                                @(Html.Kendo().Button()
-                                                            .Name("kendoIconButton")
-                                                            .HtmlAttributes(new { type = "button" })
-                                                            .Icon("search")
-                                                            .Content("Buscar")
-                                                            //.Events(x => x.Click("actualizaGrid"))
-                                                            )
-                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -53,7 +28,7 @@
                                     .Columns(column =>
                                     {
                                         column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });
-                                        column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(false).Filterable(true);
+                                        column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(true).Filterable(true);
                                         column.Bound(c => c.First_Name).Width(50).Title("Nombre").Filterable(true);
                                         column.Bound(c => c.Last_Name).Title("Apellido(s)").Visible(true).Filterable(true).Width(50);
                                         column.Bound(c => c.Position_Code_Title).Title("Puesto").Visible(true).Filterable(true).Width(70);
@@ -124,9 +99,8 @@
 
             <div id="tab2" hidden>
                 <div id="cuerpo2" class="row">
-                    @*@Html.Partial("~/Views/EmpleadosSolicitudes/GridEmpleados.cshtml")*@
                 </div>
-                <input type="button" value="Anterior" onclick="accion(4);" /> <button class="success" onclick="accion(3);">Siguiente</button>
+                <input type="button" value="Guardar" onclick="accion(4);" /> <button class="success" onclick="accion(3);">Siguiente</button>
             </div>
             <div id="tab3" hidden><h1>TAB 3 DEMO</h1><input type="button" value="Anterior" onclick="accion(5);" /> <button class="success" onclick="">Siguiente</button></div>
         </div>

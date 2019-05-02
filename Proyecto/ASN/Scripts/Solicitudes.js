@@ -24,7 +24,7 @@ function accion(tab)
             //    informacion.push(detailGrid.dataSource.view());
             //}
 
-            GuardarBorrador();
+            GuardaEmpleadosSolicitud();
             if (continuaAccion) {
                 $("#tab2").show();
                 $("#tab1").hide();
@@ -38,7 +38,7 @@ function accion(tab)
             $("#tab2").hide();
             break;
         case 4:
-            GuardarBorrador();
+            GuardaEmpleadosSolicitud();
             $("#tab1").show();
             $("#tab2").hide();
             $("#tab3").hide();
@@ -247,7 +247,7 @@ function GetParametrosAlta() {
     };
 }
 
-function GuardarBorrador() {
+function GuardaEmpleadosSolicitud() {//GuardarBorrador
     var valoresGrid = $("#grid").data("kendoGrid");
     var listado = valoresGrid.selectedKeyNames().join(", ") 
     var solicitud = $("#SolicitudId").val();
@@ -263,10 +263,11 @@ function GuardarBorrador() {
         data: JSON.stringify({ "solicitud": solicitud,"listaEmpleados":listado }),
         contentType: 'application/json',
         success: function (resultData) {
-            if (resultData.response !== null) {
+            if (resultData.status !=="0") {
                 continuaAccion = false;
                 var notification = $("#popupNotification").data("kendoNotification");
-                notification.show(resultData.response.Errors, "error");
+                notification.show(resultData.responseError.Errors, "error");
+               
             } else {
                 //debugger;
                 continuaAccion = true
@@ -275,7 +276,6 @@ function GuardarBorrador() {
                 var notification = $("#popupNotification").data("kendoNotification");
                 CargaEmpleadosSolicitud();
                 notification.show("Procesado Correctamente", "success");
-                
             }
         }        
     });
@@ -290,9 +290,10 @@ function CargaEmpleadosSolicitud() {
         })
         .success(function (result) {
             $('#cuerpo2').html(result);
-            $("#tab2").show();
+            
             $("#tab1").hide();
             $("#tab3").hide();
+            $("#tab2").show();
         })
         .error(function (xhr, status) {
             alert(status);
