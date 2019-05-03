@@ -179,6 +179,12 @@
       <DependentUpon>ASN.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Authentication.cs" />
+    <Compile Include="Models\AutorizadoresxPerfilSolicitanteSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AvisoSolicitantesAutorizantes_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CargaMasivaRegistroViewModel.cs" />
     <Compile Include="Models\CatAnioFechasCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
@@ -285,6 +291,9 @@
     <Compile Include="Models\CatParametroConceptosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatPerfilEmpleadosAccesosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatPerfilEmpleadosAccesosSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -317,6 +326,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatRelUserRoleSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatSolicitudEmpleadosAutorizantesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatSolicitudesSel_Result.cs">

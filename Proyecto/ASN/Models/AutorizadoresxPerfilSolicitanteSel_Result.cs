@@ -13,7 +13,12 @@ namespace ASN.Models
     
     public partial class AutorizadoresxPerfilSolicitanteSel_Result
     {
+<<<<<<< HEAD
         public int Ident { get; set; }
         public string Valor { get; set; }
+=======
+        public int EmpleadoId { get; set; }
+        public string Nombre { get; set; }
+>>>>>>> 8d39054fac977c56686dd28fcf0305e3e212c29b
     }
 }

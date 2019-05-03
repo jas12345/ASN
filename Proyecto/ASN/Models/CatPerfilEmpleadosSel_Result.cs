@@ -17,7 +17,7 @@ namespace ASN.Models
         public string NombrePerfilEmpleados { get; set; }
         public Nullable<int> Country_Ident { get; set; }
         public string Country_Full_Name { get; set; }
-        public string City_Ident { get; set; }
+        public Nullable<int> City_Ident { get; set; }
         public string City_Name { get; set; }
         public Nullable<int> Company_Ident { get; set; }
         public string Company_Name { get; set; }

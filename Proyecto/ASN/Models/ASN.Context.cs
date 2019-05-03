@@ -943,7 +943,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosCMB_Result>("CatPerfilEmpleadosCMB", tipoAccesoIdParameter);
         }
     
-        public virtual int CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, string city_Ident, Nullable<int> company_Ident, Nullable<int> location_Ident, Nullable<int> client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, Nullable<int> conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, Nullable<int> city_Ident, Nullable<int> company_Ident, Nullable<int> location_Ident, Nullable<int> client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, Nullable<int> conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var nombrePerfilEmpleadosParameter = nombrePerfilEmpleados != null ?
                 new ObjectParameter("NombrePerfilEmpleados", nombrePerfilEmpleados) :
@@ -953,9 +953,9 @@ namespace ASN.Models
                 new ObjectParameter("Country_Ident", country_Ident) :
                 new ObjectParameter("Country_Ident", typeof(int));
     
-            var city_IdentParameter = city_Ident != null ?
+            var city_IdentParameter = city_Ident.HasValue ?
                 new ObjectParameter("City_Ident", city_Ident) :
-                new ObjectParameter("City_Ident", typeof(string));
+                new ObjectParameter("City_Ident", typeof(int));
     
             var company_IdentParameter = company_Ident.HasValue ?
                 new ObjectParameter("Company_Ident", company_Ident) :
@@ -1728,6 +1728,38 @@ namespace ASN.Models
                 new ObjectParameter("Solicitud", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SolicitudEmpleadosxPerfilSel_Result>("SolicitudEmpleadosxPerfilSel", perfil_IdentParameter, solicitudParameter);
+        }
+    
+        public virtual ObjectResult<AutorizadoresxPerfilSolicitanteSel_Result> AutorizadoresxPerfilSolicitanteSel(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizadoresxPerfilSolicitanteSel_Result>("AutorizadoresxPerfilSolicitanteSel", perfil_IdentParameter);
+        }
+    
+        public virtual ObjectResult<AvisoSolicitantesAutorizantes_Result> AvisoSolicitantesAutorizantes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AvisoSolicitantesAutorizantes_Result>("AvisoSolicitantesAutorizantes");
+        }
+    
+        public virtual ObjectResult<CatPerfilEmpleadosAccesosCMB_Result> CatPerfilEmpleadosAccesosCMB(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosAccesosCMB_Result>("CatPerfilEmpleadosAccesosCMB", perfil_IdentParameter);
+        }
+    
+        public virtual ObjectResult<CatSolicitudEmpleadosAutorizantesSel_Result> CatSolicitudEmpleadosAutorizantesSel(Nullable<int> folioSolicitud)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudEmpleadosAutorizantesSel_Result>("CatSolicitudEmpleadosAutorizantesSel", folioSolicitudParameter);
         }
     }
 }

@@ -274,7 +274,7 @@ namespace ASN.Controllers
                             Country_Ident = (item.Country_Ident != null ? item.Country_Ident.ToString():"-1"),
                             NombrePerfilEmpleados = item.NombrePerfilEmpleados,
                             Country_Full_Name = item.Country_Full_Name,
-                            City_Ident = (item.City_Ident!= null ?item.City_Ident.ToString():"-1"),
+                            City_Ident = (item.City_Ident!= null ?item.City_Ident:-1),
                             City_Name = item.City_Name,
                             Company_Ident = (item.Company_Ident !=null ? item.Company_Ident.ToString(): "-1"),
                             Company_Name = item.Company_Name,
@@ -328,14 +328,16 @@ namespace ASN.Controllers
                             int i = 0;
                             context.CatPerfilEmpleadosSi(
                                 obj.NombrePerfilEmpleados,
-                                (string.IsNullOrEmpty(obj.Country_Ident)?-1:int.Parse(obj.Country_Ident)), 
-                                obj.City_Ident,
-                                (string.IsNullOrEmpty(obj.Company_Ident) ?-1:int.Parse(obj.Company_Ident)),
+                                (string.IsNullOrEmpty(obj.Country_Ident)?-1:int.Parse(obj.Country_Ident)),
+                                //obj.City_Ident,
+                                ((obj.City_Ident != null) ? obj.City_Ident: -1),
+                                (string.IsNullOrEmpty(obj.Company_Ident) ? -1 : int.Parse(obj.Company_Ident)),
                                 (string.IsNullOrEmpty(obj.Location_Ident) ?-1:int.Parse(obj.Location_Ident)),
                                 (string.IsNullOrEmpty(obj.Client_Ident)?-1:int.Parse(obj.Client_Ident)),
                                 (string.IsNullOrEmpty(obj.Program_Ident)?-1:int.Parse(obj.Program_Ident)),
                                 (string.IsNullOrEmpty(obj.Contract_Type_Ident) ?-1:int.Parse(obj.Contract_Type_Ident)), 
-                                ((Int32.TryParse(obj.ConceptoId, out i) ? i : (int?)null)), obj.TipoAccesoId, ccmsidAdmin, resultado);
+                                ((Int32.TryParse(obj.ConceptoId, out i) ? i : (int?)null)),
+                                obj.TipoAccesoId, ccmsidAdmin, resultado);
                         }
 
                         int.TryParse(resultado.Value.ToString(), out res);
