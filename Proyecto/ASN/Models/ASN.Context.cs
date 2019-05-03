@@ -943,7 +943,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosCMB_Result>("CatPerfilEmpleadosCMB", tipoAccesoIdParameter);
         }
     
-        public virtual int CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, string city_Ident, Nullable<int> company_Ident, Nullable<int> location_Ident, Nullable<int> client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, Nullable<int> conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, Nullable<int> city_Ident, Nullable<int> company_Ident, Nullable<int> location_Ident, Nullable<int> client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, Nullable<int> conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var nombrePerfilEmpleadosParameter = nombrePerfilEmpleados != null ?
                 new ObjectParameter("NombrePerfilEmpleados", nombrePerfilEmpleados) :
@@ -953,9 +953,9 @@ namespace ASN.Models
                 new ObjectParameter("Country_Ident", country_Ident) :
                 new ObjectParameter("Country_Ident", typeof(int));
     
-            var city_IdentParameter = city_Ident != null ?
+            var city_IdentParameter = city_Ident.HasValue ?
                 new ObjectParameter("City_Ident", city_Ident) :
-                new ObjectParameter("City_Ident", typeof(string));
+                new ObjectParameter("City_Ident", typeof(int));
     
             var company_IdentParameter = company_Ident.HasValue ?
                 new ObjectParameter("Company_Ident", company_Ident) :
