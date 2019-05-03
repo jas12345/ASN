@@ -30,8 +30,8 @@ namespace ASN.Controllers
             if (!string.IsNullOrEmpty(id))
             {
                 ViewBag.SolicitudBaseId = id;
-                TempData["PerfilId"] = perfilId;
-               if (User.Identity.IsAuthenticated)
+                ViewBag.perfilId = perfilId;//TempData["PerfilId"] 
+                if (User.Identity.IsAuthenticated)
                 {
                     using (ASNContext context = new ASNContext())
                     {
@@ -43,6 +43,12 @@ namespace ASN.Controllers
             }
             
             return PartialView("GridEmpleados");
+        }
+
+        public PartialViewResult GridEmpleadosAutorizantes(string id, string perfil)
+        {
+            ViewBag.SolicitudBaseId = id;
+            return PartialView("GridEmpleadosAutorizantes");
         }
 
         /// <summary>
@@ -69,7 +75,10 @@ namespace ASN.Controllers
                     foreach (var item in listEmpleadosSolicitudes)
                     {
                         var lstConceptos = new List<selectModelConceptoMotivo>();
-                        lstConceptos.Add(new selectModelConceptoMotivo() { Ident = int.Parse(item.CatConceptoMotivoId), Valor = item.ConceptoMotivo});
+                        if (item.CatConceptoMotivoId != null)
+                        {
+                            lstConceptos.Add(new selectModelConceptoMotivo() { Ident = int.Parse(item.CatConceptoMotivoId), Valor = item.ConceptoMotivo });
+                        }
 
                         lstEmpleadosSolicitud.Add(new EmpleadosSolicitudesViewModel()
                         {
@@ -104,6 +113,31 @@ namespace ASN.Controllers
 
                         return Json(ok);
                     }
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GridEmpleadosAutorizantesSel([DataSourceRequest]DataSourceRequest request, string SolicitudId)
+        {
+            try
+            {
+                var listEmpleadosAutorizante = new List<CatSolicitudEmpleadosAutorizantesSel_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    SolicitudId = (string.IsNullOrEmpty(SolicitudId) && !string.IsNullOrEmpty(ViewBag.SolicitudBaseId) ? ViewBag.SolicitudBaseId : SolicitudId);
+                    int i = 0;
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    listEmpleadosAutorizante = context.CatSolicitudEmpleadosAutorizantesSel(((Int32.TryParse(SolicitudId, out i) ? i : (int?)null))).ToList();
+
+                    DataSourceResult ok = listEmpleadosAutorizante.ToDataSourceResult(request);
+                    return Json(ok);
+                }
             }
             catch (Exception ex)
             {

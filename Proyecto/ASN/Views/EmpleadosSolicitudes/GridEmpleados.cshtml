@@ -1,5 +1,8 @@
-﻿<div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-4"></div><div class="col-lg-4 col-md-4 col-sm-4"></div><div class="col-lg-4 col-md-4 col-sm-4"></div>
+﻿@{ 
+    var perfil = ViewBag.perfilId;
+}
+<div class="col-lg-12 col-md-12">
+    <div class="row"><div style="display: inline-block;">@Html.Label("Captura de Solicitud", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Selección de Empleados", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Conceptos Motivos por Empleado", new { style = "font-size: 15px;" }) - @Html.Label("Selección de Autorizantes", new { style = "font-size: 15px; color:darkgrey;" })</div></div>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12">
     @(Html.Kendo().Grid<ASN.Models.EmpleadosSolicitudesViewModel>()
@@ -27,7 +30,6 @@
                                    .Resizable(c => c.Columns(true))
                                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadosSolicitudesPopUp").Window(x => x.Width(630).HtmlAttributes(new { style = "width: 630px" })))//EmpleadoMotivoConceptoPopUp
                                    .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
-                                   //.PersistSelection()
                                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                    .DataSource(dataSource => dataSource
                                        .Ajax()
@@ -74,7 +76,8 @@
                                    )
     )
     <input type="hidden" id="idSolicitud" value="@ViewBag.SolicitudBaseId"/>
-    <input type="hidden" name="idPerfil" value="@ViewBag.PerfilId" />
+    <input type="hidden" name="idPerfil" value="@perfil" />
 </div>
 
-@Scripts.Render("~/bundles/EmpleadosSolicitudes")
+@*@Scripts.Render("~/bundles/EmpleadosSolicitudes")*@
+@Scripts.Render("~/bundles/Solicitudes")

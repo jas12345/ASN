@@ -230,14 +230,14 @@ function SaveSolicitud(accion) {
     {
         
         if (validator.validate()) {
-            var modelo = {
-                FolioSolicitud: $("#FolioSolicitud").val(),
-                Perfil_Ident: $("#Perfil_Ident").val(),
-                PeriodoNominaMes_Id: $("#PeriodoNominaMes_Id").val(),
-                ConceptoId: $("#ConceptoId").val(),
-                MotivoId: $("#MotivoId").val(),
-                Justficacion: $("#Justficacion").val()
-            };
+            //var modelo = {
+            //    FolioSolicitud: $("#FolioSolicitud").val(),
+            //    Perfil_Ident: $("#Perfil_Ident").val(),
+            //    PeriodoNominaMes_Id: $("#PeriodoNominaMes_Id").val(),
+            //    ConceptoId: $("#ConceptoId").val(),
+            //    MotivoId: $("#MotivoId").val(),
+            //    Justficacion: $("#Justficacion").val()
+            //};
 
             var myWindow = $("#windowNotifica").data("kendoWindow");
             kendo.ui.progress($(".chart-loading"), true);
@@ -319,9 +319,9 @@ function OnFailure(response) {
 
 function cargaEmpleados(accion, solicitud, perfil) {
     if (accion ===1) {
-        window.location.href = "/Solicitudes/Index";
+        window.location.href = urlSolicitudDefault;
     } else if (accion ===2) {
-        window.location.href = "/Solicitudes/SeleccionaPersonal?id=" + solicitud;
+        window.location.href = urlSeleccionaPersonal+"?id=" + solicitud + "&perfil=" + perfil;
     }    
 }
 

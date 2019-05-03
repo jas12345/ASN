@@ -1,10 +1,20 @@
-﻿var editando = 0;
+﻿
+var editando = 0;
 var lstCountry = 0;
 var dtFechaInicio = "";
 var dtFechaFinal = "";
 var nombrePeriodo = "";
 var continuaAccion = false;
 var SolicitudNueva = 0;
+var _perfil = 0;
+
+$(document).ready(function () {
+    $("#ViewForm").bind("click", function () {
+        $("#window").data("kendoWindow").open();
+        $("#ViewForm").hide();
+    });
+});
+
 function accion(tab)
 {
     switch (tab) {
@@ -33,6 +43,7 @@ function accion(tab)
             
             break;
         case 3:
+            CargaEmpleadosAutorizadores();
             $("#tab3").show();
             $("#tab1").hide();
             $("#tab2").hide();
@@ -210,15 +221,23 @@ function validacheckdefault(e) {
 //    $("#grid").data("kendoGrid").refresh();
 //}
 
+//Inicio Parametros
 function GetPerfil() {
     return {
-        perfil: 0,
+        perfil: _perfil,
         solicitud: $("#SolicitudId").val()
     };
 }
+
 function GetSolicitudId() {
     return {
         SolicitudId: SolicitudNueva
+    };
+}
+
+function GetSolicitudAutoriza() {
+    return {
+        SolicitudId: $("#SolicitudId").val()
     };
 }
 
@@ -234,14 +253,21 @@ function GetParametrosAlta() {
     };
 }
 
+function GetParametros() {
+    return {
+        TTConceptoMotivoId: $("#TTConceptoMotivoId").is(':checked'),
+        TTManager_Ident: $("#TTManager_Ident").is(':checked'),
+        TTMonto: $("#TTMonto").is(':checked'),
+        TTDetalle: $("#TTDetalle").is(':checked'),
+        TTPeriodoNomina: $("#TTPeriodoNomina").is(':checked')
+    };
+}
+// FIn Parametros
+
 function GuardaEmpleadosSolicitud() {//GuardarBorrador
     var valoresGrid = $("#grid").data("kendoGrid");
     var listado = valoresGrid.selectedKeyNames().join(", ") 
     var solicitud = $("#SolicitudId").val();
-    //{FolioSolicitud:0,
-    //    Fecha_Solicitud:new Date("yyyy-MM-dd"),
-    //    Perfil_Ident : $("#PerfilUsuarioId").val()
-    //};
 
     continuaAccion = false;
     $.ajax({
@@ -267,18 +293,36 @@ function GuardaEmpleadosSolicitud() {//GuardarBorrador
 }
 
 function CargaEmpleadosSolicitud() {
-        $.ajax({
-            url: '/EmpleadosSolicitudes/MuestraEmpleados?id=' + SolicitudNueva + "&perfilId=" + $("#PerfilUsuarioId").val(),
+    $.ajax({
+        url: '/EmpleadosSolicitudes/MuestraEmpleados?id=' + SolicitudNueva + "&perfilId=" + $("#PeriodoId").val(),
             contentType: 'application/html; charset=utf-8',
             type: 'GET',
             dataType: 'html'
         })
         .success(function (result) {
             $('#cuerpo2').html(result);
-            
+
             $("#tab1").hide();
             $("#tab3").hide();
             $("#tab2").show();
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        }) 
+}
+
+function CargaEmpleadosAutorizadores() {
+    var solicitud = $("#SolicitudId").val();
+    var perfil = $("#idPerfil").val();
+    debugger;
+    $.ajax({
+        url: urlGridEmpleadosAutorizadores + '?id=' + solicitud + "&perfil=" + perfil,
+        contentType: 'application/html; charset=utf-8',
+        type: 'GET',
+        dataType: 'html'
+    })
+        .success(function (result) {
+            $('#cuerpo3').html(result);
         })
         .error(function (xhr, status) {
             alert(status);

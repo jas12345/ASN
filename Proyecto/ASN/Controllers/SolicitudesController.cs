@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace ASN.Controllers
 {
@@ -42,10 +43,15 @@ namespace ASN.Controllers
                 return View(modelo);
         }
 
-
-        public ActionResult SeleccionaPersonal(string id)
+        public ActionResult SelecionaEmpleadosSolicitud(string id, string perfil)
         {
-            TempData["SolicitudId"] = id;
+            return RedirectToAction("SeleccionaPersonal", "Solicitudes", new { solicitudId= id, perfilId = perfil});//new RouteValueDictionary(new { controller = "Solicitudes", action = "Editar", id = id }));
+        }
+
+        public ActionResult SeleccionaPersonal(string solicitudId, string perfilId)
+        {
+            TempData["SolicitudId"] = solicitudId;
+            TempData["PerfilId"] = perfilId;
             return View();
         }
         #region Métodos para carga de combos

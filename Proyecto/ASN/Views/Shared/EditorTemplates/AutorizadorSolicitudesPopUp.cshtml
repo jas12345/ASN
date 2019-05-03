@@ -1,0 +1,73 @@
+﻿@model  ASN.Models.CatSolicitudEmpleadosAutorizantesSel_Result
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+<div class="col-lg-12 col-md-12">
+    <div class="k-edit-form-container" style="width:500px;">
+        <div class="editor-label">
+            <label for="NombreEmpleado">Empleado</label>
+        </div>
+        <input type="hidden" id="FolioSolicitud" value="@Model.FolioSolicitud"/>
+        <input type="hidden" id="Empleado_Ident" value="@Model.Empleado_Ident"/>
+        <div class="editor-field">
+            @(Html.Kendo().TextBox().Name("NombreEmpleado").HtmlAttributes(new { @readonly = "readonly", style = "text-align:center;width: 18.4em" }))
+            @(Html.Kendo().CheckBox().Name("TTEmpleado_Ident").Label("(Todos)"))
+        </div>
+        <div class="editor-label">
+            <label for="Autorizador">Autorizador</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownList()
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetPeriodoNominaCMB", "EmpleadosSolicitudes");
+                                });
+                            })
+                            .Filter("contains")
+                            .OptionLabel("- Periodo original - ")
+                            .DataValueField("Ident")
+                            .DataTextField("Valor")
+                            .Name("Autorizador_Ident")
+                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
+            )
+            @(Html.Kendo().CheckBox().Name("TTAutorizador_Ident").Label("(Todos)"))
+        </div>
+        <div class="editor-label">
+            <label for="NivelAutorizacion">Nivel Autorización</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBox().Name("NivelAutorizacion").HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
+            @(Html.Kendo().CheckBox().Name("TTNivelAutorizacion").Label("(Todos)"))
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().CheckBox().Name("Obligatorio").Label("Es Obligatorio"))
+        </div>
+        <div class="editor-label">
+            <label>Estatus</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownList()
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetPeriodoNominaCMB", "EmpleadosSolicitudes");
+                        });
+                    })
+                    .Filter("contains")
+                    .OptionLabel("- Periodo original - ")
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .Name("Autorizador_Ident")
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
+            )
+            @(Html.Kendo().CheckBox().Name("TTAutorizador_Ident").Label("(Todos)"))
+        </div>
+        <input type="hidden" id="PeriodicidadId" value="" />
+    </div>
+</div>
