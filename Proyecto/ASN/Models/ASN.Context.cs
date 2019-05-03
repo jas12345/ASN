@@ -1729,5 +1729,37 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SolicitudEmpleadosxPerfilSel_Result>("SolicitudEmpleadosxPerfilSel", perfil_IdentParameter, solicitudParameter);
         }
+    
+        public virtual ObjectResult<AutorizadoresxPerfilSolicitanteSel_Result> AutorizadoresxPerfilSolicitanteSel(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizadoresxPerfilSolicitanteSel_Result>("AutorizadoresxPerfilSolicitanteSel", perfil_IdentParameter);
+        }
+    
+        public virtual ObjectResult<AvisoSolicitantesAutorizantes_Result> AvisoSolicitantesAutorizantes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AvisoSolicitantesAutorizantes_Result>("AvisoSolicitantesAutorizantes");
+        }
+    
+        public virtual ObjectResult<CatPerfilEmpleadosAccesosCMB_Result> CatPerfilEmpleadosAccesosCMB(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosAccesosCMB_Result>("CatPerfilEmpleadosAccesosCMB", perfil_IdentParameter);
+        }
+    
+        public virtual ObjectResult<CatSolicitudEmpleadosAutorizantesSel_Result> CatSolicitudEmpleadosAutorizantesSel(Nullable<int> folioSolicitud)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudEmpleadosAutorizantesSel_Result>("CatSolicitudEmpleadosAutorizantesSel", folioSolicitudParameter);
+        }
     }
 }
