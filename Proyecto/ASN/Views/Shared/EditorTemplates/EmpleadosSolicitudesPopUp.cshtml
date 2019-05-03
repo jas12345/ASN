@@ -1,4 +1,4 @@
-﻿@model  ASN.Models.EmpleadosxPerfilSel_Result
+﻿@model  ASN.Models.EmpleadosSolicitudesViewModel
 
 <style>
     tr.spaceUnder > td {
@@ -12,7 +12,7 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().MultiSelect()
-                .Name("CatConceptoMotivoId")
+                .Name("LstConceptoMotivo")
                 .DataValueField("Ident")
                 .DataTextField("Valor")
                 .Placeholder("- Concepto de motivo -")
@@ -34,28 +34,29 @@
             <label for="ResponsableIncidenteId">Responsable de incidente</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.Manager_Ident)
-                .DataSource(source =>
+            @(Html.Kendo().TextBox().Name("Manager_Ident").HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
+            @*@(Html.Kendo().DropDownListFor(x => x.Manager_Ident)
+            .DataSource(source =>
+            {
+                source.Read(read =>
                 {
-                    source.Read(read =>
-                    {
-                        read.Action("GetEmpleadosCMB", "EmpleadosSolicitudes");
-                    });
-                })
-                .Filter("contains")
-                .OptionLabel("- Responsable - ")
-                .DataValueField("Id")
-                .DataTextField("Value")
-                .Name("Manager_Ident")
-                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
-            )
-            @(Html.Kendo().CheckBox().Name("TTManager_Ident").Label("(Todos)")) 
+                    read.Action("GetEmpleadosCMB", "EmpleadosSolicitudes");
+                });
+            })
+            .Filter("contains")
+            .OptionLabel("- Responsable - ")
+            .DataValueField("Id")
+            .DataTextField("Value")
+            .Name("Manager_Ident")
+            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
+        )*@
+            @(Html.Kendo().CheckBox().Name("TTManager_Ident").Label("(Todos)"))
         </div>
         <div class="editor-label">
             <label for="Monto">Parámetro: Monto</label>
         </div>
         <div class="editor-field">
-            @*@(Html.Kendo().NumericTextBoxFor(x => x.ParametroConceptoMonto).Name("ParametroConceptoMonto").Min(0).HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))*@
+            @(Html.Kendo().NumericTextBoxFor(x => x.ParametroConceptoMonto).Name("ParametroConceptoMonto").Min(0).HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
             @(Html.Kendo().CheckBox().Name("TTMonto").Label("(Todos)"))
         </div>
         <div class="editor-label">
@@ -66,10 +67,10 @@
             @(Html.Kendo().CheckBox().Name("TTDetalle").Label("(Todos)"))
         </div>
         <div class="editor-label">
-            <label for="TipoPeriodo">Periodo original</label>
+            <label for="PeriodoNomina">Periodo original</label>
         </div>
         <div class="editor-field">
-            @*@(Html.Kendo().DropDownListFor(x => x.PeriodoNomina)
+            @(Html.Kendo().DropDownList()
             .DataSource(source =>
             {
                 source.Read(read =>
@@ -83,7 +84,7 @@
             .DataTextField("Valor")
             .Name("PeriodoNomina")
             .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
-        )*@
+        )
             @(Html.Kendo().CheckBox().Name("TTPeriodoNomina").Label("(Todos)"))
         </div>
         <input type="hidden" id="PeriodicidadId" value=""/>

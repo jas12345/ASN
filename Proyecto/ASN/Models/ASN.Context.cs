@@ -1604,7 +1604,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcesaSolicitudEmpleadoDetalleSi", solicitudIdParameter, listaEmpleadosParameter, conceptoMotivoIdParameter, listaConceptoMotivoParameter, aplicaAtodosParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatSolicitudEmpleadosDetalleSi(Nullable<int> solicitudId, Nullable<int> catEmpleadoId, Nullable<int> catConceptoMotivoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatSolicitudEmpleadosDetalleSi(Nullable<int> solicitudId, Nullable<int> catEmpleadoId, Nullable<int> catConceptoMotivoId, string periodoNomina, Nullable<int> reponsableId, Nullable<decimal> monto, string detalle, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var solicitudIdParameter = solicitudId.HasValue ?
                 new ObjectParameter("SolicitudId", solicitudId) :
@@ -1618,11 +1618,27 @@ namespace ASN.Models
                 new ObjectParameter("CatConceptoMotivoId", catConceptoMotivoId) :
                 new ObjectParameter("CatConceptoMotivoId", typeof(int));
     
+            var periodoNominaParameter = periodoNomina != null ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(string));
+    
+            var reponsableIdParameter = reponsableId.HasValue ?
+                new ObjectParameter("ReponsableId", reponsableId) :
+                new ObjectParameter("ReponsableId", typeof(int));
+    
+            var montoParameter = monto.HasValue ?
+                new ObjectParameter("Monto", monto) :
+                new ObjectParameter("Monto", typeof(decimal));
+    
+            var detalleParameter = detalle != null ?
+                new ObjectParameter("Detalle", detalle) :
+                new ObjectParameter("Detalle", typeof(string));
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSi", solicitudIdParameter, catEmpleadoIdParameter, catConceptoMotivoIdParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSi", solicitudIdParameter, catEmpleadoIdParameter, catConceptoMotivoIdParameter, periodoNominaParameter, reponsableIdParameter, montoParameter, detalleParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual ObjectResult<CatMotivoSolicitudCMB_Result> CatMotivoSolicitudCMB()

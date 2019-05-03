@@ -323,6 +323,10 @@
           <Parameter Name="SolicitudId" Type="int" Mode="In" />
           <Parameter Name="CatEmpleadoId" Type="int" Mode="In" />
           <Parameter Name="CatConceptoMotivoId" Type="int" Mode="In" />
+          <Parameter Name="PeriodoNomina" Type="varchar" Mode="In" />
+          <Parameter Name="ReponsableId" Type="int" Mode="In" />
+          <Parameter Name="Monto" Type="decimal" Mode="In" />
+          <Parameter Name="Detalle" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -708,7 +712,7 @@
           <FunctionImport Name="CatPeriodosNominaSel" ReturnType="Collection(ASNModel.CatPeriodosNominaSel_Result)" />
           <FunctionImport Name="CatCountryVwCMB" ReturnType="Collection(ASNModel.CatCountryVwCMB_Result)" />
           <FunctionImport Name="CatPerfilEmpleadosCMB" ReturnType="Collection(ASNModel.CatPerfilEmpleadosCMB_Result)" >
-            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
+          <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPerfilEmpleadosSi">
             <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
@@ -902,6 +906,10 @@
             <Parameter Name="SolicitudId" Mode="In" Type="Int32" />
             <Parameter Name="CatEmpleadoId" Mode="In" Type="Int32" />
             <Parameter Name="CatConceptoMotivoId" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodoNomina" Mode="In" Type="String" />
+            <Parameter Name="ReponsableId" Mode="In" Type="Int32" />
+            <Parameter Name="Monto" Mode="In" Type="Decimal" />
+            <Parameter Name="Detalle" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>

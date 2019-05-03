@@ -10,22 +10,24 @@
                                         column.Bound(c => c.Empleado_Ident).Title("CCMS ID").Width(50).Visible(true).Filterable(true);
                                         column.Bound(c => c.Empleado_Middle_Name).Width(80).Title("Nombre").Visible(true).Filterable(true);
                                         //column.Bound(c => c.CatConceptoMotivoId).Width(50).Title("Concepto de motivo").Visible(true).Filterable(true).Width(50);//,(System.Collections.IEnumerable)ViewData["ConceptoMotivo"], "Ident", "Valor"
-                                        column.Bound(c => c.ConceptoMotivo).Width(90).Title("Concepto de Motivo").Visible(true).Filterable(true);
-                                        //column.Bound(c => c.Manager_Ident).Title("Responsable ID").Visible(true).Filterable(true).Width(50);
-                                        //column.Bound(c => c.Manager_Middle_Name).Title("Nombre responsable").Width(80).Visible(true);
-                                        //column.Bound(c => c.Manager_Position_Code_Title).Title("Puesto responsable").Width(50).Visible(true);
-                                        //column.Bound(c => c.ParametroConceptoMonto).Width(50).Visible(true);
-                                        //column.Bound(c => c.Detalle).Width(80).Visible(true);
-                                        //column.Bound(c => c.PeriodoNomina).Width(50).Visible(true);
-                                        column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
+                                        column.Bound(c => c.ConceptoMotivo).Width(120).Title("Concepto de Motivo").Visible(true).Filterable(true);
+                                        column.Bound(c => c.Manager_Ident).Title("Responsable ID").Visible(true).Filterable(true).Width(50);
+                                        column.Bound(c => c.Manager_First_Name).Title("Nombre responsable").Width(120).Visible(true);
+                                        column.Bound(c => c.Manager_Position_Code_Title).Title("Puesto responsable").Width(90).Visible(true);
+                                        column.Bound(c => c.ParametroConceptoMonto).Title("Parámetro: Monto").Width(70).Visible(true);
+                                        column.Bound(c => c.Detalle).Title("Detalle").Width(80).Visible(true);
+                                        column.ForeignKey(c => c.PeriodoNomina, (System.Collections.IEnumerable)ViewData["PeriodosNomina"], "Ident", "Valor").Title("Periodo nomina").Width(70).Visible(true);
+                                        column.Bound(c => c.LstConceptoMotivo).Visible(false);
+                                        column.Command(command => { command.Edit().Text("Editar"); }).Width(40);
                                     })
                                    .HtmlAttributes(new { style = "height: 700px;" }) //EmpleadosSolicitudesPopUp
-                                   //.Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadoMotivoConceptoPopUp").Window(x => x.Width(630).HtmlAttributes(new { style = "width: 630px" })))
-                                   .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
-                                   .Scrollable(sorteable => sorteable.Virtual(false))
+                                   .Scrollable(s => s.Height("20em"))
+                                   //.Scrollable(sorteable => sorteable.Virtual(true))//.Scrollable(s => s.Enabled(true).Height("auto")) 
                                    .Sortable()
                                    .Resizable(c => c.Columns(true))
-                                   .PersistSelection()
+                                   .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadosSolicitudesPopUp").Window(x => x.Width(630).HtmlAttributes(new { style = "width: 630px" })))//EmpleadoMotivoConceptoPopUp
+                                   .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
+                                   //.PersistSelection()
                                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                    .DataSource(dataSource => dataSource
                                        .Ajax()
@@ -34,13 +36,15 @@
                                            model.Id(c => c.FolioSolicitud);
                                            model.Field(c => c.Empleado_Ident).Editable(true);
                                            model.Field(c => c.Empleado_Middle_Name).Editable(true);
-                                           model.Field(c => c.CatConceptoMotivoId).Editable(true);
-                                           //model.Field(c => c.Manager_Ident).Editable(true);
-                                           //model.Field(c => c.Manager_Middle_Name).Editable(false);
-                                           //model.Field(c => c.Manager_Position_Code_Title).Editable(true);
-                                           //model.Field(c => c.ParametroConceptoMonto).Editable(true);
-                                           //model.Field(c => c.PeriodoNomina).Editable(true);
-                                           //model.Field(c => c.Detalle).Editable(true);
+                                           model.Field(c => c.ConceptoMotivo).Editable(false);
+                                           model.Field(c => c.Manager_Ident).Editable(true);
+                                           model.Field(c => c.Manager_Middle_Name).Editable(false);
+                                           model.Field(c => c.Manager_Position_Code_Title).Editable(false);
+                                           model.Field(c => c.ParametroConceptoMonto).Editable(true);
+                                           model.Field(c => c.PeriodoNomina).Editable(true);
+                                           model.Field(c => c.LstConceptoMotivo).Editable(true);
+                                           model.Field(c => c.CatConceptoMotivoId).Editable(false);
+                                           model.Field(c => c.Detalle).Editable(true);
                                        })
                                        .Read(read => read.Action("GetEmpleadosSolicitudesSel", "EmpleadosSolicitudes").Data("GetSolicitudId"))
                                        .Create(create => create.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes").Data("GetParametrosAlta"))

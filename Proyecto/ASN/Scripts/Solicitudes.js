@@ -39,9 +39,11 @@ function accion(tab)
             break;
         case 4:
             GuardaEmpleadosSolicitud();
-            $("#tab1").show();
+            $("#tab1").hide();
             $("#tab2").hide();
             $("#tab3").hide();
+            setTimeout('redirectDefault()', 2000); 
+            
             break;
         case 5:
             $("#tab2").show();
@@ -52,24 +54,9 @@ function accion(tab)
 }
 
 function edit(e) {
-    //var validator = e.container.data('kendoValidator');
-
-    //$('input[name="NombrePeriodo"]').blur(function () {
-    //    validator.validateInput(this);
-    //});
-
-    //$('input[name="TipoPeriodo"]').change(function () {
-    //    validator.validateInput(this);
-    //});
-
-    //var lstCountryIdents = $("#LstCountryIdents").data("kendoMultiSelect");
-
-    //$("#FechaCaptura").attr("readonly", true);
-    //$("#FechaCierre").attr("readonly", true);
 
     if (e.model.isNew() === false) {
         e.container.kendoWindow("title", "Editar");
-
         editando = 1;
     }
     else {
@@ -266,10 +253,8 @@ function GuardaEmpleadosSolicitud() {//GuardarBorrador
             if (resultData.status !=="0") {
                 continuaAccion = false;
                 var notification = $("#popupNotification").data("kendoNotification");
-                notification.show(resultData.responseError.Errors, "error");
-               
+                notification.show(resultData.responseError.Errors, "error");               
             } else {
-                //debugger;
                 continuaAccion = true
                 SolicitudNueva = resultData.Id;
 
@@ -421,4 +406,8 @@ function SaveSolicitud() {
     //        alert("Estado: Error inesperado");
     //    }
     //});
+}
+
+function redirectDefault() {
+    window.location.href = urlDefault;
 }

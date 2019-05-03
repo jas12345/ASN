@@ -42,8 +42,8 @@
                                     .Sortable()
                                     .PersistSelection()
                                     .Resizable(c => c.Columns(true))
-                                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadosSolicitudesPopUp").Window(x => x.Width(530).HtmlAttributes(new { style = "width: 530px" })))
-                                    .Events(eve => eve.SaveChanges("onSave").Edit("edit").DataBound("validacheckdefault"))
+                                    //.Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadosSolicitudesPopUp").Window(x => x.Width(530).HtmlAttributes(new { style = "width: 530px" })))
+                                    .Events(eve => eve.SaveChanges("onSave").DataBound("validacheckdefault"))//.Edit("edit")
                                     .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                     .DataSource(dataSource => dataSource
                                             .Ajax()
@@ -107,6 +107,7 @@
     </div>
     <script>
         var urlSolicitudEmpleados = '@Url.Action("GuardaEmpleados", "Solicitudes")';
+        var urlDefault = '@Url.Action("Index", "Solicitudes")';
     </script>
 }
 else

@@ -37,6 +37,7 @@ namespace ASN.Controllers
                     {
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                         ViewData["ConceptoMotivo"] = context.CatConceptosMotivoCMB().ToList();
+                        ViewData["PeriodosNomina"] = context.CatPeriodosNominaCMB(0).ToList();
                     }
                 }
             }
@@ -67,6 +68,9 @@ namespace ASN.Controllers
                     //Cambiamos la información de modelo para poder trabajar con el multiselect.
                     foreach (var item in listEmpleadosSolicitudes)
                     {
+                        var lstConceptos = new List<selectModelConceptoMotivo>();
+                        lstConceptos.Add(new selectModelConceptoMotivo() { Ident = int.Parse(item.CatConceptoMotivoId), Valor = item.ConceptoMotivo});
+
                         lstEmpleadosSolicitud.Add(new EmpleadosSolicitudesViewModel()
                         {
                             FolioSolicitud = item.FolioSolicitud,
@@ -88,6 +92,7 @@ namespace ASN.Controllers
                             Manager_Contract_Type = item.Manager_Contract_Type,
                             CatConceptoMotivoId = item.CatConceptoMotivoId,
                             ConceptoMotivo = item.ConceptoMotivo,
+                            LstConceptoMotivo = lstConceptos,
                             ParametroConceptoMonto = item.ParametroConceptoMonto,
                             Detalle = item.Detalle,
                             PeriodoNomina = item.PeriodoNomina,
@@ -189,9 +194,11 @@ namespace ASN.Controllers
                         {
                             context.CatSolicitudEmpleadosDetalleSi(
                             profiles.FolioSolicitud, profiles.Empleado_Ident,
-                            element.Ident,
+                            element.Ident, profiles.PeriodoNomina,
+                            profiles.Manager_Ident, profiles.ParametroConceptoMonto, profiles.Detalle,
                             ccmsidAdmin, resultado);
                         }
+
                  
                     int.TryParse(resultado.Value.ToString(), out res);
 
