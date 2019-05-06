@@ -1761,5 +1761,18 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudEmpleadosAutorizantesSel_Result>("CatSolicitudEmpleadosAutorizantesSel", folioSolicitudParameter);
         }
+    
+        public virtual ObjectResult<SolicitudEmpleadosxPerfilCMB_Result> SolicitudEmpleadosxPerfilCMB(Nullable<int> perfil_Ident, Nullable<int> solicitud)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            var solicitudParameter = solicitud.HasValue ?
+                new ObjectParameter("Solicitud", solicitud) :
+                new ObjectParameter("Solicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SolicitudEmpleadosxPerfilCMB_Result>("SolicitudEmpleadosxPerfilCMB", perfil_IdentParameter, solicitudParameter);
+        }
     }
 }

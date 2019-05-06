@@ -24,15 +24,7 @@ function accion(tab)
             $("#tab3").hide();
             break;
         case 2:
-            //debugger;
-
-            //var masterGrid = $("#grid").data("kendoGrid");
-            //var detailRows = masterGrid.element.find(".k-detail-row");
             var informacion = null;
-            //for (var i = 0; i < detailRows.length; i++) {
-            //    var detailGrid = $(detailRows[i]).find(".k-grid").data("kendoGrid");
-            //    informacion.push(detailGrid.dataSource.view());
-            //}
 
             GuardaEmpleadosSolicitud();
             if (continuaAccion) {
@@ -211,16 +203,6 @@ function validacheckdefault(e) {
     });
 }
 
-//function actualizaGrid() {
-//    var grid = $("#grid").data("kendoGrid");
-//    var options = grid.options;    
-//    grid.destroy();
-
-//    $("#grid").empty().kendoGrid(options);
-//    $("#grid").data("kendoGrid").dataSource.read();
-//    $("#grid").data("kendoGrid").refresh();
-//}
-
 //Inicio Parametros
 function GetPerfil() {
     return {
@@ -343,6 +325,10 @@ function EditaSolicitud(e) {
     e.preventDefault();
     var d = this.dataItem($(e.currentTarget).closest("tr"));
     window.location.href = urlEditar +"?id="+ d.FolioSolicitud;
+}
+
+function EditaAutorizador() {
+    alert("En construcción");
 }
 
 //#Inicio Funciones de Solicitud

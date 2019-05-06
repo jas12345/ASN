@@ -364,6 +364,9 @@
     <Compile Include="Models\RelPeriodicidadPaisCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SolicitudEmpleadosxPerfilCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SolicitudEmpleadosxPerfilSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -599,6 +602,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\EmpleadosSolicitudes\GridEmpleadosAutorizantes.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -679,6 +683,7 @@
     <Content Include="Views\SolicitudesTodas\Index.cshtml" />
     <Content Include="Views\BusquedasVarias\Index.cshtml" />
     <Content Include="Views\Solicitudes\Editar.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AutorizadorSolicitudesPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

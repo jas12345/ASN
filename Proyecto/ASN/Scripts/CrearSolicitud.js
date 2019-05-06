@@ -230,14 +230,6 @@ function SaveSolicitud(accion) {
     {
         
         if (validator.validate()) {
-            //var modelo = {
-            //    FolioSolicitud: $("#FolioSolicitud").val(),
-            //    Perfil_Ident: $("#Perfil_Ident").val(),
-            //    PeriodoNominaMes_Id: $("#PeriodoNominaMes_Id").val(),
-            //    ConceptoId: $("#ConceptoId").val(),
-            //    MotivoId: $("#MotivoId").val(),
-            //    Justficacion: $("#Justficacion").val()
-            //};
 
             var myWindow = $("#windowNotifica").data("kendoWindow");
             kendo.ui.progress($(".chart-loading"), true);

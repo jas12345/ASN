@@ -201,6 +201,28 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult GetAutorizanteXperfilCMB(string perfil, string solicitud)
+        {
+            try
+            {
+                var listEmpleados = new List<SolicitudEmpleadosxPerfilCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    listEmpleados = context.SolicitudEmpleadosxPerfilCMB((!string.IsNullOrEmpty(perfil) ? int.Parse(perfil) : 0),(!string.IsNullOrEmpty(solicitud) ? int.Parse(solicitud) : 0)).ToList();
+                }
+
+                return Json(listEmpleados, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
         public ActionResult CreateSolicitudEmpleadosDetalle([DataSourceRequest] DataSourceRequest request, EmpleadosSolicitudesViewModel profiles)//,string aplicaTodos, string listEmpleados, string listConceptosMotivo)
         {
             try
@@ -314,6 +336,25 @@ namespace ASN.Controllers
                 //var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
                 return Json(profiles.ToDataSourceResult(request, ModelState));
                // return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult UpdateAutorizantesEmpleado([DataSourceRequest] DataSourceRequest request, CatSolicitudEmpleadosAutorizantesSel_Result profiles)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                }
+                return Json("");
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                var resultadoAccion = "Ocurrió un error al procesar los autorizantes.";
+                return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
             }
         }
     }

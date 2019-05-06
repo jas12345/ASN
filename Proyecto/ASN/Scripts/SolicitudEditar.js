@@ -48,7 +48,6 @@ function edit(e) {
     }
 }
 
-
 function valida(e) {
     if (e.type === "create" || e.type === "update") {
         $('#grid').data('kendoGrid').dataSource.data([]);
@@ -124,7 +123,6 @@ function handleSaveChanges(e, grid) {
 }
 
 (function ($, kendo) {
-
     $.extend(true, kendo.ui.validator, {
         rules: { // custom rules
             customRule1: function (input, params) {
@@ -155,11 +153,6 @@ function handleSaveChanges(e, grid) {
 function GetInformacionPerfil() {
 
     $(".infoPerfil").hide();
-    //$("div#Formulario input#FechaSolicitud").removeAttr("disabled");
-    //$("#Formulario #paisName").removeAttr("disabled");
-    //$("#Formulario #siteName").removeAttr("disabled");
-    //$("Formulario #clienteName").removeAttr("disabled");
-    //$("#Formulario input#programaName").removeAttr("disabled");
 
     $.ajax({
         url: '/Solicitudes/GetPerfil?perfilId=' + $("#Perfil_Ident").val(),
@@ -206,14 +199,6 @@ function SaveSolicitud(accion) {
     if ($("#FolioSolicitud").val() !== "0") {
 
         if (validator.validate()) {
-            var modelo = {
-                FolioSolicitud: $("#FolioSolicitud").val(),
-                Perfil_Ident: $("#Perfil_Ident").val(),
-                PeriodoNominaMes_Id: $("#PeriodoNominaMes_Id").val(),
-                ConceptoId: $("#ConceptoId").val(),
-                MotivoId: $("#MotivoId").val(),
-                Justficacion: $("#Justficacion").val()
-            };
 
             var myWindow = $("#windowNotifica").data("kendoWindow");
             kendo.ui.progress($(".chart-loading"), true);
@@ -236,29 +221,17 @@ function SaveSolicitud(accion) {
                     kendo.ui.progress($(".chart-loading"), false);
 
                     if (response.status === "0") {
-                        //if (response.listaEmpleados !== null && response.listaEmpleados.length > 0) {
-                        //    contenido += "Acontinuación se enlistas los estatus de los empleados procesados.<br /><table border='1'><tr><td>CCMS ID</td><td>Resultado Acción</td></tr>"
-                        //    for (var i = 0; i < response.listaEmpleados.length; i++) {
-                        //        contenido += "<tr><td>" + response.listaEmpleados[i].catEmployeeId + "</td><td>" + response.listaEmpleados[i].estatus.replace("-1_", "").replace("-2_", "") + "</td></tr>";
-                        //    }
-                        //    contenido += "</table>";
 
-                        //} else {
-                            contenido += "<b>Se actualizo correctamente la solicitud.</b><br>";
-                        //}
-                        solicitud = response.Id
-
+                        contenido += "<b>Se actualizo correctamente la solicitud.</b><br>";
+                        solicitud = response.Id;
                         contenido += "<br /><div style='float:right;margin-right:5px;margin-top:15px;'><button type='button' class='k-button k-state-default' onclick='cierraModal();'>Cerrar</button><button type='button' class='k-button k-state-default' style='margin-left:5px;' onclick='cargaEmpleados(" + accion + "," + solicitud + "," + $("#Perfil_Ident").val() + ");'>Continuar</button></div>";
-
-
-                        $("#windowNotifica").html("");
-
+                        
+                        $("#windowNotifica").html(contenido);
                         myWindow.center().open();
                     }
                     else {
                         var notification = $("#popupNotification").data("kendoNotification");
                         notification.show(response.responseError.Errors, "error");
-
                     }
                 },
                 failure: function (response) {
@@ -275,10 +248,6 @@ function SaveSolicitud(accion) {
 
 function OnSuccess(response) {
     debugger;
-    //var message = "Person Id: " + response.PersonId;
-    //message += "\nName: " + response.Name;
-    //message += "\nGender: " + response.Gender;
-    //message += "\nCity: " + response.City;
     alert("EXITOSO");
 }
 
@@ -291,7 +260,7 @@ function cargaEmpleados(accion, solicitud, perfil) {
     if (accion === 1) {
         window.location.href = "/Solicitudes/Index";
     } else if (accion === 2) {
-        window.location.href = "EmpleadosSolicitudes/MuestraEmpleados?id=" + solicitud + "&perfilId=" + perfil;
+        window.location.href = urlSeleccionaPersonal + "?id=" + solicitud + "&perfil=" + perfil;
     }
 }
 

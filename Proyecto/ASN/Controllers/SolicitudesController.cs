@@ -384,18 +384,18 @@ namespace ASN.Controllers
                     var lstResultado = resultado.Value.ToString().Split('_');
                     int.TryParse(lstResultado[0], out res);
                     var resultadoAccion = "";
-                    int SolicitudId = 0;
+                    int SolicitudId = profiles.FolioSolicitud;
                     object Error = null;
 
                     if (res != -1)
                     {
                         if (files != null)
                         {
-                            GuardaArchivos(lstResultado[1].ToString(), files, ccmsidAdmin);
+                            GuardaArchivos(SolicitudId.ToString(), files, ccmsidAdmin);
                         }
                         if (files2 != null)
                         {
-                            lista = Save(files2, int.Parse(lstResultado[1].ToString()), ccmsidAdmin);
+                            lista = Save(files2, SolicitudId, ccmsidAdmin);
                         }
                     }
 
@@ -405,17 +405,10 @@ namespace ASN.Controllers
                         Error = new { Errors = resultadoAccion };
                         ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
                     }
-                    else
-                    {
-                        if (lstResultado.Length > 1)
-                        {
-                            SolicitudId = int.Parse(lstResultado[1].ToString());
-                        }
-                    }
 
                     result = new { Id = SolicitudId, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };
                 }
-                return Json(result);// (profiles.ToDataSourceResult(request, ModelState)); //(profiles);//
+                return Json(result, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -428,7 +421,6 @@ namespace ASN.Controllers
                 //return Json(profiles.ToDataSourceResult(request, ModelState));
                 return Json(new { Id = 0, type = "create", responseError = new { Errors = resultadoAccion }, listaEmpleados = "", status = "-1" }, JsonRequestBehavior.AllowGet);
             }
-            //return View(profiles);
         }
 
         public List<CargaMasivaRegistroViewModel> Save(IEnumerable<HttpPostedFileBase> files, int solicitudid, int useremployeeid)

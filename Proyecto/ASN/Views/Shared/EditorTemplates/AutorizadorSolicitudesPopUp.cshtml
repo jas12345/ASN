@@ -25,13 +25,13 @@
                             {
                                 source.Read(read =>
                                 {
-                                    read.Action("GetPeriodoNominaCMB", "EmpleadosSolicitudes");
+                                    read.Action("GetAutorizanteXperfilCMB", "EmpleadosSolicitudes").Data("GetPerfil");
                                 });
                             })
                             .Filter("contains")
-                            .OptionLabel("- Periodo original - ")
+                            .OptionLabel("- Autorizador - ")
                             .DataValueField("Ident")
-                            .DataTextField("Valor")
+                            .DataTextField("Value")
                             .Name("Autorizador_Ident")
                             .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
             )
@@ -41,32 +41,26 @@
             <label for="NivelAutorizacion">Nivel Autorización</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBox().Name("NivelAutorizacion").HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
+            @(Html.Kendo().TextBox().Name("NivelAutorizacion").HtmlAttributes(new { style = "text-align:center;width: 15.4em", min=0, max=100,type="numeric" }))
             @(Html.Kendo().CheckBox().Name("TTNivelAutorizacion").Label("(Todos)"))
         </div>
         <div class="editor-field">
             @(Html.Kendo().CheckBox().Name("Obligatorio").Label("Es Obligatorio"))
         </div>
         <div class="editor-label">
-            <label>Estatus</label>
+            <label>Monto Maximo Autorización Automatica</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownList()
-                    .DataSource(source =>
-                    {
-                        source.Read(read =>
-                        {
-                            read.Action("GetPeriodoNominaCMB", "EmpleadosSolicitudes");
-                        });
-                    })
-                    .Filter("contains")
-                    .OptionLabel("- Periodo original - ")
-                    .DataValueField("Ident")
-                    .DataTextField("Valor")
-                    .Name("Autorizador_Ident")
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
-            )
-            @(Html.Kendo().CheckBox().Name("TTAutorizador_Ident").Label("(Todos)"))
+            @(Html.Kendo().NumericTextBox<decimal>()
+                    .Name("MontoAutorizacionAutomatica")
+                    .Format("c")
+                    .Min(0)
+                    .Max(10000)
+                    .Value(0)
+                    .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                    )
+        @*@(Html.Kendo().TextBox().Name("MontoAutorizacionAutomatica").HtmlAttributes(new { style = "text-align:center;width: 15.4em", min = 0, max = 10000 }))*@
+                    @(Html.Kendo().CheckBox().Name("TTAutorizador_Ident").Label("(Todos)"))
         </div>
         <input type="hidden" id="PeriodicidadId" value="" />
     </div>

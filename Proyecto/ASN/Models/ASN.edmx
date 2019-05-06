@@ -447,6 +447,10 @@
         <Function Name="RelPeriodicidadPaisCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="country" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SolicitudEmpleadosxPerfilCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+          <Parameter Name="Solicitud" Type="int" Mode="In" />
+        </Function>
         <Function Name="SolicitudEmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
           <Parameter Name="Solicitud" Type="int" Mode="In" />
@@ -952,14 +956,18 @@
             <Parameter Name="Solicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AutorizadoresxPerfilSolicitanteSel" ReturnType="Collection(ASNModel.AutorizadoresxPerfilSolicitanteSel_Result)">
-            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AvisoSolicitantesAutorizantes" ReturnType="Collection(ASNModel.AvisoSolicitantesAutorizantes_Result)" />
           <FunctionImport Name="CatPerfilEmpleadosAccesosCMB" ReturnType="Collection(ASNModel.CatPerfilEmpleadosAccesosCMB_Result)">
-            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatSolicitudEmpleadosAutorizantesSel" ReturnType="Collection(ASNModel.CatSolicitudEmpleadosAutorizantesSel_Result)">
-            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+          <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SolicitudEmpleadosxPerfilCMB" ReturnType="Collection(ASNModel.SolicitudEmpleadosxPerfilCMB_Result)">
+            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Solicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1446,6 +1454,10 @@
           <Property Type="Boolean" Name="Rechazado" Nullable="true" />
           <Property Type="Boolean" Name="Cancelado" Nullable="true" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SolicitudEmpleadosxPerfilCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="752" />
         </ComplexType>
        
         </Schema>
@@ -2173,6 +2185,14 @@
                 <ScalarProperty Name="Rechazado" ColumnName="Rechazado" />
                 <ScalarProperty Name="Cancelado" ColumnName="Cancelado" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SolicitudEmpleadosxPerfilCMB" FunctionName="ASNModel.Store.SolicitudEmpleadosxPerfilCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.SolicitudEmpleadosxPerfilCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

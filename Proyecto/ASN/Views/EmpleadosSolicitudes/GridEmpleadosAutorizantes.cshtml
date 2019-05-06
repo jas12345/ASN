@@ -57,7 +57,7 @@
                                     })
                                     .Read(read => read.Action("GridEmpleadosAutorizantesSel", "EmpleadosSolicitudes").Data("GetSolicitudAutoriza"))
                                     .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
-                                    .Update(update => update.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes"))//.Data("GetParametros")
+                                    .Update(update => update.Action("UpdateAutorizantesEmpleado", "EmpleadosSolicitudes").Data("GetPerfil"))//.Data("GetParametros")
                                     )
                                            .Navigatable()
                                            .Pageable(pageable => pageable

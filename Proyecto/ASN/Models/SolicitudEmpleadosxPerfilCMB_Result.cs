@@ -11,9 +11,9 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class AutorizadoresxPerfilSolicitanteSel_Result
+    public partial class SolicitudEmpleadosxPerfilCMB_Result
     {
-        public int EmpleadoId { get; set; }
-        public string Nombre { get; set; }
+        public int Ident { get; set; }
+        public string Value { get; set; }
     }
 }
