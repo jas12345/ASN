@@ -602,5 +602,48 @@ namespace ASN.Controllers
                 return Json(new { Id = 0, responseError = new { Errors = resultadoAccion }, status = "-1" }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public JsonResult EnviarSolicitud([DataSourceRequest]DataSourceRequest request, string solicitud)
+        {
+            try
+            {
+                var lista = new List<CargaMasivaRegistroViewModel>();
+                int res = 0;
+                var result = new object();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    object Error = null;
+
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    int ccmsidAdmin = 0;
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 1;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+                    context.CatSolicitudesSu(int.Parse(solicitud),DateTime.Now,0,0,string.Empty,0,string.Empty,string.Empty,0,0,string.Empty,0,0,string.Empty, resultado, ccmsidAdmin);
+                    
+                    var resultadoAccion = "";
+                    if (res == -1)
+                    {
+                        resultadoAccion = "Ocurrio un problema durante la actualización de la solicitud. Intente más tarde.";
+                        Error = new { Errors = resultadoAccion };
+                    }
+
+                    result = new { Id = solicitud, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };
+                }
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception  ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
+                return Json(new { Id = 0, type = "create", responseError = new { Errors = resultadoAccion }, status = "-1" }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

@@ -1774,5 +1774,42 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SolicitudEmpleadosxPerfilCMB_Result>("SolicitudEmpleadosxPerfilCMB", perfil_IdentParameter, solicitudParameter);
         }
+    
+        public virtual int CatSolicitudEmpleadosAutorizantesSI(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> autorizador_Ident, Nullable<int> nivelAutorizacion, Nullable<bool> obligatorio, Nullable<decimal> montoAutorizacionAutomatica, Nullable<int> accion, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var empleado_IdentParameter = empleado_Ident.HasValue ?
+                new ObjectParameter("Empleado_Ident", empleado_Ident) :
+                new ObjectParameter("Empleado_Ident", typeof(int));
+    
+            var autorizador_IdentParameter = autorizador_Ident.HasValue ?
+                new ObjectParameter("Autorizador_Ident", autorizador_Ident) :
+                new ObjectParameter("Autorizador_Ident", typeof(int));
+    
+            var nivelAutorizacionParameter = nivelAutorizacion.HasValue ?
+                new ObjectParameter("NivelAutorizacion", nivelAutorizacion) :
+                new ObjectParameter("NivelAutorizacion", typeof(int));
+    
+            var obligatorioParameter = obligatorio.HasValue ?
+                new ObjectParameter("Obligatorio", obligatorio) :
+                new ObjectParameter("Obligatorio", typeof(bool));
+    
+            var montoAutorizacionAutomaticaParameter = montoAutorizacionAutomatica.HasValue ?
+                new ObjectParameter("MontoAutorizacionAutomatica", montoAutorizacionAutomatica) :
+                new ObjectParameter("MontoAutorizacionAutomatica", typeof(decimal));
+    
+            var accionParameter = accion.HasValue ?
+                new ObjectParameter("Accion", accion) :
+                new ObjectParameter("Accion", typeof(int));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosAutorizantesSI", folioSolicitudParameter, empleado_IdentParameter, autorizador_IdentParameter, nivelAutorizacionParameter, obligatorioParameter, montoAutorizacionAutomaticaParameter, accionParameter, userEmployeeIdParameter, estatus);
+        }
     }
 }

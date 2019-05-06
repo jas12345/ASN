@@ -322,6 +322,17 @@
         <Function Name="CatSolicitudEmpleadosAutorizantesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatSolicitudEmpleadosAutorizantesSI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="Empleado_Ident" Type="int" Mode="In" />
+          <Parameter Name="Autorizador_Ident" Type="int" Mode="In" />
+          <Parameter Name="NivelAutorizacion" Type="int" Mode="In" />
+          <Parameter Name="Obligatorio" Type="bit" Mode="In" />
+          <Parameter Name="MontoAutorizacionAutomatica" Type="decimal" Mode="In" />
+          <Parameter Name="Accion" Type="int" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="CatSolicitudEmpleadosDetalleMasivoSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="SolicitudId" Type="int" Mode="In" />
           <Parameter Name="CatEmpleadoId" Type="int" Mode="In" />
@@ -968,6 +979,17 @@
           <FunctionImport Name="SolicitudEmpleadosxPerfilCMB" ReturnType="Collection(ASNModel.SolicitudEmpleadosxPerfilCMB_Result)">
             <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Solicitud" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatSolicitudEmpleadosAutorizantesSI">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="NivelAutorizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Obligatorio" Mode="In" Type="Boolean" />
+            <Parameter Name="MontoAutorizacionAutomatica" Mode="In" Type="Decimal" />
+            <Parameter Name="Accion" Mode="In" Type="Int32" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2196,6 +2218,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosAutorizantesSI" FunctionName="ASNModel.Store.CatSolicitudEmpleadosAutorizantesSI" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

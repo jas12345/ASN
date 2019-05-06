@@ -118,11 +118,11 @@
                 </div>
                 <div class="row">
                     <div class="k-form-field" style="float:right; margin-right:15px;">
-                        <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(4);" role="button" aria-disabled="false" tabindex="0">
-                            <span class="k-icon k-i-close"></span>Cancelar
+                        <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(5);" role="button" aria-disabled="false" tabindex="0">
+                            <span class="k-icon k-i-close"></span>Salir
                         </button>
-                        <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext primary" onclick="accion(2);" role="button" aria-disabled="false" tabindex="0">
-                            <span class="k-icon k-i-save"></span> Guardar
+                        <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext primary" onclick="accion(6);" role="button" aria-disabled="false" tabindex="0">
+                            <span class="k-icon k-i-save"></span> Enviar
                         </button>
                     </div>
                 </div>
@@ -130,9 +130,11 @@
         </div>
     </div>
     <script>
+        var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';
         var urlSolicitudEmpleados = '@Url.Action("GuardaEmpleados", "Solicitudes")';
         var urlDefault = '@Url.Action("Index", "Solicitudes")';
         var urlGridEmpleadosAutorizadores = '@Url.Action("GridEmpleadosAutorizantes", "EmpleadosSolicitudes")';
+        var urlEnviaSolicitud = '@Url.Action("EnviarSolicitud", "Solicitudes")';
     </script>
 }
 else

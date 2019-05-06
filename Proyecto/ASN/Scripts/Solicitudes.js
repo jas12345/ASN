@@ -49,7 +49,14 @@ function accion(tab)
             
             break;
         case 5:
-            $("#tab2").show();
+            redirectDefault();
+            $("#tab2").hide();
+            $("#tab1").hide();
+            $("#tab3").hide();
+            break;
+        case 6:
+            EnviarSolicitud();
+            $("#tab2").hide();
             $("#tab1").hide();
             $("#tab3").hide();
             break;
@@ -106,7 +113,7 @@ function onSave(e) {
         }
 
     });
-
+    debugger;
     if (hayCambios) {
         if (sonNuevos) {
             handleSaveChanges(e, this);
@@ -119,6 +126,7 @@ function onSave(e) {
 
 function handleEditChanges(e, grid) {
     var valid = true;
+    debugger;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
         return item.dirty;
@@ -138,6 +146,7 @@ function handleEditChanges(e, grid) {
 }
 
 function handleSaveChanges(e, grid) {
+    debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     for (var i = 0; i < rows.length; i++) {
@@ -211,6 +220,12 @@ function GetPerfil() {
     };
 }
 
+function GetAutorizador() {
+    return {
+        solicitud: $("#SolicitudId").val(),
+        Autorizador_Id: $("#Autorizador_Ident").val()
+    };
+}
 function GetSolicitudId() {
     return {
         SolicitudId: SolicitudNueva
@@ -327,19 +342,11 @@ function EditaSolicitud(e) {
     window.location.href = urlEditar +"?id="+ d.FolioSolicitud;
 }
 
-function EditaAutorizador() {
-    alert("En construcción");
-}
 
 //#Inicio Funciones de Solicitud
 function GetInformacionPerfil() {
 
     $(".infoPerfil").hide();
-    //$("div#Formulario input#FechaSolicitud").removeAttr("disabled");
-    //$("#Formulario #paisName").removeAttr("disabled");
-    //$("#Formulario #siteName").removeAttr("disabled");
-    //$("Formulario #clienteName").removeAttr("disabled");
-    //$("#Formulario input#programaName").removeAttr("disabled");
 
     $.ajax({
         url: '/Solicitudes/GetPerfil?perfilId=' + $("#Perfil_Ident").val(),
@@ -380,33 +387,24 @@ function GetInformacionPerfil() {
 }
 
 function SaveSolicitud() {
-    var modelo = {
-        FolioSolicitud: $("#FolioSolicitud").val(),
-        Perfil_Ident: $("#Perfil_Ident").val(),
-        PeriodoNominaMes_Id: $("#PeriodoNominaMes_Id").val(),
-        ConceptoId: $("#ConceptoId").val(),
-        MotivoId: $("#MotivoId").val(),
-        Justficacion: $("#Justficacion").val()
-    };
 
     var formdata = new FormData($('#Formulario').get(0));
-    //debugger;
     $.ajax({
         type: "POST",
-        url: '/Solicitudes/CreateSolicitud',
-        //contentType: "application/json; charset=utf-8", //For posting uploaded files use as below instead of this
+        url: urlCrearSolicitud,
         data: formdata,
         dataType: "json",
-        processData: false, //For posting uploaded files we add this
-        contentType: false, //For posting uploaded files we add this
+        processData: false, 
+        contentType: false,
         success: function (response) {
             //debugger;
             if (response.success) {
+                notification.show("Procesado Correctamente", "success");
                 window.location.href = response.url;
                         }
             else if (!response.success) {
                 hideKendoLoading();
-                //Scroll top of the page and div over a period of one second (1,000 milliseconds = 1 second).
+                
                 $('html, body').animate({ scrollTop: (0) }, 1000);
                 $('#popupDiv').animate({ scrollTop: (0) }, 1000);
                 var errorMsg = response.message;
@@ -421,23 +419,41 @@ function SaveSolicitud() {
         }
     });
 
-
-    //jQuery.ajax({
-    //    url: php_file_path,
-    //    type: "POST",
-    //    data: formdata,
-    //    processData: false,
-    //    contentType: false,
-    //    success: function (result) {
-    //        debugger;
-    //        // if all is well
-    //        // play the audio file
-    //    }, error: function (jqXHR, textStatus, error) {
-    //        alert("Estado: Error inesperado");
-    //    }
-    //});
 }
 
 function redirectDefault() {
     window.location.href = urlDefault;
+}
+
+function EnviarSolicitud() {
+    $.ajax({
+        type: "POST",
+        url: urlEnviaSolicitud + "?solicitud="+ $("#SolicitudId").val(),
+        dataType: "json",
+        success: function (response) {
+            debugger;
+            var notification = $("#popupNotification").data("kendoNotification");
+            if (response.status == 0) {
+                notification.show("Procesado Correctamente", "success");
+                $("#tab1").html("");
+                $("#tab2").html("");
+                //window.location.href = response.url;
+                setTimeout('redirectDefault()', 2000); 
+            }
+            else if (response.status != 0) {
+                hideKendoLoading();
+
+                $('html, body').animate({ scrollTop: (0) }, 1000);
+                $('#popupDiv').animate({ scrollTop: (0) }, 1000);
+                var errorMsg = response.Errors;
+                $('#divMessage').html(errorMsg).attr('class', 'alert alert-danger fade in');
+                $('#divMessage').show();
+            }
+            else {
+                var errorMsg = null;
+                $('#divMessage').html(errorMsg).attr('class', 'empty-alert');
+                $('#divMessage').hide();
+            }
+        }
+    });
 }

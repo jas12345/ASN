@@ -339,14 +339,38 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult UpdateAutorizantesEmpleado([DataSourceRequest] DataSourceRequest request, CatSolicitudEmpleadosAutorizantesSel_Result profiles)
+        /// <summary>
+        /// Método para guardar los autorizadores de cada empleado
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="profiles"></param>
+        /// <param name="solicitud"></param>
+        /// <param name="Autorizador_Id"></param>
+        /// <returns></returns>
+        public ActionResult UpdateAutorizantesEmpleado([DataSourceRequest] DataSourceRequest request, CatSolicitudEmpleadosAutorizantesSel_Result profiles, string solicitud, string Autorizador_Id, int accion=0)
         {
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    int ccmsidAdmin = 0;
+                    int res = 0;
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+                    context.CatSolicitudEmpleadosAutorizantesSI(int.Parse(solicitud),profiles.Empleado_Ident, int.Parse(Autorizador_Id), profiles.NivelAutorizacion,profiles.Obligatorio,profiles.MontoAutorizacionAutomatica,accion, ccmsidAdmin,resultado);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    if (res == -1)
+                    {
+                        ModelState.AddModelError("error", "Ocurrio un detalle");
+                    }
                 }
-                return Json("");
+
+                return Json(profiles, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
