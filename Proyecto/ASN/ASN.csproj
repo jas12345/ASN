@@ -358,6 +358,7 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogError.cs" />
+    <Compile Include="Models\MailHelper.cs" />
     <Compile Include="Models\MyCustomIdentity.cs" />
     <Compile Include="Models\PeriodoNominaViewModel.cs" />
     <Compile Include="Models\ProDepro.cs" />
