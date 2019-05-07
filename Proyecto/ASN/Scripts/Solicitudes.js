@@ -114,6 +114,7 @@ function onSave(e) {
 
     });
     debugger;
+    alert("onSave");
     if (hayCambios) {
         if (sonNuevos) {
             handleSaveChanges(e, this);
@@ -227,6 +228,11 @@ function GetAutorizador() {
     };
 }
 function GetSolicitudId() {
+
+    if (SolicitudNueva ===0) {
+        SolicitudNueva = $("#idSolicitud").val();
+    }
+
     return {
         SolicitudId: SolicitudNueva
     };
@@ -263,30 +269,35 @@ function GetParametros() {
 
 function GuardaEmpleadosSolicitud() {//GuardarBorrador
     var valoresGrid = $("#grid").data("kendoGrid");
-    var listado = valoresGrid.selectedKeyNames().join(", ") 
+    var listado = valoresGrid.selectedKeyNames().join(", ")
     var solicitud = $("#SolicitudId").val();
 
     continuaAccion = false;
-    $.ajax({
-        type: "POST",
-        url: urlSolicitudEmpleados,
-        data: JSON.stringify({ "solicitud": solicitud,"listaEmpleados":listado }),
-        contentType: 'application/json',
-        success: function (resultData) {
-            if (resultData.status !=="0") {
-                continuaAccion = false;
-                var notification = $("#popupNotification").data("kendoNotification");
-                notification.show(resultData.responseError.Errors, "error");               
-            } else {
-                continuaAccion = true
-                SolicitudNueva = resultData.Id;
+    if (listado !== "") {
+        $.ajax({
+            type: "POST",
+            url: urlSolicitudEmpleados,
+            data: JSON.stringify({ "solicitud": solicitud, "listaEmpleados": listado }),
+            contentType: 'application/json',
+            success: function (resultData) {
+                if (resultData.status !== "0") {
+                    continuaAccion = false;
+                    var notification = $("#popupNotification").data("kendoNotification");
+                    notification.show(resultData.responseError.Errors, "error");
+                } else {
+                    continuaAccion = true
+                    SolicitudNueva = resultData.Id;
 
-                var notification = $("#popupNotification").data("kendoNotification");
-                CargaEmpleadosSolicitud();
-                notification.show("Procesado Correctamente", "success");
+                    var notification = $("#popupNotification").data("kendoNotification");
+                    CargaEmpleadosSolicitud();
+                    notification.show("Procesado Correctamente", "success");
+                }
             }
-        }        
-    });
+        });
+    } else {
+        var notification = $("#popupNotification").data("kendoNotification");
+        notification.show(" Seleccione al menos 1 empleado", "error");
+    }
 }
 
 function CargaEmpleadosSolicitud() {

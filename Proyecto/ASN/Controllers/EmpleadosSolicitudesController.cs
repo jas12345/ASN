@@ -223,7 +223,8 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CreateSolicitudEmpleadosDetalle([DataSourceRequest] DataSourceRequest request, EmpleadosSolicitudesViewModel profiles)//,string aplicaTodos, string listEmpleados, string listConceptosMotivo)
+        public ActionResult CreateSolicitudEmpleadosDetalle([DataSourceRequest] DataSourceRequest request, EmpleadosSolicitudesViewModel profiles,
+            string TTConceptoMotivoId, string TTManager_Ident, string TTMonto, string TTDetalleId, string TTPeriodoNomina)
         {
             try
             {
@@ -252,6 +253,11 @@ namespace ASN.Controllers
                             profiles.FolioSolicitud, profiles.Empleado_Ident,
                             element.Ident, profiles.PeriodoNomina,
                             profiles.Manager_Ident, profiles.ParametroConceptoMonto, profiles.Detalle,
+                            (!string.IsNullOrEmpty(TTConceptoMotivoId) && TTConceptoMotivoId  == "true" ?  true: false),
+                            (!string.IsNullOrEmpty(TTManager_Ident) && TTManager_Ident == "true" ? true : false),
+                            (!string.IsNullOrEmpty(TTMonto) && TTMonto =="true"?  true : false),
+                            (!string.IsNullOrEmpty(TTDetalleId) && TTDetalleId  == "true" ? true : false),
+                            (!string.IsNullOrEmpty(TTPeriodoNomina) && TTPeriodoNomina == "true"? true : false),
                             ccmsidAdmin, resultado);
                         }
 

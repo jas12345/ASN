@@ -1604,7 +1604,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcesaSolicitudEmpleadoDetalleSi", solicitudIdParameter, listaEmpleadosParameter, conceptoMotivoIdParameter, listaConceptoMotivoParameter, aplicaAtodosParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatSolicitudEmpleadosDetalleSi(Nullable<int> solicitudId, Nullable<int> catEmpleadoId, Nullable<int> catConceptoMotivoId, string periodoNomina, Nullable<int> reponsableId, Nullable<decimal> monto, string detalle, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatSolicitudEmpleadosDetalleSi(Nullable<int> solicitudId, Nullable<int> catEmpleadoId, Nullable<int> catConceptoMotivoId, string periodoNomina, Nullable<int> reponsableId, Nullable<decimal> monto, string detalle, Nullable<bool> tTConceptoMotivoId, Nullable<bool> tTManager_Ident, Nullable<bool> tTMonto, Nullable<bool> tTDetalle, Nullable<bool> tTPeriodoNomina, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var solicitudIdParameter = solicitudId.HasValue ?
                 new ObjectParameter("SolicitudId", solicitudId) :
@@ -1634,11 +1634,31 @@ namespace ASN.Models
                 new ObjectParameter("Detalle", detalle) :
                 new ObjectParameter("Detalle", typeof(string));
     
+            var tTConceptoMotivoIdParameter = tTConceptoMotivoId.HasValue ?
+                new ObjectParameter("TTConceptoMotivoId", tTConceptoMotivoId) :
+                new ObjectParameter("TTConceptoMotivoId", typeof(bool));
+    
+            var tTManager_IdentParameter = tTManager_Ident.HasValue ?
+                new ObjectParameter("TTManager_Ident", tTManager_Ident) :
+                new ObjectParameter("TTManager_Ident", typeof(bool));
+    
+            var tTMontoParameter = tTMonto.HasValue ?
+                new ObjectParameter("TTMonto", tTMonto) :
+                new ObjectParameter("TTMonto", typeof(bool));
+    
+            var tTDetalleParameter = tTDetalle.HasValue ?
+                new ObjectParameter("TTDetalle", tTDetalle) :
+                new ObjectParameter("TTDetalle", typeof(bool));
+    
+            var tTPeriodoNominaParameter = tTPeriodoNomina.HasValue ?
+                new ObjectParameter("TTPeriodoNomina", tTPeriodoNomina) :
+                new ObjectParameter("TTPeriodoNomina", typeof(bool));
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSi", solicitudIdParameter, catEmpleadoIdParameter, catConceptoMotivoIdParameter, periodoNominaParameter, reponsableIdParameter, montoParameter, detalleParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSi", solicitudIdParameter, catEmpleadoIdParameter, catConceptoMotivoIdParameter, periodoNominaParameter, reponsableIdParameter, montoParameter, detalleParameter, tTConceptoMotivoIdParameter, tTManager_IdentParameter, tTMontoParameter, tTDetalleParameter, tTPeriodoNominaParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual ObjectResult<CatMotivoSolicitudCMB_Result> CatMotivoSolicitudCMB()

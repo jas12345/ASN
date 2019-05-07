@@ -16,7 +16,7 @@
             <form id="Formulario">
                 @Html.ValidationSummary(true)
                 <div class="k-form-field">
-                    <section class="well">
+                    <section class="">
                         <div class="form-horizontal form-widgets col-sm-12">
                             <div class="form-group">
                                 @(Html.HiddenFor(x => x.FolioSolicitud, new { required = "required" }))
@@ -213,6 +213,7 @@
     <script>
         var urlEdita = '@Url.Action("EditaSolicitud", "Solicitudes")';
         var urlSeleccionaPersonal = '@Url.Action("SelecionaEmpleadosSolicitud", "Solicitudes")';
+        var urlDefault = '@Url.Action("Index", "Solicitudes")';
     </script>
 }
 @Scripts.Render("~/bundles/EditarSolicitud")

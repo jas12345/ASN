@@ -194,7 +194,6 @@ function GetInformacionPerfil() {
 function SaveSolicitud(accion) {
 
     var validator = $("#Formulario").kendoValidator().data("kendoValidator"), status = $(".status");
-    debugger;
 
     if ($("#FolioSolicitud").val() !== "0") {
 
@@ -205,7 +204,6 @@ function SaveSolicitud(accion) {
             var formdata = new FormData($('#Formulario').get(0));
             var solicitud = 0;
 
-            //$.ajax({ url: urlSolicitud, data: formdata, contentType: 'application/json; charset=utf-8', type: 'POST', dataType: 'JSON' }).success(function (response) {
             $.ajax({
                 type: "POST",
                 url: urlEdita,
@@ -214,7 +212,6 @@ function SaveSolicitud(accion) {
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    debugger;
                     myWindow.close();
                     var contenido = "";
 
@@ -267,6 +264,7 @@ function cargaEmpleados(accion, solicitud, perfil) {
 function cierraModal() {
     var myWindow = $("#windowNotifica").data("kendoWindow");
     myWindow.close();
+    redirectDefault();
 }
 
 function displayLoading(target) {
@@ -280,4 +278,8 @@ function displayLoading(target) {
 function formattedDate(d = new Date) {
     return [d.getDate(), d.getMonth() + 1, d.getFullYear()]
         .map(n => n < 10 ? `0${n}` : `${n}`).join('-');
+}
+
+function redirectDefault() {
+    window.location.href = urlDefault;
 }

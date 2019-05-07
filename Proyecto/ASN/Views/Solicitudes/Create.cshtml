@@ -15,7 +15,7 @@
             <form id="Formulario" method="post" action='@Url.Action("CreateSolicitud")'>
                 @Html.ValidationSummary(true)
                 <div class="k-form-field">
-                    <section class="well">
+                    <section class="">
                         <div class="form-horizontal form-widgets col-sm-12">
                             <div class="form-group">
                                 @(Html.HiddenFor(x => x.FolioSolicitud, new { required = "false" }))

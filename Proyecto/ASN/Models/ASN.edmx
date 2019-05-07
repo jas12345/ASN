@@ -348,6 +348,11 @@
           <Parameter Name="ReponsableId" Type="int" Mode="In" />
           <Parameter Name="Monto" Type="decimal" Mode="In" />
           <Parameter Name="Detalle" Type="varchar" Mode="In" />
+          <Parameter Name="TTConceptoMotivoId" Type="bit" Mode="In" />
+          <Parameter Name="TTManager_Ident" Type="bit" Mode="In" />
+          <Parameter Name="TTMonto" Type="bit" Mode="In" />
+          <Parameter Name="TTDetalle" Type="bit" Mode="In" />
+          <Parameter Name="TTPeriodoNomina" Type="bit" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -935,6 +940,11 @@
             <Parameter Name="ReponsableId" Mode="In" Type="Int32" />
             <Parameter Name="Monto" Mode="In" Type="Decimal" />
             <Parameter Name="Detalle" Mode="In" Type="String" />
+            <Parameter Name="TTConceptoMotivoId" Mode="In" Type="Boolean" />
+            <Parameter Name="TTManager_Ident" Mode="In" Type="Boolean" />
+            <Parameter Name="TTMonto" Mode="In" Type="Boolean" />
+            <Parameter Name="TTDetalle" Mode="In" Type="Boolean" />
+            <Parameter Name="TTPeriodoNomina" Mode="In" Type="Boolean" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
