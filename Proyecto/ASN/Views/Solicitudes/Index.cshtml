@@ -22,6 +22,7 @@
                                         .Name("gridSolicitud")
                                         .Columns(column =>
                                         {
+                                            column.Command(command => { command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span> Editar").Click("EditaSolicitud"); }).Width(40);
                                             column.Bound(c => c.FolioSolicitud).Width(40).Title("Solicitud").Visible(false).Filterable(true);
                                             column.Bound(c => c.Solicintante_Nombre).Width(50).Title("Solicitante").Filterable(true).Width(70);
                                             column.Bound(c => c.NombrePerfilEmpleados).Width(50).Title("Perfil").Filterable(true).Width(70);
@@ -39,8 +40,6 @@
                                             column.Bound(c => c.MotivoId).Visible(false);
                                             column.Bound(c => c.Justficacion).Title("Justificanción").Visible(true).Width(70);
                                             column.Bound(c => c.Responsable_Id).Visible(false);
-                                            column.Command(command => { command.Custom("Editar").Click("EditaSolicitud"); }).Width(35);
-                                            //column.Bound(c => c.Current_Status).Width(50).Visible(true);
                                         })
                                        .HtmlAttributes(new { style = "height: 700px;" })
                                        .Scrollable(sorteable => sorteable.Virtual(false))
