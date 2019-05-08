@@ -283,3 +283,9 @@ function formattedDate(d = new Date) {
 function redirectDefault() {
     window.location.href = urlDefault;
 }
+
+function Perfil() {
+    return {
+        perfil: $("#Perfil_Ident").val(),
+    }
+}

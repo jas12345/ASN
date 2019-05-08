@@ -502,14 +502,16 @@
       <DependentUpon>ASN.edmx</DependentUpon>
       <LastGenOutput>ASN.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\BusquedasVarias.js" />
     <Content Include="Scripts\MisSolicitudes.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\SolicitudEditar.js" />
     <Content Include="Scripts\SolicitudesTodas.js" />
     <Content Include="Scripts\ToDo.js" />
     <Content Include="Scripts\AniosNomina.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ConceptosMotivos.js" />
     <Content Include="Scripts\ConsecutivosPeriodos.js" />
     <Content Include="Scripts\CrearSolicitud.js" />
@@ -540,9 +542,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphs\KendoUIGlyphs.eot" />
     <Content Include="Content\fonts\glyphs\KendoUIGlyphs.ttf" />
@@ -565,6 +564,9 @@
     <Content Include="Content\kendo.custom.less" />
     <Content Include="Content\kendo.default.min.css.map" />
     <Content Include="Scripts\formAnimation.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\General.js" />
@@ -589,7 +591,6 @@
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PerfilEmpleadosAccesos.js" />
     <Content Include="Scripts\PeriodicidadNomina.js" />
     <Content Include="Scripts\PeriodoNomina.js" />

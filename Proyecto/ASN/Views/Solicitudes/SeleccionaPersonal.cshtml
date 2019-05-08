@@ -16,14 +16,6 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="row"><div style="display: inline-block;">@Html.Label("Captura de solicitud", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Selección de Empleados", new { style = "font-size: 15px" }) - @Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px; color:darkgrey;" })</div></div>
                     </div>
-                    <div class="k-form-inline" style="padding:5px; display:none;" >
-                        <div class="k-form-field">
-                            <div class="editor-label">
-                                <label for="perfilId">Perfil de usuario</label>
-                            </div>
-                            
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             @(Html.Kendo().Grid<ASN.Models.EmpleadosxPerfilSel_Result>()
@@ -40,7 +32,7 @@
                                         column.Bound(c => c.EsNuevo).Width(50).Visible(false);
                                         //column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
                                     })
-                                    .HtmlAttributes(new { style = "height: 700px;" })
+                                    .HtmlAttributes(new { style = "height: 470px;" })
                                     .Scrollable(sorteable => sorteable.Virtual(false))
                                     .Sortable()
                                     .PersistSelection()
@@ -87,14 +79,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="k-form-field" style="float:right; margin-right:15px; margin-top:10px;">
-                            <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(5);" role="button" aria-disabled="false" tabindex="0">
+                        <div class="k-form-field" style="float:right; margin-right:35px; margin-top:10px;">
+                            <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext " onclick="accion(5);" role="button" aria-disabled="false" tabindex="0">
                                 <span class="k-icon k-i-close"></span>Salir
                             </button>
                             <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(4);" role="button" aria-disabled="false" tabindex="0">
                                 <span class="k-icon k-i-save"></span> Guardar
                             </button>
-                            <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext primary" onclick="accion(2);" role="button" aria-disabled="false" tabindex="0">
+                            <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext k-primary" onclick="accion(2);" role="button" aria-disabled="false" tabindex="0">
                                 <span class="k-icon k-i-redo"></span> Continuar
                             </button>
                         </div>
@@ -104,31 +96,37 @@
             </div>
 
             <div id="tab2" hidden>
+                <div class="col-lg-12 col-md-12">
+                    <div class="row"><div style="display: inline-block;">@Html.Label("Captura de Solicitud", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Selección de Empleados", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Conceptos Motivos por Empleado", new { style = "font-size: 15px;" }) - @Html.Label("Selección de Autorizantes", new { style = "font-size: 15px; color:darkgrey;" })</div></div>
+                </div>
                 <div id="cuerpo2" class="row">
                 </div>
                 <div class="row">
-                    <div class="k-form-field" style="float:right; margin-right:15px;">
+                    <div class="k-form-field" style="float:right; margin-right:35px; margin-top:10px;">
                         <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(5);" role="button" aria-disabled="false" tabindex="0">
                             <span class="k-icon k-i-close"></span>Salir
                         </button>
                         <button type="button" data-role="button" class="k-button k-button-icontext" role="button" aria-disabled="false" tabindex="0" onclick="accion(4);">
                             <span class="k-icon k-i-save"></span> Guardar
                         </button>
-                        <button type="button" data-role="button" class="k-button k-button-icontext" role="button" aria-disabled="false" tabindex="0" onclick="accion(3);">
+                        <button type="button" data-role="button" class="k-button k-button-icontext" role="button k-primary" aria-disabled="false" tabindex="0" onclick="accion(3);">
                             <span class="k-icon k-i-redo"></span> Continuar
                         </button>
                     </div>
                 </div>    
             </div>
             <div id="tab3" hidden>
+                <div class="col-lg-12 col-md-12">
+                    <div class="row"><div style="display: inline-block;">@Html.Label("Captura de solicitud", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Selección de Empleados", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Selección de autorizantes", new { style = "font-size: 15px;" })</div></div>
+                </div>
                 <div id="cuerpo3" class="row">
                 </div>
                 <div class="row">
-                    <div class="k-form-field" style="float:right; margin-right:15px;margin-top:10px;">
+                    <div class="k-form-field" style="float:right; margin-right:35px; margin-top:10px;">
                         <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(5);" role="button" aria-disabled="false" tabindex="0">
                             <span class="k-icon k-i-close"></span>Salir
                         </button>
-                        <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext primary" onclick="accion(6);" role="button" aria-disabled="false" tabindex="0">
+                        <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext k-primary" onclick="accion(6);" role="button" aria-disabled="false" tabindex="0">
                             <span class="k-icon k-i-save"></span> Enviar
                         </button>
                     </div>

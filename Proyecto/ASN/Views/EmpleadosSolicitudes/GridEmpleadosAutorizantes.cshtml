@@ -5,9 +5,7 @@
 }
 
 <div class="container-fluid">
-    <div class="col-lg-12 col-md-12">
-        <div class="row"><div style="display: inline-block;">@Html.Label("Captura de solicitud", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Selección de Empleados", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px; color:darkgrey;" }) - @Html.Label("Selección de autorizantes", new { style = "font-size: 15px;" })</div></div>
-    </div>
+    
     <div class="k-form-inline" style="padding:5px; display:none;">
         <div class="k-form-field">
             <div class="editor-label">
@@ -22,19 +20,19 @@
                             .Name("GridEmpleadosAutorizantes")
                             .Columns(column =>
                             {
+                                column.Command(command => { command.Edit().Text("Edita").HtmlAttributes(new { @class = "k-edit" }); }).Width(75);
                                 column.Bound(c => c.FolioSolicitud).Title("Solicitud").Visible(false).Filterable(true);
-                                column.Bound(c => c.Empleado_Ident).Title("CCMS ID").Width(60).Filterable(true);
+                                column.Bound(c => c.Empleado_Ident).Title("CCMS ID").Width(80).Filterable(true);
                                 column.Bound(c => c.Autorizador_Ident).Visible(false);
-                                column.Bound(c => c.NombreEmpleado).Title("Nombre").Visible(true).Filterable(true).Width(150);
+                                column.Bound(c => c.NombreEmpleado).Title("Nombre").Visible(true).Filterable(true).Width(130);
                                 column.Bound(c => c.NivelAutorizacion).Title("Nivel").Width(50).Visible(true);
                                 column.Bound(c => c.NombreAutorizador).Title("Autorizante").Width(150).Visible(true).Filterable(true);
                                 column.Bound(c => c.EsObligatorio).Title("Es obligatorio").Width(50).Visible(true);
                                 column.Bound(c => c.Obligatorio).Width(50).Visible(false);
                                 column.Bound(c => c.MontoAutorizacionAutomatica).Title("Monto autorización automatica").Width(60).Visible(true);
                                 column.Bound(c => c.Estatus).Width(50).Visible(true);
-                                column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
                             })
-                            .HtmlAttributes(new { style = "height: 700px;" })
+                            .HtmlAttributes(new { style = "height: 500px;" })
                             .Scrollable(sorteable => sorteable.Virtual(false))
                             .Sortable()
                             .PersistSelection()
