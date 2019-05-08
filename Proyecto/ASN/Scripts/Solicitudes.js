@@ -77,9 +77,9 @@ function edit(e) {
 
 function valida(e) {
     if (e.type === "create" || e.type === "update") {
-        $('#grid').data('kendoGrid').dataSource.data([]);
-        $('#grid').data('kendoGrid').dataSource.read();
-        $('#grid').data('kendoGrid').refresh();
+        $('#gridEmpleados').data('kendoGrid').dataSource.data([]);
+        $('#gridEmpleados').data('kendoGrid').dataSource.read();
+        $('#gridEmpleados').data('kendoGrid').refresh();
 
         if (e.response.Errors === null) {
             continuaAccion = true;
@@ -102,6 +102,7 @@ function errorsote(args) {
 function onSave(e) {
     var hayCambios = false;
     var sonNuevos = false;
+
     jQuery.grep(e.sender._data, function (item) {
 
         if (item.dirty || item.id <= 0) {
@@ -113,8 +114,7 @@ function onSave(e) {
         }
 
     });
-    debugger;
-    alert("onSave");
+    
     if (hayCambios) {
         if (sonNuevos) {
             handleSaveChanges(e, this);

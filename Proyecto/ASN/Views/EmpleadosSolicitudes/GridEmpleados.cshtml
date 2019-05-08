@@ -33,18 +33,18 @@
             .HtmlAttributes(new { style = "height: 550px;" })
             .Columns(column =>
             {
-                column.Bound(c => c.FolioSolicitud).Title("SolicitudId").Visible(false).Filterable(true);
-                column.Bound(c => c.Empleado_Ident).Title("CCMS ID").Width(50).Visible(true).Filterable(true);
+                column.Bound(c => c.FolioSolicitud).Title("SolicitudId").Width(50).Visible(false).Filterable(true);
+                column.Bound(c => c.Empleado_Ident).Title("CCMS ID").Width(100).Visible(true).Filterable(true);
                 column.Bound(c => c.Empleado_Middle_Name).Width(120).Title("Nombre").Visible(true).Filterable(true);
                 column.Bound(c => c.ConceptoMotivo).Width(170).Title("Concepto de Motivo").Visible(true).Filterable(true);
-                column.Bound(c => c.Manager_Ident).Title("Responsable ID").Visible(true).Filterable(true).Width(50);
+                column.Bound(c => c.Manager_Ident).Title("Responsable ID").Visible(true).Filterable(true).Width(120);
                 column.Bound(c => c.Manager_First_Name).Title("Nombre responsable").Width(120).Visible(true);
                 column.Bound(c => c.Manager_Position_Code_Title).Title("Puesto responsable").Width(90).Visible(true);
-                column.Bound(c => c.ParametroConceptoMonto).Title("Parámetro: Monto").Width(70).Visible(true);
+                column.Bound(c => c.ParametroConceptoMonto).Title("Parámetro: Monto").Width(150).Visible(true);
                 column.Bound(c => c.Detalle).Title("Detalle").Width(120).Visible(true);
-                column.ForeignKey(c => c.PeriodoNomina, (System.Collections.IEnumerable)ViewData["PeriodosNomina"], "Ident", "Valor").Title("Periodo nomina").Width(70).Visible(true);
-                column.Bound(c => c.LstConceptoMotivo).Visible(false);
-                column.Command(command => { command.Edit().Text("Editar"); }).Width(40);
+                column.ForeignKey(c => c.PeriodoNomina, (System.Collections.IEnumerable)ViewData["PeriodosNomina"], "Ident", "Valor").Title("Periodo nomina").Width(90).Visible(true);
+                column.Bound(c => c.LstConceptoMotivo).Visible(false).Width(40);
+                column.Command(command => { command.Edit().Text("Editar"); }).Width(60);
             })
             //.Scrollable(s => s.Height("20em")).Scrollable(sorteable => sorteable.Virtual(true))//.Scrollable(s => s.Enabled(true).Height("auto"))
             .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadosSolicitudesPopUp").Window(x => x.Width(630).HtmlAttributes(new { style = "width: 630px" })))//EmpleadoMotivoConceptoPopUp
@@ -70,6 +70,7 @@
             .Read(read => read.Action("GetEmpleadosSolicitudesSel", "EmpleadosSolicitudes").Data("GetSolicitudId"))
             .Create(create => create.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes").Data("GetParametrosAlta"))
             .Update(update => update.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes").Data("GetParametros"))
+            .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
             )
             .Resizable(c => c.Columns(true))
     //.Navigatable()
