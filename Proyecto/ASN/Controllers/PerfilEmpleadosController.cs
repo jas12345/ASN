@@ -30,7 +30,7 @@ namespace ASN.Controllers
                         ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
                         ViewData["Programa"] = context.CatProgramTodosCMB().ToList();
                         ViewData["TipoContrato"] = context.CatContractTypeTodosCMB().ToList();
-                        ViewData["Concepto"] = context.CatConceptosCMB().ToList();
+                        ViewData["Concepto"] = context.CatConceptosCMB(0).ToList();
                         ViewData["TipoAcceso"] = context.CatTiposAccesoCMB().ToList();
                     }
 
@@ -220,7 +220,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatConceptosCMB().ToList();
+                    lstCMB = ctx.CatConceptosCMB(0).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);

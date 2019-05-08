@@ -28,5 +28,6 @@ namespace ASN.Models
         public Nullable<bool> Rechazado { get; set; }
         public Nullable<bool> Cancelado { get; set; }
         public Nullable<bool> Active { get; set; }
+        public string EmailManager { get; set; }
     }
 }

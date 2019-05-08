@@ -129,15 +129,16 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptosCMB()
+        public JsonResult GetConceptosCMB(string perfil)
         {
             try
             {
                 var listConceptos = new List<CatConceptosCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
+                    perfil = (string.IsNullOrEmpty(perfil) ? "0": perfil);
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listConceptos = context.CatConceptosCMB().ToList();
+                    listConceptos = context.CatConceptosCMB(int.Parse(perfil)).ToList();
                 }
 
                 return Json(listConceptos, JsonRequestBehavior.AllowGet);
@@ -629,6 +630,26 @@ namespace ASN.Controllers
                     {
                         resultadoAccion = "Ocurrio un problema durante la actualización de la solicitud. Intente más tarde.";
                         Error = new { Errors = resultadoAccion };
+                    }
+                    else
+                    {
+                        var listadoAutorizadores = context.CatSolicitudEmpleadosAutorizantesSel(int.Parse(solicitud)).ToList();
+                        var correos = string.Empty;
+                        foreach (var item in listadoAutorizadores)
+                        {
+                            if (!string.IsNullOrEmpty(item.EmailManager)) {
+                                correos += item.EmailManager + ";";
+                            }
+                        }
+                        correos = correos.Substring(0, correos.Length - 1);
+
+                        MailHelper mail = new MailHelper();
+                        mail.IsBodyHtml = true;
+                        mail.RecipientCCO = correos;//emails.EmailTo; mail.RecipientCC = emails.EmailCC;
+                        mail.Subject = "Notificación de Nueva Solicitud";
+                        //mail.AttachmentFile = Server.MapPath("~/Content/images/logo.png");
+                        mail.Body = RenderPartialView.RenderPartialViewToString(this, "~\\Views\\Shared\\Mail\\NoticacionSolicitud.cshtml", null);
+                        mail.Send();
                     }
 
                     result = new { Id = solicitud, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };

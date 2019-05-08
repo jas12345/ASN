@@ -221,6 +221,12 @@ function GetPerfil() {
     };
 }
 
+function Perfil() {
+    return {
+        perfil: $("#Perfil_Ident").val(),
+    }
+}
+
 function GetAutorizador() {
     return {
         solicitud: $("#SolicitudId").val(),
@@ -465,6 +471,11 @@ function EnviarSolicitud() {
                 $('#divMessage').html(errorMsg).attr('class', 'empty-alert');
                 $('#divMessage').hide();
             }
+        },
+        error: function (response) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Ocurrio un problema durante el proceso. Intente de nuevo más tarde.","error");
+            setTimeout('redirectDefault()', 2000); 
         }
     });
 }

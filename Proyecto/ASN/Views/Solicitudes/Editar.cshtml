@@ -110,7 +110,7 @@
                                         {
                                             source.Read(read =>
                                             {
-                                                read.Action("GetConceptosCMB", "Solicitudes");
+                                                read.Action("GetConceptosCMB", "Solicitudes").Data("Perfil");
                                             })
                                             .ServerFiltering(true);
                                         })
@@ -118,8 +118,9 @@
                                         .OptionLabel("- Concepto - ")
                                         .DataValueField("Ident")
                                         .DataTextField("Valor")
-                                                                                                                    .Name("ConceptoId")
-                                                                                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                        .Name("ConceptoId")
+                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                        .CascadeFrom("Perfil_Ident")
                                     )
                                 </div>
                             </div>

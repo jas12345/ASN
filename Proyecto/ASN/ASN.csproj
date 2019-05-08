@@ -365,6 +365,7 @@
     <Compile Include="Models\RelPeriodicidadPaisCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RenderPartialView.cs" />
     <Compile Include="Models\SolicitudEmpleadosxPerfilCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -685,6 +686,7 @@
     <Content Include="Views\BusquedasVarias\Index.cshtml" />
     <Content Include="Views\Solicitudes\Editar.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AutorizadorSolicitudesPopUp.cshtml" />
+    <Content Include="Views\Shared\Mail\NoticacionSolicitud.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

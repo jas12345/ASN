@@ -33,9 +33,13 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatClientCMB_Result>("CatClientCMB");
         }
     
-        public virtual ObjectResult<CatConceptosCMB_Result> CatConceptosCMB()
+        public virtual ObjectResult<CatConceptosCMB_Result> CatConceptosCMB(Nullable<int> perfil)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosCMB_Result>("CatConceptosCMB");
+            var perfilParameter = perfil.HasValue ?
+                new ObjectParameter("Perfil", perfil) :
+                new ObjectParameter("Perfil", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosCMB_Result>("CatConceptosCMB", perfilParameter);
         }
     
         public virtual ObjectResult<CatConceptosSel_Result> CatConceptosSel()

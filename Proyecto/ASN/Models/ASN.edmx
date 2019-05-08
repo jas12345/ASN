@@ -44,7 +44,9 @@
         <Function Name="CatClientTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCompanyCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCompanyTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
-        <Function Name="CatConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatConceptosMotivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosMotivosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosMotivosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -478,7 +480,9 @@
       <Schema Namespace="ASNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ASNContext" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="CatClientCMB" ReturnType="Collection(ASNModel.CatClientCMB_Result)" />
-          <FunctionImport Name="CatConceptosCMB" ReturnType="Collection(ASNModel.CatConceptosCMB_Result)" />
+          <FunctionImport Name="CatConceptosCMB" ReturnType="Collection(ASNModel.CatConceptosCMB_Result)" >
+            <Parameter Name="Perfil" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="CatConceptosSel" ReturnType="Collection(ASNModel.CatConceptosSel_Result)" />
           <FunctionImport Name="CatConceptosSi">
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -1394,7 +1398,7 @@
           <Property Type="Int32" Name="Empleado_Contract_Type_Ident" Nullable="false" />
           <Property Type="String" Name="Empleado_Contract_Type" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Manager_Ident" Nullable="false" />
-          <Property Type="String" Name="Manager_First_Name" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Manager_First_Name" Nullable="false" MaxLength="752" />
           <Property Type="String" Name="Manager_Middle_Name" Nullable="false" MaxLength="250" />
           <Property Type="String" Name="Manager_Last_Name" Nullable="false" MaxLength="250" />
           <Property Type="Int32" Name="Manager_Position_Code_Ident" Nullable="false" />
@@ -1486,6 +1490,7 @@
           <Property Type="Boolean" Name="Rechazado" Nullable="true" />
           <Property Type="Boolean" Name="Cancelado" Nullable="true" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="String" Name="EmailManager" Nullable="true" MaxLength="80" />
         </ComplexType>
         <ComplexType Name="SolicitudEmpleadosxPerfilCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
@@ -2217,6 +2222,7 @@
                 <ScalarProperty Name="Rechazado" ColumnName="Rechazado" />
                 <ScalarProperty Name="Cancelado" ColumnName="Cancelado" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="EmailManager" ColumnName="EmailManager" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
