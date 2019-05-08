@@ -53,9 +53,9 @@
                                                                         .Columns(column =>
                                                                         {
                                                                             column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });//.ClientTemplate("#:PerfilEmpleadoAcceso_Activo == 1  ? '- Todos -' : Concepto #");
-                                                                                    column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(false).Filterable(true);
+                                                                                    column.Bound(c => c.Ident).Width(40).Title("CCMS Id").Visible(true).Filterable(true);
                                                                             column.Bound(c => c.Nombre).Width(50).Title("Nombre").Filterable(true);
-                                                                            column.Bound(c => c.PerfilEmpleadoAcceso_Activo).Title("PerfilEmpleadoAcceso_Activo").Visible(true).Filterable(false).Width(50);//.ClientTemplate("#:PerfilEmpleadoAcceso_Activo  ? 'Si' : 'No' #");
+                                                                            column.Bound(c => c.PerfilEmpleadoAcceso_Activo).Title("PerfilEmpleadoAcceso_Activo").Visible(false).Filterable(false).Width(50);//.ClientTemplate("#:PerfilEmpleadoAcceso_Activo  ? 'Si' : 'No' #");
                                                                                 })
                                                                        .HtmlAttributes(new { style = "height: 700px;" })
                                                                        .Scrollable(sorteable => sorteable.Virtual(false))

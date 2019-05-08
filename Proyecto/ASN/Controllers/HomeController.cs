@@ -117,7 +117,7 @@ namespace GAPP.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Login");
+                            return RedirectToAction("Index", "Inicio");
                         }
                     }
                     else
