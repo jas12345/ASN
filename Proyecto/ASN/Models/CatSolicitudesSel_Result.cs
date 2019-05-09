@@ -16,7 +16,7 @@ namespace ASN.Models
         public int FolioSolicitud { get; set; }
         public string Fecha_Solicitud { get; set; }
         public Nullable<int> Perfil_Ident { get; set; }
-        public Nullable<int> Solicitante_Ident { get; set; }
+        public int Solicitante_Ident { get; set; }
         public string Solicintante_Nombre { get; set; }
         public Nullable<int> Puesto_solicitante_Ident { get; set; }
         public Nullable<int> PeriodoNominaAnio_Id { get; set; }
@@ -42,5 +42,7 @@ namespace ASN.Models
         public string NombreMotivo { get; set; }
         public string PeriodoNomina_Id { get; set; }
         public string PeriodoNominaOriginal_Id { get; set; }
+        public string EstatusSolicitudId { get; set; }
+        public string Estatus { get; set; }
     }
 }

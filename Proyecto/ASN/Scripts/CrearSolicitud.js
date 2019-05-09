@@ -23,7 +23,7 @@ $(document).on('click', '.accionwizard', function () {
 });
 
 $(document).one('click', '.accionwizardSeleccion', function (e) {
-    debugger;
+    
     e.preventDefault();
     e.stopImmediatePropagation();
     accionRealizada++;
@@ -78,7 +78,7 @@ function valida(e) {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
         $('#grid').data('kendoGrid').refresh();
-        //debugger;
+        //
         if (e.response.Errors === null) {
             continuaAccion = true;
             var notification = $("#popupNotification").data("kendoNotification");
@@ -88,7 +88,7 @@ function valida(e) {
 }
 
 function errorsote(args) {
-    //debugger;
+    //
     if (args.errors) {
 
         $(document).ready(function () {
@@ -100,7 +100,7 @@ function errorsote(args) {
 }
 
 function handleEditChanges(e, grid) {
-    //debugger;
+    //
     var valid = true;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
@@ -121,7 +121,7 @@ function handleEditChanges(e, grid) {
 }
 
 function handleSaveChanges(e, grid) {
-    //debugger;
+    //
     var valid = true;
     var rows = grid.tbody.find("tr");
     for (var i = 0; i < rows.length; i++) {
@@ -189,7 +189,7 @@ function GetInformacionPerfil() {
         .success(function (result) {
 
             if (result !== "") {
-                var pais = (result.City_Name == "-1" || result.City_Name === null ? "TODOS" : result.City_Name);
+                var pais = (result.Country_Full_Name == "-1" || result.Country_Full_Name === null ? "TODOS" : result.Country_Full_Name);
                 var site = (result.Location_Name == "-1" || result.Location_Name === null ? "TODOS" : result.Location_Name);
                 var cliente = (result.Client_Name === "-1" || result.Client_Name === null ? "TODOS" : result.Client_Name);
                 var programa = (result.Program_Name === '-1' || result.Program_Name === null ? "TODOS" : result.Program_Name);
@@ -209,7 +209,7 @@ function GetInformacionPerfil() {
                 $("#Formulario input#programaName").attr("disabled", "disabled");
                 $("#Formulario input#ConceptoName").attr("disabled", "disabled");
 
-                //$(".infoPerfil").show();
+                $(".infoPerfil").show();
             } else {
                 $(".infoPerfil").hide();
             }
@@ -247,7 +247,7 @@ function SaveSolicitud(accion) {
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    //debugger;
+                    //
                     myWindow.close();
                     var contenido = "";
 
@@ -296,7 +296,7 @@ function SaveSolicitud(accion) {
 }
 
 function OnSuccess(response) {
-    //debugger;
+    //
     //var message = "Person Id: " + response.PersonId;
     //message += "\nName: " + response.Name;
     //message += "\nGender: " + response.Gender;
@@ -305,7 +305,7 @@ function OnSuccess(response) {
 }
 
 function OnFailure(response) {
-    //debugger;
+    //
     alert("Error occured.");
 }
 

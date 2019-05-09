@@ -24,15 +24,12 @@ function accion(tab)
             $("#tab3").hide();
             break;
         case 2:
-            var informacion = null;
-
             GuardaEmpleadosSolicitud();
             if (continuaAccion) {
                 $("#tab2").show();
                 $("#tab1").hide();
                 $("#tab3").hide();
-            }
-            
+            }            
             break;
         case 3:
             CargaEmpleadosAutorizadores();
@@ -80,7 +77,7 @@ function valida(e) {
         $('#gridEmpleados').data('kendoGrid').dataSource.data([]);
         $('#gridEmpleados').data('kendoGrid').dataSource.read();
         $('#gridEmpleados').data('kendoGrid').refresh();
-        $('#GridEmpleadosAutorizantes').data('kendoGrid').dataSource.data([]);
+        //$('#GridEmpleadosAutorizantes').data('kendoGrid').dataSource.data([]);
         $('#GridEmpleadosAutorizantes').data('kendoGrid').dataSource.read();
         $('#GridEmpleadosAutorizantes').data('kendoGrid').refresh();
         
@@ -130,7 +127,7 @@ function onSave(e) {
 
 function handleEditChanges(e, grid) {
     var valid = true;
-    debugger;
+    
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
         return item.dirty;
@@ -150,7 +147,7 @@ function handleEditChanges(e, grid) {
 }
 
 function handleSaveChanges(e, grid) {
-    debugger;
+    
     var valid = true;
     var rows = grid.tbody.find("tr");
     for (var i = 0; i < rows.length; i++) {
@@ -181,7 +178,7 @@ function handleSaveChanges(e, grid) {
                 if (input.is("[name=NombrePeriodo]") && input.val().trim() === "") {
                     return false;
                 }
-                debugger;
+                
                 if (input.is("[name=Autorizador_Ident]") && input.val().trim() === "") {
                     return false;
                 }
@@ -222,7 +219,6 @@ function validacheckdefault(e) {
 
 //Inicio Parametros
 function GetPerfil() {
-    debugger;
     return {
         perfil: _perfil,
         solicitud: $("#SolicitudId").val()
@@ -236,7 +232,7 @@ function Perfil() {
 }
 
 function PerfilSolicitud() {
-    debugger;
+    
     return {
         perfilBase: $("#PeriodoId").val()
     }
@@ -343,7 +339,6 @@ function CargaEmpleadosSolicitud() {
 function CargaEmpleadosAutorizadores() {
     var solicitud = $("#SolicitudId").val();
     var perfil = $("#idPerfil").val();
-    debugger;
     $.ajax({
         url: urlGridEmpleadosAutorizadores + '?id=' + solicitud + "&perfil=" + perfil,
         contentType: 'application/html; charset=utf-8',
@@ -374,6 +369,11 @@ function EditaSolicitud(e) {
     window.location.href = urlEditar +"?id="+ d.FolioSolicitud;
 }
 
+function Perfil() {
+    return {
+        perfil: $("#Perfil_Ident").val(),
+    }
+}
 
 //#Inicio Funciones de Solicitud
 function GetInformacionPerfil() {
@@ -429,7 +429,7 @@ function SaveSolicitud() {
         processData: false, 
         contentType: false,
         success: function (response) {
-            //debugger;
+            //
             if (response.success) {
                 notification.show("Procesado Correctamente", "success");
                 window.location.href = response.url;
@@ -463,7 +463,7 @@ function EnviarSolicitud() {
         url: urlEnviaSolicitud + "?solicitud="+ $("#SolicitudId").val(),
         dataType: "json",
         success: function (response) {
-            debugger;
+            
             var notification = $("#popupNotification").data("kendoNotification");
             if (response.status == 0) {
                 notification.show("Procesado Correctamente", "success");
@@ -495,8 +495,15 @@ function EnviarSolicitud() {
     });
 }
 
-function Perfil() {
-    return {
-        perfil: $("#Perfil_Ident").val(),
+function ValidaBloqueoTodos() {
+    debugger;
+    var listado = $("#LstConceptoMotivo").val();
+    var totalItem = (listado === null || listado===0 ? 0 : listado.length)
+    if (totalItem >1) {
+        $("#TTConceptoMotivoId").prop("disabled", "false");
+    } else {
+        $("#TTConceptoMotivoId").prop("disabled", "");
     }
+    
+    
 }

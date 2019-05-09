@@ -25,7 +25,7 @@
                         read.Action("GetConceptosMotivosCMB", "ConceptosMotivos");
                     });
                 })
-                
+                .Events(x => x.Change("ValidaBloqueoTodos"))
                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
             )
             @(Html.Kendo().CheckBox().Name("TTConceptoMotivoId").Label("(Todos)")) 

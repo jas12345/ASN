@@ -1366,8 +1366,8 @@
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
           <Property Type="String" Name="Fecha_Solicitud" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="Perfil_Ident" Nullable="true" />
-          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
-          <Property Type="String" Name="Solicintante_Nombre" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="false" />
+          <Property Type="String" Name="Solicintante_Nombre" Nullable="true" MaxLength="752" />
           <Property Type="Int32" Name="Puesto_solicitante_Ident" Nullable="true" />
           <Property Type="Int32" Name="PeriodoNominaAnio_Id" Nullable="true" />
           <Property Type="Int32" Name="PeriodoNominaMes_Id" Nullable="true" />
@@ -1392,6 +1392,8 @@
           <Property Type="String" Name="NombreMotivo" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="PeriodoNomina_Id" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="PeriodoNominaOriginal_Id" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Estatus" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatEmpleadosSolicitudesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -2085,6 +2087,8 @@
                 <ScalarProperty Name="NombreMotivo" ColumnName="NombreMotivo" />
                 <ScalarProperty Name="PeriodoNomina_Id" ColumnName="PeriodoNomina_Id" />
                 <ScalarProperty Name="PeriodoNominaOriginal_Id" ColumnName="PeriodoNominaOriginal_Id" />
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
