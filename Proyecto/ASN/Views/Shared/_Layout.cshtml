@@ -104,12 +104,17 @@
                                     <li>@Html.ActionLink("Perfil / Accesos", "Index", "PerfilEmpleadosAccesos")</li>
                                 }
 
-                                @if (User.IsInRole("Desarrollo"))
+                                @*@if (User.IsInRole("Desarrollo"))
                                 {
                                     <li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>
-                                }
+                                }*@
                             </ul>
                         </li>
+                    }
+
+                    if (User.IsInRole("Desarrollo"))
+                    {
+                        <li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>
                     }
 
                     if (User.IsInRole("Desarrollo2"))

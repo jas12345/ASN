@@ -80,7 +80,10 @@ function valida(e) {
         $('#gridEmpleados').data('kendoGrid').dataSource.data([]);
         $('#gridEmpleados').data('kendoGrid').dataSource.read();
         $('#gridEmpleados').data('kendoGrid').refresh();
-
+        $('#GridEmpleadosAutorizantes').data('kendoGrid').dataSource.data([]);
+        $('#GridEmpleadosAutorizantes').data('kendoGrid').dataSource.read();
+        $('#GridEmpleadosAutorizantes').data('kendoGrid').refresh();
+        
         if (e.response.Errors === null) {
             continuaAccion = true;
             var notification = $("#popupNotification").data("kendoNotification");
@@ -490,4 +493,10 @@ function EnviarSolicitud() {
             setTimeout('redirectDefault()', 1000); 
         }
     });
+}
+
+function Perfil() {
+    return {
+        perfil: $("#Perfil_Ident").val(),
+    }
 }

@@ -1,142 +1,26 @@
-﻿//(function () {
+﻿$(document).ready(function () {
+    //$("#Accounts").change(function () {
+    //    //$('#grid').data('kendoGrid').dataSource.data([]);
+    //    $('#grid').data('kendoGrid').dataSource.read();
+    //    $('#grid').data('kendoGrid').refresh();
+    //    // $("#Accounts").val() == "" ? $('#grisaseo').fadeOut('fast') : $('#grisaseo').fadeIn('slow');
+    //    $("#Accounts").val() == "" ? $('#grisaseo').fadeOut('fast') : $('#grisaseo').fadeIn('slow');
+    //});
 
-//    // custom checkbox
-//    var CHANGE = 'change';
-//    kendo.ui.plugin(kendo.ui.Widget.extend({
-//        init: function (element, options) {
-//            kendo.ui.Widget.fn.init.call(this, element, options);
-//            this._create();
-//        },
-//        options: {
-//            name: 'CustomCheckbox'
-//        },
-//        events: [
-//            CHANGE],
-//        enable: function (val) {
-//            if (val === false) {
-//                $(this.element).attr('disabled', 'disabled');
-//                $(this.wrapper).addClass('k-state-disabled');
-//            } else {
-//                $(this.element).removeAttr('disabled');
-//                $(this.wrapper).removeClass('k-state-disabled');
-//            }
-//        },
-//        value: function (checked) {
-//            var $element = $(this.element),
-//                currentValue = $element.prop('checked');
+    $("#PerfilUsuarioId").change(function () {
+        if ($("#PerfilUsuarioId").val().length > 0) {
+            //$('#grid').data('kendoGrid').dataSource.data([]);
+            $('#grid').data('kendoGrid').dataSource.read();
+            $('#grid').data('kendoGrid').refresh();
 
-//            if (typeof checked === 'boolean') {
-//                if (checked !== currentValue) {
-//                    $element.prop('checked', checked);
-//                    this.trigger(CHANGE, {
-//                        field: 'value'
-//                    });
-//                }
-//            } else {
-//                return $element.prop('checked');
-//            }
-//        },
-//        _create: function () {
-//            var me = this,
-//                $element = $(me.element),
-//                text = $element.data('label') || me.options.label || '';
+        }
+        else {
+            $('#grid').data('kendoGrid').dataSource.data([]);
+        }
+    });
 
-//            me.element.prop('type', 'checkbox');
-//            me.wrapper = $element.wrap('<span class="custom-k-checkbox"></span>')
-//                .parent();
-//            $element.after('<label>' + text + '</label>');
-//            $element.siblings('label').click(function (e) {
-//                $element.click();
-//            });
-//            $element.bind(CHANGE, function (e) {
-//                //PROPAGATE EVENT TO WIDGET
-//                me.trigger(CHANGE, {
-//                    field: 'value'
-//                });
-//            });
-//            if (me.options.enabled !== undefined) {
-//                me.enable(me.options.enabled);
-//            }
-//        }
-//    }));
+});
 
-//    $("#grid").kendoGrid({
-//        dataSource: {
-//            schema: {
-//                model: {
-//                    fields: {
-//                        name: { type: 'string' },
-//                        checkSample1: { type: 'bool' },
-//                        checkSample2: { type: 'bool' }
-//                    }
-//                }
-//            },
-//            data: [
-//                {
-//                    name: "California",
-//                    checkSample1: true,
-//                    checkSample2: true
-//                },
-//                {
-//                    name: "Colorado",
-//                    checkSample1: false,
-//                    checkSample2: true
-//                },
-//                {
-//                    name: "Florida",
-//                    checkSample1: true,
-//                    checkSample2: false
-//                },
-//                {
-//                    name: "Texas",
-//                    checkSample1: false,
-//                    checkSample2: false
-//                }
-//            ]
-//        },
-//        columns: [
-//            { field: 'name' },
-//            { field: 'checkSample1', template: '<input type="checkbox" #= checkSample1 ? \'checked="checked"\' : "" # class="chkbx" />', width: 130 },
-//            { field: 'checkSample2', template: kendo.template($('#checkColumnTemplate').html()) }
-//        ],
-//        dataBound: function (e) {
-//            e.sender.tbody.find('.grid-check-cell').each(function (cell) {
-//                var cb = $('input.select-checkbox', cell).kendoCustomCheckbox({
-//                    checked: cell.value,
-//                    label: '',
-//                    change: function (e) {
-//                        var grid = $("#grid").data("kendoGrid");
-//                        var checked = $(this.element).is(':checked'),
-//                            row = $(this.element).closest("tr"),
-//                            dataItem = grid.dataItem(row);
-//                        var col = $(this.element).closest('td');
-//                        var field = grid.columns[col.index()].field;
-//                        dataItem[field] = checked;
-//                        log(dataItem);
-//                    }
-//                });
-//            });
-//        }
-//    });
-
-//    // from Kendo documentation for checkbox editing, 
-//    // modified for multiple checkbox columns
-//    $("#grid .k-grid-content").on("change", "input.chkbx", function (e) {
-//        var grid = $("#grid").data("kendoGrid");
-//        var checked = $(this).is(':checked');
-//        var col = $(this).closest('td');
-//        dataItem = grid.dataItem($(e.target).closest("tr"));
-//        dataItem.set(grid.columns[col.index()].field, checked);
-//        log(dataItem);
-//    });
-
-//    var log = function (item) {
-//        var ot = $('#changedValue');
-//        ot.html(ot.html() + '<br/>' + 'checkSample1: ' + item.checkSample1 + ' checkSample2: ' + item.checkSample2);
-//    }
-
-
-//})()
 
 function accion(tab)
 {

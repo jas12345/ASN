@@ -27,13 +27,13 @@
                                 column.Bound(c => c.Empleado_Ident).Title("CCMS ID").Width(80).Filterable(true);
                                 column.Bound(c => c.Autorizador_Ident).Visible(false);
                                 column.Bound(c => c.NombreEmpleado).Title("Nombre").Visible(true).Filterable(true).Width(130);
-                                column.Bound(c => c.NivelAutorizacion).Title("Nivel").Width(50).Visible(true);
+                                column.Bound(c => c.NivelAutorizacion).Title("Nivel").Width(100).Visible(true);
                                 column.Bound(c => c.NombreAutorizador).Title("Autorizante").Width(150).Visible(true).Filterable(true);
-                                column.Bound(c => c.EsObligatorio).Title("Es obligatorio").Width(50).Visible(true);
-                                column.Bound(c => c.Obligatorio).Width(50).Visible(false);
+                                column.Bound(c => c.EsObligatorio).Title("Es obligatorio").Width(120).Visible(true).Filterable(false);
+                                column.Bound(c => c.Obligatorio).Width(100).Visible(false);
                                 column.Bound(c => c.Perfil).Visible(false);
                                 column.Bound(c => c.MontoAutorizacionAutomatica).Title("Monto autorización automatica").Width(60).Visible(true);
-                                column.Bound(c => c.Estatus).Width(50).Visible(true);
+                                column.Bound(c => c.Estatus).Width(50).Visible(false);
                             })
                             .HtmlAttributes(new { style = "height: 480px;" })
                             .Scrollable(sorteable => sorteable.Virtual(false))

@@ -33,7 +33,7 @@
                             .DataValueField("Id")
                             .DataTextField("Value")
                             .Name("Autorizador_Ident")
-                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Seleccione un autorizador." })
+                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 21.4em", validationMessage = "Seleccione un autorizador." })
             )
             @(Html.Kendo().CheckBox().Name("TTAutorizador_Ident").Label("(Todos)"))
         </div>
@@ -57,7 +57,7 @@
                     .Min(0)
                     .Max(10000)
                     .Value(0)
-                    .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                    .HtmlAttributes(new { style = "width: 15.4em", title = "currency" })
                     )
         @*@(Html.Kendo().TextBox().Name("MontoAutorizacionAutomatica").HtmlAttributes(new { style = "text-align:center;width: 15.4em", min = 0, max = 10000 }))*@
                     @*@(Html.Kendo().CheckBox().Name("TTAutorizador_Ident").Label("(Todos)"))*@

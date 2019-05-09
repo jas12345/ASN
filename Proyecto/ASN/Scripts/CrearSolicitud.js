@@ -209,7 +209,7 @@ function GetInformacionPerfil() {
                 $("#Formulario input#programaName").attr("disabled", "disabled");
                 $("#Formulario input#ConceptoName").attr("disabled", "disabled");
 
-                $(".infoPerfil").show();
+                //$(".infoPerfil").show();
             } else {
                 $(".infoPerfil").hide();
             }

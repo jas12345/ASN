@@ -362,11 +362,15 @@ namespace ASN.Controllers
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     int ccmsidAdmin = 0;
                     int res = 0;
+                    bool? Obligatorio = profiles.Obligatorio.HasValue ? profiles.Obligatorio : false;
+
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                     resultado.Value = 0;
 
+                    
                     int.TryParse(User.Identity.Name, out ccmsidAdmin);
-                    context.CatSolicitudEmpleadosAutorizantesSI(int.Parse(solicitud),profiles.Empleado_Ident, int.Parse(Autorizador_Id), profiles.NivelAutorizacion,profiles.Obligatorio,profiles.MontoAutorizacionAutomatica,accion, ccmsidAdmin,resultado);
+                    
+                    context.CatSolicitudEmpleadosAutorizantesSI(int.Parse(solicitud),profiles.Empleado_Ident, int.Parse(Autorizador_Id), profiles.NivelAutorizacion,Obligatorio,profiles.MontoAutorizacionAutomatica,accion, ccmsidAdmin,resultado);
 
                     int.TryParse(resultado.Value.ToString(), out res);
 

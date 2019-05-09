@@ -41,7 +41,7 @@
             <label for="Monto">Parámetro: Monto</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().NumericTextBoxFor(x => x.ParametroConceptoMonto).Name("ParametroConceptoMonto").Min(0).HtmlAttributes(new { style = "text-align:center;width: 15.4em" }))
+            @(Html.Kendo().NumericTextBoxFor(x => x.ParametroConceptoMonto).Name("ParametroConceptoMonto").Min(0).Value(0).HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" }))
             @(Html.Kendo().CheckBox().Name("TTMonto").Label("(Todos)"))
         </div>
         <div class="editor-label">
