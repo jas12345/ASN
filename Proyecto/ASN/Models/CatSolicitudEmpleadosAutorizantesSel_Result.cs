@@ -29,5 +29,6 @@ namespace ASN.Models
         public Nullable<bool> Cancelado { get; set; }
         public Nullable<bool> Active { get; set; }
         public string EmailManager { get; set; }
+        public Nullable<int> Perfil { get; set; }
     }
 }

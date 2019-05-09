@@ -16,11 +16,11 @@
                 @Html.ValidationSummary(true)
                 <div class="k-form-field">
                     <section class="">
-                        <div class="form-horizontal form-widgets col-sm-12">
+                        <div class="form-horizontal form-widgets col-sm-7">
                             <div class="form-group">
                                 @(Html.HiddenFor(x => x.FolioSolicitud, new { required = "false" }))
-                                <label class="control-label col-sm-3" for="PerfilId">Perfil de usuario</label>
-                                <div class="col-sm-12 col-md-12">
+                                <label class="control-label col-sm-2" for="PerfilId">Perfil de usuario</label>
+                                <div class="col-sm-4 col-md-4">
                                     @(Html.Kendo().DropDownList().DataSource(source =>
                                                         {
                                                             source.Read(read =>
@@ -37,6 +37,14 @@
                                                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
                                                         .Events(x => x.Change("GetInformacionPerfil"))
                                     )
+                                </div>                                
+                            </div>                            
+                        </div>
+                        <div class="form-horizontal form-widgets col-sm-5">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="EstatusSolicitud">Estatus de Solicitud</label>
+                                <div class="col-sm-2 col-md-2">
+                                    @(Html.Kendo().TextBox().Name("EstatusSolicitud").Value("Solicitud").HtmlAttributes(new { disabled = "disabled" }))
                                 </div>
                             </div>
                         </div>
@@ -88,7 +96,7 @@
                                                 {
                                                     source.Read(read =>
                                                     {
-                                                        read.Action("GetPeriodoNominaCMB", "Solicitudes");
+                                                        read.Action("GetPeriodoNominaCMB", "Solicitudes").Data("Perfil");
                                                     })
                                                     .ServerFiltering(true);
                                                 })
@@ -98,6 +106,7 @@
                                                 .DataTextField("Valor")
                                                 .Name("PeriodoNomina_Id")
                                                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                                .CascadeFrom("Perfil_Ident")
                                     )
                                 </div>
                             </div>
@@ -148,14 +157,7 @@
                                 <div class="col-sm-6 col-md-6">
                                     @Html.TextArea("Justficacion", "", new { @class = "k-textbox", style = "width: 100%;" })
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-sm-3" for="EstatusSolicitud">Estatus de Solicitud</label>
-                                <div class="col-sm-4 col-md-4">
-                                    @(Html.Kendo().TextBox().Name("EstatusSolicitud").Value("Solicitud").HtmlAttributes(new { disabled = "disabled" }))
-                                </div>
-                            </div>
+                            </div>                            
                         </div>
 
                         <div class="form-horizontal form-widgets col-sm-6">
@@ -182,7 +184,7 @@
 
                         <div class="form-horizontal form-widgets col-sm-12">
                             <div class="buttons-wrap" style="float:right;">
-                                <button type="reset" class="k-button k-state-default" onclick="cargaEmpleados(1,0,0);"><span class="k-icon k-i-close"></span> Cancelar</button>
+                                <button type="reset" class="k-button k-state-default k-editor" onclick="cargaEmpleados(1,0,0);"><span class="k-icon k-i-close"></span> Cancelar</button>
                                 <button type="button" class="k-button k-state-default accionwizard" data-accionBoton="1"><span class="k-icon k-i-save"></span> Guardar Borrador</button>
                                 <button class="k-button k-state-default accionwizardSeleccion k-primary" data-accionBoton="2"><span class="k-icon k-i-redo"></span> Siguiente</button>
                             </div>

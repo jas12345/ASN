@@ -179,6 +179,9 @@
       <DependentUpon>ASN.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Authentication.cs" />
+    <Compile Include="Models\AutorizadoresxPerfilSolicitanteCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AutorizadoresxPerfilSolicitanteSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

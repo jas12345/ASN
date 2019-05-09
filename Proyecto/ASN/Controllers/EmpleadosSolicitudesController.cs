@@ -201,15 +201,15 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetAutorizanteXperfilCMB(string perfil, string solicitud)
+        public JsonResult GetAutorizanteXperfilCMB(string perfilBase)
         {
             try
             {
-                var listEmpleados = new List<SolicitudEmpleadosxPerfilCMB_Result>();
+                var listEmpleados = new List<AutorizadoresxPerfilSolicitanteCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listEmpleados = context.SolicitudEmpleadosxPerfilCMB((!string.IsNullOrEmpty(perfil) ? int.Parse(perfil) : 0),(!string.IsNullOrEmpty(solicitud) ? int.Parse(solicitud) : 0)).ToList();
+                    listEmpleados = context.AutorizadoresxPerfilSolicitanteCMB((!string.IsNullOrEmpty(perfilBase) ? int.Parse(perfilBase) : 0)).ToList();
                 }
 
                 return Json(listEmpleados, JsonRequestBehavior.AllowGet);

@@ -178,6 +178,10 @@ function handleSaveChanges(e, grid) {
                 if (input.is("[name=NombrePeriodo]") && input.val().trim() === "") {
                     return false;
                 }
+                debugger;
+                if (input.is("[name=Autorizador_Ident]") && input.val().trim() === "") {
+                    return false;
+                }
                 return true;
             },
             productnamevalidation: function (input, params) {
@@ -215,6 +219,7 @@ function validacheckdefault(e) {
 
 //Inicio Parametros
 function GetPerfil() {
+    debugger;
     return {
         perfil: _perfil,
         solicitud: $("#SolicitudId").val()
@@ -224,6 +229,13 @@ function GetPerfil() {
 function Perfil() {
     return {
         perfil: $("#Perfil_Ident").val(),
+    }
+}
+
+function PerfilSolicitud() {
+    debugger;
+    return {
+        perfilBase: $("#PeriodoId").val()
     }
 }
 
@@ -455,7 +467,7 @@ function EnviarSolicitud() {
                 $("#tab1").html("");
                 $("#tab2").html("");
                 //window.location.href = response.url;
-                setTimeout('redirectDefault()', 2000); 
+                setTimeout('redirectDefault()', 1000); 
             }
             else if (response.status != 0) {
                 hideKendoLoading();
@@ -475,7 +487,7 @@ function EnviarSolicitud() {
         error: function (response) {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("Ocurrio un problema durante el proceso. Intente de nuevo más tarde.","error");
-            setTimeout('redirectDefault()', 2000); 
+            setTimeout('redirectDefault()', 1000); 
         }
     });
 }

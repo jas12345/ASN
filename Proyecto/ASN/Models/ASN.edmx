@@ -5,6 +5,9 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ASNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="AutorizadoresxPerfilSolicitanteCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="AutorizadoresxPerfilSolicitanteSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
@@ -481,7 +484,7 @@
         <EntityContainer Name="ASNContext" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="CatClientCMB" ReturnType="Collection(ASNModel.CatClientCMB_Result)" />
           <FunctionImport Name="CatConceptosCMB" ReturnType="Collection(ASNModel.CatConceptosCMB_Result)" >
-            <Parameter Name="Perfil" Mode="In" Type="Int32" />
+          <Parameter Name="Perfil" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConceptosSel" ReturnType="Collection(ASNModel.CatConceptosSel_Result)" />
           <FunctionImport Name="CatConceptosSi">
@@ -1005,6 +1008,9 @@
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="AutorizadoresxPerfilSolicitanteCMB" ReturnType="Collection(ASNModel.AutorizadoresxPerfilSolicitanteCMB_Result)">
+          <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1491,9 +1497,14 @@
           <Property Type="Boolean" Name="Cancelado" Nullable="true" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
           <Property Type="String" Name="EmailManager" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="Perfil" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SolicitudEmpleadosxPerfilCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="752" />
+        </ComplexType>
+        <ComplexType Name="AutorizadoresxPerfilSolicitanteCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="752" />
         </ComplexType>
        
@@ -2223,6 +2234,7 @@
                 <ScalarProperty Name="Cancelado" ColumnName="Cancelado" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="EmailManager" ColumnName="EmailManager" />
+                <ScalarProperty Name="Perfil" ColumnName="Perfil" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2235,6 +2247,14 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosAutorizantesSI" FunctionName="ASNModel.Store.CatSolicitudEmpleadosAutorizantesSI" />
+          <FunctionImportMapping FunctionImportName="AutorizadoresxPerfilSolicitanteCMB" FunctionName="ASNModel.Store.AutorizadoresxPerfilSolicitanteCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.AutorizadoresxPerfilSolicitanteCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

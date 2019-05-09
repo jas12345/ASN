@@ -11,10 +11,10 @@
             <label for="NombreEmpleado">Empleado</label>
         </div>
         <input type="hidden" id="FolioSolicitud" value="@Model.FolioSolicitud"/>
-        <input type="hidden" id="Empleado_Ident" value="@Model.Empleado_Ident"/>
+        <input type="hidden" id="Perfil" value="@Model.Empleado_Ident"/>
         <div class="editor-field">
             @(Html.Kendo().TextBox().Name("NombreEmpleado").HtmlAttributes(new { @readonly = "readonly", style = "text-align:center;width: 18.4em" }))
-            @(Html.Kendo().CheckBox().Name("TTEmpleado_Ident").Label("(Todos)"))
+            <input type="checkbox" style="display:none;" id="TTEmpleado_Ident" name="TTEmpleado_Ident" />
         </div>
         <div class="editor-label">
             <label for="Autorizador">Autorizador</label>
@@ -25,15 +25,15 @@
                             {
                                 source.Read(read =>
                                 {
-                                    read.Action("GetAutorizanteXperfilCMB", "EmpleadosSolicitudes").Data("GetPerfil");
+                                    read.Action("GetAutorizanteXperfilCMB", "EmpleadosSolicitudes").Data("PerfilSolicitud");
                                 });
                             })
                             .Filter("contains")
                             .OptionLabel("- Autorizador - ")
-                            .DataValueField("Ident")
+                            .DataValueField("Id")
                             .DataTextField("Value")
                             .Name("Autorizador_Ident")
-                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em" })
+                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Seleccione un autorizador." })
             )
             @(Html.Kendo().CheckBox().Name("TTAutorizador_Ident").Label("(Todos)"))
         </div>

@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "GridEmpleadosAutorizantes";
     var Solicitud = ViewBag.SolicitudBaseId;
+    var Perfil = ViewBag.perfilId;
 }
 
 <div class="container-fluid">
@@ -12,6 +13,7 @@
                 <label for="perfilId">Perfil de usuario</label>
             </div>
             <input type="hidden" id="Solicitud_Id" value="@Solicitud" />
+            <input type="hidden" id="Perfil_Id" value="@Perfil" />
         </div>
     </div>
     <div class="row">
@@ -29,10 +31,11 @@
                                 column.Bound(c => c.NombreAutorizador).Title("Autorizante").Width(150).Visible(true).Filterable(true);
                                 column.Bound(c => c.EsObligatorio).Title("Es obligatorio").Width(50).Visible(true);
                                 column.Bound(c => c.Obligatorio).Width(50).Visible(false);
+                                column.Bound(c => c.Perfil).Visible(false);
                                 column.Bound(c => c.MontoAutorizacionAutomatica).Title("Monto autorización automatica").Width(60).Visible(true);
                                 column.Bound(c => c.Estatus).Width(50).Visible(true);
                             })
-                            .HtmlAttributes(new { style = "height: 500px;" })
+                            .HtmlAttributes(new { style = "height: 480px;" })
                             .Scrollable(sorteable => sorteable.Virtual(false))
                             .Sortable()
                             .PersistSelection()
@@ -51,6 +54,7 @@
                                         model.Field(c => c.Obligatorio).Editable(true);
                                         model.Field(c => c.MontoAutorizacionAutomatica).Editable(true);
                                         model.Field(c => c.Estatus).Editable(true);
+                                        model.Field(c => c.Perfil).Editable(false);
                                         model.Field(c => c.Active).Editable(true);
                                     })
                                     .Read(read => read.Action("GridEmpleadosAutorizantesSel", "EmpleadosSolicitudes").Data("GetSolicitudAutoriza"))
