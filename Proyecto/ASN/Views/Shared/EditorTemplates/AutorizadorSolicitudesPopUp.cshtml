@@ -42,7 +42,7 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().TextBox().Name("NivelAutorizacion").HtmlAttributes(new { style = "text-align:center;width: 15.4em", min=0, max=100,type="numeric" }))
-            @(Html.Kendo().CheckBox().Name("TTNivelAutorizacion").Label("(Todos)"))
+            <input type="checkbox" id="TTNivelAutorizacion" name="TTNivelAutorizacion" style="display:none;" />
         </div>
         <div class="editor-field">
             @(Html.Kendo().CheckBox().Name("Obligatorio").Label("Es Obligatorio"))
