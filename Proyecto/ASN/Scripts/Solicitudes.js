@@ -241,7 +241,10 @@ function PerfilSolicitud() {
 function GetAutorizador() {
     return {
         solicitud: $("#SolicitudId").val(),
-        Autorizador_Id: $("#Autorizador_Ident").val()
+        Autorizador_Id: $("#Autorizador_Ident").val(),
+        TTAutorizador_Ident: $("#TTAutorizador_Ident").val(),
+        TTNivelAutorizacion: $("#TTNivelAutorizacion").val(),
+        TTMontoAutorizacionAutomatica: $("#TTMontoAutorizacionAutomatica").val()
     };
 }
 function GetSolicitudId() {

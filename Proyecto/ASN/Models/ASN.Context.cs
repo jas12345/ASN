@@ -1799,7 +1799,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SolicitudEmpleadosxPerfilCMB_Result>("SolicitudEmpleadosxPerfilCMB", perfil_IdentParameter, solicitudParameter);
         }
     
-        public virtual int CatSolicitudEmpleadosAutorizantesSI(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> autorizador_Ident, Nullable<int> nivelAutorizacion, Nullable<bool> obligatorio, Nullable<decimal> montoAutorizacionAutomatica, Nullable<int> accion, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatSolicitudEmpleadosAutorizantesSI(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> autorizador_Ident, Nullable<int> nivelAutorizacion, Nullable<bool> obligatorio, Nullable<decimal> montoAutorizacionAutomatica, Nullable<int> accion, Nullable<bool> tTAutorizador_Ident, Nullable<bool> tTNivelAutorizacion, Nullable<bool> tTMontoAutorizacionAutomatica, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -1829,11 +1829,27 @@ namespace ASN.Models
                 new ObjectParameter("Accion", accion) :
                 new ObjectParameter("Accion", typeof(int));
     
+            var tTAutorizador_IdentParameter = tTAutorizador_Ident.HasValue ?
+                new ObjectParameter("TTAutorizador_Ident", tTAutorizador_Ident) :
+                new ObjectParameter("TTAutorizador_Ident", typeof(bool));
+    
+            var tTNivelAutorizacionParameter = tTNivelAutorizacion.HasValue ?
+                new ObjectParameter("TTNivelAutorizacion", tTNivelAutorizacion) :
+                new ObjectParameter("TTNivelAutorizacion", typeof(bool));
+    
+            var tTMontoAutorizacionAutomaticaParameter = tTMontoAutorizacionAutomatica.HasValue ?
+                new ObjectParameter("TTMontoAutorizacionAutomatica", tTMontoAutorizacionAutomatica) :
+                new ObjectParameter("TTMontoAutorizacionAutomatica", typeof(bool));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosAutorizantesSI", folioSolicitudParameter, empleado_IdentParameter, autorizador_IdentParameter, nivelAutorizacionParameter, obligatorioParameter, montoAutorizacionAutomaticaParameter, accionParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosAutorizantesSI", folioSolicitudParameter, empleado_IdentParameter, autorizador_IdentParameter, nivelAutorizacionParameter, obligatorioParameter, montoAutorizacionAutomaticaParameter, accionParameter, tTAutorizador_IdentParameter, tTNivelAutorizacionParameter, tTMontoAutorizacionAutomaticaParameter, activeParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual ObjectResult<AutorizadoresxPerfilSolicitanteCMB_Result> AutorizadoresxPerfilSolicitanteCMB(Nullable<int> perfil_Ident)

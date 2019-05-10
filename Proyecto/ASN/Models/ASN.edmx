@@ -335,6 +335,10 @@
           <Parameter Name="Obligatorio" Type="bit" Mode="In" />
           <Parameter Name="MontoAutorizacionAutomatica" Type="decimal" Mode="In" />
           <Parameter Name="Accion" Type="int" Mode="In" />
+          <Parameter Name="TTAutorizador_Ident" Type="bit" Mode="In" />
+          <Parameter Name="TTNivelAutorizacion" Type="bit" Mode="In" />
+          <Parameter Name="TTMontoAutorizacionAutomatica" Type="bit" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -1005,6 +1009,10 @@
             <Parameter Name="Obligatorio" Mode="In" Type="Boolean" />
             <Parameter Name="MontoAutorizacionAutomatica" Mode="In" Type="Decimal" />
             <Parameter Name="Accion" Mode="In" Type="Int32" />
+            <Parameter Name="TTAutorizador_Ident" Mode="In" Type="Boolean" />
+            <Parameter Name="TTNivelAutorizacion" Mode="In" Type="Boolean" />
+            <Parameter Name="TTMontoAutorizacionAutomatica" Mode="In" Type="Boolean" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>

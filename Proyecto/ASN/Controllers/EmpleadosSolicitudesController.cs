@@ -353,7 +353,8 @@ namespace ASN.Controllers
         /// <param name="solicitud"></param>
         /// <param name="Autorizador_Id"></param>
         /// <returns></returns>
-        public ActionResult UpdateAutorizantesEmpleado([DataSourceRequest] DataSourceRequest request, CatSolicitudEmpleadosAutorizantesSel_Result profiles, string solicitud, string Autorizador_Id, int accion=0)
+        public ActionResult UpdateAutorizantesEmpleado([DataSourceRequest] DataSourceRequest request, CatSolicitudEmpleadosAutorizantesSel_Result profiles, string solicitud, string Autorizador_Id, 
+            string TTAutorizador_Ident, string TTNivelAutorizacion, string TTMontoAutorizacionAutomatica, int accion = 0)
         {
             try
             {
@@ -370,7 +371,19 @@ namespace ASN.Controllers
                     
                     int.TryParse(User.Identity.Name, out ccmsidAdmin);
                     
-                    context.CatSolicitudEmpleadosAutorizantesSI(int.Parse(solicitud),profiles.Empleado_Ident, int.Parse(Autorizador_Id), profiles.NivelAutorizacion,Obligatorio,profiles.MontoAutorizacionAutomatica,accion, ccmsidAdmin,resultado);
+                    context.CatSolicitudEmpleadosAutorizantesSI(
+                        int.Parse(solicitud),
+                        profiles.Empleado_Ident,
+                        int.Parse(Autorizador_Id),
+                        profiles.NivelAutorizacion,
+                        Obligatorio,
+                        profiles.MontoAutorizacionAutomatica,
+                        accion,
+                        (string.IsNullOrEmpty(TTAutorizador_Ident) || TTAutorizador_Ident == "false" ? false : true),
+                        (string.IsNullOrEmpty(TTNivelAutorizacion) || TTNivelAutorizacion == "false" ? false : true),
+                        (string.IsNullOrEmpty(TTMontoAutorizacionAutomatica) || TTMontoAutorizacionAutomatica == "false" ? false : true),
+                        true,
+                        ccmsidAdmin,resultado);
 
                     int.TryParse(resultado.Value.ToString(), out res);
 

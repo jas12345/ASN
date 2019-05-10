@@ -14,7 +14,6 @@
         <input type="hidden" id="Perfil" value="@Model.Empleado_Ident"/>
         <div class="editor-field">
             @(Html.Kendo().TextBox().Name("NombreEmpleado").HtmlAttributes(new { @readonly = "readonly", style = "text-align:center;width: 18.4em" }))
-            <input type="checkbox" style="display:none;" id="TTEmpleado_Ident" name="TTEmpleado_Ident" />
         </div>
         <div class="editor-label">
             <label for="Autorizador">Autorizador</label>
@@ -42,7 +41,7 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().TextBox().Name("NivelAutorizacion").HtmlAttributes(new { style = "text-align:center;width: 15.4em", min=0, max=100,type="numeric" }))
-            <input type="checkbox" id="TTNivelAutorizacion" name="TTNivelAutorizacion" style="display:none;" />
+            <input type="checkbox" id="TTNivelAutorizacion" name="TTNivelAutorizacion" />
         </div>
         <div class="editor-field">
             @(Html.Kendo().CheckBox().Name("Obligatorio").Label("Es Obligatorio"))
@@ -59,8 +58,7 @@
                     .Value(0)
                     .HtmlAttributes(new { style = "width: 15.4em", title = "currency" })
                     )
-        @*@(Html.Kendo().TextBox().Name("MontoAutorizacionAutomatica").HtmlAttributes(new { style = "text-align:center;width: 15.4em", min = 0, max = 10000 }))*@
-                    @*@(Html.Kendo().CheckBox().Name("TTAutorizador_Ident").Label("(Todos)"))*@
+            @(Html.Kendo().CheckBox().Name("TTMontoAutorizacionAutomatica").Label("(Todos)"))
         </div>
         <input type="hidden" id="PeriodicidadId" value="" />
     </div>
