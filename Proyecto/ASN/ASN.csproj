@@ -146,6 +146,7 @@
     <Compile Include="Controllers\ConsecutivoPeriodosController.cs" />
     <Compile Include="Controllers\EmpleadosSolicitudesController.cs" />
     <Compile Include="Controllers\MisSolicitudesController.cs" />
+    <Compile Include="Controllers\NotificacionesController.cs" />
     <Compile Include="Controllers\SolicitudesTodasController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Controllers\NominaController.cs" />
@@ -183,9 +184,6 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AutorizadoresxPerfilSolicitanteSel_Result.cs">
-      <DependentUpon>ASN.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AvisoSolicitantesAutorizantes_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CargaMasivaRegistroViewModel.cs" />
@@ -382,6 +380,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\ValidaSolicitud_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -695,6 +696,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Evidencias\" />
+    <Folder Include="Views\Notificaciones\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

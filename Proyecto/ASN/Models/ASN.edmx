@@ -480,6 +480,10 @@
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
           <Parameter Name="Solicitud" Type="int" Mode="In" />
         </Function>
+        <Function Name="ValidaSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <EntityContainer Name="ASNModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -990,7 +994,6 @@
           <FunctionImport Name="AutorizadoresxPerfilSolicitanteSel" ReturnType="Collection(ASNModel.AutorizadoresxPerfilSolicitanteSel_Result)">
           <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AvisoSolicitantesAutorizantes" ReturnType="Collection(ASNModel.AvisoSolicitantesAutorizantes_Result)" />
           <FunctionImport Name="CatPerfilEmpleadosAccesosCMB" ReturnType="Collection(ASNModel.CatPerfilEmpleadosAccesosCMB_Result)">
           <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1019,6 +1022,11 @@
           <FunctionImport Name="AutorizadoresxPerfilSolicitanteCMB" ReturnType="Collection(ASNModel.AutorizadoresxPerfilSolicitanteCMB_Result)">
           <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ValidaSolicitud" ReturnType="Collection(ASNModel.ValidaSolicitud_Result)">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AvisoSolicitantesAutorizantes" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1473,19 +1481,6 @@
           <Property Type="Int32" Name="EmpleadoId" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
         </ComplexType>
-        <ComplexType Name="AvisoSolicitantesAutorizantes_Result">
-          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
-          <Property Type="Int32" Name="Ident_Solicitante" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
-          <Property Type="String" Name="eMailSol" Nullable="true" MaxLength="80" />
-          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
-          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
-          <Property Type="String" Name="Nombre1" Nullable="true" MaxLength="752" />
-          <Property Type="String" Name="eMailAut" Nullable="true" MaxLength="80" />
-          <Property Type="Boolean" Name="Autorizado" Nullable="true" />
-          <Property Type="Boolean" Name="Rechazado" Nullable="true" />
-          <Property Type="Boolean" Name="Cancelado" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="CatPerfilEmpleadosAccesosCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="752" />
@@ -1516,6 +1511,10 @@
         <ComplexType Name="AutorizadoresxPerfilSolicitanteCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="752" />
+        </ComplexType>
+        <ComplexType Name="ValidaSolicitud_Result">
+          <Property Type="Int32" Name="Empleado_Ident" Nullable="true" />
+          <Property Type="Int32" Name="totalSolicitud" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -2202,23 +2201,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="AvisoSolicitantesAutorizantes" FunctionName="ASNModel.Store.AvisoSolicitantesAutorizantes">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.AvisoSolicitantesAutorizantes_Result">
-                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
-                <ScalarProperty Name="Ident_Solicitante" ColumnName="Ident_Solicitante" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="eMailSol" ColumnName="eMailSol" />
-                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
-                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
-                <ScalarProperty Name="Nombre1" ColumnName="Nombre1" />
-                <ScalarProperty Name="eMailAut" ColumnName="eMailAut" />
-                <ScalarProperty Name="Autorizado" ColumnName="Autorizado" />
-                <ScalarProperty Name="Rechazado" ColumnName="Rechazado" />
-                <ScalarProperty Name="Cancelado" ColumnName="Cancelado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosAccesosCMB" FunctionName="ASNModel.Store.CatPerfilEmpleadosAccesosCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatPerfilEmpleadosAccesosCMB_Result">
@@ -2267,6 +2249,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ValidaSolicitud" FunctionName="ASNModel.Store.ValidaSolicitud">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ValidaSolicitud_Result">
+                <ScalarProperty Name="Empleado_Ident" ColumnName="Empleado_Ident" />
+                <ScalarProperty Name="totalSolicitud" ColumnName="totalSolicitud" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AvisoSolicitantesAutorizantes" FunctionName="ASNModel.Store.AvisoSolicitantesAutorizantes" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

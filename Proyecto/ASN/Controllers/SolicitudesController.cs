@@ -622,34 +622,48 @@ namespace ASN.Controllers
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                     resultado.Value = 1;
 
-                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
-                    context.CatSolicitudesSu(int.Parse(solicitud),DateTime.Now,0,0,string.Empty,0,string.Empty,string.Empty,0,0,string.Empty,0,0,string.Empty, resultado, ccmsidAdmin);
-                    
-                    var resultadoAccion = "";
-                    if (res == -1)
+                    var resultadoValidacion = context.ValidaSolicitud(int.Parse(solicitud),resultado);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    if (res == 0)
                     {
-                        resultadoAccion = "Ocurrio un problema durante la actualización de la solicitud. Intente más tarde.";
-                        Error = new { Errors = resultadoAccion };
-                    }
-                    else
-                    {
-                        var listadoAutorizadores = context.CatSolicitudEmpleadosAutorizantesSel(int.Parse(solicitud)).ToList();
-                        var correos = string.Empty;
-                        foreach (var item in listadoAutorizadores)
+                        int.TryParse(resultado.Value.ToString(), out res);
+
+                        if (res == 0)
                         {
-                            if (!string.IsNullOrEmpty(item.EmailManager)) {
-                                correos += item.EmailManager + ";";
+                            int.TryParse(User.Identity.Name, out ccmsidAdmin);
+                            context.CatSolicitudesSu(int.Parse(solicitud), DateTime.Now, 0, 0, string.Empty, 0, string.Empty, string.Empty, 0, 0, string.Empty, 0, 0, string.Empty, resultado, ccmsidAdmin);
+
+                            var resultadoAccion = "";
+                            if (res == -1)
+                            {
+                                resultadoAccion = "Ocurrio un problema durante la actualización de la solicitud. Intente más tarde.";
+                                Error = new { Errors = resultadoAccion };
+                            }
+                            else
+                            {
+                                var listadoAutorizadores = context.CatSolicitudEmpleadosAutorizantesSel(int.Parse(solicitud)).ToList();
+                                var correos = string.Empty;
+                                foreach (var item in listadoAutorizadores)
+                                {
+                                    if (!string.IsNullOrEmpty(item.EmailManager))
+                                    {
+                                        correos += item.EmailManager + ";";
+                                    }
+                                }
+
+                                correos = correos.Substring(0, correos.Length - 1);
+
+                                MailHelper mail = new MailHelper();
+                                mail.IsBodyHtml = true;
+                                mail.RecipientCCO = correos;//emails.EmailTo; mail.RecipientCC = emails.EmailCC;
+                                mail.Subject = "Notificación de Nueva Solicitud";
+                                //mail.AttachmentFile = Server.MapPath("~/Content/images/logo.png");
+                                mail.Body = RenderPartialView.RenderPartialViewToString(this, "~\\Views\\Shared\\Mail\\NoticacionSolicitud.cshtml", null);
+                                mail.Send();
                             }
                         }
-                        correos = correos.Substring(0, correos.Length - 1);
-
-                        MailHelper mail = new MailHelper();
-                        mail.IsBodyHtml = true;
-                        mail.RecipientCCO = correos;//emails.EmailTo; mail.RecipientCC = emails.EmailCC;
-                        mail.Subject = "Notificación de Nueva Solicitud";
-                        //mail.AttachmentFile = Server.MapPath("~/Content/images/logo.png");
-                        mail.Body = RenderPartialView.RenderPartialViewToString(this, "~\\Views\\Shared\\Mail\\NoticacionSolicitud.cshtml", null);
-                        mail.Send();
                     }
 
                     result = new { Id = solicitud, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };

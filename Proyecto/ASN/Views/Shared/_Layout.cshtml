@@ -116,6 +116,10 @@
                     {
                         <li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>
                     }
+                    if (User.IsInRole("Desarrollo"))
+                    {
+                        <li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>
+                    }
 
                     if (User.IsInRole("Desarrollo2"))
                     {
