@@ -29,6 +29,30 @@
         function onClose() {
             location.reload();
         }
+
+        function generaNotificaciones() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Index", "Notificaciones")',
+                dataType: "json",
+                success: function (response) {
+
+                    var notification = $("#popupNotification").data("kendoNotification");
+                    if (response.status == 0) {
+                        notification.show(" <b>Se enviaron correos a los Solicitantes que tienen solicitudes pendientes por concluir.<br /><br /> Se enviaron correo a los autorizadores que tienen solicitudes pendientes por autorizar.</b>", "success");
+                    }
+                    else if (response.status === "-1") {
+                        var errorMsg = response.mensaje;
+                        notification.show(errorMsg, "error");
+                    }
+                    
+                },
+                error: function (response) {
+                    var notification = $("#popupNotification").data("kendoNotification");
+                    notification.show("Ocurrio un problema durante el proceso. Intente de nuevo más tarde.", "error");
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -118,7 +142,8 @@
                     }
                     if (User.IsInRole("Desarrollo"))
                     {
-                        <li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>
+                        @*<li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>*@
+                        <li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>
                     }
 
                     if (User.IsInRole("Desarrollo2"))

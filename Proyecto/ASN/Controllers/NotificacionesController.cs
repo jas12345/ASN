@@ -12,8 +12,10 @@ namespace ASN.Controllers
         // GET: Notificaciones
         public JsonResult Index()
         {
+            var estado = string.Empty;
+            var mensajeAccion = string.Empty;
             try
-            {
+            {                
                 using (ASNContext context = new ASNContext())
                 {
                     var listado = new List<AvisoSolicitantesManual_Result>();
@@ -49,17 +51,18 @@ namespace ASN.Controllers
                         mail.Send();
                     }
 
-                    //if (!string.IsNullOrEmpty(correosAutorizantes))
-                    //{
-                    //    MailHelper mail = new MailHelper();
-                    //    mail.IsBodyHtml = true;
-                    //    mail.RecipientCCO = correosAutorizantes;
-                    //    mail.Subject = "Solicitudes Pendientes por Autorizar";
-                    //    mail.AttachmentFile = Server.MapPath("~/Content/images/logo.png");
-                    //    mail.Body = RenderPartialView.RenderPartialViewToString(this, "~\\Views\\Shared\\Mail\\NoticacionSolicitud.cshtml", null);
-                    //    mail.Body = mail.Body.Replace("#cuerpo#", "Existen solicitudes asignadas para su revisión. Ingrese a la sección de Administrador de solicitudes para darle seguimiento a la solicitud.");
-                    //    mail.Send();
-                    //}
+                    if (!string.IsNullOrEmpty(correosAutorizantes))
+                    {
+                        MailHelper mail = new MailHelper();
+                        mail.IsBodyHtml = true;
+                        mail.RecipientCCO = correosAutorizantes;
+                        mail.Subject = "Solicitudes Pendientes por Autorizar";
+                        mail.AttachmentFile = Server.MapPath("~/Content/images/logo.png");
+                        mail.Body = RenderPartialView.RenderPartialViewToString(this, "~\\Views\\Shared\\Mail\\NoticacionSolicitud.cshtml", null);
+                        mail.Body = mail.Body.Replace("#cuerpo#", "Existen solicitudes asignadas para su revisión. Ingrese a la sección de Administrador de solicitudes para darle seguimiento a la solicitud.");
+                        mail.Send();
+                    }
+                    estado = "0";
                 }
             }
             catch (Exception ex)
@@ -67,8 +70,10 @@ namespace ASN.Controllers
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                estado = "-1";
+                mensajeAccion = ex.Message;
             }
-            return Json(new { status = "", mensaje = "" }, JsonRequestBehavior.AllowGet);
+            return Json(new { status = estado, mensaje = mensajeAccion }, JsonRequestBehavior.AllowGet);
         }
     }
 }
