@@ -661,6 +661,7 @@ namespace ASN.Controllers
                                 mail.Subject = "Notificación de Nueva Solicitud";
                                 mail.AttachmentFile = Server.MapPath("~/Content/images/logo.png");
                                 mail.Body = RenderPartialView.RenderPartialViewToString(this, "~\\Views\\Shared\\Mail\\NoticacionSolicitud.cshtml", null);
+                                mail.Body = mail.Body.Replace("#cuerpo#", "Existen solicitudes asignadas para su revisión. Ingrese a la sección de Administrador de solicitudes para darle seguimiento a la solicitud.");
                                 mail.Send();
                             }
                         }
