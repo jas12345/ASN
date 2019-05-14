@@ -659,7 +659,7 @@ namespace ASN.Controllers
                                 mail.IsBodyHtml = true;
                                 mail.RecipientCCO = correos;//emails.EmailTo; mail.RecipientCC = emails.EmailCC;
                                 mail.Subject = "Notificación de Nueva Solicitud";
-                                //mail.AttachmentFile = Server.MapPath("~/Content/images/logo.png");
+                                mail.AttachmentFile = Server.MapPath("~/Content/images/logo.png");
                                 mail.Body = RenderPartialView.RenderPartialViewToString(this, "~\\Views\\Shared\\Mail\\NoticacionSolicitud.cshtml", null);
                                 mail.Send();
                             }

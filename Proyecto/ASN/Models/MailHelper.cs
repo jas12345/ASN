@@ -28,6 +28,7 @@ namespace ASN.Models
         public string Body { get; set; }
         public bool IsBodyHtml { get; set; }
         public string AttachmentFile { get; set; }
+        public string AttachmentFileBanner { get; set; }
 
         public MailHelper()
         {
@@ -103,6 +104,16 @@ namespace ASN.Models
                     {
                         att = new Attachment(AttachmentFile);
                         att.ContentId = "imagens";
+                        message.Attachments.Add(att);
+                    }
+                }
+
+                if (!String.IsNullOrEmpty(AttachmentFileBanner))
+                {
+                    if (File.Exists(AttachmentFileBanner))
+                    {
+                        att = new Attachment(AttachmentFileBanner);
+                        att.ContentId = "imagensBanner";
                         message.Attachments.Add(att);
                     }
                 }

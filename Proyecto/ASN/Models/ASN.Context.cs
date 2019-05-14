@@ -1865,9 +1865,9 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ValidaSolicitud_Result>("ValidaSolicitud", folioSolicitudParameter, estatus);
         }
     
-        public virtual int AvisoSolicitantesAutorizantes()
+        public virtual ObjectResult<AvisoSolicitantesManual_Result> AvisoSolicitantesManual()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AvisoSolicitantesAutorizantes");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AvisoSolicitantesManual_Result>("AvisoSolicitantesManual");
         }
     }
 }

@@ -186,6 +186,9 @@
     <Compile Include="Models\AutorizadoresxPerfilSolicitanteSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AvisoSolicitantesManual_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CargaMasivaRegistroViewModel.cs" />
     <Compile Include="Models\CatAnioFechasCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
@@ -422,7 +425,10 @@
     <Content Include="Content\Default\sprite_kpi_2x.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\images\ASNInicio.jpg" />
+    <Content Include="Content\images\banner.png" />
+    <Content Include="Content\images\icono-requerimiento.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\tick_green.png" />
     <Content Include="Content\kendo.common-bootstrap.min.css" />
     <Content Include="Content\kendo.common.min.css" />
     <Content Include="Content\kendo.custom.css" />
