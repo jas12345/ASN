@@ -1,0 +1,23 @@
+Minuta de Reunión 1 de revisión de propuestas de Captura de Solicitudes.txt
+
+*  Se requiere eliminar Mercado de la pantalla de Perfil y de las adicionales que correspondan.
+*  Se requiere capturar solo algunos datos generales de solicitud.
+*  Se requiere permitir la captura de múltiples conceptos en la solicitud y para varios perfiles.
+*  Se requiere captura de niveles de Autorizadores en Concepto adicionalmente a captura en Solicitud.
+*  Se requiere propuesta de pantalla de captura rápida de solicitud.
+*  Se requiere botón de copiar en captura de Conceptos para agilizar la captura.
+
+
+Minuta de Reunión 2 de revisión de propuestas de Captura de Solicitudes.txt
+
+*  Se requiere modificación de pantalla de captura de Perfiles-Empleados para que se puedan seleccionar cualquier empleado como Solicitantes - Autorizadores - Responsables, incluyendo los que no pertenecen al perfil
+*
+
+Minuta de Reunión 3 de revisión de propuestas de Captura de Solicitudes.txt
+
+*  Se requiere agregar un tipo se usuario de la aplicación: "Consultante" adicional a los tipos "Solicitante", "Autorizante" y "Responsable"
+*  Se requiere botón de copiar en captura de Solicitudes para agilizar la captura.
+*  Se requiere revisar datos de retroalimentación al capturar cada detalle de la solicitud. Por ejemplo, desplegar nombre de responsable, en lugar de CCMSId de responsable.
+
+
+

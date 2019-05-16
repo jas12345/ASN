@@ -1,0 +1,18 @@
+*  Creación de tabla de Auditoría
+*  Adecuación de SPs para captura de información de Auditoría
+*  SP de envio de correos a petición.
+*  
+
+
+
+*  Pasar botón Edit a la izquierda en captura de Solicitudes
+
+
+exec sp_reset_connection
+go
+exec [app620].[CatUserInfoSel] @CCMSID=844795
+go
+
+
+Ordenar por nombre
+exec [app620].[CatPerfilEmpleadosSel] @Perfil_Ident=0

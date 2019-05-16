@@ -1,0 +1,37 @@
+
+Minuta de Junta de dudas y aclaraciones Nóminas manuales
+9:00 - 10:30 AM, 10 de mayo de 2019
+
+Durante la junta de dudas y aclaraciones de Nóminas Manuales se revisaron y aclararon distintos puntos del Sistema de Nómina Manuales.
+
+* Se aclaró que la Autorización Automática se define por concepto y esta configuración se utiliza en la última sección de la Solicitud, en la Selección de Autorizadores, permitiendo evitar la captura de Autorizadores en los conceptos que correspondan.
+
+* Se indicó que la captura de Solicitud no se realiza a nivel Perfil de Empleados/Concepto. La captura debe estar abierta a todos los Perfiles de Empleados asociados al Solicitante.
+  Esto provoca los siguientes cambios en la Solicitud: 
+  ** En la sección de Selección de Empleados, aparecerán en la lista mas empleados disponibles para su selección. Esto debido a que temdrá disponibles todos los Conceptos, de cada uno de los perfiles que tiene asociado el solicitante.
+  ** Se requiere disponibilidad de mas filtros para seleccionar empleados específicos. Como desaparece, la selección por Perfil de empleado, los filtros adicionales serían País, Ciudad, Cliente y Programa aparte de los filtros actuales CCMSId y Nombre
+
+* Se decide que no se aplica el atributo Mercado en los Perfiles de empleados, puesto que no se relacion con lo empleados de CCMS y no va a poder aplicar como filtro.
+  Se requiere desactivar este filtro que estaba asociado incorrectamente al campo Compañía del CCMS
+
+* Se retoma la solicitud de aplicar la funcionalidad de copiar Perfil de Empleados para captura rápida de Perfiles.
+
+* La captura de Autorizadores se solicita que sea dinámicamente en dos secciones: En configuración de concepto, y en la sección final de Captura de Solicitud.
+  Es importante aclarar que esta sección facilita la captura de Autorizadores en Solicitud mientras la configuracion de perfiles se realice adecuadamente.
+  En cuanto a los conceptos que no tienen configurada Autorización Automática, se requiere, por fuerza, captura de autorizadores en la última sección.
+
+* En captura de solicitud, no se captura Perfil de Empleados, Concepto ni Motivo.
+  Esto simplifica la captura de los datos generales de la Solicitud (solo esta sección).
+
+* Se solicitó la revisión de las tres pantallas de captura de la Solicitud con la finalidad de agilizar el tiempo de captura.
+  Se realizarán propuestas para su revisión en junta del lunes para su revisión, comentarios y aceptación.
+  Después de este proceso, se realizará un análisis de impacto en la implementación actual.
+  Es importante aclarar que los comentarios recibidos por parte de Emilio, en cuanto a descartar u obviar algunos datos de Captura de Solicitud, no se pueden aplicar por estar su captura indicada en el análisis actual.
+
+
+
+
+
+
+
+
