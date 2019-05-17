@@ -21,10 +21,9 @@
                             columns.Bound(c => c.ConceptoId).Title("Concepto").Visible(false).Filterable(false);
                             columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
                             columns.ForeignKey(c => c.Paises, (System.Collections.IEnumerable)ViewData["Paises"], "Id", "Value").Width(70).Title("Pais").Visible(false);
-                            columns.ForeignKey(c => c.MercadoId, (System.Collections.IEnumerable)ViewData["Mercados"], "Id", "Value").Width(90).Title("Mercado").Visible(true).Filterable(true);
                             columns.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Id", "Value").Width(70).Title("Cliente").Visible(true).Filterable(true);
                             columns.ForeignKey(c => c.PeopleSoftId, (System.Collections.IEnumerable)ViewData["PeopleSoft"], "Ident", "Valor").Width(90).Title("PeopleSoft").Visible(true).Filterable(true);
-                            columns.ForeignKey(c => c.TipoConcepto, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(70).Title("Tipo concepto");
+                            columns.ForeignKey(c => c.TipoConceptoId, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(70).Title("Tipo concepto");
                             columns.Bound(c => c.NumeroNivelAutorizante).Width(65).Title("Número de Nivel de Autorizante").Filterable(false);
 
                             columns.Bound(c => c.Vigencia).Visible(false);
@@ -63,11 +62,10 @@
                                 model.Field(c => c.ConceptoId).Editable(false);
                                 model.Field(c => c.Descripcion).Editable(true);
                                 model.Field(c => c.PaisId).Editable(true);
-                                model.Field(c => c.MercadoId).Editable(true);
                                 model.Field(c => c.ClienteId).Editable(true);
                                 model.Field(c => c.PeopleSoftId).Editable(true);
 
-                                model.Field(c => c.TipoConcepto).Editable(true);
+                                model.Field(c => c.TipoConceptoId).Editable(true);
                                 model.Field(c => c.Vigencia).Editable(true);
                                 model.Field(c => c.PagosFijos).Editable(true);
                                 model.Field(c => c.Tope).Editable(true);

@@ -15,10 +15,8 @@ namespace ASN.Models
     {
         public int ConceptoId { get; set; }
         public string Descripcion { get; set; }
-        public int TipoConcepto { get; set; }
         public string PaisId { get; set; }
         public string Paises { get; set; }
-        public int MercadoId { get; set; }
         public int ClienteId { get; set; }
         public int PeopleSoftId { get; set; }
         public Nullable<int> NumeroNivelAutorizante { get; set; }
@@ -32,5 +30,6 @@ namespace ASN.Models
         public string FechaInicio { get; set; }
         public string FechaFin { get; set; }
         public int ParametroConceptoId { get; set; }
+        public int TipoConceptoId { get; set; }
     }
 }

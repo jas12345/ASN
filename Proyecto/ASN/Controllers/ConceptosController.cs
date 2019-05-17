@@ -321,9 +321,8 @@ namespace ASN.Controllers
                         {
                             context.CatConceptosSi(
                                 obj.Descripcion,
-                                obj.TipoConcepto,
+                                obj.TipoConceptoId,
                                 obj.Paises,
-                                obj.MercadoId,
                                 obj.ClienteId,
                                 obj.PeopleSoftId,
                                 obj.NumeroNivelAutorizante,
@@ -385,9 +384,8 @@ namespace ASN.Controllers
                             context.CatConceptosSu(
                                 obj.ConceptoId,
                                 obj.Descripcion,
-                                obj.TipoConcepto,
+                                obj.TipoConceptoId,
                                 obj.Paises,
-                                obj.MercadoId,
                                 obj.ClienteId,
                                 obj.PeopleSoftId,
                                 obj.NumeroNivelAutorizante,

@@ -67,9 +67,8 @@
         <Function Name="CatConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
-          <Parameter Name="TipoConcepto" Type="int" Mode="In" />
+          <Parameter Name="TipoConceptoId" Type="int" Mode="In" />
           <Parameter Name="PaisId" Type="varchar" Mode="In" />
-          <Parameter Name="MercadoId" Type="int" Mode="In" />
           <Parameter Name="ClienteId" Type="int" Mode="In" />
           <Parameter Name="PeopleSoftId" Type="int" Mode="In" />
           <Parameter Name="NumeroNivelAutorizante" Type="int" Mode="In" />
@@ -88,9 +87,8 @@
         <Function Name="CatConceptosSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
-          <Parameter Name="TipoConcepto" Type="int" Mode="In" />
+          <Parameter Name="TipoConceptoId" Type="int" Mode="In" />
           <Parameter Name="PaisId" Type="varchar" Mode="In" />
-          <Parameter Name="MercadoId" Type="int" Mode="In" />
           <Parameter Name="ClienteId" Type="int" Mode="In" />
           <Parameter Name="PeopleSoftId" Type="int" Mode="In" />
           <Parameter Name="NumeroNivelAutorizante" Type="int" Mode="In" />
@@ -497,9 +495,8 @@
           <FunctionImport Name="CatConceptosSel" ReturnType="Collection(ASNModel.CatConceptosSel_Result)" />
           <FunctionImport Name="CatConceptosSi">
             <Parameter Name="Descripcion" Mode="In" Type="String" />
-            <Parameter Name="TipoConcepto" Mode="In" Type="Int32" />
+            <Parameter Name="TipoConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="PaisId" Mode="In" Type="String" />
-            <Parameter Name="MercadoId" Mode="In" Type="Int32" />
             <Parameter Name="ClienteId" Mode="In" Type="Int32" />
             <Parameter Name="PeopleSoftId" Mode="In" Type="Int32" />
             <Parameter Name="NumeroNivelAutorizante" Mode="In" Type="Int32" />
@@ -518,9 +515,8 @@
           <FunctionImport Name="CatConceptosSu">
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
-            <Parameter Name="TipoConcepto" Mode="In" Type="Int32" />
+            <Parameter Name="TipoConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="PaisId" Mode="In" Type="String" />
-            <Parameter Name="MercadoId" Mode="In" Type="Int32" />
             <Parameter Name="ClienteId" Mode="In" Type="Int32" />
             <Parameter Name="PeopleSoftId" Mode="In" Type="Int32" />
             <Parameter Name="NumeroNivelAutorizante" Mode="In" Type="Int32" />
@@ -1039,10 +1035,8 @@
         <ComplexType Name="CatConceptosSel_Result">
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="TipoConcepto" Nullable="false" />
           <Property Type="String" Name="PaisId" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Paises" Nullable="true" MaxLength="30" />
-          <Property Type="Int32" Name="MercadoId" Nullable="false" />
           <Property Type="Int32" Name="ClienteId" Nullable="false" />
           <Property Type="Int32" Name="PeopleSoftId" Nullable="false" />
           <Property Type="Int32" Name="NumeroNivelAutorizante" Nullable="true" />
@@ -1056,6 +1050,7 @@
           <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FechaFin" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="ParametroConceptoId" Nullable="false" />
+          <Property Type="Int32" Name="TipoConceptoId" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatCountryCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1557,10 +1552,8 @@
               <ComplexTypeMapping TypeName="ASNModel.CatConceptosSel_Result">
                 <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="TipoConcepto" ColumnName="TipoConcepto" />
                 <ScalarProperty Name="PaisId" ColumnName="PaisId" />
                 <ScalarProperty Name="Paises" ColumnName="Paises" />
-                <ScalarProperty Name="MercadoId" ColumnName="MercadoId" />
                 <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
                 <ScalarProperty Name="PeopleSoftId" ColumnName="PeopleSoftId" />
                 <ScalarProperty Name="NumeroNivelAutorizante" ColumnName="NumeroNivelAutorizante" />
@@ -1574,6 +1567,7 @@
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="ParametroConceptoId" ColumnName="ParametroConceptoId" />
+                <ScalarProperty Name="TipoConceptoId" ColumnName="TipoConceptoId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

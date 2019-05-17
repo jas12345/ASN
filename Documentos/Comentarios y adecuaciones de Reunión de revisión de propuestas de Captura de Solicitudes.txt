@@ -18,6 +18,7 @@ Minuta de Reunión 3 de revisión de propuestas de Captura de Solicitudes.txt
 *  Se requiere agregar un tipo se usuario de la aplicación: "Consultante" adicional a los tipos "Solicitante", "Autorizante" y "Responsable"
 *  Se requiere botón de copiar en captura de Solicitudes para agilizar la captura.
 *  Se requiere revisar datos de retroalimentación al capturar cada detalle de la solicitud. Por ejemplo, desplegar nombre de responsable, en lugar de CCMSId de responsable.
+*  Configuración de concepto por País y Site
 
 
 

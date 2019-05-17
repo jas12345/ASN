@@ -41,28 +41,6 @@
         </div>
 
         <div class="editor-label">
-            <label for="MercadoId">Mercado</label>
-        </div>
-        <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.MercadoId)
-                .DataSource(source =>
-                {
-                    source.Read(Read =>
-                    {
-                        Read.Action("GetCompanyCMB", "Conceptos");
-                    });
-                    //.ServerFiltering(true);
-                })
-                .Filter("contains")
-                .OptionLabel("- Mercado - ")
-                .DataValueField("Id")
-                .DataTextField("Value")
-                .Name("MercadoId")
-                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un mercado." })
-            )
-        </div>
-
-        <div class="editor-label">
             <label for="ClienteId">Cliente</label>
         </div>
         <div class="editor-field">
@@ -261,10 +239,10 @@
         </div>
 
         <div class="editor-label">
-            <label for="TipoConcepto">Tipo de concepto</label>
+            <label for="TipoConceptoId">Tipo de concepto</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.TipoConcepto)
+            @(Html.Kendo().DropDownListFor(x => x.TipoConceptoId)
                         .DataSource(source =>
                         {
                             source.Read(Read =>
@@ -277,7 +255,7 @@
                         .OptionLabel("- Tipo de concepto - ")
                         .DataValueField("Ident")
                         .DataTextField("Valor")
-                        .Name("TipoConcepto")
+                        .Name("TipoConceptoId")
                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationmessage = "Seleccione un tipo de concepto." })
             )
         </div>
