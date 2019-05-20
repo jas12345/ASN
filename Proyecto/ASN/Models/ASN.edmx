@@ -244,7 +244,6 @@
           <Parameter Name="NombrePerfilEmpleados" Type="varchar" Mode="In" />
           <Parameter Name="Country_Ident" Type="int" Mode="In" />
           <Parameter Name="City_Ident" Type="int" Mode="In" />
-          <Parameter Name="Company_Ident" Type="int" Mode="In" />
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
           <Parameter Name="Client_Ident" Type="int" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
@@ -759,7 +758,6 @@
             <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
             <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
             <Parameter Name="City_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Company_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Client_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
@@ -1294,8 +1292,6 @@
           <Property Type="String" Name="Country_Full_Name" Nullable="true" MaxLength="150" />
           <Property Type="Int32" Name="City_Ident" Nullable="false" />
           <Property Type="String" Name="City_Name" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Company_Ident" Nullable="true" />
-          <Property Type="String" Name="Company_Name" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="Location_Ident" Nullable="true" />
           <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="150" />
           <Property Type="Int32" Name="Client_Ident" Nullable="true" />
@@ -1968,8 +1964,6 @@
                 <ScalarProperty Name="Country_Full_Name" ColumnName="Country_Full_Name" />
                 <ScalarProperty Name="City_Ident" ColumnName="City_Ident" />
                 <ScalarProperty Name="City_Name" ColumnName="City_Name" />
-                <ScalarProperty Name="Company_Ident" ColumnName="Company_Ident" />
-                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
                 <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
                 <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
                 <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />

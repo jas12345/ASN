@@ -939,7 +939,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosCMB_Result>("CatPerfilEmpleadosCMB", tipoAccesoIdParameter);
         }
     
-        public virtual int CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, Nullable<int> city_Ident, Nullable<int> company_Ident, Nullable<int> location_Ident, Nullable<int> client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, Nullable<int> conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, Nullable<int> city_Ident, Nullable<int> location_Ident, Nullable<int> client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, Nullable<int> conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var nombrePerfilEmpleadosParameter = nombrePerfilEmpleados != null ?
                 new ObjectParameter("NombrePerfilEmpleados", nombrePerfilEmpleados) :
@@ -952,10 +952,6 @@ namespace ASN.Models
             var city_IdentParameter = city_Ident.HasValue ?
                 new ObjectParameter("City_Ident", city_Ident) :
                 new ObjectParameter("City_Ident", typeof(int));
-    
-            var company_IdentParameter = company_Ident.HasValue ?
-                new ObjectParameter("Company_Ident", company_Ident) :
-                new ObjectParameter("Company_Ident", typeof(int));
     
             var location_IdentParameter = location_Ident.HasValue ?
                 new ObjectParameter("Location_Ident", location_Ident) :
@@ -985,7 +981,7 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosSi", nombrePerfilEmpleadosParameter, country_IdentParameter, city_IdentParameter, company_IdentParameter, location_IdentParameter, client_IdentParameter, program_IdentParameter, contract_Type_IdentParameter, conceptoIdParameter, tipoAccesoIdParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosSi", nombrePerfilEmpleadosParameter, country_IdentParameter, city_IdentParameter, location_IdentParameter, client_IdentParameter, program_IdentParameter, contract_Type_IdentParameter, conceptoIdParameter, tipoAccesoIdParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual int CatPerfilEmpleadosSu(Nullable<int> perfil_Ident, string nombrePerfilEmpleados, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)

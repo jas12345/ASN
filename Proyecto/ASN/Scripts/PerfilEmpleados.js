@@ -1,7 +1,8 @@
 ﻿function edit(e) {
+    //var nombrePerfilEmpleados = $("#NombrePerfilEmpleados").data("kendoTextBox");
     var country = $("#Country_Ident").data("kendoDropDownList");
     var city = $("#City_Ident").data("kendoDropDownList");
-    var company = $("#Company_Ident").data("kendoDropDownList");
+    //var company = $("#Company_Ident").data("kendoDropDownList");
     var location = $("#Location_Ident").data("kendoDropDownList");
     var client = $("#Client_Ident").data("kendoDropDownList");
     var program = $("#Program_Ident").data("kendoDropDownList");
@@ -13,10 +14,11 @@
     if (e.model.isNew() === false) {
 
         $("#City_Ident").val(e.model.City_Ident).change();
-
+        debugger;
+        //nombrePerfilEmpleados.enable(false);
         country.enable(false);
         city.enable(false);
-        company.enable(false);
+        //company.enable(false);
         location.enable(false);
         client.enable(false);
         program.enable(false);
@@ -37,7 +39,7 @@
 
         country.value(valorDefault);
         city.value(valorDefault);
-        company.value(valorDefault);
+        //company.value(valorDefault);
         location.value(valorDefault);
         client.value(valorDefault);
         program.value(valorDefault);

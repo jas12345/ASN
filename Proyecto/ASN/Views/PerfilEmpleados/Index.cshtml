@@ -22,7 +22,6 @@
                                     columns.Bound(c => c.NombrePerfilEmpleados).Title("Nombre de Perfil").Width(220);
                                     columns.ForeignKey(c => c.Country_Ident, (System.Collections.IEnumerable)ViewData["Pais"], "Id", "Value").Title("Pais").Visible(true).Filterable(true).Width(220);
                                     columns.ForeignKey(c => c.City_Ident, (System.Collections.IEnumerable)ViewData["Ciudad"], "Id", "Value").Title("Ciudad").Visible(true).Filterable(true).Width(220);
-                                    columns.ForeignKey(c => c.Company_Ident, (System.Collections.IEnumerable)ViewData["Mercado"], "Id", "Value").Title("Mercado").Visible(true).Filterable(true).Width(220);
                                     columns.ForeignKey(c => c.Location_Ident, (System.Collections.IEnumerable)ViewData["Site"], "Id", "Value").Title("Site").Visible(true).Filterable(true).Width(220);
                                     columns.ForeignKey(c => c.Client_Ident, (System.Collections.IEnumerable)ViewData["Cliente"], "Id", "Value").Title("Cliente").Visible(true).Filterable(true).Width(220);
                                     columns.ForeignKey(c => c.Program_Ident, (System.Collections.IEnumerable)ViewData["Programa"], "Id", "Value").Title("Programa").Visible(true).Filterable(true).Width(220);
@@ -55,7 +54,6 @@
                                         model.Field(c => c.NombrePerfilEmpleados).Editable(true);
                                         model.Field(c => c.Country_Ident).Editable(true);
                                         model.Field(c => c.City_Ident).Editable(true);
-                                        model.Field(c => c.Company_Ident).Editable(true);
                                         model.Field(c => c.Location_Ident).Editable(true);
                                         model.Field(c => c.Client_Ident).Editable(true);
                                         model.Field(c => c.Program_Ident).Editable(true);
