@@ -168,7 +168,7 @@ function MuestraSave() {
                 var anioAnterior = fechaPasada.getFullYear() - 5;
                 
                 if (input.is("[name=AnioId]") && input.val().trim() === "" || (input.val().trim() < anioAnterior || input.val().trim() > anioFuturo)) {
-                    $("input[name=AnioId]").attr("validationMessage", "La fecha no puede ser menor ó mayor a 5 años de la fecha actual");
+                    $("input[name=AnioId]").attr("validationMessage", "El año no puede ser menor ó mayor a 5 años de la fecha actual");
                     return false;
                 }
                 return true;
