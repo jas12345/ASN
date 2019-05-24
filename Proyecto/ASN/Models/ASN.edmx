@@ -1367,7 +1367,9 @@
           <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
           <Property Type="String" Name="NombrePerfilEmpleados" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="PerfilActivo" Nullable="false" />
-          <Property Type="Boolean" Name="PerfilEmpleadoAcceso_Activo" Nullable="true" />
+          <Property Type="Boolean" Name="PerfilEmpleadoAcceso_Activo" Nullable="false" />
+          <Property Type="Int32" Name="Position_Code_Ident" Nullable="true" />
+          <Property Type="String" Name="Position_Code_Title" Nullable="true" MaxLength="150" />
         </ComplexType>
         <ComplexType Name="CatSolicitudesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -2057,6 +2059,8 @@
                 <ScalarProperty Name="NombrePerfilEmpleados" ColumnName="NombrePerfilEmpleados" />
                 <ScalarProperty Name="PerfilActivo" ColumnName="PerfilActivo" />
                 <ScalarProperty Name="PerfilEmpleadoAcceso_Activo" ColumnName="PerfilEmpleadoAcceso_Activo" />
+                <ScalarProperty Name="Position_Code_Ident" ColumnName="Position_Code_Ident" />
+                <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

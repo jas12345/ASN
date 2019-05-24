@@ -18,6 +18,8 @@ namespace ASN.Models
         public int Perfil_Ident { get; set; }
         public string NombrePerfilEmpleados { get; set; }
         public bool PerfilActivo { get; set; }
-        public Nullable<bool> PerfilEmpleadoAcceso_Activo { get; set; }
+        public bool PerfilEmpleadoAcceso_Activo { get; set; }
+        public Nullable<int> Position_Code_Ident { get; set; }
+        public string Position_Code_Title { get; set; }
     }
 }

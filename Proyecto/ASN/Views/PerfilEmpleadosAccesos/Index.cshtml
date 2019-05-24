@@ -15,7 +15,7 @@
                     <div class="k-form-inline" style="padding:5px;">
                         <div class="k-form-field">
                             @*<div class="editor-label">
-                                <label for="perfilId">Perfil de usuario</label>
+                                <label for="perfilId">Perfil de Empleados</label>
                             </div>*@
                             <div class="editor-field">
                                 @(Html.Kendo().DropDownList()
@@ -28,7 +28,7 @@
                                                             .ServerFiltering(true);
                                                         })
                                                         .Filter("contains")
-                                                        .OptionLabel("- Seleccione perfil de usuario- ")
+                                                        .OptionLabel("- Seleccione perfil de empleados- ")
                                                         .DataValueField("Ident")
                                                         .DataTextField("Valor")
                                                         .Name("PerfilUsuarioId")
@@ -53,10 +53,11 @@
                                                                         .Columns(column =>
                                                                         {
                                                                             column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });//.ClientTemplate("#:PerfilEmpleadoAcceso_Activo == 1  ? '- Todos -' : Concepto #");
-                                                                                    column.Bound(c => c.Ident).Width(40).Title("CCMS Id").Visible(true).Filterable(true);
+                                                                            column.Bound(c => c.Ident).Width(40).Title("CCMS Id").Visible(true).Filterable(true);
                                                                             column.Bound(c => c.Nombre).Width(50).Title("Nombre").Filterable(true);
+                                                                            column.Bound(c => c.Position_Code_Title).Width(50).Title("Puesto").Filterable(true);
                                                                             column.Bound(c => c.PerfilEmpleadoAcceso_Activo).Title("PerfilEmpleadoAcceso_Activo").Visible(false).Filterable(false).Width(50);//.ClientTemplate("#:PerfilEmpleadoAcceso_Activo  ? 'Si' : 'No' #");
-                                                                                })
+                                                                        })
                                                                        .HtmlAttributes(new { style = "height: 445px;" })
                                                                        .Scrollable(sorteable => sorteable.Virtual(false))
                                                                        .Sortable()

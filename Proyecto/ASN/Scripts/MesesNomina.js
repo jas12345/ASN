@@ -23,8 +23,8 @@ function edit(e) {
     }
     else {
         debugger;
-        anio.enable(false);
-        mes.enable(false);
+        anio.enable(true);
+        mes.enable(true);
         $("#Active").attr("disabled", "disabled");
         editando = 0;
         e.container.kendoWindow("title", "Nuevo");
