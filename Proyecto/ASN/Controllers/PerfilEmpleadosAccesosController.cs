@@ -125,60 +125,69 @@ namespace ASN.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult UpdatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosAccesosSel_Result> profiles)
-        {
-            try
-            {
-                // Esta función solo sirve para borrar permisos en el perfil a Empleados mediante el botón borrar.
-                using (ASNContext context = new ASNContext())
-                {
-                    int idAdmin = 0, res = 0;
-                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+        //[HttpPost]
+        //public ActionResult DeletePerfilEmpleadosAccesos(int Perfil_Ident, int Ident, int IdentUser, int resultado)
+        //{
+        //    try
+        //    {
+        //        //public JsonResult GetFechasAnio(int anioId)
+        //        // Esta función solo sirve para borrar permisos en el perfil a Empleados mediante el botón borrar.
+        //        //using (ASNContext context = new ASNContext())
+        //        //{
+        //        //        Perfil_Ident,
+        //        //        Ident,
 
-                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
-                    resultado.Value = 0;
+        //        //        IdentUser,
+        //        //        false,
+        //        //        resultado);
 
-                    int.TryParse(User.Identity.Name, out idAdmin);
 
-                    foreach (var obj in profiles)
-                    {
-                        context.CatPerfilEmpleadosAccesosSu(
-                        obj.Perfil_Ident,
-                        obj.Ident,
+        //        //        int idAdmin = 0, res = 0;
+        //        //    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
 
-                        idAdmin,
-                        false,
-                        resultado);
-                    }
+        //        //    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+        //        //    resultado.Value = 0;
 
-                    int.TryParse(resultado.Value.ToString(), out res);
+        //        //    int.TryParse(User.Identity.Name, out idAdmin);
 
-                    switch (res)
-                    {
-                        case -1:
-                            ModelState.AddModelError("error", "Error general.");
-                            break;
-                        case -2:
-                            ModelState.AddModelError("error", "Error general.");
-                            break;
-                        case -3:
-                            ModelState.AddModelError("error", "Error general.");
-                            break;
-                    }
+        //        //    foreach (var obj in profiles)
+        //        //    {
+        //        //        context.CatPerfilEmpleadosAccesosSu(
+        //        //        obj.Perfil_Ident,
+        //        //        obj.Ident,
 
-                    return Json(profiles.ToDataSourceResult(request, ModelState));
-                }
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json(profiles.ToDataSourceResult(request, ModelState));
-            }
-        }
+        //        //        idAdmin,
+        //        //        false,
+        //        //        resultado);
+        //        //    }
+
+        //        //    int.TryParse(resultado.Value.ToString(), out res);
+
+        //        //    switch (res)
+        //        //    {
+        //        //        case -1:
+        //        //            ModelState.AddModelError("error", "Error general.");
+        //        //            break;
+        //        //        case -2:
+        //        //            ModelState.AddModelError("error", "Error general.");
+        //        //            break;
+        //        //        case -3:
+        //        //            ModelState.AddModelError("error", "Error general.");
+        //        //            break;
+        //        //    }
+
+        //        //    return Json(profiles.ToDataSourceResult(request, ModelState));
+        //        //}
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+        //        MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+        //        LogError log = new LogError();
+        //        log.RecordError(ex, usuario.UserInfo.Ident.Value);
+        //        //return Json(profiles.ToDataSourceResult(request, ModelState));
+        //    }
+        //}
 
         public ActionResult Checkbox_Selection()
         {

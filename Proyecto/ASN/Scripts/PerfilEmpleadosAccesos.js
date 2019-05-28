@@ -123,6 +123,95 @@ function edit(e) {
 
 }
 
+function borrarAcceso(e) {
+    e.preventDefault(); // sho J
+    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
+    var Perfil_Ident = dataItem.Perfil_Ident; 
+    var Ident = dataItem.Ident; 
+
+    debugger;
+
+    if (anioId != 0) {
+        $.post(urlUpdatePerfilEmpleadosAccesos + "/?anioId=" + anioId, function (data) {
+            $("#FechaInicioAnio").val(data[0].FechaInicio);
+            $("#FechaCierreAnio").val(data[0].FechaCierre);
+            debugger;
+            var FInicioAnio = $("#FechaInicio").data("kendoDatePicker");
+            var FCierreAnio = $("#FechaCierre").data("kendoDatePicker");
+
+            FInicioAnio.setOptions({
+                max: data[0].FechaCierre,
+                min: data[0].FechaInicio
+            });
+
+            FCierreAnio.setOptions({
+                max: data[0].FechaCierre,
+                min: data[0].FechaInicio
+            });
+
+            debugger;
+
+            if (editando === 0) {
+                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
+                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
+                fechaInicio.value(data[0].FechaInicio);
+                fechaCierre.value(data[0].FechaCierre);
+            }
+
+        }).fail(function (ex) {
+            console.log("fail" + ex);
+        });
+    }
+
+
+
+
+
+    var validator = e.container.data('kendoValidator');
+
+    $('input[name="NombrePeriodo"]').blur(function () {
+        validator.validateInput(this);
+    });
+
+    $('input[name="TipoPeriodo"]').change(function () {
+        validator.validateInput(this);
+    });
+
+    var lstCountryIdents = $("#LstCountryIdents").data("kendoMultiSelect");
+
+    $("#FechaCaptura").attr("readonly", true);
+    $("#FechaCierre").attr("readonly", true);
+
+    if (e.model.isNew() === false) {
+        e.container.kendoWindow("title", "Editar");
+
+        var paises = e.model.CountryIdents.split(',');
+        lstCountryIdents.value(paises);
+
+        $("#FechaInicio").val(e.model.FechaInicio);
+        $("#FechaFin").val(e.model.FechaFin);
+        $("#FechaCaptura").val(e.model.FechaCaptura);
+        $("#FechaCierre").val(e.model.FechaCierre);
+
+        nombrePeriodo = e.model.NombrePeriodo;
+        var anios = $("#AnioId").data("kendoDropDownList");
+        var Periodo = $("#PeriodicidadNominaId").data("kendoDropDownList");
+        var tipoperiodo = $("#TipoPeriodo").data("kendoDropDownList");
+
+        anios.enable(false);
+        Periodo.enable(false);
+        tipoperiodo.enable(false);
+
+        editando = 1;
+    }
+    else {
+        e.container.kendoWindow("title", "Nuevo");
+        editando = 0;
+    }
+
+}
+
 
 function valida(e) {
     if (e.type === "create" || e.type === "update") {
