@@ -8,6 +8,10 @@
     //});
 
     $("#PerfilUsuarioId").change(function () {
+        debugger;
+        //var grid = $("#grid").data("kendoGrid");
+        //grid.clearSelection();
+
         if ($("#PerfilUsuarioId").val().length > 0) {
             //$('#grid').data('kendoGrid').dataSource.data([]);
             $('#grid').data('kendoGrid').dataSource.read();
@@ -146,57 +150,58 @@ function errorsote(args) {
 }
 
 function onChange(event) {
-    //var listaEmpleados = $("#selectedEmpleados").join(", ");
-    var listaSelectedEmpleados = $("#grid").data("kendoGrid").selectedKeyNames().join(", ");
-    //$("#grid").data("kendoGrid")
-
-    var perfil_Ident = $("#PerfilUsuarioId")[0].value;
+    ////var listaEmpleados = $("#selectedEmpleados").join(", ");
     //debugger;
-    //$('#kendoSeleccion')[0].textContent = listaEmpleados;
-    $.ajax({
-        type: 'POST',
-        url: '/PerfilEmpleadosAccesos/CreatePerfilEmpleadosAccesos',
-        data: JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaSelectedEmpleados.trim(), "SelectedEmpleados": listaEmpleados }),
-            //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (resultData) { //debugger
-        }
-    })    
+    //var listaSelectedEmpleados = $("#grid").data("kendoGrid").selectedKeyNames().join(", ");
+    ////$("#grid").data("kendoGrid")
+
+    //var perfil_Ident = $("#PerfilUsuarioId")[0].value;
+    ////debugger;
+    ////$('#kendoSeleccion')[0].textContent = listaEmpleados;
+    //$.ajax({
+    //    type: 'POST',
+    //    url: '/PerfilEmpleadosAccesos/CreatePerfilEmpleadosAccesos',
+    //    data: JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaSelectedEmpleados.trim(), "SelectedEmpleados": listaEmpleados }),
+    //        //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
+    //    contentType: 'application/json; charset=utf-8',
+    //    dataType: 'json',
+    //    success: function (resultData) { //debugger
+    //    }
+    //})    
 }
 
 function onDataBound(event) {
-    var grid = event.sender;
-    var allRows = grid.items();
-    listaEmpleados = "";
-    selectedEmpleados.length = 0;
-    var totalEmpleados = 0;
-    var idField = "PerfilEmpleadoAcceso_Activo";
-    var idFieldIdent = "Ident";
+    //var grid = event.sender;
+    //var allRows = grid.items();
+    //listaEmpleados = "";
+    //selectedEmpleados.length = 0;
+    //var totalEmpleados = 0;
+    //var idField = "PerfilEmpleadoAcceso_Activo";
+    //var idFieldIdent = "Ident";
+    //debugger;
+    //var rowsToSelect = [];
+    ////debugger;
+    //allRows.each(function (idx, row) {
+    //    var dataItem = grid.dataItem(row);
+    //    //debugger;
+    //    if (dataItem[idField] != null)
+    //    {
+    //        if (dataItem[idField].toString() == "true") {
+    //            //debugger;
+    //            totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent]);
+    //            rowsToSelect.push(row);
+    //        }
+    //        else {
+    //            //debugger;
+    //            totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent] * -1);
+    //        }
+    //    }
+    //});
+    ////debugger;
+    //event.sender.select(rowsToSelect);
 
-    var rowsToSelect = [];
-    //debugger;
-    allRows.each(function (idx, row) {
-        var dataItem = grid.dataItem(row);
-        //debugger;
-        if (dataItem[idField] != null)
-        {
-            if (dataItem[idField].toString() == "true") {
-                //debugger;
-                totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent]);
-                rowsToSelect.push(row);
-            }
-            else {
-                //debugger;
-                totalEmpleados = selectedEmpleados.push(dataItem[idFieldIdent] * -1);
-            }
-        }
-    });
-    //debugger;
-    event.sender.select(rowsToSelect);
-
-    listaEmpleados = selectedEmpleados.join(", ")
-    //debugger;
+    //listaEmpleados = selectedEmpleados.join(", ")
+    ////debugger;
 }
 
 
@@ -313,6 +318,12 @@ function GetPerfil() {
     return {
         perfil: $("#PerfilUsuarioId").val()
     };
+}
+
+function BorraEmpleadoAcceso(e) {
+    e.preventDefault();
+    var d = this.dataItem($(e.currentTarget).closest("tr"));
+    window.location.href = urlEditar + "?id=" + d.FolioSolicitud;
 }
 
 function GuardarBorrador() {
