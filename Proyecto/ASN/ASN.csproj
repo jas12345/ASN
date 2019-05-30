@@ -689,7 +689,6 @@
     <Content Include="Views\Shared\EditorTemplates\PerfilEmpleadosPopUp.cshtml" />
     <Content Include="Views\Solicitudes\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SolicitudesPopUp.cshtml" />
-    <Content Include="Views\PerfilEmpleadosAccesos\Index.cshtml" />
     <Content Include="Views\EmpleadosSolicitudes\Index.cshtml" />
     <Content Include="Views\EmpleadosSolicitudes\GridEmpleados.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EmpleadosSolicitudesPopUp.cshtml" />
@@ -704,6 +703,7 @@
     <Content Include="Views\Solicitudes\Editar.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AutorizadorSolicitudesPopUp.cshtml" />
     <Content Include="Views\Shared\Mail\NoticacionSolicitud.cshtml" />
+    <Content Include="Views\PerfilEmpleadosAccesos\Index3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
