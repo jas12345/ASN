@@ -220,7 +220,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult GetPerfilTipoAccesoSel(int Perfil_Ident)
+        public ActionResult GetPerfilTipoAcceso(int Perfil_Ident)
         {
             try
             {

@@ -58,9 +58,9 @@
                 console.log("fail" + ex);
             });
 
-            //debugger;
-            //$("#lblAccesos").val('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
-            //$("#lblAccesos").text('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
+            debugger;
+            $("#lblAccesos").val('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
+            $("#lblAccesos").text('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
 
        }
         else {
@@ -88,10 +88,39 @@ function onChangeCCMSId() {
     PuestoEmpleado = "";
     SupervisorEmpleado = "";
 
-    rellenaEmpleadoPuestoSupervisor();
+    //rellenaEmpleadoPuestoSupervisor();
     debugger;
-    $("#lblPropiedades").val(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
-    $("#lblPropiedades").text(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+
+    $.post(urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + ClavePerfil + '&' + "Ident=" + CCMSId, function (data) {
+        //$("#FechaInicioAnio").val(data[0].Ident);
+        Nombre = data[0].Nombre;
+        Position_Code_Ident = data[0].Position_Code_Ident;
+        Position_Code_Title = data[0].Position_Code_Title;
+        Manager_Ident = data[0].Manager_Ident;
+        Nombre_Manager = data[0].Nombre_Manager;
+        //Perfil_Ident = data[0].Perfil_Ident;
+        NombrePerfil = data[0].NombrePerfilEmpleados;
+        Active = data[0].Active;
+        TipoAccesoId = data[0].TipoAccesoId;
+        TipoAcceso = data[0].TipoAcceso;
+        AccesoSolicitante = data[0].AccesoSolicitante;
+        AccesoAutorizante = data[0].AccesoAutorizante;
+        AccesoResponsable = data[0].AccesoResponsable;
+        AccesoConsultante = data[0].AccesoConsultante;
+        AccesoOtros = data[0].AccesoOtros;
+
+        $("#lblPropiedades").val(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+        $("#lblPropiedades").text(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+
+
+    }).fail(function (ex) {
+        debugger;
+        console.log("fail" + ex);
+    });
+
+
+    //$("#lblPropiedades").val(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+    //$("#lblPropiedades").text(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
 }
 
 
@@ -544,24 +573,9 @@ function rellenaEmpleadoPuestoSupervisor() {
         //AccesoOtros
 
 
-            FInicioAnio.setOptions({
-                max: data[0].FechaCierre,
-                min: data[0].FechaInicio
-            });
+        $("#lblPropiedades").val(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+        $("#lblPropiedades").text(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
 
-            FCierreAnio.setOptions({
-                max: data[0].FechaCierre,
-                min: data[0].FechaInicio
-            });
-
-            debugger;
-
-            if (editando === 0) {
-                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
-                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
-                fechaInicio.value(data[0].FechaInicio);
-                fechaCierre.value(data[0].FechaCierre);
-            }
 
         }).fail(function (ex) {
             debugger;
@@ -584,6 +598,8 @@ function rellenaPerfilTipoAcceso() {
             TipoAccesoId = data[0].TipoAccesoId;
             TipoAcceso = data[0].Descripcion;
             //$("#FechaCierreAnio").val(data[0].Active);
+            $("#lblAccesos").val('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
+            $("#lblAccesos").text('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
         })
         .fail(function (ex) {
             console.log("fail" + ex);
