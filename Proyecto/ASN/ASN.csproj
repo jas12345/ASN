@@ -295,6 +295,9 @@
     <Compile Include="Models\CatParametroConceptosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatPerfilEmpleadoAccesoSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatPerfilEmpleadosAccesosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -308,6 +311,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatPerfilEmpleadosViewModel.cs" />
+    <Compile Include="Models\CatPerfilTipoAccesoSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatPeriodicidadNominaAnioMesConsecutivoCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

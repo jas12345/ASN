@@ -1857,5 +1857,27 @@ namespace ASN.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AvisoSolicitantesManual_Result>("AvisoSolicitantesManual");
         }
+    
+        public virtual ObjectResult<CatPerfilEmpleadoAccesoSel_Result> CatPerfilEmpleadoAccesoSel(Nullable<int> perfil_Ident, Nullable<int> ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            var identParameter = ident.HasValue ?
+                new ObjectParameter("Ident", ident) :
+                new ObjectParameter("Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadoAccesoSel_Result>("CatPerfilEmpleadoAccesoSel", perfil_IdentParameter, identParameter);
+        }
+    
+        public virtual ObjectResult<CatPerfilTipoAccesoSel_Result> CatPerfilTipoAccesoSel(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilTipoAccesoSel_Result>("CatPerfilTipoAccesoSel", perfil_IdentParameter);
+        }
     }
 }

@@ -213,6 +213,10 @@
         </Function>
         <Function Name="CatMotivoSolicitudCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatParametroConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatPerfilEmpleadoAccesoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+          <Parameter Name="Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatPerfilEmpleadosAccesosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
@@ -259,6 +263,9 @@
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatPerfilTipoAccesoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
         <Function Name="CatPeriodicidadNominaAnioMesConsecutivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="anioId" Type="int" Mode="In" />
@@ -1021,6 +1028,13 @@
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AvisoSolicitantesManual" ReturnType="Collection(ASNModel.AvisoSolicitantesManual_Result)" />
+          <FunctionImport Name="CatPerfilEmpleadoAccesoSel" ReturnType="Collection(ASNModel.CatPerfilEmpleadoAccesoSel_Result)">
+            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatPerfilTipoAccesoSel" ReturnType="Collection(ASNModel.CatPerfilTipoAccesoSel_Result)">
+            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1521,6 +1535,31 @@
           <Property Type="Int32" Name="Autorizado" Nullable="true" />
           <Property Type="Int32" Name="Rechazado" Nullable="true" />
           <Property Type="Int32" Name="Cancelado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CatPerfilEmpleadoAccesoSel_Result">
+          <Property Type="Int32" Name="Ident" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="Position_Code_Ident" Nullable="true" />
+          <Property Type="String" Name="Position_Code_Title" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Manager_Ident" Nullable="true" />
+          <Property Type="String" Name="Nombre_Manager" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="Perfil_Ident" Nullable="true" />
+          <Property Type="String" Name="NombrePerfilEmpleados" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Int32" Name="TipoAccesoId" Nullable="true" />
+          <Property Type="String" Name="TipoAcceso" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AccesoSolicitante" Nullable="false" />
+          <Property Type="Int32" Name="AccesoAutorizante" Nullable="false" />
+          <Property Type="Int32" Name="AccesoResponsable" Nullable="false" />
+          <Property Type="Int32" Name="AccesoConsultante" Nullable="false" />
+          <Property Type="Int32" Name="AccesoOtros" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatPerfilTipoAccesoSel_Result">
+          <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
+          <Property Type="String" Name="NombrePerfilEmpleados" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
        
         </Schema>
@@ -2276,6 +2315,39 @@
                 <ScalarProperty Name="Autorizado" ColumnName="Autorizado" />
                 <ScalarProperty Name="Rechazado" ColumnName="Rechazado" />
                 <ScalarProperty Name="Cancelado" ColumnName="Cancelado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPerfilEmpleadoAccesoSel" FunctionName="ASNModel.Store.CatPerfilEmpleadoAccesoSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPerfilEmpleadoAccesoSel_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Position_Code_Ident" ColumnName="Position_Code_Ident" />
+                <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
+                <ScalarProperty Name="Manager_Ident" ColumnName="Manager_Ident" />
+                <ScalarProperty Name="Nombre_Manager" ColumnName="Nombre_Manager" />
+                <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
+                <ScalarProperty Name="NombrePerfilEmpleados" ColumnName="NombrePerfilEmpleados" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
+                <ScalarProperty Name="TipoAcceso" ColumnName="TipoAcceso" />
+                <ScalarProperty Name="AccesoSolicitante" ColumnName="AccesoSolicitante" />
+                <ScalarProperty Name="AccesoAutorizante" ColumnName="AccesoAutorizante" />
+                <ScalarProperty Name="AccesoResponsable" ColumnName="AccesoResponsable" />
+                <ScalarProperty Name="AccesoConsultante" ColumnName="AccesoConsultante" />
+                <ScalarProperty Name="AccesoOtros" ColumnName="AccesoOtros" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPerfilTipoAccesoSel" FunctionName="ASNModel.Store.CatPerfilTipoAccesoSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPerfilTipoAccesoSel_Result">
+                <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
+                <ScalarProperty Name="NombrePerfilEmpleados" ColumnName="NombrePerfilEmpleados" />
+                <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

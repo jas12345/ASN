@@ -282,6 +282,7 @@ function rellenaFechasAnio() {
 
     if (anioId != 0) {
         $.post(urlFechasAnio + "/?anioId=" + anioId, function (data) {
+            debugger;
             $("#FechaInicioAnio").val(data[0].FechaInicio);
             $("#FechaCierreAnio").val(data[0].FechaCierre);
             debugger;

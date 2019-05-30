@@ -194,6 +194,57 @@ namespace ASN.Controllers
             return View();
         }
 
+        public JsonResult GetEmpleadoPuestoSupervisor(int Perfil_Ident, int Ident)
+        {
+
+            //urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + Perfil_Ident + '&' + "Ident=" + Ident
+
+            try
+            {
+                var lstEmpleadoPuestoSupervisor = new List<CatPerfilEmpleadoAccesoSel_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstEmpleadoPuestoSupervisor = context.CatPerfilEmpleadoAccesoSel(Perfil_Ident, Ident).ToList();
+                }
+
+                return Json(lstEmpleadoPuestoSupervisor, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public ActionResult GetPerfilTipoAccesoSel(int Perfil_Ident)
+        {
+            try
+            {
+                var lstPerfilTipoAcceso = new List<CatPerfilTipoAccesoSel_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstPerfilTipoAcceso = context.CatPerfilTipoAccesoSel(Perfil_Ident).ToList();
+                }
+
+                return Json(lstPerfilTipoAcceso.SingleOrDefault(), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+
+
         //public ActionResult Selection_Read([DataSourceRequest] DataSourceRequest request)
         //{
         //    return Json(productService.Read().ToDataSourceResult(request));
