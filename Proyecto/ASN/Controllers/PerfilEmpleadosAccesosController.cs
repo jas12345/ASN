@@ -125,69 +125,110 @@ namespace ASN.Controllers
             }
         }
 
-        //[HttpPost]
-        //public ActionResult DeletePerfilEmpleadosAccesos(int Perfil_Ident, int Ident, int IdentUser, int resultado)
-        //{
-        //    try
-        //    {
-        //        //public JsonResult GetFechasAnio(int anioId)
-        //        // Esta función solo sirve para borrar permisos en el perfil a Empleados mediante el botón borrar.
-        //        //using (ASNContext context = new ASNContext())
-        //        //{
-        //        //        Perfil_Ident,
-        //        //        Ident,
+        [HttpPost]
+        public ActionResult UpdatePerfilEmpleadosAccesos(int Perfil_Ident, int Ident, bool Active/*, int resultado*/)
+        {
+            try
+            {
 
-        //        //        IdentUser,
-        //        //        false,
-        //        //        resultado);
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    
+                    int ccmsidAdmin = 0, res = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    context.CatPerfilEmpleadosAccesosSu(Perfil_Ident, Ident, ccmsidAdmin, Active, resultado);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    switch (res)
+                    {
+                        case -1:
+                            ModelState.AddModelError("error", "Error general.");
+                            break;
+                        case -2:
+                            ModelState.AddModelError("error", "Error general.");
+                            break;
+                        case -3:
+                            ModelState.AddModelError("error", "Error general.");
+                            break;
+                    }
+
+                    return Json(Perfil_Ident);
+                }
 
 
-        //        //        int idAdmin = 0, res = 0;
-        //        //    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
 
-        //        //    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
-        //        //    resultado.Value = 0;
 
-        //        //    int.TryParse(User.Identity.Name, out idAdmin);
 
-        //        //    foreach (var obj in profiles)
-        //        //    {
-        //        //        context.CatPerfilEmpleadosAccesosSu(
-        //        //        obj.Perfil_Ident,
-        //        //        obj.Ident,
 
-        //        //        idAdmin,
-        //        //        false,
-        //        //        resultado);
-        //        //    }
 
-        //        //    int.TryParse(resultado.Value.ToString(), out res);
 
-        //        //    switch (res)
-        //        //    {
-        //        //        case -1:
-        //        //            ModelState.AddModelError("error", "Error general.");
-        //        //            break;
-        //        //        case -2:
-        //        //            ModelState.AddModelError("error", "Error general.");
-        //        //            break;
-        //        //        case -3:
-        //        //            ModelState.AddModelError("error", "Error general.");
-        //        //            break;
-        //        //    }
 
-        //        //    return Json(profiles.ToDataSourceResult(request, ModelState));
-        //        //}
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-        //        MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-        //        LogError log = new LogError();
-        //        log.RecordError(ex, usuario.UserInfo.Ident.Value);
-        //        //return Json(profiles.ToDataSourceResult(request, ModelState));
-        //    }
-        //}
+                // Esta función solo sirve para borrar permisos en el perfil a Empleados mediante el botón borrar.
+                //using (ASNContext context = new ASNContext())
+                //{
+                //    Perfil_Ident,
+                //        Ident,
+
+                //        IdentUser,
+                //        false,
+                //        resultado);
+
+
+                //    int idAdmin = 0, res = 0;
+                //    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                //    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                //    resultado.Value = 0;
+
+                //    int.TryParse(User.Identity.Name, out idAdmin);
+
+                //    foreach (var obj in profiles)
+                //    {
+                //        context.CatPerfilEmpleadosAccesosSu(
+                //        obj.Perfil_Ident,
+                //        obj.Ident,
+
+                //        idAdmin,
+                //        false,
+                //        resultado);
+                //    }
+
+                //    int.TryParse(resultado.Value.ToString(), out res);
+
+                //    switch (res)
+                //    {
+                //        case -1:
+                //            ModelState.AddModelError("error", "Error general.");
+                //            break;
+                //        case -2:
+                //            ModelState.AddModelError("error", "Error general.");
+                //            break;
+                //        case -3:
+                //            ModelState.AddModelError("error", "Error general.");
+                //            break;
+                //    }
+
+                //    return Json(profiles.ToDataSourceResult(request, ModelState));
+                //}
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(Perfil_Ident);
+            }
+        }
 
         public ActionResult Checkbox_Selection()
         {

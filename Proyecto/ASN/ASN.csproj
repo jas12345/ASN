@@ -703,7 +703,7 @@
     <Content Include="Views\Solicitudes\Editar.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AutorizadorSolicitudesPopUp.cshtml" />
     <Content Include="Views\Shared\Mail\NoticacionSolicitud.cshtml" />
-    <Content Include="Views\PerfilEmpleadosAccesos\Index3.cshtml" />
+    <Content Include="Views\PerfilEmpleadosAccesos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

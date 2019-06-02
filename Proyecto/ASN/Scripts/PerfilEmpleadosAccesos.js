@@ -1,40 +1,19 @@
 ﻿$(document).ready(function () {
-    //$("#Accounts").change(function () {
-    //    //$('#grid').data('kendoGrid').dataSource.data([]);
-    //    $('#grid').data('kendoGrid').dataSource.read();
-    //    $('#grid').data('kendoGrid').refresh();
-    //    // $("#Accounts").val() == "" ? $('#grisaseo').fadeOut('fast') : $('#grisaseo').fadeIn('slow');
-    //    $("#Accounts").val() == "" ? $('#grisaseo').fadeOut('fast') : $('#grisaseo').fadeIn('slow');
-    //});
 
     $("#PerfilUsuarioId").change(function () {
         debugger;
-        //var grid = $("#grid").data("kendoGrid");
-        //grid.clearSelection();
 
         if ($("#PerfilUsuarioId").val().length > 0) {
             //$('#grid').data('kendoGrid').dataSource.data([]);
             $('#grid').data('kendoGrid').dataSource.read();
             $('#grid').data('kendoGrid').refresh();
 
-            //$("#PerfilUsuarioId").data("kendoDropDownList").dataSource._data[$("#PerfilUsuarioId").data("kendoDropDownList").selectedIndex].colour;
-
-            //var dataItem = $("#PerfilUsuarioId").dataItem($("#PerfilUsuarioId").item.index());
-            //var Valor = dataItem.val();
-
             ClavePerfil = "";
             NombrePerfil = "";
             TipoAccesoId = "";
             TipoAcceso = "";
 
-            $("#lblAccesos").val('X       ' +$("#PerfilUsuarioId").val() + " Accesos: Solicitantes");
-            $("#lblAccesos").text('X       ' + $("#PerfilUsuarioId").val() + " Accesos: Solicitantes");
-
             ClavePerfil = $("#PerfilUsuarioId").val();
-            //NombrePerfil = $("#PerfilUsuarioId").data("kendoDropDownList").Valor;
-            NombrePerfil = "DEMO00" + $("#PerfilUsuarioId").val();
-            TipoAccesoId = "";
-            //TipoAcceso = "";
             debugger;
 
             //rellenaPerfilTipoAcceso();
@@ -46,8 +25,10 @@
                 TipoAccesoId = data.TipoAccesoId;
                 TipoAcceso = data.Descripcion;
 
-                $("#lblAccesos").val('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
-                $("#lblAccesos").text('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
+                $("#lblPerfilNombre").val(NombrePerfil);
+                $("#lblPerfilNombre").text(NombrePerfil);
+                $("#lblAccesosNombre").val(TipoAcceso);
+                $("#lblAccesosNombre").text(TipoAcceso);
 
                 //$("#FechaCierreAnio").val(data[0].Active);
                 debugger;
@@ -58,21 +39,11 @@
                 console.log("fail" + ex);
             });
 
-            debugger;
-            $("#lblAccesos").val('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
-            $("#lblAccesos").text('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
-
        }
         else {
             $('#grid').data('kendoGrid').dataSource.data([]);
         }
     });
-
-    //$("#CCMSId").kendoNumericTextBox({
-    //    change: onChangeCCMSId
-    //});
-
-
 });
 
 function onChangeCCMSId() {
@@ -88,8 +59,9 @@ function onChangeCCMSId() {
     PuestoEmpleado = "";
     SupervisorEmpleado = "";
 
-    //rellenaEmpleadoPuestoSupervisor();
+    ClavePerfil = $("#PerfilUsuarioId").val();
     debugger;
+    //rellenaEmpleadoPuestoSupervisor();
 
     $.post(urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + ClavePerfil + '&' + "Ident=" + CCMSId, function (data) {
         //$("#FechaInicioAnio").val(data[0].Ident);
@@ -109,9 +81,17 @@ function onChangeCCMSId() {
         AccesoConsultante = data[0].AccesoConsultante;
         AccesoOtros = data[0].AccesoOtros;
 
-        $("#lblPropiedades").val(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
-        $("#lblPropiedades").text(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+        $("#lblPropiedades").val(" CCMSId: " + CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+        $("#lblPropiedades").text(" CCMSId: " + CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
 
+        $("#lblCCMSIdClave").val(CCMSId);
+        $("#lblCCMSIdClave").text(CCMSId);
+        $("#lblEmpleadoNombre").val(Nombre);
+        $("#lblEmpleadoNombre").text(Nombre);
+        $("#lblPuestoNombre").val(Position_Code_Title);
+        $("#lblPuestoNombre").text(Position_Code_Title);
+        $("#lblSupervisorNombre").val(Nombre_Manager);
+        $("#lblSupervisorNombre").text(Nombre_Manager);
 
     }).fail(function (ex) {
         debugger;
@@ -166,7 +146,6 @@ function accion(tab)
             break;
     }
 }
-
 
 var editando = 0;
 var lstCountry = 0;
@@ -225,44 +204,26 @@ function borrarAcceso(e) {
 
     var Perfil_Ident = dataItem.Perfil_Ident; 
     var Ident = dataItem.Ident; 
+    //Se ejecuta Update con Active=false para eliminar el acceso respondiendo al botón Borrar
+    var Active = false;
 
     debugger;
 
-    if (anioId != 0) {
-        $.post(urlUpdatePerfilEmpleadosAccesos + "/?anioId=" + anioId, function (data) {
-            $("#FechaInicioAnio").val(data[0].FechaInicio);
-            $("#FechaCierreAnio").val(data[0].FechaCierre);
-            debugger;
-            var FInicioAnio = $("#FechaInicio").data("kendoDatePicker");
-            var FCierreAnio = $("#FechaCierre").data("kendoDatePicker");
+    //int Perfil_Ident, int Ident, bool Active
+    $.post(urlUpdatePerfilEmpleadosAccesos + "/?Perfil_Ident=" + Perfil_Ident + "&Ident=" + Ident + "&Active=" + Active, function (data) {
+        debugger;
 
-            FInicioAnio.setOptions({
-                max: data[0].FechaCierre,
-                min: data[0].FechaInicio
-            });
+        //if ($("#PerfilUsuarioId").val().length > 0) {
 
-            FCierreAnio.setOptions({
-                max: data[0].FechaCierre,
-                min: data[0].FechaInicio
-            });
+        //$('#grid').data('kendoGrid').dataSource.data([]);
+        $('#grid').data('kendoGrid').dataSource.read();
+        $('#grid').data('kendoGrid').refresh();
 
-            debugger;
+        debugger;
 
-            if (editando === 0) {
-                var fechaInicio = $("#FechaInicio").data("kendoDatePicker");
-                var fechaCierre = $("#FechaCierre").data("kendoDatePicker");
-                fechaInicio.value(data[0].FechaInicio);
-                fechaCierre.value(data[0].FechaCierre);
-            }
-
-        }).fail(function (ex) {
-            console.log("fail" + ex);
-        });
-    }
-
-
-
-
+    }).fail(function (ex) {
+        console.log("fail" + ex);
+    });
 
     var validator = e.container.data('kendoValidator');
 
@@ -307,7 +268,6 @@ function borrarAcceso(e) {
     }
 
 }
-
 
 function valida(e) {
     if (e.type === "create" || e.type === "update") {
@@ -544,38 +504,15 @@ function rellenaEmpleadoPuestoSupervisor() {
             Active = data[0].Active;
             TipoAccesoId = data[0].TipoAccesoId;
             TipoAcceso = data[0].TipoAcceso;
+
             AccesoSolicitante = data[0].AccesoSolicitante;
             AccesoAutorizante = data[0].AccesoAutorizante;
             AccesoResponsable = data[0].AccesoResponsable;
             AccesoConsultante = data[0].AccesoConsultante;
             AccesoOtros = data[0].AccesoOtros;
 
-        //var ClavePerfil = "";
-        //var NombrePerfil = "";
-        //var TipoAccesoId = "";
-        //var TipoAcceso = "";
-
-        //Ident
-        //Nombre
-        //Position_Code_Ident
-        //Position_Code_Title
-        //Manager_Ident
-        //Nombre_Manager
-        ////Perfil_Ident
-        ////NombrePerfilEmpleados
-        //Active
-        ////TipoAccesoId
-        ////TipoAcceso
-        //AccesoSolicitante
-        //AccesoAutorizante
-        //AccesoResponsable
-        //AccesoConsultante
-        //AccesoOtros
-
-
-        $("#lblPropiedades").val(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
-        $("#lblPropiedades").text(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
-
+            //$("#lblPropiedades").val(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+            //$("#lblPropiedades").text(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
 
         }).fail(function (ex) {
             debugger;
@@ -585,24 +522,25 @@ function rellenaEmpleadoPuestoSupervisor() {
 }
 
 function rellenaPerfilTipoAcceso() {
-    var anioId = 0;
     debugger;
 
-    anioId = $("#AnioId").val();
+    $.post(urlPerfilTipoAcceso + "/?Perfil_Ident=" + ClavePerfil, function (data) {
+        debugger;
+        //ClavePerfil = data[0].Perfil_Ident;
+        NombrePerfil = data[0].NombrePerfilEmpleados;
+        TipoAccesoId = data[0].TipoAccesoId;
+        TipoAcceso = data[0].Descripcion;
+        //$("#FechaCierreAnio").val(data[0].Active);
+        $("#lblPerfilNombre").val(NombrePerfil);
+        $("#lblPerfilNombre").text(NombrePerfil);
+        $("#lblAccesos").val(TipoAcceso);
+        $("#lblAccesos").text(TipoAcceso);
 
-    if (anioId != 0) {
-        $.post(urlPerfilTipoAcceso + "/?Perfil_Ident=" + ClavePerfil, function (data) {
-            debugger;
-            //ClavePerfil = data[0].Perfil_Ident;
-            NombrePerfil = data[0].NombrePerfilEmpleados;
-            TipoAccesoId = data[0].TipoAccesoId;
-            TipoAcceso = data[0].Descripcion;
-            //$("#FechaCierreAnio").val(data[0].Active);
-            $("#lblAccesos").val('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
-            $("#lblAccesos").text('X       ' + NombrePerfil + " Accesos: " + TipoAcceso);
-        })
-        .fail(function (ex) {
-            console.log("fail" + ex);
-        });
-    }
+        //@Html.Label("lblPerfilNombre", ",", new { id = "lblPerfilNombre", style = "font-weight:normal" })
+        //@Html.Label("lblAccesosNombre", ",", new { id = "lblAccesosNombre", style = "font-weight:normal" })
+
+    })
+    .fail(function (ex) {
+        console.log("fail" + ex);
+    });
 }

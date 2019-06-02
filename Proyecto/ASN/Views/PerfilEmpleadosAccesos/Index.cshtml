@@ -51,6 +51,8 @@
                                                  .Events(e => e
                                                     .Change("onChangeCCMSId")
                                                 )
+                                                .Format("#")
+                                                .Max(9999999999)
                                                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 13em" })
                                     )
                                     <button id="Agregar" type="button" data-role="button" class="k-button k-button-icontext k-primary" onclick="actualizaGrid;" role="button" aria-disabled="false" tabindex="0">
@@ -60,16 +62,27 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-lg-4 col-md-4">
-                            @Html.Label("lblAccesos", "X       Accesos: Solicitantes", new { id = "lblAccesos" })
+                            @*@Html.Label("lblAccesos",           "X       Accesos: ",    new { id = "lblAccesos", style = "font-weight:normal" })*@
+
+                            @Html.Label("lblPerfil",            "X       Perfil:",      new { id = "lblPerfil" })
+                            @Html.Label("lblPerfilNombre",      ",",                    new { id = "lblPerfilNombre", style = "font-weight:normal" })
+                            @Html.Label("lblAccesos",           ", Accesos: ",          new { id = "lblAccesos" })
+                            @Html.Label("lblAccesosNombre",     ",",                    new { id = "lblAccesosNombre", style = "font-weight:normal" })
+
                         </div>
                         <div class="col-lg-8 col-md-8">
-                            @Html.Label("lblPropiedades", "Empleado: Hector Guillermo Ramos, Puesto: Trainer - Bilingual, Supervisor: Sergio Alberto Rodríguez", new { id = "lblPropiedades" })
+                            @Html.Label("lblCCMSId",            "CCMSId: ",         new { id = "lblCCMSId"})
+                            @Html.Label("lblCCMSIdClave",       ",",                new { id = "lblCCMSIdClave", style = "font-weight:normal" })
+                            @Html.Label("lblEmpleado",          ", Empleado: ",     new { id = "lblEmpleados" })
+                            @Html.Label("lblEmpleadoNombre",    ",",                new { id = "lblEmpleadoNombre", style = "font-weight:normal" })
+                            @Html.Label("lblPuesto",            ", Puesto: ",       new { id = "lblPuesto" })
+                            @Html.Label("lblPuestoNombre",      ",",                new { id = "lblPuestoNombre", style = "font-weight:normal" })
+                            @Html.Label("lblSupervisor",        ", Supervisor: ",   new { id = "lblSupervisor" })
+                            @Html.Label("lblSupervisorNombre",  " ",                new { id = "lblSupervisorNombre", style = "font-weight:normal" })
                         </div>
                     </div>
-
                 </div>
 
                 <div class="row">
@@ -175,24 +188,9 @@
         var AccesoConsultante = "";
         var AccesoOtros = "";        
 
-        //Ident
-        //Nombre
-        //Position_Code_Ident
-        //Position_Code_Title
-        //Manager_Ident
-        //Nombre_Manager
-        ////Perfil_Ident
-        ////NombrePerfilEmpleados
-        //Active
-        ////TipoAccesoId
-        ////TipoAcceso
-        //AccesoSolicitante
-        //AccesoAutorizante
-        //AccesoResponsable
-        //AccesoConsultante
-        //AccesoOtros
-
         var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
+
+        var urlUpdatePerfilEmpleadosAccesos = '@Url.Action("UpdatePerfilEmpleadosAccesos", "PerfilEmpleadosAccesos")';
 
     //debugger;
     //var urlSolicitud = grid.selectedKeyNames().join(", ");
