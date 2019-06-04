@@ -53,7 +53,7 @@ function valida(e) {
         $('#grid').data('kendoGrid').dataSource.data([]);
         $('#grid').data('kendoGrid').dataSource.read();
         $('#grid').data('kendoGrid').refresh();
-        debugger;
+        //debugger;
         if (e.response.Errors === null) {
             continuaAccion = true;
             var notification = $("#popupNotification").data("kendoNotification");
@@ -63,7 +63,7 @@ function valida(e) {
 }
 
 function errorsote(args) {
-    debugger;
+    //debugger;
     if (args.errors) {
 
         $(document).ready(function () {
@@ -75,7 +75,7 @@ function errorsote(args) {
 }
 
 function handleEditChanges(e, grid) {
-    debugger;
+    //debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     var objeto = jQuery.grep(grid._data, function (item) {
@@ -96,7 +96,7 @@ function handleEditChanges(e, grid) {
 }
 
 function handleSaveChanges(e, grid) {
-    debugger;
+    //debugger;
     var valid = true;
     var rows = grid.tbody.find("tr");
     for (var i = 0; i < rows.length; i++) {
@@ -244,12 +244,12 @@ function SaveSolicitud(accion) {
 }
 
 function OnSuccess(response) {
-    debugger;
+    //debugger;
     alert("EXITOSO");
 }
 
 function OnFailure(response) {
-    debugger;
+    //debugger;
     alert("Error occured.");
 }
 

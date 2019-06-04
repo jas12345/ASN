@@ -138,7 +138,9 @@
 
                     if (User.IsInRole("Desarrollo"))
                     {
-                        <li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>
+                        @*<li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>*@
+                        <li>@Html.ActionLink("Solicitudes", "Index", "CapturaSolicitud", new { area = "CapturasRapidas" }, null)</li>
+                        <li>@Html.ActionLink("MisSolicitudes", "Index", "MisSolicitudes", new { area = "CapturasRapidas" }, null)</li>
                     }
                     if (User.IsInRole("Desarrollo"))
                     {

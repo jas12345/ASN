@@ -10,7 +10,7 @@ function edit(e) {
     });
 
     if (e.model.isNew() === false) {
-        debugger;
+        //debugger;
         anio.enable(false);
         mes.enable(false);
         editando = 1;
@@ -19,16 +19,16 @@ function edit(e) {
         $("#FechaCierre").val(e.model.FechaCierre);
 
         e.container.kendoWindow("title", "Editar");
-        debugger;
+        //debugger;
     }
     else {
-        debugger;
+        //debugger;
         anio.enable(true);
         mes.enable(true);
         $("#Active").attr("disabled", "disabled");
         editando = 0;
         e.container.kendoWindow("title", "Nuevo");
-        debugger;
+        //debugger;
     }
 }
 
@@ -153,11 +153,11 @@ function handleSaveChanges(e, grid) {
 function FechaInicioOpen(e) {
     DelimitaFechaInicio();
     if ($("#FechaInicio").data("kendoDatePicker")._oldText.length == 0) {
-        debugger;
+        //debugger;
         OcultaSave();
     }
     else {
-        debugger;
+        //debugger;
         MuestraSave()
     }
 }
@@ -165,11 +165,11 @@ function FechaInicioOpen(e) {
 function FechaCierreOpen(e) {
     DelimitaFechaCierre();
     if ($("#FechaCierre").data("kendoDatePicker")._oldText.length == 0) {
-        debugger;
+        //debugger;
         OcultaSave();
     }
     else {
-        debugger;
+        //debugger;
         MuestraSave()
     }
 }
@@ -180,7 +180,7 @@ function DelimitaFechaInicio() {
     var dtFInicioAnio = new Date($("#FechaInicioAnio").val() + " 00:00");
     var dtFCierreAnio = new Date($("#FechaCierreAnio").val() + " 00:00");
 
-    debugger;
+    //debugger;
 
     //dtFInicio.setDate(dtFInicio.getDate());
     fechaInicio.setOptions({
@@ -195,7 +195,7 @@ function DelimitaFechaCierre() {
     var dtFInicioAnio = new Date($("#FechaInicioAnio").val() + " 00:00");
     var dtFCierreAnio = new Date($("#FechaCierreAnio").val() + " 00:00");
 
-    debugger;
+    //debugger;
 
     //dtFFin.setDate(dtFFin.getDate());
     fechaCierre.setOptions({
@@ -259,7 +259,7 @@ function dateFilter(e) {
 function validandoCatMeses() {
     if (editando === 1) {
         var AnioId = $("#AnioId").data("kendoDropDownList");
-        debugger;
+        //debugger;
         AnioId.enable(false);
         rellenaFechasAnio();
     //} else {
@@ -276,16 +276,16 @@ function Anio() {
 
 function rellenaFechasAnio() {
     var anioId = 0;
-    debugger;
+    //debugger;
 
     anioId = $("#AnioId").val();
 
     if (anioId != 0) {
         $.post(urlFechasAnio + "/?anioId=" + anioId, function (data) {
-            debugger;
+            //debugger;
             $("#FechaInicioAnio").val(data[0].FechaInicio);
             $("#FechaCierreAnio").val(data[0].FechaCierre);
-            debugger;
+            //debugger;
             var FInicioAnio = $("#FechaInicio").data("kendoDatePicker");
             var FCierreAnio = $("#FechaCierre").data("kendoDatePicker");
 
@@ -299,7 +299,7 @@ function rellenaFechasAnio() {
                 min: data[0].FechaInicio
             });
 
-            debugger;
+            //debugger;
 
             if (editando === 0) {
                 var fechaInicio = $("#FechaInicio").data("kendoDatePicker");

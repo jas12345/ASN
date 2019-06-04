@@ -14,7 +14,7 @@
     if (e.model.isNew() === false) {
 
         $("#City_Ident").val(e.model.City_Ident).change();
-        debugger;
+        //debugger;
         //nombrePerfilEmpleados.enable(false);
         country.enable(false);
         city.enable(false);

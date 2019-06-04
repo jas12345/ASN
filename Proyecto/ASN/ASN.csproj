@@ -141,6 +141,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CapturaSolicitudController.cs" />
     <Compile Include="Controllers\ConceptosMotivosController.cs" />
     <Compile Include="Controllers\BusquedasVariasController.cs" />
     <Compile Include="Controllers\ConsecutivoPeriodosController.cs" />
@@ -203,6 +204,12 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatAniosNominaSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatCargaRapidaSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatCargaRapidaSi_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatCityCMB_Result.cs">
@@ -271,6 +278,9 @@
     <Compile Include="Models\CatEmployeeCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatEmployeeInfoSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatEmployeeSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -299,6 +309,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatPerfilEmpleadosAccesosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatPerfilEmpleadosAccesoSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatPerfilEmpleadosAccesosSel_Result.cs">
@@ -521,6 +534,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\BusquedasVarias.js" />
+    <Content Include="Scripts\CapturaSolicitud.js" />
     <Content Include="Scripts\MisSolicitudes.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -703,6 +717,7 @@
     <Content Include="Views\Shared\EditorTemplates\AutorizadorSolicitudesPopUp.cshtml" />
     <Content Include="Views\Shared\Mail\NoticacionSolicitud.cshtml" />
     <Content Include="Views\PerfilEmpleadosAccesos\Index.cshtml" />
+    <Content Include="Views\CapturaSolicitud\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

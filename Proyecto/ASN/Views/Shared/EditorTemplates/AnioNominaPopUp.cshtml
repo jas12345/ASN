@@ -11,7 +11,10 @@
             <label for="AnioId">Año</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.AnioId))
+            @(Html.Kendo().TextBoxFor(x => x.AnioId)
+                .Name("AnioId")
+                .Value(2021)
+            )
         </div>
         <div class="editor-label">
             <label for="FechaInicio">Fecha de Inicio</label>

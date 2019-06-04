@@ -225,11 +225,11 @@ function GetPerfil() {
     };
 }
 
-function Perfil() {
-    return {
-        perfil: $("#Perfil_Ident").val(),
-    }
-}
+//function Perfil() {
+//    return {
+//        perfil: $("#Perfil_Ident").val(),
+//    }
+//}
 
 function PerfilSolicitud() {
     
@@ -276,15 +276,15 @@ function GetParametrosAlta() {
     };
 }
 
-function GetParametros() {
-    return {
-        TTConceptoMotivoId: $("#TTConceptoMotivoId").is(':checked'),
-        TTManager_Ident: $("#TTManager_Ident").is(':checked'),
-        TTMonto: $("#TTMonto").is(':checked'),
-        TTDetalle: $("#TTDetalle").is(':checked'),
-        TTPeriodoNomina: $("#TTPeriodoNomina").is(':checked')
-    };
-}
+//function GetParametros() {
+//    return {
+//        TTConceptoMotivoId: $("#TTConceptoMotivoId").is(':checked'),
+//        TTManager_Ident: $("#TTManager_Ident").is(':checked'),
+//        TTMonto: $("#TTMonto").is(':checked'),
+//        TTDetalle: $("#TTDetalle").is(':checked'),
+//        TTPeriodoNomina: $("#TTPeriodoNomina").is(':checked')
+//    };
+//}
 // FIn Parametros
 
 function GuardaEmpleadosSolicitud() {//GuardarBorrador
@@ -369,13 +369,16 @@ function GetParametros() {
 function EditaSolicitud(e) {
     e.preventDefault();
     var d = this.dataItem($(e.currentTarget).closest("tr"));
-    window.location.href = urlEditar +"?id="+ d.FolioSolicitud;
+    //window.location.href = urlEditar +"?id="+ d.FolioSolicitud;
+
+
+
 }
 
 function Perfil() {
     return {
         perfil: $("#Perfil_Ident").val(),
-    }
+    };
 }
 
 //#Inicio Funciones de Solicitud
@@ -499,7 +502,7 @@ function EnviarSolicitud() {
 }
 
 function ValidaBloqueoTodos() {
-    //debugger;
+    debugger;
     var listado = $("#LstConceptoMotivo").val();
     var totalItem = (listado === null || listado===0 ? 0 : listado.length)
     if (totalItem >1) {

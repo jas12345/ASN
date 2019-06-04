@@ -1879,5 +1879,102 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilTipoAccesoSel_Result>("CatPerfilTipoAccesoSel", perfil_IdentParameter);
         }
+    
+        public virtual int CatCargaRapidaSd(Nullable<int> cargaRapidaId)
+        {
+            var cargaRapidaIdParameter = cargaRapidaId.HasValue ?
+                new ObjectParameter("CargaRapidaId", cargaRapidaId) :
+                new ObjectParameter("CargaRapidaId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatCargaRapidaSd", cargaRapidaIdParameter);
+        }
+    
+        public virtual ObjectResult<CatCargaRapidaSel_Result> CatCargaRapidaSel(Nullable<int> folioId)
+        {
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCargaRapidaSel_Result>("CatCargaRapidaSel", folioIdParameter);
+        }
+    
+        public virtual ObjectResult<CatCargaRapidaSi_Result> CatCargaRapidaSi(string periodoNominaActual, Nullable<int> estatus, Nullable<int> cCMSID, Nullable<int> concepto, Nullable<decimal> parametro, Nullable<int> motivo, Nullable<int> conceptoMotivo, Nullable<int> responsableIncidenteCCMSID, string periodoOriginalDePago, Nullable<int> userCCMSID, Nullable<int> folioId, string justificacion)
+        {
+            var periodoNominaActualParameter = periodoNominaActual != null ?
+                new ObjectParameter("PeriodoNominaActual", periodoNominaActual) :
+                new ObjectParameter("PeriodoNominaActual", typeof(string));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(int));
+    
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            var conceptoParameter = concepto.HasValue ?
+                new ObjectParameter("Concepto", concepto) :
+                new ObjectParameter("Concepto", typeof(int));
+    
+            var parametroParameter = parametro.HasValue ?
+                new ObjectParameter("Parametro", parametro) :
+                new ObjectParameter("Parametro", typeof(decimal));
+    
+            var motivoParameter = motivo.HasValue ?
+                new ObjectParameter("Motivo", motivo) :
+                new ObjectParameter("Motivo", typeof(int));
+    
+            var conceptoMotivoParameter = conceptoMotivo.HasValue ?
+                new ObjectParameter("ConceptoMotivo", conceptoMotivo) :
+                new ObjectParameter("ConceptoMotivo", typeof(int));
+    
+            var responsableIncidenteCCMSIDParameter = responsableIncidenteCCMSID.HasValue ?
+                new ObjectParameter("ResponsableIncidenteCCMSID", responsableIncidenteCCMSID) :
+                new ObjectParameter("ResponsableIncidenteCCMSID", typeof(int));
+    
+            var periodoOriginalDePagoParameter = periodoOriginalDePago != null ?
+                new ObjectParameter("PeriodoOriginalDePago", periodoOriginalDePago) :
+                new ObjectParameter("PeriodoOriginalDePago", typeof(string));
+    
+            var userCCMSIDParameter = userCCMSID.HasValue ?
+                new ObjectParameter("UserCCMSID", userCCMSID) :
+                new ObjectParameter("UserCCMSID", typeof(int));
+    
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            var justificacionParameter = justificacion != null ?
+                new ObjectParameter("Justificacion", justificacion) :
+                new ObjectParameter("Justificacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCargaRapidaSi_Result>("CatCargaRapidaSi", periodoNominaActualParameter, estatusParameter, cCMSIDParameter, conceptoParameter, parametroParameter, motivoParameter, conceptoMotivoParameter, responsableIncidenteCCMSIDParameter, periodoOriginalDePagoParameter, userCCMSIDParameter, folioIdParameter, justificacionParameter);
+        }
+    
+        public virtual ObjectResult<CatEmployeeInfoSel_Result> CatEmployeeInfoSel(Nullable<int> cCMSID)
+        {
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmployeeInfoSel_Result>("CatEmployeeInfoSel", cCMSIDParameter);
+        }
+    
+        public virtual ObjectResult<CatPerfilEmpleadosAccesoSel_Result> CatPerfilEmpleadosAccesoSel(Nullable<int> perfil_Ident, Nullable<int> ident, Nullable<int> activo)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            var identParameter = ident.HasValue ?
+                new ObjectParameter("Ident", ident) :
+                new ObjectParameter("Ident", typeof(int));
+    
+            var activoParameter = activo.HasValue ?
+                new ObjectParameter("Activo", activo) :
+                new ObjectParameter("Activo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosAccesoSel_Result>("CatPerfilEmpleadosAccesoSel", perfil_IdentParameter, identParameter, activoParameter);
+        }
     }
 }

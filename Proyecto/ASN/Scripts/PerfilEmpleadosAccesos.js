@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     $("#PerfilUsuarioId").change(function () {
-        debugger;
+        //debugger;
 
         if ($("#PerfilUsuarioId").val().length > 0) {
             //$('#grid').data('kendoGrid').dataSource.data([]);
@@ -14,12 +14,12 @@
             TipoAcceso = "";
 
             ClavePerfil = $("#PerfilUsuarioId").val();
-            debugger;
+            //debugger;
 
             //rellenaPerfilTipoAcceso();
 
             $.post(urlPerfilTipoAcceso + "/?Perfil_Ident=" + ClavePerfil, function (data) {
-                debugger;
+                //debugger;
                 //ClavePerfil = data[0].Perfil_Ident;
                 NombrePerfil = data.NombrePerfilEmpleados;
                 TipoAccesoId = data.TipoAccesoId;
@@ -34,11 +34,11 @@
                 $("#lblAccesos").show();
 
                 //$("#FechaCierreAnio").val(data[0].Active);
-                debugger;
+                //debugger;
 
 
             }).fail(function (ex) {
-                debugger;
+                //debugger;
                 console.log("fail" + ex);
             });
 
@@ -59,7 +59,7 @@
 });
 
 function onChangeCCMSId() {
-    debugger;
+    //debugger;
 
     CCMSId = "";
     NombreEmpleado = "";
@@ -72,11 +72,11 @@ function onChangeCCMSId() {
     SupervisorEmpleado = "";
 
     ClavePerfil = $("#PerfilUsuarioId").val();
-    debugger;
+    //debugger;
     //rellenaEmpleadoPuestoSupervisor();
 
     if ($("#CCMSId").val().length > 0) {
-        debugger;
+        //debugger;
         //$.post(urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + ClavePerfil + '&' + "Ident=" + CCMSId, function (data) {
         $.post(urlEmpleadoPuestoSupervisor + "/?Ident=" + CCMSId + '&' + "Perfil_Ident=" + ClavePerfil, function (data) {
             //$("#FechaInicioAnio").val(data[0].Ident);
@@ -114,7 +114,7 @@ function onChangeCCMSId() {
             $("#lblSupervisor").show();
 
         }).fail(function (ex) {
-            debugger;
+            //debugger;
             console.log("fail" + ex);
         });
 
@@ -252,11 +252,11 @@ function borrarAcceso(e) {
     //Se ejecuta Update con Active=false para eliminar el acceso respondiendo al botón Borrar
     var Active = false;
 
-    debugger;
+    //debugger;
 
     //int Perfil_Ident, int Ident, bool Active
     $.post(urlUpdatePerfilEmpleadosAccesos + "/?Perfil_Ident=" + Perfil_Ident + "&Ident=" + Ident + "&Active=" + Active, function (data) {
-        debugger;
+        //debugger;
 
         //if ($("#PerfilUsuarioId").val().length > 0) {
 
@@ -264,7 +264,7 @@ function borrarAcceso(e) {
         $('#grid').data('kendoGrid').dataSource.read();
         $('#grid').data('kendoGrid').refresh();
 
-        debugger;
+        //debugger;
 
     }).fail(function (ex) {
         console.log("fail" + ex);
@@ -531,7 +531,7 @@ function GuardarBorrador() {
 }
 
 function rellenaEmpleadoPuestoSupervisor() {
-    debugger;
+    //debugger;
 
         //@Perfil_Ident
         //@Ident
@@ -561,17 +561,17 @@ function rellenaEmpleadoPuestoSupervisor() {
             //$("#lblPropiedades").text(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
 
         }).fail(function (ex) {
-            debugger;
+            //debugger;
             console.log("fail" + ex);
         });
     }
 }
 
 function rellenaPerfilTipoAcceso() {
-    debugger;
+    //debugger;
 
     $.post(urlPerfilTipoAcceso + "/?Perfil_Ident=" + ClavePerfil, function (data) {
-        debugger;
+        //debugger;
         //ClavePerfil = data[0].Perfil_Ident;
         NombrePerfil = data[0].NombrePerfilEmpleados;
         TipoAccesoId = data[0].TipoAccesoId;
