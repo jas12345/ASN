@@ -30,6 +30,9 @@
                 $("#lblAccesosNombre").val(TipoAcceso);
                 $("#lblAccesosNombre").text(TipoAcceso);
 
+                $("#lblPerfil").show();
+                $("#lblAccesos").show();
+
                 //$("#FechaCierreAnio").val(data[0].Active);
                 debugger;
 
@@ -42,6 +45,15 @@
        }
         else {
             $('#grid').data('kendoGrid').dataSource.data([]);
+
+            $("#lblPerfilNombre").val("");
+            $("#lblPerfilNombre").text("");
+            $("#lblAccesosNombre").val("");
+            $("#lblAccesosNombre").text("");
+
+            $("#lblPerfil").hide();
+            $("#lblAccesos").hide();
+
         }
     });
 });
@@ -63,41 +75,74 @@ function onChangeCCMSId() {
     debugger;
     //rellenaEmpleadoPuestoSupervisor();
 
-    $.post(urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + ClavePerfil + '&' + "Ident=" + CCMSId, function (data) {
-        //$("#FechaInicioAnio").val(data[0].Ident);
-        Nombre = data[0].Nombre;
-        Position_Code_Ident = data[0].Position_Code_Ident;
-        Position_Code_Title = data[0].Position_Code_Title;
-        Manager_Ident = data[0].Manager_Ident;
-        Nombre_Manager = data[0].Nombre_Manager;
-        //Perfil_Ident = data[0].Perfil_Ident;
-        NombrePerfil = data[0].NombrePerfilEmpleados;
-        Active = data[0].Active;
-        TipoAccesoId = data[0].TipoAccesoId;
-        TipoAcceso = data[0].TipoAcceso;
-        AccesoSolicitante = data[0].AccesoSolicitante;
-        AccesoAutorizante = data[0].AccesoAutorizante;
-        AccesoResponsable = data[0].AccesoResponsable;
-        AccesoConsultante = data[0].AccesoConsultante;
-        AccesoOtros = data[0].AccesoOtros;
-
-        $("#lblPropiedades").val(" CCMSId: " + CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
-        $("#lblPropiedades").text(" CCMSId: " + CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
-
-        $("#lblCCMSIdClave").val(CCMSId);
-        $("#lblCCMSIdClave").text(CCMSId);
-        $("#lblEmpleadoNombre").val(Nombre);
-        $("#lblEmpleadoNombre").text(Nombre);
-        $("#lblPuestoNombre").val(Position_Code_Title);
-        $("#lblPuestoNombre").text(Position_Code_Title);
-        $("#lblSupervisorNombre").val(Nombre_Manager);
-        $("#lblSupervisorNombre").text(Nombre_Manager);
-
-    }).fail(function (ex) {
+    if ($("#CCMSId").val().length > 0) {
         debugger;
-        console.log("fail" + ex);
-    });
+        //$.post(urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + ClavePerfil + '&' + "Ident=" + CCMSId, function (data) {
+        $.post(urlEmpleadoPuestoSupervisor + "/?Ident=" + CCMSId + '&' + "Perfil_Ident=" + ClavePerfil, function (data) {
+            //$("#FechaInicioAnio").val(data[0].Ident);
+            Nombre = data[0].Nombre;
+            Position_Code_Ident = data[0].Position_Code_Ident;
+            Position_Code_Title = data[0].Position_Code_Title;
+            Manager_Ident = data[0].Manager_Ident;
+            Nombre_Manager = data[0].Nombre_Manager;
+            //Perfil_Ident = data[0].Perfil_Ident;
+            NombrePerfil = data[0].NombrePerfilEmpleados;
+            Active = data[0].Active;
+            TipoAccesoId = data[0].TipoAccesoId;
+            TipoAcceso = data[0].TipoAcceso;
+            AccesoSolicitante = data[0].AccesoSolicitante;
+            AccesoAutorizante = data[0].AccesoAutorizante;
+            AccesoResponsable = data[0].AccesoResponsable;
+            AccesoConsultante = data[0].AccesoConsultante;
+            AccesoOtros = data[0].AccesoOtros;
 
+            $("#lblPropiedades").val(" CCMSId: " + CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+            $("#lblPropiedades").text(" CCMSId: " + CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
+
+            $("#lblCCMSIdClave").val(CCMSId);
+            $("#lblCCMSIdClave").text(CCMSId);
+            $("#lblEmpleadoNombre").val(Nombre);
+            $("#lblEmpleadoNombre").text(Nombre);
+            $("#lblPuestoNombre").val(Position_Code_Title);
+            $("#lblPuestoNombre").text(Position_Code_Title);
+            $("#lblSupervisorNombre").val(Nombre_Manager);
+            $("#lblSupervisorNombre").text(Nombre_Manager);
+
+            $("#lblCCMSId").show();
+            $("#lblEmpleado").show();
+            $("#lblPuesto").show();
+            $("#lblSupervisor").show();
+
+        }).fail(function (ex) {
+            debugger;
+            console.log("fail" + ex);
+        });
+
+    }
+    else {
+        //$('#grid').data('kendoGrid').dataSource.data([]);
+
+        //$("#lblPerfilNombre").val("");
+        //$("#lblPerfilNombre").text("");
+        //$("#lblAccesosNombre").val("");
+        //$("#lblAccesosNombre").text("");
+
+
+        $("#lblCCMSIdClave").val("");
+        $("#lblCCMSIdClave").text("");
+        $("#lblEmpleadoNombre").val("");
+        $("#lblEmpleadoNombre").text("");
+        $("#lblPuestoNombre").val("");
+        $("#lblPuestoNombre").text("");
+        $("#lblSupervisorNombre").val("");
+        $("#lblSupervisorNombre").text("");
+
+        $("#lblCCMSId").hide();
+        $("#lblEmpleado").hide();
+        $("#lblPuesto").hide();
+        $("#lblSupervisor").hide();
+
+    }
 
     //$("#lblPropiedades").val(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
     //$("#lblPropiedades").text(CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
@@ -492,7 +537,8 @@ function rellenaEmpleadoPuestoSupervisor() {
         //@Ident
 
     if (anioId != 0) {
-        $.post(urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + Perfil_Ident + '&' + "Ident=" + Ident, function (data) {
+        //$.post(urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + Perfil_Ident + '&' + "Ident=" + Ident, function (data) {
+        $.post(urlEmpleadoPuestoSupervisor + "/?Ident=" + CCMSId + '&' + "Perfil_Ident=" + ClavePerfil, function (data) {
             //$("#FechaInicioAnio").val(data[0].Ident);
             Nombre = data[0].Nombre;
             Position_Code_Ident = data[0].Position_Code_Ident;

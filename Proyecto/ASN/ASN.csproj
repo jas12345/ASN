@@ -697,7 +697,6 @@
     <Content Include="Views\Solicitudes\SeleccionaPersonal.cshtml" />
     <Content Include="Views\ToDo\Index.cshtml" />
     <Content Include="Views\MisSolicitudes\Index.cshtml" />
-    <Content Include="Views\PeriodoNomina - Copy\Index.cshtml" />
     <Content Include="Views\SolicitudesTodas\Index.cshtml" />
     <Content Include="Views\BusquedasVarias\Index.cshtml" />
     <Content Include="Views\Solicitudes\Editar.cshtml" />

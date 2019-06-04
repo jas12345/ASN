@@ -235,10 +235,11 @@ namespace ASN.Controllers
             return View();
         }
 
-        public JsonResult GetEmpleadoPuestoSupervisor(int Perfil_Ident, int Ident)
+        public JsonResult GetEmpleadoPuestoSupervisor(int Ident, Nullable<int> Perfil_Ident = null)
         {
 
             //urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + Perfil_Ident + '&' + "Ident=" + Ident
+            //urlEmpleadoPuestoSupervisor + "/?Ident=" + Ident + '&' + "Perfil_Ident=" + Perfil_Ident
 
             try
             {
