@@ -59,7 +59,7 @@
 });
 
 function onChangeCCMSId() {
-    //debugger;
+    debugger;
 
     CCMSId = "";
     NombreEmpleado = "";
@@ -78,7 +78,7 @@ function onChangeCCMSId() {
     if ($("#CCMSId").val().length > 0) {
         //debugger;
         //$.post(urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + ClavePerfil + '&' + "Ident=" + CCMSId, function (data) {
-        $.post(urlEmpleadoPuestoSupervisor + "/?Ident=" + CCMSId + '&' + "Perfil_Ident=" + ClavePerfil, function (data) {
+        $.post(urlEmpleadoPuestoSupervisor + "/?Ident=" + CCMSId, function (data) {
             //$("#FechaInicioAnio").val(data[0].Ident);
             Nombre = data[0].Nombre;
             Position_Code_Ident = data[0].Position_Code_Ident;
@@ -270,47 +270,47 @@ function borrarAcceso(e) {
         console.log("fail" + ex);
     });
 
-    var validator = e.container.data('kendoValidator');
+    //var validator = e.container.data('kendoValidator');
 
-    $('input[name="NombrePeriodo"]').blur(function () {
-        validator.validateInput(this);
-    });
+    //$('input[name="NombrePeriodo"]').blur(function () {
+    //    validator.validateInput(this);
+    //});
 
-    $('input[name="TipoPeriodo"]').change(function () {
-        validator.validateInput(this);
-    });
+    //$('input[name="TipoPeriodo"]').change(function () {
+    //    validator.validateInput(this);
+    //});
 
-    var lstCountryIdents = $("#LstCountryIdents").data("kendoMultiSelect");
+    //var lstCountryIdents = $("#LstCountryIdents").data("kendoMultiSelect");
 
-    $("#FechaCaptura").attr("readonly", true);
-    $("#FechaCierre").attr("readonly", true);
+    //$("#FechaCaptura").attr("readonly", true);
+    //$("#FechaCierre").attr("readonly", true);
 
-    if (e.model.isNew() === false) {
-        e.container.kendoWindow("title", "Editar");
+    //if (e.model.isNew() === false) {
+    //    e.container.kendoWindow("title", "Editar");
 
-        var paises = e.model.CountryIdents.split(',');
-        lstCountryIdents.value(paises);
+    //    var paises = e.model.CountryIdents.split(',');
+    //    lstCountryIdents.value(paises);
 
-        $("#FechaInicio").val(e.model.FechaInicio);
-        $("#FechaFin").val(e.model.FechaFin);
-        $("#FechaCaptura").val(e.model.FechaCaptura);
-        $("#FechaCierre").val(e.model.FechaCierre);
+    //    $("#FechaInicio").val(e.model.FechaInicio);
+    //    $("#FechaFin").val(e.model.FechaFin);
+    //    $("#FechaCaptura").val(e.model.FechaCaptura);
+    //    $("#FechaCierre").val(e.model.FechaCierre);
 
-        nombrePeriodo = e.model.NombrePeriodo;
-        var anios = $("#AnioId").data("kendoDropDownList");
-        var Periodo = $("#PeriodicidadNominaId").data("kendoDropDownList");
-        var tipoperiodo = $("#TipoPeriodo").data("kendoDropDownList");
+    //    nombrePeriodo = e.model.NombrePeriodo;
+    //    var anios = $("#AnioId").data("kendoDropDownList");
+    //    var Periodo = $("#PeriodicidadNominaId").data("kendoDropDownList");
+    //    var tipoperiodo = $("#TipoPeriodo").data("kendoDropDownList");
 
-        anios.enable(false);
-        Periodo.enable(false);
-        tipoperiodo.enable(false);
+    //    anios.enable(false);
+    //    Periodo.enable(false);
+    //    tipoperiodo.enable(false);
 
-        editando = 1;
-    }
-    else {
-        e.container.kendoWindow("title", "Nuevo");
-        editando = 0;
-    }
+    //    editando = 1;
+    //}
+    //else {
+    //    e.container.kendoWindow("title", "Nuevo");
+    //    editando = 0;
+    //}
 
 }
 
@@ -498,6 +498,37 @@ function handleSaveChanges(e, grid) {
     });
 })(jQuery, kendo);
 
+
+
+function agregaEmpleado() {
+    debugger;
+    ClavePerfil = "";
+    CCMSId = "";
+    nivel = "";
+
+    ClavePerfil = $("#PerfilUsuarioId").val();
+    CCMSId = $("#CCMSId").val();
+    //nivel = $("#nivel").val();
+
+    $.post('/PerfilEmpleadosAccesos/CreatePerfilEmpleadosAccesos' + "/?perfil_Ident=" + ClavePerfil + "&empleadoId=" + CCMSId + "&nivel=" + nivel, function (data){
+            //type: 'POST',
+            //url: ,
+            //data: JSON.stringify({ "perfil_Ident": ClavePerfil, "empleadoId": CCMSId, "nivel": nivel }),
+            //int empleadoId, int perfil_Ident, Nullable<int> nivel, int userEmployeeId, bool active, ObjectParameter estatus
+
+            //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
+            //contentType: 'application/json; charset=utf-8',
+            //dataType: 'json',
+            //success: function (resultData) {
+            //debugger
+
+        actualizaGrid();
+    //}
+    }).fail(function (ex) {
+        //debugger;
+        console.log("fail" + ex);
+    });
+}
 
 function actualizaGrid() {
     $("#grid").data("kendoGrid").dataSource.read();

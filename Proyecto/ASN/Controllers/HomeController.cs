@@ -18,7 +18,7 @@ namespace GAPP.Controllers
             var ctx = System.Web.HttpContext.Current;
             if (ctx.Request.IsAuthenticated)
             {
-                return redirecciona(User.Identity.Name);
+                return Redirecciona(User.Identity.Name);
             }
             return this.View();
         }
@@ -58,7 +58,7 @@ namespace GAPP.Controllers
                         //    decodedUrl = Server.UrlDecode(returnUrl);
                         //}
 
-                        return redirecciona(user.ident.ToString());
+                        return Redirecciona(user.ident.ToString());
 
                         //return redireccion();
 
@@ -96,7 +96,7 @@ namespace GAPP.Controllers
             }
         }
 
-        public ActionResult redirecciona(string ccms)
+        public ActionResult Redirecciona(string ccms)
         {
             if (User.IsInRole("Desarrollo"))
             {

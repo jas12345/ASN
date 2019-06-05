@@ -75,27 +75,28 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, string Perfil_Ident, string selectedKeyNames, string selectedEmpleados)
+        public ActionResult CreatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, int empleadoId, int perfil_Ident, Nullable<int> nivel)
         {
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
                     int idAdmin = 0, res = 0;
+
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
 
-                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    ObjectParameter resultado = new ObjectParameter("estatus", typeof(int));
                     resultado.Value = 0;
 
                     int.TryParse(User.Identity.Name, out idAdmin);
 
                     context.CatPerfilEmpleadosAccesosSi(
-                        int.Parse(Perfil_Ident),
-                        selectedKeyNames,
-                        selectedEmpleados,
-                        idAdmin,
-                        true,
-                        resultado);
+                          empleadoId
+                        , perfil_Ident
+                        , nivel
+                        , idAdmin
+                        , true
+                        , resultado);
 
                     int.TryParse(resultado.Value.ToString(), out res);
 
@@ -112,7 +113,7 @@ namespace ASN.Controllers
                             break;
                     }
 
-                    return Json(Perfil_Ident);
+                    return Json(empleadoId);
                 }
             }
             catch (Exception ex)
@@ -121,7 +122,7 @@ namespace ASN.Controllers
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json(Perfil_Ident);
+                return Json(empleadoId);
             }
         }
 
@@ -235,7 +236,7 @@ namespace ASN.Controllers
             return View();
         }
 
-        public JsonResult GetEmpleadoPuestoSupervisor(int Ident, Nullable<int> Perfil_Ident = null)
+        public JsonResult GetEmpleadoPuestoSupervisor(int Ident)
         {
 
             //urlEmpleadoPuestoSupervisor + "/?Perfil_Ident=" + Perfil_Ident + '&' + "Ident=" + Ident
@@ -243,11 +244,11 @@ namespace ASN.Controllers
 
             try
             {
-                var lstEmpleadoPuestoSupervisor = new List<CatPerfilEmpleadoAccesoSel_Result>();
+                var lstEmpleadoPuestoSupervisor = new List<CatEmpleadoPuestoSupervisorSel_Result>();
 
                 using (ASNContext context = new ASNContext())
                 {
-                    lstEmpleadoPuestoSupervisor = context.CatPerfilEmpleadoAccesoSel(Perfil_Ident, Ident).ToList();
+                    lstEmpleadoPuestoSupervisor = context.CatEmpleadoPuestoSupervisorSel(Ident).ToList();
                 }
 
                 return Json(lstEmpleadoPuestoSupervisor, JsonRequestBehavior.AllowGet);
@@ -261,6 +262,30 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
+
+        //public JsonResult GetEmpleadoPuesto(int Ident)
+        //{
+
+        //    try
+        //    {
+        //        var lstEmpleadoPuestoSupervisor = new List<CatPerfilEmpleadoSel_Result>();
+
+        //        using (ASNContext context = new ASNContext())
+        //        {
+        //            lstEmpleadoPuestoSupervisor = context.CatPerfilEmpleadoSel(Ident).ToList();
+        //        }
+
+        //        return Json(lstEmpleadoPuestoSupervisor, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+        //        MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+        //        LogError log = new LogError();
+        //        log.RecordError(ex, usuario.UserInfo.Ident.Value);
+        //        return Json("");
+        //    }
+        //}
 
         public ActionResult GetPerfilTipoAcceso(int Perfil_Ident)
         {

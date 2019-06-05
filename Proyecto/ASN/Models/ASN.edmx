@@ -157,6 +157,9 @@
         <Function Name="CatContractTypeTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatEmpleadoPuestoSupervisorSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatEmpleadosPerfilEmpleadosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
@@ -252,9 +255,9 @@
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
         <Function Name="CatPerfilEmpleadosAccesosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="EmpleadoId" Type="int" Mode="In" />
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
-          <Parameter Name="SelectedKeyNames" Type="varchar" Mode="In" />
-          <Parameter Name="SelectedEmpleados" Type="varchar" Mode="In" />
+          <Parameter Name="Nivel" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -268,6 +271,9 @@
         </Function>
         <Function Name="CatPerfilEmpleadosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatPerfilEmpleadoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Ident" Type="int" Mode="In" />
         </Function>
         <Function Name="CatPerfilEmpleadosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
@@ -877,9 +883,9 @@
           <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPerfilEmpleadosAccesosSi">
+            <Parameter Name="EmpleadoId" Mode="In" Type="Int32" />
             <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="SelectedKeyNames" Mode="In" Type="String" />
-            <Parameter Name="SelectedEmpleados" Mode="In" Type="String" />
+            <Parameter Name="Nivel" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -1064,10 +1070,10 @@
           <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatCargaRapidaSd">
-            <Parameter Name="CargaRapidaId" Mode="In" Type="Int32" />
+          <Parameter Name="CargaRapidaId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatCargaRapidaSel" ReturnType="Collection(ASNModel.CatCargaRapidaSel_Result)">
-            <Parameter Name="FolioId" Mode="In" Type="Int32" />
+          <Parameter Name="FolioId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatCargaRapidaSi" ReturnType="Collection(ASNModel.CatCargaRapidaSi_Result)">
             <Parameter Name="PeriodoNominaActual" Mode="In" Type="String" />
@@ -1084,12 +1090,18 @@
             <Parameter Name="Justificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatEmployeeInfoSel" ReturnType="Collection(ASNModel.CatEmployeeInfoSel_Result)">
-            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPerfilEmpleadosAccesoSel" ReturnType="Collection(ASNModel.CatPerfilEmpleadosAccesoSel_Result)">
             <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Ident" Mode="In" Type="Int32" />
             <Parameter Name="Activo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatPerfilEmpleadoSel" ReturnType="Collection(ASNModel.CatPerfilEmpleadoSel_Result)">
+          <Parameter Name="Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatEmpleadoPuestoSupervisorSel" ReturnType="Collection(ASNModel.CatEmpleadoPuestoSupervisorSel_Result)">
+          <Parameter Name="Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1661,6 +1673,22 @@
           <Property Type="String" Name="NombrePerfilEmpleados" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
           <Property Type="Int32" Name="TipoAccesoId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CatPerfilEmpleadoSel_Result">
+          <Property Type="Int32" Name="Ident" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="Position_Code_Ident" Nullable="true" />
+          <Property Type="String" Name="Position_Code_Title" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Manager_Ident" Nullable="false" />
+          <Property Type="String" Name="Nombre1" Nullable="true" MaxLength="752" />
+        </ComplexType>
+        <ComplexType Name="CatEmpleadoPuestoSupervisorSel_Result">
+          <Property Type="Int32" Name="Ident" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="Position_Code_Ident" Nullable="true" />
+          <Property Type="String" Name="Position_Code_Title" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Manager_Ident" Nullable="false" />
+          <Property Type="String" Name="Nombre_Manager" Nullable="true" MaxLength="752" />
         </ComplexType>
        
         </Schema>
@@ -2511,6 +2539,30 @@
                 <ScalarProperty Name="NombrePerfilEmpleados" ColumnName="NombrePerfilEmpleados" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPerfilEmpleadoSel" FunctionName="ASNModel.Store.CatPerfilEmpleadoSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPerfilEmpleadoSel_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Position_Code_Ident" ColumnName="Position_Code_Ident" />
+                <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
+                <ScalarProperty Name="Manager_Ident" ColumnName="Manager_Ident" />
+                <ScalarProperty Name="Nombre1" ColumnName="Nombre1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatEmpleadoPuestoSupervisorSel" FunctionName="ASNModel.Store.CatEmpleadoPuestoSupervisorSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatEmpleadoPuestoSupervisorSel_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Position_Code_Ident" ColumnName="Position_Code_Ident" />
+                <ScalarProperty Name="Position_Code_Title" ColumnName="Position_Code_Title" />
+                <ScalarProperty Name="Manager_Ident" ColumnName="Manager_Ident" />
+                <ScalarProperty Name="Nombre_Manager" ColumnName="Nombre_Manager" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
