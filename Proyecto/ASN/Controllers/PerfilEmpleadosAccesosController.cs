@@ -9,6 +9,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+
 namespace ASN.Controllers
 {
     public class PerfilEmpleadosAccesosController : Controller
@@ -75,7 +77,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, int empleadoId, int perfil_Ident, Nullable<int> nivel)
+        public ActionResult CreatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosAccesosSel_Result> profiles, int empleadoId, int perfil_Ident, Nullable<int> nivel)
         {
             try
             {
@@ -103,15 +105,18 @@ namespace ASN.Controllers
                     switch (res)
                     {
                         case -1:
-                            ModelState.AddModelError("error", "Error general.");
+                            ModelState.AddModelError("error", "Ya existe este registro de Acceso para este empleado y perfil.");
                             break;
                         case -2:
-                            ModelState.AddModelError("error", "Error general.");
+                            ModelState.AddModelError("error", "El empleado no existe en CCMS o no está activo.");
                             break;
                         case -3:
-                            ModelState.AddModelError("error", "Error general.");
+                            ModelState.AddModelError("error", "El puesto del empleado no es válido para este perfil.");
                             break;
                     }
+
+                    //return Json(profiles.ToDataSourceResult(request, ModelState));
+                    //return Json(ModelState);
 
                     return Json(empleadoId);
                 }
@@ -127,7 +132,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdatePerfilEmpleadosAccesos(int Perfil_Ident, int Ident, bool Active/*, int resultado*/)
+        public ActionResult UpdatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosAccesosSel_Result> profiles, int Perfil_Ident, int Ident, bool Active/*, int resultado*/)
         {
             try
             {
@@ -162,16 +167,9 @@ namespace ASN.Controllers
                             break;
                     }
 
-                    return Json(Perfil_Ident);
+                    return Json(profiles.ToDataSourceResult(request, ModelState));
+                    //return Json(Perfil_Ident);
                 }
-
-
-
-
-
-
-
-
 
                 // Esta función solo sirve para borrar permisos en el perfil a Empleados mediante el botón borrar.
                 //using (ASNContext context = new ASNContext())

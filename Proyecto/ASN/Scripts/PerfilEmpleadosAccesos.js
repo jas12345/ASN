@@ -328,7 +328,7 @@ function valida(e) {
 }
 
 function errorsote(args) {
-
+    debugger;
     if (args.errors) {
 
         $(document).ready(function () {
@@ -516,16 +516,21 @@ function agregaEmpleado() {
             //data: JSON.stringify({ "perfil_Ident": ClavePerfil, "empleadoId": CCMSId, "nivel": nivel }),
             //int empleadoId, int perfil_Ident, Nullable<int> nivel, int userEmployeeId, bool active, ObjectParameter estatus
 
-            //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
-            //contentType: 'application/json; charset=utf-8',
-            //dataType: 'json',
-            //success: function (resultData) {
-            //debugger
+        //JSON.stringify({ "Perfil_Ident": perfil_Ident, "selectedKeyNames": listaEmpleados }),
+        //contentType: 'application/json; charset=utf-8',
+        //dataType: 'json',
+        //success: function (resultData) {
+        debugger
+        //Error = data[0].Position_Code_Ident;
+        Error = "Mensaje de error de prueba";
+
+        //var notification = $("#popupNotification").data("kendoNotification");
+        //notification.show(Error, "error");
 
         actualizaGrid();
     //}
     }).fail(function (ex) {
-        //debugger;
+        debugger;
         console.log("fail" + ex);
     });
 }

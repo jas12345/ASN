@@ -58,8 +58,10 @@
                                     @*<button id="Agregar" type="button" data-role="button" class="k-button k-button-icontext k-primary" onclick="agregaEmpleado;" role="button" aria-disabled="false" tabindex="0">
                                         <span class="k-icon k-i-save"></span> Agregar
                                     </button>*@
-                                    @(Html.Kendo().Button().Name("Agregar").Content("Agregar").Events(x => x.Click("agregaEmpleado")))
-
+                                    @(Html.Kendo().Button().Name("Agregar").Content("Agregar")
+                                        .Events(x => x.Click("agregaEmpleado"))
+                                    //.Events(ev => ev.Error("errorsote").RequestEnd("hola"))
+                                    )
                                 </div>
                             </div>
                         </div>
@@ -190,6 +192,7 @@
         var AccesoResponsable = "";
         var AccesoConsultante = "";
         var AccesoOtros = "";        
+        var Error = "";
 
         var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
 

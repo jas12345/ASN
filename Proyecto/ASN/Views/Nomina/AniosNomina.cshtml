@@ -46,8 +46,8 @@
                             .Model(model =>
                             {
                                 model.Id(c => c.AnioId);
-                                model.Field(c => c.FechaInicio).Editable(false);
-                                model.Field(c => c.FechaCierre).Editable(false);
+                                model.Field(c => c.FechaInicio).Editable(true);
+                                model.Field(c => c.FechaCierre).Editable(true);
                                 model.Field(c => c.Active).Editable(true).DefaultValue(true);
                             })
                             .Read(read => read.Action("GetAniosNomina", "Nomina"))
