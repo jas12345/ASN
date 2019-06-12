@@ -84,6 +84,9 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatConceptosParametroConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -124,6 +127,9 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatConceptosxEmpleadoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Ident" Type="int" Mode="In" />
         </Function>
         <Function Name="CatConsecutivoPeriodicidadCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CatPeriodicidadNominaId" Type="nvarchar" Mode="In" />
@@ -1111,6 +1117,12 @@
           <FunctionImport Name="CatEmpleadoPuestoSel" ReturnType="Collection(ASNModel.CatEmpleadoPuestoSel_Result)">
           <Parameter Name="Ident" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatConceptosParametroConceptosSel" ReturnType="Collection(ASNModel.CatConceptosParametroConceptosSel_Result)">
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConceptosxEmpleadoCMB" ReturnType="Collection(ASNModel.CatConceptosxEmpleadoCMB_Result)">
+            <Parameter Name="Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1707,6 +1719,16 @@
           <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Location_Ident" Nullable="true" />
           <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosParametroConceptosSel_Result">
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="String" Name="DescripcionConcepto" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TipoConceptoId" Nullable="false" />
+          <Property Type="String" Name="DescripcionParametroConcepto" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosxEmpleadoCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -2595,6 +2617,24 @@
                 <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
                 <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
                 <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosParametroConceptosSel" FunctionName="ASNModel.Store.CatConceptosParametroConceptosSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosParametroConceptosSel_Result">
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="DescripcionConcepto" ColumnName="DescripcionConcepto" />
+                <ScalarProperty Name="TipoConceptoId" ColumnName="TipoConceptoId" />
+                <ScalarProperty Name="DescripcionParametroConcepto" ColumnName="DescripcionParametroConcepto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosxEmpleadoCMB" FunctionName="ASNModel.Store.CatConceptosxEmpleadoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosxEmpleadoCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

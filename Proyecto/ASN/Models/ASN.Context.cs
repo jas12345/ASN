@@ -2007,5 +2007,23 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadoPuestoSel_Result>("CatEmpleadoPuestoSel", identParameter);
         }
+    
+        public virtual ObjectResult<CatConceptosParametroConceptosSel_Result> CatConceptosParametroConceptosSel(Nullable<int> conceptoId)
+        {
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosParametroConceptosSel_Result>("CatConceptosParametroConceptosSel", conceptoIdParameter);
+        }
+    
+        public virtual ObjectResult<CatConceptosxEmpleadoCMB_Result> CatConceptosxEmpleadoCMB(Nullable<int> ident)
+        {
+            var identParameter = ident.HasValue ?
+                new ObjectParameter("Ident", ident) :
+                new ObjectParameter("Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosxEmpleadoCMB_Result>("CatConceptosxEmpleadoCMB", identParameter);
+        }
     }
 }

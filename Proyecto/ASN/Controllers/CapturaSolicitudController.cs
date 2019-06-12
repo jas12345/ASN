@@ -177,5 +177,29 @@ namespace ASN.Areas.CapturasRapidas.Controllers
                 return Json("");
             }
         }
+
+        public JsonResult GetConceptoParametroConcepto(int conceptoIdent)
+        {
+            try
+            { 
+                var lstConceptosParametroConceptos = new List<CatConceptosParametroConceptosSel_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstConceptosParametroConceptos = context.CatConceptosParametroConceptosSel(conceptoIdent).ToList();
+                }
+
+                return Json(lstConceptosParametroConceptos, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
     }
 }

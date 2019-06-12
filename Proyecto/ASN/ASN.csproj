@@ -148,13 +148,13 @@
     <Compile Include="Controllers\EmpleadosSolicitudesController.cs" />
     <Compile Include="Controllers\MisSolicitudesController.cs" />
     <Compile Include="Controllers\NotificacionesController.cs" />
+    <Compile Include="Controllers\PerfilEmpleadosAccesosController.cs" />
     <Compile Include="Controllers\SolicitudesTodasController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Controllers\NominaController.cs" />
     <Compile Include="Controllers\ConceptosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
-    <Compile Include="Controllers\PerfilEmpleadosAccesosController.cs" />
     <Compile Include="Controllers\PerfilEmpleadosController.cs" />
     <Compile Include="Controllers\PeriodicidadNominaController.cs" />
     <Compile Include="Controllers\PeriodoNominaController.cs" />
@@ -242,7 +242,13 @@
     <Compile Include="Models\CatConceptosMotivosSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatConceptosParametroConceptosSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatConceptosSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatConceptosxEmpleadoCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatConsecutivoPeriodicidadCMB_Result.cs">
@@ -571,7 +577,6 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <EntityDeploy Include="Models\ASN.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ASN.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\ASN.edmx.diagram">
       <DependentUpon>ASN.edmx</DependentUpon>

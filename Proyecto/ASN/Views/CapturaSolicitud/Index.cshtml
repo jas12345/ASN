@@ -40,10 +40,10 @@
                         <label class="primerLabel" id="lblContrato">Contrato:</label>
                     </td>
                     <td>
-                        <label id="CCMSID"></label><br />
-                        <label id="Nombre"></label><br />
-                        <label id="Puesto"></label><br />
-                        <label id="Contrato"></label>
+                        <label id="CCMSIDX"></label><br />
+                        <label id="NombreX"></label><br />
+                        <label id="PuestoX"></label><br />
+                        <label id="ContratoX"></label>
                     </td>
                     <td>
                         <label class="primerLabel" id="lblSite">Site:</label><br />
@@ -52,22 +52,22 @@
                         <label class="primerLabel" id="lblMotivo">Motivo:</label>
                     </td>
                     <td>
-                        <label id="Site"></label><br />
-                        <label id="Concepto"></label><br />
-                        <label id="Parametrox"></label><br />
-                        <label id="Motivox"></label>
+                        <label id="SiteX"></label><br />
+                        <label id="ConceptoX"></label><br />
+                        <label id="ParametroX"></label><br />
+                        <label id="MotivoX"></label>
                     </td>
                     <td>
                         <label class="primerLabel" id="lblConceptoMotivo">ConceptoMotivo:</label><br />
                         <label class="primerLabel" id="lblResponsableCCMSID">Responsable de incidente:</label><br />
-                        <label class="primerLabel" id="lblPeriodoOP">Período original de pago:</label><br />
-                        <label class="primerLabel" id="lblNombreRespo">Nombre responsable:</label>
+                        <label class="primerLabel" id="lblNombreRespo">Nombre responsable:</label><br />
+                        <label class="primerLabel" id="lblPeriodoOP">Período original de pago:</label>
                     </td>
                     <td>
-                        <label id="ConceptoMotivox"></label><br />
-                        <label id="ResponsableCCMSID"></label><br />
-                        <label id="PeriodoOP"></label><br />
-                        <label id="NombreRespo"></label>
+                        <label id="ConceptoMotivoX"></label><br />
+                        <label id="ResponsableCCMSIDX"></label><br />
+                        <label id="NombreRespoX"></label><br />
+                        <label id="PeriodoOPX"></label>
                     </td>
                 </tr>
                 <tr></tr>
@@ -190,6 +190,7 @@
                             <td>
                                 @(Html.Kendo().NumericTextBox()
                                             .Name("Parametro")
+                                            .Events(e => e.Change("onChangeParametro"))
                                             .Spinners(false)
                                             .Decimals(2)
                                             .Format("0.00")
@@ -201,20 +202,21 @@
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                {
-                                                    source.Read(read =>
-                                                        {
-                                                            read.Action("GetMotivosCMB", "CapturaSolicitud");
-                                                        }
-                                                    );
-                                                                //.ServerFiltering(true);
-                                                            }
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetMotivosCMB", "CapturaSolicitud");
+                                }
+                                );
+                                //.ServerFiltering(true);
+                            }
                                             )
                                             .Filter("contains")
                                             .OptionLabel("- Motivo - ")
                                             .DataValueField("Id")
                                             .DataTextField("Value")
                                             .Name("Motivo")
+                                            .Events(e => e.Change("onChangeMotivo"))
                                             //.SelectedIndex(1)
                                             .Enable(true)
                                             .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
@@ -222,18 +224,19 @@
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                                        {
-                                                                                            source.Read(read =>
-                                                                                            {
-                                                                                                read.Action("GetConceptosMotivosCMB", "CapturaSolicitud");
-                                                                                            });
-                                                                                                        //.ServerFiltering(true);
-                                                                                                    })
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetConceptosMotivosCMB", "CapturaSolicitud");
+                                });
+                                //.ServerFiltering(true);
+                            })
                                                                                         .Filter("contains")
                                                                                         .OptionLabel("- Concepto Motivo - ")
                                                                                         .DataValueField("Ident")
                                                                                         .DataTextField("Valor")
                                                                                         .Name("ConceptoMotivo")
+                                                                                        .Events(e => e.Change("onChangeConceptoMotivo"))
                                                                                         //.SelectedIndex(1)
                                                                                         .Enable(true)
                                                                                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
@@ -242,6 +245,7 @@
                             <td>
                                 @(Html.Kendo().NumericTextBox()
                                                                                         .Name("CCMSIDIncidente")
+                                                                                        .Events(e => e.Change("onChangeCCMSIdIncidente"))
                                                                                         .Spinners(false)
                                                                                         .Decimals(0)
                                                                                         .Format("0.")
@@ -253,18 +257,19 @@
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                                        {
-                                                                                            source.Read(read =>
-                                                                                            {
-                                                                                                read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
-                                                                                            });
-                                                                                                        //.ServerFiltering(true);
-                                                                                                    })
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                });
+                                //.ServerFiltering(true);
+                            })
                                                                                         .Filter("contains")
                                                                                         .OptionLabel("- Período Incidente - ")
                                                                                         .DataValueField("Ident")
                                                                                         .DataTextField("Valor")
-                                                                                        .Name("PeríodoIncidente")
+                                                                                        .Name("PeriodoIncidente")
+                                                                                        .Events(e => e.Change("onChangePeriodoIncidente"))
                                                                                         //.SelectedIndex(1)
                                                                                         .Enable(true)
                                                                                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
@@ -274,7 +279,10 @@
                     </table>
                 </div>
                 <div class="col-lg-12">
-                    @(Html.Kendo().Button().Name("Saved").Content("Agregar").Events(x => x.Click("Salvar")))
+                    @(Html.Kendo().Button().Name("AgregarSolicitud").Content("Agregar")
+                    .Events(x => x.Click("agregarSolicitud"))
+                    //.Events(x => x.Click("agregaEmpleado"))
+                    )
                 </div>
             </div>
         </div>
@@ -369,6 +377,7 @@
         var EmpSiteId = "";
         var EmpSite = "";
 
+        // Sección Empleado - Puesto
         var EmpPosition_Code_Ident = "";
         var EmpPosition_Code_Title = "";
         var EmpContract_Type_Ident = "";
@@ -377,37 +386,41 @@
         var EmpLocation_Name = "";
         var EmpActive = "";
 
+        // Sección Conceptos - Parámetro Conceptos
+        var ConConceptoIdent = ""
+        var ConConceptoNombre = ""
+        var ConParametroId = ""
+        var ConParametroNombre = ""
 
-        var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "CapturaSolicitud")';
+        // Sección Responsable de Incidente
+        var CCMSIdIncidente = "";
+        var NombreResponsableIncidente = "";
+
+        // Sección alta de Empleados - Solicitudes
+        var FolioSolicitud = ""
+        var Fecha_Solicitud = ""
+        var Solictante_Ident = ""
 
         //Datos a extraer Perfil - Tipo de Acceso
-
         var nivel = "";
         var Active = "";
         var Error = "";
 
+        //
+        var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "CapturaSolicitud")';
+
+        //
+        var urlConceptoParametroConcepto = '@Url.Action("GetConceptoParametroConcepto", "CapturaSolicitud")';
+
+        //
         var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
 
+        //
         var urlUpdatePerfilEmpleadosAccesos = '@Url.Action("UpdatePerfilEmpleadosAccesos", "PerfilEmpleadosAccesos")';
 
     //debugger;
     //var urlSolicitud = grid.selectedKeyNames().join(", ");
     </script>
-
-
-
-    @*@(Html.Kendo().Window()
-        .Name("windowNotifica")
-        .Title("Notificación")
-        .Content("")
-        .Iframe(true)
-        .Draggable()
-        .Actions(a => a.Minimize())
-        .Width(450)
-        .Height(300)
-        .Visible(false)
-        .Modal(true)
-        )*@
 }
 else
 {

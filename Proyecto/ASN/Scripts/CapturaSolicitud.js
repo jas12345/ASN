@@ -1,6 +1,54 @@
 ﻿//var _perfil = 0;
 
 $(document).ready(function () {
+    //$("#Conceptos").change(function () {
+    //    debugger;
+
+    //    if ($("#Conceptos").val().length > 0) {
+    //        //$('#grid').data('kendoGrid').dataSource.data([]);
+
+    //        ConConceptoIdent = ""
+    //        ConConceptoNombre = ""
+    //        ConParametroId = ""
+    //        ConParametroNombre = ""
+
+    //        ConConceptoIdent = $("#Conceptos").val();
+    //        debugger;
+
+    //        //rellenaPerfilTipoAcceso();
+
+    //        $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent, function (data) {
+    //            debugger;
+    //            ConConceptoId = data[0].ConceptoId;
+    //            ConConceptoNombre = data[0].DescripcionConcepto;
+    //            ConParametroId = data[0].TipoconceptoId
+    //            ConParametroNombre = data[0].DescripcionParametroConcepto;
+
+    //            $("#Concepto").val(ConConceptoNombre);
+    //            $("#Concepto").text(ConConceptoNombre);
+    //            $("#Parametro").val(ConParametroNombre);
+    //            $("#Parametro").text(ConParametroNombre);
+
+    //            //$("#FechaCierreAnio").val(data[0].Active);
+    //            debugger;
+
+
+    //        }).fail(function (ex) {
+    //            debugger;
+    //            console.log("fail" + ex);
+    //        });
+
+    //    }
+    //    else {
+
+    //        $("#Concepto").val("");
+    //        $("#Concepto").text("");
+    //        $("#Parametro").val("");
+    //        $("#Parametro").text("");
+
+    //    }
+    //});
+
     //$("#ViewForm").bind("click", function () {
     //    $("#window").data("kendoWindow").open();
     //    $("#ViewForm").hide();
@@ -13,13 +61,21 @@ function getFolio() {
     };
 }
 
-function Salvar() {
+function agregarSolicitud() {
     //console.log("Salvado");
-    infoEmployee();
+    infoSolicitud();
 }
 
 
-function infoEmployee() {
+function infoSolicitud() {
+    $.post(urlSolicitud + "/?FolioSolicitud=" + FolioSolicitud + "&Solicitante_Ident" + Solicitante_Ident, function (data) {
+
+        //FolioSolicitud
+        //Fecha_Solicitud
+        //Solictante_Ident
+
+
+    }
     //$.ajax({
     //    type: "POST",
     //    url: urlSolicitudEmpleados,
@@ -114,16 +170,16 @@ function onChangeCCMSId() {
             //$("#lblPropiedades").val(" CCMSId: " + CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
             //$("#lblPropiedades").text(" CCMSId: " + CCMSId + " Empleado: " + Nombre + ", Puesto: " + Position_Code_Title + ", Supervisor: " + Nombre_Manager);
             debugger;
-            $("#CCMSID").val(EmpCCMSId);
-            $("#CCMSID").text(EmpCCMSId);
-            $("#Nombre").val(EmpNombre);
-            $("#Nombre").text(EmpNombre);
-            $("#Puesto").val(EmpPosition_Code_Title);
-            $("#Puesto").text(EmpPosition_Code_Title);
-            $("#Contrato").val(EmpContract_Type);
-            $("#Contrato").text(EmpContract_Type);
-            $("#Site").val(EmpLocation_Name);
-            $("#Site").text(EmpLocation_Name);
+            $("#CCMSIDX").val(EmpCCMSId);
+            $("#CCMSIDX").text(EmpCCMSId);
+            $("#NombreX").val(EmpNombre);
+            $("#NombreX").text(EmpNombre);
+            $("#PuestoX").val(EmpPosition_Code_Title);
+            $("#PuestoX").text(EmpPosition_Code_Title);
+            $("#ContratoX").val(EmpContract_Type);
+            $("#ContratoX").text(EmpContract_Type);
+            $("#SiteX").val(EmpLocation_Name);
+            $("#SiteX").text(EmpLocation_Name);
 
             //$("#lblCCMSId").show();
             //$("#Nombre").show();
@@ -138,16 +194,16 @@ function onChangeCCMSId() {
 
     }
     else {
-        $("#CCMSID").val("");
-        $("#CCMSID").text("");
-        $("#Nombre").val("");
-        $("#Nombre").text("");
-        $("#Puesto").val("");
-        $("#Puesto").text("");
-        $("#Contrato").val("");
-        $("#Contrato").text("");
-        $("#Site").val("");
-        $("#Site").text("");
+        $("#CCMSIDX").val("");
+        $("#CCMSIDX").text("");
+        $("#NombreX").val("");
+        $("#NombreX").text("");
+        $("#PuestoX").val("");
+        $("#PuestoX").text("");
+        $("#ContratoX").val("");
+        $("#ContratoX").text("");
+        $("#SiteX").val("");
+        $("#SiteX").text("");
 
         //$("#lblCCMSId").hide();
         //$("#lblNombre").hide();
@@ -161,65 +217,172 @@ function onChangeCCMSId() {
 function onChangeConceptos() {
     debugger;
 
-    CCMSId = "";
-    NombreEmpleado = "";
-    PuestoEmpleado = "";
-    SupervisorEmpleado = "";
+    if ($("#Conceptos").val().length > 0) {
+        //$('#grid').data('kendoGrid').dataSource.data([]);
 
-    CCMSId = $("#CCMSIDSolicitado").val();
-    NombreEmpleado = "";
-    PuestoEmpleado = "";
-    SupervisorEmpleado = "";
+        ConConceptoIdent = ""
+        ConConceptoNombre = ""
+        ConParametroId = ""
+        ConParametroNombre = ""
 
-    if ($("#CCMSIDSolicitado").val().length > 0) {
+        ConConceptoIdent = $("#Conceptos").val();
         debugger;
-        $.post(urlEmpleadoPuesto + "/?Ident=" + CCMSId, function (data) {
-            EmpCCMSId = data[0].Ident
-            EmpNombre = data[0].Nombre;
-            EmpPosition_Code_Ident = data[0].Position_Code_Ident;
-            EmpPosition_Code_Title = data[0].Position_Code_Title;
-            EmpContract_Type_Ident = data[0].Contract_Type_Ident;
-            EmpContract_Type = data[0].Contract_Type;
-            EmpLocation_Ident = data[0].Location_Ident;
-            EmpLocation_Name = data[0].Location_Name;
-            Active = data[0].Active;
 
+        //rellenaPerfilTipoAcceso();
+
+        $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent, function (data) {
             debugger;
-            $("#CCMSID").val(EmpCCMSId);
-            $("#CCMSID").text(EmpCCMSId);
-            $("#Nombre").val(EmpNombre);
-            $("#Nombre").text(EmpNombre);
-            $("#Puesto").val(EmpPosition_Code_Title);
-            $("#Puesto").text(EmpPosition_Code_Title);
-            $("#Contrato").val(EmpContract_Type);
-            $("#Contrato").text(EmpContract_Type);
-            $("#Site").val(EmpLocation_Name);
-            $("#Site").text(EmpLocation_Name);
+            ConConceptoIdent = data[0].ConceptoId;
+            ConConceptoNombre = data[0].DescripcionConcepto;
+            ConParametroId = data[0].TipoconceptoId
+            ConParametroNombre = data[0].DescripcionParametroConcepto;
+
+            $("#ConceptoX").val(ConConceptoNombre);
+            $("#ConceptoX").text(ConConceptoNombre);
+            $("#ParametroX").val(ConParametroNombre);
+            $("#ParametroX").text(ConParametroNombre);
+
+            //$("#FechaCierreAnio").val(data[0].Active);
+            debugger;
+
 
         }).fail(function (ex) {
-            //debugger;
+            debugger;
             console.log("fail" + ex);
         });
 
     }
     else {
-        $("#CCMSID").val("");
-        $("#CCMSID").text("");
-        $("#Nombre").val("");
-        $("#Nombre").text("");
-        $("#Puesto").val("");
-        $("#Puesto").text("");
-        $("#Contrato").val("");
-        $("#Contrato").text("");
-        $("#Site").val("");
-        $("#Site").text("");
 
-        //$("#lblCCMSId").hide();
-        //$("#lblNombre").hide();
-        //$("#lblPuesto").hide();
-        //$("#lblContrato").hide();
-        //$("#lblSite").hide();
+        $("#ConceptoX").val("");
+        $("#ConceptoX").text("");
+        $("#ParametroX").val("");
+        $("#ParametroX").text("");
+    }
+}
 
+function onChangeMotivo() {
+    debugger;
+
+    if ($("#Motivo").data('kendoDropDownList').text().length > 0) {
+        ConConceptoMotivo = ""
+
+        //ConConceptoMotivo = $("#Motivo.value").text();
+        ConConceptoMotivo = $("#Motivo").data('kendoDropDownList').text();
+        debugger;
+
+        //rellenaPerfilTipoAcceso();
+
+        $("#MotivoX").val(ConConceptoMotivo);
+        $("#MotivoX").text(ConConceptoMotivo);
+    }
+    else {
+        $("#MotivoX").val("");
+        $("#MotivoX").text("");
+
+    }
+}
+
+function onChangeConceptoMotivo() {
+    debugger;
+
+    if ($("#ConceptoMotivo").data('kendoDropDownList').text().length > 0) {
+        ConConceptoMotivo = ""
+
+        //ConConceptoMotivo = $("#Motivo.value").text();
+        ConConceptoMotivo = $("#ConceptoMotivo").data('kendoDropDownList').text();
+        debugger;
+
+        //rellenaPerfilTipoAcceso();
+
+        $("#ConceptoMotivoX").val(ConConceptoMotivo);
+        $("#ConceptoMotivoX").text(ConConceptoMotivo);
+    }
+    else {
+        $("#ConceptoMotivoX").val("");
+        $("#ConceptoMotivoX").text("");
+
+    }
+}
+
+function onChangePeriodoIncidente() {
+    debugger;
+
+    if ($("#PeriodoIncidente").data('kendoDropDownList').text().length > 0) {
+        ConConceptoMotivo = ""
+
+        //ConConceptoMotivo = $("#Motivo.value").text();
+        ConPeriodoIncidente = $("#PeriodoIncidente").data('kendoDropDownList').text();
+        debugger;
+
+        //rellenaPerfilTipoAcceso();
+
+        $("#PeriodoOPX").val(ConPeriodoIncidente);
+        $("#PeriodoOPX").text(ConPeriodoIncidente);
+    }
+    else {
+        $("#PeriodoOPX").val("");
+        $("#PeriodoOPX").text("");
+    }
+}
+
+function onChangeParametro() {
+    debugger;
+
+    if ($("#Parametro").val().length > 0) {
+        ConConceptoMotivo = ""
+
+        //ConConceptoMotivo = $("#Motivo.value").text();
+        ConConceptoMotivo = $("#Parametro").val() + ' ' + ConParametroNombre;
+        debugger;
+
+        //rellenaPerfilTipoAcceso();
+
+        $("#ParametroX").val(ConConceptoMotivo);
+        $("#ParametroX").text(ConConceptoMotivo);
+    }
+    else {
+        $("#ParametroX").val("");
+        $("#ParametroX").text("");
+    }}
+
+function onChangeCCMSIdIncidente()
+{
+    debugger;
+
+    CCMSIdIncidente = "";
+    NombreResponsableIncidente = "";
+
+    CCMSIdIncidente = $("#CCMSIDIncidente").val();
+    NombreResponsableIncidente = "";
+
+    //ClavePerfil = $("#PerfilUsuarioId").val();
+    //debugger;
+    //rellenaEmpleadoPuestoSupervisor();
+
+    if ($("#CCMSIDSolicitado").val().length > 0) {
+        debugger;
+        $.post(urlEmpleadoPuesto + "/?Ident=" + CCMSIdIncidente, function (data) {
+            CCMSIdIncidente = data[0].Ident
+            NombreResponsableIncidente = data[0].Nombre;
+
+            debugger;
+            $("#ResponsableCCMSIDX").val(EmpCCMSId);
+            $("#ResponsableCCMSIDX").text(EmpCCMSId);
+            $("#NombreRespoX").val(EmpNombre);
+            $("#NombreRespoX").text(EmpNombre);
+
+        }).fail(function (ex) {
+            //debugger;
+            console.log("fail" + ex);
+        });
+    }
+    else {
+
+        $("#ResponsableCCMSIDX").val("");
+        $("#ResponsableCCMSIDX").text("");
+        $("#NombreRespoX").val("");
+        $("#NombreRespoX").text("");
     }
 }
 
