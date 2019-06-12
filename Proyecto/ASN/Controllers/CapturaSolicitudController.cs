@@ -63,6 +63,29 @@ namespace ASN.Areas.CapturasRapidas.Controllers
             }
         }
 
+        public JsonResult GetEmpleadoPuesto(int Ident)
+        {
+            try
+            {
+                var lstEmpleadoPuesto = new List<CatEmpleadoPuestoSel_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstEmpleadoPuesto = context.CatEmpleadoPuestoSel(Ident).ToList();
+                }
+
+                return Json(lstEmpleadoPuesto, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
         /// <summary>
         /// Método que devuelve todos los periodos de nomina para un ComboBox
         /// </summary>

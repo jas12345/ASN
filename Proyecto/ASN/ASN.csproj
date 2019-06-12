@@ -269,6 +269,9 @@
     <Compile Include="Models\CatCountryVwCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatEmpleadoPuestoSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatEmpleadoPuestoSupervisorSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

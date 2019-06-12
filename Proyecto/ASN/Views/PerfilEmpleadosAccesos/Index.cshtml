@@ -10,35 +10,35 @@
             <div id="tab1">
                 <div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-lg-3 col-md-3">
                             @Html.Label("X       Seleccion de Perfil - Accesos", new { style = "font-size: 15px" })
                         </div>
                         <div class="col-lg-4 col-md-4">
-                            @Html.Label("    Seleccion de Empleado", new { style = "font-size: 15px" })
+                            @Html.Label("    Seleccion de Empleado - Nivel", new { style = "font-size: 15px" })
                         </div>
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-lg-5 col-md-5">
                             <p> </p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-4" style="padding:5px;">
+                        <div class="col-lg-3 col-md-3" style="padding:5px;">
                             <div class="k-form-field">
                                 <div class="editor-field">
                                     @(Html.Kendo().DropDownList()
-                                                .DataSource(source =>
-                                                {
-                                                    source.Read(read =>
-                                                    {
-                                                        read.Action("GetPerfilCMB", "PerfilEmpleadosAccesos");
-                                                    })
-                                                    .ServerFiltering(true);
-                                                })
-                                                .Filter("contains")
-                                                .OptionLabel("- Seleccione perfil de empleados- ")
-                                                .DataValueField("Ident")
-                                                .DataTextField("Valor")
-                                                .Name("PerfilUsuarioId")
-                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                                                        .DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetPerfilCMB", "PerfilEmpleadosAccesos");
+                                                            })
+                                                            .ServerFiltering(true);
+                                                        })
+                                                        .Filter("contains")
+                                                        .OptionLabel("- Seleccione perfil de empleados- ")
+                                                        .DataValueField("Ident")
+                                                        .DataTextField("Valor")
+                                                        .Name("PerfilUsuarioId")
+                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </div>
@@ -47,44 +47,51 @@
                             <div class="k-form-field">
                                 <div class="editor-field">
                                     @(Html.Kendo().NumericTextBox()
-                                                                .Name("CCMSId")
-                                                                 .Events(e => e
-                                                                    .Change("onChangeCCMSId")
-                                                                )
-                                                                .Format("#")
-                                                                .Max(9999999999)
-                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 13em" })
+                                                .Name("CCMSId")
+                                                .Events(e => e
+                                                    .Change("onChangeCCMSId")
+                                                )
+                                                .Format("#")
+                                                .Max(9999999999)
+                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 13em" })
                                     )
-                                    @*<button id="Agregar" type="button" data-role="button" class="k-button k-button-icontext k-primary" onclick="agregaEmpleado;" role="button" aria-disabled="false" tabindex="0">
-                                        <span class="k-icon k-i-save"></span> Agregar
-                                    </button>*@
+                                    @(Html.Kendo().NumericTextBox()
+                                                .Name("NumeroNivel")
+                                                //.Events(e => e
+                                                //    .Change("onChangeNumeroNivel")
+                                                //)
+                                                .Format("#")
+                                                .Max(9)
+                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 13em" })
+                                    )
                                     @(Html.Kendo().Button().Name("Agregar").Content("Agregar")
-                                        .Events(x => x.Click("agregaEmpleado"))
-                                    //.Events(ev => ev.Error("errorsote").RequestEnd("hola"))
+                                                .Events(x => x.Click("agregaEmpleado"))
                                     )
                                 </div>
                             </div>
                         </div>
+                        <div class="k-form-inline, col-lg-5 col-md-5" style="padding:5px;">
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-lg-3 col-md-3">
                             @*@Html.Label("lblAccesos",           "X       Accesos: ",    new { id = "lblAccesos", style = "font-weight:normal" })*@
 
-                            @Html.Label("lblPerfil",            "X       Perfil:",      new { id = "lblPerfil", style = "display: none;" })
-                            @Html.Label("lblPerfilNombre",      " ",                    new { id = "lblPerfilNombre", style = "font-weight:normal;" })
-                            @Html.Label("lblAccesos",           ", Accesos: ",          new { id = "lblAccesos", style = "display: none;" })
-                            @Html.Label("lblAccesosNombre",     " ",                    new { id = "lblAccesosNombre", style = "font-weight:normal;" })
+                            @Html.Label("lblPerfil", "X       Perfil:", new { id = "lblPerfil", style = "display: none;" })
+                            @Html.Label("lblPerfilNombre", " ", new { id = "lblPerfilNombre", style = "font-weight:normal;" })
+                            @Html.Label("lblAccesos", ", Accesos: ", new { id = "lblAccesos", style = "display: none;" })
+                            @Html.Label("lblAccesosNombre", " ", new { id = "lblAccesosNombre", style = "font-weight:normal;" })
 
                         </div>
-                        <div class="col-lg-8 col-md-8">
-                            @Html.Label("lblCCMSId",            "CCMSId: ",         new { id = "lblCCMSId", style = "display: none;" })
-                            @Html.Label("lblCCMSIdClave",       " ",                new { id = "lblCCMSIdClave", style = "font-weight:normal" })
-                            @Html.Label("lblEmpleado",          ", Empleado: ",     new { id = "lblEmpleado", style = "display: none;" })
-                            @Html.Label("lblEmpleadoNombre",    " ",                new { id = "lblEmpleadoNombre", style = "font-weight:normal" })
-                            @Html.Label("lblPuesto",            ", Puesto: ",       new { id = "lblPuesto", style = "display: none;" })
-                            @Html.Label("lblPuestoNombre",      " ",                new { id = "lblPuestoNombre", style = "font-weight:normal" })
-                            @Html.Label("lblSupervisor",        ", Supervisor: ",   new { id = "lblSupervisor", style = "display: none;" })
-                            @Html.Label("lblSupervisorNombre",  " ",                new { id = "lblSupervisorNombre", style = "font-weight:normal" })
+                        <div class="col-lg-9 col-md-9">
+                            @Html.Label("lblCCMSId", "CCMSId: ", new { id = "lblCCMSId", style = "display: none;" })
+                            @Html.Label("lblCCMSIdClave", " ", new { id = "lblCCMSIdClave", style = "font-weight:normal" })
+                            @Html.Label("lblEmpleado", ", Empleado: ", new { id = "lblEmpleado", style = "display: none;" })
+                            @Html.Label("lblEmpleadoNombre", " ", new { id = "lblEmpleadoNombre", style = "font-weight:normal" })
+                            @Html.Label("lblPuesto", ", Puesto: ", new { id = "lblPuesto", style = "display: none;" })
+                            @Html.Label("lblPuestoNombre", " ", new { id = "lblPuestoNombre", style = "font-weight:normal" })
+                            @Html.Label("lblSupervisor", ", Supervisor: ", new { id = "lblSupervisor", style = "display: none;" })
+                            @Html.Label("lblSupervisorNombre", " ", new { id = "lblSupervisorNombre", style = "font-weight:normal" })
                         </div>
                     </div>
                 </div>
