@@ -251,7 +251,7 @@ namespace ASN.Areas.CapturasRapidas.Controllers
             }
         }
 
-        public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Solicitante_Ident, int empleadoId, int perfil_Ident, Nullable<int> nivel)
-        { }
+        //public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Solicitante_Ident, int empleadoId, int perfil_Ident, Nullable<int> nivel)
+        //{ }
     }
 }

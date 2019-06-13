@@ -367,10 +367,10 @@ function onChangeCCMSIdIncidente()
             NombreResponsableIncidente = data[0].Nombre;
 
             debugger;
-            $("#ResponsableCCMSIDX").val(EmpCCMSId);
-            $("#ResponsableCCMSIDX").text(EmpCCMSId);
-            $("#NombreRespoX").val(EmpNombre);
-            $("#NombreRespoX").text(EmpNombre);
+            $("#ResponsableCCMSIDX").val(CCMSIdIncidente);
+            $("#ResponsableCCMSIDX").text(CCMSIdIncidente);
+            $("#NombreRespoX").val(NombreResponsableIncidente);
+            $("#NombreRespoX").text(NombreResponsableIncidente);
 
         }).fail(function (ex) {
             //debugger;
