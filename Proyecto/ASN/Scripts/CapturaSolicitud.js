@@ -68,14 +68,14 @@ function agregarSolicitud() {
 
 
 function infoSolicitud() {
-    $.post(urlSolicitud + "/?FolioSolicitud=" + FolioSolicitud + "&Solicitante_Ident" + Solicitante_Ident, function (data) {
+    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Solicitante_Ident" + Solicitante_Ident, function (data) {
 
         //FolioSolicitud
         //Fecha_Solicitud
         //Solictante_Ident
 
 
-    }
+    });
     //$.ajax({
     //    type: "POST",
     //    url: urlSolicitudEmpleados,
@@ -90,10 +90,10 @@ function infoSolicitud() {
     //    }
     //});
 
-    //$.post(InfoCCMSID + '/?ccms=' + 844795, function (data) {
-    //    var dat = data;
-    //    //debugger;
-    //});
+    $.post(urlSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident" + Empleado_Ident + "&Solicitante_Ident" + Solicitante_Ident, function (data) {
+        var dat = data;
+        debugger;
+    });
 }
 
 

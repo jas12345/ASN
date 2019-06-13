@@ -1303,73 +1303,17 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosAccesosSu", perfil_IdentParameter, empleadoIdParameter, nivelParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
-        public virtual int CatSolicitudesSi(Nullable<int> folioSolicitud, string fecha_Solicitud, Nullable<int> perfil_Ident, Nullable<int> solicitante_Ident, string solicintante_Nombre, Nullable<int> puesto_solicitante_Ident, string periodoNomina_Id, Nullable<int> conceptoId, Nullable<int> motivoId, string justficacion, Nullable<int> responsable_Id, Nullable<int> detalle, string periodoNominaOriginal_Id, string autorizantes, string listaEmpleados, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> solicitante_Ident, ObjectParameter folioSolicitudOut, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
                 new ObjectParameter("FolioSolicitud", typeof(int));
     
-            var fecha_SolicitudParameter = fecha_Solicitud != null ?
-                new ObjectParameter("Fecha_Solicitud", fecha_Solicitud) :
-                new ObjectParameter("Fecha_Solicitud", typeof(string));
-    
-            var perfil_IdentParameter = perfil_Ident.HasValue ?
-                new ObjectParameter("Perfil_Ident", perfil_Ident) :
-                new ObjectParameter("Perfil_Ident", typeof(int));
-    
             var solicitante_IdentParameter = solicitante_Ident.HasValue ?
                 new ObjectParameter("Solicitante_Ident", solicitante_Ident) :
                 new ObjectParameter("Solicitante_Ident", typeof(int));
     
-            var solicintante_NombreParameter = solicintante_Nombre != null ?
-                new ObjectParameter("Solicintante_Nombre", solicintante_Nombre) :
-                new ObjectParameter("Solicintante_Nombre", typeof(string));
-    
-            var puesto_solicitante_IdentParameter = puesto_solicitante_Ident.HasValue ?
-                new ObjectParameter("Puesto_solicitante_Ident", puesto_solicitante_Ident) :
-                new ObjectParameter("Puesto_solicitante_Ident", typeof(int));
-    
-            var periodoNomina_IdParameter = periodoNomina_Id != null ?
-                new ObjectParameter("PeriodoNomina_Id", periodoNomina_Id) :
-                new ObjectParameter("PeriodoNomina_Id", typeof(string));
-    
-            var conceptoIdParameter = conceptoId.HasValue ?
-                new ObjectParameter("ConceptoId", conceptoId) :
-                new ObjectParameter("ConceptoId", typeof(int));
-    
-            var motivoIdParameter = motivoId.HasValue ?
-                new ObjectParameter("MotivoId", motivoId) :
-                new ObjectParameter("MotivoId", typeof(int));
-    
-            var justficacionParameter = justficacion != null ?
-                new ObjectParameter("Justficacion", justficacion) :
-                new ObjectParameter("Justficacion", typeof(string));
-    
-            var responsable_IdParameter = responsable_Id.HasValue ?
-                new ObjectParameter("Responsable_Id", responsable_Id) :
-                new ObjectParameter("Responsable_Id", typeof(int));
-    
-            var detalleParameter = detalle.HasValue ?
-                new ObjectParameter("Detalle", detalle) :
-                new ObjectParameter("Detalle", typeof(int));
-    
-            var periodoNominaOriginal_IdParameter = periodoNominaOriginal_Id != null ?
-                new ObjectParameter("PeriodoNominaOriginal_Id", periodoNominaOriginal_Id) :
-                new ObjectParameter("PeriodoNominaOriginal_Id", typeof(string));
-    
-            var autorizantesParameter = autorizantes != null ?
-                new ObjectParameter("Autorizantes", autorizantes) :
-                new ObjectParameter("Autorizantes", typeof(string));
-    
-            var listaEmpleadosParameter = listaEmpleados != null ?
-                new ObjectParameter("ListaEmpleados", listaEmpleados) :
-                new ObjectParameter("ListaEmpleados", typeof(string));
-    
-            var userEmployeeIdParameter = userEmployeeId.HasValue ?
-                new ObjectParameter("UserEmployeeId", userEmployeeId) :
-                new ObjectParameter("UserEmployeeId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSi", folioSolicitudParameter, fecha_SolicitudParameter, perfil_IdentParameter, solicitante_IdentParameter, solicintante_NombreParameter, puesto_solicitante_IdentParameter, periodoNomina_IdParameter, conceptoIdParameter, motivoIdParameter, justficacionParameter, responsable_IdParameter, detalleParameter, periodoNominaOriginal_IdParameter, autorizantesParameter, listaEmpleadosParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSi", folioSolicitudParameter, solicitante_IdentParameter, folioSolicitudOut, estatus);
         }
     
         public virtual ObjectResult<CatSolicitudesSel_Result> CatSolicitudesSel(Nullable<int> folioSolicitud)
@@ -1390,7 +1334,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosSolicitudesSel_Result>("CatEmpleadosSolicitudesSel", folioSolicitudParameter);
         }
     
-        public virtual int CatEmpleadosSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, string empleado_First_Name, string empleado_Middle_Name, string empleado_Last_Name, Nullable<int> empleado_Position_Code_Ident, string empleado_Position_Code_Title, Nullable<int> empleado_Contract_Type_Ident, string empleado_Contract_Type, Nullable<int> manager_Ident, string manager_First_Name, string manager_Middle_Name, string manager_Last_Name, Nullable<int> manager_Position_Code_Ident, string manager_Position_Code_Title, Nullable<int> manager_Contract_Type_Ident, string manager_Contract_Type, Nullable<decimal> parametroConceptoMonto, string detalle, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatEmpleadosSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> manager_Ident, Nullable<decimal> parametroConceptoMonto, string detalle, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -1400,65 +1344,9 @@ namespace ASN.Models
                 new ObjectParameter("Empleado_Ident", empleado_Ident) :
                 new ObjectParameter("Empleado_Ident", typeof(int));
     
-            var empleado_First_NameParameter = empleado_First_Name != null ?
-                new ObjectParameter("Empleado_First_Name", empleado_First_Name) :
-                new ObjectParameter("Empleado_First_Name", typeof(string));
-    
-            var empleado_Middle_NameParameter = empleado_Middle_Name != null ?
-                new ObjectParameter("Empleado_Middle_Name", empleado_Middle_Name) :
-                new ObjectParameter("Empleado_Middle_Name", typeof(string));
-    
-            var empleado_Last_NameParameter = empleado_Last_Name != null ?
-                new ObjectParameter("Empleado_Last_Name", empleado_Last_Name) :
-                new ObjectParameter("Empleado_Last_Name", typeof(string));
-    
-            var empleado_Position_Code_IdentParameter = empleado_Position_Code_Ident.HasValue ?
-                new ObjectParameter("Empleado_Position_Code_Ident", empleado_Position_Code_Ident) :
-                new ObjectParameter("Empleado_Position_Code_Ident", typeof(int));
-    
-            var empleado_Position_Code_TitleParameter = empleado_Position_Code_Title != null ?
-                new ObjectParameter("Empleado_Position_Code_Title", empleado_Position_Code_Title) :
-                new ObjectParameter("Empleado_Position_Code_Title", typeof(string));
-    
-            var empleado_Contract_Type_IdentParameter = empleado_Contract_Type_Ident.HasValue ?
-                new ObjectParameter("Empleado_Contract_Type_Ident", empleado_Contract_Type_Ident) :
-                new ObjectParameter("Empleado_Contract_Type_Ident", typeof(int));
-    
-            var empleado_Contract_TypeParameter = empleado_Contract_Type != null ?
-                new ObjectParameter("Empleado_Contract_Type", empleado_Contract_Type) :
-                new ObjectParameter("Empleado_Contract_Type", typeof(string));
-    
             var manager_IdentParameter = manager_Ident.HasValue ?
                 new ObjectParameter("Manager_Ident", manager_Ident) :
                 new ObjectParameter("Manager_Ident", typeof(int));
-    
-            var manager_First_NameParameter = manager_First_Name != null ?
-                new ObjectParameter("Manager_First_Name", manager_First_Name) :
-                new ObjectParameter("Manager_First_Name", typeof(string));
-    
-            var manager_Middle_NameParameter = manager_Middle_Name != null ?
-                new ObjectParameter("Manager_Middle_Name", manager_Middle_Name) :
-                new ObjectParameter("Manager_Middle_Name", typeof(string));
-    
-            var manager_Last_NameParameter = manager_Last_Name != null ?
-                new ObjectParameter("Manager_Last_Name", manager_Last_Name) :
-                new ObjectParameter("Manager_Last_Name", typeof(string));
-    
-            var manager_Position_Code_IdentParameter = manager_Position_Code_Ident.HasValue ?
-                new ObjectParameter("Manager_Position_Code_Ident", manager_Position_Code_Ident) :
-                new ObjectParameter("Manager_Position_Code_Ident", typeof(int));
-    
-            var manager_Position_Code_TitleParameter = manager_Position_Code_Title != null ?
-                new ObjectParameter("Manager_Position_Code_Title", manager_Position_Code_Title) :
-                new ObjectParameter("Manager_Position_Code_Title", typeof(string));
-    
-            var manager_Contract_Type_IdentParameter = manager_Contract_Type_Ident.HasValue ?
-                new ObjectParameter("Manager_Contract_Type_Ident", manager_Contract_Type_Ident) :
-                new ObjectParameter("Manager_Contract_Type_Ident", typeof(int));
-    
-            var manager_Contract_TypeParameter = manager_Contract_Type != null ?
-                new ObjectParameter("Manager_Contract_Type", manager_Contract_Type) :
-                new ObjectParameter("Manager_Contract_Type", typeof(string));
     
             var parametroConceptoMontoParameter = parametroConceptoMonto.HasValue ?
                 new ObjectParameter("ParametroConceptoMonto", parametroConceptoMonto) :
@@ -1472,7 +1360,7 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSi", folioSolicitudParameter, empleado_IdentParameter, empleado_First_NameParameter, empleado_Middle_NameParameter, empleado_Last_NameParameter, empleado_Position_Code_IdentParameter, empleado_Position_Code_TitleParameter, empleado_Contract_Type_IdentParameter, empleado_Contract_TypeParameter, manager_IdentParameter, manager_First_NameParameter, manager_Middle_NameParameter, manager_Last_NameParameter, manager_Position_Code_IdentParameter, manager_Position_Code_TitleParameter, manager_Contract_Type_IdentParameter, manager_Contract_TypeParameter, parametroConceptoMontoParameter, detalleParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSi", folioSolicitudParameter, empleado_IdentParameter, manager_IdentParameter, parametroConceptoMontoParameter, detalleParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual int CatEmpleadosSolicitudesSu(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<decimal> parametroConceptoMonto, string detalle, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter estatus)
