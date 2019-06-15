@@ -354,7 +354,7 @@
         </div>
     </div>
     <script>
-        var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';
+        @*var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';*@
         var urlSolicitudEmpleados = '@Url.Action("GuardaEmpleados", "Solicitudes")';
         var urlDefault = '@Url.Action("Index", "Solicitudes")';
         var urlGridEmpleadosAutorizadores = '@Url.Action("GridEmpleadosAutorizantes", "EmpleadosSolicitudes")';
@@ -399,7 +399,7 @@
         // Sección alta de Empleados - Solicitudes
         var FolioSolicitud = ""
         var Fecha_Solicitud = ""
-        var Solictante_Ident = ""
+        var Solicitante_Ident = ""
 
         //Datos a extraer Perfil - Tipo de Acceso
         var nivel = "";
@@ -416,7 +416,10 @@
         var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
 
         //
-        var urlSolicitud = '@Url.Action("CreateSolicitud", "CapturaSolicitud")';
+        var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "CapturaSolicitud")';
+
+        //
+        var urlCrearEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "CapturaSolicitud")';
 
         //
         var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "CapturaSolicitud")';

@@ -82,6 +82,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     int idAdmin = 0, res = 0;
+                    string mensaje = "";
 
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
 
@@ -103,29 +104,29 @@ namespace ASN.Controllers
                     switch (res)
                     {
                         case -1:
-                            ModelState.AddModelError("error", "Ya existe este registro de Acceso para este empleado y perfil.");
+                            mensaje = "Ya existe este registro de Acceso para este empleado y perfil.";
                             break;
                         case -2:
-                            ModelState.AddModelError("error", "El empleado no existe en CCMS o no está activo.");
+                            mensaje = "El empleado no existe en CCMS o no está activo.";
                             break;
                         case -3:
-                            ModelState.AddModelError("error", "El puesto del empleado no es válido para este perfil.");
+                            mensaje = "El puesto del empleado no es válido para este perfil.";
                             break;
                     }
 
                     //return Json(profiles.ToDataSourceResult(request, ModelState));
                     //return Json(ModelState);
 
-                    return Json(empleadoId);
+                    return Json(mensaje);
                 }
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                string mensaje = "Ocurrió un error al procesar la solicitud.";
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json(ModelState);
+                return Json(mensaje);
             }
         }
 

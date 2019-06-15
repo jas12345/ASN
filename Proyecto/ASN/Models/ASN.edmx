@@ -402,7 +402,7 @@
         <Function Name="CatSolicitudEmpleadosDetalleSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="SolicitudId" Type="int" Mode="In" />
           <Parameter Name="CatEmpleadoId" Type="int" Mode="In" />
-          <Parameter Name="CatConceptoMotivoId" Type="varchar" Mode="In" />
+          <Parameter Name="ConceptoMotivoId" Type="varchar" Mode="In" />
           <Parameter Name="ResponsableId" Type="int" Mode="In" />
           <Parameter Name="PeriodoNomina" Type="varchar" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
@@ -918,7 +918,7 @@
           <FunctionImport Name="CatSolicitudEmpleadosDetalleSu">
             <Parameter Name="SolicitudId" Mode="In" Type="Int32" />
             <Parameter Name="CatEmpleadoId" Mode="In" Type="Int32" />
-            <Parameter Name="CatConceptoMotivoId" Mode="In" Type="String" />
+            <Parameter Name="ConceptoMotivoId" Mode="In" Type="String" />
             <Parameter Name="ResponsableId" Mode="In" Type="Int32" />
             <Parameter Name="PeriodoNomina" Mode="In" Type="String" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />

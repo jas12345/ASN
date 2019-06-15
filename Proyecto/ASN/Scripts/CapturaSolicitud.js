@@ -63,6 +63,7 @@ function getFolio() {
 
 function agregarSolicitud() {
     //console.log("Salvado");
+    debugger;
     infoSolicitud();
 }
 
@@ -73,6 +74,7 @@ function infoSolicitud() {
         //FolioSolicitud
         //Fecha_Solicitud
         //Solictante_Ident
+        debugger;
 
 
     });
@@ -90,7 +92,7 @@ function infoSolicitud() {
     //    }
     //});
 
-    $.post(urlSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident" + Empleado_Ident + "&Solicitante_Ident" + Solicitante_Ident, function (data) {
+    $.post(urlCrearEmpleadoSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident" + EmpCCMSId + "&Solicitante_Ident" + Solicitante_Ident, function (data) {
         var dat = data;
         debugger;
     });

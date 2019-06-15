@@ -208,7 +208,7 @@ namespace ASN.Areas.CapturasRapidas.Controllers
             {
                 using (ASNContext context = new ASNContext())
                 {
-                    int idAdmin = 0, res = 0;
+                    int res = 0;
 
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
 
@@ -217,7 +217,7 @@ namespace ASN.Areas.CapturasRapidas.Controllers
                     resultado.Value = 0;
                     folioSolicitudOut.Value = 0;
 
-                    int.TryParse(User.Identity.Name, out idAdmin);
+                    int.TryParse(User.Identity.Name, out int idAdmin);
 
                     context.CatSolicitudesSi(
                           FolioSolicitud
@@ -251,7 +251,53 @@ namespace ASN.Areas.CapturasRapidas.Controllers
             }
         }
 
-        //public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Solicitante_Ident, int empleadoId, int perfil_Ident, Nullable<int> nivel)
-        //{ }
+        public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Solicitante_Ident, int empleadoId, int perfil_Ident, Nullable<int> nivel)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    int res = 0;
+
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    ObjectParameter folioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
+                    resultado.Value = 0;
+                    folioSolicitudOut.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out int idAdmin);
+
+                    context.CatSolicitudesSi(
+                          FolioSolicitud
+                        , idAdmin
+                        , folioSolicitudOut
+                        , resultado);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+                    int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
+
+                    switch (res)
+                    {
+                        case -1:
+                            ModelState.AddModelError("error", "Ya existe un registro para esta solicitud.");
+                            break;
+                    }
+
+                    //return Json(profiles.ToDataSourceResult(request, ModelState));
+                    //return Json(ModelState);
+
+                    return Json(ModelState);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(ModelState);
+            }
+        }
     }
 }
