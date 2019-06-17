@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ASN.Areas.CapturasRapidas.Controllers
+namespace ASN.CapturasRapidas.Controllers
 {
     public class MisSolicitudesController : Controller
     {

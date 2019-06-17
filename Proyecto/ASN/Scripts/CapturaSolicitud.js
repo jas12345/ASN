@@ -69,7 +69,7 @@ function agregarSolicitud() {
 
 
 function infoSolicitud() {
-    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Solicitante_Ident" + Solicitante_Ident, function (data) {
+    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
 
         //FolioSolicitud
         //Fecha_Solicitud
@@ -92,7 +92,7 @@ function infoSolicitud() {
     //    }
     //});
 
-    $.post(urlCrearEmpleadoSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident" + EmpCCMSId + "&Solicitante_Ident" + Solicitante_Ident, function (data) {
+    $.post(urlCrearEmpleadoSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident" + EmpCCMSId, function (data) {
         var dat = data;
         debugger;
     });

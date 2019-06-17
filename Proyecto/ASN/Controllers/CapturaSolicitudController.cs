@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ASN.Areas.CapturasRapidas.Controllers
+namespace ASN.CapturasRapidas.Controllers
 {
     public class CapturaSolicitudController : Controller
     {
@@ -202,13 +202,16 @@ namespace ASN.Areas.CapturasRapidas.Controllers
             }
         }
 
-        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Solicitante_Ident, int FolioSolicitudOut, int Estatus)
+        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
         {
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
                     int res = 0;
+                    int ccmsidAdmin = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
 
