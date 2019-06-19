@@ -64,39 +64,46 @@ function getFolio() {
 function agregarSolicitud() {
     //console.log("Salvado");
     debugger;
-    infoSolicitud();
+    //infoSolicitud();
+    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId, function (data) {
+        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
+
+        FolioSolicitud = data;
+
+        debugger;
+    });
 }
 
 
-function infoSolicitud() {
-    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+//function infoSolicitud() {
+//    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
 
-        //FolioSolicitud
-        //Fecha_Solicitud
-        //Solictante_Ident
-        debugger;
+//        //FolioSolicitud
+//        //Fecha_Solicitud
+//        //Solictante_Ident
+//        debugger;
 
 
-    });
-    //$.ajax({
-    //    type: "POST",
-    //    url: urlSolicitudEmpleados,
-    //    data: JSON.stringify({ "ccmsid": $("#CCMSIDSolicitado").val() }),
-    //    contentType: 'application/json',
-    //    success: function (resultData) {
-    //        if (resultData.status !== "0") {
+//    });
+//    //$.ajax({
+//    //    type: "POST",
+//    //    url: urlSolicitudEmpleados,
+//    //    data: JSON.stringify({ "ccmsid": $("#CCMSIDSolicitado").val() }),
+//    //    contentType: 'application/json',
+//    //    success: function (resultData) {
+//    //        if (resultData.status !== "0") {
                 
-    //        } else {
-    //            console.log("falso");
-    //        }
-    //    }
-    //});
+//    //        } else {
+//    //            console.log("falso");
+//    //        }
+//    //    }
+//    //});
 
-    $.post(urlCrearEmpleadoSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident" + EmpCCMSId, function (data) {
-        var dat = data;
-        debugger;
-    });
-}
+//    //$.post(urlCrearEmpleadoSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident" + EmpCCMSId, function (data) {
+//    //    var dat = data;
+//    //    debugger;
+//    //});
+//}
 
 
 //function GuardaEmpleadosSolicitud() {//GuardarBorrador
@@ -267,16 +274,18 @@ function onChangeMotivo() {
     debugger;
 
     if ($("#Motivo").data('kendoDropDownList').text().length > 0) {
-        ConConceptoMotivo = ""
+        ConMotivoNombre = "";
+        ConMotivoIdent = "";
 
         //ConConceptoMotivo = $("#Motivo.value").text();
-        ConConceptoMotivo = $("#Motivo").data('kendoDropDownList').text();
+        ConMotivoNombre = $("#Motivo").data('kendoDropDownList').text();        
+        ConMotivoIdent = $("#Motivo").val();
         debugger;
 
         //rellenaPerfilTipoAcceso();
 
-        $("#MotivoX").val(ConConceptoMotivo);
-        $("#MotivoX").text(ConConceptoMotivo);
+        $("#MotivoX").val(ConMotivoNombre);
+        $("#MotivoX").text(ConMotivoNombre);
     }
     else {
         $("#MotivoX").val("");
@@ -290,9 +299,11 @@ function onChangeConceptoMotivo() {
 
     if ($("#ConceptoMotivo").data('kendoDropDownList').text().length > 0) {
         ConConceptoMotivo = ""
+        conceptoMotivoId = 0
 
         //ConConceptoMotivo = $("#Motivo.value").text();
         ConConceptoMotivo = $("#ConceptoMotivo").data('kendoDropDownList').text();
+        conceptoMotivoId = $("#ConceptoMotivo").val();
         debugger;
 
         //rellenaPerfilTipoAcceso();
@@ -311,10 +322,12 @@ function onChangePeriodoIncidente() {
     debugger;
 
     if ($("#PeriodoIncidente").data('kendoDropDownList').text().length > 0) {
-        ConConceptoMotivo = ""
+        ConPeriodoIncidente = ""
+        periododOriginalId = -1
 
         //ConConceptoMotivo = $("#Motivo.value").text();
         ConPeriodoIncidente = $("#PeriodoIncidente").data('kendoDropDownList').text();
+        periododOriginalId = $("#PeriodoIncidente").val();
         debugger;
 
         //rellenaPerfilTipoAcceso();
@@ -332,10 +345,14 @@ function onChangeParametro() {
     debugger;
 
     if ($("#Parametro").val().length > 0) {
+        debugger;
         ConConceptoMotivo = ""
+        ConParametroConceptoValor = 0
+        ConParametroConceptoMonto = 0
 
         //ConConceptoMotivo = $("#Motivo.value").text();
         ConConceptoMotivo = $("#Parametro").val() + ' ' + ConParametroNombre;
+        ConParametroConceptoMonto = $("#Parametro").val()
         debugger;
 
         //rellenaPerfilTipoAcceso();
@@ -352,25 +369,25 @@ function onChangeCCMSIdIncidente()
 {
     debugger;
 
-    CCMSIdIncidente = "";
+    responsableId = "";
     NombreResponsableIncidente = "";
 
-    CCMSIdIncidente = $("#CCMSIDIncidente").val();
+    responsableId = $("#CCMSIDIncidente").val();
     NombreResponsableIncidente = "";
 
     //ClavePerfil = $("#PerfilUsuarioId").val();
     //debugger;
     //rellenaEmpleadoPuestoSupervisor();
 
-    if ($("#CCMSIDSolicitado").val().length > 0) {
+    if ($("#CCMSIDIncidente").val().length > 0) {
         debugger;
-        $.post(urlEmpleadoPuesto + "/?Ident=" + CCMSIdIncidente, function (data) {
-            CCMSIdIncidente = data[0].Ident
+        $.post(urlEmpleadoPuesto + "/?Ident=" + responsableId , function (data) {
+            responsableId  = data[0].Ident
             NombreResponsableIncidente = data[0].Nombre;
 
             debugger;
-            $("#ResponsableCCMSIDX").val(CCMSIdIncidente);
-            $("#ResponsableCCMSIDX").text(CCMSIdIncidente);
+            $("#ResponsableCCMSIDX").val(responsableId );
+            $("#ResponsableCCMSIDX").text(responsableId );
             $("#NombreRespoX").val(NombreResponsableIncidente);
             $("#NombreRespoX").text(NombreResponsableIncidente);
 

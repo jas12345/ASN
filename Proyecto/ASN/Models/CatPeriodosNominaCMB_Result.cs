@@ -13,7 +13,7 @@ namespace ASN.Models
     
     public partial class CatPeriodosNominaCMB_Result
     {
-        public string Ident { get; set; }
+        public int Ident { get; set; }
         public string Valor { get; set; }
     }
 }

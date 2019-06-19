@@ -202,7 +202,7 @@ namespace ASN.CapturasRapidas.Controllers
             }
         }
 
-        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
+        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId)
         {
             try
             {
@@ -225,6 +225,13 @@ namespace ASN.CapturasRapidas.Controllers
                     context.CatSolicitudesSi(
                           FolioSolicitud
                         , idAdmin
+                        , Empleado_Ident
+                        , ConceptoId
+                        , ParametroConceptoMonto
+                        , MotivosSolicitudId
+                        , conceptoMotivoId
+                        , responsableId
+                        , periododOriginalId
                         , folioSolicitudOut
                         , resultado);
 
@@ -239,9 +246,9 @@ namespace ASN.CapturasRapidas.Controllers
                     }
 
                     //return Json(profiles.ToDataSourceResult(request, ModelState));
-                    //return Json(ModelState);
 
-                    return Json(ModelState);
+                    //return Json(ModelState);
+                    return Json(FolioSolicitud, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)
@@ -250,57 +257,62 @@ namespace ASN.CapturasRapidas.Controllers
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json(ModelState);
+                return Json(FolioSolicitud);
             }
         }
 
-        public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Solicitante_Ident, int empleadoId, int perfil_Ident, Nullable<int> nivel)
-        {
-            try
-            {
-                using (ASNContext context = new ASNContext())
-                {
-                    int res = 0;
+        //public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int conceptoMotivoId, int responsableId, int periododOriginalId)
+        //{
+        //    try
+        //    {
+        //        using (ASNContext context = new ASNContext())
+        //        {
+        //            int res = 0;
 
-                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+        //            context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
 
-                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
-                    ObjectParameter folioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
-                    resultado.Value = 0;
-                    folioSolicitudOut.Value = 0;
+        //            ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+        //            ObjectParameter folioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
+        //            resultado.Value = 0;
+        //            folioSolicitudOut.Value = 0;
 
-                    int.TryParse(User.Identity.Name, out int idAdmin);
+        //            int.TryParse(User.Identity.Name, out int idAdmin);
 
-                    context.CatSolicitudesSi(
-                          FolioSolicitud
-                        , idAdmin
-                        , folioSolicitudOut
-                        , resultado);
+        //            context.CatSolicitudesSi(
+        //                  FolioSolicitud
+        //                , idAdmin
+        //                , Empleado_Ident
+        //                , ConceptoId
+        //                , ParametroConceptoMonto
+        //                , conceptoMotivoId
+        //                , responsableId
+        //                , periododOriginalId
+        //                , resultado);
 
-                    int.TryParse(resultado.Value.ToString(), out res);
-                    int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
+        //            int.TryParse(resultado.Value.ToString(), out res);
+        //            int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
 
-                    switch (res)
-                    {
-                        case -1:
-                            ModelState.AddModelError("error", "Ya existe un registro para esta solicitud.");
-                            break;
-                    }
+        //            switch (res)
+        //            {
+        //                case -1:
+        //                    ModelState.AddModelError("error", "Ya existe un registro para esta solicitud.");
+        //                    break;
+        //            }
 
-                    //return Json(profiles.ToDataSourceResult(request, ModelState));
-                    //return Json(ModelState);
+        //            //return Json(profiles.ToDataSourceResult(request, ModelState));
+        //            //return Json(ModelState);
 
-                    return Json(ModelState);
-                }
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json(ModelState);
-            }
-        }
+        //            return Json(ModelState);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+        //        MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+        //        LogError log = new LogError();
+        //        log.RecordError(ex, usuario.UserInfo.Ident.Value);
+        //        return Json(ModelState);
+        //    }
+        //}
     }
 }

@@ -178,9 +178,9 @@
         <Function Name="CatEmpleadosSolicitudesSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Empleado_Ident" Type="int" Mode="In" />
-          <Parameter Name="Manager_Ident" Type="int" Mode="In" />
+          <Parameter Name="conceptoid" Type="int" Mode="In" />
           <Parameter Name="ParametroConceptoMonto" Type="decimal" Mode="In" />
-          <Parameter Name="Detalle" Type="varchar" Mode="In" />
+          <Parameter Name="Motivo_Ident" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -426,6 +426,13 @@
         <Function Name="CatSolicitudesSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Solicitante_Ident" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="ConceptoMonto" Type="decimal" Mode="In" />
+          <Parameter Name="MotivosSolicitudId" Type="int" Mode="In" />
+          <Parameter Name="ConceptoMotivoId" Type="int" Mode="In" />
+          <Parameter Name="ResponsableId" Type="int" Mode="In" />
+          <Parameter Name="PeriododOriginalId" Type="int" Mode="In" />
           <Parameter Name="FolioSolicitudOut" Type="int" Mode="InOut" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -884,6 +891,13 @@
           <FunctionImport Name="CatSolicitudesSi">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
+            <Parameter Name="MotivosSolicitudId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoMotivoId" Mode="In" Type="Int32" />
+            <Parameter Name="ResponsableId" Mode="In" Type="Int32" />
+            <Parameter Name="PeriododOriginalId" Mode="In" Type="Int32" />
             <Parameter Name="FolioSolicitudOut" Mode="InOut" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -896,9 +910,9 @@
           <FunctionImport Name="CatEmpleadosSolicitudesSi">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Manager_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="conceptoid" Mode="In" Type="Int32" />
             <Parameter Name="ParametroConceptoMonto" Mode="In" Type="Decimal" />
-            <Parameter Name="Detalle" Mode="In" Type="String" />
+            <Parameter Name="Motivo_Ident" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -1241,8 +1255,8 @@
           <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="CatPeriodosNominaCMB_Result">
-          <Property Type="String" Name="Ident" Nullable="false" MaxLength="5" />
-          <Property Type="String" Name="Valor" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="true" MaxLength="17" />
         </ComplexType>
         <ComplexType Name="CatPeriodosNominaSel_Result">
           <Property Type="Int32" Name="AnioId" Nullable="false" />
