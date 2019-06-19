@@ -56,9 +56,15 @@ $(document).ready(function () {
 });
 
 function getFolio() {
-    return {
-        folioid: $("#folioId").val(),
-    };
+    debugger;
+    //return //{
+    //    //folioid: FolioSolicitud,
+    //    FolioSolicitud;
+    ////};
+
+      return {
+          FolioSolicitud: FolioSolicitud
+        };
 }
 
 function agregarSolicitud() {
@@ -70,10 +76,16 @@ function agregarSolicitud() {
 
         FolioSolicitud = data;
 
+        actualizaGrid();
         debugger;
     });
+
 }
 
+function actualizaGrid() {
+    $("#gridSolicitud").data("kendoGrid").dataSource.read();
+    $("#gridSolicitud").data("kendoGrid").refresh();
+}
 
 //function infoSolicitud() {
 //    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {

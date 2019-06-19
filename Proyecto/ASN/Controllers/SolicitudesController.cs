@@ -339,90 +339,90 @@ namespace ASN.Controllers
         ////    //return View(profiles);
         ////}
 
-        [HttpPost]
-        public JsonResult EditaSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, IEnumerable<HttpPostedFileBase> files, IEnumerable<HttpPostedFileBase> files2, string listaEmpleados)
-        {
-            try
-            {
-                var lista = new List<CargaMasivaRegistroViewModel>();
-                int res = 0;
-                var result = new object();
-                using (ASNContext context = new ASNContext())
-                {
-                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    int ccmsidAdmin = 0;
+        //[HttpPost]
+        //public JsonResult EditaSolicitud([DataSourceRequest]DataSourceRequest request, CatSolicitudesSel_Result profiles, IEnumerable<HttpPostedFileBase> files, IEnumerable<HttpPostedFileBase> files2, string listaEmpleados)
+        //{
+        //    try
+        //    {
+        //        var lista = new List<CargaMasivaRegistroViewModel>();
+        //        int res = 0;
+        //        var result = new object();
+        //        using (ASNContext context = new ASNContext())
+        //        {
+        //            context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+        //            int ccmsidAdmin = 0;
 
-                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
-                    resultado.Value = 0;
+        //            ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+        //            resultado.Value = 0;
 
-                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+        //            int.TryParse(User.Identity.Name, out ccmsidAdmin);
 
-                    if (profiles != null)
-                    {
-                        if (profiles.FolioSolicitud != 0)
-                        {
-                            context.CatSolicitudesSu(
-                                profiles.FolioSolicitud,
-                                DateTime.Now,
-                                profiles.Perfil_Ident,
-                                profiles.Solicitante_Ident,
-                                profiles.Solicintante_Nombre,
-                                profiles.Puesto_solicitante_Ident,
-                                profiles.PeriodoNomina_Id,
-                                profiles.PeriodoNominaOriginal_Id,
-                                profiles.ConceptoId,
-                                profiles.MotivoId,
-                                profiles.Justficacion,
-                                profiles.Responsable_Id,
-                                profiles.Detalle,
-                                profiles.Autorizantes,
-                                resultado,
-                                ccmsidAdmin
-                                );
-                        }
-                    }
+        //            if (profiles != null)
+        //            {
+        //                if (profiles.FolioSolicitud != 0)
+        //                {
+        //                    context.CatSolicitudesSu(
+        //                        profiles.FolioSolicitud,
+        //                        DateTime.Now,
+        //                        profiles.Perfil_Ident,
+        //                        profiles.Solicitante_Ident,
+        //                        profiles.Solicintante_Nombre,
+        //                        profiles.Puesto_solicitante_Ident,
+        //                        profiles.PeriodoNomina_Id,
+        //                        profiles.PeriodoNominaOriginal_Id,
+        //                        profiles.ConceptoId,
+        //                        profiles.MotivoId,
+        //                        profiles.Justficacion,
+        //                        profiles.Responsable_Id,
+        //                        profiles.Detalle,
+        //                        profiles.Autorizantes,
+        //                        resultado,
+        //                        ccmsidAdmin
+        //                        );
+        //                }
+        //            }
 
-                    var lstResultado = resultado.Value.ToString().Split('_');
-                    int.TryParse(lstResultado[0], out res);
-                    var resultadoAccion = "";
-                    int SolicitudId = profiles.FolioSolicitud;
-                    object Error = null;
+        //            var lstResultado = resultado.Value.ToString().Split('_');
+        //            int.TryParse(lstResultado[0], out res);
+        //            var resultadoAccion = "";
+        //            int SolicitudId = profiles.FolioSolicitud;
+        //            object Error = null;
 
-                    if (res != -1)
-                    {
-                        if (files != null)
-                        {
-                            GuardaArchivos(SolicitudId.ToString(), files, ccmsidAdmin);
-                        }
-                        if (files2 != null)
-                        {
-                            lista = Save(files2, SolicitudId, ccmsidAdmin);
-                        }
-                    }
+        //            if (res != -1)
+        //            {
+        //                if (files != null)
+        //                {
+        //                    GuardaArchivos(SolicitudId.ToString(), files, ccmsidAdmin);
+        //                }
+        //                if (files2 != null)
+        //                {
+        //                    lista = Save(files2, SolicitudId, ccmsidAdmin);
+        //                }
+        //            }
 
-                    if (res == -1)
-                    {
-                        resultadoAccion = "Ya existe un concepto con la misma descripción.";
-                        Error = new { Errors = resultadoAccion };
-                        ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
-                    }
+        //            if (res == -1)
+        //            {
+        //                resultadoAccion = "Ya existe un concepto con la misma descripción.";
+        //                Error = new { Errors = resultadoAccion };
+        //                ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
+        //            }
 
-                    result = new { Id = SolicitudId, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };
-                }
-                return Json(result, JsonRequestBehavior.AllowGet);
+        //            result = new { Id = SolicitudId, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };
+        //        }
+        //        return Json(result, JsonRequestBehavior.AllowGet);
 
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
-                //return Json(profiles.ToDataSourceResult(request, ModelState));
-                return Json(new { Id = 0, type = "create", responseError = new { Errors = resultadoAccion }, listaEmpleados = "", status = "-1" }, JsonRequestBehavior.AllowGet);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+        //        MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+        //        LogError log = new LogError();
+        //        log.RecordError(ex, usuario.UserInfo.Ident.Value);
+        //        var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
+        //        //return Json(profiles.ToDataSourceResult(request, ModelState));
+        //        return Json(new { Id = 0, type = "create", responseError = new { Errors = resultadoAccion }, listaEmpleados = "", status = "-1" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
         public List<CargaMasivaRegistroViewModel> Save(IEnumerable<HttpPostedFileBase> files, int solicitudid, int useremployeeid)
         {

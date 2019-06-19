@@ -103,13 +103,13 @@
                                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
                                 )
                             </div>
-                            <div class="col-lg-4">
+                            @*<div class="col-lg-4">
                                 <label>Estatus</label>
                                 @(Html.Kendo().TextBox().Name("Estatus")
-                                                                                                        .Enable(false)
-                                                                                                        .Value(string.IsNullOrEmpty(Model.Estatus) ? "Nuevo" : Model.Estatus)
+                                        .Enable(false)
+                                        .Value(string.IsNullOrEmpty(Model.Estatus) ? "Nuevo" : Model.Estatus)
                                 )
-                            </div>
+                            </div>*@
                         </td>
                     </tr>
                 </tbody>
@@ -291,17 +291,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                @(Html.Kendo().Grid<ASN.Models.CatCargaRapidaSel_Result>()
+                @(Html.Kendo().Grid<ASN.Models.CatSolicitudesSel_Result>()
                             .Name("gridSolicitud")
                             .Columns(column =>
                             {
-                            //column.Command(command => { command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span> Editar").Click("EditaSolicitud"); }).Width(40);
-                            column.Bound(c => c.CargaRapidaId).Width(40).Title("Id").Visible(true).Filterable(true);
-                                column.Bound(c => c.FolioSolicitudId).Title("FolioId").Filterable(true).Width(70).Visible(false);
-                                column.Bound(c => c.CCMSID).Title("CCMSID").Filterable(true).Width(70);
-                                column.Bound(c => c.ConceptoId).Title("Concepto").Width(70).Filterable(true);
-                                column.Bound(c => c.Justificacion).Title("Justificacion").Filterable(true).Width(70);
-                                column.Bound(c => c.Motivo).Title("Motivo").Width(70);
+                                //column.Command(command => { command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span> Editar").Click("EditaSolicitud"); }).Width(40);
+                                column.Bound(c => c.FolioSolicitud).Width(40).Title("Id").Visible(true).Filterable(true);
+                                column.Bound(c => c.Nombre).Title("FolioId").Filterable(true).Width(70).Visible(false);
+                                column.Bound(c => c.ConceptoDesc).Title("CCMSID").Filterable(true).Width(70);
+                                column.Bound(c => c.MotivosSolicitudDesc).Title("Concepto").Width(70).Filterable(true);
                             })
                             .HtmlAttributes(new { style = "height: 475px;" })
                             .Scrollable(sorteable => sorteable.Virtual(false))
@@ -314,15 +312,15 @@
                                 .Ajax()
                                 .Model(model =>
                                 {
-                                    model.Id(c => c.CargaRapidaId);
-                                    model.Field(c => c.CargaRapidaId).Editable(true);
-                                    model.Field(c => c.FolioSolicitudId).Editable(true);
-                                    model.Field(c => c.CCMSID).Editable(true);
+                                    model.Id(c => c.FolioSolicitud);
+                                    model.Field(c => c.Ident).Editable(true);
+                                    model.Field(c => c.Nombre).Editable(true);
                                     model.Field(c => c.ConceptoId).Editable(true);
-                                    model.Field(c => c.Justificacion).Editable(true);
-                                    model.Field(c => c.Motivo).Editable(true);
+                                    model.Field(c => c.ConceptoDesc).Editable(true);
+                                    model.Field(c => c.MotivosSolicitudId).Editable(true);
+                                    model.Field(c => c.MotivosSolicitudDesc).Editable(true);
                                 })
-                                .Read(read => read.Action("GetSolicitudesRapidas", "CapturaSolicitud").Data("GetPerfil").Data("getFolio"))
+                                .Read(read => read.Action("GetSolicitudes", "CapturaSolicitud").Data("getFolio"))
                             //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
                             //.Create(create => create.Action("CrearSolicitudPorEmpleado", "CapturaSolicitud").Type(HttpVerbs.Post))
                             //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))

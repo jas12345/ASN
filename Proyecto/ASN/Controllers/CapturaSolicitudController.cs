@@ -21,14 +21,14 @@ namespace ASN.CapturasRapidas.Controllers
             return View(obj);
         }
 
-        public ActionResult GetSolicitudesRapidas([DataSourceRequest]DataSourceRequest request, int folioid)
+        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
         {
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.CatCargaRapidaSel(folioid).ToList();
+                    var lstSolicitudes = context.CatSolicitudesSel(FolioSolicitud).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok);
                 }
