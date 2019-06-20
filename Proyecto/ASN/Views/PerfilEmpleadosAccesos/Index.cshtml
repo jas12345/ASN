@@ -11,10 +11,10 @@
                 <div>
                     <div class="row">
                         <div class="col-lg-3 col-md-3">
-                            @Html.Label("X       Seleccion de Perfil - Accesos", new { style = "font-size: 15px" })
+                            @Html.Label("X       Seleccion de Perfil - Accesos", new { id = "lblPerfilAccesos", style = "font-size: 15px" })
                         </div>
                         <div class="col-lg-4 col-md-4">
-                            @Html.Label("    Seleccion de Empleado - Nivel", new { style = "font-size: 15px" })
+                            @Html.Label("    Seleccion de Empleado - Nivel", new { id = "lblEmpleadoNivel", style = "font-size: 15px" })
                         </div>
                         <div class="col-lg-5 col-md-5">
                             <p> </p>
@@ -61,6 +61,7 @@
                                                 //    .Change("onChangeNumeroNivel")
                                                 //)
                                                 .Format("#")
+                                                .Min(1)
                                                 .Max(9)
                                                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 13em" })
                                     )
@@ -101,13 +102,14 @@
                         @(Html.Kendo().Grid<ASN.Models.CatPerfilEmpleadosAccesosSel_Result>()
                                 .Name("grid")
                                 .Columns(column =>
-                                    {
-                                        column.Command(command => command.Custom("DELETE").Text("<span class='k-icon k-i-delete'></span>Borrar").Click("borrarAcceso")).Width(15).HtmlAttributes(new { style = "text-align: center;" });
-                                        column.Bound(c => c.Ident).Width(40).Title("CCMS Id").Visible(true).Filterable(true);
-                                        column.Bound(c => c.Nombre).Width(50).Title("Nombre").Filterable(true);
-                                        column.Bound(c => c.Position_Code_Title).Width(50).Title("Puesto").Filterable(true);
-                                            //column.Bound(c => c.PerfilEmpleadoAcceso_Activo).Title("PerfilEmpleadoAcceso_Activo").Visible(false).Filterable(false).Width(50);//.ClientTemplate("#:PerfilEmpleadoAcceso_Activo  ? 'Si' : 'No' #");
-                                        })
+                                {
+                                    column.Command(command => command.Custom("DELETE").Text("<span class='k-icon k-i-delete'></span>Borrar").Click("borrarAcceso")).Width(15).HtmlAttributes(new { style = "text-align: center;" });
+                                    column.Bound(c => c.Ident).Width(40).Title("CCMS Id").Visible(true).Filterable(true);
+                                    column.Bound(c => c.Nombre).Width(50).Title("Nombre").Filterable(true);
+                                    column.Bound(c => c.Position_Code_Title).Width(50).Title("Puesto").Filterable(true);
+                                    column.Bound(c => c.Nivel).Width(50).Title("Nivel").Visible(true).Filterable(true);
+                                    //column.Bound(c => c.PerfilEmpleadoAcceso_Activo).Title("PerfilEmpleadoAcceso_Activo").Visible(false).Filterable(false).Width(50);//.ClientTemplate("#:PerfilEmpleadoAcceso_Activo  ? 'Si' : 'No' #");
+                                })
                                 .HtmlAttributes(new { style = "height: 445px;" })
                                 .Scrollable(sorteable => sorteable.Virtual(false))
                                 .Sortable()
@@ -128,6 +130,7 @@
                                     model.Id(c => c.Ident);
                                     model.Field(c => c.Nombre);
                                     model.Field(c => c.PerfilEmpleadoAcceso_Activo);
+                                    model.Field(c => c.Nivel);
                                 })
                                 .Read(read => read.Action("GetPerfilEmpleadosAccesos", "PerfilEmpleadosAccesos").Data("GetPerfil"))
                                 .Update(update => update.Action("UpdatePerfilEmpleadosAccesos", "PerfilEmpleadosAccesos").Type(HttpVerbs.Post))

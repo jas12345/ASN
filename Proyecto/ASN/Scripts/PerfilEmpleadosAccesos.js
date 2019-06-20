@@ -33,10 +33,35 @@
                 $("#lblPerfil").show();
                 $("#lblAccesos").show();
 
+
+                debugger;
+                if (TipoAcceso == "Autorizante") {
+                    //$("#NumeroNivel").show();
+                    $("#lblEmpleadoNivel").val("    Seleccion de Empleado - Nivel");
+                    $("#lblEmpleadoNivel").text("    Seleccion de Empleado - Nivel");
+
+                    $("#NumeroNivel").data("kendoNumericTextBox").wrapper.show();
+
+                    //var grid = $("#grid").data("kendoGrid");
+                    //grid.showColumn("Nivel");
+
+                }
+                else {
+                    $("#NumeroNivel").val("");
+                    $("#NumeroNivel").text("");
+
+                    $("#lblEmpleadoNivel").val("    Seleccion de Empleado");
+                    $("#lblEmpleadoNivel").text("    Seleccion de Empleado");
+                    //$("#NumeroNivel").hide();
+
+                    //var grid = $("#grid").data("kendoGrid");
+                    //grid.hideColumn("Nivel");
+
+                    $("#NumeroNivel").data("kendoNumericTextBox").wrapper.hide();
+                }
+
                 //$("#FechaCierreAnio").val(data[0].Active);
                 //debugger;
-
-
             }).fail(function (ex) {
                 //debugger;
                 console.log("fail" + ex);
@@ -508,7 +533,7 @@ function agregaEmpleado() {
 
     ClavePerfil = $("#PerfilUsuarioId").val();
     CCMSId = $("#CCMSId").val();
-    //nivel = $("#nivel").val();
+    nivel = $("#NumeroNivel").val();
 
     $.post('/PerfilEmpleadosAccesos/CreatePerfilEmpleadosAccesos' + "/?perfil_Ident=" + ClavePerfil + "&empleadoId=" + CCMSId + "&nivel=" + nivel, function (data){
         debugger

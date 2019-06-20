@@ -74,12 +74,16 @@ function agregarSolicitud() {
     $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
 
-        FolioSolicitud = data;
+        FolioSolicitud = data.FolioSolicitud;
+
+        if (data.res == -2) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Ya existe un registro con este Empleado y Concepto", "error");
+        }
 
         actualizaGrid();
         debugger;
     });
-
 }
 
 function actualizaGrid() {

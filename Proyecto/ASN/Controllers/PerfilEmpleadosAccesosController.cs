@@ -112,6 +112,9 @@ namespace ASN.Controllers
                         case -3:
                             mensaje = "El puesto del empleado no es válido para este perfil.";
                             break;
+                        case -4:
+                            mensaje = "El nivel ya está asignado a otro empleado";
+                            break;
                     }
 
                     //return Json(profiles.ToDataSourceResult(request, ModelState));

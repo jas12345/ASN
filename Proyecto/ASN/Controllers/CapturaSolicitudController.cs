@@ -238,26 +238,32 @@ namespace ASN.CapturasRapidas.Controllers
                     int.TryParse(resultado.Value.ToString(), out res);
                     int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
 
-                    switch (res)
-                    {
-                        case -1:
-                            ModelState.AddModelError("error", "Ya existe un registro para esta solicitud.");
-                            break;
-                    }
+                    //switch (res)
+                    //{
+                    //    case -2:
+                    //        ModelState.AddModelError("error", "Ya existe un registro con este Empleado y Concepto.");
+                    //        break;
+                    //}
 
                     //return Json(profiles.ToDataSourceResult(request, ModelState));
 
                     //return Json(ModelState);
-                    return Json(FolioSolicitud, JsonRequestBehavior.AllowGet);
+                    //return Json(FolioSolicitud, JsonRequestBehavior.AllowGet);
+                    //return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+                    return Json(new { FolioSolicitud, res }, JsonRequestBehavior.AllowGet);
+
+                    //return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+
                 }
             }
+
             catch (Exception ex)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json(FolioSolicitud);
+                return Json(new { FolioSolicitud, res = 0 }, JsonRequestBehavior.AllowGet);
             }
         }
 

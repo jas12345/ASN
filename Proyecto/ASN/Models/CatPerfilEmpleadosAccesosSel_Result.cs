@@ -21,5 +21,6 @@ namespace ASN.Models
         public bool PerfilEmpleadoAcceso_Activo { get; set; }
         public Nullable<int> Position_Code_Ident { get; set; }
         public string Position_Code_Title { get; set; }
+        public Nullable<int> Nivel { get; set; }
     }
 }

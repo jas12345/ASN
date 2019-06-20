@@ -136,7 +136,7 @@
                                 Concepto
                             </th>
                             <th scope="col">
-                                Parametro
+                                Parametro/Monto
                             </th>
                             <th scope="col">
                                 Motivo
@@ -296,10 +296,11 @@
                             .Columns(column =>
                             {
                                 //column.Command(command => { command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span> Editar").Click("EditaSolicitud"); }).Width(40);
-                                column.Bound(c => c.FolioSolicitud).Width(40).Title("Id").Visible(true).Filterable(true);
-                                column.Bound(c => c.Nombre).Title("FolioId").Filterable(true).Width(70).Visible(false);
-                                column.Bound(c => c.ConceptoDesc).Title("CCMSID").Filterable(true).Width(70);
-                                column.Bound(c => c.MotivosSolicitudDesc).Title("Concepto").Width(70).Filterable(true);
+                                column.Bound(c => c.Ident).Width(40).Title("# Empleado").Filterable(false).Visible(true);
+                                column.Bound(c => c.Nombre).Title("Nombre").Filterable(false).Visible(true).Width(70);
+                                column.Bound(c => c.ConceptoDesc).Title("Concepto").Filterable(false).Width(70);
+                                column.Bound(c => c.Monto).Title("Monto").Filterable(false).Width(70);
+                                column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
                             })
                             .HtmlAttributes(new { style = "height: 475px;" })
                             .Scrollable(sorteable => sorteable.Virtual(false))
