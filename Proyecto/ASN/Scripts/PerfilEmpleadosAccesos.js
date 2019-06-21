@@ -34,7 +34,7 @@
                 $("#lblAccesos").show();
 
 
-                debugger;
+                //debugger;
                 if (TipoAcceso == "Autorizante") {
                     //$("#NumeroNivel").show();
                     $("#lblEmpleadoNivel").val("    Seleccion de Empleado - Nivel");
@@ -84,7 +84,7 @@
 });
 
 function onChangeCCMSId() {
-    debugger;
+    //debugger;
 
     CCMSId = "";
     NombreEmpleado = "";
@@ -353,7 +353,7 @@ function valida(e) {
 }
 
 function errorsote(args) {
-    debugger;
+    //debugger;
     if (args.errors) {
 
         $(document).ready(function () {
@@ -371,7 +371,7 @@ function onChange(event) {
     ////$("#grid").data("kendoGrid")
 
     //var perfil_Ident = $("#PerfilUsuarioId")[0].value;
-    ////debugger;
+    //debugger;
     ////$('#kendoSeleccion')[0].textContent = listaEmpleados;
     //$.ajax({
     //    type: 'POST',
@@ -395,7 +395,7 @@ function onDataBound(event) {
     //var idFieldIdent = "Ident";
     //debugger;
     //var rowsToSelect = [];
-    ////debugger;
+    //debugger;
     //allRows.each(function (idx, row) {
     //    var dataItem = grid.dataItem(row);
     //    //debugger;
@@ -412,11 +412,11 @@ function onDataBound(event) {
     //        }
     //    }
     //});
-    ////debugger;
+    //debugger;
     //event.sender.select(rowsToSelect);
 
     //listaEmpleados = selectedEmpleados.join(", ")
-    ////debugger;
+    //debugger;
 }
 
 
@@ -526,7 +526,7 @@ function handleSaveChanges(e, grid) {
 
 
 function agregaEmpleado() {
-    debugger;
+    //debugger;
     ClavePerfil = "";
     CCMSId = "";
     nivel = "";
@@ -545,7 +545,7 @@ function agregaEmpleado() {
 
         actualizaGrid();
     }).fail(function (ex) {
-        debugger;
+        //debugger;
         console.log("fail" + ex);
     });
 }

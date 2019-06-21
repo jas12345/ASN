@@ -13,13 +13,15 @@ namespace ASN.Models
     
     public partial class CatEmpleadoPuestoSel_Result
     {
-        public Nullable<int> Ident { get; set; }
+        public int Ident { get; set; }
         public string Nombre { get; set; }
         public Nullable<int> Position_Code_Ident { get; set; }
         public string Position_Code_Title { get; set; }
-        public int Contract_Type_Ident { get; set; }
+        public Nullable<int> Contract_Type_Ident { get; set; }
         public string Contract_Type { get; set; }
         public Nullable<int> Location_Ident { get; set; }
         public string Location_Name { get; set; }
+        public Nullable<int> IdentManager { get; set; }
+        public string NombreManager { get; set; }
     }
 }

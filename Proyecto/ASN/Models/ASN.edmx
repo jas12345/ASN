@@ -1651,14 +1651,16 @@
           <Property Type="String" Name="Nombre_Manager" Nullable="true" MaxLength="752" />
           </ComplexType>
         <ComplexType Name="CatEmpleadoPuestoSel_Result">
-          <Property Type="Int32" Name="Ident" Nullable="true" />
+          <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
           <Property Type="Int32" Name="Position_Code_Ident" Nullable="true" />
           <Property Type="String" Name="Position_Code_Title" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="false" />
+          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
           <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Location_Ident" Nullable="true" />
           <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="IdentManager" Nullable="true" />
+          <Property Type="String" Name="NombreManager" Nullable="true" MaxLength="752" />
         </ComplexType>
         <ComplexType Name="CatConceptosParametroConceptosSel_Result">
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
@@ -2537,6 +2539,8 @@
                 <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
                 <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
                 <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="IdentManager" ColumnName="IdentManager" />
+                <ScalarProperty Name="NombreManager" ColumnName="NombreManager" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
