@@ -120,10 +120,10 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstCMB = new List<CatClientCMB_Result>();
+                var lstCMB = new List<CatClientTodosCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
-                    lstCMB = context.CatClientCMB().ToList();
+                    lstCMB = context.CatClientTodosCMB().ToList();
                 }
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
             }

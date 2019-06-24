@@ -53,11 +53,10 @@
                     }).ServerFiltering(true);
                 })
                 .Filter("contains")
-                .OptionLabel("- Cliente - ")
                 .DataValueField("Id")
                 .DataTextField("Value")
                 .Name("ClienteId")
-                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un cliente." })
+                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
 
@@ -264,9 +263,12 @@
             <label for="NumeroNivelAutorizante">Número de nivel autorizante</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.NumeroNivelAutorizante)
+            @(Html.Kendo().NumericTextBoxFor(x => x.NumeroNivelAutorizante)
                         .Name("NumeroNivelAutorizante")
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em" })
+                        .Format("0")
+                        .Decimals(0)
+                        .Min(1)
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
 

@@ -31,5 +31,6 @@ namespace ASN.Models
         public string FechaFin { get; set; }
         public int ParametroConceptoId { get; set; }
         public int TipoConceptoId { get; set; }
+        public string Cliente { get; set; }
     }
 }

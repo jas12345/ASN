@@ -21,7 +21,7 @@
                             columns.Bound(c => c.ConceptoId).Title("Concepto").Visible(false).Filterable(false);
                             columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
                             columns.ForeignKey(c => c.Paises, (System.Collections.IEnumerable)ViewData["Paises"], "Id", "Value").Width(70).Title("Pais").Visible(false);
-                            columns.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Id", "Value").Width(70).Title("Cliente").Visible(true).Filterable(true);
+                            columns.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Id", "Value").Width(70).Title("Cliente").Visible(true).Filterable(true).ClientTemplate("#:ClienteId == -1  ? '- Todos -' : Cliente #");
                             columns.ForeignKey(c => c.PeopleSoftId, (System.Collections.IEnumerable)ViewData["PeopleSoft"], "Ident", "Valor").Width(90).Title("PeopleSoft").Visible(true).Filterable(true);
                             columns.ForeignKey(c => c.TipoConceptoId, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(70).Title("Tipo concepto");
                             columns.Bound(c => c.NumeroNivelAutorizante).Width(65).Title("Número de Nivel de Autorizante").Filterable(false);

@@ -1111,6 +1111,7 @@
           <Property Type="String" Name="FechaFin" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="ParametroConceptoId" Nullable="false" />
           <Property Type="Int32" Name="TipoConceptoId" Nullable="false" />
+          <Property Type="String" Name="Cliente" Nullable="true" MaxLength="250" />
         </ComplexType>
         <ComplexType Name="CatCountryCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1716,6 +1717,7 @@
                 <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="ParametroConceptoId" ColumnName="ParametroConceptoId" />
                 <ScalarProperty Name="TipoConceptoId" ColumnName="TipoConceptoId" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
