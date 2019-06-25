@@ -26,40 +26,18 @@ function edit(e) {
         }
 
         $("#Vigencia").val(e.model.Vigencia);
-        debugger;
+        
         if (e.model.PagosFijos === true) {
-            debugger;
             $("#PagosFijos").prop("checked", true);
-            $("#PagosFijos").val(true);
             $("#PagosFijos input:checkbox").trigger("click");
             $("#PagosFijos").attr("checked", "checked");
-            $("#PagosFijos input:checkbox").trigger("click");
-            $("#PagosFijosNo").prop("checked", false);
-            $("#PagosFijosNo").val(false);
-            $("#PagosFijosNo").attr("checked", "nothing");
+            $("label[for=PagosFijos]").html("Sí");
 
             editor = 1;
             valorVigencia = e.model.Vigencia;
             valorPeriodicidad = e.model.PeriodicidadNominaId;
             AdministraControles();
             GetPeriodicidad();
-        }
-        else {
-            debugger;
-            $("#PagosFijosNo").prop("checked", true);
-            $("#PagosFijosNo").val(true);
-            $("#PagosFijosNo").attr("checked", "checked");
-            $("#PagosFijosNo input:checkbox").trigger("click");
-            $("#PagosFijos").prop("checked", false);
-            $("#PagosFijos").val(false);
-            $("#PagosFijos").attr("checked", "nothing");
-
-            editor = 1;
-            valorVigencia = e.model.Vigencia;
-            valorPeriodicidad = e.model.PeriodicidadNominaId;
-            AdministraControles();
-            GetPeriodicidad();
-
         }
 
         var periodicidad = $("#PeriodicidadNominaId").data("kendoDropDownList");
@@ -238,73 +216,21 @@ function MuestraMultiSelect() {
 }
 
 function AdministraControles() {
-    debugger;
     var valorSeleccionado = $("#PagosFijos").is(':checked');
     if (valorSeleccionado) {
-        debugger;
-
-        $("#PagosFijos").prop("checked", true);
-        $("#PagosFijos").val(true);
-        $("#PagosFijos input:checkbox").trigger("click");
-        
-
-        $("#PagosFijosNo").prop("checked", false);
-        $("#PagosFijosNo").val(false);
-        $("#PagosFijosNo").attr("checked", "nothing");
-
+        $("label[for=PagosFijos]").html("Sí");
         $(".cntHidden").show();
         $("#Tope").attr("required", "required");
         $("#PeriodicidadNominaId").attr("required", "required");
         $("#FechaInicio").attr("required", "required");
     } else {
-        debugger;
-        $("#PagosFijos").prop(("checked", false);
-        $("#PagosFijos").val(false);
-        $("#PagosFijos input:checkbox").trigger("click");
-
-        $("#PagosFijosNo").prop("checked", true);
-        $("#PagosFijosNo").val(true);
-        $("#PagosFijosNo").attr("checked", "checked");
-
+        $("label[for=PagosFijos]").html("No");
         $("#Tope").removeAttr("required");
         $("#PeriodicidadNominaId").removeAttr("required");
         $("#FechaInicio").removeAttr("required");
         $(".cntHidden").hide();
     }
 }
-
-//function AdministraControlesNo() {
-//    debugger;
-//    var valorSeleccionado = $("#PagosFijosNo").is(':checked');
-//    if (valorSeleccionado) {
-//        debugger;
-
-//        $("#PagosFijosNo").prop("checked", true);
-//        $("#PagosFijosNo").val(true);
-
-//        $("#PagosFijos").prop("checked", false);
-//        $("#PagosFijos").val(false);
-//        $("#PagosFijos").attr("checked", "nothing");
-//        $("#Tope").removeAttr("required");
-//        $("#PeriodicidadNominaId").removeAttr("required");
-//        $("#FechaInicio").removeAttr("required");
-//        $(".cntHidden").hide();
-//    }
-//    else {
-//        debugger;
-
-//        $("#PagosFijosNo").prop("checked", false);
-//        $("#PagosFijosNo").val(false);
-
-//        $("#PagosFijos").prop("checked", true);
-//        $("#PagosFijos").val(true);
-//        $("#PagosFijos").attr("checked", "checked");
-//        $(".cntHidden").show();
-//        $("#Tope").attr("required", "required");
-//        $("#PeriodicidadNominaId").attr("required", "required");
-//        $("#FechaInicio").attr("required", "required");
-//    }
-//}
 
 function fechasValor() {
     return {
