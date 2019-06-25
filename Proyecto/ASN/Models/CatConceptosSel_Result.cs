@@ -24,7 +24,7 @@ namespace ASN.Models
         public Nullable<bool> AutorizacionObligatoria { get; set; }
         public bool Active { get; set; }
         public string Vigencia { get; set; }
-        public Nullable<bool> PagosFijos { get; set; }
+        public bool PagosFijos { get; set; }
         public Nullable<decimal> Tope { get; set; }
         public string PeriodicidadNominaId { get; set; }
         public string FechaInicio { get; set; }
@@ -32,5 +32,6 @@ namespace ASN.Models
         public int ParametroConceptoId { get; set; }
         public int TipoConceptoId { get; set; }
         public string Cliente { get; set; }
+        public int PagosFijosNo { get; set; }
     }
 }
