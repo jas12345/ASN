@@ -69,9 +69,9 @@ function getFolio() {
 
 function agregarSolicitud() {
     //console.log("Salvado");
-    //debugger;
+    debugger;
     //infoSolicitud();
-    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId, function (data) {
+    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&Active=" + 1, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
 
         FolioSolicitud = data.FolioSolicitud;
@@ -89,6 +89,64 @@ function agregarSolicitud() {
 function actualizaGrid() {
     $("#gridSolicitud").data("kendoGrid").dataSource.read();
     $("#gridSolicitud").data("kendoGrid").refresh();
+}
+
+function editarEmpleadoSolicitud(e) {
+    e.preventDefault(); // sho J
+    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+    debugger;
+    $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem.Ident);
+    //$("#CCMSIDSolicitado").data('kendoNumericTextBox').text(dataItem.Ident);
+    $('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change');
+
+    //var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+    //dropdownlist.value("Apples");
+    //dropdownlist.trigger("change");
+
+    $("#Conceptos").data('kendoDropDownList').value(dataItem.ConceptoId);
+    $('#Conceptos').data('kendoDropDownList').trigger('change');
+
+    $("#Parametro").data('kendoNumericTextBox').value(dataItem.Monto);
+    $('#Parametro').trigger('change');
+
+    $("#Motivo").data('kendoDropDownList').value(dataItem.MotivosSolicitudId);
+    $('#Motivo').data('kendoDropDownList').trigger('change');
+
+    $("#ConceptoMotivo").data('kendoDropDownList').value(dataItem.ConceptoMotivoId);
+    $('#ConceptoMotivo').data('kendoDropDownList').trigger('change');
+
+    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
+    $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
+
+    $("#PeriodoIncidente").data('kendoDropDownList').value(dataItem.PeriodoOriginalId);
+    $('#PeriodoIncidente').data('kendoDropDownList').trigger('change');
+
+}
+
+function borrarEmpleadoSolicitud(e) {
+    e.preventDefault(); // sho J
+    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+    debugger;
+    var Solicitud_Ident = dataItem.FolioSolicitud;
+    var Empleado_Ident = dataItem.Ident;
+    var ConceptoId = dataItem.ConceptoId;
+    //Se ejecuta Update con Active=false para eliminar el acceso respondiendo al botón Borrar
+    var Active = false;
+
+    //debugger;
+
+    //int Perfil_Ident, int Ident, bool Active
+    $.post(urlUpdateEmpleadoSolicitud + "/?FolioSolicitud=" + Solicitud_Ident + "&Empleado_Ident=" + Empleado_Ident + "&ConceptoId=" + ConceptoId + "&Activo=" + Active, function (data) {
+        //debugger;
+
+        actualizaGrid();
+
+        //debugger;
+
+    }).fail(function (ex) {
+        console.log("fail" + ex);
+    });
+
 }
 
 //function infoSolicitud() {
@@ -163,7 +221,7 @@ function actualizaGrid() {
 //}
 
 function onChangeCCMSId() {
-    //debugger;
+    debugger;
 
     CCMSId = "";
     NombreEmpleado = "";
@@ -242,7 +300,7 @@ function onChangeCCMSId() {
 }
 
 function onChangeConceptos() {
-    //debugger;
+    debugger;
 
     if ($("#Conceptos").val().length > 0) {
         //$('#grid').data('kendoGrid').dataSource.data([]);
@@ -265,7 +323,7 @@ function onChangeConceptos() {
             ConParametroNombre = data[0].DescripcionParametroConcepto;
 
             $("#ConceptoX").val(ConConceptoNombre);
-            $("#ConceptoX").text(ConConceptoNombre);
+            $("#ConceptoX").text(ConConceptoNombre);    
             $("#ParametroX").val(ConParametroNombre);
             $("#ParametroX").text(ConParametroNombre);
 
@@ -337,7 +395,7 @@ function onChangeConceptoMotivo() {
 }
 
 function onChangePeriodoIncidente() {
-    //debugger;
+    debugger;
 
     if ($("#PeriodoIncidente").data('kendoDropDownList').text().length > 0) {
         ConPeriodoIncidente = ""

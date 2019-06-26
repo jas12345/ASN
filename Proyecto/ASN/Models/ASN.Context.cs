@@ -1303,15 +1303,11 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosAccesosSu", perfil_IdentParameter, empleadoIdParameter, nivelParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
-        public virtual int CatSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> solicitante_Ident, Nullable<int> employeeId, Nullable<int> conceptoId, Nullable<decimal> conceptoMonto, Nullable<int> motivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, ObjectParameter folioSolicitudOut, ObjectParameter estatus)
+        public virtual int CatSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, Nullable<int> conceptoId, Nullable<decimal> conceptoMonto, Nullable<int> motivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter folioSolicitudOut, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
                 new ObjectParameter("FolioSolicitud", typeof(int));
-    
-            var solicitante_IdentParameter = solicitante_Ident.HasValue ?
-                new ObjectParameter("Solicitante_Ident", solicitante_Ident) :
-                new ObjectParameter("Solicitante_Ident", typeof(int));
     
             var employeeIdParameter = employeeId.HasValue ?
                 new ObjectParameter("EmployeeId", employeeId) :
@@ -1341,7 +1337,15 @@ namespace ASN.Models
                 new ObjectParameter("PeriododOriginalId", periododOriginalId) :
                 new ObjectParameter("PeriododOriginalId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSi", folioSolicitudParameter, solicitante_IdentParameter, employeeIdParameter, conceptoIdParameter, conceptoMontoParameter, motivosSolicitudIdParameter, conceptoMotivoIdParameter, responsableIdParameter, periododOriginalIdParameter, folioSolicitudOut, estatus);
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSi", folioSolicitudParameter, employeeIdParameter, conceptoIdParameter, conceptoMontoParameter, motivosSolicitudIdParameter, conceptoMotivoIdParameter, responsableIdParameter, periododOriginalIdParameter, activeParameter, userEmployeeIdParameter, folioSolicitudOut, estatus);
         }
     
         public virtual ObjectResult<CatSolicitudesSel_Result> CatSolicitudesSel(Nullable<int> folioSolicitud)
@@ -1362,7 +1366,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosSolicitudesSel_Result>("CatEmpleadosSolicitudesSel", folioSolicitudParameter);
         }
     
-        public virtual int CatEmpleadosSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> conceptoid, Nullable<decimal> parametroConceptoMonto, Nullable<int> motivo_Ident, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatEmpleadosSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> conceptoid, Nullable<decimal> parametroConceptoMonto, Nullable<int> motivo_Ident, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -1384,14 +1388,18 @@ namespace ASN.Models
                 new ObjectParameter("Motivo_Ident", motivo_Ident) :
                 new ObjectParameter("Motivo_Ident", typeof(int));
     
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSi", folioSolicitudParameter, empleado_IdentParameter, conceptoidParameter, parametroConceptoMontoParameter, motivo_IdentParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSi", folioSolicitudParameter, empleado_IdentParameter, conceptoidParameter, parametroConceptoMontoParameter, motivo_IdentParameter, activeParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatEmpleadosSolicitudesSu(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<decimal> parametroConceptoMonto, string detalle, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatEmpleadosSolicitudesSu(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> conceptoId, Nullable<decimal> parametroConceptoMonto, Nullable<int> motivosSolicitudId, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -1401,13 +1409,17 @@ namespace ASN.Models
                 new ObjectParameter("Empleado_Ident", empleado_Ident) :
                 new ObjectParameter("Empleado_Ident", typeof(int));
     
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
             var parametroConceptoMontoParameter = parametroConceptoMonto.HasValue ?
                 new ObjectParameter("ParametroConceptoMonto", parametroConceptoMonto) :
                 new ObjectParameter("ParametroConceptoMonto", typeof(decimal));
     
-            var detalleParameter = detalle != null ?
-                new ObjectParameter("Detalle", detalle) :
-                new ObjectParameter("Detalle", typeof(string));
+            var motivosSolicitudIdParameter = motivosSolicitudId.HasValue ?
+                new ObjectParameter("MotivosSolicitudId", motivosSolicitudId) :
+                new ObjectParameter("MotivosSolicitudId", typeof(int));
     
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
@@ -1417,7 +1429,7 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSu", folioSolicitudParameter, empleado_IdentParameter, parametroConceptoMontoParameter, detalleParameter, activeParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatEmpleadosSolicitudesSu", folioSolicitudParameter, empleado_IdentParameter, conceptoIdParameter, parametroConceptoMontoParameter, motivosSolicitudIdParameter, activeParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual ObjectResult<CatEmployeeCMB_Result> CatEmployeeCMB()

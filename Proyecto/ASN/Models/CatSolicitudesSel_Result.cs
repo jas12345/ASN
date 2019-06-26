@@ -23,5 +23,7 @@ namespace ASN.Models
         public Nullable<int> ConceptoMotivoId { get; set; }
         public string ConceptoMotivoDesc { get; set; }
         public string Monto { get; set; }
+        public Nullable<int> ResponsableId { get; set; }
+        public Nullable<int> PeriodoOriginalId { get; set; }
     }
 }

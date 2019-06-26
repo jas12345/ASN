@@ -181,14 +181,16 @@
           <Parameter Name="conceptoid" Type="int" Mode="In" />
           <Parameter Name="ParametroConceptoMonto" Type="decimal" Mode="In" />
           <Parameter Name="Motivo_Ident" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatEmpleadosSolicitudesSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Empleado_Ident" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
           <Parameter Name="ParametroConceptoMonto" Type="decimal" Mode="In" />
-          <Parameter Name="Detalle" Type="varchar" Mode="In" />
+          <Parameter Name="MotivosSolicitudId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -425,7 +427,6 @@
         </Function>
         <Function Name="CatSolicitudesSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
-          <Parameter Name="Solicitante_Ident" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
           <Parameter Name="ConceptoMonto" Type="decimal" Mode="In" />
@@ -433,6 +434,8 @@
           <Parameter Name="ConceptoMotivoId" Type="int" Mode="In" />
           <Parameter Name="ResponsableId" Type="int" Mode="In" />
           <Parameter Name="PeriododOriginalId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="FolioSolicitudOut" Type="int" Mode="InOut" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -890,7 +893,6 @@
           </FunctionImport>
           <FunctionImport Name="CatSolicitudesSi">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
-            <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
@@ -898,6 +900,8 @@
             <Parameter Name="ConceptoMotivoId" Mode="In" Type="Int32" />
             <Parameter Name="ResponsableId" Mode="In" Type="Int32" />
             <Parameter Name="PeriododOriginalId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="FolioSolicitudOut" Mode="InOut" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -913,14 +917,16 @@
             <Parameter Name="conceptoid" Mode="In" Type="Int32" />
             <Parameter Name="ParametroConceptoMonto" Mode="In" Type="Decimal" />
             <Parameter Name="Motivo_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatEmpleadosSolicitudesSu">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="ParametroConceptoMonto" Mode="In" Type="Decimal" />
-            <Parameter Name="Detalle" Mode="In" Type="String" />
+            <Parameter Name="MotivosSolicitudId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -1447,6 +1453,8 @@
           <Property Type="Int32" Name="ConceptoMotivoId" Nullable="true" />
           <Property Type="String" Name="ConceptoMotivoDesc" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Monto" Nullable="true" MaxLength="73" />
+          <Property Type="Int32" Name="ResponsableId" Nullable="true" />
+          <Property Type="Int32" Name="PeriodoOriginalId" Nullable="true" />
           </ComplexType>
         <ComplexType Name="CatEmpleadosSolicitudesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -2235,6 +2243,8 @@
                 <ScalarProperty Name="ConceptoMotivoId" ColumnName="ConceptoMotivoId" />
                 <ScalarProperty Name="ConceptoMotivoDesc" ColumnName="ConceptoMotivoDesc" />
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
+                <ScalarProperty Name="PeriodoOriginalId" ColumnName="PeriodoOriginalId" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
