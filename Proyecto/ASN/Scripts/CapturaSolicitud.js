@@ -115,11 +115,11 @@ function editarEmpleadoSolicitud(e) {
     $("#ConceptoMotivo").data('kendoDropDownList').value(dataItem.ConceptoMotivoId);
     $('#ConceptoMotivo').data('kendoDropDownList').trigger('change');
 
-    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
-    $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
-
     $("#PeriodoIncidente").data('kendoDropDownList').value(dataItem.PeriodoOriginalId);
     $('#PeriodoIncidente').data('kendoDropDownList').trigger('change');
+
+    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
+    $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
 
 }
 
