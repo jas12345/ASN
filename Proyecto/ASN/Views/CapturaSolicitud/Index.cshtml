@@ -12,6 +12,9 @@
     label {
         font-size: small;
     }
+    .k-grid-header th.k-header {
+        text-align: center;
+    }
 </style>
 
 
@@ -48,7 +51,7 @@
                     <td>
                         <label class="primerLabel" id="lblSite">Site:</label><br />
                         <label class="primerLabel" id="lblConcepto">Concepto:</label><br />
-                        <label class="primerLabel" id="lblParametro">Parametro:</label><br />
+                        <label class="primerLabel" id="lblParametro">Parámetro:</label><br />
                         <label class="primerLabel" id="lblMotivo">Motivo:</label>
                     </td>
                     <td>
@@ -58,7 +61,7 @@
                         <label id="MotivoX"></label>
                     </td>
                     <td>
-                        <label class="primerLabel" id="lblConceptoMotivo">ConceptoMotivo:</label><br />
+                        <label class="primerLabel" id="lblConceptoMotivo">Concepto Motivo:</label><br />
                         <label class="primerLabel" id="lblResponsableCCMSID">Responsable de incidente:</label><br />
                         <label class="primerLabel" id="lblNombreRespo">Nombre responsable:</label><br />
                         <label class="primerLabel" id="lblPeriodoOP">Período original de pago:</label>
@@ -100,7 +103,7 @@
                                         .Name("PeriodoNomina_Id")
                                         .SelectedIndex(1)
                                         .Enable(false)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
+                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </div>
                             @*<div class="col-lg-4">
@@ -136,13 +139,13 @@
                                 Concepto
                             </th>
                             <th scope="col">
-                                Parametro/Monto
+                                Parámetro/Monto
                             </th>
                             <th scope="col">
                                 Motivo
                             </th>
                             <th scope="col">
-                                ConceptoMotivo
+                                Concepto Motivo
                             </th>
                             <th scope="col">
                                 Responsable de Incidente (CCMSID)
@@ -162,7 +165,7 @@
                                             .Events(e => e.Change("onChangeCCMSId"))
                                             //.Step(5)
                                             //.Value(0)
-                                            .HtmlAttributes(new { style = "text-align:center;", maxlength = "10" })
+                                            .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
                                 )
                             </td>
                             <td>
@@ -184,7 +187,7 @@
                                             .Events(e => e.Change("onChangeConceptos"))
                                             //.SelectedIndex(1)
                                             .Enable(true)
-                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
+                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
@@ -197,7 +200,7 @@
                                             .Min(0)
                                             //.Step(5)
                                             //.Value(0)
-                                            .HtmlAttributes(new { style = "text-align:center;", maxlength = "10" })
+                                            .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
@@ -219,7 +222,7 @@
                                             .Events(e => e.Change("onChangeMotivo"))
                                             //.SelectedIndex(1)
                                             .Enable(true)
-                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
+                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
@@ -239,7 +242,7 @@
                                                                                         .Events(e => e.Change("onChangeConceptoMotivo"))
                                                                                         //.SelectedIndex(1)
                                                                                         .Enable(true)
-                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
+                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
@@ -252,7 +255,7 @@
                                                                                         .Min(0)
                                                                                         //.Step(5)
                                                                                         //.Value(0)
-                                                                                        .HtmlAttributes(new { style = "text-align:center;width: 15.4em", maxlength = "10" })
+                                                                                        .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
@@ -272,14 +275,14 @@
                                                                                         .Events(e => e.Change("onChangePeriodoIncidente"))
                                                                                         //.SelectedIndex(1)
                                                                                         .Enable(true)
-                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 15.4em", validationMessage = "Este campo es requerido." })
+                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="col-lg-12">
-                    @(Html.Kendo().Button().Name("AgregarSolicitud").Content("Agregar")
+                    @(Html.Kendo().Button().Name("AgregarSolicitud").Content("Aplicar")
                     .Events(x => x.Click("agregarSolicitud"))
                     //.Events(x => x.Click("agregaEmpleado"))
                     )
