@@ -27,7 +27,7 @@ namespace ASN.Controllers
                         ViewData["Paises"] = context.CatCountryCMB().ToList();
                         ViewData["Mercados"] = context.CatCompanyCMB().ToList();
                         ViewData["Clientes"] = context.CatClientCMB().ToList();
-                        ViewData["PeopleSoft"] = context.CatConceptosMotivoCMB().ToList();
+                        ViewData["PeopleSoft"] = context.CatConceptosPeopleSoftCMB(0).ToList();
                         ViewData["TipoPeriodo"] = context.CatTiposPeriodoNominaCMB().ToList();
                     }
 
@@ -61,6 +61,32 @@ namespace ASN.Controllers
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     lstCMB = ctx.CatTipoConceptosCMB().ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetConceptosPeoplesoftCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatConceptosPeopleSoftCMB_Result>();
+                //MyCustomIdentity usuario = (MyCustomIdentity) User.Identity;
+
+                //int locIdUser = usuario.UserInfo.Location_Ident.Value;
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatConceptosPeopleSoftCMB(0).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);

@@ -87,6 +87,9 @@
         <Function Name="CatConceptosParametroConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatConceptosPeopleSoftCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="TipoConceptoId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -388,7 +391,7 @@
         <Function Name="CatSolicitudEmpleadosDetalleSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="SolicitudId" Type="int" Mode="In" />
           <Parameter Name="CatEmpleadoId" Type="int" Mode="In" />
-          <Parameter Name="CatConceptoMotivoId" Type="int" Mode="In" />
+          <Parameter Name="ConceptoMotivoId" Type="int" Mode="In" />
           <Parameter Name="PeriodoNomina" Type="varchar" Mode="In" />
           <Parameter Name="ReponsableId" Type="int" Mode="In" />
           <Parameter Name="Monto" Type="decimal" Mode="In" />
@@ -962,7 +965,7 @@
           <FunctionImport Name="CatSolicitudEmpleadosDetalleSi">
             <Parameter Name="SolicitudId" Mode="In" Type="Int32" />
             <Parameter Name="CatEmpleadoId" Mode="In" Type="Int32" />
-            <Parameter Name="CatConceptoMotivoId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoMotivoId" Mode="In" Type="Int32" />
             <Parameter Name="PeriodoNomina" Mode="In" Type="String" />
             <Parameter Name="ReponsableId" Mode="In" Type="Int32" />
             <Parameter Name="Monto" Mode="In" Type="Decimal" />
@@ -1088,6 +1091,9 @@
           </FunctionImport>
           <FunctionImport Name="CatConceptosxEmpleadoCMB" ReturnType="Collection(ASNModel.CatConceptosxEmpleadoCMB_Result)">
           <Parameter Name="Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConceptosPeopleSoftCMB" ReturnType="Collection(ASNModel.CatConceptosPeopleSoftCMB_Result)">
+            <Parameter Name="TipoConceptoId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1679,6 +1685,10 @@
           <Property Type="String" Name="DescripcionParametroConcepto" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatConceptosxEmpleadoCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosPeopleSoftCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
@@ -2571,6 +2581,14 @@
           <FunctionImportMapping FunctionImportName="CatConceptosxEmpleadoCMB" FunctionName="ASNModel.Store.CatConceptosxEmpleadoCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatConceptosxEmpleadoCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosPeopleSoftCMB" FunctionName="ASNModel.Store.CatConceptosPeopleSoftCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosPeopleSoftCMB_Result">
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>

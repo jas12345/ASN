@@ -1528,7 +1528,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcesaSolicitudEmpleadoDetalleSi", solicitudIdParameter, listaEmpleadosParameter, conceptoMotivoIdParameter, listaConceptoMotivoParameter, aplicaAtodosParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatSolicitudEmpleadosDetalleSi(Nullable<int> solicitudId, Nullable<int> catEmpleadoId, Nullable<int> catConceptoMotivoId, string periodoNomina, Nullable<int> reponsableId, Nullable<decimal> monto, string detalle, Nullable<bool> tTConceptoMotivoId, Nullable<bool> tTManager_Ident, Nullable<bool> tTMonto, Nullable<bool> tTDetalle, Nullable<bool> tTPeriodoNomina, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatSolicitudEmpleadosDetalleSi(Nullable<int> solicitudId, Nullable<int> catEmpleadoId, Nullable<int> conceptoMotivoId, string periodoNomina, Nullable<int> reponsableId, Nullable<decimal> monto, string detalle, Nullable<bool> tTConceptoMotivoId, Nullable<bool> tTManager_Ident, Nullable<bool> tTMonto, Nullable<bool> tTDetalle, Nullable<bool> tTPeriodoNomina, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var solicitudIdParameter = solicitudId.HasValue ?
                 new ObjectParameter("SolicitudId", solicitudId) :
@@ -1538,9 +1538,9 @@ namespace ASN.Models
                 new ObjectParameter("CatEmpleadoId", catEmpleadoId) :
                 new ObjectParameter("CatEmpleadoId", typeof(int));
     
-            var catConceptoMotivoIdParameter = catConceptoMotivoId.HasValue ?
-                new ObjectParameter("CatConceptoMotivoId", catConceptoMotivoId) :
-                new ObjectParameter("CatConceptoMotivoId", typeof(int));
+            var conceptoMotivoIdParameter = conceptoMotivoId.HasValue ?
+                new ObjectParameter("ConceptoMotivoId", conceptoMotivoId) :
+                new ObjectParameter("ConceptoMotivoId", typeof(int));
     
             var periodoNominaParameter = periodoNomina != null ?
                 new ObjectParameter("PeriodoNomina", periodoNomina) :
@@ -1582,7 +1582,7 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSi", solicitudIdParameter, catEmpleadoIdParameter, catConceptoMotivoIdParameter, periodoNominaParameter, reponsableIdParameter, montoParameter, detalleParameter, tTConceptoMotivoIdParameter, tTManager_IdentParameter, tTMontoParameter, tTDetalleParameter, tTPeriodoNominaParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSi", solicitudIdParameter, catEmpleadoIdParameter, conceptoMotivoIdParameter, periodoNominaParameter, reponsableIdParameter, montoParameter, detalleParameter, tTConceptoMotivoIdParameter, tTManager_IdentParameter, tTMontoParameter, tTDetalleParameter, tTPeriodoNominaParameter, userEmployeeIdParameter, estatus);
         }
     
         public virtual ObjectResult<CatMotivoSolicitudCMB_Result> CatMotivoSolicitudCMB()
@@ -1952,6 +1952,15 @@ namespace ASN.Models
                 new ObjectParameter("Ident", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosxEmpleadoCMB_Result>("CatConceptosxEmpleadoCMB", identParameter);
+        }
+    
+        public virtual ObjectResult<CatConceptosPeopleSoftCMB_Result> CatConceptosPeopleSoftCMB(Nullable<int> tipoConceptoId)
+        {
+            var tipoConceptoIdParameter = tipoConceptoId.HasValue ?
+                new ObjectParameter("TipoConceptoId", tipoConceptoId) :
+                new ObjectParameter("TipoConceptoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosPeopleSoftCMB_Result>("CatConceptosPeopleSoftCMB", tipoConceptoIdParameter);
         }
     }
 }

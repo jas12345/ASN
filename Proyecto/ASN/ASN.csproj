@@ -250,6 +250,9 @@
     <Compile Include="Models\CatConceptosParametroConceptosSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatConceptosPeopleSoftCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatConceptosSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
