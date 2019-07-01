@@ -210,20 +210,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.ParametroConceptoId)
-                                                                                                        .DataSource(source =>
-                                                                                                        {
-                                                                                                            source.Read(Read =>
-                                                                                                            {
-                                                                                                                Read.Action("GetParametrosConceptosCMB", "Conceptos");
-                                                                                                            })
-                                                                                                            .ServerFiltering(true);
-                                                                                                        })
-                                                                                                        .Filter("contains")
-                                                                                                        .OptionLabel("- Parámetro - ")
-                                                                                                        .DataValueField("Id")
-                                                                                                        .DataTextField("Value")
-                                                                                                        .Name("ParametroConceptoId")
-                                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione una opción" })
+                                                                                                                .DataSource(source =>
+                                                                                                                {
+                                                                                                                    source.Read(Read =>
+                                                                                                                    {
+                                                                                                                        Read.Action("GetParametrosConceptosCMB", "Conceptos");
+                                                                                                                    })
+                                                                                                                    .ServerFiltering(true);
+                                                                                                                })
+                                                                                                                .Filter("contains")
+                                                                                                                .OptionLabel("- Parámetro - ")
+                                                                                                                .DataValueField("Id")
+                                                                                                                .DataTextField("Value")
+                                                                                                                .Name("ParametroConceptoId")
+                                                                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione una opción" })
             )
         </div>
 
@@ -232,20 +232,20 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.TipoConceptoId)
-                                                                                                        .DataSource(source =>
-                                                                                                        {
-                                                                                                            source.Read(Read =>
-                                                                                                            {
-                                                                                                                Read.Action("GetConceptosCMB", "Conceptos");
-                                                                                                            });
-                                                                                                        //.serverFiltering(true);
-                                                                                                    })
-                                                                                                        .Filter("contains")
-                                                                                                        .OptionLabel("- Tipo de concepto - ")
-                                                                                                        .DataValueField("Ident")
-                                                                                                        .DataTextField("Valor")
-                                                                                                        .Name("TipoConceptoId")
-                                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationmessage = "Seleccione un tipo de concepto." })
+                                                                                                                .DataSource(source =>
+                                                                                                                {
+                                                                                                                    source.Read(Read =>
+                                                                                                                    {
+                                                                                                                        Read.Action("GetConceptosCMB", "Conceptos");
+                                                                                                                    });
+                                                                                                                //.serverFiltering(true);
+                                                                                                            })
+                                                                                                                .Filter("contains")
+                                                                                                                .OptionLabel("- Tipo de concepto - ")
+                                                                                                                .DataValueField("Ident")
+                                                                                                                .DataTextField("Valor")
+                                                                                                                .Name("TipoConceptoId")
+                                                                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationmessage = "Seleccione un tipo de concepto." })
             )
         </div>
 
@@ -254,26 +254,27 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().NumericTextBoxFor(x => x.NumeroNivelAutorizante)
-                                                                                                        .Name("NumeroNivelAutorizante")
-                                                                                                        .Format("0")
-                                                                                                        .Decimals(0)
-                                                                                                        .Min(1)
-                                                                                                        //.Events(e => e.Change("onChangeNumeroNivelAutorizante"))
-                                                                                                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                                                                                                                .Name("NumeroNivelAutorizante")
+                                                                                                                .Format("0")
+                                                                                                                .Decimals(0)
+                                                                                                                .Min(1)
+                                                                                                                //.Events(e => e.Change("onChangeNumeroNivelAutorizante"))
+                                                                                                                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
 
-        @*<div class="editor-label cntHidden">
+        @**@
+        <div class="editor-label cntHidden">
             <label for="NumeroNivel">Nivel de autorizante</label>
         </div>
         <div class="editor-field cntHidden">
             @(Html.Kendo().NumericTextBoxFor(x => x.ConceptoId)
-                                                                    .Name("NivelAutorizante")
-                                                                    .Format("0")
-                                                                    .Decimals(0)
-                                                                    .Min(1)
-                                                                    //.Events(e => e.Change("onChangeNumeroNivelAutorizante"))
-                                                                    .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                                                                            .Name("NivelAutorizante")
+                                                                            .Format("0")
+                                                                            .Decimals(0)
+                                                                            .Min(1)
+                                                                            //.Events(e => e.Change("onChangeNumeroNivelAutorizante"))
+                                                                            .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
 
@@ -289,20 +290,20 @@
         </div>
         <div class="editor-field cntHidden">
             @(Html.Kendo().DropDownListFor(x => x.ConceptoId)
-                                            .DataSource(source =>
-                                            {
-                                                source.Read(Read =>
-                                            {
-                                                Read.Action("GetParametrosConceptosCMB", "Conceptos");
-                                            })
-                                            .ServerFiltering(true);
-                                            })
-                                            .Filter("contains")
-                                            .OptionLabel("- Autorizante - ")
-                                            .DataValueField("Id")
-                                            .DataTextField("Value")
-                                            .Name("AutorizanteIdent")
-                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione una opción" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(Read =>
+                                                    {
+                                                        Read.Action("GetParametrosConceptosCMB", "Conceptos");
+                                                    })
+                                                    .ServerFiltering(true);
+                                                    })
+                                                    .Filter("contains")
+                                                    .OptionLabel("- Autorizante - ")
+                                                    .DataValueField("Id")
+                                                    .DataTextField("Value")
+                                                    .Name("AutorizanteIdent")
+                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione una opción" })
             )
         </div>
 
@@ -318,14 +319,14 @@
         </div>
         <div class="editor-field cntHidden">
             @(Html.Kendo().NumericTextBoxFor(x => x.ConceptoId)
-                                                                    .Name("Monto")
-                                                                    .Format("0")
-                                                                    .Decimals(0)
-                                                                    .Min(1)
-                                                                    //.Events(e => e.Change("onChangeNumeroNivelAutorizante"))
-                                                                    .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                                                                            .Name("Monto")
+                                                                            .Format("0")
+                                                                            .Decimals(0)
+                                                                            .Min(1)
+                                                                            //.Events(e => e.Change("onChangeNumeroNivelAutorizante"))
+                                                                            .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
-        </div>*@
+        </div>
 
 
         <div class="editor-label">
