@@ -289,7 +289,13 @@
     <Compile Include="Models\CatEmpleadoPuestoSupervisorSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatEmpleadosPerfilAccesoCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatEmpleadosPerfilEmpleadosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatEmpleadosPerfilNivelAccesoSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatEmpleadosSolicitudesSel_Result.cs">

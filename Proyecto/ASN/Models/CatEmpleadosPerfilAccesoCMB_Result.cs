@@ -11,7 +11,7 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class CatMotivoSolicitudCMB_Result
+    public partial class CatEmpleadosPerfilAccesoCMB_Result
     {
         public int Id { get; set; }
         public string Valor { get; set; }

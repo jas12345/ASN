@@ -1962,5 +1962,23 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosPeopleSoftCMB_Result>("CatConceptosPeopleSoftCMB", tipoConceptoIdParameter);
         }
+    
+        public virtual ObjectResult<CatEmpleadosPerfilAccesoCMB_Result> CatEmpleadosPerfilAccesoCMB(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosPerfilAccesoCMB_Result>("CatEmpleadosPerfilAccesoCMB", perfil_IdentParameter);
+        }
+    
+        public virtual ObjectResult<CatEmpleadosPerfilNivelAccesoSel_Result> CatEmpleadosPerfilNivelAccesoSel(Nullable<int> perfil_Ident)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosPerfilNivelAccesoSel_Result>("CatEmpleadosPerfilNivelAccesoSel", perfil_IdentParameter);
+        }
     }
 }

@@ -172,7 +172,13 @@
         <Function Name="CatEmpleadoPuestoSupervisorSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Ident" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatEmpleadosPerfilAccesoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatEmpleadosPerfilEmpleadosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatEmpleadosPerfilNivelAccesoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
         <Function Name="CatEmpleadosSolicitudesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1093,7 +1099,13 @@
           <Parameter Name="Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConceptosPeopleSoftCMB" ReturnType="Collection(ASNModel.CatConceptosPeopleSoftCMB_Result)">
-            <Parameter Name="TipoConceptoId" Mode="In" Type="Int32" />
+          <Parameter Name="TipoConceptoId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatEmpleadosPerfilAccesoCMB" ReturnType="Collection(ASNModel.CatEmpleadosPerfilAccesoCMB_Result)">
+          <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatEmpleadosPerfilNivelAccesoSel" ReturnType="Collection(ASNModel.CatEmpleadosPerfilNivelAccesoSel_Result)">
+            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1497,7 +1509,7 @@
         </ComplexType>
         <ComplexType Name="CatMotivoSolicitudCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="SolicitudEmpleadosxPerfilSel_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
@@ -1691,6 +1703,15 @@
         <ComplexType Name="CatConceptosPeopleSoftCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatEmpleadosPerfilAccesoCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="true" MaxLength="752" />
+        </ComplexType>
+        <ComplexType Name="CatEmpleadosPerfilNivelAccesoSel_Result">
+          <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
+          <Property Type="Int32" Name="EmpleadoId" Nullable="false" />
+          <Property Type="Int32" Name="Nivel" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -2312,7 +2333,7 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatMotivoSolicitudCMB_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2591,6 +2612,23 @@
               <ComplexTypeMapping TypeName="ASNModel.CatConceptosPeopleSoftCMB_Result">
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatEmpleadosPerfilAccesoCMB" FunctionName="ASNModel.Store.CatEmpleadosPerfilAccesoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatEmpleadosPerfilAccesoCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatEmpleadosPerfilNivelAccesoSel" FunctionName="ASNModel.Store.CatEmpleadosPerfilNivelAccesoSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatEmpleadosPerfilNivelAccesoSel_Result">
+                <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
