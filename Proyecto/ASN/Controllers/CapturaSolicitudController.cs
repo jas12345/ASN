@@ -254,7 +254,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId)
+        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
         {
             try
             {
@@ -283,6 +283,15 @@ namespace ASN.Controllers
                         , conceptoMotivoId
                         , responsableId
                         , periododOriginalId
+                        , autorizadorNivel1
+                        , autorizadorNivel2
+                        , autorizadorNivel3
+                        , autorizadorNivel4
+                        , autorizadorNivel5
+                        , autorizadorNivel6
+                        , autorizadorNivel7
+                        , autorizadorNivel8
+                        , autorizadorNivel9
                         , true//active
                         , idAdmin
                         , folioSolicitudOut
@@ -291,22 +300,19 @@ namespace ASN.Controllers
                     int.TryParse(resultado.Value.ToString(), out res);
                     int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
 
-                    //switch (res)
-                    //{
-                    //    case -2:
-                    //        ModelState.AddModelError("error", "Ya existe un registro con este Empleado y Concepto.");
-                    //        break;
-                    //}
+                    //TODO: Guardar 
+                    
+                    
+                    
+                    
+                    
 
-                    //return Json(profiles.ToDataSourceResult(request, ModelState));
+                    
 
-                    //return Json(ModelState);
-                    //return Json(FolioSolicitud, JsonRequestBehavior.AllowGet);
-                    //return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
-                    return Json(new { FolioSolicitud, res }, JsonRequestBehavior.AllowGet);
-
-                    //return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
-
+                    
+                    
+                    
+                    return Json(new { FolioSolicitud, res }, JsonRequestBehavior.AllowGet);                    
                 }
             }
 

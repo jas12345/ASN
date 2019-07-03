@@ -57,21 +57,18 @@ $(document).ready(function () {
 
 function getFolio() {
     //debugger;
-    //return //{
-    //    //folioid: FolioSolicitud,
-    //    FolioSolicitud;
-    ////};
-
-      return {
-          FolioSolicitud: FolioSolicitud
-        };
+    return {
+        //folioid: FolioSolicitud,
+        FolioSolicitud: FolioSolicitud,
+        //FolioSolicitud;
+    };
 }
 
 function agregarSolicitud() {
     //console.log("Salvado");
     debugger;
     //infoSolicitud();
-    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&Active=" + 1, function (data) {
+    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9 + "&Active=" + 1, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
 
         FolioSolicitud = data.FolioSolicitud;
@@ -81,6 +78,7 @@ function agregarSolicitud() {
             notification.show("Ya existe un registro con este Empleado y Concepto", "error");
         }
 
+        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
         actualizaGrid();
         //debugger;
     });
@@ -92,8 +90,10 @@ function actualizaGrid() {
 }
 
 function editarEmpleadoSolicitud(e) {
+    debugger;
     e.preventDefault(); // sho J
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
     debugger;
     $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem.Ident);
     //$("#CCMSIDSolicitado").data('kendoNumericTextBox').text(dataItem.Ident);
@@ -118,35 +118,44 @@ function editarEmpleadoSolicitud(e) {
     $("#PeriodoIncidente").data('kendoDropDownList').value(dataItem.PeriodoOriginalId);
     $('#PeriodoIncidente').data('kendoDropDownList').trigger('change');
 
-    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
-    $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
+    //$("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
+    //$('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
 
+    debugger;
+    var rowIndex = $(e.currentTarget).closest("tr").index();
+    var grid = $("#gridSolicitud").data("kendoGrid");
+    grid.select("tr:eq(" + rowIndex + ")");
 }
 
 function borrarEmpleadoSolicitud(e) {
-    e.preventDefault(); // sho J
-    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-    debugger;
-    var Solicitud_Ident = dataItem.FolioSolicitud;
-    var Empleado_Ident = dataItem.Ident;
-    var ConceptoId = dataItem.ConceptoId;
-    //Se ejecuta Update con Active=false para eliminar el acceso respondiendo al botón Borrar
-    var Active = false;
-
     //debugger;
 
-    //int Perfil_Ident, int Ident, bool Active
-    $.post(urlUpdateEmpleadoSolicitud + "/?FolioSolicitud=" + Solicitud_Ident + "&Empleado_Ident=" + Empleado_Ident + "&ConceptoId=" + ConceptoId + "&Activo=" + Active, function (data) {
-        //debugger;
+    if (confirm("Desea eliminar este registro?")) {
 
-        actualizaGrid();
+        e.preventDefault(); // sho J
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        debugger;
+        var Solicitud_Ident = dataItem.FolioSolicitud;
+        var Empleado_Ident = dataItem.Ident;
+        var ConceptoId = dataItem.ConceptoId;
+        //Se ejecuta Update con Active=false para eliminar el acceso respondiendo al botón Borrar
+        var Active = false;
 
-        //debugger;
+        //int Perfil_Ident, int Ident, bool Active
+        $.post(urlUpdateEmpleadoSolicitud + "/?FolioSolicitud=" + Solicitud_Ident + "&Empleado_Ident=" + Empleado_Ident + "&ConceptoId=" + ConceptoId + "&Activo=" + Active, function (data) {
+            //debugger;
 
-    }).fail(function (ex) {
-        console.log("fail" + ex);
-    });
+            var grid = $("#gridSolicitud").data("kendoGrid");
+            var selectedRows = grid.select();
 
+            actualizaGrid();
+
+            //grid.select("tr:eq(" + selectedRows(0) + ")");
+
+        }).fail(function (ex) {
+            console.log("fail" + ex);
+        });
+    }
 }
 
 //function infoSolicitud() {
@@ -478,6 +487,105 @@ function onChangeCCMSIdIncidente()
         $("#ResponsableCCMSIDX").text("");
         $("#NombreRespoX").val("");
         $("#NombreRespoX").text("");
+    }
+}
+
+function onChangeAutorizadorNivel1() {
+    debugger;
+
+    if ($("#AutorizadorNivel1").data('kendoDropDownList').text().length > 0) {
+
+        ConAutorizadorNivel1 = ""
+
+        ConAutorizadorNivel1 = $("#AutorizadorNivel1").val();
+    }
+}
+
+function onChangeAutorizadorNivel2() {
+    debugger;
+
+    if ($("#AutorizadorNivel2").data('kendoDropDownList').text().length > 0) {
+
+        ConAutorizadorNivel2 = ""
+
+        ConAutorizadorNivel2 = $("#AutorizadorNivel2").val();
+    }
+}
+
+function onChangeAutorizadorNivel3() {
+    debugger;
+
+    if ($("#AutorizadorNivel3").data('kendoDropDownList').text().length > 0) {
+
+        ConAutorizadorNivel3 = ""
+
+        ConAutorizadorNivel3 = $("#AutorizadorNivel3").val();
+    }
+}
+
+function onChangeAutorizadorNivel4() {
+    debugger;
+
+    if ($("#AutorizadorNivel4").data('kendoDropDownList').text().length > 0) {
+
+        ConAutorizadorNivel4 = ""
+
+        ConAutorizadorNivel4 = $("#AutorizadorNivel4").val();
+    }
+}
+
+function onChangeAutorizadorNivel5() {
+    debugger;
+
+    if ($("#AutorizadorNivel5").data('kendoDropDownList').text().length > 0) {
+
+        ConAutorizadorNivel5 = ""
+
+        ConAutorizadorNivel5 = $("#AutorizadorNivel5").val();
+    }
+}
+
+function onChangeAutorizadorNivel6() {
+    debugger;
+
+    if ($("#AutorizadorNivel6").data('kendoDropDownList').text().length > 0) {
+
+        ConAutorizadorNivel6 = ""
+
+        ConAutorizadorNivel6 = $("#AutorizadorNivel6").val();
+    }
+}
+
+function onChangeAutorizadorNivel7() {
+    debugger;
+
+    if ($("#AutorizadorNivel7").data('kendoDropDownList').text().length > 0) {
+
+        ConAutorizadorNivel7 = ""
+
+        ConAutorizadorNivel7 = $("#AutorizadorNivel7").val();
+    }
+}
+
+function onChangeAutorizadorNivel8() {
+    debugger;
+
+    if ($("#AutorizadorNivel8").data('kendoDropDownList').text().length > 0) {
+
+        ConAutorizadorNivel8 = ""
+
+        ConAutorizadorNivel8 = $("#AutorizadorNivel8").val();
+    }
+}
+
+function onChangeAutorizadorNivel9() {
+    debugger;
+
+    if ($("#AutorizadorNivel9").data('kendoDropDownList').text().length > 0) {
+
+        ConAutorizadorNivel9 = ""
+
+        ConAutorizadorNivel9 = $("#AutorizadorNivel9").val();
     }
 }
 
