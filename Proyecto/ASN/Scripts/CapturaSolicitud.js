@@ -495,9 +495,10 @@ function onChangeAutorizadorNivel1() {
 
     if ($("#AutorizadorNivel1").data('kendoDropDownList').text().length > 0) {
 
-        ConAutorizadorNivel1 = ""
+        autorizadorNivel1 = ""
+        debugger;
 
-        ConAutorizadorNivel1 = $("#AutorizadorNivel1").val();
+        autorizadorNivel1 = $("#AutorizadorNivel1").val();
     }
 }
 
@@ -506,9 +507,10 @@ function onChangeAutorizadorNivel2() {
 
     if ($("#AutorizadorNivel2").data('kendoDropDownList').text().length > 0) {
 
-        ConAutorizadorNivel2 = ""
+        autorizadorNivel2 = ""
+        debugger;
 
-        ConAutorizadorNivel2 = $("#AutorizadorNivel2").val();
+        autorizadorNivel2 = $("#AutorizadorNivel2").val();
     }
 }
 
@@ -517,9 +519,10 @@ function onChangeAutorizadorNivel3() {
 
     if ($("#AutorizadorNivel3").data('kendoDropDownList').text().length > 0) {
 
-        ConAutorizadorNivel3 = ""
+        autorizadorNivel3 = ""
+        debugger;
 
-        ConAutorizadorNivel3 = $("#AutorizadorNivel3").val();
+        autorizadorNivel3 = $("#AutorizadorNivel3").val();
     }
 }
 
@@ -528,9 +531,10 @@ function onChangeAutorizadorNivel4() {
 
     if ($("#AutorizadorNivel4").data('kendoDropDownList').text().length > 0) {
 
-        ConAutorizadorNivel4 = ""
+        autorizadorNivel4 = ""
+        debugger;
 
-        ConAutorizadorNivel4 = $("#AutorizadorNivel4").val();
+        autorizadorNivel4 = $("#AutorizadorNivel4").val();
     }
 }
 
@@ -539,9 +543,9 @@ function onChangeAutorizadorNivel5() {
 
     if ($("#AutorizadorNivel5").data('kendoDropDownList').text().length > 0) {
 
-        ConAutorizadorNivel5 = ""
+        autorizadorNivel5 = ""
 
-        ConAutorizadorNivel5 = $("#AutorizadorNivel5").val();
+        autorizadorNivel5 = $("#AutorizadorNivel5").val();
     }
 }
 
@@ -550,9 +554,9 @@ function onChangeAutorizadorNivel6() {
 
     if ($("#AutorizadorNivel6").data('kendoDropDownList').text().length > 0) {
 
-        ConAutorizadorNivel6 = ""
+        autorizadorNivel6 = ""
 
-        ConAutorizadorNivel6 = $("#AutorizadorNivel6").val();
+        autorizadorNivel6 = $("#AutorizadorNivel6").val();
     }
 }
 
@@ -561,9 +565,9 @@ function onChangeAutorizadorNivel7() {
 
     if ($("#AutorizadorNivel7").data('kendoDropDownList').text().length > 0) {
 
-        ConAutorizadorNivel7 = ""
+        autorizadorNivel7 = ""
 
-        ConAutorizadorNivel7 = $("#AutorizadorNivel7").val();
+        autorizadorNivel7 = $("#AutorizadorNivel7").val();
     }
 }
 
@@ -572,9 +576,9 @@ function onChangeAutorizadorNivel8() {
 
     if ($("#AutorizadorNivel8").data('kendoDropDownList').text().length > 0) {
 
-        ConAutorizadorNivel8 = ""
+        autorizadorNivel8 = ""
 
-        ConAutorizadorNivel8 = $("#AutorizadorNivel8").val();
+        autorizadorNivel8 = $("#AutorizadorNivel8").val();
     }
 }
 
@@ -583,9 +587,9 @@ function onChangeAutorizadorNivel9() {
 
     if ($("#AutorizadorNivel9").data('kendoDropDownList').text().length > 0) {
 
-        ConAutorizadorNivel9 = ""
+        autorizadorNivel9 = ""
 
-        ConAutorizadorNivel9 = $("#AutorizadorNivel9").val();
+        autorizadorNivel9 = $("#AutorizadorNivel9").val();
     }
 }
 
