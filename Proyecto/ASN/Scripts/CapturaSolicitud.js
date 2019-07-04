@@ -1,7 +1,8 @@
 ﻿//var _perfil = 0;
 
 $(document).ready(function () {
-
+    debugger;
+    FolioSolicitud = $("#FolioSolicitud").val();
     actualizaGrid();
 
     //$("#Conceptos").change(function () {

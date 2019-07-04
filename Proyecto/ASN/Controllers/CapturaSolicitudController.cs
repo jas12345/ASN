@@ -17,7 +17,7 @@ namespace ASN.Controllers
         public ActionResult Index(int? FolioSolicitud)
         {
             var obj = new CatSolicitudesSel_Result();
-            obj.FolioSolicitud = 200;
+            obj.FolioSolicitud = (int)(FolioSolicitud ?? -1);
             return View(obj);
             //return View();
         }
