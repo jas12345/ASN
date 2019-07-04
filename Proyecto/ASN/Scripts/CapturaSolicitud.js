@@ -1,6 +1,9 @@
 ﻿//var _perfil = 0;
 
 $(document).ready(function () {
+
+    actualizaGrid();
+
     //$("#Conceptos").change(function () {
     //    //debugger;
 
@@ -59,7 +62,7 @@ function getFolio() {
     //debugger;
     return {
         //folioid: FolioSolicitud,
-        FolioSolicitud: FolioSolicitud,
+        FolioSolicitud: $("#FolioSolicitud").val(),
         //FolioSolicitud;
     };
 }
@@ -87,6 +90,7 @@ function agregarSolicitud() {
 function actualizaGrid() {
     $("#gridSolicitud").data("kendoGrid").dataSource.read();
     $("#gridSolicitud").data("kendoGrid").refresh();
+    debugger;
 }
 
 function editarEmpleadoSolicitud(e) {
@@ -228,6 +232,15 @@ function borrarEmpleadoSolicitud(e) {
 //        perfil: $("#Perfil_Ident").val(),
 //    };
 //}
+
+function onChangeFolioSolicitud() {
+    debugger;
+
+    //FolioSolicitud = data.FolioSolicitud;
+    //FolioSolicitud: $("#FolioSolicitud").val();
+
+    actualizaGrid();
+}
 
 function onChangeCCMSId() {
     debugger;

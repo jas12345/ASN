@@ -2016,5 +2016,14 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosPerfilNivelAccesoSel_Result>("CatEmpleadosPerfilNivelAccesoSel", perfil_IdentParameter);
         }
+    
+        public virtual ObjectResult<CatMisSolicitudesSel_Result> CatMisSolicitudesSel(Nullable<int> solicitante_Ident)
+        {
+            var solicitante_IdentParameter = solicitante_Ident.HasValue ?
+                new ObjectParameter("Solicitante_Ident", solicitante_Ident) :
+                new ObjectParameter("Solicitante_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisSolicitudesSel_Result>("CatMisSolicitudesSel", solicitante_IdentParameter);
+        }
     }
 }

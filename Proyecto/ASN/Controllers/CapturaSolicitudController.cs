@@ -14,11 +14,12 @@ namespace ASN.Controllers
     public class CapturaSolicitudController : Controller
     {
         // GET: CapturaSolicitud
-        public ActionResult Index()
+        public ActionResult Index(int? FolioSolicitud)
         {
             var obj = new CatSolicitudesSel_Result();
-            obj.FolioSolicitud = 0;
+            obj.FolioSolicitud = 200;
             return View(obj);
+            //return View();
         }
 
         public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)

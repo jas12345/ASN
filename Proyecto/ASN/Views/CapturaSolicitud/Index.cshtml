@@ -88,11 +88,12 @@
                             <div class="col-lg-3">
                                 <label>Folio de Solicitud:  </label>
                                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
-                                            .Enable(false)
+                                            .Enable(true)
                                             .Spinners(false)
                                             .Decimals(0)
                                             .Format("0")
                                             .Min(0)
+                                            .Events(e => e.Change("onChangeFolioSolicitud"))
                                             //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
                                             .Value(Model.FolioSolicitud)
                                             .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })

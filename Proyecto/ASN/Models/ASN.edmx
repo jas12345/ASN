@@ -243,6 +243,9 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatMisSolicitudesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Solicitante_Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatMotivoSolicitudCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatParametroConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPerfilEmpleadoAccesoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1125,6 +1128,9 @@
           <FunctionImport Name="CatEmpleadosPerfilNivelAccesoSel" ReturnType="Collection(ASNModel.CatEmpleadosPerfilNivelAccesoSel_Result)">
           <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatMisSolicitudesSel" ReturnType="Collection(ASNModel.CatMisSolicitudesSel_Result)">
+          <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1730,6 +1736,14 @@
           <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
           <Property Type="Int32" Name="EmpleadoId" Nullable="false" />
           <Property Type="Int32" Name="Nivel" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CatMisSolicitudesSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -2647,6 +2661,18 @@
                 <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
                 <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
                 <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatMisSolicitudesSel" FunctionName="ASNModel.Store.CatMisSolicitudesSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatMisSolicitudesSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
+                <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

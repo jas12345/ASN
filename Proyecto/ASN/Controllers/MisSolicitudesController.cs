@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ASN.CapturasRapidas.Controllers
+namespace ASN.Controllers
 {
     public class MisSolicitudesController : Controller
     {
@@ -24,8 +24,10 @@ namespace ASN.CapturasRapidas.Controllers
             {
                 using (ASNContext context = new ASNContext())
                 {
+                    int.TryParse(User.Identity.Name, out int idAdmin);
+
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.CatSolicitudesSel(0).ToList();
+                    var lstSolicitudes = context.CatMisSolicitudesSel(idAdmin).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok);
                 }

@@ -84,6 +84,14 @@ function handleEditChanges(e, grid) {
     }
 }
 
+//Inicio Parametros
+function GetSolicitante() {
+    return {
+        //solicitante: _solicitante,
+        solicitud: $("#SolicitudId").val()
+    };
+}
+
 function handleSaveChanges(e, grid) {
     var valid = true;
     var rows = grid.tbody.find("tr");
@@ -199,6 +207,14 @@ function dateFilter(e) {
     });
 }
 
+function EditaSolicitud(e) {
+    e.preventDefault();
+    var d = this.dataItem($(e.currentTarget).closest("tr"));
+    debugger;
+    //@Html.ActionLink("CapturaSolicitud", "Index", "CapturaSolicitud")
+
+    window.location.href = urlEditar +"?FolioSolicitud="+ d.FolioSolicitud;
+}
 
 //$(document).ready(function () {
 //    //OcultaSave();
