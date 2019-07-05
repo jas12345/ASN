@@ -2025,5 +2025,44 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisSolicitudesSel_Result>("CatMisSolicitudesSel", solicitante_IdentParameter);
         }
+    
+        public virtual ObjectResult<CatConceptosPeopleSoftSel_Result> CatConceptosPeopleSoftSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosPeopleSoftSel_Result>("CatConceptosPeopleSoftSel");
+        }
+    
+        public virtual int CatConceptosPeopleSoftSi(string descripcion, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        {
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosPeopleSoftSi", descripcionParameter, userEmployeeIdParameter, estatus);
+        }
+    
+        public virtual int CatConceptosPeopleSoftSu(Nullable<int> conceptoId, string descripcion, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        {
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosPeopleSoftSu", conceptoIdParameter, descripcionParameter, userEmployeeIdParameter, activeParameter, estatus);
+        }
     }
 }

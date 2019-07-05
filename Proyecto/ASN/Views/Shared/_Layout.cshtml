@@ -110,6 +110,11 @@
 
                                 @if (User.IsInRole("Desarrollo"))
                                 {
+                                    <li>@Html.ActionLink("Conceptos PeopleSoft", "index", "ConceptosPeopleSoft")</li>
+                                }
+
+                                @if (User.IsInRole("Desarrollo"))
+                                {
                                     <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
                                 }
 
@@ -129,9 +134,9 @@
                                 }
 
                                 @*@if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>
-                                }*@
+        {
+            <li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>
+        }*@
                             </ul>
                         </li>
                     }

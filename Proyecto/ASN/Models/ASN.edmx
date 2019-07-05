@@ -90,6 +90,19 @@
         <Function Name="CatConceptosPeopleSoftCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="TipoConceptoId" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatConceptosPeopleSoftSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConceptosPeopleSoftSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatConceptosPeopleSoftSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="CatConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -1131,6 +1144,19 @@
           <FunctionImport Name="CatMisSolicitudesSel" ReturnType="Collection(ASNModel.CatMisSolicitudesSel_Result)">
           <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatConceptosPeopleSoftSel" ReturnType="Collection(ASNModel.CatConceptosPeopleSoftSel_Result)" />
+          <FunctionImport Name="CatConceptosPeopleSoftSi">
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConceptosPeopleSoftSu">
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1744,6 +1770,11 @@
           <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosPeopleSoftSel_Result">
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
        
         </Schema>
@@ -2676,6 +2707,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosPeopleSoftSel" FunctionName="ASNModel.Store.CatConceptosPeopleSoftSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosPeopleSoftSel_Result">
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosPeopleSoftSi" FunctionName="ASNModel.Store.CatConceptosPeopleSoftSi" />
+          <FunctionImportMapping FunctionImportName="CatConceptosPeopleSoftSu" FunctionName="ASNModel.Store.CatConceptosPeopleSoftSu" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

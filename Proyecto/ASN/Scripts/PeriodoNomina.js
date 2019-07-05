@@ -58,7 +58,7 @@ function valida(e) {
         
         if (e.response.Errors === null) {
             var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Saved", "success");
+            notification.show("Guardado", "success");
         }
     }
 }
