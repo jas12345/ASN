@@ -2031,20 +2031,24 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosPeopleSoftSel_Result>("CatConceptosPeopleSoftSel");
         }
     
-        public virtual int CatConceptosPeopleSoftSi(string descripcion, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatConceptosPeopleSoftSi(string descripcion, string descripcionPeopleSoft, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("Descripcion", descripcion) :
                 new ObjectParameter("Descripcion", typeof(string));
     
+            var descripcionPeopleSoftParameter = descripcionPeopleSoft != null ?
+                new ObjectParameter("DescripcionPeopleSoft", descripcionPeopleSoft) :
+                new ObjectParameter("DescripcionPeopleSoft", typeof(string));
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosPeopleSoftSi", descripcionParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosPeopleSoftSi", descripcionParameter, descripcionPeopleSoftParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatConceptosPeopleSoftSu(Nullable<int> conceptoId, string descripcion, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatConceptosPeopleSoftSu(Nullable<int> conceptoId, string descripcion, string descripcionPeopleSoft, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
             var conceptoIdParameter = conceptoId.HasValue ?
                 new ObjectParameter("ConceptoId", conceptoId) :
@@ -2054,6 +2058,10 @@ namespace ASN.Models
                 new ObjectParameter("Descripcion", descripcion) :
                 new ObjectParameter("Descripcion", typeof(string));
     
+            var descripcionPeopleSoftParameter = descripcionPeopleSoft != null ?
+                new ObjectParameter("DescripcionPeopleSoft", descripcionPeopleSoft) :
+                new ObjectParameter("DescripcionPeopleSoft", typeof(string));
+    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
@@ -2062,7 +2070,7 @@ namespace ASN.Models
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosPeopleSoftSu", conceptoIdParameter, descripcionParameter, userEmployeeIdParameter, activeParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosPeopleSoftSu", conceptoIdParameter, descripcionParameter, descripcionPeopleSoftParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     }
 }

@@ -93,12 +93,14 @@
         <Function Name="CatConceptosPeopleSoftSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosPeopleSoftSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="DescripcionPeopleSoft" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatConceptosPeopleSoftSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="DescripcionPeopleSoft" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -1147,12 +1149,14 @@
           <FunctionImport Name="CatConceptosPeopleSoftSel" ReturnType="Collection(ASNModel.CatConceptosPeopleSoftSel_Result)" />
           <FunctionImport Name="CatConceptosPeopleSoftSi">
             <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="DescripcionPeopleSoft" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConceptosPeopleSoftSu">
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="DescripcionPeopleSoft" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -1775,6 +1779,7 @@
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="DescripcionPeopleSoft" Nullable="true" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -2713,6 +2718,7 @@
                 <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DescripcionPeopleSoft" ColumnName="DescripcionPeopleSoft" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

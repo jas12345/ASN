@@ -16,5 +16,6 @@ namespace ASN.Models
         public int ConceptoId { get; set; }
         public string Descripcion { get; set; }
         public bool Active { get; set; }
+        public string DescripcionPeopleSoft { get; set; }
     }
 }

@@ -111,7 +111,7 @@ namespace ASN.Controllers
                     {
                         if (!string.IsNullOrEmpty(obj.Descripcion))
                         {
-                            context.CatConceptosPeopleSoftSi(obj.Descripcion,ccmsidAdmin, resultado);
+                            context.CatConceptosPeopleSoftSi(obj.Descripcion, obj.DescripcionPeopleSoft, ccmsidAdmin, resultado);
                         }
                     }
 
@@ -156,7 +156,7 @@ namespace ASN.Controllers
                     {
                         if (!string.IsNullOrEmpty(obj.Descripcion))
                         {
-                            context.CatConceptosPeopleSoftSu(obj.ConceptoId,obj.Descripcion,ccmsidAdmin,obj.Active,resultado);
+                            context.CatConceptosPeopleSoftSu(obj.ConceptoId, obj.Descripcion, obj.DescripcionPeopleSoft, ccmsidAdmin,obj.Active,resultado);
                         }
                     }
 

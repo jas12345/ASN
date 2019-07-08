@@ -12,7 +12,14 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().TextBoxFor(x => x.Descripcion)
-                .HtmlAttributes(new { required = "required", validationMessage = "Este campo es requerido." }))
+                    .HtmlAttributes(new { required = "required", validationMessage = "Este campo es requerido." }))
+        </div>
+        <div class="editor-label">
+            <label for="Descripcion">Descripción PeopleSoft</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.DescripcionPeopleSoft)
+                        .HtmlAttributes(new { required = "required", validationMessage = "Este campo es requerido." }))
         </div>
         <div class="editor-label">
             <label for="Active">Activo</label>
