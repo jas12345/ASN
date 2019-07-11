@@ -183,6 +183,7 @@
         <Function Name="CatCountryTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatEmpleadoPuestoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Ident" Type="int" Mode="In" />
+          <Parameter Name="Solicitante_Ident" Type="int" Mode="In" />
         </Function>
         <Function Name="CatEmpleadoPuestoSupervisorSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Ident" Type="int" Mode="In" />
@@ -1127,6 +1128,7 @@
           </FunctionImport>
           <FunctionImport Name="CatEmpleadoPuestoSel" ReturnType="Collection(ASNModel.CatEmpleadoPuestoSel_Result)">
           <Parameter Name="Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConceptosParametroConceptosSel" ReturnType="Collection(ASNModel.CatConceptosParametroConceptosSel_Result)">
           <Parameter Name="ConceptoId" Mode="In" Type="Int32" />

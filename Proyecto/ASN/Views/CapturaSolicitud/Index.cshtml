@@ -84,11 +84,11 @@
                 <tbody>
                     <tr>
                         <td>
-                            @**@
+                            
                             <div class="col-lg-3">
                                 <label>Folio de Solicitud:  </label>
                                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
-                                            .Enable(true)
+                                            .Enable(false)
                                             .Spinners(false)
                                             .Decimals(0)
                                             .Format("0")
@@ -172,125 +172,125 @@
                         <tr>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                                                                    .Name("CCMSIDSolicitado")
-                                                                                    .Spinners(false)
-                                                                                    .Decimals(0)
-                                                                                    .Format("0.")
-                                                                                    .Min(0)
-                                                                                    .Events(e => e.Change("onChangeCCMSId"))
-                                                                                    //.Step(5)
-                                                                                    //.Value(0)
-                                                                                    .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
+                                                                                            .Name("CCMSIDSolicitado")
+                                                                                            .Spinners(false)
+                                                                                            .Decimals(0)
+                                                                                            .Format("0.")
+                                                                                            .Min(0)
+                                                                                            .Events(e => e.Change("onChangeCCMSId"))
+                                                                                            //.Step(5)
+                                                                                            //.Value(0)
+                                                                                            .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                    {
-                                                                        source.Read(read =>
-                                                                        {
-                                                                            read.Action("GetConceptosCMB", "CapturaSolicitud");
-                                                                        }
-                                                                        );
-                                                                                    //.ServerFiltering(true);
+                                                                            {
+                                                                                source.Read(read =>
+                                                                                {
+                                                                                    read.Action("GetConceptosCMB", "CapturaSolicitud");
                                                                                 }
-                                                                                    )
-                                                                                    .Filter("contains")
-                                                                                    .OptionLabel("- Conceptos - ")
-                                                                                    .DataValueField("Ident")
-                                                                                    .DataTextField("Valor")
-                                                                                    .Name("Conceptos")
-                                                                                    .Events(e => e.Change("onChangeConceptos"))
-                                                                                    //.SelectedIndex(1)
-                                                                                    .Enable(true)
-                                                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                                                                );
+                                                                                            //.ServerFiltering(true);
+                                                                                        }
+                                                                                            )
+                                                                                            .Filter("contains")
+                                                                                            .OptionLabel("- Conceptos - ")
+                                                                                            .DataValueField("Ident")
+                                                                                            .DataTextField("Valor")
+                                                                                            .Name("Conceptos")
+                                                                                            .Events(e => e.Change("onChangeConceptos"))
+                                                                                            //.SelectedIndex(1)
+                                                                                            .Enable(true)
+                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                                                                    .Name("Parametro")
-                                                                                    .Events(e => e.Change("onChangeParametro"))
-                                                                                    .Spinners(false)
-                                                                                    .Decimals(2)
-                                                                                    .Format("0.00")
-                                                                                    .Min(0)
-                                                                                    //.Step(5)
-                                                                                    //.Value(0)
-                                                                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+                                                                                            .Name("Parametro")
+                                                                                            .Events(e => e.Change("onChangeParametro"))
+                                                                                            .Spinners(false)
+                                                                                            .Decimals(2)
+                                                                                            .Format("0.00")
+                                                                                            .Min(0)
+                                                                                            //.Step(5)
+                                                                                            //.Value(0)
+                                                                                            .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                    {
-                                                                        source.Read(read =>
-                                                                        {
-                                                                            read.Action("GetMotivosCMB", "CapturaSolicitud");
-                                                                        }
-                                                                        );
-                                                                                    //.ServerFiltering(true);
+                                                                            {
+                                                                                source.Read(read =>
+                                                                                {
+                                                                                    read.Action("GetMotivosCMB", "CapturaSolicitud");
                                                                                 }
-                                                                                    )
-                                                                                    .Filter("contains")
-                                                                                    .OptionLabel("- Motivo - ")
-                                                                                    .DataValueField("Id")
-                                                                                    .DataTextField("Valor")
-                                                                                    .Name("Motivo")
-                                                                                    .Events(e => e.Change("onChangeMotivo"))
-                                                                                    //.SelectedIndex(1)
-                                                                                    .Enable(true)
-                                                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                                                                );
+                                                                                            //.ServerFiltering(true);
+                                                                                        }
+                                                                                            )
+                                                                                            .Filter("contains")
+                                                                                            .OptionLabel("- Motivo - ")
+                                                                                            .DataValueField("Id")
+                                                                                            .DataTextField("Valor")
+                                                                                            .Name("Motivo")
+                                                                                            .Events(e => e.Change("onChangeMotivo"))
+                                                                                            //.SelectedIndex(1)
+                                                                                            .Enable(true)
+                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                    {
-                                                                        source.Read(read =>
-                                                                        {
-                                                                            read.Action("GetConceptosMotivosCMB", "CapturaSolicitud");
-                                                                        });
-                                                                                    //.ServerFiltering(true);
-                                                                                })
-                                                                                                                                .Filter("contains")
-                                                                                                                                .OptionLabel("- Concepto Motivo - ")
-                                                                                                                                .DataValueField("Ident")
-                                                                                                                                .DataTextField("Valor")
-                                                                                                                                .Name("ConceptoMotivo")
-                                                                                                                                .Events(e => e.Change("onChangeConceptoMotivo"))
-                                                                                                                                //.SelectedIndex(1)
-                                                                                                                                .Enable(true)
-                                                                                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                                                            {
+                                                                                source.Read(read =>
+                                                                                {
+                                                                                    read.Action("GetConceptosMotivosCMB", "CapturaSolicitud");
+                                                                                });
+                                                                                            //.ServerFiltering(true);
+                                                                                        })
+                                                                                                                                        .Filter("contains")
+                                                                                                                                        .OptionLabel("- Concepto Motivo - ")
+                                                                                                                                        .DataValueField("Ident")
+                                                                                                                                        .DataTextField("Valor")
+                                                                                                                                        .Name("ConceptoMotivo")
+                                                                                                                                        .Events(e => e.Change("onChangeConceptoMotivo"))
+                                                                                                                                        //.SelectedIndex(1)
+                                                                                                                                        .Enable(true)
+                                                                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                                                                                                                .Name("CCMSIDIncidente")
-                                                                                                                                .Events(e => e.Change("onChangeCCMSIdIncidente"))
-                                                                                                                                .Spinners(false)
-                                                                                                                                .Decimals(0)
-                                                                                                                                .Format("0.")
-                                                                                                                                .Min(0)
-                                                                                                                                //.Step(5)
-                                                                                                                                //.Value(0)
-                                                                                                                                .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+                                                                                                                                        .Name("CCMSIDIncidente")
+                                                                                                                                        .Events(e => e.Change("onChangeCCMSIdIncidente"))
+                                                                                                                                        .Spinners(false)
+                                                                                                                                        .Decimals(0)
+                                                                                                                                        .Format("0.")
+                                                                                                                                        .Min(0)
+                                                                                                                                        //.Step(5)
+                                                                                                                                        //.Value(0)
+                                                                                                                                        .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                    {
-                                                                        source.Read(read =>
-                                                                        {
-                                                                            read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
-                                                                        });
-                                                                                    //.ServerFiltering(true);
-                                                                                })
-                                                                                                                                .Filter("contains")
-                                                                                                                                .OptionLabel("- Período Incidente - ")
-                                                                                                                                .DataValueField("Ident")
-                                                                                                                                .DataTextField("Valor")
-                                                                                                                                .Name("PeriodoIncidente")
-                                                                                                                                .Events(e => e.Change("onChangePeriodoIncidente"))
-                                                                                                                                //.SelectedIndex(1)
-                                                                                                                                .Enable(true)
-                                                                                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                                                            {
+                                                                                source.Read(read =>
+                                                                                {
+                                                                                    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                });
+                                                                                            //.ServerFiltering(true);
+                                                                                        })
+                                                                                                                                        .Filter("contains")
+                                                                                                                                        .OptionLabel("- Período Incidente - ")
+                                                                                                                                        .DataValueField("Ident")
+                                                                                                                                        .DataTextField("Valor")
+                                                                                                                                        .Name("PeriodoIncidente")
+                                                                                                                                        .Events(e => e.Change("onChangePeriodoIncidente"))
+                                                                                                                                        //.SelectedIndex(1)
+                                                                                                                                        .Enable(true)
+                                                                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                         </tr>
@@ -301,94 +301,101 @@
                         <tr>
                             <td style="width : 6em">
                                 @(Html.Kendo().Button().Name("AgregarSolicitud").Content("Aplicar")
-                                                .Events(x => x.Click("agregarSolicitud"))
+                                                        .Events(x => x.Click("agregarSolicitud"))
                                         //.Events(x => x.Click("agregaEmpleado"))
                                 )
                             </td>
                             <td>
-                                <label class="primerLabel" id="lblAutorizadorNivel1">        Autorizador     Nivel 1:</label>
+                                <div name="nivel" id="1">
+                                    <label class="primerLabel" id="lblAutorizadorNivel1">        Autorizador     Nivel 1:</label>
 
-                                @(Html.Kendo().DropDownList().DataSource(source =>
-                            {
-                                source.Read(read =>
-                                {
-                                    read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
-                                });
-                            })
-                                                                                                                .Filter("contains")
-                                                                                                                .OptionLabel("- Autorizador Nivel 1 - ")
-                                                                                                                .DataValueField("Id")
-                                                                                                                .DataTextField("Valor")
-                                                                                                                .Name("AutorizadorNivel1")
-                                                                                                                .Events(e => e.Change("onChangeAutorizadorNivel1"))
-                                                                                                                //.SelectedIndex(1)
-                                                                                                                .Enable(true)
-                                                                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
+                                    @(Html.Kendo().DropDownList().DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
+                                                    });
+                                                })
+                                                                                                                                    .Filter("contains")
+                                                                                                                                    .OptionLabel("- Autorizador Nivel 1 - ")
+                                                                                                                                    .DataValueField("Id")
+                                                                                                                                    .DataTextField("Valor")
+                                                                                                                                    .Name("AutorizadorNivel1")
+                                                                                                                                    .Events(e => e.Change("onChangeAutorizadorNivel1"))
+                                                                                                                                    //.SelectedIndex(1)
+                                                                                                                                    .Enable(true)
+                                                                                                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                    )
+                                </div>
                             </td>
                             <td>
-                                <label class="primerLabel" id="lblAutorizadorNivel2">    Nivel 2:</label>
+                                <div name="nivel" id="2">
+                                    <label class="primerLabel" id="lblAutorizadorNivel2">    Nivel 2:</label>
 
-                                @(Html.Kendo().DropDownList().DataSource(source =>
-                            {
-                                source.Read(read =>
-                                {
-                                    read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
-                                });
-                            })
-                                                                                                                                            .Filter("contains")
-                                                                                                                                            .OptionLabel("- Autorizador Nivel 2 - ")
-                                                                                                                                            .DataValueField("Id")
-                                                                                                                                            .DataTextField("Valor")
-                                                                                                                                            .Name("AutorizadorNivel2")
-                                                                                                                                            .Events(e => e.Change("onChangeAutorizadorNivel2"))
-                                                                                                                                            //.SelectedIndex(1)
-                                                                                                                                            .Enable(true)
-                                                                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
-
+                                    @(Html.Kendo().DropDownList().DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
+                                                            });
+                                                        })
+                                                                                                                                                                        .Filter("contains")
+                                                                                                                                                                        .OptionLabel("- Autorizador Nivel 2 - ")
+                                                                                                                                                                        .DataValueField("Id")
+                                                                                                                                                                        .DataTextField("Valor")
+                                                                                                                                                                        .Name("AutorizadorNivel2")
+                                                                                                                                                                        .Events(e => e.Change("onChangeAutorizadorNivel2"))
+                                                                                                                                                                        //.SelectedIndex(1)
+                                                                                                                                                                        .Enable(true)
+                                                                                                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                    )
+                                </div>
                             </td>
                             <td>
-                                <label class="primerLabel" id="lblAutorizadorNivel3">    Nivel 3:</label>
+                                <div name="nivel" id="3">
+                                    <label class="primerLabel" id="lblAutorizadorNivel3">    Nivel 3:</label>
 
-                                @(Html.Kendo().DropDownList().DataSource(source =>
-                            {
-                                source.Read(read =>
-                                {
-                                    read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
-                                });
-                            })
-                                                                                                                                            .Filter("contains")
-                                                                                                                                            .OptionLabel("- Autorizador Nivel 3 - ")
-                                                                                                                                            .DataValueField("Id")
-                                                                                                                                            .DataTextField("Valor")
-                                                                                                                                            .Name("AutorizadorNivel3")
-                                                                                                                                            .Events(e => e.Change("onChangeAutorizadorNivel3"))
-                                                                                                                                            //.SelectedIndex(1)
-                                                                                                                                            .Enable(true)
-                                                                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
+                                    @(Html.Kendo().DropDownList().DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
+                                                            });
+                                                        })
+                                                                                                                                                                        .Filter("contains")
+                                                                                                                                                                        .OptionLabel("- Autorizador Nivel 3 - ")
+                                                                                                                                                                        .DataValueField("Id")
+                                                                                                                                                                        .DataTextField("Valor")
+                                                                                                                                                                        .Name("AutorizadorNivel3")
+                                                                                                                                                                        .Events(e => e.Change("onChangeAutorizadorNivel3"))
+                                                                                                                                                                        //.SelectedIndex(1)
+                                                                                                                                                                        .Enable(true)
+                                                                                                                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                    )
+                                </div>
                             </td>
                             <td>
-                                <label class="primerLabel" id="lblAutorizadorNivel4">    Nivel 4:</label>
+                                <div name="nivel" id="4">
+                                    <label class="primerLabel" id="lblAutorizadorNivel4">    Nivel 4:</label>
 
-                                @(Html.Kendo().DropDownList().DataSource(source =>
-                            {
-                                source.Read(read =>
-                                {
-                                    read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
-                                });
-                            })
-                                                                                                                                            .Filter("contains")
-                                                                                                                                                .OptionLabel("- Autorizador Nivel 4 - ")
-                                                                                                                                                .DataValueField("Id")
-                                                                                                                                                .DataTextField("Valor")
-                                                                                                                                                .Name("AutorizadorNivel4")
-                                                                                                                                            .Events(e => e.Change("onChangeAutorizadorNivel4"))
-                                                                                                                                            //.SelectedIndex(1)
-                                                                                                                                            .Enable(true)
-                                                                                                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
+                                    @(Html.Kendo().DropDownList().DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
+                                                            });
+                                                        })
+                                                                                                                                                                        .Filter("contains")
+                                                                                                                                                                            .OptionLabel("- Autorizador Nivel 4 - ")
+                                                                                                                                                                            .DataValueField("Id")
+                                                                                                                                                                            .DataTextField("Valor")
+                                                                                                                                                                            .Name("AutorizadorNivel4")
+                                                                                                                                                                        .Events(e => e.Change("onChangeAutorizadorNivel4"))
+                                                                                                                                                                        //.SelectedIndex(1)
+                                                                                                                                                                        .Enable(true)
+                                                                                                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                    )
+                                </div>
                             </td>
                         </tr>
                     </table>
@@ -396,121 +403,130 @@
                 <div class="col-lg-12">
                     <table class="table-responsive table" cellpadding="1" style="margin-bottom: 5px;">
                         <tr>
-                            <td style="width : 6em">
-
-                            </td>
+                            <td style="width : 6em"></td>
                             <td>
-                                @**@
+                                <div name="nivel" id="5">
+                                
                                 <label class="primerLabel" id="lblAutorizadorNivel5">        Autorizador     Nivel 5:</label>
 
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                                                                                                                                    {
-                                                                                                                                                                                                    //source.Read(read =>
-                                                                                                                                                                                                    //{
-                                                                                                                                                                                                    //    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
-                                                                                                                                                                                                    //});
-                                                                                                                                                                                                })
-                                                                                                                                                                                    .Filter("contains")
-                                                                                                                                                                                    .OptionLabel("- Autorizador Nivel 5 - ")
-                                                                                                                                                                                    .DataValueField("Id")
-                                                                                                                                                                                    .DataTextField("Valor")
-                                                                                                                                                                                    .Name("AutorizadorNivel5")
-                                                                                                                                                                                    .Events(e => e.Change("onChangeAutorizadorNivel5"))
-                                                                                                                                                                                    //.SelectedIndex(1)
-                                                                                                                                                                                    .Enable(true)
-                                                                                                                                                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                                                                                                                                                                            {
+                                                                                                                                                                                                            //source.Read(read =>
+                                                                                                                                                                                                            //{
+                                                                                                                                                                                                            //    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                                                                                                                                            //});
+                                                                                                                                                                                                        })
+                                                                                                                                                                                            .Filter("contains")
+                                                                                                                                                                                            .OptionLabel("- Autorizador Nivel 5 - ")
+                                                                                                                                                                                            .DataValueField("Id")
+                                                                                                                                                                                            .DataTextField("Valor")
+                                                                                                                                                                                            .Name("AutorizadorNivel5")
+                                                                                                                                                                                            .Events(e => e.Change("onChangeAutorizadorNivel5"))
+                                                                                                                                                                                            //.SelectedIndex(1)
+                                                                                                                                                                                            .Enable(true)
+                                                                                                                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
+                                </div>
                             </td>
                             <td>
-                                @**@
-                                <label class="primerLabel" id="lblAutorizadorNivel6">     Nivel 6:</label>
+                                
+                                <div name="nivel" id="6">
+                                    <label class="primerLabel" id="lblAutorizadorNivel6">     Nivel 6:</label>
 
-                                @(Html.Kendo().DropDownList().DataSource(source =>
+                                    @(Html.Kendo().DropDownList().DataSource(source =>
+                                                                                                                                                                                            {
+                                                                                                                                                                                                                //source.Read(read =>
+                                                                                                                                                                                                                //{
+                                                                                                                                                                                                                //    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                                                                                                                                                //});
+                                                                                                                                                                                                            })
+                                                                                                                                                                                            .Filter("contains")
+                                                                                                                                                                                            .OptionLabel("- Autorizador Nivel 6 - ")
+                                                                                                                                                                                            .DataValueField("Id")
+                                                                                                                                                                                            .DataTextField("Valor")
+                                                                                                                                                                                            .Name("AutorizadorNivel6")
+                                                                                                                                                                                            .Events(e => e.Change("onChangeAutorizadorNivel6"))
+                                                                                                                                                                                            //.SelectedIndex(1)
+                                                                                                                                                                                            .Enable(true)
+                                                                                                                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                    )
+                                </div>
+                            </td>
+                <td>
+                    
+                    <div name="nivel" id="7">
+                        <label class="primerLabel" id="lblAutorizadorNivel7">     Nivel 7:</label>
+
+                        @(Html.Kendo().DropDownList().DataSource(source =>
                                                                                                                                                                             {
-                                                                                                                                                                                            //source.Read(read =>
-                                                                                                                                                                                            //{
-                                                                                                                                                                                            //    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
-                                                                                                                                                                                            //});
-                                                                                                                                                                                        })
+                                                                                                                                                                                //source.Read(read =>
+                                                                                                                                                                                //{
+                                                                                                                                                                                //    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                                                                                                                //});
+                                                                                                                                                                            })
                                                                                                                                                                             .Filter("contains")
-                                                                                                                                                                            .OptionLabel("- Autorizador Nivel 6 - ")
+                                                                                                                                                                            .OptionLabel("- Autorizador Nivel 7 - ")
                                                                                                                                                                             .DataValueField("Id")
                                                                                                                                                                             .DataTextField("Valor")
-                                                                                                                                                                            .Name("AutorizadorNivel6")
-                                                                                                                                                                            .Events(e => e.Change("onChangeAutorizadorNivel6"))
+                                                                                                                                                                            .Name("AutorizadorNivel7")
+                                                                                                                                                                            .Events(e => e.Change("onChangeAutorizadorNivel7"))
                                                                                                                                                                             //.SelectedIndex(1)
                                                                                                                                                                             .Enable(true)
                                                                                                                                                                             .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
-                            </td>
-                            <td>
-                                @**@<label class="primerLabel" id="lblAutorizadorNivel7">     Nivel 7:</label>
+                        )
+                    </div>
+                </td>
+                <td>
+                    
+                    <div name="nivel" id="8">
+                        <label class="primerLabel" id="lblAutorizadorNivel8">     Nivel 8:</label>
 
-                                @(Html.Kendo().DropDownList().DataSource(source =>
+                        @(Html.Kendo().DropDownList().DataSource(source =>
                                                                                                                                                                     {
-                                                                                                                                                                                    //source.Read(read =>
-                                                                                                                                                                                    //{
-                                                                                                                                                                                    //    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
-                                                                                                                                                                                    //});
-                                                                                                                                                                                })
+                                                                                                                                                                        //source.Read(read =>
+                                                                                                                                                                        //{
+                                                                                                                                                                        //    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                                                                                                        //});
+                                                                                                                                                                    })
                                                                                                                                                                     .Filter("contains")
-                                                                                                                                                                    .OptionLabel("- Autorizador Nivel 7 - ")
+                                                                                                                                                                    .OptionLabel("- Autorizador Nivel 8 - ")
                                                                                                                                                                     .DataValueField("Id")
                                                                                                                                                                     .DataTextField("Valor")
-                                                                                                                                                                    .Name("AutorizadorNivel7")
-                                                                                                                                                                    .Events(e => e.Change("onChangeAutorizadorNivel7"))
+                                                                                                                                                                    .Name("AutorizadorNivel8")
+                                                                                                                                                                    .Events(e => e.Change("onChangeAutorizadorNivel8"))
                                                                                                                                                                     //.SelectedIndex(1)
                                                                                                                                                                     .Enable(true)
                                                                                                                                                                     .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
-                            </td>
-                            <td>
-                                @**@
-                                <label class="primerLabel" id="lblAutorizadorNivel8">     Nivel 8:</label>
+                        )
+                    </div>
+                </td>
+                <td>
+                    <div name="nivel" id="9">
+                        <label class="primerLabel" id="lblAutorizadorNivel9">Autorizador     Nivel 9:</label>
 
-                                @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                                                                                                            {
-                                                                                                                                                                            //source.Read(read =>
-                                                                                                                                                                            //{
-                                                                                                                                                                            //    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
-                                                                                                                                                                            //});
-                                                                                                                                                                        })
-                                                                                                                                                            .Filter("contains")
-                                                                                                                                                            .OptionLabel("- Autorizador Nivel 8 - ")
-                                                                                                                                                            .DataValueField("Id")
-                                                                                                                                                            .DataTextField("Valor")
-                                                                                                                                                            .Name("AutorizadorNivel8")
-                                                                                                                                                            .Events(e => e.Change("onChangeAutorizadorNivel8"))
-                                                                                                                                                            //.SelectedIndex(1)
-                                                                                                                                                            .Enable(true)
-                                                                                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
-                            </td>
-                            <td>
-                                <label class="primerLabel" id="lblAutorizadorNivel9">Autorizador     Nivel 9:</label>
-
-                                @(Html.Kendo().DropDownList().DataSource(source =>
-                                                                                    {
+                        @(Html.Kendo().DropDownList().DataSource(source =>
+                                                                                            {
                                                                                                 //source.Read(read =>
                                                                                                 //{
                                                                                                 //    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
                                                                                                 //});
                                                                                             })
-                                                                                    .Filter("contains")
-                                                                                    .OptionLabel("- Autorizador Nivel 9 - ")
-                                                                                    .DataValueField("Id")
-                                                                                    .DataTextField("Valor")
-                                                                                    .Name("AutorizadorNivel9")
-                                                                                    .Events(e => e.Change("onChangeAutorizadorNivel9"))
-                                                                                    //.SelectedIndex(1)
-                                                                                    .Enable(true)
-                                                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
-                            </td>
-                        </tr>
-                            @**@
-                    </table>
-                </div>
+                                                                                            .Filter("contains")
+                                                                                            .OptionLabel("- Autorizador Nivel 9 - ")
+                                                                                            .DataValueField("Id")
+                                                                                            .DataTextField("Valor")
+                                                                                            .Name("AutorizadorNivel9")
+                                                                                            .Events(e => e.Change("onChangeAutorizadorNivel9"))
+                                                                                            //.SelectedIndex(1)
+                                                                                            .Enable(true)
+                                                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                        )
+                    </div>
+                </td>
+                </tr>
+                
+                </table>
+            </div>
             </div>
         </div>
     </div>
@@ -655,8 +671,11 @@ var Error = "";
                         var autorizadorNivel8 = "";
                         var autorizadorNivel9 = "";
 
-//
+// URL para consultar datos de Empleado
 var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "CapturaSolicitud")';
+
+//
+var urlEmpleadoxSolicitante = '@Url.Action("GetEmpleadoxSolicitante", "CapturaSolicitud")';
 
 //
 var urlConceptoParametroConcepto = '@Url.Action("GetConceptoParametroConcepto", "CapturaSolicitud")';

@@ -5,6 +5,8 @@ $(document).ready(function () {
     FolioSolicitud = $("#FolioSolicitud").val();
     actualizaGrid();
 
+    habilitaCombosAutorizadores(6);
+
     //$("#Conceptos").change(function () {
     //    //debugger;
 
@@ -112,7 +114,7 @@ function editarEmpleadoSolicitud(e) {
     $('#Conceptos').data('kendoDropDownList').trigger('change');
 
     $("#Parametro").data('kendoNumericTextBox').value(dataItem.Monto);
-    $('#Parametro').trigger('change');
+    $('#Parametro').data('kendoNumericTextBox').trigger('change');
 
     $("#Motivo").data('kendoDropDownList').value(dataItem.MotivosSolicitudId);
     $('#Motivo').data('kendoDropDownList').trigger('change');
@@ -263,6 +265,9 @@ function onChangeCCMSId() {
     if ($("#CCMSIDSolicitado").val().length > 0) {
         //debugger;
         $.post(urlEmpleadoPuesto + "/?Ident=" + CCMSId, function (data) {
+
+            //FolioSolicitud = data.FolioSolicitud;
+
             EmpCCMSId = data[0].Ident
             EmpNombre = data[0].Nombre;
             EmpPosition_Code_Ident = data[0].Position_Code_Ident;
@@ -276,8 +281,15 @@ function onChangeCCMSId() {
 
             Active = data[0].Active;
 
-            $("#CCMSIDX").val(EmpCCMSId);
-            $("#CCMSIDX").text(EmpCCMSId);
+            if (EmpCCMSId > 0) {
+                $("#CCMSIDX").val(EmpCCMSId);
+                $("#CCMSIDX").text(EmpCCMSId);
+            }
+            else {
+                $("#CCMSIDX").val(-1);
+                $("#CCMSIDX").text("");
+            }
+
             $("#NombreX").val(EmpNombre);
             $("#NombreX").text(EmpNombre);
             $("#PuestoX").val(EmpPosition_Code_Title);
@@ -296,6 +308,15 @@ function onChangeCCMSId() {
 
             $("#CCMSIDIncidente").data("kendoNumericTextBox").value(responsableId);
 
+            if (EmpCCMSId == -1) {
+                var notification = $("#popupNotification").data("kendoNotification");
+                notification.show("No tiene permiso para crear una solicitud a este empleado.", "error");
+            }
+
+            if (EmpCCMSId == -2) {
+                var notification = $("#popupNotification").data("kendoNotification");
+                notification.show("Este empleado no existe o no está activo.", "error");
+            }
 
         }).fail(function (ex) {
             //debugger;
@@ -452,7 +473,7 @@ function onChangeParametro() {
         //ConConceptoMotivo = $("#Motivo.value").text();
         ConConceptoMotivo = $("#Parametro").val() + ' ' + ConParametroNombre;
         ConParametroConceptoMonto = $("#Parametro").val()
-        //debugger;
+        debugger;
 
         //rellenaPerfilTipoAcceso();
 
@@ -502,6 +523,24 @@ function onChangeCCMSIdIncidente()
         $("#NombreRespoX").val("");
         $("#NombreRespoX").text("");
     }
+}
+
+
+function habilitaCombosAutorizadores(nivelAutorizador) {
+    var autorizadores = $("div[name='nivel']");
+    debugger;
+    $(autorizadores).each(function (nivel) {
+        //console.log(index + ": " + $(this).text());
+        //console.log("ssss");
+        if (this.id <= nivelAutorizador) {
+            debugger;
+            $(this).show();
+        }
+        if (this.id > nivelAutorizador) {
+            debugger;
+            $(this).hide();
+        }
+    });
 }
 
 function onChangeAutorizadorNivel1() {

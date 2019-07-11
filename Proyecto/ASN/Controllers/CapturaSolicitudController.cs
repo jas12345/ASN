@@ -71,9 +71,11 @@ namespace ASN.Controllers
             {
                 var lstEmpleadoPuesto = new List<CatEmpleadoPuestoSel_Result>();
 
+                int.TryParse(User.Identity.Name, out int solicitanteIdent);
+
                 using (ASNContext context = new ASNContext())
                 {
-                    lstEmpleadoPuesto = context.CatEmpleadoPuestoSel(Ident).ToList();
+                    lstEmpleadoPuesto = context.CatEmpleadoPuestoSel(Ident, solicitanteIdent).ToList();
                 }
 
                 return Json(lstEmpleadoPuesto, JsonRequestBehavior.AllowGet);
