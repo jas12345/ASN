@@ -190,6 +190,30 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident)
+        {
+            try
+            {
+                int.TryParse(User.Identity.Name, out int ident_Solicitante);
+
+                var listPeriodoNomina = new List<CatConceptosxEmpleadoxSolicitanteCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    listPeriodoNomina = context.CatConceptosxEmpleadoxSolicitanteCMB(ident, ident_Solicitante).OrderBy(x => x.Valor).ToList();
+                }
+
+                return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
         public JsonResult GetMotivosCMB()
         {
             try
@@ -305,17 +329,49 @@ namespace ASN.Controllers
 
                     //TODO: Guardar 
                     
-                    
-                    
-                    
-                    
-
-                    
-
-                    
-                    
-                    
                     return Json(new { FolioSolicitud, res }, JsonRequestBehavior.AllowGet);                    
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(new { FolioSolicitud, res = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult EnviaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    int res = 0;
+                    int ccmsidAdmin = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    ObjectParameter folioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
+                    resultado.Value = 0;
+                    folioSolicitudOut.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out int idAdmin);
+
+                    //TODO: Implementar EnviarSolicitud
+                    //context.EnviaSolicitud(FolioSolicitud, ccmsidAdmin);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+                    int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
+
+                    //TODO: Guardar 
+
+                    return Json(new { FolioSolicitud, res }, JsonRequestBehavior.AllowGet);
                 }
             }
 

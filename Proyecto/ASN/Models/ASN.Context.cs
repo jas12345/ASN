@@ -2076,5 +2076,18 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosPeopleSoftSu", conceptoIdParameter, descripcionParameter, descripcionPeopleSoftParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
+    
+        public virtual ObjectResult<CatConceptosxEmpleadoxSolicitanteCMB_Result> CatConceptosxEmpleadoxSolicitanteCMB(Nullable<int> ident, Nullable<int> ident_Solicitante)
+        {
+            var identParameter = ident.HasValue ?
+                new ObjectParameter("Ident", ident) :
+                new ObjectParameter("Ident", typeof(int));
+    
+            var ident_SolicitanteParameter = ident_Solicitante.HasValue ?
+                new ObjectParameter("Ident_Solicitante", ident_Solicitante) :
+                new ObjectParameter("Ident_Solicitante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosxEmpleadoxSolicitanteCMB_Result>("CatConceptosxEmpleadoxSolicitanteCMB", identParameter, ident_SolicitanteParameter);
+        }
     }
 }
