@@ -399,6 +399,7 @@ function onChangeConceptos() {
         ConConceptoNombre = ""
         ConParametroId = ""
         ConParametroNombre = ""
+        ConNivelesAutorizacion = ""
 
         ConConceptoIdent = $("#Conceptos").val();
         debugger;
@@ -409,15 +410,16 @@ function onChangeConceptos() {
             debugger;
             ConConceptoIdent = data[0].ConceptoId;
             ConConceptoNombre = data[0].DescripcionConcepto;
-            ConParametroId = data[0].TipoconceptoId
+            ConParametroId = data[0].TipoconceptoId;
             ConParametroNombre = data[0].DescripcionParametroConcepto;
+            ConNivelesAutorizacion = data[0].NivelesAutorizacion;
 
             $("#ConceptoX").val(ConConceptoNombre);
             $("#ConceptoX").text(ConConceptoNombre);    
             $("#ParametroX").val(ConParametroNombre);
             $("#ParametroX").text(ConParametroNombre);
 
-            //$("#FechaCierreAnio").val(data[0].Active);
+            habilitaCombosAutorizadores(ConNivelesAutorizacion);
             //debugger;
 
 
@@ -452,6 +454,10 @@ function onChangeMotivo() {
 
         $("#MotivoX").val(ConMotivoNombre);
         $("#MotivoX").text(ConMotivoNombre);
+
+        $("#ConceptoMotivo").val(-1);
+        $("#PeriodoIncidente").val(-1);
+
     }
     else {
         $("#MotivoX").val("");

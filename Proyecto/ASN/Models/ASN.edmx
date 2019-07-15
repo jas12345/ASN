@@ -1759,6 +1759,7 @@
           <Property Type="String" Name="DescripcionConcepto" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="TipoConceptoId" Nullable="false" />
           <Property Type="String" Name="DescripcionParametroConcepto" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NivelesAutorizacion" Nullable="true" />
         </ComplexType>
         <ComplexType Name="CatConceptosxEmpleadoCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
@@ -2678,6 +2679,7 @@
                 <ScalarProperty Name="DescripcionConcepto" ColumnName="DescripcionConcepto" />
                 <ScalarProperty Name="TipoConceptoId" ColumnName="TipoConceptoId" />
                 <ScalarProperty Name="DescripcionParametroConcepto" ColumnName="DescripcionParametroConcepto" />
+                <ScalarProperty Name="NivelesAutorizacion" ColumnName="NivelesAutorizacion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -17,5 +17,6 @@ namespace ASN.Models
         public string DescripcionConcepto { get; set; }
         public int TipoConceptoId { get; set; }
         public string DescripcionParametroConcepto { get; set; }
+        public Nullable<int> NivelesAutorizacion { get; set; }
     }
 }
