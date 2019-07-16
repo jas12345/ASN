@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     Solicitante_Ident = 
 
-    habilitaCombosAutorizadores(9);
+    habilitaCombosAutorizadores(1);
 
     //$("#Conceptos").change(function () {
     //    //debugger;
@@ -92,7 +92,7 @@ function agregarSolicitud() {
     });
 }
 
-function enviasolicitud() {
+function enviarSolicitud() {
     //console.log("Salvado");
     debugger;
     //infoSolicitud();
@@ -144,6 +144,34 @@ function editarEmpleadoSolicitud(e) {
 
     $("#PeriodoIncidente").data('kendoDropDownList').value(dataItem.PeriodoOriginalId);
     $('#PeriodoIncidente').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel1").data('kendoDropDownList').value(dataItem.AutorizadorNivel1);
+    $('#AutorizadorNivel1').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel2").data('kendoDropDownList').value(dataItem.AutorizadorNivel2);
+    $('#AutorizadorNivel2').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel3").data('kendoDropDownList').value(dataItem.AutorizadorNivel3);
+    $('#AutorizadorNivel3').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel4").data('kendoDropDownList').value(dataItem.AutorizadorNivel4);
+    $('#AutorizadorNivel4').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel5").data('kendoDropDownList').value(dataItem.AutorizadorNivel5);
+    $('#AutorizadorNivel5').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel6").data('kendoDropDownList').value(dataItem.AutorizadorNivel6);
+    $('#AutorizadorNivel6').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel7").data('kendoDropDownList').value(dataItem.AutorizadorNivel7);
+    $('#AutorizadorNivel7').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel8").data('kendoDropDownList').value(dataItem.AutorizadorNivel8);
+    $('#AutorizadorNivel8').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem.AutorizadorNivel9);
+    $('#AutorizadorNivel9').data('kendoDropDownList').trigger('change');
+
 
     //$("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
     //$('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');

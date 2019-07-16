@@ -1526,17 +1526,30 @@
         </ComplexType>
         <ComplexType Name="CatSolicitudesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
-          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
           <Property Type="Int32" Name="Ident" Nullable="true" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
           <Property Type="String" Name="ConceptoDesc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Monto" Nullable="true" MaxLength="73" />
           <Property Type="Int32" Name="MotivosSolicitudId" Nullable="true" />
           <Property Type="String" Name="MotivosSolicitudDesc" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="true" />
+          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="false" />
           <Property Type="String" Name="ConceptoMotivoDesc" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Monto" Nullable="true" MaxLength="73" />
-          <Property Type="Int32" Name="ResponsableId" Nullable="true" />
-          <Property Type="Int32" Name="PeriodoOriginalId" Nullable="true" />
+          <Property Type="Int32" Name="ResponsableId" Nullable="false" />
+          <Property Type="Int32" Name="PeriodoOriginalId" Nullable="false" />
+          <Property Type="Int32" Name="NivelAutorizacion1" Nullable="false" />
+          <Property Type="Int32" Name="NivelAutorizacion2" Nullable="false" />
+          <Property Type="Int32" Name="NivelAutorizacion3" Nullable="false" />
+          <Property Type="Int32" Name="NivelAutorizacion4" Nullable="false" />
+          <Property Type="Int32" Name="NivelAutorizacion5" Nullable="false" />
+          <Property Type="Int32" Name="NivelAutorizacion6" Nullable="false" />
+          <Property Type="Int32" Name="AutorizadorNivel1" Nullable="true" />
+          <Property Type="Int32" Name="AutorizadorNivel2" Nullable="true" />
+          <Property Type="Int32" Name="AutorizadorNivel3" Nullable="true" />
+          <Property Type="Int32" Name="AutorizadorNivel4" Nullable="true" />
+          <Property Type="Int32" Name="AutorizadorNivel5" Nullable="true" />
+          <Property Type="Int32" Name="AutorizadorNivel6" Nullable="true" />
           </ComplexType>
         <ComplexType Name="CatEmpleadosSolicitudesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -2348,17 +2361,30 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatSolicitudesSel_Result">
                 <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
-                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
                 <ScalarProperty Name="ConceptoDesc" ColumnName="ConceptoDesc" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="MotivosSolicitudId" ColumnName="MotivosSolicitudId" />
                 <ScalarProperty Name="MotivosSolicitudDesc" ColumnName="MotivosSolicitudDesc" />
                 <ScalarProperty Name="ConceptoMotivoId" ColumnName="ConceptoMotivoId" />
                 <ScalarProperty Name="ConceptoMotivoDesc" ColumnName="ConceptoMotivoDesc" />
-                <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
                 <ScalarProperty Name="PeriodoOriginalId" ColumnName="PeriodoOriginalId" />
+                <ScalarProperty Name="NivelAutorizacion1" ColumnName="NivelAutorizacion1" />
+                <ScalarProperty Name="NivelAutorizacion2" ColumnName="NivelAutorizacion2" />
+                <ScalarProperty Name="NivelAutorizacion3" ColumnName="NivelAutorizacion3" />
+                <ScalarProperty Name="NivelAutorizacion4" ColumnName="NivelAutorizacion4" />
+                <ScalarProperty Name="NivelAutorizacion5" ColumnName="NivelAutorizacion5" />
+                <ScalarProperty Name="NivelAutorizacion6" ColumnName="NivelAutorizacion6" />
+                <ScalarProperty Name="AutorizadorNivel1" ColumnName="AutorizadorNivel1" />
+                <ScalarProperty Name="AutorizadorNivel2" ColumnName="AutorizadorNivel2" />
+                <ScalarProperty Name="AutorizadorNivel3" ColumnName="AutorizadorNivel3" />
+                <ScalarProperty Name="AutorizadorNivel4" ColumnName="AutorizadorNivel4" />
+                <ScalarProperty Name="AutorizadorNivel5" ColumnName="AutorizadorNivel5" />
+                <ScalarProperty Name="AutorizadorNivel6" ColumnName="AutorizadorNivel6" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
