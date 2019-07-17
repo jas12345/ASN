@@ -134,9 +134,9 @@
                                 }
 
                                 @*@if (User.IsInRole("Desarrollo"))
-        {
-            <li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>
-        }*@
+                        {
+                            <li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>
+                        }*@
                             </ul>
                         </li>
                     }
@@ -147,6 +147,12 @@
                         <li>@Html.ActionLink("Solicitudes", "Index", "CapturaSolicitud")</li>
                         <li>@Html.ActionLink("Mis Solicitudes", "Index", "MisSolicitudes")</li>
                     }
+
+                    if (User.IsInRole("Desarrollo"))
+                    {
+                        <li>@Html.ActionLink("Mis Autorizaciones", "Index", "MisAutorizaciones")</li>
+                    }
+
                     if (User.IsInRole("Desarrollo"))
                     {
                         @*<li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>*@

@@ -107,6 +107,9 @@ namespace ASN
             bundles.Add(new ScriptBundle("~/bundles/MisSolicitudes").Include(
             "~/Scripts/MisSolicitudes.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/MisAutorizaciones").Include(
+            "~/Scripts/MisAutorizaciones.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/SolicitudesTodas").Include(
             "~/Scripts/SolicitudesTodas.js"));
 

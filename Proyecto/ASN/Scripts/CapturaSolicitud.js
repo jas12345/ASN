@@ -120,6 +120,7 @@ function editarEmpleadoSolicitud(e) {
     debugger;
     e.preventDefault(); // sho J
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+    CCMSIdResponsable = dataItem.ResponsableId;
 
     debugger;
     $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem.Ident);
@@ -172,9 +173,9 @@ function editarEmpleadoSolicitud(e) {
     $("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem.AutorizadorNivel9);
     $('#AutorizadorNivel9').data('kendoDropDownList').trigger('change');
 
-
-    //$("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
-    //$('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
+    //debugger;
+    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
+    $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
 
     debugger;
     var rowIndex = $(e.currentTarget).closest("tr").index();
@@ -374,13 +375,26 @@ function onChangeCCMSId() {
             $("#SiteX").text(EmpLocation_Name);
 
             debugger;
-            // Sugerencia de responsable de incidente es el Manager del empleado
-            $("#ResponsableCCMSIDX").val(responsableId);
-            $("#ResponsableCCMSIDX").text(responsableId);
-            $("#NombreRespoX").val(NombreResponsableIncidente);
-            $("#NombreRespoX").text(NombreResponsableIncidente);
 
-            $("#CCMSIDIncidente").data("kendoNumericTextBox").value(responsableId);
+            
+            //if ($("#CCMSIDIncidente").data("kendoNumericTextBox").value() == 0) {
+            if (CCMSIdResponsable == 0) {
+                $("#CCMSIDIncidente").data("kendoNumericTextBox").value(CCMSIdResponsable);
+                // Sugerencia de responsable de incidente es el Manager del empleado
+                $("#ResponsableCCMSIDX").val("");
+                $("#ResponsableCCMSIDX").text("");
+                $("#NombreRespoX").val("");
+                $("#NombreRespoX").text("");
+
+            }
+            else {
+                $("#CCMSIDIncidente").data("kendoNumericTextBox").value(responsableId);
+                 // Sugerencia de responsable de incidente es el Manager del empleado
+                $("#ResponsableCCMSIDX").val(responsableId);
+                $("#ResponsableCCMSIDX").text(responsableId);
+                $("#NombreRespoX").val(NombreResponsableIncidente);
+                $("#NombreRespoX").text(NombreResponsableIncidente);
+           }
 
             if (EmpCCMSId == -1) {
                 var notification = $("#popupNotification").data("kendoNotification");
@@ -495,7 +509,7 @@ function onChangeMotivo() {
 }
 
 function onChangeConceptoMotivo() {
-    //debugger;
+    debugger;
 
     if ($("#ConceptoMotivo").data('kendoDropDownList').text().length > 0) {
         ConConceptoMotivo = ""
@@ -504,7 +518,7 @@ function onChangeConceptoMotivo() {
         //ConConceptoMotivo = $("#Motivo.value").text();
         ConConceptoMotivo = $("#ConceptoMotivo").data('kendoDropDownList').text();
         conceptoMotivoId = $("#ConceptoMotivo").val();
-        //debugger;
+        debugger;
 
         //rellenaPerfilTipoAcceso();
 
@@ -567,12 +581,13 @@ function onChangeParametro() {
 
 function onChangeCCMSIdIncidente()
 {
-    //debugger;
+    debugger;
 
     responsableId = "";
     NombreResponsableIncidente = "";
 
     responsableId = $("#CCMSIDIncidente").val();
+    //CCMSIdResponsable = 
     NombreResponsableIncidente = "";
 
     //ClavePerfil = $("#PerfilUsuarioId").val();
@@ -585,7 +600,7 @@ function onChangeCCMSIdIncidente()
             responsableId  = data[0].Ident
             NombreResponsableIncidente = data[0].Nombre;
 
-            //debugger;
+            debugger;
             $("#ResponsableCCMSIDX").val(responsableId );
             $("#ResponsableCCMSIDX").text(responsableId );
             $("#NombreRespoX").val(NombreResponsableIncidente);

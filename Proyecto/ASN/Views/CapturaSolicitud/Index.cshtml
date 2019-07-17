@@ -263,11 +263,11 @@
                             <td>
                                 @(Html.Kendo().NumericTextBox()
                                 .Name("CCMSIDIncidente")
-                                .Events(e => e.Change("onChangeCCMSIdIncidente"))
                                 .Spinners(false)
                                 .Decimals(0)
                                 .Format("0.")
                                 .Min(0)
+                                .Events(e => e.Change("onChangeCCMSIdIncidente"))
                                 //.Step(5)
                                 //.Value(0)
                                 .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
@@ -575,8 +575,13 @@
                                             model.Field(c => c.Nombre).Editable(true);
                                             model.Field(c => c.ConceptoId).Editable(true);
                                             model.Field(c => c.ConceptoDesc).Editable(true);
+                                            model.Field(c => c.Monto).Editable(false);
                                             model.Field(c => c.MotivosSolicitudId).Editable(true);
                                             model.Field(c => c.MotivosSolicitudDesc).Editable(true);
+                                            model.Field(c => c.ConceptoMotivoId).Editable(true);
+                                            model.Field(c => c.ConceptoMotivoDesc).Editable(true);
+                                            model.Field(c => c.ResponsableId).Editable(true);
+                                            model.Field(c => c.PeriodoOriginalId).Editable(true);
                                         })
                                         .Read(read => read.Action("GetSolicitudes", "CapturaSolicitud").Data("getFolio"))
                                     //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
