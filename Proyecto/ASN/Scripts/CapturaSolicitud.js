@@ -98,15 +98,16 @@ function enviarSolicitud() {
     //infoSolicitud();
     $.post(urlEnviaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
+        debugger;
 
-        if (data.res == -2) {
+        if (data.res == -1) {
             var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Ya existe un registro con este Empleado y Concepto", "error");
+            notification.show("Error al Enviar Solicitud", "error");
         }
 
-        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+        //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
         actualizaGrid();
-        //debugger;
+        debugger;
     });
 }
 

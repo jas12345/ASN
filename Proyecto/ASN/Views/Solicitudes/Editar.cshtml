@@ -58,7 +58,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4" for="EstatusSolicitud">Estatus de Solicitud</label>
                                 <div class="col-sm-2 col-md-2">
-                                    @(Html.Kendo().TextBoxFor(x => x.Estatus).Name("Estatus").HtmlAttributes(new { disabled = "disabled" }))
+                                   @* @(Html.Kendo().TextBoxFor(x => x.Estatus).Name("Estatus").HtmlAttributes(new { disabled = "disabled" }))*@
                                 </div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-3" for="PeriodoNominaId">Periodo de Nomina</label>
                                 <div class="col-sm-4 col-md-4">
-                                    @(Html.Kendo().DropDownList().DataSource(source =>
+                                    @*@(Html.Kendo().DropDownList().DataSource(source =>
                                                                 {
                                                                     source.Read(read =>
                                                                     {
@@ -120,7 +120,7 @@
                                                                 .DataTextField("Valor")
                                                                 .Name("PeriodoNomina_Id")
                                                                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
-                                    )
+                                    )*@
                                 </div>
                             </div>
 
@@ -170,7 +170,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-3" for="language" id="language_label">Justificación</label>
                                 <div class="col-sm-6 col-md-6">
-                                    @Html.TextArea("Justficacion", Model.Justficacion, new { @class = "k-textbox", style = "width: 100%;" })
+                                    @*@Html.TextArea("Justficacion", Model.Justficacion, new { @class = "k-textbox", style = "width: 100%;" })*@
                                 </div>
                             </div>
                         </div>

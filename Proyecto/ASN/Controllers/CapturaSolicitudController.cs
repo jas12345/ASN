@@ -357,21 +357,19 @@ namespace ASN.Controllers
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
 
                     ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
-                    ObjectParameter folioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
+                    //ObjectParameter folioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
                     resultado.Value = 0;
-                    folioSolicitudOut.Value = 0;
+                    //folioSolicitudOut.Value = 0;
 
                     int.TryParse(User.Identity.Name, out int idAdmin);
 
-                    //TODO: Implementar EnviarSolicitud
-                    //context.EnviaSolicitud(FolioSolicitud, ccmsidAdmin);
+                    // EnviarSolicitud A Autorizadores
+                    context.EnviaSolicitud(FolioSolicitud, resultado);
 
                     int.TryParse(resultado.Value.ToString(), out res);
-                    int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
 
-                    //TODO: Guardar 
-
-                    return Json(new { FolioSolicitud, res }, JsonRequestBehavior.AllowGet);
+                    // 
+                    return Json(new { res }, JsonRequestBehavior.AllowGet);
                 }
             }
 
@@ -381,7 +379,7 @@ namespace ASN.Controllers
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json(new { FolioSolicitud, res = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
             }
         }
 

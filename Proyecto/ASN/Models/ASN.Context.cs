@@ -2107,5 +2107,23 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAutorizacionesSel_Result>("CatAutorizacionesSel", folioSolicitudParameter);
         }
+    
+        public virtual ObjectResult<CatPeriodosNominaCerradosCMB_Result> CatPeriodosNominaCerradosCMB(Nullable<int> active)
+        {
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCerradosCMB_Result>("CatPeriodosNominaCerradosCMB", activeParameter);
+        }
+    
+        public virtual int EnviaSolicitud(Nullable<int> folioSolicitud, ObjectParameter estatus)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EnviaSolicitud", folioSolicitudParameter, estatus);
+        }
     }
 }
