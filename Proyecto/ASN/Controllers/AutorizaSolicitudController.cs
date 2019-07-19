@@ -11,12 +11,12 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
-    public class CapturaSolicitudController : Controller
+    public class AutorizaSolicitudController : Controller
     {
-        // GET: CapturaSolicitud
+        // GET: AutorizaSolicitud
         public ActionResult Index(int? FolioSolicitud)
         {
-            var obj = new CatSolicitudesSel_Result();
+            var obj = new CatAutorizacionesSel_Result();
             obj.FolioSolicitud = (int)(FolioSolicitud ?? -1);
             return View(obj);
             //return View();
@@ -262,29 +262,6 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult ConsultarEstatusSolicitud(int folioSolicitud)
-        {
-            try
-            {
-                var lstEstatusSolicitud = new List<CatEstatusSolicitudSel_Result>();
-
-                using (ASNContext context = new ASNContext())
-                {
-                    lstEstatusSolicitud = context.CatEstatusSolicitudSel(folioSolicitud).ToList();
-                }
-
-                return Json(lstEstatusSolicitud, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("error", "Ocurrió un error al consultar Estatus.");
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json("");
-            }
-        }
-
         public JsonResult GetConceptosMotivosCMB()
         {
             try
@@ -323,6 +300,29 @@ namespace ASN.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult ConsultarEstatusSolicitud(int folioSolicitud)
+        {
+            try
+            {
+                var lstEstatusSolicitud = new List<CatEstatusSolicitudSel_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstEstatusSolicitud = context.CatEstatusSolicitudSel(folioSolicitud).ToList();
+                }
+
+                return Json(lstEstatusSolicitud, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al consultar Estatus.");
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);

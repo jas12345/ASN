@@ -232,6 +232,9 @@
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
         <Function Name="CatEmployeeSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatEstatusSolicitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatLocationCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLocationTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLogErrorSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1197,6 +1200,9 @@
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatEstatusSolicitudSel" ReturnType="Collection(ASNModel.CatEstatusSolicitudSel_Result)">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1880,6 +1886,10 @@
         <ComplexType Name="CatPeriodosNominaCerradosCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="true" MaxLength="17" />
+        </ComplexType>
+        <ComplexType Name="CatEstatusSolicitudSel_Result">
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -2905,6 +2915,14 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="EnviaSolicitud" FunctionName="ASNModel.Store.EnviaSolicitud" />
+          <FunctionImportMapping FunctionImportName="CatEstatusSolicitudSel" FunctionName="ASNModel.Store.CatEstatusSolicitudSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatEstatusSolicitudSel_Result">
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

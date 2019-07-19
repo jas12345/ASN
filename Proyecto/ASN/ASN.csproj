@@ -141,6 +141,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AutorizaSolicitudController.cs" />
     <Compile Include="Controllers\CapturaSolicitudController.cs" />
     <Compile Include="Controllers\ConceptosPeopleSoftController.cs" />
     <Compile Include="Controllers\ConceptosMotivosController.cs" />
@@ -319,6 +320,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatEmployeeSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatEstatusSolicitudSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatLocationCMB_Result.cs">
@@ -583,6 +587,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\BusquedasVarias.js" />
+    <Content Include="Scripts\AutorizaSolicitud.js" />
     <Content Include="Scripts\CapturaSolicitud.js" />
     <Content Include="Scripts\ConceptosPeopleSoft.js" />
     <Content Include="Scripts\MisAutorizaciones.js" />
@@ -772,6 +777,7 @@
     <Content Include="Views\ConceptosPeopleSoft\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ConceptosPeopleSoftPopUp.cshtml" />
     <Content Include="Views\MisAutorizaciones\Index.cshtml" />
+    <Content Include="Views\AutorizaSolicitud\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

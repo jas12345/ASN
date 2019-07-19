@@ -2125,5 +2125,14 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EnviaSolicitud", folioSolicitudParameter, estatus);
         }
+    
+        public virtual ObjectResult<CatEstatusSolicitudSel_Result> CatEstatusSolicitudSel(Nullable<int> folioSolicitud)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEstatusSolicitudSel_Result>("CatEstatusSolicitudSel", folioSolicitudParameter);
+        }
     }
 }

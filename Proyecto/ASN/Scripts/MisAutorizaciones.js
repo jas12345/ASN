@@ -207,7 +207,7 @@ function dateFilter(e) {
     });
 }
 
-function EditaSolicitud(e) {
+function EditaAutorizacion(e) {
     e.preventDefault();
     var d = this.dataItem($(e.currentTarget).closest("tr"));
     debugger;
