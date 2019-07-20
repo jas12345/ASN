@@ -457,7 +457,11 @@
                         <tr>
                             <td style="width : 6em">
                                 @(Html.Kendo().Button().Name("EnviarSolicitud").Content("Enviar")
-                                                                                        .Events(x => x.Click("enviarSolicitud"))
+                                .Events(x => x.Click("enviarSolicitud"))
+                                )
+
+                                @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar")
+                                .Events(x => x.Click("rechazarSolicitud"))
                                 )
                             </td>
                             <td>
@@ -610,6 +614,7 @@
                                                                                         column.Bound(c => c.ConceptoDesc).Title("Concepto").Filterable(false).Width(70);
                                                                                         column.Bound(c => c.Monto).Title("Monto").Filterable(false).Width(70);
                                                                                         column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
+                                                                                        column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
                                                                                     })
                                                                                     .HtmlAttributes(new { style = "height: 475px;" })
                                                                                     .Scrollable(sorteable => sorteable.Virtual(false))
@@ -634,6 +639,7 @@
                                                                                             model.Field(c => c.ConceptoMotivoDesc).Editable(true);
                                                                                             model.Field(c => c.ResponsableId).Editable(true);
                                                                                             model.Field(c => c.PeriodoOriginalId).Editable(true);
+                                                                                            model.Field(c => c.EstatusSolicitud).Editable(true);
                                                                                         })
                                                                                         .Read(read => read.Action("GetSolicitudes", "CapturaSolicitud").Data("getFolio"))
                                                                                     //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
@@ -742,6 +748,10 @@
                 var autorizadorNivel8 = "";
                 var autorizadorNivel9 = "";
 
+        // Datos de Estatus de Solicitud
+        var DescripcionEstatusSolicitud = "";
+        var ClaveEstatusSolicitud = "";
+
                 // URL para consultar datos de Empleado
                 var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "CapturaSolicitud")';
 
@@ -768,6 +778,9 @@
 
                 //
                 var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "CapturaSolicitud")';
+
+        // Función para calcular Estatus de Solicitud
+        var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "CapturaSolicitud")';
 
                 //debugger;
                 //var urlSolicitud = grid.selectedKeyNames().join(", ");

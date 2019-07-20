@@ -14,10 +14,10 @@ namespace ASN.Models
     public partial class CatSolicitudesSel_Result
     {
         public int FolioSolicitud { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public Nullable<int> Ident { get; set; }
+        public bool Active { get; set; }
+        public int Ident { get; set; }
         public string Nombre { get; set; }
-        public Nullable<int> ConceptoId { get; set; }
+        public int ConceptoId { get; set; }
         public string ConceptoDesc { get; set; }
         public string Monto { get; set; }
         public Nullable<int> MotivosSolicitudId { get; set; }
@@ -38,5 +38,14 @@ namespace ASN.Models
         public Nullable<int> AutorizadorNivel4 { get; set; }
         public Nullable<int> AutorizadorNivel5 { get; set; }
         public Nullable<int> AutorizadorNivel6 { get; set; }
+        public string NombreResponsable { get; set; }
+        public string EstatusId { get; set; }
+        public string EstatusSolicitud { get; set; }
+        public Nullable<int> NivelAutorizacion7 { get; set; }
+        public Nullable<int> Autorizador7_Ident { get; set; }
+        public Nullable<int> NivelAutorizacion8 { get; set; }
+        public Nullable<int> Autorizador8_Ident { get; set; }
+        public Nullable<int> NivelAutorizacion9 { get; set; }
+        public Nullable<int> Autorizador9_Ident { get; set; }
     }
 }

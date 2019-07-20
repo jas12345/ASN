@@ -45,5 +45,7 @@ namespace ASN.Models
         public Nullable<int> NivelAutorizacion9 { get; set; }
         public Nullable<int> Autorizador9_Ident { get; set; }
         public bool Active { get; set; }
+        public string EstatusId { get; set; }
+        public string EstatusSolicitud { get; set; }
     }
 }

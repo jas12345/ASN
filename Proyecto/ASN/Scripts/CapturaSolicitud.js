@@ -110,6 +110,25 @@ function enviarSolicitud() {
     });
 }
 
+function rechazarSolicitud() {
+    //console.log("Salvado");
+    debugger;
+    //infoSolicitud();
+    $.post(urlEnviaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
+        debugger;
+
+        if (data.res == -1) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Error al Enviar Solicitud", "error");
+        }
+
+        //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+        actualizaGrid();
+        debugger;
+    });
+}
+
 function calculaEstatusSolicitud() {
     debugger;
     $.post(urlConsultarEstatusSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
@@ -120,6 +139,26 @@ function calculaEstatusSolicitud() {
             notification.show("Error al Calcular Estatus", "error");
         }
         debugger;
+
+        DescripcionEstatusSolicitud = data[0].Descripcion;
+        ClaveEstatusSolicitud = data[0].EstatusSolicitudId;
+
+        if (ClaveEstatusSolicitud == 'EB') {
+            $("#EnviarSolicitud").data("kendoButton").enable(true);
+        }
+        else {
+            //$("#EnviarSolicitud").data("kendoButton").enable(false);
+            $("#EnviarSolicitud").kendoButton({ enable: false });
+        }
+
+        if (ClaveEstatusSolicitud == 'E') {
+            //$("#RechazarSolicitud").data("kendoButton").enable(false);
+            $("#RechazarSolicitud").data("kendoButton").enable(true);
+        }
+        else {
+            $("#RechazarSolicitud").kendoButton({ enable: false });
+        }
+
         $("#Estatus").val(data[0].Descripcion);
         debugger;
     });
@@ -188,8 +227,8 @@ function editarEmpleadoSolicitud(e) {
     $("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem.AutorizadorNivel9);
     $('#AutorizadorNivel9').data('kendoDropDownList').trigger('change');
 
-    //debugger;
-    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
+    debugger;
+    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(CCMSIdResponsable);
     $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
 
     debugger;
@@ -390,7 +429,6 @@ function onChangeCCMSId() {
             $("#SiteX").text(EmpLocation_Name);
 
             debugger;
-
             
             //if ($("#CCMSIDIncidente").data("kendoNumericTextBox").value() == 0) {
             if (CCMSIdResponsable == 0) {
@@ -409,16 +447,25 @@ function onChangeCCMSId() {
                 $("#ResponsableCCMSIDX").text(responsableId);
                 $("#NombreRespoX").val(NombreResponsableIncidente);
                 $("#NombreRespoX").text(NombreResponsableIncidente);
-           }
-
+            }
+            debugger;
             if (EmpCCMSId == -1) {
+                $("#AgregarSolicitud").kendoButton({enable: false});
+
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("No tiene permiso para crear una solicitud a este empleado.", "error");
             }
 
             if (EmpCCMSId == -2) {
+                $("#AgregarSolicitud").kendoButton({ enable: false });
+
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("Este empleado no existe o no está activo.", "error");
+            }
+
+            if (EmpCCMSId > 0) {
+                //$("#AgregarSolicitud").kendoButton({ enable: true });
+                $("#AgregarSolicitud").data("kendoButton").enable(true);
             }
 
         }).fail(function (ex) {
