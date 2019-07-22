@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class NominaController : Controller
     {
         // GET: AniosNomina

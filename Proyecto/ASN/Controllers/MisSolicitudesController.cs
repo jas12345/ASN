@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Solicitante")]
     public class MisSolicitudesController : Controller
     {
         // GET: CapturasRapidas/MisSolicitudes

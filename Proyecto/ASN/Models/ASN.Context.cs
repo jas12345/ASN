@@ -2134,5 +2134,61 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEstatusSolicitudSel_Result>("CatEstatusSolicitudSel", folioSolicitudParameter);
         }
+    
+        public virtual ObjectResult<AutorizadoresxConceptoCMB_Result> AutorizadoresxConceptoCMB(Nullable<int> conceptoId)
+        {
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizadoresxConceptoCMB_Result>("AutorizadoresxConceptoCMB", conceptoIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> AutorizadorxConceptoxNivelCMB(Nullable<int> conceptoId, Nullable<int> nivelId)
+        {
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var nivelIdParameter = nivelId.HasValue ?
+                new ObjectParameter("NivelId", nivelId) :
+                new ObjectParameter("NivelId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AutorizadorxConceptoxNivelCMB", conceptoIdParameter, nivelIdParameter);
+        }
+    
+        public virtual int CatConceptosNivelAutorizadorSi(Nullable<int> conceptoId, Nullable<int> nivelId, Nullable<int> autorizadorIdent, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        {
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var nivelIdParameter = nivelId.HasValue ?
+                new ObjectParameter("NivelId", nivelId) :
+                new ObjectParameter("NivelId", typeof(int));
+    
+            var autorizadorIdentParameter = autorizadorIdent.HasValue ?
+                new ObjectParameter("AutorizadorIdent", autorizadorIdent) :
+                new ObjectParameter("AutorizadorIdent", typeof(int));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosNivelAutorizadorSi", conceptoIdParameter, nivelIdParameter, autorizadorIdentParameter, userEmployeeIdParameter, estatus);
+        }
+    
+        public virtual ObjectResult<AutorizadoresxEmpleadoxConceptoCMB_Result> AutorizadoresxEmpleadoxConceptoCMB(Nullable<int> empleadoIdent, Nullable<int> conceptoId)
+        {
+            var empleadoIdentParameter = empleadoIdent.HasValue ?
+                new ObjectParameter("EmpleadoIdent", empleadoIdent) :
+                new ObjectParameter("EmpleadoIdent", typeof(int));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizadoresxEmpleadoxConceptoCMB_Result>("AutorizadoresxEmpleadoxConceptoCMB", empleadoIdentParameter, conceptoIdParameter);
+        }
     }
 }

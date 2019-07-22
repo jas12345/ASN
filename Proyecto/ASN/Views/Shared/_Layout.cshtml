@@ -67,93 +67,45 @@
                     </a>
                 </li>
                 @{
-                    if (User.IsInRole("Desarrollo"))
-                    {
-                        <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
-                    }
+                    <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
 
-                    if (User.IsInRole("Desarrollo"))
+
+
+
+                    if (User.IsInRole("Administrador"))
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li class="dropdown-header"><div class="fa fa-angellist"></div></li>
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Años Nómina", "AniosNomina", "Nomina")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Meses Nómina", "MesesNomina", "Nomina")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Periodicidad Nómina", "index", "PeriodicidadNomina")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Periodos consecutivos", "index", "ConsecutivoPeriodos")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Tipos de Periodo", "Index", "TiposPeriodoNomina")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Periodos de Nómina", "index", "PeriodoNomina")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Conceptos PeopleSoft", "index", "ConceptosPeopleSoft")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Motivos de Incidencia", "index", "ConceptosMotivos")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Perfil de Empleados", "Index", "PerfilEmpleados")</li>
-                                }
-
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("Perfil / Accesos", "Index", "PerfilEmpleadosAccesos")</li>
-                                }
-
-                                @*@if (User.IsInRole("Desarrollo"))
-                        {
-                            <li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>
-                        }*@
+                                <li>@Html.ActionLink("Años Nómina", "AniosNomina", "Nomina")</li>
+                                <li>@Html.ActionLink("Meses Nómina", "MesesNomina", "Nomina")</li>
+                                <li>@Html.ActionLink("Periodicidad Nómina", "index", "PeriodicidadNomina")</li>
+                                <li>@Html.ActionLink("Periodos consecutivos", "index", "ConsecutivoPeriodos")</li>
+                                <li>@Html.ActionLink("Tipos de Periodo", "Index", "TiposPeriodoNomina")</li>
+                                <li>@Html.ActionLink("Periodos de Nómina", "index", "PeriodoNomina")</li>
+                                <li>@Html.ActionLink("Conceptos PeopleSoft", "index", "ConceptosPeopleSoft")</li>
+                                <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
+                                <li>@Html.ActionLink("Motivos de Incidencia", "index", "ConceptosMotivos")</li>
+                                <li>@Html.ActionLink("Perfil de Empleados", "Index", "PerfilEmpleados")</li>
+                                <li>@Html.ActionLink("Perfil / Accesos", "Index", "PerfilEmpleadosAccesos")</li>
                             </ul>
                         </li>
                     }
 
-                    if (User.IsInRole("Desarrollo"))
+                    if (User.IsInRole("Solicitante", "Administrador"))
                     {
                         @*<li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>*@
                         <li>@Html.ActionLink("Solicitudes", "Index", "CapturaSolicitud")</li>
                         <li>@Html.ActionLink("Mis Solicitudes", "Index", "MisSolicitudes")</li>
                     }
 
-                    if (User.IsInRole("Desarrollo"))
+                    if (User.IsInRole("Autorizante", "Administrador"))
                     {
                         <li>@Html.ActionLink("Mis Autorizaciones", "Index", "MisAutorizaciones")</li>
                     }
 
-                    if (User.IsInRole("Desarrollo"))
+                    if (User.IsInRole("Responsable", "Administrador"))
                     {
                         @*<li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>*@
                         <li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>

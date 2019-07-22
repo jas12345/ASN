@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class PeriodoNominaController : Controller
     {
         // GET: PeriodoNomina

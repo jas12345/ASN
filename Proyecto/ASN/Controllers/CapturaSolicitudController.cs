@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Solicitante")]
     public class CapturaSolicitudController : Controller
     {
         // GET: CapturaSolicitud
@@ -146,15 +147,15 @@ namespace ASN.Controllers
         /// Método que devuelve todos los periodos de nomina para un ComboBox
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetEmpleadosPerfilAccesoCMB()
+        public JsonResult GetEmpleadosPerfilAutorizadoresCMB(string EmpleadoIdent, string ConceptoId)
         {
             try
             {
-                var listPeriodoNomina = new List<CatEmpleadosPerfilAccesoCMB_Result>();
+                var listPeriodoNomina = new List<AutorizadoresxEmpleadoxConceptoCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatEmpleadosPerfilAccesoCMB(32).ToList();
+                    listPeriodoNomina = context.AutorizadoresxEmpleadoxConceptoCMB(int.Parse(EmpleadoIdent), int.Parse(ConceptoId)).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);

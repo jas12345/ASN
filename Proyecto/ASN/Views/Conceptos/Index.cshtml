@@ -118,5 +118,8 @@ else
 {
     <p>You are not logged in</p>
 }
-
+<script>
+    urlSugeridos = '@Url.Action("GetSugerido","Conceptos")';
+    urlSalvado = '@Url.Action("SaveAutorizante", "Conceptos")';
+</script>
 @Scripts.Render("~/bundles/Conceptos")

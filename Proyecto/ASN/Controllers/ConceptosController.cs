@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class ConceptosController : Controller
     {
         // GET: Conceptos
@@ -48,6 +49,131 @@ namespace ASN.Controllers
         }
 
         #region Conjunto de metodos para cargas de combos
+        public JsonResult GetNivelesDeAutorizacionCMB(string numeroDeNiveles)
+        {
+            try
+            {
+                var lstNiveles = new List<NivelesCMB>();
+                var nivelInicial = 0;
+                var numeroNiveles = 0;
+
+                int.TryParse(numeroDeNiveles,out numeroNiveles);
+
+                while (nivelInicial < numeroNiveles)
+                {
+                    var obj = new NivelesCMB();
+                    nivelInicial = nivelInicial + 1;
+                    obj.Ident = nivelInicial;
+                    obj.Nivel = nivelInicial;
+
+                    lstNiveles.Add(obj);
+                }
+
+                return Json(lstNiveles,JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GetSugerido(string nivelId, string conceptoId)
+        {
+            try
+            {
+                int conceptId = 0;
+                int level = 0;
+                int.TryParse(conceptoId, out conceptId);
+                int.TryParse(nivelId, out level);
+                int? resultado = 0;
+                using (ASNContext context = new ASNContext())
+                {
+                    resultado = context.AutorizadorxConceptoxNivelCMB(conceptId,level).SingleOrDefault();
+                }
+
+                if (resultado != null)
+                {
+                    return Json(resultado, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(0, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SaveAutorizante(string conceptoId, string nivelId, string ccmsid)
+        {
+            try
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                int conceptId, level, ident = 0;
+                int.TryParse(conceptoId, out conceptId);
+                int.TryParse(nivelId, out level);
+                int.TryParse(ccmsid, out ident);
+                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                using (ASNContext context = new ASNContext())
+                {
+                    context.CatConceptosNivelAutorizadorSi(conceptId, level, ident, usuario.UserInfo.Ident.Value, resultado);
+                }
+
+                if (Convert.ToInt32(resultado.Value) != -1)
+                {
+                    return Json(resultado, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(-1, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+
+        public ActionResult GetAutorizantesCMB(string conceptoId)
+        {
+            try
+            {
+                int conceptId = 0;
+                int.TryParse(conceptoId, out conceptId);
+                var lstCMB = new List<AutorizadoresxConceptoCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    lstCMB = context.AutorizadoresxConceptoCMB(conceptId).ToList();
+                }
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception excepcion)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }            
+        }
+
+
         public JsonResult GetConceptosCMB()
         {
             try

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class ConceptosMotivosController : Controller
     {
         // GET: ConceptosMotivos

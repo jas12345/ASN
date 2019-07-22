@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class PerfilEmpleadosController : Controller
     {
         // GET: PerfilEmpleados

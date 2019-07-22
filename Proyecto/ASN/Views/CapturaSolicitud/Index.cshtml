@@ -365,10 +365,12 @@
                                                                                         {
                                                                                             source.Read(read =>
                                                                                             {
-                                                                                                read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
+                                                                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud")
+                                                                                                .Data("parametrosAutorizadores");
                                                                                             });
                                                                                         })
                                                                                             .Filter("contains")
+                                                                                            .AutoBind(false)
                                                                                             .OptionLabel("- Autorizador Nivel 1 - ")
                                                                                             .DataValueField("Id")
                                                                                             .DataTextField("Valor")
@@ -388,10 +390,11 @@
                                                                                         {
                                                                                             source.Read(read =>
                                                                                             {
-                                                                                                read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
+                                                                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
                                                                                             });
                                                                                         })
                                                                                             .Filter("contains")
+                                                                                            .AutoBind(false)
                                                                                             .OptionLabel("- Autorizador Nivel 2 - ")
                                                                                             .DataValueField("Id")
                                                                                             .DataTextField("Valor")
@@ -411,10 +414,11 @@
                                                                                         {
                                                                                             source.Read(read =>
                                                                                             {
-                                                                                                read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
+                                                                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
                                                                                             });
                                                                                         })
                                                                                             .Filter("contains")
+                                                                                            .AutoBind(false)
                                                                                             .OptionLabel("- Autorizador Nivel 3 - ")
                                                                                             .DataValueField("Id")
                                                                                             .DataTextField("Valor")
@@ -434,10 +438,11 @@
                                                                                         {
                                                                                             source.Read(read =>
                                                                                             {
-                                                                                                read.Action("GetEmpleadosPerfilAccesoCMB", "CapturaSolicitud");
+                                                                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
                                                                                             });
                                                                                         })
                                                                                             .Filter("contains")
+                                                                                            .AutoBind(false)
                                                                                             .OptionLabel("- Autorizador Nivel 4 - ")
                                                                                             .DataValueField("Id")
                                                                                             .DataTextField("Valor")
@@ -473,10 +478,11 @@
                                                                                                 {
                                                                                                     source.Read(read =>
                                                                                                     {
-                                                                                                        read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
                                                                                                     });
                                                                                                 })
                                                                                                     .Filter("contains")
+                                                                                                    .AutoBind(false)
                                                                                                     .OptionLabel("- Autorizador Nivel 5 - ")
                                                                                                     .DataValueField("Id")
                                                                                                     .DataTextField("Valor")
@@ -497,10 +503,11 @@
                                                                                                 {
                                                                                                     source.Read(read =>
                                                                                                     {
-                                                                                                        read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
                                                                                                     });
                                                                                                 })
                                                                                                     .Filter("contains")
+                                                                                                    .AutoBind(false)
                                                                                                     .OptionLabel("- Autorizador Nivel 6 - ")
                                                                                                     .DataValueField("Id")
                                                                                                     .DataTextField("Valor")
@@ -522,10 +529,11 @@
                                                                                                 {
                                                                                                     source.Read(read =>
                                                                                                     {
-                                                                                                        read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
                                                                                                     });
                                                                                                 })
                                                                                                     .Filter("contains")
+                                                                                                    .AutoBind(false)
                                                                                                     .OptionLabel("- Autorizador Nivel 7 - ")
                                                                                                     .DataValueField("Id")
                                                                                                     .DataTextField("Valor")
@@ -546,10 +554,11 @@
                                                                                                 {
                                                                                                     source.Read(read =>
                                                                                                     {
-                                                                                                        read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
                                                                                                     });
                                                                                                 })
                                                                                                     .Filter("contains")
+                                                                                                    .AutoBind(false)
                                                                                                     .OptionLabel("- Autorizador Nivel 8 - ")
                                                                                                     .DataValueField("Id")
                                                                                                     .DataTextField("Valor")
@@ -577,10 +586,11 @@
                                                                                                         {
                                                                                                             source.Read(read =>
                                                                                                             {
-                                                                                                                read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
                                                                                                             });
                                                                                                         })
                                                                                                             .Filter("contains")
+                                                                                                            .AutoBind(false)
                                                                                                             .OptionLabel("- Autorizador Nivel 9 - ")
                                                                                                             .DataValueField("Id")
                                                                                                             .DataTextField("Valor")
@@ -781,6 +791,10 @@
 
         // Función para calcular Estatus de Solicitud
         var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "CapturaSolicitud")';
+
+        // Función para calcular...
+        var urlGetEmpleadosPerfilAutorizadores = '@Url.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud")';
+
 
                 //debugger;
                 //var urlSolicitud = grid.selectedKeyNames().join(", ");
