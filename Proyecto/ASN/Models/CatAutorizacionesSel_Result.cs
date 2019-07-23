@@ -29,5 +29,6 @@ namespace ASN.Models
         public bool Active { get; set; }
         public string EstatusId { get; set; }
         public string EstatusSolicitud { get; set; }
+        public int NivelAutorizacion { get; set; }
     }
 }

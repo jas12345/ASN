@@ -2208,7 +2208,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosxEmpleadoSolicitanteCMB_Result>("CatConceptosxEmpleadoSolicitanteCMB", identParameter, ident_SolicitanteParameter);
         }
     
-        public virtual int CatSolicitudEmpleadosAutorizantesSu(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> autorizador_Ident, Nullable<int> nivelAutorizacion, Nullable<int> accion, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatSolicitudEmpleadosAutorizantesSu(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> concepto_Id, Nullable<int> nivelAutorizacion, Nullable<int> autorizador_Ident, Nullable<int> accion, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -2218,13 +2218,17 @@ namespace ASN.Models
                 new ObjectParameter("Empleado_Ident", empleado_Ident) :
                 new ObjectParameter("Empleado_Ident", typeof(int));
     
-            var autorizador_IdentParameter = autorizador_Ident.HasValue ?
-                new ObjectParameter("Autorizador_Ident", autorizador_Ident) :
-                new ObjectParameter("Autorizador_Ident", typeof(int));
+            var concepto_IdParameter = concepto_Id.HasValue ?
+                new ObjectParameter("Concepto_Id", concepto_Id) :
+                new ObjectParameter("Concepto_Id", typeof(int));
     
             var nivelAutorizacionParameter = nivelAutorizacion.HasValue ?
                 new ObjectParameter("NivelAutorizacion", nivelAutorizacion) :
                 new ObjectParameter("NivelAutorizacion", typeof(int));
+    
+            var autorizador_IdentParameter = autorizador_Ident.HasValue ?
+                new ObjectParameter("Autorizador_Ident", autorizador_Ident) :
+                new ObjectParameter("Autorizador_Ident", typeof(int));
     
             var accionParameter = accion.HasValue ?
                 new ObjectParameter("Accion", accion) :
@@ -2234,7 +2238,7 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosAutorizantesSu", folioSolicitudParameter, empleado_IdentParameter, autorizador_IdentParameter, nivelAutorizacionParameter, accionParameter, userEmployeeIdParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosAutorizantesSu", folioSolicitudParameter, empleado_IdentParameter, concepto_IdParameter, nivelAutorizacionParameter, autorizador_IdentParameter, accionParameter, userEmployeeIdParameter, estatus);
         }
     }
 }

@@ -370,6 +370,7 @@
                                                                                             model.Field(c => c.ResponsableId).Editable(true);
                                                                                             model.Field(c => c.PeriodoOriginalId).Editable(true);
                                                                                             model.Field(c => c.EstatusSolicitud).Editable(false);
+                                                                                            model.Field(c => c.NivelAutorizacion).Editable(false);
                                                                                         })
                                                                                         .Read(read => read.Action("GetAutorizaciones", "AutorizaSolicitud").Data("getFolio"))
                                                                                     //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))

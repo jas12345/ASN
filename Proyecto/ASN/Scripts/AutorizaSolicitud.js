@@ -41,7 +41,7 @@ function autorizarSolicitud() {
     //console.log("Salvado");
     debugger;
     //infoSolicitud();
-    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&Autorizador_Ident=" + Autorizador_Ident + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 2, function (data) {
+    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConceptoId + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 2, function (data) {
 
         FolioSolicitud = data.FolioSolicitud;
 
@@ -60,7 +60,7 @@ function rechazarSolicitud() {
     //console.log("Salvado");
     debugger;
     //infoSolicitud();
-    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&Autorizador_Ident=" + Autorizador_Ident + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 3, function (data) {
+    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConceptoId + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 3, function (data) {
 
         FolioSolicitud = data.FolioSolicitud;
 
@@ -79,7 +79,7 @@ function cancelarSolicitud() {
     //console.log("Salvado");
     debugger;
     //infoSolicitud();
-    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&Autorizador_Ident=" + Autorizador_Ident + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 4, function (data) {
+    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConceptoId + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 4, function (data) {
 
         FolioSolicitud = data.FolioSolicitud;
 
@@ -197,6 +197,8 @@ function editarEmpleadoSolicitud(e) {
     e.preventDefault(); // sho J
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
     CCMSIdResponsable = dataItem.ResponsableId;
+    NivelAutorizacion = dataItem.NivelAutorizacion;
+    ConceptoId = dataItem.ConceptoId;
 
     debugger;
     $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem.Ident);

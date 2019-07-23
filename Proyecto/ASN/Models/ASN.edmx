@@ -448,8 +448,9 @@
         <Function Name="CatSolicitudEmpleadosAutorizantesSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Empleado_Ident" Type="int" Mode="In" />
-          <Parameter Name="Autorizador_Ident" Type="int" Mode="In" />
+          <Parameter Name="Concepto_Id" Type="int" Mode="In" />
           <Parameter Name="NivelAutorizacion" Type="int" Mode="In" />
+          <Parameter Name="Autorizador_Ident" Type="int" Mode="In" />
           <Parameter Name="Accion" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -1261,8 +1262,9 @@
           <FunctionImport Name="CatSolicitudEmpleadosAutorizantesSu">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Concepto_Id" Mode="In" Type="Int32" />
             <Parameter Name="NivelAutorizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Accion" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -1939,6 +1941,7 @@
           <Property Type="Boolean" Name="Active" Nullable="false" />
           <Property Type="String" Name="EstatusId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NivelAutorizacion" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatPeriodosNominaCerradosCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
@@ -2983,6 +2986,7 @@
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
+                <ScalarProperty Name="NivelAutorizacion" ColumnName="NivelAutorizacion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
