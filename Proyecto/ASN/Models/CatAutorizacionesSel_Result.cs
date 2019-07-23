@@ -26,24 +26,6 @@ namespace ASN.Models
         public int ResponsableId { get; set; }
         public string NombreResponsable { get; set; }
         public int PeriodoOriginalId { get; set; }
-        public int NivelAutorizacion1 { get; set; }
-        public Nullable<int> AutorizadorNivel1 { get; set; }
-        public int NivelAutorizacion2 { get; set; }
-        public Nullable<int> AutorizadorNivel2 { get; set; }
-        public int NivelAutorizacion3 { get; set; }
-        public Nullable<int> AutorizadorNivel3 { get; set; }
-        public int NivelAutorizacion4 { get; set; }
-        public Nullable<int> AutorizadorNivel4 { get; set; }
-        public int NivelAutorizacion5 { get; set; }
-        public Nullable<int> AutorizadorNivel5 { get; set; }
-        public int NivelAutorizacion6 { get; set; }
-        public Nullable<int> AutorizadorNivel6 { get; set; }
-        public Nullable<int> NivelAutorizacion7 { get; set; }
-        public Nullable<int> Autorizador7_Ident { get; set; }
-        public Nullable<int> NivelAutorizacion8 { get; set; }
-        public Nullable<int> Autorizador8_Ident { get; set; }
-        public Nullable<int> NivelAutorizacion9 { get; set; }
-        public Nullable<int> Autorizador9_Ident { get; set; }
         public bool Active { get; set; }
         public string EstatusId { get; set; }
         public string EstatusSolicitud { get; set; }

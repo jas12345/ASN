@@ -93,19 +93,19 @@
                         </li>
                     }
 
-                    if (User.IsInRole("Solicitante, Administrador"))
+                    if (User.IsInRole("Solicitante") || User.IsInRole("Administrador"))
                     {
                         @*<li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>*@
                         <li>@Html.ActionLink("Solicitudes", "Index", "CapturaSolicitud")</li>
                         <li>@Html.ActionLink("Mis Solicitudes", "Index", "MisSolicitudes")</li>
                     }
 
-                    if (User.IsInRole("Autorizante, Administrador"))
+                    if (User.IsInRole("Autorizante") || User.IsInRole("Administrador"))
                     {
                         <li>@Html.ActionLink("Mis Autorizaciones", "Index", "MisAutorizaciones")</li>
                     }
 
-                    if (User.IsInRole("Responsable, Administrador"))
+                    if (User.IsInRole("Responsable") || User.IsInRole("Administrador"))
                     {
                         @*<li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>*@
                         <li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>

@@ -81,7 +81,7 @@
             </div>
             <div class="col-lg-3">
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })
-                @Html.TextBox("Estatus", "")
+                @Html.TextBox("Estatus", "", new { disabled = "disabled" })
             </div>
             <p></p>
         </div>
@@ -247,6 +247,7 @@
                                                                                                 }
                                                                                                                                                     )
                                                                                         .Filter("contains")
+                                                                                        .AutoBind(false)
                                                                                         .OptionLabel("- Conceptos - ")
                                                                                         .DataValueField("Ident")
                                                                                         .DataTextField("Valor")

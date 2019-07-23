@@ -145,11 +145,11 @@ function calculaEstatusSolicitud() {
             ClaveEstatusSolicitud = data[0].EstatusSolicitudId;
 
             if (ClaveEstatusSolicitud == 'EB') {
-                $("#EnviarSolicitud").data("kendoButton").enable(true);
+                $("#EnviarSolicitud").show();
             }
             else {
                 //$("#EnviarSolicitud").data("kendoButton").enable(false);
-                $("#EnviarSolicitud").kendoButton({ enable: false });
+                $("#EnviarSolicitud").hide();
             }
 
             if (ClaveEstatusSolicitud == 'E') {
@@ -158,7 +158,7 @@ function calculaEstatusSolicitud() {
                 $("#RechazarSolicitud").show();
             }
             else {
-                $("#RechazarSolicitud").kendoButton({ enable: false });
+                $("#RechazarSolicitud").hide();
             }
 
             $("#Estatus").val(data[0].Descripcion);
@@ -178,6 +178,11 @@ function editarEmpleadoSolicitud(e) {
     e.preventDefault(); // sho J
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
     CCMSIdResponsable = dataItem.ResponsableId;
+    ConConceptoIdent = dataItem.ConceptoId
+
+    // Se actualiza comboBox de Conceptos
+    $("#Conceptos").data("kendoDropDownList").dataSource.read(parametrosConceptos);
+    $("#Conceptos").data("kendoDropDownList").refresh();
 
     debugger;
     $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem.Ident);
@@ -204,31 +209,31 @@ function editarEmpleadoSolicitud(e) {
     $('#PeriodoIncidente').data('kendoDropDownList').trigger('change');
 
     $("#AutorizadorNivel1").data('kendoDropDownList').value(dataItem.AutorizadorNivel1);
-    $('#AutorizadorNivel1').data('kendoDropDownList').trigger('change');
+    //$('#AutorizadorNivel1').data('kendoDropDownList').trigger('change');
 
     $("#AutorizadorNivel2").data('kendoDropDownList').value(dataItem.AutorizadorNivel2);
-    $('#AutorizadorNivel2').data('kendoDropDownList').trigger('change');
+    //$('#AutorizadorNivel2').data('kendoDropDownList').trigger('change');
 
     $("#AutorizadorNivel3").data('kendoDropDownList').value(dataItem.AutorizadorNivel3);
-    $('#AutorizadorNivel3').data('kendoDropDownList').trigger('change');
+    //$('#AutorizadorNivel3').data('kendoDropDownList').trigger('change');
 
     $("#AutorizadorNivel4").data('kendoDropDownList').value(dataItem.AutorizadorNivel4);
-    $('#AutorizadorNivel4').data('kendoDropDownList').trigger('change');
+    //$('#AutorizadorNivel4').data('kendoDropDownList').trigger('change');
 
     $("#AutorizadorNivel5").data('kendoDropDownList').value(dataItem.AutorizadorNivel5);
-    $('#AutorizadorNivel5').data('kendoDropDownList').trigger('change');
+    //$('#AutorizadorNivel5').data('kendoDropDownList').trigger('change');
 
     $("#AutorizadorNivel6").data('kendoDropDownList').value(dataItem.AutorizadorNivel6);
-    $('#AutorizadorNivel6').data('kendoDropDownList').trigger('change');
+    //$('#AutorizadorNivel6').data('kendoDropDownList').trigger('change');
 
     $("#AutorizadorNivel7").data('kendoDropDownList').value(dataItem.AutorizadorNivel7);
-    $('#AutorizadorNivel7').data('kendoDropDownList').trigger('change');
+    //$('#AutorizadorNivel7').data('kendoDropDownList').trigger('change');
 
     $("#AutorizadorNivel8").data('kendoDropDownList').value(dataItem.AutorizadorNivel8);
-    $('#AutorizadorNivel8').data('kendoDropDownList').trigger('change');
+    //$('#AutorizadorNivel8').data('kendoDropDownList').trigger('change');
 
     $("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem.AutorizadorNivel9);
-    $('#AutorizadorNivel9').data('kendoDropDownList').trigger('change');
+    //$('#AutorizadorNivel9').data('kendoDropDownList').trigger('change');
 
     debugger;
     $("#CCMSIdIncidente").data('kendoNumericTextBox').value(CCMSIdResponsable);
@@ -411,7 +416,7 @@ function onChangeCCMSId() {
                 $("#CCMSIDX").text(EmpCCMSId);
 
                 debugger;
-                $("#Conceptos").data("kendoDropDownList").dataSource.read(EmpCCMSId);
+                $("#Conceptos").data("kendoDropDownList").dataSource.read(parametrosConceptos);
                 $("#Conceptos").data("kendoDropDownList").refresh();
 
             }
@@ -514,14 +519,23 @@ function onChangeConceptos() {
         //rellenaPerfilTipoAcceso();
 
         $('#AutorizadorNivel1').data('kendoDropDownList').dataSource.read();
+        $("#AutorizadorNivel1").data("kendoDropDownList").refresh();
         $('#AutorizadorNivel2').data('kendoDropDownList').dataSource.read();
+        $("#AutorizadorNivel2").data("kendoDropDownList").refresh();
         $('#AutorizadorNivel3').data('kendoDropDownList').dataSource.read();
+        $("#AutorizadorNivel3").data("kendoDropDownList").refresh();
         $('#AutorizadorNivel4').data('kendoDropDownList').dataSource.read();
+        $("#AutorizadorNivel4").data("kendoDropDownList").refresh();
         $('#AutorizadorNivel5').data('kendoDropDownList').dataSource.read();
+        $("#AutorizadorNivel5").data("kendoDropDownList").refresh();
         $('#AutorizadorNivel6').data('kendoDropDownList').dataSource.read();
+        $("#AutorizadorNivel6").data("kendoDropDownList").refresh();
         $('#AutorizadorNivel7').data('kendoDropDownList').dataSource.read();
+        $("#AutorizadorNivel7").data("kendoDropDownList").refresh();
         $('#AutorizadorNivel8').data('kendoDropDownList').dataSource.read();
+        $("#AutorizadorNivel8").data("kendoDropDownList").refresh();
         $('#AutorizadorNivel9').data('kendoDropDownList').dataSource.read();
+        $("#AutorizadorNivel9").data("kendoDropDownList").refresh();
 
 
         $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent, function (data) {
@@ -859,6 +873,14 @@ function parametrosAutorizadores() {
         ConceptoId: $("#Conceptos").val()
     };
 }
+
+function parametrosConceptos() {
+    return {
+        EmpleadoIdent: EmpCCMSId,
+        ConceptoId: ConConceptoIdent
+    };
+}
+
 
 function rellenaPerfilTipoAcceso() {
     //debugger;

@@ -37,6 +37,63 @@ function agregarSolicitud() {
     });
 }
 
+function autorizarSolicitud() {
+    //console.log("Salvado");
+    debugger;
+    //infoSolicitud();
+    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&Autorizador_Ident=" + Autorizador_Ident + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 2, function (data) {
+
+        FolioSolicitud = data.FolioSolicitud;
+
+        if (data.res == -1) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("No se pudo procesar la Autorización ", "error");
+        }
+
+        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+        actualizaGrid();
+        //debugger;
+    });
+}
+
+function rechazarSolicitud() {
+    //console.log("Salvado");
+    debugger;
+    //infoSolicitud();
+    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&Autorizador_Ident=" + Autorizador_Ident + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 3, function (data) {
+
+        FolioSolicitud = data.FolioSolicitud;
+
+        if (data.res == -1) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("No se pudo procesar la Autorización ", "error");
+        }
+
+        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+        actualizaGrid();
+        //debugger;
+    });
+}
+
+function cancelarSolicitud() {
+    //console.log("Salvado");
+    debugger;
+    //infoSolicitud();
+    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&Autorizador_Ident=" + Autorizador_Ident + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 4, function (data) {
+
+        FolioSolicitud = data.FolioSolicitud;
+
+        if (data.res == -1) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("No se pudo procesar la Autorización ", "error");
+        }
+
+        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+        actualizaGrid();
+        //debugger;
+    });
+}
+
 function enviarSolicitud() {
     //console.log("Salvado");
     debugger;
@@ -130,8 +187,8 @@ function deshabilitaControlesEdicion() {
 }
 
 function actualizaGrid() {
-    $("#gridSolicitud").data("kendoGrid").dataSource.read();
-    $("#gridSolicitud").data("kendoGrid").refresh();
+    $("#gridAutorizacion").data("kendoGrid").dataSource.read();
+    $("#gridAutorizacion").data("kendoGrid").refresh();
     debugger;
 }
 
@@ -167,7 +224,7 @@ function editarEmpleadoSolicitud(e) {
 
     debugger;
     var rowIndex = $(e.currentTarget).closest("tr").index();
-    var grid = $("#gridSolicitud").data("kendoGrid");
+    var grid = $("#gridAutorizacion").data("kendoGrid");
     grid.select("tr:eq(" + rowIndex + ")");
 }
 
@@ -189,7 +246,7 @@ function borrarEmpleadoSolicitud(e) {
         $.post(urlUpdateEmpleadoSolicitud + "/?FolioSolicitud=" + Solicitud_Ident + "&Empleado_Ident=" + Empleado_Ident + "&ConceptoId=" + ConceptoId + "&Activo=" + Active, function (data) {
             //debugger;
 
-            var grid = $("#gridSolicitud").data("kendoGrid");
+            var grid = $("#gridAutorizacion").data("kendoGrid");
             var selectedRows = grid.select();
 
             actualizaGrid();

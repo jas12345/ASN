@@ -298,21 +298,20 @@
                         <tr>
                             <td style="width : 6em">
                                 @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar")
-                                .Events(x => x.Click("agregarSolicitud"))
+                                .Events(x => x.Click("autorizarSolicitud"))
                                 )
                             </td>
                             <td style="width : 6em">
                                 <div name="nivel" id="1">
                                     @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar")
-                                    .Events(x => x.Click("agregarSolicitud"))
+                                    .Events(x => x.Click("rechazarSolicitud"))
                                     )
                                 </div>
                             </td>
                             <td style="width : 6em">
                                 <div name="nivel" id="2">
                                     @(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar")
-                                                                                                                                    .Events(x => x.Click("agregarSolicitud"))
-                                            //.Events(x => x.Click("agregaEmpleado"))
+                                    .Events(x => x.Click("cancelarSolicitud"))
                                     )
                                 </div>
                             </td>
@@ -335,7 +334,7 @@
         <div class="row">
             <div class="col-lg-12">
                 @(Html.Kendo().Grid<ASN.Models.CatAutorizacionesSel_Result>()
-                                                                                    .Name("gridSolicitud")
+                                                                                    .Name("gridAutorizacion")
                                                                                     .Columns(column =>
                                                                                     {
                                                                                         column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(25);
@@ -372,7 +371,7 @@
                                                                                             model.Field(c => c.PeriodoOriginalId).Editable(true);
                                                                                             model.Field(c => c.EstatusSolicitud).Editable(false);
                                                                                         })
-                                                                                        .Read(read => read.Action("GetSolicitudes", "AutorizaSolicitud").Data("getFolio"))
+                                                                                        .Read(read => read.Action("GetAutorizaciones", "AutorizaSolicitud").Data("getFolio"))
                                                                                     //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
                                                                                     //.Create(create => create.Action("CrearSolicitudPorEmpleado", "AutorizaSolicitud").Type(HttpVerbs.Post))
                                                                                     //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
@@ -505,6 +504,16 @@
 
                 //
                 var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "AutorizaSolicitud")';
+
+        //
+        var urlAutorizaSolicitud = '@Url.Action("ProcesaSolicitud", "AutorizaSolicitud")';
+
+        //
+        var urlRechazaSolicitud = '@Url.Action("ProcesaSolicitud", "AutorizaSolicitud")';
+
+        //
+        var urlCancelaSolicitud = '@Url.Action("ProcesaSolicitud", "AutorizaSolicitud")';
+
 
         // Función para calcular Estatus de Solicitud
         var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "AutorizaSolicitud")';

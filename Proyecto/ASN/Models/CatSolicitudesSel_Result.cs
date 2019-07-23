@@ -26,12 +26,12 @@ namespace ASN.Models
         public string ConceptoMotivoDesc { get; set; }
         public int ResponsableId { get; set; }
         public int PeriodoOriginalId { get; set; }
-        public int NivelAutorizacion1 { get; set; }
-        public int NivelAutorizacion2 { get; set; }
-        public int NivelAutorizacion3 { get; set; }
-        public int NivelAutorizacion4 { get; set; }
-        public int NivelAutorizacion5 { get; set; }
-        public int NivelAutorizacion6 { get; set; }
+        public Nullable<int> NivelAutorizacion1 { get; set; }
+        public Nullable<int> NivelAutorizacion2 { get; set; }
+        public Nullable<int> NivelAutorizacion3 { get; set; }
+        public Nullable<int> NivelAutorizacion4 { get; set; }
+        public Nullable<int> NivelAutorizacion5 { get; set; }
+        public Nullable<int> NivelAutorizacion6 { get; set; }
         public Nullable<int> AutorizadorNivel1 { get; set; }
         public Nullable<int> AutorizadorNivel2 { get; set; }
         public Nullable<int> AutorizadorNivel3 { get; set; }

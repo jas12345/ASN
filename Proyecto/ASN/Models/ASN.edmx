@@ -54,6 +54,7 @@
         </Function>
         <Function Name="CatAutorizacionesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="Autorizante_Ident" Type="int" Mode="In" />
         </Function>
         <Function Name="CatCargaRapidaSd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CargaRapidaId" Type="int" Mode="In" />
@@ -169,6 +170,10 @@
         </Function>
         <Function Name="CatConceptosxEmpleadoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Ident" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatConceptosxEmpleadoSolicitanteCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Ident" Type="int" Mode="In" />
+          <Parameter Name="Ident_Solicitante" Type="int" Mode="In" />
         </Function>
         <Function Name="CatConceptosxEmpleadoxSolicitanteCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Ident" Type="int" Mode="In" />
@@ -437,6 +442,15 @@
           <Parameter Name="TTNivelAutorizacion" Type="bit" Mode="In" />
           <Parameter Name="TTMontoAutorizacionAutomatica" Type="bit" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatSolicitudEmpleadosAutorizantesSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="Empleado_Ident" Type="int" Mode="In" />
+          <Parameter Name="Autorizador_Ident" Type="int" Mode="In" />
+          <Parameter Name="NivelAutorizacion" Type="int" Mode="In" />
+          <Parameter Name="Accion" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -1209,7 +1223,8 @@
           <Parameter Name="Autorizante_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatAutorizacionesSel" ReturnType="Collection(ASNModel.CatAutorizacionesSel_Result)">
-          <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizante_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPeriodosNominaCerradosCMB" ReturnType="Collection(ASNModel.CatPeriodosNominaCerradosCMB_Result)">
           <Parameter Name="Active" Mode="In" Type="Int32" />
@@ -1238,6 +1253,19 @@
           <FunctionImport Name="AutorizadoresxEmpleadoxConceptoCMB" ReturnType="Collection(ASNModel.AutorizadoresxEmpleadoxConceptoCMB_Result)">
             <Parameter Name="EmpleadoIdent" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConceptosxEmpleadoSolicitanteCMB" ReturnType="Collection(ASNModel.CatConceptosxEmpleadoSolicitanteCMB_Result)">
+            <Parameter Name="Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Ident_Solicitante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatSolicitudEmpleadosAutorizantesSu">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="NivelAutorizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Accion" Mode="In" Type="Int32" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1606,12 +1634,12 @@
           <Property Type="String" Name="ConceptoMotivoDesc" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="ResponsableId" Nullable="false" />
           <Property Type="Int32" Name="PeriodoOriginalId" Nullable="false" />
-          <Property Type="Int32" Name="NivelAutorizacion1" Nullable="false" />
-          <Property Type="Int32" Name="NivelAutorizacion2" Nullable="false" />
-          <Property Type="Int32" Name="NivelAutorizacion3" Nullable="false" />
-          <Property Type="Int32" Name="NivelAutorizacion4" Nullable="false" />
-          <Property Type="Int32" Name="NivelAutorizacion5" Nullable="false" />
-          <Property Type="Int32" Name="NivelAutorizacion6" Nullable="false" />
+          <Property Type="Int32" Name="NivelAutorizacion1" Nullable="true" />
+          <Property Type="Int32" Name="NivelAutorizacion2" Nullable="true" />
+          <Property Type="Int32" Name="NivelAutorizacion3" Nullable="true" />
+          <Property Type="Int32" Name="NivelAutorizacion4" Nullable="true" />
+          <Property Type="Int32" Name="NivelAutorizacion5" Nullable="true" />
+          <Property Type="Int32" Name="NivelAutorizacion6" Nullable="true" />
           <Property Type="Int32" Name="AutorizadorNivel1" Nullable="true" />
           <Property Type="Int32" Name="AutorizadorNivel2" Nullable="true" />
           <Property Type="Int32" Name="AutorizadorNivel3" Nullable="true" />
@@ -1908,24 +1936,6 @@
           <Property Type="Int32" Name="ResponsableId" Nullable="false" />
           <Property Type="String" Name="NombreResponsable" Nullable="true" MaxLength="752" />
           <Property Type="Int32" Name="PeriodoOriginalId" Nullable="false" />
-          <Property Type="Int32" Name="NivelAutorizacion1" Nullable="false" />
-          <Property Type="Int32" Name="AutorizadorNivel1" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion2" Nullable="false" />
-          <Property Type="Int32" Name="AutorizadorNivel2" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion3" Nullable="false" />
-          <Property Type="Int32" Name="AutorizadorNivel3" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion4" Nullable="false" />
-          <Property Type="Int32" Name="AutorizadorNivel4" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion5" Nullable="false" />
-          <Property Type="Int32" Name="AutorizadorNivel5" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion6" Nullable="false" />
-          <Property Type="Int32" Name="AutorizadorNivel6" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion7" Nullable="true" />
-          <Property Type="Int32" Name="Autorizador7_Ident" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion8" Nullable="true" />
-          <Property Type="Int32" Name="Autorizador8_Ident" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion9" Nullable="true" />
-          <Property Type="Int32" Name="Autorizador9_Ident" Nullable="true" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
           <Property Type="String" Name="EstatusId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
@@ -1945,6 +1955,28 @@
         <ComplexType Name="AutorizadoresxEmpleadoxConceptoCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="true" MaxLength="752" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosxEmpleadoSolicitanteCMB_Result">
+          <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
+          <Property Type="String" Name="NombrePerfilEmpleados" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Perfil_Ident1" Nullable="false" />
+          <Property Type="String" Name="NombrePerfilEmpleados1" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Country_Ident" Nullable="true" />
+          <Property Type="Int32" Name="City_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Location_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Program_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
+          <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DeactivatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DeactivatedBy" Nullable="true" />
+          <Property Type="Int32" Name="LastModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastModifiedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="LastModifiedFromPCName" Nullable="false" MaxLength="64" />
         </ComplexType>
        
         </Schema>
@@ -2948,24 +2980,6 @@
                 <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
                 <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
                 <ScalarProperty Name="PeriodoOriginalId" ColumnName="PeriodoOriginalId" />
-                <ScalarProperty Name="NivelAutorizacion1" ColumnName="NivelAutorizacion1" />
-                <ScalarProperty Name="AutorizadorNivel1" ColumnName="AutorizadorNivel1" />
-                <ScalarProperty Name="NivelAutorizacion2" ColumnName="NivelAutorizacion2" />
-                <ScalarProperty Name="AutorizadorNivel2" ColumnName="AutorizadorNivel2" />
-                <ScalarProperty Name="NivelAutorizacion3" ColumnName="NivelAutorizacion3" />
-                <ScalarProperty Name="AutorizadorNivel3" ColumnName="AutorizadorNivel3" />
-                <ScalarProperty Name="NivelAutorizacion4" ColumnName="NivelAutorizacion4" />
-                <ScalarProperty Name="AutorizadorNivel4" ColumnName="AutorizadorNivel4" />
-                <ScalarProperty Name="NivelAutorizacion5" ColumnName="NivelAutorizacion5" />
-                <ScalarProperty Name="AutorizadorNivel5" ColumnName="AutorizadorNivel5" />
-                <ScalarProperty Name="NivelAutorizacion6" ColumnName="NivelAutorizacion6" />
-                <ScalarProperty Name="AutorizadorNivel6" ColumnName="AutorizadorNivel6" />
-                <ScalarProperty Name="NivelAutorizacion7" ColumnName="NivelAutorizacion7" />
-                <ScalarProperty Name="Autorizador7_Ident" ColumnName="Autorizador7_Ident" />
-                <ScalarProperty Name="NivelAutorizacion8" ColumnName="NivelAutorizacion8" />
-                <ScalarProperty Name="Autorizador8_Ident" ColumnName="Autorizador8_Ident" />
-                <ScalarProperty Name="NivelAutorizacion9" ColumnName="NivelAutorizacion9" />
-                <ScalarProperty Name="Autorizador9_Ident" ColumnName="Autorizador9_Ident" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
@@ -3007,6 +3021,33 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosxEmpleadoSolicitanteCMB" FunctionName="ASNModel.Store.CatConceptosxEmpleadoSolicitanteCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosxEmpleadoSolicitanteCMB_Result">
+                <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
+                <ScalarProperty Name="NombrePerfilEmpleados" ColumnName="NombrePerfilEmpleados" />
+                <ScalarProperty Name="Perfil_Ident1" ColumnName="Perfil_Ident1" />
+                <ScalarProperty Name="NombrePerfilEmpleados1" ColumnName="NombrePerfilEmpleados1" />
+                <ScalarProperty Name="Country_Ident" ColumnName="Country_Ident" />
+                <ScalarProperty Name="City_Ident" ColumnName="City_Ident" />
+                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
+                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
+                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
+                <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosAutorizantesSu" FunctionName="ASNModel.Store.CatSolicitudEmpleadosAutorizantesSu" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

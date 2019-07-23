@@ -2099,13 +2099,17 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisAutorizacionesSel_Result>("CatMisAutorizacionesSel", autorizante_IdentParameter);
         }
     
-        public virtual ObjectResult<CatAutorizacionesSel_Result> CatAutorizacionesSel(Nullable<int> folioSolicitud)
+        public virtual ObjectResult<CatAutorizacionesSel_Result> CatAutorizacionesSel(Nullable<int> folioSolicitud, Nullable<int> autorizante_Ident)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
                 new ObjectParameter("FolioSolicitud", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAutorizacionesSel_Result>("CatAutorizacionesSel", folioSolicitudParameter);
+            var autorizante_IdentParameter = autorizante_Ident.HasValue ?
+                new ObjectParameter("Autorizante_Ident", autorizante_Ident) :
+                new ObjectParameter("Autorizante_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAutorizacionesSel_Result>("CatAutorizacionesSel", folioSolicitudParameter, autorizante_IdentParameter);
         }
     
         public virtual ObjectResult<CatPeriodosNominaCerradosCMB_Result> CatPeriodosNominaCerradosCMB(Nullable<int> active)
@@ -2189,6 +2193,48 @@ namespace ASN.Models
                 new ObjectParameter("ConceptoId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizadoresxEmpleadoxConceptoCMB_Result>("AutorizadoresxEmpleadoxConceptoCMB", empleadoIdentParameter, conceptoIdParameter);
+        }
+    
+        public virtual ObjectResult<CatConceptosxEmpleadoSolicitanteCMB_Result> CatConceptosxEmpleadoSolicitanteCMB(Nullable<int> ident, Nullable<int> ident_Solicitante)
+        {
+            var identParameter = ident.HasValue ?
+                new ObjectParameter("Ident", ident) :
+                new ObjectParameter("Ident", typeof(int));
+    
+            var ident_SolicitanteParameter = ident_Solicitante.HasValue ?
+                new ObjectParameter("Ident_Solicitante", ident_Solicitante) :
+                new ObjectParameter("Ident_Solicitante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosxEmpleadoSolicitanteCMB_Result>("CatConceptosxEmpleadoSolicitanteCMB", identParameter, ident_SolicitanteParameter);
+        }
+    
+        public virtual int CatSolicitudEmpleadosAutorizantesSu(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> autorizador_Ident, Nullable<int> nivelAutorizacion, Nullable<int> accion, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var empleado_IdentParameter = empleado_Ident.HasValue ?
+                new ObjectParameter("Empleado_Ident", empleado_Ident) :
+                new ObjectParameter("Empleado_Ident", typeof(int));
+    
+            var autorizador_IdentParameter = autorizador_Ident.HasValue ?
+                new ObjectParameter("Autorizador_Ident", autorizador_Ident) :
+                new ObjectParameter("Autorizador_Ident", typeof(int));
+    
+            var nivelAutorizacionParameter = nivelAutorizacion.HasValue ?
+                new ObjectParameter("NivelAutorizacion", nivelAutorizacion) :
+                new ObjectParameter("NivelAutorizacion", typeof(int));
+    
+            var accionParameter = accion.HasValue ?
+                new ObjectParameter("Accion", accion) :
+                new ObjectParameter("Accion", typeof(int));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosAutorizantesSu", folioSolicitudParameter, empleado_IdentParameter, autorizador_IdentParameter, nivelAutorizacionParameter, accionParameter, userEmployeeIdParameter, estatus);
         }
     }
 }

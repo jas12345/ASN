@@ -22,21 +22,23 @@ namespace ASN.Controllers
             //return View();
         }
 
-        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
+        public ActionResult GetAutorizaciones([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
         {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            int.TryParse(User.Identity.Name, out int idAdmin);
+
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.CatSolicitudesSel(FolioSolicitud).ToList();
+                    var lstSolicitudes = context.CatAutorizacionesSel(FolioSolicitud, idAdmin).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok);
                 }
             }
             catch (Exception ex)
-            {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            {                
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json("");
@@ -330,68 +332,6 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
-        {
-            try
-            {
-                using (ASNContext context = new ASNContext())
-                {
-                    int res = 0;
-                    int ccmsidAdmin = 0;
-
-                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
-
-                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-
-                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
-                    ObjectParameter folioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
-                    resultado.Value = 0;
-                    folioSolicitudOut.Value = 0;
-
-                    int.TryParse(User.Identity.Name, out int idAdmin);
-
-                    context.CatSolicitudesSi(
-                          FolioSolicitud
-                        , Empleado_Ident
-                        , ConceptoId
-                        , ParametroConceptoMonto
-                        , MotivosSolicitudId
-                        , conceptoMotivoId
-                        , responsableId
-                        , periododOriginalId
-                        , autorizadorNivel1
-                        , autorizadorNivel2
-                        , autorizadorNivel3
-                        , autorizadorNivel4
-                        , autorizadorNivel5
-                        , autorizadorNivel6
-                        , autorizadorNivel7
-                        , autorizadorNivel8
-                        , autorizadorNivel9
-                        , true//active
-                        , idAdmin
-                        , folioSolicitudOut
-                        , resultado);
-
-                    int.TryParse(resultado.Value.ToString(), out res);
-                    int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
-
-                    //TODO: Guardar 
-                    
-                    return Json(new { FolioSolicitud, res }, JsonRequestBehavior.AllowGet);                    
-                }
-            }
-
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json(new { FolioSolicitud, res = 0 }, JsonRequestBehavior.AllowGet);
-            }
-        }
-
         public ActionResult EnviaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
         {
             try
@@ -433,6 +373,146 @@ namespace ASN.Controllers
         }
 
         public ActionResult UpdateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, Nullable<decimal> ParametroConceptoMonto, Nullable<int> MotivosSolicitudId, bool Activo)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    int res = 0;
+                    int ccmsidAdmin = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out int idAdmin);
+
+                    context.CatEmpleadosSolicitudesSu(
+                          FolioSolicitud
+                        , Empleado_Ident
+                        , ConceptoId
+                        , ParametroConceptoMonto
+                        , MotivosSolicitudId
+                        , Activo
+                        , idAdmin
+                        , resultado);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    return Json(new { FolioSolicitud, Empleado_Ident, res }, JsonRequestBehavior.AllowGet);
+
+                    //return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(new { FolioSolicitud, Empleado_Ident, res = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult ProcesaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, Nullable<int> Autorizador_Ident, Nullable<int> NivelAutorizacion, int Accion)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    int res = 0;
+                    int ccmsidAdmin = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out int idAdmin);
+
+                    context.CatSolicitudEmpleadosAutorizantesSu(
+                          FolioSolicitud
+                        , Empleado_Ident
+                        , Autorizador_Ident
+                        , NivelAutorizacion
+                        , Accion
+                        , idAdmin
+                        , resultado);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    return Json(new { FolioSolicitud, Empleado_Ident, res }, JsonRequestBehavior.AllowGet);
+
+                    //return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(new { FolioSolicitud, Empleado_Ident, res = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult RechazaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, Nullable<decimal> ParametroConceptoMonto, Nullable<int> MotivosSolicitudId, bool Activo)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    int res = 0;
+                    int ccmsidAdmin = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out int idAdmin);
+
+                    context.CatEmpleadosSolicitudesSu(
+                          FolioSolicitud
+                        , Empleado_Ident
+                        , ConceptoId
+                        , ParametroConceptoMonto
+                        , MotivosSolicitudId
+                        , Activo
+                        , idAdmin
+                        , resultado);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    return Json(new { FolioSolicitud, Empleado_Ident, res }, JsonRequestBehavior.AllowGet);
+
+                    //return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(new { FolioSolicitud, Empleado_Ident, res = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult CancelaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, Nullable<decimal> ParametroConceptoMonto, Nullable<int> MotivosSolicitudId, bool Activo)
         {
             try
             {
