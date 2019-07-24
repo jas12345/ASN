@@ -173,6 +173,10 @@ function calculaEstatusSolicitud() {
                 $("#EnviarSolicitud").hide();
             }
 
+            if (ClaveEstatusSolicitud == 'C') {
+                $("#CancelarSolicitud").hide();
+            }
+
             // Activar / Desactivar botón Rechazar
             if (ClaveEstatusSolicitud == 'R') {
                 //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(false);

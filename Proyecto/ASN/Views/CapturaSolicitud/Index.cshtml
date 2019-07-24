@@ -39,7 +39,7 @@
             <div class="col-lg-2">
                 @Html.Label("Captura de Solicitudes", new { style = "font-size: 15px" })
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
                                                                 .Enable(false)
@@ -79,7 +79,7 @@
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })
                 @Html.TextBox("Estatus", "", new { disabled = "disabled" })
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-1">
                 @(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar")
                     .Events(x => x.Click("cancelarSolicitud"))
                 )

@@ -76,7 +76,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePerfilEmpleadosAccesos([DataSourceRequest]DataSourceRequest request, int empleadoId, int perfil_Ident, Nullable<int> nivel)
+        public ActionResult CreatePerfilEmpleadosAccesos(int empleadoId, int perfil_Ident, Nullable<int> nivel)
         {
             try
             {

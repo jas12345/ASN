@@ -535,7 +535,7 @@ function agregaEmpleado() {
     CCMSId = $("#CCMSId").val();
     nivel = $("#NumeroNivel").val();
 
-    $.post('/PerfilEmpleadosAccesos/CreatePerfilEmpleadosAccesos' + "/?perfil_Ident=" + ClavePerfil + "&empleadoId=" + CCMSId + "&nivel=" + nivel, function (data){
+    $.post(urlCreatePerfilEmpleadosAccesos + "/?perfil_Ident=" + ClavePerfil + "&empleadoId=" + CCMSId + "&nivel=" + nivel, function (data){
         debugger
 
         var notification = $("#popupNotification").data("kendoNotification");
