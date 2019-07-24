@@ -218,17 +218,18 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident)
+        public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident, int Ident_Solicitante)
         {
             try
             {
-                int.TryParse(User.Identity.Name, out int ident_Solicitante);
+                // Se asigna el Solicitante de la solicitud, no el usuario actual de la aplicación
+                //int.TryParse(User.Identity.Name, out int ident_Solicitante);
 
                 var listPeriodoNomina = new List<CatConceptosxEmpleadoxSolicitanteCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatConceptosxEmpleadoxSolicitanteCMB(ident, ident_Solicitante).OrderBy(x => x.Valor).ToList();
+                    listPeriodoNomina = context.CatConceptosxEmpleadoxSolicitanteCMB(ident, Ident_Solicitante).OrderBy(x => x.Valor).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);

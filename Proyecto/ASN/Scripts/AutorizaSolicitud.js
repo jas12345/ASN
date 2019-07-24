@@ -199,6 +199,12 @@ function editarEmpleadoSolicitud(e) {
     CCMSIdResponsable = dataItem.ResponsableId;
     NivelAutorizacion = dataItem.NivelAutorizacion;
     ConceptoId = dataItem.ConceptoId;
+    ConEmpleadoident = dataItem.Ident;
+    Solicitante_Ident = dataItem.Solicitante_Ident;
+
+    // Se actualiza comboBox de Conceptos
+    $("#Conceptos").data("kendoDropDownList").dataSource.read(getIdent);
+    $("#Conceptos").data("kendoDropDownList").refresh();
 
     debugger;
     $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem.Ident);
@@ -271,20 +277,9 @@ function onChangeFolioSolicitud() {
 }
 
 function getIdent() {
-    var Ident = -1
-    CCMSId = "";
-    debugger;
-    CCMSId = $("#CCMSIDSolicitado").val();
-
-    if (CCMSId.length > 0) {
-        Ident = CCMSId
-    }
-    else {
-        Ident = -1
-    }
-
     return {
-        Ident: Ident,
+        Ident: ConEmpleadoident,
+        Ident_Solicitante: Solicitante_Ident
     }
 }
 

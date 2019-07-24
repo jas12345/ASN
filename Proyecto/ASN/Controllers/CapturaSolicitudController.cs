@@ -286,6 +286,43 @@ namespace ASN.Controllers
             }
         }
 
+        public ActionResult CancelaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    int res = 0;
+                    int ccmsidAdmin = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    // EnviarSolicitud A Autorizadores
+                    context.CancelaSolicitud(FolioSolicitud, resultado);
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    // 
+                    return Json(new { res }, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         public JsonResult GetConceptosMotivosCMB()
         {
             try

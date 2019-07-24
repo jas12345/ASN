@@ -38,98 +38,99 @@
         <div class="col-lg-12 col-md-12">
             <div class="col-lg-2">
                 @Html.Label("Captura de Solicitudes", new { style = "font-size: 15px" })
-                @*<div class="container-fluid">
-                    <a href="@Url.Action("Create","MisAutorizaciones")" data-role="button" class="k-button k-button-icontext" style="float:right; margin-right:10px;" role="button" aria-disabled="false" tabindex="0">
-                    <span class="k-icon k-i-plus"></span> Autorizar
-                    </a>*@
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
-                                                        .Enable(false)
-                                                        .Spinners(false)
-                                                        .Decimals(0)
-                                                        .Format("0")
-                                                        .Min(0)
-                                                        .Events(e => e.Change("onChangeFolioSolicitud"))
-                                                        //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
-                                                        .Value(Model.FolioSolicitud)
-                                                        .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
+                                                                .Enable(false)
+                                                                .Spinners(false)
+                                                                .Decimals(0)
+                                                                .Format("0")
+                                                                .Min(0)
+                                                                .Events(e => e.Change("onChangeFolioSolicitud"))
+                                                                //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
+                                                                .Value(Model.FolioSolicitud)
+                                                                .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
                 )
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 @Html.Label("Periodo de nómina actual: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                    {
-                                                        source.Read(read =>
-                                                        {
-                                                            read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                            {
+                                                                source.Read(read =>
+                                                                {
+                                                                    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                                                                }
+                                                                );
+                                                            //.ServerFiltering(true);
                                                         }
-                                                        );
-                                                    //.ServerFiltering(true);
-                                                }
-                                                    )
-                                                    .Filter("contains")
-                                                    .OptionLabel("- Seleccione Periodo de Nomina - ")
-                                                    .DataValueField("Ident")
-                                                    .DataTextField("Valor")
-                                                    .Name("PeriodoNomina_Id")
-                                                    .SelectedIndex(1)
-                                                    .Enable(false)
-                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                                            )
+                                                            .Filter("contains")
+                                                            .OptionLabel("- Seleccione Periodo de Nomina - ")
+                                                            .DataValueField("Ident")
+                                                            .DataTextField("Valor")
+                                                            .Name("PeriodoNomina_Id")
+                                                            .SelectedIndex(1)
+                                                            .Enable(false)
+                                                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                 )
             </div>
             <div class="col-lg-3">
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })
                 @Html.TextBox("Estatus", "", new { disabled = "disabled" })
             </div>
+            <div class="col-lg-2">
+                @(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar")
+                    .Events(x => x.Click("cancelarSolicitud"))
+                )
+            </div>
+                <p></p>
+            </div>
             <p></p>
-        </div>
-        <p></p>
 
-        <table class="table" style="margin-bottom: 5px;">
-            <tbody>
-                <tr>
-                    <td>
-                        <label class="primerLabel" id="lblCCMSID">CCMSID:</label><br />
-                        <label class="primerLabel" id="lblNombre">Nombre:</label><br />
-                        <label class="primerLabel" id="lblPuesto">Puesto:</label><br />
-                        <label class="primerLabel" id="lblContrato">Contrato:</label>
-                    </td>
-                    <td>
-                        <label id="CCMSIDX"></label><br />
-                        <label id="NombreX"></label><br />
-                        <label id="PuestoX"></label><br />
-                        <label id="ContratoX"></label>
-                    </td>
-                    <td>
-                        <label class="primerLabel" id="lblSite">Site:</label><br />
-                        <label class="primerLabel" id="lblConcepto">Concepto:</label><br />
-                        <label class="primerLabel" id="lblParametro">Parámetro:</label><br />
-                        <label class="primerLabel" id="lblMotivo">Motivo:</label>
-                    </td>
-                    <td>
-                        <label id="SiteX"></label><br />
-                        <label id="ConceptoX"></label><br />
-                        <label id="ParametroX"></label><br />
-                        <label id="MotivoX"></label>
-                    </td>
-                    <td>
-                        <label class="primerLabel" id="lblConceptoMotivo">Concepto Motivo:</label><br />
-                        <label class="primerLabel" id="lblResponsableCCMSID">Responsable de incidente:</label><br />
-                        <label class="primerLabel" id="lblNombreRespo">Nombre responsable:</label><br />
-                        <label class="primerLabel" id="lblPeriodoOP">Período original de pago:</label>
-                    </td>
-                    <td>
-                        <label id="ConceptoMotivoX"></label><br />
-                        <label id="ResponsableCCMSIDX"></label><br />
-                        <label id="NombreRespoX"></label><br />
-                        <label id="PeriodoOPX"></label>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+            <table class="table" style="margin-bottom: 5px;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <label class="primerLabel" id="lblCCMSID">CCMSID:</label><br />
+                            <label class="primerLabel" id="lblNombre">Nombre:</label><br />
+                            <label class="primerLabel" id="lblPuesto">Puesto:</label><br />
+                            <label class="primerLabel" id="lblContrato">Contrato:</label>
+                        </td>
+                        <td>
+                            <label id="CCMSIDX"></label><br />
+                            <label id="NombreX"></label><br />
+                            <label id="PuestoX"></label><br />
+                            <label id="ContratoX"></label>
+                        </td>
+                        <td>
+                            <label class="primerLabel" id="lblSite">Site:</label><br />
+                            <label class="primerLabel" id="lblConcepto">Concepto:</label><br />
+                            <label class="primerLabel" id="lblParametro">Parámetro:</label><br />
+                            <label class="primerLabel" id="lblMotivo">Motivo:</label>
+                        </td>
+                        <td>
+                            <label id="SiteX"></label><br />
+                            <label id="ConceptoX"></label><br />
+                            <label id="ParametroX"></label><br />
+                            <label id="MotivoX"></label>
+                        </td>
+                        <td>
+                            <label class="primerLabel" id="lblConceptoMotivo">Concepto Motivo:</label><br />
+                            <label class="primerLabel" id="lblResponsableCCMSID">Responsable de incidente:</label><br />
+                            <label class="primerLabel" id="lblNombreRespo">Nombre responsable:</label><br />
+                            <label class="primerLabel" id="lblPeriodoOP">Período original de pago:</label>
+                        </td>
+                        <td>
+                            <label id="ConceptoMotivoX"></label><br />
+                            <label id="ResponsableCCMSIDX"></label><br />
+                            <label id="NombreRespoX"></label><br />
+                            <label id="PeriodoOPX"></label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     @*
         <div class="container-fluid">
             <div class="row">
@@ -466,8 +467,8 @@
                                 .Events(x => x.Click("enviarSolicitud"))
                                 )
 
-                                @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar")
-                                .Events(x => x.Click("rechazarSolicitud"))
+                                @(Html.Kendo().Button().Name("CancelarEmpleadoSolicitud").Content("Cancelar")
+                                .Events(x => x.Click("cancelarEmpleadoSolicitud"))
                                 )
                             </td>
                             <td>
@@ -762,6 +763,7 @@
         // Datos de Estatus de Solicitud
         var DescripcionEstatusSolicitud = "";
         var ClaveEstatusSolicitud = "";
+        var ClaveEstatusEmpleadoSolicitud = "";
 
                 // URL para consultar datos de Empleado
                 var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "CapturaSolicitud")';
@@ -796,6 +798,8 @@
         // Función para calcular...
         var urlGetEmpleadosPerfilAutorizadores = '@Url.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud")';
 
+        //
+        var urlCancelaSolicitud = '@Url.Action("CancelaSolicitud", "CapturaSolicitud")';
 
                 //debugger;
                 //var urlSolicitud = grid.selectedKeyNames().join(", ");

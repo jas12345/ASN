@@ -182,9 +182,10 @@
                                 }
                                 );
                                 //.ServerFiltering(true);
-                            }
+                                }
                                 )
                                 .Filter("contains")
+                                .AutoBind(false)
                                 .OptionLabel("- Conceptos - ")
                                 .DataValueField("Ident")
                                 .DataTextField("Valor")
@@ -371,6 +372,7 @@
                                                                                             model.Field(c => c.PeriodoOriginalId).Editable(true);
                                                                                             model.Field(c => c.EstatusSolicitud).Editable(false);
                                                                                             model.Field(c => c.NivelAutorizacion).Editable(false);
+                                                                                            model.Field(c => c.Solicitante_Ident).Editable(false);
                                                                                         })
                                                                                         .Read(read => read.Action("GetAutorizaciones", "AutorizaSolicitud").Data("getFolio"))
                                                                                     //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
@@ -445,7 +447,8 @@
                 var ConParametroId = ""
                 var ConParametroNombre = ""
                 var ConParametroConceptoMonto = ""
-                var ConNivelesAutorizacion = ""
+        var ConNivelesAutorizacion = ""
+        var ConEmpleadoident = ""
 
                 // Sección Responsable de Incidente
                 var CCMSIdResponsable = "";

@@ -2240,5 +2240,14 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosAutorizantesSu", folioSolicitudParameter, empleado_IdentParameter, concepto_IdParameter, nivelAutorizacionParameter, autorizador_IdentParameter, accionParameter, userEmployeeIdParameter, estatus);
         }
+    
+        public virtual int CancelaSolicitud(Nullable<int> folioSolicitud, ObjectParameter estatus)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CancelaSolicitud", folioSolicitudParameter, estatus);
+        }
     }
 }

@@ -110,17 +110,36 @@ function enviarSolicitud() {
     });
 }
 
-function rechazarSolicitud() {
+function cancelarSolicitud() {
     //console.log("Salvado");
     debugger;
     //infoSolicitud();
-    $.post(urlEnviaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+    $.post(urlCancelaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
         debugger;
 
         if (data.res == -1) {
             var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Error al Enviar Solicitud", "error");
+            notification.show("Error al Cancelar Solicitud", "error");
+        }
+
+        //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+        actualizaGrid();
+        debugger;
+    });
+}
+
+function cancelarEmpleadoSolicitud() {
+    //console.log("Salvado");
+    debugger;
+    //infoSolicitud();
+    $.post(urlCancelaEmpleadoSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
+        debugger;
+
+        if (data.res == -1) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Error al Cancelar Solicitud", "error");
         }
 
         //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
@@ -144,21 +163,24 @@ function calculaEstatusSolicitud() {
             DescripcionEstatusSolicitud = data[0].Descripcion;
             ClaveEstatusSolicitud = data[0].EstatusSolicitudId;
 
+            // Ocultar el botón Rechazar
+            $("#CancelarEmpleadoSolicitud").hide();
+
             if (ClaveEstatusSolicitud == 'EB') {
                 $("#EnviarSolicitud").show();
             }
             else {
-                //$("#EnviarSolicitud").data("kendoButton").enable(false);
                 $("#EnviarSolicitud").hide();
             }
 
-            if (ClaveEstatusSolicitud == 'E') {
-                //$("#RechazarSolicitud").data("kendoButton").enable(false);
-                //$("#RechazarSolicitud").data("kendoButton").enable(true);
-                $("#RechazarSolicitud").show();
+            // Activar / Desactivar botón Rechazar
+            if (ClaveEstatusSolicitud == 'R') {
+                //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(false);
+                //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(true);
+                $("#CancelarEmpleadoSolicitud").hide();
             }
             else {
-                $("#RechazarSolicitud").hide();
+                $("#CancelarEmpleadoSolicitud").hide();
             }
 
             $("#Estatus").val(data[0].Descripcion);
@@ -178,7 +200,29 @@ function editarEmpleadoSolicitud(e) {
     e.preventDefault(); // sho J
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
     CCMSIdResponsable = dataItem.ResponsableId;
-    ConConceptoIdent = dataItem.ConceptoId
+    ConConceptoIdent = dataItem.ConceptoId;
+    ClaveEstatusEmpleadoSolicitud = dataItem.EstatusId;
+    //ConEstatusSolicitudId
+
+    // Procesar el estatus de EmpleadoSolicitud
+    // Activar / Desactivar botón Rechazar
+    if (ClaveEstatusEmpleadoSolicitud == 'EB' || ClaveEstatusEmpleadoSolicitud == 'R') {AgregarSolicitud
+        $("#AgregarSolicitud").show();
+    }
+    else {
+        $("#AgregarSolicitud").hide();
+    }
+
+    // Procesar el estatus de EmpleadoSolicitud
+    // Activar / Desactivar botón Rechazar
+    if (ClaveEstatusEmpleadoSolicitud == 'R') {
+        $("#CancelarEmpleadoSolicitud").show();
+    }
+    else {
+        $("#CancelarEmpleadoSolicitud").hide();
+    }
+
+    $("#EnviarSolicitud").hide();
 
     // Se actualiza comboBox de Conceptos
     $("#Conceptos").data("kendoDropDownList").dataSource.read(parametrosConceptos);

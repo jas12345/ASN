@@ -30,5 +30,6 @@ namespace ASN.Models
         public string EstatusId { get; set; }
         public string EstatusSolicitud { get; set; }
         public int NivelAutorizacion { get; set; }
+        public Nullable<int> Solicitante_Ident { get; set; }
     }
 }

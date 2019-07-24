@@ -23,6 +23,10 @@
           <Parameter Name="NivelId" Type="int" Mode="In" />
         </Function>
         <Function Name="AvisoSolicitantesManual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CancelaSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="CatAnioFechasCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
         </Function>
@@ -1269,6 +1273,10 @@
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CancelaSolicitud">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1942,6 +1950,7 @@
           <Property Type="String" Name="EstatusId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="NivelAutorizacion" Nullable="false" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
         </ComplexType>
         <ComplexType Name="CatPeriodosNominaCerradosCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
@@ -2987,6 +2996,7 @@
                 <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
                 <ScalarProperty Name="NivelAutorizacion" ColumnName="NivelAutorizacion" />
+                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3052,6 +3062,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosAutorizantesSu" FunctionName="ASNModel.Store.CatSolicitudEmpleadosAutorizantesSu" />
+          <FunctionImportMapping FunctionImportName="CancelaSolicitud" FunctionName="ASNModel.Store.CancelaSolicitud" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
