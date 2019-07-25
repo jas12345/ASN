@@ -212,9 +212,11 @@ function editarEmpleadoSolicitud(e) {
     // Activar / Desactivar botón Rechazar
     if (ClaveEstatusEmpleadoSolicitud == 'EB' || ClaveEstatusEmpleadoSolicitud == 'R') {AgregarSolicitud
         $("#AgregarSolicitud").show();
+        $("#EnviarSolicitud").show();
     }
     else {
         $("#AgregarSolicitud").hide();
+        $("#EnviarSolicitud").hide();
     }
 
     // Procesar el estatus de EmpleadoSolicitud
@@ -226,7 +228,7 @@ function editarEmpleadoSolicitud(e) {
         $("#CancelarEmpleadoSolicitud").hide();
     }
 
-    $("#EnviarSolicitud").hide();
+    //$("#EnviarSolicitud").hide();
 
     // Se actualiza comboBox de Conceptos
     $("#Conceptos").data("kendoDropDownList").dataSource.read(parametrosConceptos);
