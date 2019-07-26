@@ -82,7 +82,7 @@
         </div>
 
         <div class="editor-label">
-            <label for="vigencia">Vigencia</label>
+            <label for="Vigencia">Vigencia</label>
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Vigencia)
@@ -265,61 +265,59 @@
 
         <div id="ocultaAutorizantes">
             <div class="editor-label">
-                <label for="NumeroNivel">Nivel de autorizante</label>
+                <label for="NumeroNivel">Niveles de autorizacion</label>
             </div>
             <div class="editor-field">
                 @(Html.Kendo().DropDownListFor(x => x.ConceptoId)
-                                            .DataSource(source =>
-                                            {
-                                                source.Read(Read =>
-                                            {
-                                                Read.Action("GetNivelesDeAutorizacionCMB", "Conceptos").Data("numeroNivel");
-                                            })
-                                            .ServerFiltering(true);
-                                            })
-                                            .AutoBind(false)
-                                            .Filter("contains")
-                                            .OptionLabel("- Nivel - ")
-                                            .DataValueField("Ident")
-                                            .DataTextField("Nivel")
-                                            .Name("NivelAutorizante")
-                                            .Events(e => e.Change("checaSugerido"))
-                                            .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(Read =>
+                                                    {
+                                                        Read.Action("GetNivelesDeAutorizacionCMB", "Conceptos").Data("numeroNivel");
+                                                    })
+                                                    .ServerFiltering(true);
+                                                    })
+                                                    .AutoBind(false)
+                                                    .Filter("contains")
+                                                    .OptionLabel("- Nivel - ")
+                                                    .DataValueField("Ident")
+                                                    .DataTextField("Nivel")
+                                                    .Name("NivelAutorizante")
+                                                    .Events(e => e.Change("checaSugerido"))
+                                                    .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                 )
             </div>
 
-
-
-
-            <div class="editor-label">
-                <label for="autorizacionobligatoria">Autorización obligatoria</label>
-            </div>
-            <div class="editor-field">
-                @(Html.Kendo().CheckBox().Name("AutorizacionObligatoria"))
-            </div>
 
             <div class="editor-label">
                 <label for="AutorizacionAutomatica">Autorización automática</label>
             </div>
             <div class="editor-field">
-                @(Html.Kendo().CheckBox().Name("AutorizacionAutomatica").HtmlAttributes(new { onchange = "AdministraCheckBoxAutorizacion()" }))
+                @(Html.Kendo().CheckBox().Name("AutorizacionAutomatica").HtmlAttributes(new { onchange = "AdministraAutorizacionAutomatica()" }))
+            </div>
+
+            <div id="CapturaMonto">
+
+                <div class="editor-label">
+                    <label for="NumeroNivel" id="lblMonto">Monto de autorización</label>
+                </div>
+                <div class="editor-field">
+                    @(Html.Kendo().NumericTextBoxFor(x => x.ConceptoId)
+                                                .Name("Monto")
+                                                .Format("0")
+                                                .Decimals(2)
+                                                .Min(0)
+                                                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                    )
+                </div>
             </div>
 
             <div class="editor-label">
-                <label for="NumeroNivel">Monto de autorización</label>
+                <label for="autorizacionobligatoria">Autorización obligatoria</label>
             </div>
             <div class="editor-field">
-                @(Html.Kendo().NumericTextBoxFor(x => x.ConceptoId)
-                            .Name("Monto")
-                            .Format("0")
-                            .Decimals(0)
-                            .Min(1)
-                            .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                )
+                @(Html.Kendo().CheckBox().Name("AutorizacionObligatoria").HtmlAttributes(new { onchange = "AdministraAutorizacionObligatoria()" }))
             </div>
-
-
-
 
             <div class="editor-label">
                 <label for="AutorizanteIdent">Autorizante</label>
@@ -327,22 +325,22 @@
 
             <div class="editor-field">
                 @(Html.Kendo().DropDownListFor(x => x.ConceptoId)
-                                            .DataSource(source =>
-                                            {
-                                                source.Read(Read =>
-                                            {
-                                                Read.Action("GetAutorizantesCMB", "Conceptos").Data("conceptoNumero");
-                                            })
-                                            .ServerFiltering(true);
-                                            })
-                                            .AutoBind(false)
-                                            .Filter("contains")
-                                            .OptionLabel("- Autorizante - ")
-                                            .DataValueField("EmpleadoId")
-                                            .DataTextField("Nombre")
-                                            .Name("AutorizanteIdent")
-                                            .Events(e => e.Change("salvadoAutor"))
-                                            .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(Read =>
+                                                    {
+                                                        Read.Action("GetAutorizantesCMB", "Conceptos").Data("conceptoNumero");
+                                                    })
+                                                    .ServerFiltering(true);
+                                                    })
+                                                    .AutoBind(false)
+                                                    .Filter("contains")
+                                                    .OptionLabel("- Autorizante - ")
+                                                    .DataValueField("EmpleadoId")
+                                                    .DataTextField("Nombre")
+                                                    .Name("AutorizanteIdent")
+                                                    .Events(e => e.Change("salvadoAutor"))
+                                                    .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                 )
             </div>
         </div>

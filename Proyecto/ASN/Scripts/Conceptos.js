@@ -35,7 +35,7 @@ function edit(e) {
             $("#PagosFijos").prop("checked", true);
             $("#PagosFijos input:checkbox").trigger("click");
             $("#PagosFijos").attr("checked", "checked");
-            $("label[for=PagosFijos]").html("Sí");
+            //$("label[for=PagosFijos]").html("Sí");
 
             editor = 1;
             valorVigencia = e.model.Vigencia;
@@ -52,7 +52,7 @@ function edit(e) {
         $("#ocultaAutorizantes").hide();
         editor = 0;
         //$("#Active").attr("disabled", "disabled");
-        $("label[for=PagosFijos]").html("No");
+        //$("label[for=PagosFijos]").html("No");
         e.container.kendoWindow("title", "Nuevo");
     }
 }
@@ -269,17 +269,31 @@ function MuestraMultiSelect() {
 function AdministraControles() {
     var valorSeleccionado = $("#PagosFijos").is(':checked');
     if (valorSeleccionado) {
-        $("label[for=PagosFijos]").html("Sí");
+        //$("label[for=PagosFijos]").html("Sí");
         $(".cntHidden").show();
         $("#Tope").attr("required", "required");
         $("#PeriodicidadNominaId").attr("required", "required");
         $("#FechaInicio").attr("required", "required");
     } else {
-        $("label[for=PagosFijos]").html("No");
+        //$("label[for=PagosFijos]").html("No");
         $("#Tope").removeAttr("required");
         $("#PeriodicidadNominaId").removeAttr("required");
         $("#FechaInicio").removeAttr("required");
         $(".cntHidden").hide();
+    }
+}
+
+function AdministraAutorizacionAutomatica() {
+    var valorSeleccionado = $("#AutorizacionAutomatica").is(':checked');
+
+    if (valorSeleccionado) {
+        //$("#lblMonto").show();
+        //$("#Monto").show();
+        $("#CapturaMonto").show();
+    } else {
+        //$("#lblMonto").hide();
+        //$("#Monto").hide();
+        $("#CapturaMonto").hide();
     }
 }
 

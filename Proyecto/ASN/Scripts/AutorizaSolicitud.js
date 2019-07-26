@@ -49,6 +49,13 @@ function autorizarSolicitud() {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("No se pudo procesar la Autorización ", "error");
         }
+        else {
+            $("#AutorizarSolicitud").hide();
+            $("#RechazarSolicitud").hide();
+            $("#CancelarSolicitud").hide();
+
+            calculaEstatusSolicitud();
+        }
 
         $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
         actualizaGrid();
@@ -68,6 +75,13 @@ function rechazarSolicitud() {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("No se pudo procesar la Autorización ", "error");
         }
+        else {
+            $("#AutorizarSolicitud").hide();
+            $("#RechazarSolicitud").hide();
+            $("#CancelarSolicitud").hide();
+
+            calculaEstatusSolicitud();
+        }
 
         $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
         actualizaGrid();
@@ -86,6 +100,13 @@ function cancelarSolicitud() {
         if (data.res == -1) {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("No se pudo procesar la Autorización ", "error");
+        }
+        else {
+            $("#AutorizarSolicitud").hide();
+            $("#RechazarSolicitud").hide();
+            $("#CancelarSolicitud").hide();
+
+            calculaEstatusSolicitud();
         }
 
         $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
@@ -201,6 +222,11 @@ function editarEmpleadoSolicitud(e) {
     ConceptoId = dataItem.ConceptoId;
     ConEmpleadoident = dataItem.Ident;
     Solicitante_Ident = dataItem.Solicitante_Ident;
+
+    // Activar botones Autorizar, Rechazar y Cancelar Solicitud
+    $("#AutorizarSolicitud").show();
+    $("#RechazarSolicitud").show();
+    $("#CancelarSolicitud").show();
 
     // Se actualiza comboBox de Conceptos
     $("#Conceptos").data("kendoDropDownList").dataSource.read(getIdent);
