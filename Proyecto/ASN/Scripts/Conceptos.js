@@ -78,7 +78,7 @@ function salvadoAutor() {
             //$("").html(data);
             console.log(data);
             if (data != -1) {
-                //autoCMB.value(data);
+                autoCMB.value(data);
             } else {
                 autoCMB.value(-1);
                 notification.show("Ya existe este autorizador para otro nivel", "error");
