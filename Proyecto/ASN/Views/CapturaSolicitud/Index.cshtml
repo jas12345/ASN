@@ -241,7 +241,7 @@
                                                                                     {
                                                                                         source.Read(read =>
                                                                                         {
-                                                                                            read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "CapturaSolicitud").Data("getIdent"); ;
+                                                                                            read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "CapturaSolicitud").Data("parametrosConceptos"); ;
                                                                                         }
                                                                                         );
                                                                                                     //.ServerFiltering(true);
@@ -367,8 +367,7 @@
                                                                                         {
                                                                                             source.Read(read =>
                                                                                             {
-                                                                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud")
-                                                                                                .Data("parametrosAutorizadores");
+                                                                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
                                                                                             });
                                                                                         })
                                                                                             .Filter("contains")
@@ -694,10 +693,47 @@
     </script>
 
     <script>
-                //var listaEmpleados = "";
-                //var selectedEmpleados = new Array();
-                var grid = $('#grid');
-                //var urlDeletePerfilEmpleadosAccesos = '@Url.Action("DeleteEmpleados", "CapturaSolicitud")';
+        //var listaEmpleados = "";
+        //var selectedEmpleados = new Array();
+        var grid = $('#grid');
+        //var urlDeletePerfilEmpleadosAccesos = '@Url.Action("DeleteEmpleados", "CapturaSolicitud")';
+
+        //Sección de Edición de Solicitud
+        var dataItem_FolioSolicitud = "";
+        var dataItem_Ident = "";
+        var dataItem_Nombre = "";
+        var dataItem_ConceptoId = "";
+        //dataItem_ConceptoDesc = dataItem.
+        var dataItem_Monto = "";
+        var dataItem_MotivosSolicitudId = "";
+        //dataItem_MotivosSolicitudDesc = dataItem.
+        var dataItem_ConceptoMotivoId = "";
+        //dataItem_ConceptoMotivoDesc = dataItem.
+        var dataItem_ResponsableId = "";
+        //dataItem_NombreResponsable = dataItem.
+        var dataItem_PeriodoOriginalId = "";
+        var dataItem_EstatusId = "";
+        //dataItem_EstatusSolicitud = dataItem.
+        //dataItem_NivelAutorizacion1 = dataItem.
+        var dataItem_AutorizadorNivel1 = "";
+        //dataItem_NivelAutorizacion2 = dataItem.
+        var dataItem_AutorizadorNivel2 = "";
+        //dataItem_NivelAutorizacion3 = dataItem.
+        var dataItem_AutorizadorNivel3 = "";
+        //dataItem_NivelAutorizacion4 = dataItem.
+        var dataItem_AutorizadorNivel4 = "";
+        //dataItem_NivelAutorizacion5 = dataItem.
+        var dataItem_AutorizadorNivel5 = "";
+        //dataItem_NivelAutorizacion6 = dataItem.
+        var dataItem_AutorizadorNivel6 = "";
+        //dataItem_NivelAutorizacion7 = dataItem.
+        var dataItem_Autorizador7_Ident = "";
+        //dataItem_NivelAutorizacion8 = dataItem.
+        var dataItem_Autorizador8_Ident = "";
+        //dataItem_NivelAutorizacion9 = dataItem.
+        var dataItem_Autorizador9_Ident = "";
+        //dataItem_Active = dataItem.
+
 
                 //Datos a extraer Empleado - Puesto - Contrato - Site
                 var EmpCCMSId = "";

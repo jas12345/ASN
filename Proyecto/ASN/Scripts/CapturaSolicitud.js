@@ -8,6 +8,15 @@ $(document).ready(function () {
 
     habilitaCombosAutorizadores(1);
 
+    // Activar / Desactivar botón Cancelar
+    if (ClaveEstatusEmpleadoSolicitud == 'R') {
+        $("#CancelarEmpleadoSolicitud").show();
+    }
+    else {
+        $("#CancelarEmpleadoSolicitud").hide();
+    }
+
+
     //$("#Conceptos").change(function () {
     //    //debugger;
 
@@ -203,14 +212,85 @@ function editarEmpleadoSolicitud(e) {
     debugger;
     e.preventDefault(); // sho J
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-    CCMSIdResponsable = dataItem.ResponsableId;
-    ConConceptoIdent = dataItem.ConceptoId;
-    ClaveEstatusEmpleadoSolicitud = dataItem.EstatusId;
-    //ConEstatusSolicitudId
+
+    //Calcular los valores que retorna dataItem
+    dataItem_FolioSolicitud = dataItem.FolioSolicitud;
+    dataItem_Ident = dataItem.Ident;
+    dataItem_Nombre = dataItem.Nombre;
+    dataItem_ConceptoId = dataItem.ConceptoId;
+    //dataItem_ConceptoDesc = dataItem.
+    dataItem_Monto = dataItem.Monto;
+    dataItem_MotivosSolicitudId = dataItem.MotivosSolicitudId;
+    //dataItem_MotivosSolicitudDesc = dataItem.
+    dataItem_ConceptoMotivoId = dataItem.ConceptoMotivoId;
+    //dataItem_ConceptoMotivoDesc = dataItem.
+    dataItem_ResponsableId = dataItem.responsableId;
+    //dataItem_NombreResponsable = dataItem.
+    dataItem_PeriodoOriginalId = dataItem.PeriodoOriginalId;
+    dataItem_EstatusId = dataItem.EstatusId;
+    //dataItem_EstatusSolicitud = dataItem.
+    //dataItem_NivelAutorizacion1 = dataItem.
+    dataItem_AutorizadorNivel1 = dataItem.AutorizadorNivel1;
+    //dataItem_NivelAutorizacion2 = dataItem.
+    dataItem_AutorizadorNivel2 = dataItem.AutorizadorNivel2;
+    //dataItem_NivelAutorizacion3 = dataItem.
+    dataItem_AutorizadorNivel3 = dataItem.AutorizadorNivel3;
+    //dataItem_NivelAutorizacion4 = dataItem.
+    dataItem_AutorizadorNivel4 = dataItem.AutorizadorNivel4;
+    //dataItem_NivelAutorizacion5 = dataItem.
+    dataItem_AutorizadorNivel5 = dataItem.AutorizadorNivel5;
+    //dataItem_NivelAutorizacion6 = dataItem.
+    dataItem_AutorizadorNivel6 = dataItem.AutorizadorNivel6;
+    //dataItem_NivelAutorizacion7 = dataItem.
+    dataItem_AutorizadorNivel7 = dataItem.AutorizadorNivel7;
+    //dataItem_NivelAutorizacion8 = dataItem.
+    dataItem_AutorizadorNivel8 = dataItem.AutorizadorNivel8;
+    //dataItem_NivelAutorizacion9 = dataItem.
+    dataItem_AutorizadorNivel9 = dataItem.AutorizadorNivel9;
+    //dataItem_Active = dataItem.
+
+    //Carga combos:
+
+    // Se actualiza comboBox de Conceptos
+    //$("#Conceptos").data("kendoDropDownList").dataSource.read();
+    //$("#Conceptos").data("kendoDropDownList").refresh();
+
+    // Se actualizan combos de Autorizadores
+    $('#AutorizadorNivel1').data('kendoDropDownList').dataSource.read();
+    $("#AutorizadorNivel1").data("kendoDropDownList").refresh();
+
+    $('#AutorizadorNivel2').data('kendoDropDownList').dataSource.read();
+    $("#AutorizadorNivel2").data("kendoDropDownList").refresh();
+
+    $('#AutorizadorNivel3').data('kendoDropDownList').dataSource.read();
+    $("#AutorizadorNivel3").data("kendoDropDownList").refresh();
+
+    $('#AutorizadorNivel4').data('kendoDropDownList').dataSource.read();
+    $("#AutorizadorNivel4").data("kendoDropDownList").refresh();
+
+    $('#AutorizadorNivel5').data('kendoDropDownList').dataSource.read();
+    $("#AutorizadorNivel5").data("kendoDropDownList").refresh();
+
+    $('#AutorizadorNivel6').data('kendoDropDownList').dataSource.read();
+    $("#AutorizadorNivel6").data("kendoDropDownList").refresh();
+
+    $('#AutorizadorNivel7').data('kendoDropDownList').dataSource.read();
+    $("#AutorizadorNivel7").data("kendoDropDownList").refresh();
+
+    $('#AutorizadorNivel8').data('kendoDropDownList').dataSource.read();
+    $("#AutorizadorNivel8").data("kendoDropDownList").refresh();
+
+    $('#AutorizadorNivel9').data('kendoDropDownList').dataSource.read();
+    $("#AutorizadorNivel9").data("kendoDropDownList").refresh();
+
+
+    //CCMSIdResponsable = dataItem.ResponsableId;
+    //ConConceptoIdent = dataItem.ConceptoId;
+    //ClaveEstatusEmpleadoSolicitud = dataItem.EstatusId;
 
     // Procesar el estatus de EmpleadoSolicitud
     // Activar / Desactivar botón Rechazar
-    if (ClaveEstatusEmpleadoSolicitud == 'EB' || ClaveEstatusEmpleadoSolicitud == 'R') {AgregarSolicitud
+    if (dataItem_EstatusId == 'EB' || dataItem_EstatusId == 'R') {
         $("#AgregarSolicitud").show();
         $("#EnviarSolicitud").show();
     }
@@ -219,74 +299,59 @@ function editarEmpleadoSolicitud(e) {
         $("#EnviarSolicitud").hide();
     }
 
-    // Procesar el estatus de EmpleadoSolicitud
-    // Activar / Desactivar botón Rechazar
-    if (ClaveEstatusEmpleadoSolicitud == 'R') {
-        $("#CancelarEmpleadoSolicitud").show();
-    }
-    else {
-        $("#CancelarEmpleadoSolicitud").hide();
-    }
-
-    //$("#EnviarSolicitud").hide();
-
-    // Se actualiza comboBox de Conceptos
-    $("#Conceptos").data("kendoDropDownList").dataSource.read(parametrosConceptos);
-    $("#Conceptos").data("kendoDropDownList").refresh();
+    //// Procesar el estatus de EmpleadoSolicitud
+    //// Activar / Desactivar botón Rechazar
+    //if (ClaveEstatusEmpleadoSolicitud == 'R') {
+    //    $("#CancelarEmpleadoSolicitud").show();
+    //}
+    //else {
+    //    $("#CancelarEmpleadoSolicitud").hide();
+    //}
 
     debugger;
-    $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem.Ident);
-    //$("#CCMSIDSolicitado").data('kendoNumericTextBox').text(dataItem.Ident);
+    $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem_Ident);
     $('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change');
 
-    //var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
-    //dropdownlist.value("Apples");
-    //dropdownlist.trigger("change");
+    // Se actualiza comboBox de Conceptos
+    $("#Conceptos").data("kendoDropDownList").dataSource.read();
+    $("#Conceptos").data("kendoDropDownList").refresh();
 
-    $("#Conceptos").data('kendoDropDownList').value(dataItem.ConceptoId);
+    $("#Conceptos").data('kendoDropDownList').select(dataItem_ConceptoId);
     $('#Conceptos').data('kendoDropDownList').trigger('change');
     debugger;
-    $("#Parametro").data('kendoNumericTextBox').value(dataItem.Monto);
+    $("#Parametro").data('kendoNumericTextBox').value(dataItem_Monto);
     $('#Parametro').data('kendoNumericTextBox').trigger('change');
 
-    $("#Motivo").data('kendoDropDownList').value(dataItem.MotivosSolicitudId);
+    $("#Motivo").data('kendoDropDownList').value(dataItem_MotivosSolicitudId);
     $('#Motivo').data('kendoDropDownList').trigger('change');
 
-    $("#ConceptoMotivo").data('kendoDropDownList').value(dataItem.ConceptoMotivoId);
+    $("#ConceptoMotivo").data('kendoDropDownList').value(dataItem_ConceptoMotivoId);
     $('#ConceptoMotivo').data('kendoDropDownList').trigger('change');
 
-    $("#PeriodoIncidente").data('kendoDropDownList').value(dataItem.PeriodoOriginalId);
+    $("#PeriodoIncidente").data('kendoDropDownList').value(dataItem_PeriodoOriginalId);
     $('#PeriodoIncidente').data('kendoDropDownList').trigger('change');
 
-    $("#AutorizadorNivel1").data('kendoDropDownList').value(dataItem.AutorizadorNivel1);
-    //$('#AutorizadorNivel1').data('kendoDropDownList').trigger('change');
+    $("#AutorizadorNivel1").data('kendoDropDownList').select(dataItem_AutorizadorNivel1);
 
-    $("#AutorizadorNivel2").data('kendoDropDownList').value(dataItem.AutorizadorNivel2);
-    //$('#AutorizadorNivel2').data('kendoDropDownList').trigger('change');
+    $("#AutorizadorNivel2").data('kendoDropDownList').select(dataItem_AutorizadorNivel2);
 
-    $("#AutorizadorNivel3").data('kendoDropDownList').value(dataItem.AutorizadorNivel3);
-    //$('#AutorizadorNivel3').data('kendoDropDownList').trigger('change');
+    $("#AutorizadorNivel3").data('kendoDropDownList').select(dataItem_AutorizadorNivel3);
 
-    $("#AutorizadorNivel4").data('kendoDropDownList').value(dataItem.AutorizadorNivel4);
-    //$('#AutorizadorNivel4').data('kendoDropDownList').trigger('change');
+    $("#AutorizadorNivel4").data('kendoDropDownList').select(dataItem_AutorizadorNivel4);
 
-    $("#AutorizadorNivel5").data('kendoDropDownList').value(dataItem.AutorizadorNivel5);
-    //$('#AutorizadorNivel5').data('kendoDropDownList').trigger('change');
+    $("#AutorizadorNivel5").data('kendoDropDownList').select(dataItem_AutorizadorNivel5);
 
-    $("#AutorizadorNivel6").data('kendoDropDownList').value(dataItem.AutorizadorNivel6);
-    //$('#AutorizadorNivel6').data('kendoDropDownList').trigger('change');
+    $("#AutorizadorNivel6").data('kendoDropDownList').select(dataItem_AutorizadorNivel6);
 
-    $("#AutorizadorNivel7").data('kendoDropDownList').value(dataItem.AutorizadorNivel7);
-    //$('#AutorizadorNivel7').data('kendoDropDownList').trigger('change');
+    $("#AutorizadorNivel7").data('kendoDropDownList').select(dataItem_AutorizadorNivel7);
 
-    $("#AutorizadorNivel8").data('kendoDropDownList').value(dataItem.AutorizadorNivel8);
-    //$('#AutorizadorNivel8').data('kendoDropDownList').trigger('change');
+    $("#AutorizadorNivel8").data('kendoDropDownList').select(dataItem_AutorizadorNivel8);
 
-    $("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem.AutorizadorNivel9);
-    //$('#AutorizadorNivel9').data('kendoDropDownList').trigger('change');
+    $("#AutorizadorNivel9").data('kendoDropDownList').select(dataItem_AutorizadorNivel9);
 
     debugger;
-    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(CCMSIdResponsable);
+    //Carga de valor de responsable
+    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem_ResponsableId);
     $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
 
     debugger;
@@ -456,7 +521,7 @@ function onChangeCCMSId() {
             EmpContract_Type = data[0].Contract_Type;
             EmpLocation_Ident = data[0].Location_Ident;
             EmpLocation_Name = data[0].Location_Name;
-            responsableId = data[0].IdentManager;
+            responsableSugeridoId = data[0].IdentManager;
             NombreResponsableIncidente = data[0].NombreManager;
 
             Active = data[0].Active;
@@ -489,22 +554,15 @@ function onChangeCCMSId() {
             debugger;
             
             //if ($("#CCMSIDIncidente").data("kendoNumericTextBox").value() == 0) {
-            if (CCMSIdResponsable == 0) {
-                $("#CCMSIDIncidente").data("kendoNumericTextBox").value(CCMSIdResponsable);
-                // Sugerencia de responsable de incidente es el Manager del empleado
-                $("#ResponsableCCMSIDX").val("");
-                $("#ResponsableCCMSIDX").text("");
-                $("#NombreRespoX").val("");
-                $("#NombreRespoX").text("");
-
-            }
-            else {
-                $("#CCMSIDIncidente").data("kendoNumericTextBox").value(responsableId);
+            if (responsableSugeridoId !== dataItem_ResponsableId) {
+                $("#CCMSIDIncidente").data("kendoNumericTextBox").value(responsableSugeridoId);
+                $("#CCMSIDIncidente").data("kendoNumericTextBox").trigger('change');
                  // Sugerencia de responsable de incidente es el Manager del empleado
                 $("#ResponsableCCMSIDX").val(responsableId);
                 $("#ResponsableCCMSIDX").text(responsableId);
                 $("#NombreRespoX").val(NombreResponsableIncidente);
                 $("#NombreRespoX").text(NombreResponsableIncidente);
+                dataItem_ResponsableId = 0;
             }
             debugger;
             if (EmpCCMSId == -1) {
@@ -760,6 +818,24 @@ function onChangeCCMSIdIncidente()
     }
 }
 
+function validaAutorizador(valor) {
+    var autorizadores = $("div[name='nivel']");
+    var igualesTotales = 0;
+    debugger;
+    $(autorizadores).each(function (nivel) {
+
+        if ($("#AutorizadorNivel" + this.id).val() == valor) {
+            igualesTotales++;
+        }
+    });
+
+    if (igualesTotales == 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 function habilitaCombosAutorizadores(nivelAutorizador) {
     var autorizadores = $("div[name='nivel']");
@@ -788,7 +864,20 @@ function onChangeAutorizadorNivel1() {
 
         autorizadorNivel1 = $("#AutorizadorNivel1").val();
     }
+
+    if (autorizadorNivel1 !== "") {
+
+        if (!validaAutorizador(autorizadorNivel1)) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Este autorizador ya está asignado a otro nivel.", "error");
+            $("#AutorizadorNivel1").data("kendoDropDownList").value(0);
+            $("#AutorizadorNivel1").data("kendoDropDownList").text("");
+        }
+    }
 }
+
+
+
 
 function onChangeAutorizadorNivel2() {
     debugger;
@@ -799,6 +888,16 @@ function onChangeAutorizadorNivel2() {
         debugger;
 
         autorizadorNivel2 = $("#AutorizadorNivel2").val();
+    }
+
+    if (autorizadorNivel2 !== "") {
+
+        if (!validaAutorizador(autorizadorNivel2)) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Este autorizador ya está asignado a otro nivel.", "error");
+            $("#AutorizadorNivel2").data("kendoDropDownList").value(0);
+            $("#AutorizadorNivel2").data("kendoDropDownList").text("");
+        }
     }
 }
 
@@ -812,6 +911,16 @@ function onChangeAutorizadorNivel3() {
 
         autorizadorNivel3 = $("#AutorizadorNivel3").val();
     }
+
+    if (autorizadorNivel3 !== "") {
+
+        if (!validaAutorizador(autorizadorNivel3)) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Este autorizador ya está asignado a otro nivel.", "error");
+            $("#AutorizadorNivel3").data("kendoDropDownList").value(0);
+            $("#AutorizadorNivel3").data("kendoDropDownList").text("");
+        }
+    }
 }
 
 function onChangeAutorizadorNivel4() {
@@ -824,6 +933,17 @@ function onChangeAutorizadorNivel4() {
 
         autorizadorNivel4 = $("#AutorizadorNivel4").val();
     }
+
+    if (autorizadorNivel4 !== "") {
+
+        if (!validaAutorizador(autorizadorNivel4)) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Este autorizador ya está asignado a otro nivel.", "error");
+            $("#AutorizadorNivel4").data("kendoDropDownList").value(0);
+            $("#AutorizadorNivel4").data("kendoDropDownList").text("");
+        }
+    }
+
 }
 
 function onChangeAutorizadorNivel5() {
@@ -834,6 +954,16 @@ function onChangeAutorizadorNivel5() {
         autorizadorNivel5 = ""
 
         autorizadorNivel5 = $("#AutorizadorNivel5").val();
+    }
+
+    if (autorizadorNivel5 !== "") {
+
+        if (!validaAutorizador(autorizadorNivel5)) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Este autorizador ya está asignado a otro nivel.", "error");
+            $("#AutorizadorNivel5").data("kendoDropDownList").value(0);
+            $("#AutorizadorNivel5").data("kendoDropDownList").text("");
+        }
     }
 }
 
@@ -846,6 +976,16 @@ function onChangeAutorizadorNivel6() {
 
         autorizadorNivel6 = $("#AutorizadorNivel6").val();
     }
+
+    if (autorizadorNivel6 !== "") {
+
+        if (!validaAutorizador(autorizadorNivel6)) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Este autorizador ya está asignado a otro nivel.", "error");
+            $("#AutorizadorNivel6").data("kendoDropDownList").value(0);
+            $("#AutorizadorNivel6").data("kendoDropDownList").text("");
+        }
+    }
 }
 
 function onChangeAutorizadorNivel7() {
@@ -856,6 +996,16 @@ function onChangeAutorizadorNivel7() {
         autorizadorNivel7 = ""
 
         autorizadorNivel7 = $("#AutorizadorNivel7").val();
+    }
+
+    if (autorizadorNivel7 !== "") {
+
+        if (!validaAutorizador(autorizadorNivel7)) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Este autorizador ya está asignado a otro nivel.", "error");
+            $("#AutorizadorNivel7").data("kendoDropDownList").value(0);
+            $("#AutorizadorNivel7").data("kendoDropDownList").text("");
+        }
     }
 }
 
@@ -868,6 +1018,16 @@ function onChangeAutorizadorNivel8() {
 
         autorizadorNivel8 = $("#AutorizadorNivel8").val();
     }
+
+    if (autorizadorNivel8 !== "") {
+
+        if (!validaAutorizador(autorizadorNivel8)) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Este autorizador ya está asignado a otro nivel.", "error");
+            $("#AutorizadorNivel8").data("kendoDropDownList").value(0);
+            $("#AutorizadorNivel8").data("kendoDropDownList").text("");
+        }
+    }
 }
 
 function onChangeAutorizadorNivel9() {
@@ -878,6 +1038,16 @@ function onChangeAutorizadorNivel9() {
         autorizadorNivel9 = ""
 
         autorizadorNivel9 = $("#AutorizadorNivel9").val();
+    }
+
+    if (autorizadorNivel9 !== "") {
+
+        if (!validaAutorizador(autorizadorNivel9)) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Este autorizador ya está asignado a otro nivel.", "error");
+            $("#AutorizadorNivel9").data("kendoDropDownList").value(0);
+            $("#AutorizadorNivel9").data("kendoDropDownList").text("");
+        }
     }
 }
 
@@ -918,16 +1088,39 @@ function onChangeAutorizadorNivel9() {
 //}
 
 function parametrosAutorizadores() {
+    //var Empleado = $("#CCMSIDSolicitado").val();
+    //var Concepto = $("#CCMSIDSolicitado").val();
+    var Empleado = dataItem_Ident;
+    var Concepto = dataItem_ConceptoId;
+
+    if (Empleado == "") {
+        Empleado = $("#CCMSIDSolicitado").val();
+    }
+
+    if (Concepto == "") {
+        Concepto = $("#Conceptos").val();
+    }
+
     return {
-        EmpleadoIdent: $("#CCMSIDSolicitado").val(),
-        ConceptoId: $("#Conceptos").val()
+        EmpleadoIdent: Empleado,
+        ConceptoId: Concepto
     };
 }
 
 function parametrosConceptos() {
+    CCMSId = $("#CCMSIDSolicitado").val();
+    var ValorCCMS = 0
+
+    if (CCMSId !== "") {
+        ValorCCMS = CCMSId;
+    }
+    else
+    {
+        ValorCCMS = dataItem_Ident;
+    }
+
     return {
-        EmpleadoIdent: EmpCCMSId,
-        ConceptoId: ConConceptoIdent
+        Ident: ValorCCMS,
     };
 }
 

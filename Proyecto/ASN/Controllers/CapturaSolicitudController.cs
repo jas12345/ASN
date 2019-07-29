@@ -218,7 +218,7 @@ namespace ASN.Controllers
         }
 
         public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident)
-        {
+            {
             try
             {
                 int.TryParse(User.Identity.Name, out int ident_Solicitante);

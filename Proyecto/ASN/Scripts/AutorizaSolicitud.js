@@ -129,6 +129,8 @@ function enviarSolicitud() {
         }
 
         //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+        calculaEstatusSolicitud();
+        deshabilitaControlesEdicion();
         actualizaGrid();
         debugger;
     });
