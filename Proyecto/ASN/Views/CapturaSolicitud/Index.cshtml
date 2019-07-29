@@ -241,7 +241,7 @@
                                                                                     {
                                                                                         source.Read(read =>
                                                                                         {
-                                                                                            read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "CapturaSolicitud").Data("getIdent"); ;
+                                                                                            read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "CapturaSolicitud").Data("parametrosConceptos"); ;
                                                                                         }
                                                                                         );
                                                                                                     //.ServerFiltering(true);
@@ -694,10 +694,47 @@
     </script>
 
     <script>
-                //var listaEmpleados = "";
-                //var selectedEmpleados = new Array();
-                var grid = $('#grid');
-                //var urlDeletePerfilEmpleadosAccesos = '@Url.Action("DeleteEmpleados", "CapturaSolicitud")';
+        //var listaEmpleados = "";
+        //var selectedEmpleados = new Array();
+        var grid = $('#grid');
+        //var urlDeletePerfilEmpleadosAccesos = '@Url.Action("DeleteEmpleados", "CapturaSolicitud")';
+
+        //Sección de Edición de Solicitud
+        var data_FolioSolicitud = "";
+        var data_Ident = "";
+        var data_Nombre = "";
+        var data_ConceptoId = "";
+        //data_ConceptoDesc = dataItem.
+        var data_Monto = "";
+        var data_MotivosSolicitudId = "";
+        //data_MotivosSolicitudDesc = dataItem.
+        var data_ConceptoMotivoId = "";
+        //data_ConceptoMotivoDesc = dataItem.
+        var data_ResponsableId = "";
+        //data_NombreResponsable = dataItem.
+        var data_PeriodoOriginalId = "";
+        var data_EstatusId = "";
+        //data_EstatusSolicitud = dataItem.
+        //data_NivelAutorizacion1 = dataItem.
+        var data_AutorizadorNivel1 = "";
+        //data_NivelAutorizacion2 = dataItem.
+        var data_AutorizadorNivel2 = "";
+        //data_NivelAutorizacion3 = dataItem.
+        var data_AutorizadorNivel3 = "";
+        //data_NivelAutorizacion4 = dataItem.
+        var data_AutorizadorNivel4 = "";
+        //data_NivelAutorizacion5 = dataItem.
+        var data_AutorizadorNivel5 = "";
+        //data_NivelAutorizacion6 = dataItem.
+        var data_AutorizadorNivel6 = "";
+        //data_NivelAutorizacion7 = dataItem.
+        var data_Autorizador7_Ident = "";
+        //data_NivelAutorizacion8 = dataItem.
+        var data_Autorizador8_Ident = "";
+        //data_NivelAutorizacion9 = dataItem.
+        var data_Autorizador9_Ident = "";
+        //data_Active = dataItem.
+
 
                 //Datos a extraer Empleado - Puesto - Contrato - Site
                 var EmpCCMSId = "";
