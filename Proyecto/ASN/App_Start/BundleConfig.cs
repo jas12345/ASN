@@ -110,6 +110,9 @@ namespace ASN
             bundles.Add(new ScriptBundle("~/bundles/MisAutorizaciones").Include(
             "~/Scripts/MisAutorizaciones.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/MisResponsabilidades").Include(
+            "~/Scripts/MisResponsabilidades.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/CapturaSolicitud").Include(
             "~/Scripts/CapturaSolicitud.js"));
 

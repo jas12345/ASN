@@ -299,6 +299,9 @@
         <Function Name="CatMisAutorizacionesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Autorizante_Ident" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatMisResponsabilidadesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Responsable_Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatMisSolicitudesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Solicitante_Ident" Type="int" Mode="In" />
         </Function>
@@ -1277,6 +1280,9 @@
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatMisResponsabilidadesSel" ReturnType="Collection(ASNModel.CatMisResponsabilidadesSel_Result)">
+          <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1989,6 +1995,15 @@
           <Property Type="Int32" Name="LastModifiedBy" Nullable="false" />
           <Property Type="DateTime" Name="LastModifiedDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="LastModifiedFromPCName" Nullable="false" MaxLength="64" />
+        </ComplexType>
+        <ComplexType Name="CatMisResponsabilidadesSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -3063,6 +3078,19 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosAutorizantesSu" FunctionName="ASNModel.Store.CatSolicitudEmpleadosAutorizantesSu" />
           <FunctionImportMapping FunctionImportName="CancelaSolicitud" FunctionName="ASNModel.Store.CancelaSolicitud" />
+          <FunctionImportMapping FunctionImportName="CatMisResponsabilidadesSel" FunctionName="ASNModel.Store.CatMisResponsabilidadesSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatMisResponsabilidadesSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
+                <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
+                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

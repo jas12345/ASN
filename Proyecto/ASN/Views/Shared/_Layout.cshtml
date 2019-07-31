@@ -107,6 +107,11 @@
 
                     if (User.IsInRole("Responsable") || User.IsInRole("Administrador"))
                     {
+                        <li>@Html.ActionLink("Mis Responsabilidades", "Index", "MisResponsabilidades")</li>
+                    }
+
+                    if (User.IsInRole("Responsable") || User.IsInRole("Administrador"))
+                    {
                         @*<li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>*@
                         <li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>
                     }
