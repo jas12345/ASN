@@ -234,7 +234,7 @@ function editarEmpleadoSolicitud(e) {
     //dataItem_NivelAutorizacion2 = dataItem.
     dataItem_AutorizadorNivel2 = dataItem.AutorizadorNivel2;
     //dataItem_NivelAutorizacion3 = dataItem.
-    dataItem_AutorizadorNivel3 = dataItem.AutorizadorNivel5;
+    dataItem_AutorizadorNivel3 = dataItem.AutorizadorNivel3;
     //dataItem_NivelAutorizacion4 = dataItem.
     dataItem_AutorizadorNivel4 = dataItem.AutorizadorNivel4;
     //dataItem_NivelAutorizacion5 = dataItem.
@@ -252,8 +252,8 @@ function editarEmpleadoSolicitud(e) {
     //Carga combos:
 
     // Se actualiza comboBox de Conceptos
-    $("#Conceptos").data("kendoDropDownList").dataSource.read();
-    $("#Conceptos").data("kendoDropDownList").refresh();
+    //$("#Conceptos").data("kendoDropDownList").dataSource.read();
+    //$("#Conceptos").data("kendoDropDownList").refresh();
 
     // Se actualizan combos de Autorizadores
     $('#AutorizadorNivel1').data('kendoDropDownList').dataSource.read();
@@ -311,6 +311,10 @@ function editarEmpleadoSolicitud(e) {
     debugger;
     $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem_Ident);
     $('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change');
+
+    // Se actualiza comboBox de Conceptos
+    $("#Conceptos").data("kendoDropDownList").dataSource.read();
+    $("#Conceptos").data("kendoDropDownList").refresh();
 
     $("#Conceptos").data('kendoDropDownList').select(dataItem_ConceptoId);
     $('#Conceptos').data('kendoDropDownList').trigger('change');
@@ -552,7 +556,7 @@ function onChangeCCMSId() {
             //if ($("#CCMSIDIncidente").data("kendoNumericTextBox").value() == 0) {
             if (responsableSugeridoId !== dataItem_ResponsableId) {
                 $("#CCMSIDIncidente").data("kendoNumericTextBox").value(responsableSugeridoId);
-                $("#CCMSIDIncidente").data("kendoNumericTextBox").change();
+                $("#CCMSIDIncidente").data("kendoNumericTextBox").trigger('change');
                  // Sugerencia de responsable de incidente es el Manager del empleado
                 $("#ResponsableCCMSIDX").val(responsableId);
                 $("#ResponsableCCMSIDX").text(responsableId);
@@ -1084,17 +1088,39 @@ function onChangeAutorizadorNivel9() {
 //}
 
 function parametrosAutorizadores() {
+    //var Empleado = $("#CCMSIDSolicitado").val();
+    //var Concepto = $("#CCMSIDSolicitado").val();
+    var Empleado = dataItem_Ident;
+    var Concepto = dataItem_ConceptoId;
+
+    if (Empleado == "") {
+        Empleado = $("#CCMSIDSolicitado").val();
+    }
+
+    if (Concepto == "") {
+        Concepto = $("#Conceptos").val();
+    }
+
     return {
-        //EmpleadoIdent: $("#CCMSIDSolicitado").val(),
-        //ConceptoId: $("#Conceptos").val()
-        EmpleadoIdent: dataItem_Ident,
-        ConceptoId: dataItem_ConceptoId
+        EmpleadoIdent: Empleado,
+        ConceptoId: Concepto
     };
 }
 
 function parametrosConceptos() {
+    CCMSId = $("#CCMSIDSolicitado").val();
+    var ValorCCMS = 0
+
+    if (CCMSId !== "") {
+        ValorCCMS = CCMSId;
+    }
+    else
+    {
+        ValorCCMS = dataItem_Ident;
+    }
+
     return {
-        Ident: dataItem_Ident,
+        Ident: ValorCCMS,
     };
 }
 
