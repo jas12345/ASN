@@ -98,33 +98,43 @@ namespace GAPP.Controllers
 
         public ActionResult Redirecciona(string ccms)
         {
-            if (User.IsInRole("Desarrollo"))
-            {
-                return RedirectToAction("Index", "Inicio");
-            }
-            else
-            {
-                //return Logout();
-                using (ASNContext ctx = new ASNContext())
+            try { 
+
+                if (User.IsInRole("Desarrollo"))
                 {
-                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    int ccmsid = 0;
-                    if (int.TryParse(ccms, out ccmsid))
+                    return RedirectToAction("Index", "Inicio");
+                }
+                else
+                {
+                    //return Logout();
+                    using (ASNContext ctx = new ASNContext())
                     {
-                        if (ctx.CatRelUserRoleSel(ccmsid).ToList().Count() <= 0)
+                        ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                        int ccmsid = 0;
+                        if (int.TryParse(ccms, out ccmsid))
                         {
-                            return Logout();
+                            if (ctx.CatRelUserRoleSel(ccmsid).ToList().Count() <= 0)
+                            {
+                                return Logout();
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", "Inicio");
+                            }
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Inicio");
+                            return Logout();
                         }
                     }
-                    else
-                    {
-                        return Logout();
-                    }
                 }
+            }
+            catch (Exception ex){
+                ModelState.AddModelError("x", ex.Message);
+                //MyCustomIdentity usuario = (MyCustomIdentity) User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, 0);
+                return View();
             }
         }
 

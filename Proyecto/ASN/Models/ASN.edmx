@@ -1360,7 +1360,7 @@
           <Property Type="String" Name="FullName" Nullable="true" />
         </ComplexType>
         <ComplexType Name="CatRelUserRoleSel_Result">
-          <Property Type="String" Name="Role" Nullable="false" />
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="CatMesesNominaSel_Result">
           <Property Type="Int32" Name="MesId" Nullable="false" />
