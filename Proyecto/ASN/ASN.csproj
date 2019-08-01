@@ -149,6 +149,7 @@
     <Compile Include="Controllers\ConsecutivoPeriodosController.cs" />
     <Compile Include="Controllers\EmpleadosSolicitudesController.cs" />
     <Compile Include="Controllers\MisAutorizacionesController.cs" />
+    <Compile Include="Controllers\MisResponsabilidadesController.cs" />
     <Compile Include="Controllers\MisSolicitudesController.cs" />
     <Compile Include="Controllers\NotificacionesController.cs" />
     <Compile Include="Controllers\PerfilEmpleadosAccesosController.cs" />
@@ -350,6 +351,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatMisAutorizacionesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatMisResponsabilidadesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatMisSolicitudesSel_Result.cs">
@@ -601,6 +605,7 @@
     <Content Include="Scripts\CapturaSolicitud.js" />
     <Content Include="Scripts\ConceptosPeopleSoft.js" />
     <Content Include="Scripts\MisAutorizaciones.js" />
+    <Content Include="Scripts\MisResponsabilidades.js" />
     <Content Include="Scripts\MisSolicitudes.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -788,6 +793,7 @@
     <Content Include="Views\Shared\EditorTemplates\ConceptosPeopleSoftPopUp.cshtml" />
     <Content Include="Views\MisAutorizaciones\Index.cshtml" />
     <Content Include="Views\AutorizaSolicitud\Index.cshtml" />
+    <Content Include="Views\MisResponsabilidades\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

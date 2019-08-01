@@ -2249,5 +2249,14 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CancelaSolicitud", folioSolicitudParameter, estatus);
         }
+    
+        public virtual ObjectResult<CatMisResponsabilidadesSel_Result> CatMisResponsabilidadesSel(Nullable<int> responsable_Ident)
+        {
+            var responsable_IdentParameter = responsable_Ident.HasValue ?
+                new ObjectParameter("Responsable_Ident", responsable_Ident) :
+                new ObjectParameter("Responsable_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisResponsabilidadesSel_Result>("CatMisResponsabilidadesSel", responsable_IdentParameter);
+        }
     }
 }
