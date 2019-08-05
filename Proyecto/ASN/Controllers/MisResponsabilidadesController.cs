@@ -2,15 +2,13 @@
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
-    [Authorize(Roles = "Responable")]
+    [Authorize(Roles = "Responsable")]
     public class MisResponsabilidadesController : Controller
     {
         // GET: CapturasRapidas/MisResponsabilidades

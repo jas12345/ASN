@@ -2003,7 +2003,6 @@
           <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -3087,7 +3086,6 @@
                 <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
                 <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
-                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
