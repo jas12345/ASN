@@ -141,6 +141,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ResponsableAutorizaController.cs" />
     <Compile Include="Controllers\AutorizaSolicitudController.cs" />
     <Compile Include="Controllers\CapturaSolicitudController.cs" />
     <Compile Include="Controllers\ConceptosPeopleSoftController.cs" />
@@ -417,6 +418,9 @@
     <Compile Include="Models\CatRelUserRoleSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatResponsabilidadesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatSolicitudEmpleadosAutorizantesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -598,6 +602,7 @@
       <DependentUpon>ASN.edmx</DependentUpon>
       <LastGenOutput>ASN.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\ResponsableAutoriza.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\BusquedasVarias.js" />
@@ -794,6 +799,8 @@
     <Content Include="Views\MisAutorizaciones\Index.cshtml" />
     <Content Include="Views\AutorizaSolicitud\Index.cshtml" />
     <Content Include="Views\MisResponsabilidades\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ResponsableSolicitudesPopUp.cshtml" />
+    <Content Include="Views\ResponsableAutoriza\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

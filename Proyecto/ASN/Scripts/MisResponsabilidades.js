@@ -213,7 +213,7 @@ function EditaResponsabilidad(e) {
     debugger;
     //@Html.ActionLink("CapturaResponsabilidad", "Index", "CapturaResponsabilidad")
 
-    window.location.href = urlEditar +"?FolioResponsabilidad="+ d.FolioResponsabilidad;
+    window.location.href = urlEditar + "?FolioSolicitud=" + d.FolioSolicitud;
 }
 
 //$(document).ready(function () {

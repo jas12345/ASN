@@ -434,6 +434,10 @@
         <Function Name="CatRelUserRoleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatResponsabilidadesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="Responsable_Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatSolicitudEmpleadosAutorizantesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
         </Function>
@@ -1283,6 +1287,10 @@
           <FunctionImport Name="CatMisResponsabilidadesSel" ReturnType="Collection(ASNModel.CatMisResponsabilidadesSel_Result)">
           <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatResponsabilidadesSel" ReturnType="Collection(ASNModel.CatResponsabilidadesSel_Result)">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2003,6 +2011,25 @@
           <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="CatResponsabilidadesSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="String" Name="ConceptoDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Monto" Nullable="true" MaxLength="73" />
+          <Property Type="Int32" Name="MotivosSolicitudId" Nullable="true" />
+          <Property Type="String" Name="MotivosSolicitudDesc" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="false" />
+          <Property Type="String" Name="ConceptoMotivoDesc" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ResponsableId" Nullable="false" />
+          <Property Type="String" Name="NombreResponsable" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="PeriodoOriginalId" Nullable="false" />
+          <Property Type="String" Name="EstatusId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
        
         </Schema>
@@ -3086,6 +3113,29 @@
                 <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
                 <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatResponsabilidadesSel" FunctionName="ASNModel.Store.CatResponsabilidadesSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatResponsabilidadesSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="ConceptoDesc" ColumnName="ConceptoDesc" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="MotivosSolicitudId" ColumnName="MotivosSolicitudId" />
+                <ScalarProperty Name="MotivosSolicitudDesc" ColumnName="MotivosSolicitudDesc" />
+                <ScalarProperty Name="ConceptoMotivoId" ColumnName="ConceptoMotivoId" />
+                <ScalarProperty Name="ConceptoMotivoDesc" ColumnName="ConceptoMotivoDesc" />
+                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
+                <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
+                <ScalarProperty Name="PeriodoOriginalId" ColumnName="PeriodoOriginalId" />
+                <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+                <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
