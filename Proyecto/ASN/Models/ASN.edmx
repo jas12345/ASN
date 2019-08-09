@@ -575,6 +575,11 @@
         <Function Name="CatUserInfoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
+        <Function Name="CierraSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="Responsable_Ident" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="EmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
@@ -1291,6 +1296,11 @@
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CierraSolicitud">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1658,27 +1668,9 @@
           <Property Type="String" Name="ConceptoMotivoDesc" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="ResponsableId" Nullable="false" />
           <Property Type="Int32" Name="PeriodoOriginalId" Nullable="false" />
-          <Property Type="Int32" Name="NivelAutorizacion1" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion2" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion3" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion4" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion5" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion6" Nullable="true" />
-          <Property Type="Int32" Name="AutorizadorNivel1" Nullable="true" />
-          <Property Type="Int32" Name="AutorizadorNivel2" Nullable="true" />
-          <Property Type="Int32" Name="AutorizadorNivel3" Nullable="true" />
-          <Property Type="Int32" Name="AutorizadorNivel4" Nullable="true" />
-          <Property Type="Int32" Name="AutorizadorNivel5" Nullable="true" />
-          <Property Type="Int32" Name="AutorizadorNivel6" Nullable="true" />
           <Property Type="String" Name="NombreResponsable" Nullable="true" MaxLength="752" />
           <Property Type="String" Name="EstatusId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="NivelAutorizacion7" Nullable="true" />
-          <Property Type="Int32" Name="Autorizador7_Ident" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion8" Nullable="true" />
-          <Property Type="Int32" Name="Autorizador8_Ident" Nullable="true" />
-          <Property Type="Int32" Name="NivelAutorizacion9" Nullable="true" />
-          <Property Type="Int32" Name="Autorizador9_Ident" Nullable="true" />
           </ComplexType>
         <ComplexType Name="CatEmpleadosSolicitudesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -2595,27 +2587,9 @@
                 <ScalarProperty Name="ConceptoMotivoDesc" ColumnName="ConceptoMotivoDesc" />
                 <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
                 <ScalarProperty Name="PeriodoOriginalId" ColumnName="PeriodoOriginalId" />
-                <ScalarProperty Name="NivelAutorizacion1" ColumnName="NivelAutorizacion1" />
-                <ScalarProperty Name="NivelAutorizacion2" ColumnName="NivelAutorizacion2" />
-                <ScalarProperty Name="NivelAutorizacion3" ColumnName="NivelAutorizacion3" />
-                <ScalarProperty Name="NivelAutorizacion4" ColumnName="NivelAutorizacion4" />
-                <ScalarProperty Name="NivelAutorizacion5" ColumnName="NivelAutorizacion5" />
-                <ScalarProperty Name="NivelAutorizacion6" ColumnName="NivelAutorizacion6" />
-                <ScalarProperty Name="AutorizadorNivel1" ColumnName="AutorizadorNivel1" />
-                <ScalarProperty Name="AutorizadorNivel2" ColumnName="AutorizadorNivel2" />
-                <ScalarProperty Name="AutorizadorNivel3" ColumnName="AutorizadorNivel3" />
-                <ScalarProperty Name="AutorizadorNivel4" ColumnName="AutorizadorNivel4" />
-                <ScalarProperty Name="AutorizadorNivel5" ColumnName="AutorizadorNivel5" />
-                <ScalarProperty Name="AutorizadorNivel6" ColumnName="AutorizadorNivel6" />
                 <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
                 <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
-                <ScalarProperty Name="NivelAutorizacion7" ColumnName="NivelAutorizacion7" />
-                <ScalarProperty Name="Autorizador7_Ident" ColumnName="Autorizador7_Ident" />
-                <ScalarProperty Name="NivelAutorizacion8" ColumnName="NivelAutorizacion8" />
-                <ScalarProperty Name="Autorizador8_Ident" ColumnName="Autorizador8_Ident" />
-                <ScalarProperty Name="NivelAutorizacion9" ColumnName="NivelAutorizacion9" />
-                <ScalarProperty Name="Autorizador9_Ident" ColumnName="Autorizador9_Ident" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3139,6 +3113,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CierraSolicitud" FunctionName="ASNModel.Store.CierraSolicitud" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

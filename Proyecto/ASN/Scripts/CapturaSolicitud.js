@@ -229,24 +229,24 @@ function editarEmpleadoSolicitud(e) {
     dataItem_PeriodoOriginalId = dataItem.PeriodoOriginalId;
     dataItem_EstatusId = dataItem.EstatusId;
     //dataItem_EstatusSolicitud = dataItem.
-    //dataItem_NivelAutorizacion1 = dataItem.
-    dataItem_AutorizadorNivel1 = dataItem.AutorizadorNivel1;
-    //dataItem_NivelAutorizacion2 = dataItem.
-    dataItem_AutorizadorNivel2 = dataItem.AutorizadorNivel2;
-    //dataItem_NivelAutorizacion3 = dataItem.
-    dataItem_AutorizadorNivel3 = dataItem.AutorizadorNivel3;
-    //dataItem_NivelAutorizacion4 = dataItem.
-    dataItem_AutorizadorNivel4 = dataItem.AutorizadorNivel4;
-    //dataItem_NivelAutorizacion5 = dataItem.
-    dataItem_AutorizadorNivel5 = dataItem.AutorizadorNivel5;
-    //dataItem_NivelAutorizacion6 = dataItem.
-    dataItem_AutorizadorNivel6 = dataItem.AutorizadorNivel6;
-    //dataItem_NivelAutorizacion7 = dataItem.
-    dataItem_AutorizadorNivel7 = dataItem.AutorizadorNivel7;
-    //dataItem_NivelAutorizacion8 = dataItem.
-    dataItem_AutorizadorNivel8 = dataItem.AutorizadorNivel8;
-    //dataItem_NivelAutorizacion9 = dataItem.
-    dataItem_AutorizadorNivel9 = dataItem.AutorizadorNivel9;
+    ////dataItem_NivelAutorizacion1 = dataItem.
+    //dataItem_AutorizadorNivel1 = dataItem.AutorizadorNivel1;
+    ////dataItem_NivelAutorizacion2 = dataItem.
+    //dataItem_AutorizadorNivel2 = dataItem.AutorizadorNivel2;
+    ////dataItem_NivelAutorizacion3 = dataItem.
+    //dataItem_AutorizadorNivel3 = dataItem.AutorizadorNivel3;
+    ////dataItem_NivelAutorizacion4 = dataItem.
+    //dataItem_AutorizadorNivel4 = dataItem.AutorizadorNivel4;
+    ////dataItem_NivelAutorizacion5 = dataItem.
+    //dataItem_AutorizadorNivel5 = dataItem.AutorizadorNivel5;
+    ////dataItem_NivelAutorizacion6 = dataItem.
+    //dataItem_AutorizadorNivel6 = dataItem.AutorizadorNivel6;
+    ////dataItem_NivelAutorizacion7 = dataItem.
+    //dataItem_AutorizadorNivel7 = dataItem.AutorizadorNivel7;
+    ////dataItem_NivelAutorizacion8 = dataItem.
+    //dataItem_AutorizadorNivel8 = dataItem.AutorizadorNivel8;
+    ////dataItem_NivelAutorizacion9 = dataItem.
+    //dataItem_AutorizadorNivel9 = dataItem.AutorizadorNivel9;
     //dataItem_Active = dataItem.
 
     //Carga combos:
@@ -316,7 +316,7 @@ function editarEmpleadoSolicitud(e) {
     $("#Conceptos").data("kendoDropDownList").dataSource.read();
     $("#Conceptos").data("kendoDropDownList").refresh();
 
-    $("#Conceptos").data('kendoDropDownList').select(dataItem_ConceptoId);
+    $("#Conceptos").data('kendoDropDownList').value(dataItem_ConceptoId);
     $('#Conceptos').data('kendoDropDownList').trigger('change');
     debugger;
     $("#Parametro").data('kendoNumericTextBox').value(dataItem_Monto);
@@ -331,23 +331,23 @@ function editarEmpleadoSolicitud(e) {
     $("#PeriodoIncidente").data('kendoDropDownList').value(dataItem_PeriodoOriginalId);
     $('#PeriodoIncidente').data('kendoDropDownList').trigger('change');
 
-    $("#AutorizadorNivel1").data('kendoDropDownList').select(dataItem_AutorizadorNivel1);
+    $("#AutorizadorNivel1").data('kendoDropDownList').value(dataItem_AutorizadorNivel1);
 
-    $("#AutorizadorNivel2").data('kendoDropDownList').select(dataItem_AutorizadorNivel2);
+    $("#AutorizadorNivel2").data('kendoDropDownList').value(dataItem_AutorizadorNivel2);
 
-    $("#AutorizadorNivel3").data('kendoDropDownList').select(dataItem_AutorizadorNivel3);
+    $("#AutorizadorNivel3").data('kendoDropDownList').value(dataItem_AutorizadorNivel3);
 
-    $("#AutorizadorNivel4").data('kendoDropDownList').select(dataItem_AutorizadorNivel4);
+    $("#AutorizadorNivel4").data('kendoDropDownList').value(dataItem_AutorizadorNivel4);
 
-    $("#AutorizadorNivel5").data('kendoDropDownList').select(dataItem_AutorizadorNivel5);
+    $("#AutorizadorNivel5").data('kendoDropDownList').value(dataItem_AutorizadorNivel5);
 
-    $("#AutorizadorNivel6").data('kendoDropDownList').select(dataItem_AutorizadorNivel6);
+    $("#AutorizadorNivel6").data('kendoDropDownList').value(dataItem_AutorizadorNivel6);
 
-    $("#AutorizadorNivel7").data('kendoDropDownList').select(dataItem_AutorizadorNivel7);
+    $("#AutorizadorNivel7").data('kendoDropDownList').value(dataItem_AutorizadorNivel7);
 
-    $("#AutorizadorNivel8").data('kendoDropDownList').select(dataItem_AutorizadorNivel8);
+    $("#AutorizadorNivel8").data('kendoDropDownList').value(dataItem_AutorizadorNivel8);
 
-    $("#AutorizadorNivel9").data('kendoDropDownList').select(dataItem_AutorizadorNivel9);
+    $("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem_AutorizadorNivel9);
 
     debugger;
     //Carga de valor de responsable

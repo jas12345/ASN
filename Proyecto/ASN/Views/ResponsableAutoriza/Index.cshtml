@@ -43,7 +43,7 @@
                     <span class="k-icon k-i-plus"></span> Autorizar
                     </a>*@
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
                                                         .Enable(false)
@@ -82,11 +82,6 @@
             <div class="col-lg-3">
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })
                 @Html.TextBox("Estatus", "", new { disabled = "disabled" })
-            </div>
-            <div class="col-lg-1">
-                @(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar")
-                    .Events(x => x.Click("cancelarSolicitud"))
-                )
             </div>
             <div class="col-lg-1">
                 @(Html.Kendo().Button().Name("CerrarSolicitud").Content("Cerrar")
@@ -531,6 +526,8 @@
         //
         var urlCancelaSolicitud = '@Url.Action("CancelaSolicitud", "ResponsableAutoriza")';
 
+        //
+        var urlCierraSolicitud = '@Url.Action("CierraSolicitud", "ResponsableAutoriza")';
 
         // Función para calcular Estatus de Solicitud
         var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "AutorizaSolicitud")';

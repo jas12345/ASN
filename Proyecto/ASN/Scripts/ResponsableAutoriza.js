@@ -115,6 +115,32 @@ function cancelarSolicitud() {
     });
 }
 
+function cerrarSolicitud() {
+    //console.log("Salvado");
+    debugger;
+    //infoSolicitud();
+    $.post(urlCierraSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+
+        FolioSolicitud = data.FolioSolicitud;
+
+        if (data.res == -1) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("No se pudo procesar la Autorización ", "error");
+        }
+        else {
+            $("#AutorizarSolicitud").hide();
+            $("#RechazarSolicitud").hide();
+            $("#CancelarSolicitud").hide();
+
+            calculaEstatusSolicitud();
+        }
+
+        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+        actualizaGrid();
+        //debugger;
+    });
+}
+
 function enviarSolicitud() {
     //console.log("Salvado");
     debugger;
