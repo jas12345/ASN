@@ -224,7 +224,7 @@ function editarEmpleadoSolicitud(e) {
     //dataItem_MotivosSolicitudDesc = dataItem.
     dataItem_ConceptoMotivoId = dataItem.ConceptoMotivoId;
     //dataItem_ConceptoMotivoDesc = dataItem.
-    dataItem_ResponsableId = dataItem.responsableId;
+    dataItem_ResponsableId = dataItem.ResponsableId;
     //dataItem_NombreResponsable = dataItem.
     dataItem_PeriodoOriginalId = dataItem.PeriodoOriginalId;
     dataItem_EstatusId = dataItem.EstatusId;
@@ -249,39 +249,80 @@ function editarEmpleadoSolicitud(e) {
     //dataItem_AutorizadorNivel9 = dataItem.AutorizadorNivel9;
     //dataItem_Active = dataItem.
 
+
+    $.when($("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem_Ident),
+        $('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change')
+    ).done(function () {
+        console.log("CCMSID Change");
+        $.when(
+            $("#CCMSIDIncidente").data('kendoNumericTextBox').value(dataItem_ResponsableId),
+            $('#CCMSIDIncidente').data('kendoNumericTextBox').trigger('change')
+        ).done(function () {
+            console.log("CCMSIdIncidente Change");
+            $.when(
+
+                $("#Conceptos").data("kendoDropDownList").dataSource.read(),
+                $("#Conceptos").data("kendoDropDownList").refresh(),
+
+            ).done(function () {
+                console.log("Conceptos Fill");
+                $.when(
+                    $("#Conceptos").data('kendoDropDownList').value(dataItem_ConceptoId),
+                    $('#Conceptos').data('kendoDropDownList').trigger('change'),
+                    conceptoParametroConcepto(dataItem_ConceptoId)
+                ).done(function () {
+                    console.log("Conceptos Change");
+                    $.when(
+                        solicitudAutorizantes()
+                    ).done(function () {
+                        console.log("Solicitud Autorizantes Change");
+                    });
+
+                });
+            });            
+        });
+    });
+
+
+    //conceptoParametroConcepto
+
+    //Llenar controles
+
     //Carga combos:
+
+
 
     // Se actualiza comboBox de Conceptos
     //$("#Conceptos").data("kendoDropDownList").dataSource.read();
     //$("#Conceptos").data("kendoDropDownList").refresh();
 
     // Se actualizan combos de Autorizadores
-    $('#AutorizadorNivel1').data('kendoDropDownList').dataSource.read();
-    $("#AutorizadorNivel1").data("kendoDropDownList").refresh();
+    //$('#AutorizadorNivel1').data('kendoDropDownList').dataSource.read();
+    //$("#AutorizadorNivel1").data("kendoDropDownList").refresh();
 
-    $('#AutorizadorNivel2').data('kendoDropDownList').dataSource.read();
-    $("#AutorizadorNivel2").data("kendoDropDownList").refresh();
+    //$('#AutorizadorNivel2').data('kendoDropDownList').dataSource.read();
+    //$("#AutorizadorNivel2").data("kendoDropDownList").refresh();
 
-    $('#AutorizadorNivel3').data('kendoDropDownList').dataSource.read();
-    $("#AutorizadorNivel3").data("kendoDropDownList").refresh();
+    //$('#AutorizadorNivel3').data('kendoDropDownList').dataSource.read();
+    //$("#AutorizadorNivel3").data("kendoDropDownList").refresh();
 
-    $('#AutorizadorNivel4').data('kendoDropDownList').dataSource.read();
-    $("#AutorizadorNivel4").data("kendoDropDownList").refresh();
+    //$('#AutorizadorNivel4').data('kendoDropDownList').dataSource.read();
+    //$("#AutorizadorNivel4").data("kendoDropDownList").refresh();
 
-    $('#AutorizadorNivel5').data('kendoDropDownList').dataSource.read();
-    $("#AutorizadorNivel5").data("kendoDropDownList").refresh();
+    //$('#AutorizadorNivel5').data('kendoDropDownList').dataSource.read();
+    //$("#AutorizadorNivel5").data("kendoDropDownList").refresh();
 
-    $('#AutorizadorNivel6').data('kendoDropDownList').dataSource.read();
-    $("#AutorizadorNivel6").data("kendoDropDownList").refresh();
+    //$('#AutorizadorNivel6').data('kendoDropDownList').dataSource.read();
+    //$("#AutorizadorNivel6").data("kendoDropDownList").refresh();
 
-    $('#AutorizadorNivel7').data('kendoDropDownList').dataSource.read();
-    $("#AutorizadorNivel7").data("kendoDropDownList").refresh();
+    //$('#AutorizadorNivel7').data('kendoDropDownList').dataSource.read();
+    //$("#AutorizadorNivel7").data("kendoDropDownList").refresh();
 
-    $('#AutorizadorNivel8').data('kendoDropDownList').dataSource.read();
-    $("#AutorizadorNivel8").data("kendoDropDownList").refresh();
+    //$('#AutorizadorNivel8').data('kendoDropDownList').dataSource.read();
+    //$("#AutorizadorNivel8").data("kendoDropDownList").refresh();
 
-    $('#AutorizadorNivel9').data('kendoDropDownList').dataSource.read();
-    $("#AutorizadorNivel9").data("kendoDropDownList").refresh();
+    //$('#AutorizadorNivel9').data('kendoDropDownList').dataSource.read();
+    //$("#AutorizadorNivel9").data("kendoDropDownList").refresh();
 
 
     //CCMSIdResponsable = dataItem.ResponsableId;
@@ -290,7 +331,10 @@ function editarEmpleadoSolicitud(e) {
 
     // Procesar el estatus de EmpleadoSolicitud
     // Activar / Desactivar botón Rechazar
-    if (dataItem_EstatusId == 'EB' || dataItem_EstatusId == 'R') {
+    if (dataItem_EstatusId == 'R') {
+        $("#AgregarSolicitud").show();
+    }
+    else if (dataItem_EstatusId == 'EB') {
         $("#AgregarSolicitud").show();
         $("#EnviarSolicitud").show();
     }
@@ -309,15 +353,15 @@ function editarEmpleadoSolicitud(e) {
     //}
 
     debugger;
-    $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem_Ident);
-    $('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change');
+    //$("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem_Ident);
+    //$('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change');
 
     // Se actualiza comboBox de Conceptos
-    $("#Conceptos").data("kendoDropDownList").dataSource.read();
-    $("#Conceptos").data("kendoDropDownList").refresh();
+    //$("#Conceptos").data("kendoDropDownList").dataSource.read();
+    //$("#Conceptos").data("kendoDropDownList").refresh();
 
-    $("#Conceptos").data('kendoDropDownList').value(dataItem_ConceptoId);
-    $('#Conceptos').data('kendoDropDownList').trigger('change');
+    //$("#Conceptos").data('kendoDropDownList').value(dataItem_ConceptoId);
+    //$('#Conceptos').data('kendoDropDownList').trigger('change');
     debugger;
     $("#Parametro").data('kendoNumericTextBox').value(dataItem_Monto);
     $('#Parametro').data('kendoNumericTextBox').trigger('change');
@@ -343,21 +387,88 @@ function editarEmpleadoSolicitud(e) {
 
     $("#AutorizadorNivel6").data('kendoDropDownList').value(dataItem_AutorizadorNivel6);
 
-    $("#AutorizadorNivel7").data('kendoDropDownList').value(dataItem_AutorizadorNivel7);
+    //$("#AutorizadorNivel7").data('kendoDropDownList').value(dataItem_AutorizadorNivel7);
 
-    $("#AutorizadorNivel8").data('kendoDropDownList').value(dataItem_AutorizadorNivel8);
+    //$("#AutorizadorNivel8").data('kendoDropDownList').value(dataItem_AutorizadorNivel8);
 
-    $("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem_AutorizadorNivel9);
+    //$("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem_AutorizadorNivel9);
 
     debugger;
     //Carga de valor de responsable
-    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem_ResponsableId);
-    $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
+    //$("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem_ResponsableId);
+    //$('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
 
     debugger;
     var rowIndex = $(e.currentTarget).closest("tr").index();
     var grid = $("#gridSolicitud").data("kendoGrid");
     grid.select("tr:eq(" + rowIndex + ")");
+}
+
+function solicitudAutorizantes() {
+    $.post(urlSolicitudAutorizantes + "/?FolioSolicitud=" + dataItem_FolioSolicitud + "&ConceptoId=" + dataItem_ConceptoId + "&Empleado_Ident=" + dataItem_Ident, function (data) {
+        debugger;
+
+        ////Se actualizan combos de Autorizadores
+        //$('#AutorizadorNivel1').data('kendoDropDownList').dataSource.read();
+        //$("#AutorizadorNivel1").data("kendoDropDownList").refresh();
+
+        //$('#AutorizadorNivel2').data('kendoDropDownList').dataSource.read();
+        //$("#AutorizadorNivel2").data("kendoDropDownList").refresh();
+
+        //$('#AutorizadorNivel3').data('kendoDropDownList').dataSource.read();
+        //$("#AutorizadorNivel3").data("kendoDropDownList").refresh();
+
+        //$('#AutorizadorNivel4').data('kendoDropDownList').dataSource.read();
+        //$("#AutorizadorNivel4").data("kendoDropDownList").refresh();
+
+        //$('#AutorizadorNivel5').data('kendoDropDownList').dataSource.read();
+        //$("#AutorizadorNivel5").data("kendoDropDownList").refresh();
+
+        //$('#AutorizadorNivel6').data('kendoDropDownList').dataSource.read();
+        //$("#AutorizadorNivel6").data("kendoDropDownList").refresh();
+
+        //$('#AutorizadorNivel7').data('kendoDropDownList').dataSource.read();
+        //$("#AutorizadorNivel7").data("kendoDropDownList").refresh();
+
+        //$('#AutorizadorNivel8').data('kendoDropDownList').dataSource.read();
+        //$("#AutorizadorNivel8").data("kendoDropDownList").refresh();
+
+        //$('#AutorizadorNivel9').data('kendoDropDownList').dataSource.read();
+        //$("#AutorizadorNivel9").data("kendoDropDownList").refresh();
+
+
+        var lista = data;
+
+        var autorizadores = $("div[name='nivel']");
+
+        for (index = 0; index < lista.length; index++) {
+            debugger;
+
+            $(autorizadores).each(function (nivel) {
+
+                if (this.id = (index + 1)) {
+                    debugger;
+                    $("#AutorizadorNivel" + this.id).data('kendoDropDownList').value(lista[index].Autorizador_Ident);
+                }
+            });
+        }
+
+        //data[0].FolioSolicitud
+        //18
+        //data.length
+        //4
+
+
+        //var grid = $("#gridSolicitud").data("kendoGrid");
+        //var selectedRows = grid.select();
+
+        //actualizaGrid();
+
+        //grid.select("tr:eq(" + selectedRows(0) + ")");
+
+    }).fail(function (ex) {
+        console.log("fail" + ex);
+    });
 }
 
 function borrarEmpleadoSolicitud(e) {
@@ -562,7 +673,7 @@ function onChangeCCMSId() {
                 $("#ResponsableCCMSIDX").text(responsableId);
                 $("#NombreRespoX").val(NombreResponsableIncidente);
                 $("#NombreRespoX").text(NombreResponsableIncidente);
-                dataItem_ResponsableId = 0;
+                //dataItem_ResponsableId = 0;
             }
             debugger;
             if (EmpCCMSId == -1) {
@@ -645,28 +756,28 @@ function onChangeConceptos() {
         $('#AutorizadorNivel9').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel9").data("kendoDropDownList").refresh();
 
+        conceptoParametroConcepto(ConConceptoIdent);
+        //$.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent, function (data) {
+        //    debugger;
+        //    ConConceptoIdent = data[0].ConceptoId;
+        //    ConConceptoNombre = data[0].DescripcionConcepto;
+        //    ConParametroId = data[0].TipoconceptoId;
+        //    ConParametroNombre = data[0].DescripcionParametroConcepto;
+        //    ConNivelesAutorizacion = data[0].NivelesAutorizacion;
 
-        $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent, function (data) {
-            debugger;
-            ConConceptoIdent = data[0].ConceptoId;
-            ConConceptoNombre = data[0].DescripcionConcepto;
-            ConParametroId = data[0].TipoconceptoId;
-            ConParametroNombre = data[0].DescripcionParametroConcepto;
-            ConNivelesAutorizacion = data[0].NivelesAutorizacion;
+        //    $("#ConceptoX").val(ConConceptoNombre);
+        //    $("#ConceptoX").text(ConConceptoNombre);    
+        //    $("#ParametroX").val(ConParametroNombre);
+        //    $("#ParametroX").text(ConParametroNombre);
 
-            $("#ConceptoX").val(ConConceptoNombre);
-            $("#ConceptoX").text(ConConceptoNombre);    
-            $("#ParametroX").val(ConParametroNombre);
-            $("#ParametroX").text(ConParametroNombre);
-
-            habilitaCombosAutorizadores(ConNivelesAutorizacion);
-            //debugger;
+        //    habilitaCombosAutorizadores(ConNivelesAutorizacion);
+        //    //debugger;
 
 
-        }).fail(function (ex) {
-            //debugger;
-            console.log("fail" + ex);
-        });
+        //}).fail(function (ex) {
+        //    //debugger;
+        //    console.log("fail" + ex);
+        //});
 
     }
     else {
@@ -676,6 +787,31 @@ function onChangeConceptos() {
         $("#ParametroX").val("");
         $("#ParametroX").text("");
     }
+}
+
+function conceptoParametroConcepto(conceptoIdent) {
+    $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + conceptoIdent, function (data) {
+        debugger;
+        ConConceptoIdent = data[0].ConceptoId;
+        ConConceptoNombre = data[0].DescripcionConcepto;
+        ConParametroId = data[0].TipoconceptoId;
+        ConParametroNombre = data[0].DescripcionParametroConcepto;
+        ConNivelesAutorizacion = data[0].NivelesAutorizacion;
+
+        $("#ConceptoX").val(ConConceptoNombre);
+        $("#ConceptoX").text(ConConceptoNombre);
+        $("#ParametroX").val(ConParametroNombre);
+        $("#ParametroX").text(ConParametroNombre);
+
+        habilitaCombosAutorizadores(ConNivelesAutorizacion);
+        //debugger;
+
+
+    }).fail(function (ex) {
+        //debugger;
+        console.log("fail" + ex);
+    });
+
 }
 
 function onChangeMotivo() {
@@ -843,11 +979,11 @@ function habilitaCombosAutorizadores(nivelAutorizador) {
     $(autorizadores).each(function (nivel) {
         //console.log(index + ": " + $(this).text());
         //console.log("ssss");
-        if (this.id <= nivelAutorizador) {
+        if (nivel < nivelAutorizador) {
             debugger;
             $(this).show();
         }
-        if (this.id > nivelAutorizador) {
+        if (nivel >= nivelAutorizador) {
             debugger;
             $(this).hide();
         }

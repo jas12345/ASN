@@ -421,6 +421,9 @@
     <Compile Include="Models\CatResponsabilidadesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatSolicitudAutorizantesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatSolicitudEmpleadosAutorizantesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

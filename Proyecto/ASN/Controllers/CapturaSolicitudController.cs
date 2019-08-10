@@ -91,6 +91,34 @@ namespace ASN.Controllers
             }
         }
 
+
+        public JsonResult GetAutorizadores(int FolioSolicitud, int Conceptoid, int Empleado_Ident)
+        {
+            try
+            {
+                var lstEmpleadoAutorizantes = new List<CatSolicitudAutorizantesSel_Result>();
+
+                //int.TryParse(User.Identity.Name, out int solicitanteIdent);
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstEmpleadoAutorizantes = context.CatSolicitudAutorizantesSel(FolioSolicitud, Conceptoid, Empleado_Ident).ToList();
+                }
+
+                return Json(lstEmpleadoAutorizantes, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+
+
         /// <summary>
         /// Método que devuelve todos los periodos de nomina para un ComboBox
         /// </summary>

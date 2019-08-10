@@ -438,6 +438,11 @@
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Responsable_Ident" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatSolicitudAutorizantesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="Empleado_Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatSolicitudEmpleadosAutorizantesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
         </Function>
@@ -1301,6 +1306,11 @@
             <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatSolicitudAutorizantesSel" ReturnType="Collection(ASNModel.CatSolicitudAutorizantesSel_Result)">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2022,6 +2032,13 @@
           <Property Type="String" Name="EstatusId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatSolicitudAutorizantesSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Empleado_Ident" Nullable="false" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="Int32" Name="NivelAutorizacion" Nullable="false" />
+          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -3114,6 +3131,17 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CierraSolicitud" FunctionName="ASNModel.Store.CierraSolicitud" />
+          <FunctionImportMapping FunctionImportName="CatSolicitudAutorizantesSel" FunctionName="ASNModel.Store.CatSolicitudAutorizantesSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudAutorizantesSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Empleado_Ident" ColumnName="Empleado_Ident" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="NivelAutorizacion" ColumnName="NivelAutorizacion" />
+                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -801,32 +801,32 @@
         var ClaveEstatusSolicitud = "";
         var ClaveEstatusEmpleadoSolicitud = "";
 
-                // URL para consultar datos de Empleado
-                var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "CapturaSolicitud")';
+        // URL para consultar datos de Empleado
+        var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "CapturaSolicitud")';
 
-                //
-                var urlEmpleadoxSolicitante = '@Url.Action("GetEmpleadoxSolicitante", "CapturaSolicitud")';
+        //
+        var urlEmpleadoxSolicitante = '@Url.Action("GetEmpleadoxSolicitante", "CapturaSolicitud")';
 
-                //
-                var urlConceptoParametroConcepto = '@Url.Action("GetConceptoParametroConcepto", "CapturaSolicitud")';
+        //
+        var urlConceptoParametroConcepto = '@Url.Action("GetConceptoParametroConcepto", "CapturaSolicitud")';
 
-                //
-                var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
+        //
+        var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
 
-                // Liga para crear Solicitud
-                var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "CapturaSolicitud")';
+        // Liga para crear Solicitud
+        var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "CapturaSolicitud")';
 
-                // Liga para enviar solicitud a Autorizadores
-                var urlEnviaSolicitud = '@Url.Action("EnviaSolicitud", "CapturaSolicitud")';
+        // Liga para enviar solicitud a Autorizadores
+        var urlEnviaSolicitud = '@Url.Action("EnviaSolicitud", "CapturaSolicitud")';
 
-                //
-                var urlUpdateEmpleadoSolicitud = '@Url.Action("UpdateEmpleadoSolicitud", "CapturaSolicitud")';
+        //
+        var urlUpdateEmpleadoSolicitud = '@Url.Action("UpdateEmpleadoSolicitud", "CapturaSolicitud")';
 
-                //
-                var urlCrearEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "CapturaSolicitud")';
+        //
+        var urlCrearEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "CapturaSolicitud")';
 
-                //
-                var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "CapturaSolicitud")';
+        //
+        var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "CapturaSolicitud")';
 
         // Función para calcular Estatus de Solicitud
         var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "CapturaSolicitud")';
@@ -836,6 +836,9 @@
 
         //
         var urlCancelaSolicitud = '@Url.Action("CancelaSolicitud", "CapturaSolicitud")';
+
+        //
+        var urlSolicitudAutorizantes = '@Url.Action("GetAutorizadores", "CapturaSolicitud")';
 
                 //debugger;
                 //var urlSolicitud = grid.selectedKeyNames().join(", ");
