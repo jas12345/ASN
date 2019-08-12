@@ -456,6 +456,9 @@
     <Compile Include="Models\LogError.cs" />
     <Compile Include="Models\MailHelper.cs" />
     <Compile Include="Models\MyCustomIdentity.cs" />
+    <Compile Include="Models\NivelesAutorizacionxEmpleadoxConcepto_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NivelesCMB.cs" />
     <Compile Include="Models\PeriodoNominaViewModel.cs" />
     <Compile Include="Models\ProDepro.cs" />

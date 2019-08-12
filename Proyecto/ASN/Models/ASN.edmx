@@ -592,6 +592,10 @@
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="NivelesAutorizacionxEmpleadoxConcepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="EmpleadoIdent" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+        </Function>
         <Function Name="ProcesaSolicitudEmpleadoDetalleSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="SolicitudId" Type="int" Mode="In" />
           <Parameter Name="ListaEmpleados" Type="varchar(max)" Mode="In" />
@@ -1310,6 +1314,10 @@
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NivelesAutorizacionxEmpleadoxConcepto" ReturnType="Collection(ASNModel.NivelesAutorizacionxEmpleadoxConcepto_Result)">
+            <Parameter Name="EmpleadoIdent" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2039,6 +2047,11 @@
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
           <Property Type="Int32" Name="NivelAutorizacion" Nullable="false" />
           <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="NivelesAutorizacionxEmpleadoxConcepto_Result">
+          <Property Type="Int32" Name="Nivel" Nullable="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="true" MaxLength="752" />
         </ComplexType>
        
         </Schema>
@@ -3139,6 +3152,15 @@
                 <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
                 <ScalarProperty Name="NivelAutorizacion" ColumnName="NivelAutorizacion" />
                 <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="NivelesAutorizacionxEmpleadoxConcepto" FunctionName="ASNModel.Store.NivelesAutorizacionxEmpleadoxConcepto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.NivelesAutorizacionxEmpleadoxConcepto_Result">
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

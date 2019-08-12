@@ -449,6 +449,13 @@ function solicitudAutorizantes() {
                 if (this.id = (index + 1)) {
                     debugger;
                     $("#AutorizadorNivel" + this.id).data('kendoDropDownList').value(lista[index].Autorizador_Ident);
+
+                    var autorizadorNivel = "autorizadorNivel" + this.id;
+                    window[autorizadorNivel] = lista[index].Autorizador_Ident;
+
+                    //this["autorizadorNivel" + this.id] = lista[index].Autorizador_Ident;
+
+                    //$("#autorizadorNivel" + this.id) = lista[index].Autorizador_Ident;                    
                 }
             });
         }
@@ -960,7 +967,8 @@ function validaAutorizador(valor) {
     debugger;
     $(autorizadores).each(function (nivel) {
 
-        if ($("#AutorizadorNivel" + this.id).val() == valor) {
+        if ($("#AutorizadorNivel" + (nivel + 1)).val() == valor) {
+            
             igualesTotales++;
         }
     });
@@ -1008,6 +1016,7 @@ function onChangeAutorizadorNivel1() {
             notification.show("Este autorizador ya está asignado a otro nivel.", "error");
             $("#AutorizadorNivel1").data("kendoDropDownList").value(0);
             $("#AutorizadorNivel1").data("kendoDropDownList").text("");
+            autorizadorNivel1 = "";
         }
     }
 }
@@ -1033,6 +1042,7 @@ function onChangeAutorizadorNivel2() {
             notification.show("Este autorizador ya está asignado a otro nivel.", "error");
             $("#AutorizadorNivel2").data("kendoDropDownList").value(0);
             $("#AutorizadorNivel2").data("kendoDropDownList").text("");
+            autorizadorNivel2 = "";
         }
     }
 }
@@ -1055,6 +1065,7 @@ function onChangeAutorizadorNivel3() {
             notification.show("Este autorizador ya está asignado a otro nivel.", "error");
             $("#AutorizadorNivel3").data("kendoDropDownList").value(0);
             $("#AutorizadorNivel3").data("kendoDropDownList").text("");
+            autorizadorNivel3 = "";
         }
     }
 }
@@ -1077,6 +1088,7 @@ function onChangeAutorizadorNivel4() {
             notification.show("Este autorizador ya está asignado a otro nivel.", "error");
             $("#AutorizadorNivel4").data("kendoDropDownList").value(0);
             $("#AutorizadorNivel4").data("kendoDropDownList").text("");
+            autorizadorNivel4 = "";
         }
     }
 
@@ -1099,6 +1111,7 @@ function onChangeAutorizadorNivel5() {
             notification.show("Este autorizador ya está asignado a otro nivel.", "error");
             $("#AutorizadorNivel5").data("kendoDropDownList").value(0);
             $("#AutorizadorNivel5").data("kendoDropDownList").text("");
+            autorizadorNivel5 = "";
         }
     }
 }
@@ -1120,6 +1133,7 @@ function onChangeAutorizadorNivel6() {
             notification.show("Este autorizador ya está asignado a otro nivel.", "error");
             $("#AutorizadorNivel6").data("kendoDropDownList").value(0);
             $("#AutorizadorNivel6").data("kendoDropDownList").text("");
+            autorizadorNivel6 = "";
         }
     }
 }
@@ -1141,6 +1155,7 @@ function onChangeAutorizadorNivel7() {
             notification.show("Este autorizador ya está asignado a otro nivel.", "error");
             $("#AutorizadorNivel7").data("kendoDropDownList").value(0);
             $("#AutorizadorNivel7").data("kendoDropDownList").text("");
+            autorizadorNivel7 = "";
         }
     }
 }
@@ -1162,6 +1177,7 @@ function onChangeAutorizadorNivel8() {
             notification.show("Este autorizador ya está asignado a otro nivel.", "error");
             $("#AutorizadorNivel8").data("kendoDropDownList").value(0);
             $("#AutorizadorNivel8").data("kendoDropDownList").text("");
+            autorizadorNivel8 = "";
         }
     }
 }
@@ -1183,6 +1199,7 @@ function onChangeAutorizadorNivel9() {
             notification.show("Este autorizador ya está asignado a otro nivel.", "error");
             $("#AutorizadorNivel9").data("kendoDropDownList").value(0);
             $("#AutorizadorNivel9").data("kendoDropDownList").text("");
+            autorizadorNivel9 = "";
         }
     }
 }
