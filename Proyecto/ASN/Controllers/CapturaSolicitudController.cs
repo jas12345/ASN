@@ -545,6 +545,29 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult GetNivelesAutorizacionxEmpleadoxConcepto(int EmpleadoIdent, int ConceptoId)
+        {
+            try
+            {
+                var lstAutorizadoresxEmpleadoxConcepto = new List<NivelesAutorizacionxEmpleadoxConcepto_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstAutorizadoresxEmpleadoxConcepto = context.NivelesAutorizacionxEmpleadoxConcepto(EmpleadoIdent, ConceptoId).ToList();
+                }
+
+                return Json(lstAutorizadoresxEmpleadoxConcepto, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
         //public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int conceptoMotivoId, int responsableId, int periododOriginalId)
         //{
         //    try

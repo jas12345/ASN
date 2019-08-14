@@ -273,9 +273,16 @@ function editarEmpleadoSolicitud(e) {
                 ).done(function () {
                     console.log("Conceptos Change");
                     $.when(
-                        solicitudAutorizantes()
+                        inicializaAutorizadores(dataItem_Ident, dataItem_ConceptoId)
+                        //solicitudAutorizantes()
                     ).done(function () {
                         console.log("Solicitud Autorizantes Change");
+                        $.when(
+                            //inicializaAutorizadores(dataItem_Ident, dataItem_ConceptoId)
+                            solicitudAutorizantes()
+                        ).done(function () {
+                            console.log("Inicializa Autorizantes")
+                        });
                     });
 
                 });
@@ -727,7 +734,7 @@ function onChangeCCMSId() {
     }
 }
 
-function onChangeConceptos() {
+function onChangeConceptos(e) {
     debugger;
 
     if ($("#Conceptos").val().length > 0) {
@@ -763,7 +770,11 @@ function onChangeConceptos() {
         $('#AutorizadorNivel9').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel9").data("kendoDropDownList").refresh();
 
-        conceptoParametroConcepto(ConConceptoIdent);
+        $.when(conceptoParametroConcepto(ConConceptoIdent))
+            .done(function () {
+                inicializaAutorizadores(CCMSId, ConConceptoIdent)
+            });
+
         //$.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent, function (data) {
         //    debugger;
         //    ConConceptoIdent = data[0].ConceptoId;
@@ -794,6 +805,58 @@ function onChangeConceptos() {
         $("#ParametroX").val("");
         $("#ParametroX").text("");
     }
+}
+
+
+function inicializaAutorizadores(empleadoIdent, conceptoId) {
+    $.post(urlNivelesAutorizacionxEmpleadoxConcepto + "/?EmpleadoIdent=" + empleadoIdent + "&ConceptoId=" + conceptoId, function (data) {
+        debugger;
+
+        var lista = data;
+        var autorizadores = $("div[name='nivel']");
+
+        $(autorizadores).each(function (nivel) {
+            //$("#AutorizadorNivel" + (nivel + 1)).val() = 0
+
+            var autorizadorNivel = "autorizadorNivel" + nivel;
+            window[autorizadorNivel] = null;
+
+        });
+
+
+        for (index = 0; index < lista.length; index++) {
+            debugger;
+
+            if (lista[index].Nivel < 10) {
+                $("#AutorizadorNivel" + lista[index].Nivel).data('kendoDropDownList').value(lista[index].Id);
+
+                var autorizadorNivel = "autorizadorNivel" + lista[index].Nivel;
+                window[autorizadorNivel] = lista[index].Id;
+            }
+            //else {
+            //    var autorizadorNivel = "autorizadorNivel" + lista[index].Nivel;
+            //    window[autorizadorNivel] = 0;
+            //}
+        }
+
+        //if (this.id = (index + 1)) {
+        //    debugger;
+            //$("#AutorizadorNivel" + this.id).data('kendoDropDownList').value(lista[index].Autorizador_Ident);
+
+            //var autorizadorNivel = "autorizadorNivel" + this.id;
+            //window[autorizadorNivel] = lista[index].Autorizador_Ident;
+
+            //this["autorizadorNivel" + this.id] = lista[index].Autorizador_Ident;
+
+            //$("#autorizadorNivel" + this.id) = lista[index].Autorizador_Ident;                    
+        //}
+
+        //debugger;
+
+    }).fail(function (ex) {
+        //debugger;
+        console.log("fail" + ex);
+    });
 }
 
 function conceptoParametroConcepto(conceptoIdent) {

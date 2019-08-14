@@ -1,0 +1,53 @@
+Solicitantes
+2881731	Enrique Gerardo Barrera Pedraza	Admin Software Development Sr. Manager	
+1671994	Jaime Antonio Garcia Lucio	Database Services Specialist	
+1621097	Jesus Armando Esparza Rodriguez	Database Services Specialist	
+X 666484	Juana Janeth Rangel Alonso	Admin Software Developer	
+X 599670	Luis Enrique Rosado Baez	Software Development Director
+
+Autorizantes
+X 666229	Miguel Angel Villarreal Mancha	Software Developer
+X 666336	Carlos Adrian Navarro Loera	Software Development Coordinator	
+X 893576	Gaudencio Lopez Serna	Application Support Specialist	
+  960310	Alfredo Guerrero Lopez	Admin Software Developer	
+
+villarreal.144
+navarroloera.5
+lopezserna.6
+
+Responsables Universidad
+656654	cavazosaranda.5		Mireya Cavazos Aranda	Payroll Sr. Manager
+
+
+Responsables Cuauhtemoc
+656657	araujosalazar.5		Jose Jose Araujo Salazar
+910707	rodriguezhorabuena.5	Karla Ivette Rodriguez Horabuena
+
+
+
+Empleados Cuauhtemoc Soriana
+1796962
+3160115
+3208548
+2964012
+3235579
+3426814
+3333999
+3208541
+3034897
+3428438
+
+
+
+Empleados Universidad GM Financial
+3335711
+3245723
+3113744
+2956675
+2749173
+2429776
+1804677
+1050437
+3369120
+3382351
+
