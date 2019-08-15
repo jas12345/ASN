@@ -177,13 +177,21 @@ function calculaEstatusSolicitud() {
 
             if (ClaveEstatusSolicitud == 'EB') {
                 $("#EnviarSolicitud").show();
+                $("#CancelarSolicitud").show();
+                
+                //$("#EnviarSolicitud").enable(true);
             }
             else {
                 $("#EnviarSolicitud").hide();
-            }
+                $("#CancelarSolicitud").hide();
+                //$("#EnviarSolicitud").attr("disabled", "disabled");
+                //$("#EnviarSolicitud").enable(false);
+           }
 
             if (ClaveEstatusSolicitud == 'C') {
                 $("#CancelarSolicitud").hide();
+                $("#CancelarSolicitud").attr("disabled", "disabled");
+                //$("#EnviarSolicitud").enable(false);
             }
 
             // Activar / Desactivar botón Rechazar
@@ -191,9 +199,11 @@ function calculaEstatusSolicitud() {
                 //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(false);
                 //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(true);
                 $("#CancelarEmpleadoSolicitud").hide();
+                $("#CancelarSolicitud").attr("disabled", "disabled");
             }
             else {
                 $("#CancelarEmpleadoSolicitud").hide();
+                $("#CancelarSolicitud").attr("disabled", "disabled");
             }
 
             $("#Estatus").val(data[0].Descripcion);
