@@ -3,8 +3,8 @@ var valorVigencia = "";
 var valorPeriodicidad = "";
 function edit(e) {
 
-    var autoCMB = $('#AutorizanteIdent').data('kendoDropDownList').select(-1);
-    var nivelCMB = $('#NivelAutorizante').data('kendoDropDownList').select(-1);
+    //var autoCMB = $('#AutorizanteIdent').data('kendoDropDownList').select(-1);
+    //var f = $('#NivelAutorizante').data('kendoDropDownList').select(-1);
     var validator = e.container.data('kendoValidator');
 
     $('input[name="Descripcion"]').blur(function () {
@@ -57,35 +57,35 @@ function edit(e) {
     }
 }
 
-function checaSugerido() {
-    var autoCMB = $('#AutorizanteIdent').data('kendoDropDownList');
-    autoCMB.dataSource.read();
-    $.post(urlSugeridos + "/?nivelId=" + $("#NivelAutorizante").val() + "&conceptoId=" + $("#ConceptoId").val() , function (data) {
-        console.log(data);
-        if (data > 0) {
-            autoCMB.value(data);
-        } else {
-            autoCMB.value(-1);
-        }
-    });
-}
+//function checaSugerido() {
+//    var autoCMB = $('#AutorizanteIdent').data('kendoDropDownList');
+//    autoCMB.dataSource.read();
+//    $.post(urlSugeridos + "/?nivelId=" + $("#NivelAutorizante").val() + "&conceptoId=" + $("#ConceptoId").val() , function (data) {
+//        console.log(data);
+//        if (data > 0) {
+//            autoCMB.value(data);
+//        } else {
+//            autoCMB.value(-1);
+//        }
+//    });
+//}
 
-function salvadoAutor() {
-    var notification = $("#popupNotification").data("kendoNotification");
-    var autoCMB = $('#AutorizanteIdent').data('kendoDropDownList');
-    if ($('#AutorizanteIdent').val() > 0 && $("#NivelAutorizante").val() > 0) {
-        $.post(urlSalvado + "/?conceptoId=" + $("#ConceptoId").val() + "&nivelId=" + $("#NivelAutorizante").val() + "&ccmsid=" + $("#AutorizanteIdent").val(), function (data) {
-            //$("").html(data);
-            console.log(data);
-            if (data != -1) {
-                autoCMB.value(data);
-            } else {
-                autoCMB.value(-1);
-                notification.show("Ya existe este autorizador para otro nivel", "error");
-            }
-        });
-    }
-}
+//function salvadoAutor() {
+//    var notification = $("#popupNotification").data("kendoNotification");
+//    var autoCMB = $('#AutorizanteIdent').data('kendoDropDownList');
+//    if ($('#AutorizanteIdent').val() > 0 && $("#NivelAutorizante").val() > 0) {
+//        $.post(urlSalvado + "/?conceptoId=" + $("#ConceptoId").val() + "&nivelId=" + $("#NivelAutorizante").val() + "&ccmsid=" + $("#AutorizanteIdent").val(), function (data) {
+//            //$("").html(data);
+//            console.log(data);
+//            if (data != -1) {
+//                autoCMB.value(data);
+//            } else {
+//                autoCMB.value(-1);
+//                notification.show("Ya existe este autorizador para otro nivel", "error");
+//            }
+//        });
+//    }
+//}
 
 function conceptoNumero() {
     return {
@@ -99,9 +99,9 @@ function numeroNivel() {
     };
 }
 
-function onChangeNumeroNivelAutorizante() {
-    $('#NivelAutorizante').data('kendoDropDownList').dataSource.read();
-}
+//function onChangeNumeroNivelAutorizante() {
+//    $('#NivelAutorizante').data('kendoDropDownList').dataSource.read();
+//}
 
 function hola(e) {
     if (e.type === "create" || e.type === "update") {
