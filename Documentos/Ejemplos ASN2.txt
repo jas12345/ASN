@@ -1,31 +1,28 @@
+Administradores
+844795		raygozatorres.5		Javier Raygoza Torres			Admin Software Development Coordinator
+
 Solicitantes
-2881731	Enrique Gerardo Barrera Pedraza	Admin Software Development Sr. Manager	
-1671994	Jaime Antonio Garcia Lucio	Database Services Specialist	
-1621097	Jesus Armando Esparza Rodriguez	Database Services Specialist	
-X 666484	Juana Janeth Rangel Alonso	Admin Software Developer	
-X 599670	Luis Enrique Rosado Baez	Software Development Director
+2881731		barrerapedraza.5	Enrique Gerardo Barrera Pedraza		Admin Software Development Sr. Manager	
+1671994		garcialucio.5		Jaime Antonio Garcia Lucio		Database Services Specialist	
+1621097		esparza.26		Jesus Armando Esparza Rodriguez		Database Services Specialist	
+666484		rangelalonso.5		Juana Janeth Rangel Alonso		Admin Software Developer	
+599670		rosadobaez.5		Luis Enrique Rosado Baez		Software Development Director
 
 Autorizantes
-X 666229	Miguel Angel Villarreal Mancha	Software Developer
-X 666336	Carlos Adrian Navarro Loera	Software Development Coordinator	
-X 893576	Gaudencio Lopez Serna	Application Support Specialist	
-  960310	Alfredo Guerrero Lopez	Admin Software Developer	
-
-villarreal.144
-navarroloera.5
-lopezserna.6
+666229		villarreal.144		Miguel Angel Villarreal Mancha		Software Developer
+666336		navarroloera.5		Carlos Adrian Navarro Loera		Software Development Coordinator	
+893576		lopezserna.6		Gaudencio Lopez Serna			Application Support Specialist	
+960310		guerrerolopez.8		Alfredo Guerrero Lopez			Admin Software Developer	
 
 Responsables Universidad
-656654	cavazosaranda.5		Mireya Cavazos Aranda	Payroll Sr. Manager
-
+656654		cavazosaranda.5		Mireya Cavazos Aranda			Payroll Sr. Manager
 
 Responsables Cuauhtemoc
-656657	araujosalazar.5		Jose Jose Araujo Salazar
-910707	rodriguezhorabuena.5	Karla Ivette Rodriguez Horabuena
+656657		araujosalazar.5		Jose Jose Araujo Salazar		IMSS Coordinator		
+910707		rodriguezhorabuena.5	Karla Ivette Rodriguez Horabuena	Payroll Coordinator
 
 
-
-Empleados Cuauhtemoc Soriana
+Empleados Empleados Cuauhtemoc Soriana
 1796962
 3160115
 3208548
@@ -39,7 +36,7 @@ Empleados Cuauhtemoc Soriana
 
 
 
-Empleados Universidad GM Financial
+Empleados Empleados Universidad GM Financial
 3335711
 3245723
 3113744
