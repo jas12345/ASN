@@ -617,6 +617,7 @@
                     {
                         column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(25);
                         column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(25);
+                        column.Command(command => command.Custom("Ver").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Ver").Width(25);
                         column.Bound(c => c.Ident).Width(40).Title("# Empleado").Filterable(false).Visible(true);
                         column.Bound(c => c.Nombre).Title("Nombre").Filterable(false).Visible(true).Width(70);
                         column.Bound(c => c.ConceptoDesc).Title("Concepto").Filterable(false).Width(70);
@@ -629,7 +630,7 @@
                     .Sortable()
                     .PersistSelection()
                     .AutoBind(false)
-                    //.Events(eve => eve.SaveChanges("onSave"))//.Change("onChange")
+                    .Events(eve => eve.DataBound("onDataBound"))
                     .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                     .DataSource(dataSource => dataSource
                         .Ajax()
@@ -652,7 +653,6 @@
                         .Read(read => read.Action("GetSolicitudes", "CapturaSolicitud").Data("getFolio"))
                     //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
                     //.Create(create => create.Action("CrearSolicitudPorEmpleado", "CapturaSolicitud").Type(HttpVerbs.Post))
-                    //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
                     )
                     .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
                     .Navigatable()

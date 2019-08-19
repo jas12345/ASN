@@ -526,6 +526,50 @@ function borrarEmpleadoSolicitud(e) {
     }
 }
 
+function onDataBound(e) {
+    var grid = $("#gridSolicitud").data("kendoGrid");
+    var gridData = grid.dataSource.view();
+
+    debugger;
+
+    for (var i = 0; i < gridData.length; i++) {
+        var currentUid = gridData[i].uid;
+        var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+        var EditButton = $(currenRow).find(".k-grid-Editar");
+        var ViewButton = $(currenRow).find(".k-grid-Ver");
+        var DeleteButton = $(currenRow).find(".k-grid-Borrar");
+
+        if (gridData[i].EstatusId == "EB") {
+            EditButton.show();
+            DeleteButton.show();
+            ViewButton.hide();
+        }
+        else if (gridData[i].EstatusId == "R") {
+            EditButton.show();
+            DeleteButton.hide();
+            ViewButton.hide();
+        }
+        else {
+            EditButton.hide();
+            DeleteButton.hide();
+            ViewButton.show();
+        }
+
+        //if (gridData[i].UPLOAD == 0) {
+        //    UplButton.show();
+        //    ViwButton.hide();
+        //}
+        //else if (gridData[i].UPLOAD == 1) {
+        //    UplButton.show();
+        //    ViwButton.show();
+        //}
+        //else {
+        //    UplButton.hide();
+        //    ViwButton.hide();
+        //}
+    }
+}
+
 //function infoSolicitud() {
 //    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
 
