@@ -291,7 +291,7 @@ function editarEmpleadoSolicitud(e) {
                             //inicializaAutorizadores(dataItem_Ident, dataItem_ConceptoId)
                             solicitudAutorizantes()
                         ).done(function () {
-                            console.log("Inicializa Autorizantes")
+                            console.log("Inicializa Autorizantes");
                         });
                     });
 
@@ -404,11 +404,11 @@ function editarEmpleadoSolicitud(e) {
 
     $("#AutorizadorNivel6").data('kendoDropDownList').value(dataItem_AutorizadorNivel6);
 
-    //$("#AutorizadorNivel7").data('kendoDropDownList').value(dataItem_AutorizadorNivel7);
+    $("#AutorizadorNivel7").data('kendoDropDownList').value(dataItem_AutorizadorNivel7);
 
-    //$("#AutorizadorNivel8").data('kendoDropDownList').value(dataItem_AutorizadorNivel8);
+    $("#AutorizadorNivel8").data('kendoDropDownList').value(dataItem_AutorizadorNivel8);
 
-    //$("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem_AutorizadorNivel9);
+    $("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem_AutorizadorNivel9);
 
     debugger;
     //Carga de valor de responsable
