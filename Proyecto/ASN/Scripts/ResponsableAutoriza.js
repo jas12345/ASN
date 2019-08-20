@@ -235,9 +235,42 @@ function deshabilitaControlesEdicion() {
     //});
 }
 
+function calculaEstatusSolicitud() {
+    debugger;
+    FolioSolicitud = $("#FolioSolicitud").val();
+
+    if (FolioSolicitud != -1) {
+        $.post(urlConsultarEstatusSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+            debugger;
+
+            if (data.res == -1) {
+                var notification = $("#popupNotification").data("kendoNotification");
+                notification.show("Error al Calcular Estatus", "error");
+            }
+            debugger;
+
+            DescripcionEstatusSolicitud = data[0].Descripcion;
+            ClaveEstatusSolicitud = data[0].EstatusSolicitudId;
+
+            /// Ocultar el botón Cerrar Solicitud
+            if (ClaveEstatusSolicitud == 'A') {
+                $("#CerrarSolicitud").show();
+            }
+            else
+            {
+                $("#CerrarSolicitud").hide();
+            }
+
+            $("#Estatus").val(DescripcionEstatusSolicitud);
+            debugger;
+        });
+    }
+}
+
 function actualizaGrid() {
     $("#gridResponsabilidad").data("kendoGrid").dataSource.read();
     $("#gridResponsabilidad").data("kendoGrid").refresh();
+    $("#Estatus").value = calculaEstatusSolicitud();
     debugger;
 }
 

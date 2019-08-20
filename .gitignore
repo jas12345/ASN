@@ -1,9 +1,10 @@
 *.bak
 .vs/*
+Documentos/~$*
+Documentos/.~*
+Documentos/Pendientes/.~*
 Proyecto/.vs/*
 Proyecto/ASN/bin/*
 Proyecto/ASN/obj/*
-Documentos/~$*
-Documentos/.~*
 Proyecto/ASN/Publish/*
 Proyecto/ASN/Properties/*
