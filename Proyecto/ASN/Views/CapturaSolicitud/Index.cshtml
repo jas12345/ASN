@@ -615,10 +615,10 @@
                     .Name("gridSolicitud")
                     .Columns(column =>
                     {
-                        column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(25).HtmlAttributes(new { style = "text-align: center;" });
-                        column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(25).HtmlAttributes(new { style = "text-align: center;" });
-                        column.Command(command => command.Custom("Ver").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Ver").Width(25).HtmlAttributes(new { style = "text-align: center;" });
-                        column.Bound(c => c.FolioSolicitud).Width(33).Title("Comentarios").ClientTemplate("<input class='k-button k-button-icontext comentarioss' style='text-align:center;' type='button' value='Comentarios' onclick='getComments(#=FolioSolicitud#,#=Ident#,#=ConceptoId#);' />").Filterable(false);
+                        column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(28).HtmlAttributes(new { style = "text-align: center;" });
+                        column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(28).HtmlAttributes(new { style = "text-align: center;" });
+                        column.Command(command => command.Custom("Ver").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Ver").Width(28).HtmlAttributes(new { style = "text-align: center;" });
+                        column.Bound(c => c.FolioSolicitud).Width(38).Title("Comentarios").ClientTemplate("<input class='k-button k-button-icontext comentarioss' style='text-align:center;' type='button' value='Comentarios' onclick='getComments(#=FolioSolicitud#,#=Ident#,#=ConceptoId#);' />").Filterable(false);
                         column.Bound(c => c.Ident).Width(40).Title("# Empleado").Filterable(false).Visible(true);
                         column.Bound(c => c.Nombre).Title("Nombre").Filterable(false).Visible(true).Width(70);
                         column.Bound(c => c.ConceptoDesc).Title("Concepto").Filterable(false).Width(70);

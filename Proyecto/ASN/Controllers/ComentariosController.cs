@@ -75,21 +75,21 @@ namespace ASN.Controllers
 
                     var list2 = context.TraCommentSel(folioId, eid, conceptoId).ToList();
 
-                    //TraComment obj = new TraComment();
+                    TraComment obj = new TraComment();
 
-                    //obj.TraCommentId = -1;
-                    //obj.FolioId = folioId;
-                    //obj.EmployeeId = eid;
-                    //obj.ConceptoId = conceptoId;
+                    obj.TraCommentId = -1;
+                    obj.FolioId = folioId;
+                    obj.EmployeeId = eid;
+                    obj.ConceptoId = conceptoId;
 
-                    //list2.Add(obj);
+                    list2.Add(obj);
 
-                    foreach(var obj in list2)
-                    {
-                        obj.FolioId = folioId;
-                        obj.EmployeeId = eid;
-                        obj.ConceptoId = conceptoId;
-                    }
+                    //foreach (var obj in list2)
+                    //{
+                    //    obj.FolioId = folioId;
+                    //    obj.EmployeeId = eid;
+                    //    obj.ConceptoId = conceptoId;
+                    //}
 
                     return PartialView("Comments", list2);
                 }
