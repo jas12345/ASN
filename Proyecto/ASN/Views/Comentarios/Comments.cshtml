@@ -19,7 +19,7 @@
     <div style="overflow-x:auto;height:350px;">
         @{
 
-            if (Model.Count() <= 1)
+            if (Model.Count() <= 0)
             {
                 <div><label>Sin comentarios</label></div>
                 @Html.Hidden("IlusionDefinida", Model.Take(1).FirstOrDefault().FolioId)

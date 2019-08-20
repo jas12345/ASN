@@ -38,6 +38,7 @@
         }
         else {
             lblMsg.text('Solo se aceptan letras con y sin acentos, números y los caracteres .,-? y maximo 150 caracteres.');
+            $("#dale").prop('disabled', false);
         }
     });
 });
