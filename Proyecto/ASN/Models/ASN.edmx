@@ -1713,6 +1713,8 @@
           <Property Type="String" Name="NombreResponsable" Nullable="true" MaxLength="752" />
           <Property Type="String" Name="EstatusId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
+          <Property Type="String" Name="Autorizador" Nullable="true" MaxLength="752" />
           </ComplexType>
         <ComplexType Name="CatEmpleadosSolicitudesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -2654,6 +2656,8 @@
                 <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
                 <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
+                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
+                <ScalarProperty Name="Autorizador" ColumnName="Autorizador" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

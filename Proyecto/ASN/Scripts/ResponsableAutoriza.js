@@ -246,7 +246,7 @@ function calculaEstatusSolicitud() {
             if (data.res == -1) {
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("Error al Calcular Estatus", "error");
-            }
+            }|
             debugger;
 
             DescripcionEstatusSolicitud = data[0].Descripcion;
