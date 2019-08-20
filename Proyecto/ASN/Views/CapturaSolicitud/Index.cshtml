@@ -624,6 +624,7 @@
                         column.Bound(c => c.Monto).Title("Monto").Filterable(false).Width(70);
                         column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
                         column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
+                        column.Bound(c => c.Autorizador).Title("Autorizador Asignado").Filterable(false).Width(70);
                     })
                     .HtmlAttributes(new { style = "height: 475px;" })
                     .Scrollable(sorteable => sorteable.Virtual(false))
@@ -649,6 +650,8 @@
                             model.Field(c => c.ResponsableId).Editable(true);
                             model.Field(c => c.PeriodoOriginalId).Editable(true);
                             model.Field(c => c.EstatusSolicitud).Editable(true);
+                            model.Field(c => c.Autorizador_Ident).Editable(true);
+                            model.Field(c => c.Autorizador).Editable(true);
                         })
                         .Read(read => read.Action("GetSolicitudes", "CapturaSolicitud").Data("getFolio"))
                     //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
