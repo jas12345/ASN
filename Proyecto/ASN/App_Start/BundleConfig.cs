@@ -128,6 +128,8 @@ namespace ASN
             bundles.Add(new ScriptBundle("~/bundles/BusquedasVarias").Include(
             "~/Scripts/BusquedasVarias.js"));
 
+            //Comentarios
+            bundles.Add(new ScriptBundle("~/bundles/Comentarios").Include("~/Scripts/Comentarios.js"));
         }
     }
 }

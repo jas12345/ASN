@@ -1,10 +1,10 @@
-﻿textarea{
-    max-width:441px;
-    max-height:64px;
+﻿textarea {
+    max-width: 441px;
+    max-height: 64px;
 }
 
 .error {
-    max-width:441px;
+    max-width: 441px;
     background-color: #ffe0d9;
     color: #d92800;
     border-color: #ffb6a6;
@@ -32,7 +32,7 @@
     border-radius: 4px;
 }
 
-.btn:hover, .btn:focus, .btn.focus {
-    color: #333;
-    text-decoration: none;
-}
+    .btn:hover, .btn:focus, .btn.focus {
+        color: #333;
+        text-decoration: none;
+    }

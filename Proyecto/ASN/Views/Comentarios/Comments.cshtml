@@ -1,0 +1,107 @@
+﻿
+@model List<ASN.Models.TraCommentSel_Result>
+
+<style>
+    textarea {
+        resize: none;
+    }
+</style>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+@Scripts.Render("~/bundles/jquery")
+<link href="~/Content/Comentarios.css" rel="stylesheet" />
+@{
+    int userCCMSID = 0;
+
+    int.TryParse(User.Identity.Name, out userCCMSID);
+}
+<div class="container-fluid">
+    <div style="overflow-x:auto;height:350px;">
+        @{
+
+            if (Model.Count() <= 1)
+            {
+                <div><label>Sin comentarios</label></div>
+                @Html.Hidden("IlusionDefinida", Model.Take(1).FirstOrDefault().FolioId)
+                @Html.Hidden("IlusionDefinidaEID", Model.Take(1).FirstOrDefault().EmployeeId)
+                @Html.Hidden("IlusionDefinidaConcept", Model.Take(1).FirstOrDefault().ConceptoId)
+            }
+            else
+            {
+                foreach (var obj in Model)
+                {
+                    if (obj.TraCommentId != -1)
+                    {
+                        if (obj.CCMSIDAutor == userCCMSID)
+                        {
+                            @Html.Hidden("IlusionDefinida", obj.FolioId)
+                            @Html.Hidden("IlusionDefinidaEID", obj.EmployeeId)
+                            @Html.Hidden("IlusionDefinidaConcept", obj.ConceptoId)
+                            <div style="background-color:beige;">
+                                <hr />
+                                <div class="">
+                                    <bold>@obj.Nombre</bold>
+                                </div>
+                                <div>
+                                    @obj.FechaComentario
+                                </div>
+                                <br />
+                                <div class="">
+                                    @obj.Comentario
+                                </div>
+                                <hr />
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.Hidden("IlusionDefinida", obj.FolioId)
+                            @Html.Hidden("IlusionDefinidaEID", obj.EmployeeId)
+                            @Html.Hidden("IlusionDefinidaConcept", obj.ConceptoId)
+                            <div style="background-color:azure;">
+                                <hr />
+                                <div class="">
+                                    <bold>@obj.Nombre</bold>
+                                </div>
+                                <div>
+                                    @obj.FechaComentario
+                                </div>
+                                <br />
+                                <div class="">
+                                    @obj.Comentario
+                                </div>
+                                <hr />
+                            </div>
+                        }
+                    }
+                }
+            }
+        }
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="">
+            @*<input type="textarea"  value="" id="comentario" />*@
+            <textarea rows="4" cols="60" id="comentario" class=""></textarea>
+            <div class="error" id="labelWarning"></div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="">
+            <input id="dale" type="button" class="btn" value="Comentar" />
+        </div>
+    </div>
+</div>
+
+
+<script>
+    urlComGrab = '@Url.Action("CreateComment", "Comentarios")';
+    if (/Mobi/.test(navigator.userAgent)) {
+        //$("#comentario").attr("cols", 30);
+        $("#comentario").css("width", $(window).width() - 15);
+    }
+    //setTimeout(function () { console.log("sss"); }, 3000);
+</script>
+@*<script src="~/Scripts/Comentarios.js"></script>*@
+@Scripts.Render("~/bundles/Comentarios")

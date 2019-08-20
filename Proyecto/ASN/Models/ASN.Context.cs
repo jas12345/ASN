@@ -2314,5 +2314,47 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NivelesAutorizacionxEmpleadoxConcepto_Result>("NivelesAutorizacionxEmpleadoxConcepto", empleadoIdentParameter, conceptoIdParameter);
         }
+    
+        public virtual ObjectResult<TraCommentSel_Result> TraCommentSel(Nullable<int> folioId, Nullable<int> eID, Nullable<int> conceptoId)
+        {
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            var eIDParameter = eID.HasValue ?
+                new ObjectParameter("EID", eID) :
+                new ObjectParameter("EID", typeof(int));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TraCommentSel_Result>("TraCommentSel", folioIdParameter, eIDParameter, conceptoIdParameter);
+        }
+    
+        public virtual int TraCommentSi(Nullable<int> userCCMSID, Nullable<int> folioId, Nullable<int> eID, Nullable<int> conceptoId, string comentario)
+        {
+            var userCCMSIDParameter = userCCMSID.HasValue ?
+                new ObjectParameter("UserCCMSID", userCCMSID) :
+                new ObjectParameter("UserCCMSID", typeof(int));
+    
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            var eIDParameter = eID.HasValue ?
+                new ObjectParameter("EID", eID) :
+                new ObjectParameter("EID", typeof(int));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var comentarioParameter = comentario != null ?
+                new ObjectParameter("Comentario", comentario) :
+                new ObjectParameter("Comentario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TraCommentSi", userCCMSIDParameter, folioIdParameter, eIDParameter, conceptoIdParameter, comentarioParameter);
+        }
     }
 }
