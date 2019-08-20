@@ -212,6 +212,7 @@ function calculaEstatusSolicitud() {
 function actualizaGrid() {
     $("#gridSolicitud").data("kendoGrid").dataSource.read();
     $("#gridSolicitud").data("kendoGrid").refresh();
+    $("#Estatus").value = calculaEstatusSolicitud();
     debugger;
 }
 
