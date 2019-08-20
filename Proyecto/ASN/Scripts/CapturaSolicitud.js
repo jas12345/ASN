@@ -177,20 +177,17 @@ function calculaEstatusSolicitud() {
 
             if (ClaveEstatusSolicitud == 'EB') {
                 $("#EnviarSolicitud").show();
-                $("#CancelarSolicitud").show();
+                //$("#CancelarSolicitud").show();
                 
                 //$("#EnviarSolicitud").enable(true);
             }
             else {
                 $("#EnviarSolicitud").hide();
-                $("#CancelarSolicitud").hide();
                 //$("#EnviarSolicitud").attr("disabled", "disabled");
                 //$("#EnviarSolicitud").enable(false);
            }
 
             if (ClaveEstatusSolicitud == 'C') {
-                $("#CancelarSolicitud").hide();
-                $("#CancelarSolicitud").attr("disabled", "disabled");
                 //$("#EnviarSolicitud").enable(false);
             }
 
@@ -198,12 +195,12 @@ function calculaEstatusSolicitud() {
             if (ClaveEstatusSolicitud == 'R') {
                 //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(false);
                 //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(true);
-                $("#CancelarEmpleadoSolicitud").hide();
-                $("#CancelarSolicitud").attr("disabled", "disabled");
+                //$("#CancelarEmpleadoSolicitud").hide();
+                //$("#CancelarSolicitud").attr("disabled", "disabled");
             }
             else {
-                $("#CancelarEmpleadoSolicitud").hide();
-                $("#CancelarSolicitud").attr("disabled", "disabled");
+                //$("#CancelarEmpleadoSolicitud").hide();
+                //$("#CancelarSolicitud").attr("disabled", "disabled");
             }
 
             $("#Estatus").val(data[0].Descripcion);
@@ -538,21 +535,25 @@ function onDataBound(e) {
         var EditButton = $(currenRow).find(".k-grid-Editar");
         var ViewButton = $(currenRow).find(".k-grid-Ver");
         var DeleteButton = $(currenRow).find(".k-grid-Borrar");
+        var ComentariosButton = $(currenRow).find(".comentarioss");
 
         if (gridData[i].EstatusId == "EB") {
             EditButton.show();
             DeleteButton.show();
             ViewButton.hide();
+            ComentariosButton.hide();
         }
         else if (gridData[i].EstatusId == "R") {
             EditButton.show();
             DeleteButton.hide();
             ViewButton.hide();
+            ComentariosButton.show();
         }
         else {
             EditButton.hide();
             DeleteButton.hide();
             ViewButton.show();
+            ComentariosButton.show();
         }
 
         //if (gridData[i].UPLOAD == 0) {
