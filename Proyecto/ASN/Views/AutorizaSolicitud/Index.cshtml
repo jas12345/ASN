@@ -296,37 +296,30 @@
                     </table>
                 </div>
                 <div class="col-lg-12">
-                    <table class="table-responsive table" cellpadding="1" style="margin-bottom: 5px;">
-                        <tr>
-                            <td style="width : 6em">
-                                @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar")
-                                                .Events(x => x.Click("autorizarSolicitud"))
-                                )
-                            </td>
-                            <td style="width : 6em">
-                                <div name="nivel" id="1">
-                                    @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar")
-                                                    .Events(x => x.Click("rechazarSolicitud"))
-                                    )
-                                </div>
-                            </td>
-                            @*<td style="width : 6em">
-                                    <div name="nivel" id="2">
-                                        @(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar")
-                                        .Events(x => x.Click("cancelarSolicitud"))
-                                        )
-                                    </div>
-                                </td>*@
-                            <td style="width : 6em">
-                                @*<div name="nivel" id="3">
-                                    </div>*@
-                            </td>
-                            <td>
-                                @*<div name="nivel" id="4">
-                                    </div>*@
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="col-lg-6">
+                        <div class="col-lg-2">
+                            @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar")
+                            .Events(x => x.Click("autorizarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+                            )
+                        </div>
+                        <div class="col-lg-2">
+                            @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar")
+                            .Events(x => x.Click("rechazarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+                            )
+                        </div>
+                        <div class="col-lg-3">
+                            @(Html.Kendo().Button().Name("AutorizarSolicitudALL").Content("Autorizar selección")
+                            .Events(x => x.Click("autorizarSolicitudALL")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+                            )
+                        </div>
+                        <div class="col-lg-3">
+                            @(Html.Kendo().Button().Name("RechazarSolicitudALL").Content("Rechazar selección")
+                            .Events(x => x.Click("rechazarSolicitudALL")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                    </div>
                 </div>
             </div>
         </div>
@@ -339,9 +332,12 @@
                             .Name("gridAutorizacion")
                             .Columns(column =>
                             {
-                                column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(25).HtmlAttributes(new { style = "text-align: center;" });
+                                column.Select().Width(8).HtmlAttributes(new { style = "text-align: left;" }).HeaderHtmlAttributes(new { style = "text-align: left;" });
+                                column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Ver").Width(25).HtmlAttributes(new { style = "text-align: center;" });
                                 //column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(25);
                                 column.Bound(c => c.FolioSolicitud).Width(29).Title("Comentarios").ClientTemplate("<input class='k-button k-button-icontext' style='text-align:center;' type='button' value='Comentarios' onclick='getComments(#=FolioSolicitud#,#=Ident#,#=ConceptoId#);' />").Filterable(false);
+                                //column.Bound(c => c.FolioSolicitud).Width(1).Title("# folioid").Filterable(false).Visible(true);
+                                //column.Bound(c => c.ConceptoId).Width(1).Title("# conceptid").Filterable(false).Visible(true);
                                 column.Bound(c => c.Ident).Width(40).Title("# Empleado").Filterable(false).Visible(true);
                                 column.Bound(c => c.Nombre).Title("Nombre").Filterable(false).Visible(true).Width(70);
                                 column.Bound(c => c.ConceptoDesc).Title("Concepto").Filterable(false).Width(70);
@@ -354,8 +350,8 @@
                             .Sortable()
                             .PersistSelection()
                             .AutoBind(false)
-                            //.Events(eve => eve.SaveChanges("onSave"))//.Change("onChange")
-                            .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                            .Events(eve => eve.Change("onChange"))
+                            //.Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                             .DataSource(dataSource => dataSource
                                 .Ajax()
                                 .Model(model =>
@@ -381,7 +377,8 @@
                             //.Create(create => create.Action("CrearSolicitudPorEmpleado", "AutorizaSolicitud").Type(HttpVerbs.Post))
                             //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
                             )
-                            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                            //.Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                            //.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple).Type(GridSelectionType.Row))
                             .Navigatable()
                             .Pageable(pageable => pageable
                             .Refresh(true)
