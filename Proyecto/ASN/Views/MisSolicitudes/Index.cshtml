@@ -17,6 +17,11 @@
                             </a>*@
                     </div>
                 </div>
+                <div class="col-lg-12 col-md-12">
+                    <div class="row">
+                        <input type="button" title="Captura Rápida" value="Captura Rápida" class="k-button" style="background-color:steelblue;color:white;" onclick="location.href='@Url.Action("Index", "CapturaSolicitud")'" />
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         @(Html.Kendo().Grid<ASN.Models.CatMisSolicitudesSel_Result>()
