@@ -116,6 +116,8 @@ function enviarSolicitud() {
         //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
         actualizaGrid();
         debugger;
+
+        window.location.href = '../MisSolicitudes/Index';
     });
 }
 
@@ -135,6 +137,7 @@ function cancelarSolicitud() {
         //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
         actualizaGrid();
         debugger;
+        
     });
 }
 
