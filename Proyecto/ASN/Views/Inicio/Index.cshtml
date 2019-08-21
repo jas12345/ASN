@@ -1,4 +1,4 @@
-﻿
+﻿@model ASN.Models.MyCustomIdentity
 @{
     ViewBag.Title = "ASN";
 }
@@ -19,6 +19,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <img src="~/Content/images/ASNInicio.jpg" class="img-fluid center" alt="Responsive image" style="max-width: 100%;height: auto;" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="jumbotron">
+                <div class="control-label" style="color:black;font-size:30px;text-align:center;">
+                    Hola, @Model.UserInfo.FullName
+                </div>
             </div>
         </div>
     </div>
