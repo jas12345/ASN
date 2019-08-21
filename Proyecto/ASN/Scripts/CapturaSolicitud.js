@@ -122,23 +122,25 @@ function enviarSolicitud() {
 }
 
 function cancelarSolicitud() {
-    //console.log("Salvado");
-    debugger;
-    //infoSolicitud();
-    $.post(urlCancelaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
-        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
-        debugger;
+    ////console.log("Salvado");
+    //debugger;
+    ////infoSolicitud();
+    //$.post(urlCancelaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+    //    //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
+    //    debugger;
 
-        if (data.res == -1) {
-            var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Error al Cancelar Solicitud", "error");
-        }
+    //    if (data.res == -1) {
+    //        var notification = $("#popupNotification").data("kendoNotification");
+    //        notification.show("Error al Cancelar Solicitud", "error");
+    //    }
 
-        //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
-        actualizaGrid();
-        debugger;
+    //    //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+    //    actualizaGrid();
+    //    debugger;
         
-    });
+    //});
+
+    $("#dialog").data("kendoDialog").open();
 }
 
 function cancelarEmpleadoSolicitud() {
@@ -192,6 +194,22 @@ function calculaEstatusSolicitud() {
 
             if (ClaveEstatusSolicitud == 'C') {
                 //$("#EnviarSolicitud").enable(false);
+                $("#AgregarSolicitud").hide();
+            }
+
+            if (ClaveEstatusSolicitud == 'CE') {
+                //$("#EnviarSolicitud").enable(false);
+                $("#AgregarSolicitud").hide();
+            }
+
+            if (ClaveEstatusSolicitud == 'PA') {
+                //$("#EnviarSolicitud").enable(false);
+                $("#AgregarSolicitud").hide();
+            }
+
+            if (ClaveEstatusSolicitud == 'A') {
+                //$("#EnviarSolicitud").enable(false);
+                $("#AgregarSolicitud").hide();
             }
 
             // Activar / Desactivar botón Rechazar
@@ -1422,4 +1440,33 @@ function rellenaPerfilTipoAcceso() {
         .fail(function (ex) {
             console.log("fail" + ex);
         });
+}
+
+function onCancel(e) {
+    //kendoConsole.log("action :: Cancel");
+    //console.log("cancel");
+}
+
+function onOK(e) {
+    //kendoConsole.log("action :: OK");
+
+    $.post(urlCancelaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
+        debugger;
+
+        if (data.res == -1) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Error al Cancelar Solicitud", "error");
+        }
+
+        //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+        //actualizaGrid();
+        //debugger;
+
+        window.location.href = urlMisSolicitudes;
+
+        //console.log("ok");
+    });
+
+    //window.location.href = urlMisSolicitudes;
 }

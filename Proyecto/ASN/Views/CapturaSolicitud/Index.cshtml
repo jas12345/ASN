@@ -34,57 +34,61 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div class="container-fluid">
-
+        <div class="row">
+            <div class="col-lg-12">
+                @Html.Label("Captura de Solicitudes", new { style = "font-size: 18px" })
+            </div>
+        </div>
         <div class="col-lg-12 col-md-12">
-            <div class="col-lg-2">
-                @Html.Label("Captura de Solicitudes", new { style = "font-size: 15px" })
-            </div>
-            <div class="col-lg-3">
-                @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
-                @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
-                    .Enable(false)
-                    .Spinners(false)
-                    .Decimals(0)
-                    .Format("0")
-                    .Min(0)
-                    .Events(e => e.Change("onChangeFolioSolicitud"))
-                    //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
-                    .Value(Model.FolioSolicitud)
-                    .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
-                )
-            </div>
-            <div class="col-lg-3">
-                @Html.Label("Periodo de nómina actual: ", new { style = "font-size: 15px" })
-                @(Html.Kendo().DropDownList().DataSource(source =>
-                    {
-                        source.Read(read =>
+            <div class="col-lg-9">
+                <div class="col-lg-3">
+                    @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
+                        .Enable(false)
+                        .Spinners(false)
+                        .Decimals(0)
+                        .Format("0")
+                        .Min(0)
+                        .Events(e => e.Change("onChangeFolioSolicitud"))
+                        //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
+                        .Value(Model.FolioSolicitud)
+                        .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
+                    )
+                </div>
+                 <div class="col-lg-4">
+                    @Html.Label("Periodo de nómina actual: ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().DropDownList().DataSource(source =>
                         {
-                            read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
-                        }
-                        );
-                    //.ServerFiltering(true);
-                    })
-                    .Filter("contains")
-                    .OptionLabel("- Seleccione Periodo de Nomina - ")
-                    .DataValueField("Ident")
-                    .DataTextField("Valor")
-                    .Name("PeriodoNomina_Id")
-                    .SelectedIndex(1)
-                    .Enable(false)
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                )
+                            source.Read(read =>
+                            {
+                                read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
+                            }
+                            );
+                        //.ServerFiltering(true);
+                        })
+                        .Filter("contains")
+                        .OptionLabel("- Seleccione Periodo de Nomina - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("PeriodoNomina_Id")
+                        .SelectedIndex(1)
+                        .Enable(false)
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                    )
+                </div>
+                <div class="col-lg-4">
+                    @Html.Label("Estatus: ", new { style = "font-size: 15px" })
+                    @Html.TextBox("Estatus", "", new { disabled = "disabled" })
+                </div>
             </div>
             <div class="col-lg-3">
-                @Html.Label("Estatus: ", new { style = "font-size: 15px" })
-                @Html.TextBox("Estatus", "", new { disabled = "disabled" })
+                <div class="col-lg-12" style="text-align:right;">
+                    @(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar solicitud").Icon("close")
+                                .Events(x => x.Click("cancelarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+                    )
+                </div>
             </div>
-            <div class="col-lg-1">
-                @(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar")
-                    .Events(x => x.Click("cancelarSolicitud"))
-                )
-            </div>
-                <p></p>
-            </div>
+        </div>
             <p></p>
 
             <table class="table" style="margin-bottom: 5px;">
@@ -350,10 +354,10 @@
                 <div class="col-lg-12">
                     <table class="table-responsive table" cellpadding="1" style="margin-bottom: 5px;">
                         <tr>
-                            <td style="width : 6em">
-                                @(Html.Kendo().Button().Name("AgregarSolicitud").Content("Aplicar")
-                                        .Events(x => x.Click("agregarSolicitud"))
-                                        //.Events(x => x.Click("agregaEmpleado"))
+                            <td style="width : 8em">
+                                @(Html.Kendo().Button().Name("AgregarSolicitud").Content("Agregar").Icon("add")
+                                        .Events(x => x.Click("agregarSolicitud")).HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;", type = "button" })
+                                //.Events(x => x.Click("agregaEmpleado"))
                                 )
                             </td>
                             <td>
@@ -458,9 +462,9 @@
                 <div class="col-lg-12">
                     <table class="table-responsive table" cellpadding="1" style="margin-bottom: 5px;">
                         <tr>
-                            <td style="width : 6em">
-                                @(Html.Kendo().Button().Name("EnviarSolicitud").Content("Enviar")
-                                .Events(x => x.Click("enviarSolicitud"))
+                            <td style="width : 15em">
+                                @(Html.Kendo().Button().Name("EnviarSolicitud").Content("Enviar solicitud").Icon("email")
+                                .Events(x => x.Click("enviarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                                 )
 
                                 @(Html.Kendo().Button().Name("CancelarEmpleadoSolicitud").Content("Cancelar")
@@ -607,7 +611,7 @@
             </div>
         </div>
     </div>
-    <p></p>
+    
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -627,13 +631,13 @@
                         column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
                         column.Bound(c => c.Autorizador).Title("Autorizador Asignado").Filterable(false).Width(70);
                     })
-                    .HtmlAttributes(new { style = "height: 475px;" })
+                    .HtmlAttributes(new { style = "height: 425px;" })
                     .Scrollable(sorteable => sorteable.Virtual(false))
                     .Sortable()
                     .PersistSelection()
                     .AutoBind(false)
                     .Events(eve => eve.DataBound("onDataBound"))
-                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                    //.Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                     .DataSource(dataSource => dataSource
                         .Ajax()
                         .Model(model =>
@@ -686,7 +690,7 @@
         </div>
     </div>
 
-        @(Html.Kendo().Window()
+    @(Html.Kendo().Window()
         .Name("Comentarios")
         .Title("Comentarios")
         .Content("loading user info...")
@@ -703,6 +707,25 @@
         .Height(530)
         .Visible(false)
         .Modal(true)
+    )
+
+    @(Html.Kendo().Dialog()
+        .Name("dialog")
+        .Title("Advertencia")
+        .Content("<p><strong>Se va cancelar la solicitud...</strong></p><p><strong>Deseas continuar?</strong></p>")
+        .Width(400)
+        .Modal(true)
+        .Animation(true)
+        .Visible(false)
+        .Actions(actions =>
+        {
+            actions.Add()
+            .Text("Cancel")
+            .Action("onCancel");
+            actions.Add().Text("OK")
+            .Primary(true)
+            .Action("onOK");
+        })
     )
 
     
@@ -874,6 +897,8 @@
 
                 //debugger;
                 //var urlSolicitud = grid.selectedKeyNames().join(", ");
+
+        var urlMisSolicitudes = '@Url.Action("Index", "MisSolicitudes")'
     </script>
 }
 else

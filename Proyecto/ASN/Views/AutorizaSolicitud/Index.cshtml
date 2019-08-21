@@ -34,49 +34,49 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div class="container-fluid">
-
-        <div class="col-lg-12 col-md-12">
-            <div class="col-lg-2">
-                @Html.Label("Autoriza Solicitud", new { style = "font-size: 15px" })
-                @*<div class="container-fluid">
-                    <a href="@Url.Action("Create","MisAutorizaciones")" data-role="button" class="k-button k-button-icontext" style="float:right; margin-right:10px;" role="button" aria-disabled="false" tabindex="0">
-                    <span class="k-icon k-i-plus"></span> Autorizar
-                    </a>*@
+        <div class="row">
+            <div class="col-lg-12">
+                @Html.Label("Autoriza Solicitud", new { style = "font-size: 18px" })
             </div>
+        </div>
+        <div class="col-lg-12 col-md-12">
+            @*<div class="col-lg-2">
+                @Html.Label("Autoriza Solicitud", new { style = "font-size: 15px" })
+            </div>*@
             <div class="col-lg-3">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
-                                    .Enable(false)
-                                    .Spinners(false)
-                                    .Decimals(0)
-                                    .Format("0")
-                                    .Min(0)
-                                    .Events(e => e.Change("onChangeFolioSolicitud"))
-                                    //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
-                                    .Value(Model.FolioSolicitud)
-                                    .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
+                    .Enable(false)
+                    .Spinners(false)
+                    .Decimals(0)
+                    .Format("0")
+                    .Min(0)
+                    .Events(e => e.Change("onChangeFolioSolicitud"))
+                    //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
+                    .Value(Model.FolioSolicitud)
+                    .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
                 )
             </div>
             <div class="col-lg-4">
                 @Html.Label("Periodo de nómina actual: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                    {
-                                        source.Read(read =>
-                                        {
-                                            read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
-                                        }
-                                        );
-                                    //.ServerFiltering(true);
-                                }
-                                    )
-                                    .Filter("contains")
-                                    .OptionLabel("- Seleccione Periodo de Nomina - ")
-                                    .DataValueField("Ident")
-                                    .DataTextField("Valor")
-                                    .Name("PeriodoNomina_Id")
-                                    .SelectedIndex(1)
-                                    .Enable(false)
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
+                        }
+                        );
+                    //.ServerFiltering(true);
+                    }
+                    )
+                    .Filter("contains")
+                    .OptionLabel("- Seleccione Periodo de Nomina - ")
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .Name("PeriodoNomina_Id")
+                    .SelectedIndex(1)
+                    .Enable(false)
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                 )
             </div>
             <div class="col-lg-3">
@@ -162,134 +162,134 @@
                         <tr>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                                .Name("CCMSIDSolicitado")
-                                                .Spinners(false)
-                                                .Decimals(0)
-                                                .Format("0.")
-                                                .Min(0)
-                                                .Events(e => e.Change("onChangeCCMSId"))
-                                                .Enable(false)
-                                                //.Step(5)
-                                                //.Value(0)
-                                                .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
+                                    .Name("CCMSIDSolicitado")
+                                    .Spinners(false)
+                                    .Decimals(0)
+                                    .Format("0.")
+                                    .Min(0)
+                                    .Events(e => e.Change("onChangeCCMSId"))
+                                    .Enable(false)
+                                    //.Step(5)
+                                    //.Value(0)
+                                    .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                            {
-                                                source.Read(read =>
-                                                {
-                                                    read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "AutorizaSolicitud").Data("getIdent"); ;
-                                                }
-                                                );
-                                                            //.ServerFiltering(true);
-                                                        }
-                                                )
-                                                .Filter("contains")
-                                                .AutoBind(false)
-                                                .OptionLabel("- Conceptos - ")
-                                                .DataValueField("Ident")
-                                                .DataTextField("Valor")
-                                                .Name("Conceptos")
-                                                .Enable(false)
-                                                .Events(e => e.Change("onChangeConceptos"))
-                                                //.SelectedIndex(1)
-                                                .Enable(true)
-                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                    {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "AutorizaSolicitud").Data("getIdent"); ;
+                                    }
+                                    );
+                                                //.ServerFiltering(true);
+                                            }
+                                    )
+                                    .Filter("contains")
+                                    .AutoBind(false)
+                                    .OptionLabel("- Conceptos - ")
+                                    .DataValueField("Ident")
+                                    .DataTextField("Valor")
+                                    .Name("Conceptos")
+                                    .Enable(false)
+                                    .Events(e => e.Change("onChangeConceptos"))
+                                    //.SelectedIndex(1)
+                                    .Enable(true)
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                                .Name("Parametro")
-                                                .Enable(false)
-                                                .Events(e => e.Change("onChangeParametro"))
-                                                .Spinners(false)
-                                                .Decimals(2)
-                                                .Format("0.00")
-                                                .Min(0)
-                                                //.Step(5)
-                                                //.Value(0)
-                                                .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+                                    .Name("Parametro")
+                                    .Enable(false)
+                                    .Events(e => e.Change("onChangeParametro"))
+                                    .Spinners(false)
+                                    .Decimals(2)
+                                    .Format("0.00")
+                                    .Min(0)
+                                    //.Step(5)
+                                    //.Value(0)
+                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                {
-                                                    source.Read(read =>
-                                                    {
-                                                        read.Action("GetMotivosCMB", "AutorizaSolicitud");
-                                                    }
-                                                );
-                                                                //.ServerFiltering(true);
-                                                            }
-                                                                                            )
-                                                .Filter("contains")
-                                                .OptionLabel("- Motivo - ")
-                                                .DataValueField("Id")
-                                                .DataTextField("Valor")
-                                                .Name("Motivo")
-                                                .Enable(false)
-                                                .Events(e => e.Change("onChangeMotivo"))
-                                                //.SelectedIndex(1)
-                                                .Enable(true)
-                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
-                            </td>
-                            <td>
-                                @(Html.Kendo().DropDownList().DataSource(source =>
-                                                {
-                                                    source.Read(read =>
-                                                                {
-                                                                    read.Action("GetConceptosMotivosCMB", "AutorizaSolicitud");
-                                                                });
-                                                                //.ServerFiltering(true);
-                                                            })
-                                                .Filter("contains")
-                                                .OptionLabel("- Concepto Motivo - ")
-                                                .DataValueField("Ident")
-                                                .DataTextField("Valor")
-                                                .Name("ConceptoMotivo")
-                                                .Enable(false)
-                                                .Events(e => e.Change("onChangeConceptoMotivo"))
-                                                //.SelectedIndex(1)
-                                                .Enable(true)
-                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                                )
-                            </td>
-                            <td>
-                                @(Html.Kendo().NumericTextBox()
-                                            .Name("CCMSIDIncidente")
-                                            .Enable(false)
-
-                                            .Spinners(false)
-                                            .Decimals(0)
-                                            .Format("0.")
-                                            .Min(0)
-                                            .Events(e => e.Change("onChangeCCMSIdIncidente"))
-                                            //.Step(5)
-                                            //.Value(0)
-                                            .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
-                                )
-                            </td>
-                            <td>
-                                @(Html.Kendo().DropDownList().DataSource(source =>
+                                    {
+                                        source.Read(read =>
                                         {
-                                            source.Read(read =>
-                                                        {
-                                            read.Action("GetPeriodoNominaCerradosCMB", "AutorizaSolicitud");
-                                        });
-                                                        //.ServerFiltering(true);
-                                                    })
-                                        .Filter("contains")
-                                        .OptionLabel("- Período Incidente - ")
-                                        .DataValueField("Ident")
-                                        .DataTextField("Valor")
-                                        .Name("PeriodoIncidente")
-                                        .Enable(false)
-                                        .Events(e => e.Change("onChangePeriodoIncidente"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                            read.Action("GetMotivosCMB", "AutorizaSolicitud");
+                                        }
+                                    );
+                                                    //.ServerFiltering(true);
+                                                }
+                                                                                )
+                                    .Filter("contains")
+                                    .OptionLabel("- Motivo - ")
+                                    .DataValueField("Id")
+                                    .DataTextField("Valor")
+                                    .Name("Motivo")
+                                    .Enable(false)
+                                    .Events(e => e.Change("onChangeMotivo"))
+                                    //.SelectedIndex(1)
+                                    .Enable(true)
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().DropDownList().DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                                    {
+                                                        read.Action("GetConceptosMotivosCMB", "AutorizaSolicitud");
+                                                    });
+                                                    //.ServerFiltering(true);
+                                                })
+                                    .Filter("contains")
+                                    .OptionLabel("- Concepto Motivo - ")
+                                    .DataValueField("Ident")
+                                    .DataTextField("Valor")
+                                    .Name("ConceptoMotivo")
+                                    .Enable(false)
+                                    .Events(e => e.Change("onChangeConceptoMotivo"))
+                                    //.SelectedIndex(1)
+                                    .Enable(true)
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().NumericTextBox()
+                                    .Name("CCMSIDIncidente")
+                                    .Enable(false)
+
+                                    .Spinners(false)
+                                    .Decimals(0)
+                                    .Format("0.")
+                                    .Min(0)
+                                    .Events(e => e.Change("onChangeCCMSIdIncidente"))
+                                    //.Step(5)
+                                    //.Value(0)
+                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().DropDownList().DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                                    {
+                                        read.Action("GetPeriodoNominaCerradosCMB", "AutorizaSolicitud");
+                                    });
+                                                    //.ServerFiltering(true);
+                                                })
+                                    .Filter("contains")
+                                    .OptionLabel("- Período Incidente - ")
+                                    .DataValueField("Ident")
+                                    .DataTextField("Valor")
+                                    .Name("PeriodoIncidente")
+                                    .Enable(false)
+                                    .Events(e => e.Change("onChangePeriodoIncidente"))
+                                    //.SelectedIndex(1)
+                                    .Enable(true)
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                         </tr>
@@ -298,22 +298,22 @@
                 <div class="col-lg-12">
                     <div class="col-lg-6">
                         <div class="col-lg-2">
-                            @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar")
+                            @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar").Icon("check")
                             .Events(x => x.Click("autorizarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                             )
                         </div>
                         <div class="col-lg-2">
-                            @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar")
+                            @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar").Icon("close")
                             .Events(x => x.Click("rechazarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                             )
                         </div>
                         <div class="col-lg-3">
-                            @(Html.Kendo().Button().Name("AutorizarSolicitudALL").Content("Autorizar selección")
+                            @(Html.Kendo().Button().Name("AutorizarSolicitudALL").Content("Autorizar selección").Icon("check")
                             .Events(x => x.Click("autorizarSolicitudALL")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                             )
                         </div>
                         <div class="col-lg-3">
-                            @(Html.Kendo().Button().Name("RechazarSolicitudALL").Content("Rechazar selección")
+                            @(Html.Kendo().Button().Name("RechazarSolicitudALL").Content("Rechazar selección").Icon("close")
                             .Events(x => x.Click("rechazarSolicitudALL")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                             )
                         </div>
