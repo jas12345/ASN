@@ -26,7 +26,7 @@ namespace ASN.Controllers
                     //    ViewBag.URLImagen = urlimg == null ? string.Empty : urlimg.ImageView;
                     //}
 
-                    return View();
+                    return View(usuario);
                 }
                 else
                 {
