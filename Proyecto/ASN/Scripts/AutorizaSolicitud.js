@@ -232,8 +232,15 @@ function editarEmpleadoSolicitud(e) {
     Solicitante_Ident = dataItem.Solicitante_Ident;
 
     // Activar botones Autorizar, Rechazar y Cancelar Solicitud
-    $("#AutorizarSolicitud").show();
-    $("#RechazarSolicitud").show();
+    if (dataItem.BtnAutorizarBorrar==1) {
+        $("#AutorizarSolicitud").show();
+        $("#RechazarSolicitud").show();
+    }
+    else {
+        $("#AutorizarSolicitud").hide();
+        $("#RechazarSolicitud").hide();
+    }
+    
     $("#CancelarSolicitud").show();
 
     // Se actualiza comboBox de Conceptos
@@ -262,7 +269,7 @@ function editarEmpleadoSolicitud(e) {
 
     //debugger;
     $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
-    $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
+    $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');    
 
     debugger;
     var rowIndex = $(e.currentTarget).closest("tr").index();
