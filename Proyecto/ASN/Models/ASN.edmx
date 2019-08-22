@@ -536,6 +536,7 @@
           <Parameter Name="Autorizador7" Type="int" Mode="In" />
           <Parameter Name="Autorizador8" Type="int" Mode="In" />
           <Parameter Name="Autorizador9" Type="int" Mode="In" />
+          <Parameter Name="PeriodoNomina_Id" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="FolioSolicitudOut" Type="int" Mode="InOut" />
@@ -1036,6 +1037,7 @@
             <Parameter Name="Autorizador7" Mode="In" Type="Int32" />
             <Parameter Name="Autorizador8" Mode="In" Type="Int32" />
             <Parameter Name="Autorizador9" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodoNomina_Id" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="FolioSolicitudOut" Mode="InOut" Type="Int32" />
