@@ -21,7 +21,8 @@ BEGIN
 		SEA.Autorizador_Ident = @Autorizante_Ident
 --	AND 
 --		SEA.Pendiente = 1
---	AND
+	AND
+		S.EstatusSolicitudId NOT IN ('EB')
 --		S.EstatusSolicitudId IN ('E', 'PA', 'R')
 END
 
