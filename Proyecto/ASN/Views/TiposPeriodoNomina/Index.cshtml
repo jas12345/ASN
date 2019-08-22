@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <label>Catálago de Tipos de Período de Nómina</label>
+                @Html.Label("Catálago de Tipos de Período de Nómina", new { style = "font-size: 18px" })
             </div>
         </div>
         <div class="row">
@@ -29,7 +29,7 @@
                                 toolBar.Excel().Text("Exportar a excel");
                                 })
                                 .Excel(ex => ex.AllPages(true))
-                                .HtmlAttributes(new { style = "height: 700px;" })
+                                .HtmlAttributes(new { style = "height: 475px;" })
                                 .Scrollable(sorteable => sorteable.Virtual(false))
                                 .Sortable()
                                 .Resizable(c => c.Columns(true))
