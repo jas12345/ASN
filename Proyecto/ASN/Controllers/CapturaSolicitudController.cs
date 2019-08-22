@@ -396,7 +396,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
+        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, string PeriodoNomina_Id, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
         {
             try
             {
@@ -404,8 +404,10 @@ namespace ASN.Controllers
                 {
                     int res = 0;
                     int ccmsidAdmin = 0;
+                    int periodoNominaId = 0;
 
                     int.TryParse(User.Identity.Name, out ccmsidAdmin);
+                    int.TryParse(PeriodoNomina_Id, out periodoNominaId);
 
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
 
@@ -434,6 +436,7 @@ namespace ASN.Controllers
                         , autorizadorNivel7
                         , autorizadorNivel8
                         , autorizadorNivel9
+                        , periodoNominaId
                         , true//active
                         , idAdmin
                         , folioSolicitudOut

@@ -304,3 +304,7 @@ function rellenaFechasAnio() {
         });
     }
 }
+
+function toSolicitudes() {
+    window.location.href = urlSolicitudes;
+}
