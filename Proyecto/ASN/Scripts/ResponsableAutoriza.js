@@ -246,7 +246,7 @@ function calculaEstatusSolicitud() {
             if (data.res == -1) {
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("Error al Calcular Estatus", "error");
-            }|
+            }
             debugger;
 
             DescripcionEstatusSolicitud = data[0].Descripcion;
@@ -283,6 +283,7 @@ function editarEmpleadoSolicitud(e) {
     ConceptoId = dataItem.ConceptoId;
     ConEmpleadoident = dataItem.Ident;
     Solicitante_Ident = dataItem.Solicitante_Ident;
+    ConParametroConceptoMonto = dataItem.Monto;
 
     // Activar botones Autorizar, Rechazar y Cancelar Solicitud
     $("#AutorizarSolicitud").show();
@@ -314,8 +315,8 @@ function editarEmpleadoSolicitud(e) {
     $('#PeriodoIncidente').data('kendoDropDownList').trigger('change');
 
     //debugger;
-    $("#CCMSIdIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
-    $('#CCMSIdIncidente').data('kendoNumericTextBox').trigger('change');
+    $("#CCMSIDIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
+    $('#CCMSIDIncidente').data('kendoNumericTextBox').trigger('change');
 
     debugger;
     var rowIndex = $(e.currentTarget).closest("tr").index();
@@ -492,7 +493,7 @@ function onChangeCCMSId() {
 function onChangeConceptos() {
     debugger;
 
-    if ($("#Conceptos").val().length > 0) {
+    if ($("#Conceptos").val().length > 0 || ConceptoId.toString().length > 0) {
         //$('#grid').data('kendoGrid').dataSource.data([]);
 
         ConConceptoIdent = ""
@@ -501,17 +502,18 @@ function onChangeConceptos() {
         ConParametroNombre = ""
         ConNivelesAutorizacion = ""
 
-        ConConceptoIdent = $("#Conceptos").val();
+        ConConceptoIdent = $("#Conceptos").val().length > 0 ? $("#Conceptos").val() : ConceptoId;
         debugger;
 
         //rellenaPerfilTipoAcceso();
 
-        $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent, function (data) {
+        $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent + "&eid=" + $("#CCMSIDSolicitado").val(), function (data) {
             debugger;
             ConConceptoIdent = data[0].ConceptoId;
             ConConceptoNombre = data[0].DescripcionConcepto;
             ConParametroId = data[0].TipoconceptoId;
-            ConParametroNombre = data[0].DescripcionParametroConcepto;
+            //ConParametroNombre = data[0].DescripcionParametroConcepto;
+            ConParametroNombre = ConParametroConceptoMonto + " " + data[0].DescripcionParametroConcepto;
             ConNivelesAutorizacion = data[0].NivelesAutorizacion;
 
             $("#ConceptoX").val(ConConceptoNombre);

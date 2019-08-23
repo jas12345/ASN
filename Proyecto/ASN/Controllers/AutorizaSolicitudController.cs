@@ -287,15 +287,19 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptoParametroConcepto(int conceptoIdent)
+        public JsonResult GetConceptoParametroConcepto(int conceptoIdent, string eid)
         {
             try
             {
                 var lstConceptosParametroConceptos = new List<CatConceptosParametroConceptosSel_Result>();
+                int employeeId = 0;
 
                 using (ASNContext context = new ASNContext())
                 {
-                    lstConceptosParametroConceptos = context.CatConceptosParametroConceptosSel(conceptoIdent).ToList();
+                    if (int.TryParse(eid, out employeeId))
+                    {
+                        lstConceptosParametroConceptos = context.CatConceptosParametroConceptosSel(conceptoIdent, employeeId).ToList();
+                    }
                 }
 
                 return Json(lstConceptosParametroConceptos, JsonRequestBehavior.AllowGet);

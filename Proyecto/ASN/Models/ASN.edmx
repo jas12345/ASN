@@ -112,6 +112,7 @@
         </Function>
         <Function Name="CatConceptosParametroConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatConceptosPeopleSoftCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="TipoConceptoId" Type="int" Mode="In" />
@@ -1223,7 +1224,8 @@
             <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConceptosParametroConceptosSel" ReturnType="Collection(ASNModel.CatConceptosParametroConceptosSel_Result)">
-          <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConceptosxEmpleadoCMB" ReturnType="Collection(ASNModel.CatConceptosxEmpleadoCMB_Result)">
           <Parameter Name="Ident" Mode="In" Type="Int32" />
