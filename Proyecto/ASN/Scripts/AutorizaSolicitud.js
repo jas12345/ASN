@@ -233,8 +233,15 @@ function editarEmpleadoSolicitud(e) {
     ConParametroConceptoMonto = dataItem.Monto;
 
     // Activar botones Autorizar, Rechazar y Cancelar Solicitud
-    $("#AutorizarSolicitud").show();
-    $("#RechazarSolicitud").show();
+    if (dataItem.BtnAutorizarBorrar==1) {
+        $("#AutorizarSolicitud").show();
+        $("#RechazarSolicitud").show();
+    }
+    else {
+        $("#AutorizarSolicitud").hide();
+        $("#RechazarSolicitud").hide();
+    }
+    
     $("#CancelarSolicitud").show();
 
     // Se actualiza comboBox de Conceptos

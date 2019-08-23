@@ -2005,6 +2005,9 @@
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="NivelAutorizacion" Nullable="false" />
           <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
+          <Property Type="String" Name="Autorizador" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="BtnAutorizarBorrar" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatPeriodosNominaCerradosCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
@@ -3084,6 +3087,9 @@
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
                 <ScalarProperty Name="NivelAutorizacion" ColumnName="NivelAutorizacion" />
                 <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
+                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
+                <ScalarProperty Name="Autorizador" ColumnName="Autorizador" />
+                <ScalarProperty Name="BtnAutorizarBorrar" ColumnName="BtnAutorizarBorrar" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
