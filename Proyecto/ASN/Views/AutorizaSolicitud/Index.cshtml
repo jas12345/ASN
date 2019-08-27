@@ -332,10 +332,10 @@
                             .Name("gridAutorizacion")
                             .Columns(column =>
                             {
-                                column.Select().Width(8).HtmlAttributes(new { style = "text-align: left;" }).HeaderHtmlAttributes(new { style = "text-align: left;" });
+                                column.Select().Width(9).HtmlAttributes(new { style = "text-align: left;" }).HeaderHtmlAttributes(new { style = "text-align: left;" });
                                 column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Ver").Width(25).HtmlAttributes(new { style = "text-align: center;" });
                                 //column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(25);
-                                column.Bound(c => c.FolioSolicitud).Width(29).Title("Comentarios").ClientTemplate("<input class='k-button k-button-icontext' style='text-align:center;' type='button' value='Comentarios' onclick='getComments(#=FolioSolicitud#,#=Ident#,#=ConceptoId#);' />").Filterable(false);
+                                column.Bound(c => c.FolioSolicitud).Width(35).Title("Comentarios").ClientTemplate("<input class='k-button k-button-icontext' style='text-align:center;' type='button' value='Comentarios' onclick='getComments(#=FolioSolicitud#,#=Ident#,#=ConceptoId#);' />").Filterable(false);
                                 //column.Bound(c => c.FolioSolicitud).Width(1).Title("# folioid").Filterable(false).Visible(true);
                                 //column.Bound(c => c.ConceptoId).Width(1).Title("# conceptid").Filterable(false).Visible(true);
                                 column.Bound(c => c.Ident).Width(40).Title("# Empleado").Filterable(false).Visible(true);
