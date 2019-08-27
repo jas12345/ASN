@@ -26,6 +26,7 @@ namespace ASN.Controllers
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                         ViewData["Pais"] = context.CatCountryTodosCMB().ToList();
                         ViewData["Ciudad"] = context.CatCityTodosCMB().ToList();
+                        //ViewData["Ciudad"] = context.CatCityByCountryCMB("mexico").ToList();
                         ViewData["Mercado"] = context.CatCompanyTodosCMB().ToList();
                         ViewData["Site"] = context.CatLocationTodosCMB().ToList();
                         ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
@@ -51,16 +52,18 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetPaisesCMB()
+        public JsonResult GetPaisesCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
         {
             try
             {
-                var lstCMB = new List<CatCountryTodosCMB_Result>();
+                //var lstCMB = new List<CatCountryTodosCMB_Result>();
+                var lstCMB = new List<CatCountryByCascadeCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatCountryTodosCMB().ToList();
+                    //lstCMB = ctx.CatCountryTodosCMB().ToList();
+                    lstCMB = ctx.CatCountryByCascadeCMB(country, city, site, client, program, contract).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -74,16 +77,19 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetCiudadesCMB()
+        public JsonResult GetCiudadesCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
         {
             try
             {
-                var lstCMB = new List<CatCityTodosCMB_Result>();
+
+                //var lstCMB = new List<CatCityTodosCMB_Result>();
+                var lstCMB = new List<CatCityByCountryCMB_Result>();                
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatCityTodosCMB().ToList();
+                    //lstCMB = ctx.CatCityTodosCMB().ToList();
+                    lstCMB = ctx.CatCityByCountryCMB(country, city, site, client, program, contract).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -120,16 +126,18 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetSitesCMB()
+        public JsonResult GetSitesCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
         {
             try
             {
-                var lstCMB = new List<CatLocationTodosCMB_Result>();
+                //var lstCMB = new List<CatLocationTodosCMB_Result>();
+                var lstCMB = new List<CatLocationByCityCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatLocationTodosCMB().ToList();
+                    //lstCMB = ctx.CatLocationTodosCMB().ToList();
+                    lstCMB = ctx.CatLocationByCityCMB(country, city, site, client, program, contract).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -143,16 +151,18 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetClientesCMB()
+        public JsonResult GetClientesCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
         {
             try
             {
-                var lstCMB = new List<CatClientTodosCMB_Result>();
+                //var lstCMB = new List<CatClientTodosCMB_Result>();
+                var lstCMB = new List<CatClientBySiteCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatClientTodosCMB().ToList();
+                    //lstCMB = ctx.CatClientTodosCMB().ToList();
+                    lstCMB = ctx.CatClientBySiteCMB(country, city, site, client, program, contract).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -166,16 +176,18 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetProgramasCMB()
+        public JsonResult GetProgramasCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
         {
             try
             {
-                var lstCMB = new List<CatProgramTodosCMB_Result>();
+                //var lstCMB = new List<CatProgramTodosCMB_Result>();
+                var lstCMB = new List<CatProgramByClientCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatProgramTodosCMB().ToList();
+                    //lstCMB = ctx.CatProgramTodosCMB().ToList();
+                    lstCMB = ctx.CatProgramByClientCMB(country, city, site, client, program, contract).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -189,16 +201,18 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetTiposContratoCMB()
+        public JsonResult GetTiposContratoCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
         {
             try
             {
-                var lstCMB = new List<CatContractTypeTodosCMB_Result>();
+                //var lstCMB = new List<CatContractTypeTodosCMB_Result>();
+                var lstCMB = new List<CatContractTypeByProgramCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatContractTypeTodosCMB().ToList();
+                    //lstCMB = ctx.CatContractTypeTodosCMB().ToList();
+                    lstCMB = ctx.CatContractTypeByProgramCMB(country, city, site, client, program, contract).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -212,16 +226,18 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptosCMB()
+        public JsonResult GetConceptosCMB(int? country, int? client)
         {
             try
             {
-                var lstCMB = new List<CatConceptosCMB_Result>();
+                //var lstCMB = new List<CatConceptosCMB_Result>();
+                var lstCMB = new List<CatConceptosPaisClienteCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatConceptosCMB(0).ToList();
+                    //lstCMB = ctx.CatConceptosCMB(0).ToList();
+                    lstCMB = ctx.CatConceptosPaisClienteCMB(0, country, client).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);

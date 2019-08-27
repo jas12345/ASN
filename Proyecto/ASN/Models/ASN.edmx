@@ -80,8 +80,24 @@
           <Parameter Name="FolioId" Type="int" Mode="In" />
           <Parameter Name="Justificacion" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="CatCityByCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Country" Type="int" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="SiteId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="CrontactId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatCityCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCityTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatClientBySiteCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Country" Type="int" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="SiteId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="CrontactId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatClientCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatClientTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCompanyCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -109,6 +125,11 @@
           <Parameter Name="AutorizadorIdent" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatConceptosPaisClienteCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil" Type="int" Mode="In" />
+          <Parameter Name="PaisId" Type="int" Mode="In" />
+          <Parameter Name="ClienteId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatConceptosParametroConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
@@ -212,8 +233,24 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatContractTypeByProgramCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Country" Type="int" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="SiteId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="CrontactId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatContractTypeCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatContractTypeTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatCountryByCascadeCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Country" Type="int" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="SiteId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="CrontactId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatEmpleadoPuestoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -262,6 +299,14 @@
         <Function Name="CatEmployeeSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatEstatusSolicitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatLocationByCityCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Country" Type="int" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="SiteId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="CrontactId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatLocationCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLocationTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -429,6 +474,14 @@
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CatProgramByClientCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Country" Type="int" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="SiteId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+          <Parameter Name="CrontactId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatProgramCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatProgramTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -1347,6 +1400,59 @@
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Comentario" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="CatCityByCountryCMB" ReturnType="Collection(ASNModel.CatCityByCountryCMB_Result)">
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatClientBySiteCMB" ReturnType="Collection(ASNModel.CatClientBySiteCMB_Result)">
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatContractTypeByProgramCMB" ReturnType="Collection(ASNModel.CatContractTypeByProgramCMB_Result)">
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatLocationByCityCMB" ReturnType="Collection(ASNModel.CatLocationByCityCMB_Result)">
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatProgramByClientCMB" ReturnType="Collection(ASNModel.CatProgramByClientCMB_Result)">
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatCountryByCascadeCMB" ReturnType="Collection(ASNModel.CatCountryByCascadeCMB_Result)">
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatConceptosPaisClienteCMB" ReturnType="Collection(ASNModel.CatConceptosPaisClienteCMB_Result)">
+            <Parameter Name="Perfil" Mode="In" Type="Int32" />
+            <Parameter Name="PaisId" Mode="In" Type="Int32" />
+            <Parameter Name="ClienteId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2095,6 +2201,34 @@
           <Property Type="Int32" Name="FolioId" Nullable="false" />
           <Property Type="Int32" Name="EmployeeId" Nullable="false" />
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatCityByCountryCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="50" />
+          </ComplexType>
+        <ComplexType Name="CatClientBySiteCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatContractTypeByProgramCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatLocationByCityCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatProgramByClientCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatCountryByCascadeCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosPaisClienteCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -3227,6 +3361,62 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="TraCommentSi" FunctionName="ASNModel.Store.TraCommentSi" />
+          <FunctionImportMapping FunctionImportName="CatCityByCountryCMB" FunctionName="ASNModel.Store.CatCityByCountryCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCityByCountryCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatClientBySiteCMB" FunctionName="ASNModel.Store.CatClientBySiteCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatClientBySiteCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatContractTypeByProgramCMB" FunctionName="ASNModel.Store.CatContractTypeByProgramCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatContractTypeByProgramCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatLocationByCityCMB" FunctionName="ASNModel.Store.CatLocationByCityCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatLocationByCityCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatProgramByClientCMB" FunctionName="ASNModel.Store.CatProgramByClientCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatProgramByClientCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatCountryByCascadeCMB" FunctionName="ASNModel.Store.CatCountryByCascadeCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCountryByCascadeCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosPaisClienteCMB" FunctionName="ASNModel.Store.CatConceptosPaisClienteCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosPaisClienteCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

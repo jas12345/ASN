@@ -11,25 +11,27 @@
             <label for="Descripcion">Descripción</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.NombrePerfilEmpleados).HtmlAttributes(new { required = "required", validationmessage = "El Nombre del Perfil de Empleados es requerido"}))
+            @(Html.Kendo().TextBoxFor(x => x.NombrePerfilEmpleados).HtmlAttributes(new { required = "required", validationmessage = "El Nombre del Perfil de Empleados es requerido" }))
         </div>
         <div class="editor-label">
             <label for="Country_Ident">Pais</label>
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Country_Ident)
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetPaisesCMB", "PerfilEmpleados");
-                    });
-                })
-                .Filter("contains")
-                .DataValueField("Id")
-                .DataTextField("Value")
-                .Name("Country_Ident")
-                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetPaisesCMB", "PerfilEmpleados").Data("filterCountry");
+                            });
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .Name("Country_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+            //.Events(eve => eve.Select("CargaCiudad"))
+            .Events(eve => eve.Change("CargaCiudad"))
             )
         </div>
         <div class="editor-label">
@@ -37,18 +39,19 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.City_Ident)
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetCiudadesCMB", "PerfilEmpleados");
-                    });
-                })
-                .Filter("contains")
-                .DataValueField("Id")
-                .DataTextField("Value")
-                .Name("City_Ident")
-                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetCiudadesCMB", "PerfilEmpleados").Data("filterCity");
+                            });
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .Name("City_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .Events(eve => eve.Change("CargaSite"))
             )
         </div>
         <div class="editor-label">
@@ -56,18 +59,19 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Location_Ident)
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetSitesCMB", "PerfilEmpleados");
-                    });
-                })
-                .Filter("contains")
-                .DataValueField("Id")
-                .DataTextField("Value")
-                .Name("Location_Ident")
-                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetSitesCMB", "PerfilEmpleados").Data("filterSite");
+                            });
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .Name("Location_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .Events(eve => eve.Change("CargaCliente"))
             )
         </div>
         <div class="editor-label">
@@ -75,18 +79,19 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Client_Ident)
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetClientesCMB", "PerfilEmpleados");
-                    });
-                })
-                .Filter("contains")
-                .DataValueField("Id")
-                .DataTextField("Value")
-                .Name("Client_Ident")
-                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetClientesCMB", "PerfilEmpleados").Data("filterClient");
+                            });
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .Name("Client_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .Events(eve => eve.Change("CargaPrograma"))
             )
         </div>
         <div class="editor-label">
@@ -94,18 +99,19 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Program_Ident)
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetProgramasCMB", "PerfilEmpleados");
-                    });
-                })
-                .Filter("contains")
-                .DataValueField("Id")
-                .DataTextField("Value")
-                .Name("Program_Ident")
-                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram");
+                            });
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .Name("Program_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .Events(eve => eve.Change("CargaContrato"))
             )
         </div>
         <div class="editor-label">
@@ -113,18 +119,19 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.Contract_Type_Ident)
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetTiposContratoCMB", "PerfilEmpleados");
-                    });
-                })
-                .Filter("contains")
-                .DataValueField("Id")
-                .DataTextField("Value")
-                .Name("Contract_Type_Ident")
-                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetTiposContratoCMB", "PerfilEmpleados").Data("filterContract");
+                            });
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .Name("Contract_Type_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .Events(eve => eve.Change("CargaCascada"))
             )
         </div>
 
@@ -133,19 +140,19 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.ConceptoId)
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetConceptosCMB", "PerfilEmpleados");
-                    });
-                })
-                .Filter("contains")
-                .DataValueField("Ident")
-                .DataTextField("Valor")
-                .Name("ConceptoId")
-                .OptionLabel(" - Todos - ")
-                .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto");
+                            });
+                        })
+                        .Filter("contains")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("ConceptoId")
+                        .OptionLabel(" - Todos - ")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
         </div>
         <div class="editor-label">
@@ -153,19 +160,19 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DropDownListFor(x => x.TipoAccesoId)
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetTiposAccesoCMB", "PerfilEmpleados");
-                    });
-                })
-                .Filter("contains")
-                .OptionLabel("- Tipo de acceso - ")
-                .DataValueField("Ident")
-                .DataTextField("Valor")
-                .Name("TipoAccesoId")
-                .HtmlAttributes(new { style = "text-align:center;width: 16.4em", required = "required", validationmessage = "El Tipo de Acceso es requerido" })
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetTiposAccesoCMB", "PerfilEmpleados");
+                            });
+                        })
+                        .Filter("contains")
+                        .OptionLabel("- Tipo de acceso - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("TipoAccesoId")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em", required = "required", validationmessage = "El Tipo de Acceso es requerido" })
             )
         </div>
 
@@ -177,3 +184,5 @@
         </div>
     </div>
 </div>
+
+@Scripts.Render("~/bundles/PerfilEmpleados")

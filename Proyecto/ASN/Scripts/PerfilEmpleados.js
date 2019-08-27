@@ -53,6 +53,13 @@
         //program.trigger("change");
         //contract_Type.trigger("change");
 
+        city.enable(false);
+        location.enable(false);
+        client.enable(false);
+        program.enable(false);
+        contract_Type.enable(false);
+        
+
         $("#Active").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Nuevo");
     }
@@ -188,5 +195,358 @@ function accionado() {
     };
 }
 
+function filterCountry() {
+    return {
+        country: $("#Country_Ident").val(),
+        city: $("#City_Ident").val(),
+        site: $("#Location_Ident").val(),
+        client: $("#Client_Ident").val(),
+        program: $("#Program_Ident").val(),
+        contract: $("#Contract_Type_Ident").val()
+    };
+}
 
+function CargaCiudad() {
+    var pais = $("#Country_Ident").data("kendoDropDownList");
+    var ciudad = $("#City_Ident").data("kendoDropDownList");
+    var site = $("#Location_Ident").data("kendoDropDownList");
+    var cliente = $("#Client_Ident").data("kendoDropDownList");
+    var programa = $("#Program_Ident").data("kendoDropDownList");
+    var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+    var concepto = $("#ConceptoId").data("kendoDropDownList");
+
+    concepto.dataSource.read();
+    concepto.refresh();
+
+    //if (pais.value() == -1) {
+    //    pais.dataSource.read();
+    //    pais.refresh();
+    //}
+
+    //if (site.value() == -1) {
+    //    site.dataSource.read();
+    //    site.refresh();
+    //}
+    
+    //if (cliente.value() == -1) {
+    //    cliente.dataSource.read();
+    //    cliente.refresh();
+    //}
+
+    //if (contrato.value() == -1) {
+    //    contrato.dataSource.read();
+    //    contrato.refresh();
+    //}
+
+    //if (programa.value() == -1) {
+    //    programa.dataSource.read();
+    //    programa.refresh();
+    //}
+        
+    site.enable(false);
+    site.value("-1");
+
+    cliente.enable(false);
+    cliente.value("-1");
+
+    programa.enable(false);
+    programa.value("-1");
+
+    contrato.enable(false);
+    contrato.value("-1");
+
+    ciudad.enable(true);
+    ciudad.dataSource.read();
+    ciudad.refresh();
+    ciudad.value("-1");
+
+}
+
+function filterCity() {
+    return {
+        country: $("#Country_Ident").val(),
+        //city: $("#City_Ident").val(),
+        //site: $("#Location_Ident").val(),
+        //client: $("#Client_Ident").val(),
+        //program: $("#Program_Ident").val(),
+        //contract: $("#Contract_Type_Ident").val()
+    };
+}
+
+function CargaSite() {
+    var pais = $("#Country_Ident").data("kendoDropDownList");
+    var ciudad = $("#City_Ident").data("kendoDropDownList");
+    var site = $("#Location_Ident").data("kendoDropDownList");
+    var cliente = $("#Client_Ident").data("kendoDropDownList");
+    var programa = $("#Program_Ident").data("kendoDropDownList");
+    var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+    
+    //if (ciudad.value() == -1) {
+    //    ciudad.dataSource.read();
+    //    ciudad.refresh();
+    //}
+
+    //if (pais.value() == -1) {
+    //    pais.dataSource.read();
+    //    pais.refresh();
+    //}
+
+    
+    //if (cliente.value() == -1) {
+    //    cliente.dataSource.read();
+    //    cliente.refresh();
+    //}
+
+    //if (contrato.value() == -1) {
+    //    contrato.dataSource.read();
+    //    contrato.refresh();
+    //}
+
+    //if (programa.value() == -1) {
+    //    programa.dataSource.read();
+    //    programa.refresh();
+    //}    
+
+    cliente.enable(false);
+    cliente.value("-1");
+
+    programa.enable(false);
+    programa.value("-1");
+
+    contrato.enable(false);
+    contrato.value("-1");
+
+    site.enable(true);
+    site.dataSource.read();
+    site.refresh();
+    site.value("-1");
+}
+
+function filterSite() {
+    return {
+        country: $("#Country_Ident").val(),
+        city: $("#City_Ident").val(),
+        //site: $("#Location_Ident").val(),
+        //client: $("#Client_Ident").val(),
+        //program: $("#Program_Ident").val(),
+        //contract: $("#Contract_Type_Ident").val()
+    };
+}
+
+function CargaCliente() {
+    var pais = $("#Country_Ident").data("kendoDropDownList");
+    var ciudad = $("#City_Ident").data("kendoDropDownList");
+    var site = $("#Location_Ident").data("kendoDropDownList");
+    var cliente = $("#Client_Ident").data("kendoDropDownList");
+    var programa = $("#Program_Ident").data("kendoDropDownList");
+    var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+    
+   
+    //if (site.value() == -1) {
+    //    site.dataSource.read();
+    //    site.refresh();
+    //}
+
+    //if (ciudad.value() == -1) {
+    //    ciudad.dataSource.read();
+    //    ciudad.refresh();
+    //}
+
+    //if (pais.value() == -1) {
+    //    pais.dataSource.read();
+    //    pais.refresh();
+    //}
+
+    //if (contrato.value() == -1) {
+    //    contrato.dataSource.read();
+    //    contrato.refresh();
+    //}
+
+    //if (programa.value() == -1) {
+    //    programa.dataSource.read();
+    //    programa.refresh();
+    //}
+    programa.enable(false);
+    programa.value("-1");
+
+    contrato.enable(false);
+    contrato.value("-1");
+
+    cliente.enable(true);
+    cliente.dataSource.read();
+    cliente.refresh();
+    cliente.value("-1");
+
+}
+
+function filterClient() {
+    return {
+        country: $("#Country_Ident").val(),
+        city: $("#City_Ident").val(),
+        site: $("#Location_Ident").val(),
+        //client: $("#Client_Ident").val(),
+        //program: $("#Program_Ident").val(),
+        //contract: $("#Contract_Type_Ident").val()
+    };
+}
+
+function CargaPrograma() {
+    var pais = $("#Country_Ident").data("kendoDropDownList");
+    var ciudad = $("#City_Ident").data("kendoDropDownList");
+    var site = $("#Location_Ident").data("kendoDropDownList");
+    var cliente = $("#Client_Ident").data("kendoDropDownList");
+    var programa = $("#Program_Ident").data("kendoDropDownList");
+    var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+    var concepto = $("#ConceptoId").data("kendoDropDownList");
+
+    concepto.dataSource.read();
+    concepto.refresh();
+
+    //if (contrato.value() == -1) {
+    //    contrato.dataSource.read();
+    //    contrato.refresh();
+    //}
+
+    //if (cliente.value() == -1) {
+    //    cliente.dataSource.read();
+    //    cliente.refresh();
+    //}
+
+    //if (site.value() == -1) {
+    //    site.dataSource.read();
+    //    site.refresh();
+    //}
+
+    //if (ciudad.value() == -1) {
+    //    ciudad.dataSource.read();
+    //    ciudad.refresh();
+    //}
+
+    //if (pais.value() == -1) {
+    //    pais.dataSource.read();
+    //    pais.refresh();
+    //}
+
+    contrato.enable(false);
+    contrato.value("-1");
+
+
+    programa.enable(true);
+    programa.dataSource.read();
+    programa.refresh();
+    programa.value("-1");
+}
+
+function filterProgram() {
+    return {
+        country: $("#Country_Ident").val(),
+        city: $("#City_Ident").val(),
+        site: $("#Location_Ident").val(),
+        client: $("#Client_Ident").val(),
+        //program: $("#Program_Ident").val(),
+        //contract: $("#Contract_Type_Ident").val()
+    };
+}
+function CargaContrato() {    
+    
+    var pais = $("#Country_Ident").data("kendoDropDownList");
+    var ciudad = $("#City_Ident").data("kendoDropDownList");
+    var site = $("#Location_Ident").data("kendoDropDownList");
+    var cliente = $("#Client_Ident").data("kendoDropDownList");
+    var programa = $("#Program_Ident").data("kendoDropDownList");
+    var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+
+    //if (programa.value() == -1) {
+    //    programa.dataSource.read();
+    //    programa.refresh();
+    //}
+
+    //if (cliente.value() == -1) {
+    //    cliente.dataSource.read();
+    //    cliente.refresh();
+    //}
+
+    //if (site.value() == -1) {
+    //    site.dataSource.read();
+    //    site.refresh();
+    //}
+
+    //if (ciudad.value() == -1) {
+    //    ciudad.dataSource.read();
+    //    ciudad.refresh();
+    //}
+
+    //if (pais.value() == -1) {
+    //    pais.dataSource.read();
+    //    pais.refresh();
+    //}
+
+    contrato.enable(true);
+    contrato.dataSource.read();
+    contrato.refresh();
+    contrato.value("-1");
+    
+    //if (contrato.value() == -1) {        
+    //    contrato.value("-1");
+    //}
+    
+}
+
+function filterContract() {
+    return {
+        country: $("#Country_Ident").val(),
+        city: $("#City_Ident").val(),
+        site: $("#Location_Ident").val(),
+        client: $("#Client_Ident").val(),
+        program: $("#Program_Ident").val(),
+        //contract: $("#Contract_Type_Ident").val()
+    };
+}
+
+function CargaCascada() {
+
+    var pais = $("#Country_Ident").data("kendoDropDownList");
+    var ciudad = $("#City_Ident").data("kendoDropDownList");
+    var site = $("#Location_Ident").data("kendoDropDownList");
+    var cliente = $("#Client_Ident").data("kendoDropDownList");
+    var programa = $("#Program_Ident").data("kendoDropDownList");
+    var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+
+    //if (contrato.value() == -1) {
+    //    contrato.dataSource.read();
+    //    contrato.refresh();
+    //}
+
+    //if (programa.value() == -1) {
+    //    programa.dataSource.read();
+    //    programa.refresh();
+    //}
+
+    //if (cliente.value() == -1) {
+    //    cliente.dataSource.read();
+    //    cliente.refresh();
+    //}
+
+    //if (site.value() == -1) {
+    //    site.dataSource.read();
+    //    site.refresh();
+    //}
+
+    //if (ciudad.value() == -1) {
+    //    ciudad.dataSource.read();
+    //    ciudad.refresh();
+    //}
+
+    //if (pais.value() == -1) {
+    //    pais.dataSource.read();
+    //    pais.refresh();
+    //}       
+}
+
+function filterConcepto() {
+    return {
+        country: $("#Country_Ident").val(),
+        client: $("#Client_Ident").val(),
+    };
+}
 
