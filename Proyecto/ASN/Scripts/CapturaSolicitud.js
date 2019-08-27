@@ -16,7 +16,6 @@ $(document).ready(function () {
         $("#CancelarEmpleadoSolicitud").hide();
     }
 
-
     //$("#Conceptos").change(function () {
     //    //debugger;
 
@@ -182,12 +181,14 @@ function calculaEstatusSolicitud() {
 
             if (ClaveEstatusSolicitud == 'EB') {
                 $("#EnviarSolicitud").show();
+                $("#Conceptos").data("kendoDropDownList").enable(true);
                 //$("#CancelarSolicitud").show();
                 
                 //$("#EnviarSolicitud").enable(true);
             }
             else {
                 $("#EnviarSolicitud").hide();
+                $("#Conceptos").data("kendoDropDownList").enable(false);
                 //$("#EnviarSolicitud").attr("disabled", "disabled");
                 //$("#EnviarSolicitud").enable(false);
            }
@@ -217,16 +218,50 @@ function calculaEstatusSolicitud() {
                 //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(false);
                 //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(true);
                 //$("#CancelarEmpleadoSolicitud").hide();
-                //$("#CancelarSolicitud").attr("disabled", "disabled");
+                $("#AgregarSolicitud").hide();
+                $("#CCMSIDSolicitado").data("kendoNumericTextBox").enable(false);
+                $("#Conceptos").data("kendoDropDownList").enable(false);
+                
+                $("#mensajeroConceptos").on("click", function () {
+                    if ($("#CCMSIDSolicitado").val().length > 0) {
+                        //console.log("conceptosMOD");
+                        let notificationWidget = $("#popupNotification").data("kendoNotification");
+                        var elements = notificationWidget.getNotifications();
+
+                        // remove the two messages from the DOM
+                        elements.each(function () {
+                            $(this).parent().remove();
+                        });
+
+                        notificationWidget.show("El concepto no puede ser modificado, porque es un dato usado como referencia al mismo registro.", "error");
+                    }
+                });
+
+                $("#mensajeroCCMSIDSolicitado").on("click", function () {
+                    if ($("#CCMSIDSolicitado").val().length > 0) {
+                        //console.log("conceptosMOD");
+                        let notificationWidget = $("#popupNotification").data("kendoNotification");
+                        var elements = notificationWidget.getNotifications();
+
+                        // remove the two messages from the DOM
+                        elements.each(function () {
+                            $(this).parent().remove();
+                        });
+
+                        notificationWidget.show("El CCMSID no puede ser modificado, porque es un dato usado como referencia al mismo registro.", "error");
+                    }
+                });
+
             }
             else {
                 //$("#CancelarEmpleadoSolicitud").hide();
                 //$("#CancelarSolicitud").attr("disabled", "disabled");
+                //$("#Conceptos").data("kendoDropDownList").enable(true);
             }
 
             $("#Estatus").val(data[0].Descripcion);
             //debugger;
-            });
+        });
     }
 }
 

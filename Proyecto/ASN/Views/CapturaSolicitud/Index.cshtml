@@ -227,7 +227,8 @@
                         </tr>
                         <tr>
                             <td>
-                                @(Html.Kendo().NumericTextBox()
+                                <div id="mensajeroCCMSIDSolicitado">
+                                    @(Html.Kendo().NumericTextBox()
                                     .Name("CCMSIDSolicitado")
                                     .Spinners(false)
                                     .Decimals(0)
@@ -237,10 +238,12 @@
                                     //.Step(5)
                                     //.Value(0)
                                     .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
-                                )
+                                    )
+                                </div>
                             </td>
                             <td>
-                                @(Html.Kendo().DropDownList().DataSource(source =>
+                                <div id="mensajeroConceptos">
+                                    @(Html.Kendo().DropDownList().DataSource(source =>
                                     {
                                         source.Read(read =>
                                         {
@@ -260,6 +263,7 @@
                                     .Enable(true)
                                     .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
+                                </div>
                             </td>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
