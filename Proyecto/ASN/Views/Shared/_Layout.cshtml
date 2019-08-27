@@ -106,24 +106,24 @@
                         </li>
                     }
 
-                    if (User.IsInRole("Solicitante") || User.IsInRole("Administrador"))
+                    if (User.IsInRole("Solicitante"))
                     {
                         @*<li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>*@
                         <li>@Html.ActionLink("Solicitudes", "Index", "CapturaSolicitud")</li>
                         <li>@Html.ActionLink("Mis Solicitudes", "Index", "MisSolicitudes")</li>
                     }
 
-                    if (User.IsInRole("Autorizante") || User.IsInRole("Administrador"))
+                    if (User.IsInRole("Autorizante"))
                     {
                         <li>@Html.ActionLink("Mis Autorizaciones", "Index", "MisAutorizaciones")</li>
                     }
 
-                    if (User.IsInRole("Responsable") || User.IsInRole("Administrador"))
+                    if (User.IsInRole("Responsable"))
                     {
                         <li>@Html.ActionLink("Mis Responsabilidades", "Index", "MisResponsabilidades")</li>
                     }
 
-                    if (User.IsInRole("Responsable") || User.IsInRole("Administrador"))
+                    if (User.IsInRole("Responsable"))
                     {
                         @*<li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>*@
                         <li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>
