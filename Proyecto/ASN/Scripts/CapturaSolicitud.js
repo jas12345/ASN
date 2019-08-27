@@ -8,6 +8,14 @@ $(document).ready(function () {
 
     habilitaCombosAutorizadores(1);
 
+    // Activar / Desactivar botón Enviar Solicitud
+    if (FolioSolicitud == '-1') {
+        $("#EnviarSolicitud").hide();
+    }
+    else {
+        $("#EnviarSolicitud").show();
+    }
+
     // Activar / Desactivar botón Cancelar
     if (ClaveEstatusEmpleadoSolicitud == 'R') {
         $("#CancelarEmpleadoSolicitud").show();

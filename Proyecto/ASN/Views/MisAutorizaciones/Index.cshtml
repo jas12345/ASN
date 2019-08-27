@@ -18,7 +18,8 @@
                     .Columns(column =>
                     {
                         column.Command(command => { command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span> Editar").Click("EditaAutorizacion"); }).Width(40);
-                        column.Bound(c => c.FolioSolicitud).Width(40).Title("Folio de Solicitud").Visible(true).Filterable(true);
+                        //column.Bound(c => c.FolioSolicitud).Width(40).Title("Folio de Solicitud").Visible(true).Filterable(true);
+                        column.Bound(c => c.FolioSolicitud).Width(40).Title("Folio de Solicitud").Visible(true).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
                         column.Bound(c => c.Fecha_Solicitud).Title("Fecha de Solicitud").Visible(true).Format("{0:yyyy-MM-dd}").Filterable(true).Width(50);
                         column.Bound(c => c.EstatusSolicitud).Title("Estatus").Visible(true).Width(70);
                         //column.Bound(c => c.Justificacion).Title("Justificanción").Visible(true).Width(70);
