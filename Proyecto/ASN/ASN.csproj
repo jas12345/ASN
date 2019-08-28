@@ -382,6 +382,9 @@
     <Compile Include="Models\CatMotivoSolicitudCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatNotificacionesManualesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatParametroConceptosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -635,6 +638,7 @@
       <LastGenOutput>ASN.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\Comentarios.js" />
+    <Content Include="Scripts\Notificaciones.js" />
     <Content Include="Scripts\ResponsableAutoriza.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -835,11 +839,12 @@
     <Content Include="Views\Shared\EditorTemplates\ResponsableSolicitudesPopUp.cshtml" />
     <Content Include="Views\ResponsableAutoriza\Index.cshtml" />
     <Content Include="Views\Comentarios\Comments.cshtml" />
+    <Content Include="Views\Notificaciones\Index.cshtml" />
+    <Content Include="Views\Notificaciones\NotificacionEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Evidencias\" />
-    <Folder Include="Views\Notificaciones\" />
     <Folder Include="Views\ResponsableDeSolicitudes\" />
   </ItemGroup>
   <ItemGroup>
