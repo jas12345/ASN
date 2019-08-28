@@ -552,15 +552,19 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetNivelesAutorizacionxEmpleadoxConcepto(int EmpleadoIdent, int ConceptoId)
+        public JsonResult GetNivelesAutorizacionxEmpleadoxConcepto(int EmpleadoIdent, int ConceptoId, string folioId)
         {
             try
             {
                 var lstAutorizadoresxEmpleadoxConcepto = new List<NivelesAutorizacionxEmpleadoxConcepto_Result>();
+                int foliId = 0;
 
                 using (ASNContext context = new ASNContext())
                 {
-                    lstAutorizadoresxEmpleadoxConcepto = context.NivelesAutorizacionxEmpleadoxConcepto(EmpleadoIdent, ConceptoId).ToList();
+                    if(int.TryParse(folioId,out foliId))
+                    {
+                        lstAutorizadoresxEmpleadoxConcepto = context.NivelesAutorizacionxEmpleadoxConcepto(EmpleadoIdent, ConceptoId, foliId).ToList();
+                    }
                 }
 
                 return Json(lstAutorizadoresxEmpleadoxConcepto, JsonRequestBehavior.AllowGet);

@@ -19,7 +19,14 @@ namespace ASN.Controllers
         // GET: Solicitudes
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
         }
 
          public ActionResult Create()

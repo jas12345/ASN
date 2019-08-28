@@ -16,7 +16,14 @@ namespace ASN.Controllers
         // GET: CapturasRapidas/MisSolicitudes
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
         }
 
         public ActionResult getAutorizaciones([DataSourceRequest]DataSourceRequest request)

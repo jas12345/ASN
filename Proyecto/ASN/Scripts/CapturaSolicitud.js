@@ -929,7 +929,7 @@ function onChangeConceptos(e) {
 
 
 function inicializaAutorizadores(empleadoIdent, conceptoId) {
-    $.post(urlNivelesAutorizacionxEmpleadoxConcepto + "/?EmpleadoIdent=" + empleadoIdent + "&ConceptoId=" + conceptoId, function (data) {
+    $.post(urlNivelesAutorizacionxEmpleadoxConcepto + "/?EmpleadoIdent=" + empleadoIdent + "&ConceptoId=" + conceptoId + "&folioId=" + $("#FolioSolicitud").val(), function (data) {
         //debugger;
 
         var lista = data;
@@ -981,7 +981,7 @@ function inicializaAutorizadores(empleadoIdent, conceptoId) {
 
 function conceptoParametroConcepto(conceptoIdent) {
     $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + conceptoIdent + "&eid=" + $("#CCMSIDSolicitado").val(), function (data) {
-        debugger;
+        //debugger;
         ConConceptoIdent = data[0].ConceptoId;
         ConConceptoNombre = data[0].DescripcionConcepto;
         ConParametroId = data[0].TipoconceptoId;
@@ -1080,7 +1080,7 @@ function onChangePeriodoIncidente() {
 }
 
 function onChangeParametro() {
-    debugger;
+    //debugger;
 
     if ($("#Parametro").val().length > 0) {
         //debugger;
@@ -1091,7 +1091,7 @@ function onChangeParametro() {
         //ConConceptoMotivo = $("#Motivo.value").text();
         ConConceptoMotivo = $("#Parametro").val(); // + ' ' + ConParametro;
         ConParametroConceptoMonto = $("#Parametro").val();
-        debugger;
+        //debugger;
 
         //rellenaPerfilTipoAcceso();
 

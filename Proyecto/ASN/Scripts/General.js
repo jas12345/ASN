@@ -4,6 +4,20 @@
 });
 
 
+function gridFilterIntegerNumericTextbox(args) {
+    args.element.kendoNumericTextBox({
+        format: "n0",
+        decimals: 0,
+    });
+}
+
+function dateFilter(e) {
+    e.element.kendoDatePicker({
+        format: "yyyy-MM-dd",
+    });
+}
+
+
 /* Menu Toggle Script */
 $(document).ready(function () {
     var trigger = $('.hamburger'),

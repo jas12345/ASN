@@ -26,24 +26,11 @@
 
     <script>
 
-        function gridFilterIntegerNumericTextbox(args) {
-            args.element.kendoNumericTextBox({
-                format: "n0",
-                decimals: 0,
-            });
-        }
-
-        function dateFilter(e) {
-            e.element.kendoDatePicker({
-                format: "yyyy-MM-dd",
-            });
-        }
-
         function onClose() {
             location.reload();
         }
 
-        function generaNotificaciones() {
+        @*function generaNotificaciones() {
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("Index", "Notificaciones")',
@@ -65,7 +52,7 @@
                     notification.show("Ocurrio un problema durante el proceso. Intente de nuevo más tarde.", "error");
                 }
             });
-        }
+        }*@
     </script>
 </head>
 <body>
@@ -125,8 +112,8 @@
 
                     if (User.IsInRole("Responsable"))
                     {
-                        @*<li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>*@
-                        <li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>
+                        <li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>
+                        @*<li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>*@
                     }
 
                     if (User.IsInRole("Desarrollo2"))

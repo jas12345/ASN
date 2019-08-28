@@ -2310,7 +2310,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudAutorizantesSel_Result>("CatSolicitudAutorizantesSel", folioSolicitudParameter, conceptoIdParameter, empleado_IdentParameter);
         }
     
-        public virtual ObjectResult<NivelesAutorizacionxEmpleadoxConcepto_Result> NivelesAutorizacionxEmpleadoxConcepto(Nullable<int> empleadoIdent, Nullable<int> conceptoId)
+        public virtual ObjectResult<NivelesAutorizacionxEmpleadoxConcepto_Result> NivelesAutorizacionxEmpleadoxConcepto(Nullable<int> empleadoIdent, Nullable<int> conceptoId, Nullable<int> folioId)
         {
             var empleadoIdentParameter = empleadoIdent.HasValue ?
                 new ObjectParameter("EmpleadoIdent", empleadoIdent) :
@@ -2320,7 +2320,11 @@ namespace ASN.Models
                 new ObjectParameter("ConceptoId", conceptoId) :
                 new ObjectParameter("ConceptoId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NivelesAutorizacionxEmpleadoxConcepto_Result>("NivelesAutorizacionxEmpleadoxConcepto", empleadoIdentParameter, conceptoIdParameter);
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NivelesAutorizacionxEmpleadoxConcepto_Result>("NivelesAutorizacionxEmpleadoxConcepto", empleadoIdentParameter, conceptoIdParameter, folioIdParameter);
         }
     
         public virtual ObjectResult<TraCommentSel_Result> TraCommentSel(Nullable<int> folioId, Nullable<int> eID, Nullable<int> conceptoId)
@@ -2554,6 +2558,15 @@ namespace ASN.Models
                 new ObjectParameter("ClienteId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosPaisClienteCMB_Result>("CatConceptosPaisClienteCMB", perfilParameter, paisIdParameter, clienteIdParameter);
+        }
+    
+        public virtual ObjectResult<CatNotificacionesManualesSel_Result> CatNotificacionesManualesSel(Nullable<int> responsableCCMSID)
+        {
+            var responsableCCMSIDParameter = responsableCCMSID.HasValue ?
+                new ObjectParameter("ResponsableCCMSID", responsableCCMSID) :
+                new ObjectParameter("ResponsableCCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatNotificacionesManualesSel_Result>("CatNotificacionesManualesSel", responsableCCMSIDParameter);
         }
     }
 }

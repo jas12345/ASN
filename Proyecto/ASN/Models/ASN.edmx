@@ -352,6 +352,9 @@
           <Parameter Name="Solicitante_Ident" Type="int" Mode="In" />
         </Function>
         <Function Name="CatMotivoSolicitudCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatNotificacionesManualesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="ResponsableCCMSID" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatParametroConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPerfilEmpleadoAccesoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
@@ -650,6 +653,7 @@
         <Function Name="NivelesAutorizacionxEmpleadoxConcepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="EmpleadoIdent" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="FolioId" Type="int" Mode="In" />
         </Function>
         <Function Name="ProcesaSolicitudEmpleadoDetalleSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="SolicitudId" Type="int" Mode="In" />
@@ -1387,6 +1391,7 @@
           <FunctionImport Name="NivelesAutorizacionxEmpleadoxConcepto" ReturnType="Collection(ASNModel.NivelesAutorizacionxEmpleadoxConcepto_Result)">
             <Parameter Name="EmpleadoIdent" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="FolioId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TraCommentSel" ReturnType="Collection(ASNModel.TraCommentSel_Result)">
             <Parameter Name="FolioId" Mode="In" Type="Int32" />
@@ -1452,6 +1457,9 @@
             <Parameter Name="Perfil" Mode="In" Type="Int32" />
             <Parameter Name="PaisId" Mode="In" Type="Int32" />
             <Parameter Name="ClienteId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatNotificacionesManualesSel" ReturnType="Collection(ASNModel.CatNotificacionesManualesSel_Result)">
+          <Parameter Name="ResponsableCCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2229,6 +2237,14 @@
         <ComplexType Name="CatConceptosPaisClienteCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatNotificacionesManualesSel_Result">
+          <Property Type="Int32" Name="FolioId" Nullable="true" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="EID" Nullable="true" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Accesos" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="250" />
         </ComplexType>
        
         </Schema>
@@ -3414,6 +3430,18 @@
               <ComplexTypeMapping TypeName="ASNModel.CatConceptosPaisClienteCMB_Result">
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatNotificacionesManualesSel" FunctionName="ASNModel.Store.CatNotificacionesManualesSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatNotificacionesManualesSel_Result">
+                <ScalarProperty Name="FolioId" ColumnName="FolioId" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="EID" ColumnName="EID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Accesos" ColumnName="Accesos" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

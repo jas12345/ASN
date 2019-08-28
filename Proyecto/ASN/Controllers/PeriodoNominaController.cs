@@ -38,6 +38,10 @@ namespace ASN.Controllers
                     }
                     return View();
                 }
+                else
+                {
+                    return RedirectToAction("Login", "Home");
+                }
             }
             catch (Exception ex)
             {
