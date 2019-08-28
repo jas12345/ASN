@@ -552,7 +552,7 @@ function CargaCascada() {
 function filterConcepto() {
     return {
         country: $("#Country_Ident").val(),
-        client: $("#Client_Ident").val(),
+        client: $("#Client_Ident").val()
     };
 }
 
