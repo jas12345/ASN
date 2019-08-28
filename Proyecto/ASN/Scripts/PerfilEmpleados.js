@@ -1,4 +1,6 @@
-﻿function edit(e) {
+﻿var editando = 0;
+
+function edit(e) {
     //var nombrePerfilEmpleados = $("#NombrePerfilEmpleados").data("kendoTextBox");
     var country = $("#Country_Ident").data("kendoDropDownList");
     var city = $("#City_Ident").data("kendoDropDownList");
@@ -33,17 +35,19 @@
         $("#Pais").attr("disabled", "disabled");
         //$("#MesId").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Editar");
+
+        editando = 1;
     }
     else {
         var valorDefault = "-1";
 
-        country.value(valorDefault);
-        city.value(valorDefault);
-        //company.value(valorDefault);
-        location.value(valorDefault);
-        client.value(valorDefault);
-        program.value(valorDefault);
-        contract_Type.value(valorDefault);
+        //country.value(valorDefault);
+        //city.value(valorDefault);
+        ////company.value(valorDefault);
+        //location.value(valorDefault);
+        //client.value(valorDefault);
+        //program.value(valorDefault);
+        //contract_Type.value(valorDefault);
 
         //country.trigger("change");
         //city.trigger("change");
@@ -62,6 +66,8 @@
 
         $("#Active").attr("disabled", "disabled");
         e.container.kendoWindow("title", "Nuevo");
+
+        editando = 0;
     }
 }
 
@@ -264,8 +270,8 @@ function CargaCiudad() {
 
 function filterCity() {
     return {
-        country: $("#Country_Ident").val(),
-        //city: $("#City_Ident").val(),
+        country: $("#Country_Ident").val()
+        //,city: $("#City_Ident").val(),
         //site: $("#Location_Ident").val(),
         //client: $("#Client_Ident").val(),
         //program: $("#Program_Ident").val(),
@@ -548,5 +554,23 @@ function filterConcepto() {
         country: $("#Country_Ident").val(),
         client: $("#Client_Ident").val(),
     };
+}
+
+function validando() {
+    if (editando === 1) {
+        var pais = $("#Country_Ident").data("kendoDropDownList");
+        var ciudad = $("#City_Ident").data("kendoDropDownList");
+        var site = $("#Location_Ident").data("kendoDropDownList");
+        var cliente = $("#Client_Ident").data("kendoDropDownList");
+        var programa = $("#Program_Ident").data("kendoDropDownList");
+        var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+
+        pais.enable(false);
+        ciudad.enable(false);
+        site.enable(false);
+        cliente.enable(false);
+        programa.enable(false);
+        contrato.enable(false);
+    }
 }
 

@@ -26,7 +26,6 @@ namespace ASN.Controllers
                         context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                         ViewData["Pais"] = context.CatCountryTodosCMB().ToList();
                         ViewData["Ciudad"] = context.CatCityTodosCMB().ToList();
-                        //ViewData["Ciudad"] = context.CatCityByCountryCMB("mexico").ToList();
                         ViewData["Mercado"] = context.CatCompanyTodosCMB().ToList();
                         ViewData["Site"] = context.CatLocationTodosCMB().ToList();
                         ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
@@ -56,14 +55,14 @@ namespace ASN.Controllers
         {
             try
             {
-                //var lstCMB = new List<CatCountryTodosCMB_Result>();
-                var lstCMB = new List<CatCountryByCascadeCMB_Result>();
+                var lstCMB = new List<CatCountryTodosCMB_Result>();
+                //var lstCMB = new List<CatCountryByCascadeCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    //lstCMB = ctx.CatCountryTodosCMB().ToList();
-                    lstCMB = ctx.CatCountryByCascadeCMB(country, city, site, client, program, contract).ToList();
+                    lstCMB = ctx.CatCountryTodosCMB().ToList();
+                    //lstCMB = ctx.CatCountryByCascadeCMB(country, city, site, client, program, contract).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);

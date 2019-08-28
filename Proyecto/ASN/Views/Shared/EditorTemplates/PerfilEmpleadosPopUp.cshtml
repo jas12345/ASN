@@ -22,16 +22,16 @@
                         {
                             source.Read(read =>
                             {
-                                read.Action("GetPaisesCMB", "PerfilEmpleados").Data("filterCountry");
+                                read.Action("GetPaisesCMB", "PerfilEmpleados"); //.Data("filterCountry");
                             });
                         })
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
+                        .OptionLabel("Seleccione Pais")
                         .Name("Country_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-            //.Events(eve => eve.Select("CargaCiudad"))
-            .Events(eve => eve.Change("CargaCiudad"))
+                        //.Events(eve => eve.Change("CargaCiudad"))                        
             )
         </div>
         <div class="editor-label">
@@ -44,14 +44,18 @@
                             source.Read(read =>
                             {
                                 read.Action("GetCiudadesCMB", "PerfilEmpleados").Data("filterCity");
-                            });
+                            })
+                         .ServerFiltering(true);
                         })
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
+                        .OptionLabel("- Seleccione Ciudad")
                         .Name("City_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        .Events(eve => eve.Change("CargaSite"))
+                        //.Events(eve => eve.Change("CargaSite"))
+                        .Events(eve => eve.DataBound("validando"))
+                        .CascadeFrom("Country_Ident")
             )
         </div>
         <div class="editor-label">
@@ -64,14 +68,18 @@
                             source.Read(read =>
                             {
                                 read.Action("GetSitesCMB", "PerfilEmpleados").Data("filterSite");
-                            });
+                            })
+                         .ServerFiltering(true);
                         })
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
+                        .OptionLabel("- Seleccione Site -")
                         .Name("Location_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        .Events(eve => eve.Change("CargaCliente"))
+                        //.Events(eve => eve.Change("CargaCliente"))
+                        .Events(eve => eve.DataBound("validando"))
+                        .CascadeFrom("City_Ident")
             )
         </div>
         <div class="editor-label">
@@ -84,14 +92,18 @@
                             source.Read(read =>
                             {
                                 read.Action("GetClientesCMB", "PerfilEmpleados").Data("filterClient");
-                            });
+                            })
+                        .ServerFiltering(true);
                         })
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
+                        .OptionLabel("- Seleccione Cliente -")
                         .Name("Client_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        .Events(eve => eve.Change("CargaPrograma"))
+                        //.Events(eve => eve.Change("CargaPrograma"))
+                        .Events(eve => eve.DataBound("validando"))
+                        .CascadeFrom("Location_Ident")
             )
         </div>
         <div class="editor-label">
@@ -104,14 +116,18 @@
                             source.Read(read =>
                             {
                                 read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram");
-                            });
+                            })
+                        .ServerFiltering(true);
                         })
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
+                        .OptionLabel("- Seleccione Programa -")
                         .Name("Program_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        .Events(eve => eve.Change("CargaContrato"))
+                        //.Events(eve => eve.Change("CargaContrato"))
+                        .Events(eve => eve.DataBound("validando"))
+                        .CascadeFrom("Client_Ident")
             )
         </div>
         <div class="editor-label">
@@ -124,14 +140,18 @@
                             source.Read(read =>
                             {
                                 read.Action("GetTiposContratoCMB", "PerfilEmpleados").Data("filterContract");
-                            });
+                            })
+                        .ServerFiltering(true);
                         })
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
+                        .OptionLabel("- Seleccione Contrato -")
                         .Name("Contract_Type_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        .Events(eve => eve.Change("CargaCascada"))
+                        //.Events(eve => eve.Change("CargaCascada"))
+                        .Events(eve => eve.DataBound("validando"))
+                        .CascadeFrom("Program_Ident")
             )
         </div>
 
