@@ -2369,36 +2369,16 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TraCommentSi", userCCMSIDParameter, folioIdParameter, eIDParameter, conceptoIdParameter, comentarioParameter);
         }
     
-        public virtual ObjectResult<CatCityByCountryCMB_Result> CatCityByCountryCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, Nullable<int> clientId, Nullable<int> programId, Nullable<int> crontactId)
+        public virtual ObjectResult<CatCityByCountryCMB_Result> CatCityByCountryCMB(Nullable<int> country)
         {
             var countryParameter = country.HasValue ?
                 new ObjectParameter("Country", country) :
                 new ObjectParameter("Country", typeof(int));
     
-            var cityIdParameter = cityId.HasValue ?
-                new ObjectParameter("CityId", cityId) :
-                new ObjectParameter("CityId", typeof(int));
-    
-            var siteIdParameter = siteId.HasValue ?
-                new ObjectParameter("SiteId", siteId) :
-                new ObjectParameter("SiteId", typeof(int));
-    
-            var clientIdParameter = clientId.HasValue ?
-                new ObjectParameter("ClientId", clientId) :
-                new ObjectParameter("ClientId", typeof(int));
-    
-            var programIdParameter = programId.HasValue ?
-                new ObjectParameter("ProgramId", programId) :
-                new ObjectParameter("ProgramId", typeof(int));
-    
-            var crontactIdParameter = crontactId.HasValue ?
-                new ObjectParameter("CrontactId", crontactId) :
-                new ObjectParameter("CrontactId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCityByCountryCMB_Result>("CatCityByCountryCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter, programIdParameter, crontactIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCityByCountryCMB_Result>("CatCityByCountryCMB", countryParameter);
         }
     
-        public virtual ObjectResult<CatClientBySiteCMB_Result> CatClientBySiteCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, Nullable<int> clientId, Nullable<int> programId, Nullable<int> crontactId)
+        public virtual ObjectResult<CatClientBySiteCMB_Result> CatClientBySiteCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId)
         {
             var countryParameter = country.HasValue ?
                 new ObjectParameter("Country", country) :
@@ -2412,22 +2392,10 @@ namespace ASN.Models
                 new ObjectParameter("SiteId", siteId) :
                 new ObjectParameter("SiteId", typeof(int));
     
-            var clientIdParameter = clientId.HasValue ?
-                new ObjectParameter("ClientId", clientId) :
-                new ObjectParameter("ClientId", typeof(int));
-    
-            var programIdParameter = programId.HasValue ?
-                new ObjectParameter("ProgramId", programId) :
-                new ObjectParameter("ProgramId", typeof(int));
-    
-            var crontactIdParameter = crontactId.HasValue ?
-                new ObjectParameter("CrontactId", crontactId) :
-                new ObjectParameter("CrontactId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatClientBySiteCMB_Result>("CatClientBySiteCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter, programIdParameter, crontactIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatClientBySiteCMB_Result>("CatClientBySiteCMB", countryParameter, cityIdParameter, siteIdParameter);
         }
     
-        public virtual ObjectResult<CatContractTypeByProgramCMB_Result> CatContractTypeByProgramCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, Nullable<int> clientId, Nullable<int> programId, Nullable<int> crontactId)
+        public virtual ObjectResult<CatContractTypeByProgramCMB_Result> CatContractTypeByProgramCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, Nullable<int> clientId, Nullable<int> programId)
         {
             var countryParameter = country.HasValue ?
                 new ObjectParameter("Country", country) :
@@ -2449,14 +2417,10 @@ namespace ASN.Models
                 new ObjectParameter("ProgramId", programId) :
                 new ObjectParameter("ProgramId", typeof(int));
     
-            var crontactIdParameter = crontactId.HasValue ?
-                new ObjectParameter("CrontactId", crontactId) :
-                new ObjectParameter("CrontactId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatContractTypeByProgramCMB_Result>("CatContractTypeByProgramCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter, programIdParameter, crontactIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatContractTypeByProgramCMB_Result>("CatContractTypeByProgramCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter, programIdParameter);
         }
     
-        public virtual ObjectResult<CatLocationByCityCMB_Result> CatLocationByCityCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, Nullable<int> clientId, Nullable<int> programId, Nullable<int> crontactId)
+        public virtual ObjectResult<CatLocationByCityCMB_Result> CatLocationByCityCMB(Nullable<int> country, Nullable<int> cityId)
         {
             var countryParameter = country.HasValue ?
                 new ObjectParameter("Country", country) :
@@ -2466,26 +2430,10 @@ namespace ASN.Models
                 new ObjectParameter("CityId", cityId) :
                 new ObjectParameter("CityId", typeof(int));
     
-            var siteIdParameter = siteId.HasValue ?
-                new ObjectParameter("SiteId", siteId) :
-                new ObjectParameter("SiteId", typeof(int));
-    
-            var clientIdParameter = clientId.HasValue ?
-                new ObjectParameter("ClientId", clientId) :
-                new ObjectParameter("ClientId", typeof(int));
-    
-            var programIdParameter = programId.HasValue ?
-                new ObjectParameter("ProgramId", programId) :
-                new ObjectParameter("ProgramId", typeof(int));
-    
-            var crontactIdParameter = crontactId.HasValue ?
-                new ObjectParameter("CrontactId", crontactId) :
-                new ObjectParameter("CrontactId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatLocationByCityCMB_Result>("CatLocationByCityCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter, programIdParameter, crontactIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatLocationByCityCMB_Result>("CatLocationByCityCMB", countryParameter, cityIdParameter);
         }
     
-        public virtual ObjectResult<CatProgramByClientCMB_Result> CatProgramByClientCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, Nullable<int> clientId, Nullable<int> programId, Nullable<int> crontactId)
+        public virtual ObjectResult<CatProgramByClientCMB_Result> CatProgramByClientCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, Nullable<int> clientId)
         {
             var countryParameter = country.HasValue ?
                 new ObjectParameter("Country", country) :
@@ -2503,15 +2451,7 @@ namespace ASN.Models
                 new ObjectParameter("ClientId", clientId) :
                 new ObjectParameter("ClientId", typeof(int));
     
-            var programIdParameter = programId.HasValue ?
-                new ObjectParameter("ProgramId", programId) :
-                new ObjectParameter("ProgramId", typeof(int));
-    
-            var crontactIdParameter = crontactId.HasValue ?
-                new ObjectParameter("CrontactId", crontactId) :
-                new ObjectParameter("CrontactId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatProgramByClientCMB_Result>("CatProgramByClientCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter, programIdParameter, crontactIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatProgramByClientCMB_Result>("CatProgramByClientCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter);
         }
     
         public virtual ObjectResult<CatCountryByCascadeCMB_Result> CatCountryByCascadeCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, Nullable<int> clientId, Nullable<int> programId, Nullable<int> crontactId)
