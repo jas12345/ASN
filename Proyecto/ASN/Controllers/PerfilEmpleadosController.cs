@@ -51,7 +51,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetPaisesCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
+        public JsonResult GetPaisesCMB()
         {
             try
             {
@@ -76,7 +76,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetCiudadesCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
+        public JsonResult GetCiudadesCMB(int? country)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace ASN.Controllers
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatCityTodosCMB().ToList();
-                    lstCMB = ctx.CatCityByCountryCMB(country, city, site, client, program, contract).ToList();
+                    lstCMB = ctx.CatCityByCountryCMB(country).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -125,7 +125,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetSitesCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
+        public JsonResult GetSitesCMB(int? city)
         {
             try
             {
@@ -136,7 +136,7 @@ namespace ASN.Controllers
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatLocationTodosCMB().ToList();
-                    lstCMB = ctx.CatLocationByCityCMB(country, city, site, client, program, contract).ToList();
+                    lstCMB = ctx.CatLocationByCityCMB(city).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -150,7 +150,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetClientesCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
+        public JsonResult GetClientesCMB(int? site)
         {
             try
             {
@@ -161,7 +161,7 @@ namespace ASN.Controllers
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatClientTodosCMB().ToList();
-                    lstCMB = ctx.CatClientBySiteCMB(country, city, site, client, program, contract).ToList();
+                    lstCMB = ctx.CatClientBySiteCMB(site).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -175,7 +175,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetProgramasCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
+        public JsonResult GetProgramasCMB(int? client)
         {
             try
             {
@@ -186,7 +186,7 @@ namespace ASN.Controllers
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatProgramTodosCMB().ToList();
-                    lstCMB = ctx.CatProgramByClientCMB(country, city, site, client, program, contract).ToList();
+                    lstCMB = ctx.CatProgramByClientCMB(client).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -200,7 +200,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetTiposContratoCMB(int? country, int? city, int? site, int? client, int? program, int? contract)
+        public JsonResult GetTiposContratoCMB(int? program)
         {
             try
             {
@@ -211,7 +211,7 @@ namespace ASN.Controllers
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatContractTypeTodosCMB().ToList();
-                    lstCMB = ctx.CatContractTypeByProgramCMB(country, city, site, client, program, contract).ToList();
+                    lstCMB = ctx.CatContractTypeByProgramCMB(program).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
