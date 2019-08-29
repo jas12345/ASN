@@ -330,7 +330,7 @@ function CargaSite() {
 
 function filterSite() {
     return {
-        //country: $("#Country_Ident").val(),
+        country: $("#Country_Ident").val(),
         city: $("#City_Ident").val(),
         //site: $("#Location_Ident").val(),
         //client: $("#Client_Ident").val(),
@@ -387,8 +387,8 @@ function CargaCliente() {
 
 function filterClient() {
     return {
-        //country: $("#Country_Ident").val(),
-        //city: $("#City_Ident").val(),
+        country: $("#Country_Ident").val(),
+        city: $("#City_Ident").val(),
         site: $("#Location_Ident").val(),
         //client: $("#Client_Ident").val(),
         //program: $("#Program_Ident").val(),
@@ -445,9 +445,9 @@ function CargaPrograma() {
 
 function filterProgram() {
     return {
-        //country: $("#Country_Ident").val(),
-        //city: $("#City_Ident").val(),
-        //site: $("#Location_Ident").val(),
+        country: $("#Country_Ident").val(),
+        city: $("#City_Ident").val(),
+        site: $("#Location_Ident").val(),
         client: $("#Client_Ident").val(),
         //program: $("#Program_Ident").val(),
         //contract: $("#Contract_Type_Ident").val()
@@ -500,10 +500,10 @@ function CargaContrato() {
 
 function filterContract() {
     return {
-        //country: $("#Country_Ident").val(),
-        //city: $("#City_Ident").val(),
-        //site: $("#Location_Ident").val(),
-        //client: $("#Client_Ident").val(),
+        country: $("#Country_Ident").val(),
+        city: $("#City_Ident").val(),
+        site: $("#Location_Ident").val(),
+        client: $("#Client_Ident").val(),
         program: $("#Program_Ident").val(),
         //contract: $("#Contract_Type_Ident").val()
     };
