@@ -1,0 +1,36 @@
+Mireya, buenas tardes:
+
+Respecto a las dudas que te consulté cerca del mediodía, te comento lo siguiente:
+
+En la ruta del procesamiento de Solicitudes del Sistema de Nóminas Manuales, esta va a pasar por las siguientes etapas.
+
+Hasta aquí, esta es la descripción de lo que sucederá en el Sistema de Nóminas Manuales en cuanto entre en operación.
+
+* El Solicitante envía las solicitudes En Borrador a su autorización.
+
+* Los Autorizadores revisan los conceptos para autorizan el movimiento, o lo rechazan para su revisión por parte del solicitante.
+
+* El Solicitante, en el caso de que algún concepto sea rechazado, puede editarlo y enviarlo nuevamente a autorización, o puede cancelarlo.
+
+* Los conceptos autorizados pueden pasar por varios niveles de autorización hasta su autorización final, o su rechazo y cancelación.
+
+* Al autorizarse/cancelarse todos los conceptos de la solicitud, el sistema va a configurar como Autorizada dicha solicitud.
+
+* Los responsables se encargaran de pasar de Autorizada a Cerrada el estatus de las solicitudes en cuanto concluya el período de nómina, con ayuda de un proceso automático que corregirá algunas solicitudes que se quedaron pendientes de procesar por parte de los solicitantes y autorizadores.
+
+* El Responsable procederá a Cerrar la solicitud para su posterior procesamiento
+
+* Previo a este proceso, un proceso automático de cierre se encargará de pasar a estatus de Cerrado o de Cancelado todas las solicitudes que tengan alguno de sus conceptos en estatus de Pendiente de Autorizar, En Borrador o Rechazado.
+
+* Este proceso automático está ligado a una configuración del Período de Nóminas llamado Fecha y hora límite de Autorización. Hasta que no se llegue a esta fecha y hora, el sistema permitirá que el proceso natural de autorización, rechazo, cancelación de los conceptos de solicitud siga disponible para los Solicitantes y Autorizadores.
+
+* Tan pronto se llegue la fecha y hora de esta configuración, el proceso se encargará de manipular las solicitudes en base a algunas reglas indicadas en el análisis del sistema, e impedirá que los solicitantes y/o autorizadores tengan acceso a estas solicitudes.
+
+* El Responsable al final del período de nómina se encargará de procesar en PeopleSoft todas las solicitudes en estatus de cerrado mediante la generación de Archivo de Carga de movimientos a PeopleSoft
+
+
+¿Puedes revisar esta descripción del proceso para verificar si está completamente clarificada y entendible la forma en cómo va a operar el sistema de nóminas manuales?
+
+En caso de cualquier duda, por favor, nos la haces saber para asegurar que todo esté claro antes de la implantación del sistema.
+
+Saludos y gracias de antemano por cualquier comentario.

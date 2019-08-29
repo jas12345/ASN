@@ -1,0 +1,3 @@
+Rev. 9
+Ya se corrigió despliegue de información de consulta/edición de los conceptos de solcitud.
+

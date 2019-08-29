@@ -1,0 +1,11 @@
+Rev. 14 (Rev. 2)
+Ya está funcionando sin problemas este formulario de Captura Rápida.
+
+Rev. 15 (Rev. 2)
+El Menú nunca desaparece de la pantalla, por lo que siempre está disponible para el usuario. Incluso en caso de que se desplace el formulario hacia arriba.
+No existe otra manea de operar del menú.
+ 
+
+Rev. 15 (Rev. 2)
+Comportamiento correcto.
+El botón Enviar solicitud se configuró para que no aparezca mientras no esté capturada una solicitud.
