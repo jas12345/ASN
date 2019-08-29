@@ -130,6 +130,10 @@ namespace ASN
 
             //Comentarios
             bundles.Add(new ScriptBundle("~/bundles/Comentarios").Include("~/Scripts/Comentarios.js"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/Notificaciones").Include(
+            "~/Scripts/Notificaciones.js"));
         }
     }
 }
