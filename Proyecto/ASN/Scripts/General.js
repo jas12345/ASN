@@ -6,7 +6,7 @@
 
 function gridFilterIntegerNumericTextbox(args) {
     args.element.kendoNumericTextBox({
-        format: "n0",
+        format: "#",
         decimals: 0,
     });
 }

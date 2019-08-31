@@ -82,11 +82,6 @@
         </Function>
         <Function Name="CatCityByCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Country" Type="int" Mode="In" />
-          <Parameter Name="CityId" Type="int" Mode="In" />
-          <Parameter Name="SiteId" Type="int" Mode="In" />
-          <Parameter Name="ClientId" Type="int" Mode="In" />
-          <Parameter Name="ProgramId" Type="int" Mode="In" />
-          <Parameter Name="CrontactId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatCityCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCityTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -94,9 +89,6 @@
           <Parameter Name="Country" Type="int" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="SiteId" Type="int" Mode="In" />
-          <Parameter Name="ClientId" Type="int" Mode="In" />
-          <Parameter Name="ProgramId" Type="int" Mode="In" />
-          <Parameter Name="CrontactId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatClientCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatClientTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -239,7 +231,6 @@
           <Parameter Name="SiteId" Type="int" Mode="In" />
           <Parameter Name="ClientId" Type="int" Mode="In" />
           <Parameter Name="ProgramId" Type="int" Mode="In" />
-          <Parameter Name="CrontactId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatContractTypeCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatContractTypeTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -303,10 +294,6 @@
         <Function Name="CatLocationByCityCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Country" Type="int" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
-          <Parameter Name="SiteId" Type="int" Mode="In" />
-          <Parameter Name="ClientId" Type="int" Mode="In" />
-          <Parameter Name="ProgramId" Type="int" Mode="In" />
-          <Parameter Name="CrontactId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatLocationCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatLocationTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -483,8 +470,6 @@
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="SiteId" Type="int" Mode="In" />
           <Parameter Name="ClientId" Type="int" Mode="In" />
-          <Parameter Name="ProgramId" Type="int" Mode="In" />
-          <Parameter Name="CrontactId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatProgramCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatProgramTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -677,6 +662,23 @@
         <Function Name="RelPeriodicidadPaisCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="country" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="ReporteAuditoriasDetalleAutorizadoresSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReporteAuditoriasDetalleHistorialAutorizadoresSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioId" Type="int" Mode="In" />
+          <Parameter Name="EID" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReporteAuditoriasDetalleHistorialSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioId" Type="int" Mode="In" />
+          <Parameter Name="EID" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReporteAuditoriasDetalleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReporteAuditoriasSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="SolicitudEmpleadosxPerfilCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
           <Parameter Name="Solicitud" Type="int" Mode="In" />
@@ -1406,20 +1408,12 @@
             <Parameter Name="Comentario" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatCityByCountryCMB" ReturnType="Collection(ASNModel.CatCityByCountryCMB_Result)">
-            <Parameter Name="Country" Mode="In" Type="Int32" />
-            <Parameter Name="CityId" Mode="In" Type="Int32" />
-            <Parameter Name="SiteId" Mode="In" Type="Int32" />
-            <Parameter Name="ClientId" Mode="In" Type="Int32" />
-            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
-            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
+          <Parameter Name="Country" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatClientBySiteCMB" ReturnType="Collection(ASNModel.CatClientBySiteCMB_Result)">
             <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="SiteId" Mode="In" Type="Int32" />
-            <Parameter Name="ClientId" Mode="In" Type="Int32" />
-            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
-            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatContractTypeByProgramCMB" ReturnType="Collection(ASNModel.CatContractTypeByProgramCMB_Result)">
             <Parameter Name="Country" Mode="In" Type="Int32" />
@@ -1427,23 +1421,16 @@
             <Parameter Name="SiteId" Mode="In" Type="Int32" />
             <Parameter Name="ClientId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
-            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatLocationByCityCMB" ReturnType="Collection(ASNModel.CatLocationByCityCMB_Result)">
             <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
-            <Parameter Name="SiteId" Mode="In" Type="Int32" />
-            <Parameter Name="ClientId" Mode="In" Type="Int32" />
-            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
-            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatProgramByClientCMB" ReturnType="Collection(ASNModel.CatProgramByClientCMB_Result)">
             <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="SiteId" Mode="In" Type="Int32" />
             <Parameter Name="ClientId" Mode="In" Type="Int32" />
-            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
-            <Parameter Name="CrontactId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatCountryByCascadeCMB" ReturnType="Collection(ASNModel.CatCountryByCascadeCMB_Result)">
             <Parameter Name="Country" Mode="In" Type="Int32" />
@@ -1460,6 +1447,23 @@
           </FunctionImport>
           <FunctionImport Name="CatNotificacionesManualesSel" ReturnType="Collection(ASNModel.CatNotificacionesManualesSel_Result)">
           <Parameter Name="ResponsableCCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteAuditoriasSel" ReturnType="Collection(ASNModel.ReporteAuditoriasSel_Result)" />
+          <FunctionImport Name="ReporteAuditoriasDetalleSel" ReturnType="Collection(ASNModel.ReporteAuditoriasDetalleSel_Result)">
+          <Parameter Name="FolioId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteAuditoriasDetalleHistorialSel" ReturnType="Collection(ASNModel.ReporteAuditoriasDetalleHistorialSel_Result)">
+            <Parameter Name="FolioId" Mode="In" Type="Int32" />
+            <Parameter Name="EID" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteAuditoriasDetalleHistorialAutorizadoresSel" ReturnType="Collection(ASNModel.ReporteAuditoriasDetalleHistorialAutorizadoresSel_Result)">
+            <Parameter Name="FolioId" Mode="In" Type="Int32" />
+            <Parameter Name="EID" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteAuditoriasDetalleAutorizadoresSel" ReturnType="Collection(ASNModel.ReporteAuditoriasDetalleAutorizadoresSel_Result)">
+          <Parameter Name="FolioId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2245,6 +2249,61 @@
           <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Accesos" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="ReporteAuditoriasSel_Result">
+          <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="NombreDelSolicitante" Nullable="true" MaxLength="752" />
+          <Property Type="DateTime" Name="FechaDeModificacion" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="ReporteAuditoriasDetalleSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Empleado_Ident" Nullable="false" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="String" Name="ConceptoDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="false" />
+          <Property Type="String" Name="ConceptoMotivoDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ResponsableId" Nullable="true" />
+          <Property Type="String" Name="NombreResponsable" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="PeriodoOriginalId" Nullable="true" />
+          <Property Type="Decimal" Name="ParametroConceptoMonto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="MotivosSolicitudId" Nullable="false" />
+          <Property Type="String" Name="MotivoSolicitudDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="NombreEmpleado" Nullable="true" MaxLength="752" />
+          <Property Type="DateTime" Name="FechaDeModificacion" Nullable="true" />
+          <Property Type="DateTime" Name="FechaDeCreacion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ReporteAuditoriasDetalleHistorialSel_Result">
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="MotivosSolicitudId" Nullable="true" />
+          <Property Type="String" Name="MotivoSolicitudDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="true" />
+          <Property Type="String" Name="ConceptoMotivoDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FechaModificacion" Nullable="true" MaxLength="19" />
+          <Property Type="String" Name="Monto" Nullable="true" MaxLength="73" />
+          </ComplexType>
+        <ComplexType Name="ReporteAuditoriasDetalleHistorialAutorizadoresSel_Result">
+          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="true" />
+          <Property Type="Int32" Name="Empleado_Ident" Nullable="true" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="String" Name="Accion" Nullable="false" MaxLength="11" />
+          <Property Type="String" Name="FechaModificacion" Nullable="true" MaxLength="19" />
+          <Property Type="String" Name="ConceptoDesc" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ReporteAuditoriasDetalleAutorizadoresSel_Result">
+          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Empleado_Ident" Nullable="false" />
+          <Property Type="Int32" Name="NivelAutorizacion" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="String" Name="ConceptoDesc" Nullable="false" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -3442,6 +3501,81 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="Accesos" ColumnName="Accesos" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteAuditoriasSel" FunctionName="ASNModel.Store.ReporteAuditoriasSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteAuditoriasSel_Result">
+                <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="NombreDelSolicitante" ColumnName="NombreDelSolicitante" />
+                <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteAuditoriasDetalleSel" FunctionName="ASNModel.Store.ReporteAuditoriasDetalleSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteAuditoriasDetalleSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Empleado_Ident" ColumnName="Empleado_Ident" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="ConceptoDesc" ColumnName="ConceptoDesc" />
+                <ScalarProperty Name="ConceptoMotivoId" ColumnName="ConceptoMotivoId" />
+                <ScalarProperty Name="ConceptoMotivoDesc" ColumnName="ConceptoMotivoDesc" />
+                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
+                <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
+                <ScalarProperty Name="PeriodoOriginalId" ColumnName="PeriodoOriginalId" />
+                <ScalarProperty Name="ParametroConceptoMonto" ColumnName="ParametroConceptoMonto" />
+                <ScalarProperty Name="MotivosSolicitudId" ColumnName="MotivosSolicitudId" />
+                <ScalarProperty Name="MotivoSolicitudDesc" ColumnName="MotivoSolicitudDesc" />
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+                <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
+                <ScalarProperty Name="FechaDeCreacion" ColumnName="FechaDeCreacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteAuditoriasDetalleHistorialSel" FunctionName="ASNModel.Store.ReporteAuditoriasDetalleHistorialSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteAuditoriasDetalleHistorialSel_Result">
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="MotivosSolicitudId" ColumnName="MotivosSolicitudId" />
+                <ScalarProperty Name="MotivoSolicitudDesc" ColumnName="MotivoSolicitudDesc" />
+                <ScalarProperty Name="ConceptoMotivoId" ColumnName="ConceptoMotivoId" />
+                <ScalarProperty Name="ConceptoMotivoDesc" ColumnName="ConceptoMotivoDesc" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteAuditoriasDetalleHistorialAutorizadoresSel" FunctionName="ASNModel.Store.ReporteAuditoriasDetalleHistorialAutorizadoresSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteAuditoriasDetalleHistorialAutorizadoresSel_Result">
+                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Empleado_Ident" ColumnName="Empleado_Ident" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="ConceptoDesc" ColumnName="ConceptoDesc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteAuditoriasDetalleAutorizadoresSel" FunctionName="ASNModel.Store.ReporteAuditoriasDetalleAutorizadoresSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteAuditoriasDetalleAutorizadoresSel_Result">
+                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Empleado_Ident" ColumnName="Empleado_Ident" />
+                <ScalarProperty Name="NivelAutorizacion" ColumnName="NivelAutorizacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="ConceptoDesc" ColumnName="ConceptoDesc" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

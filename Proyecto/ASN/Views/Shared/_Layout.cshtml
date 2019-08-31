@@ -116,6 +116,8 @@
                         @*<li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>*@
                     }
 
+                    <li>@Html.ActionLink("Reporte Auditoria", "Index", "ReporteAuditoria")</li>
+
                     if (User.IsInRole("Desarrollo2"))
                     {
                         <li class="dropdown">
