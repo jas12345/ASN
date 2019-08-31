@@ -1,0 +1,13 @@
+Rev. 6
+Se corrigió edición de solicitudes para desplegar datos para consulta o para edición cuando corresponda.
+
+Rev. 7
+Se corrige el desplegado del botón Cancelar para que aparezca solo en las situaciones donde se requiere.
+
+Rev. 8
+Se revisó la aplicación y se filtra por el criterio que se selecciona sin problema alguno.
+Revisar si es una cuestión de multi-navegador
+
+
+
+

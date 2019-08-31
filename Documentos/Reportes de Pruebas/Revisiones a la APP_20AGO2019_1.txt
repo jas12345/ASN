@@ -1,0 +1,16 @@
+Rev. 1
+Se atenderá en la próxima versión. No se solicitó aplicación multi-navegadores, y a menos que Folio de Solicitud -1 detenga la captura de solicitudes, queda asi.
+
+Rev 2
+Se aplicaron cambios para que aparezca la descripción de la moneda cuanto se captura una solicitud para un concepto que se aplica por montos. Revisar nuevamente el proceso.
+
+Rev 3.
+Se aplicaron cambios para que aparezcan los autorizadores configurados para la solicitud, no la sugerencia de Autorizantes para el concepto.
+
+Rev. 4
+Se aplicaron cambios para que aparezca la descripción del tipo de parámetro que corresponde.
+
+
+
+
+
