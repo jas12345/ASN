@@ -16,6 +16,19 @@
     .k-grid-header th.k-header {
         text-align: center;
     }
+
+    #gridAutorizacion {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
 </style>
 
 
@@ -43,7 +56,7 @@
             @*<div class="col-lg-2">
                 @Html.Label("Autoriza Solicitud", new { style = "font-size: 15px" })
             </div>*@
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
                     .Enable(false)
@@ -79,9 +92,9 @@
                     .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                 )
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })
-                @Html.TextBox("Estatus", "", new { disabled = "disabled" })
+                @Html.TextBox("Estatus", "", new { disabled = "disabled", style = "width:13em;" })
             </div>
             <p></p>
         </div>
@@ -297,16 +310,16 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="col-lg-6">
-                        <div class="col-lg-2">
+                        @*<div class="col-lg-2">
                             @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar").Icon("check")
                             .Events(x => x.Click("autorizarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                             )
-                        </div>
-                        <div class="col-lg-2">
+                        </div>*@
+                        @*<div class="col-lg-2">
                             @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar").Icon("close")
                             .Events(x => x.Click("rechazarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                             )
-                        </div>
+                        </div>*@
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("AutorizarSolicitudALL").Content("Autorizar selección").Icon("check")
                             .Events(x => x.Click("autorizarSolicitudALL")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
@@ -328,7 +341,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                @(Html.Kendo().Grid<ASN.Models.CatAutorizacionesSel_Result>()
+                <div id="parent">
+                    @(Html.Kendo().Grid<ASN.Models.CatAutorizacionesSel_Result>()
                             .Name("gridAutorizacion")
                             .Columns(column =>
                             {
@@ -346,10 +360,10 @@
                                 column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
                                 column.Bound(c => c.Autorizador).Title("Autorizador Asignado").Filterable(false).Width(70);
                             })
-                            .HtmlAttributes(new { style = "height: 475px;" })
+                            //.HtmlAttributes(new { style = "height: 475px;" })
                             .Scrollable(sorteable => sorteable.Virtual(false))
                             .Sortable()
-                            .PersistSelection()
+                            //.PersistSelection()
                             .AutoBind(false)
                             .Events(eve => eve.Change("onChange"))
                             //.Filterable(ftb => ftb.Mode(GridFilterMode.Row))
@@ -376,7 +390,7 @@
                                     model.Field(c => c.Autorizador).Editable(true);
                                     model.Field(c => c.BtnAutorizarBorrar).Editable(false);
                                 })
-                                .Read(read => read.Action("GetAutorizaciones", "AutorizaSolicitud").Data("getFolio"))
+                            .Read(read => read.Action("GetAutorizaciones", "AutorizaSolicitud").Data("getFolio"))
                             //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
                             //.Create(create => create.Action("CrearSolicitudPorEmpleado", "AutorizaSolicitud").Type(HttpVerbs.Post))
                             //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
@@ -406,6 +420,7 @@
                             })
                             )
                 )
+                </div>
             </div>
         </div>
     </div>
@@ -568,7 +583,6 @@ else
 
 <script>
     var InfoCCMSID = '@Url.Action("GetUserInfo","AutorizaSolicitud")';
-
     
     function getComments(a,b,c) {
 
