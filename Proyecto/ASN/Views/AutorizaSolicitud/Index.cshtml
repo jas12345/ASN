@@ -395,7 +395,7 @@
                             //.Create(create => create.Action("CrearSolicitudPorEmpleado", "AutorizaSolicitud").Type(HttpVerbs.Post))
                             //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
                             )
-                            //.Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
                             //.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple).Type(GridSelectionType.Row))
                             .Navigatable()
                             .Pageable(pageable => pageable
