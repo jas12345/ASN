@@ -1,6 +1,27 @@
-﻿//var _perfil = 0;
+﻿function resizeGrid() {
+    var gridElement = $("#gridResponsabilidad"),
+        dataArea = gridElement.find(".k-grid-content"),
+        gridHeight = gridElement.innerHeight(),
+        otherElements = gridElement.children().not(".k-grid-content"),
+        otherElementsHeight = 0;
+    otherElements.each(function () {
+        otherElementsHeight += $(this).outerHeight();
+    });
+    dataArea.height(gridHeight - otherElementsHeight);
+}
+
+function resizeWrapper() {
+    $("#parent").height(document.body.offsetHeight - 400);
+}
+
+$(window).resize(function () {
+    resizeWrapper();
+    resizeGrid();
+});
+//var _perfil = 0;
 
 $(document).ready(function () {
+    $(window).trigger("resize");
     debugger;
     FolioSolicitud = $("#FolioSolicitud").val();
     calculaEstatusSolicitud();

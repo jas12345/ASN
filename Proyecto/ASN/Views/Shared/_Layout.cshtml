@@ -116,7 +116,10 @@
                         @*<li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>*@
                     }
 
-                    <li>@Html.ActionLink("Reporte Auditoria", "Index", "ReporteAuditoria")</li>
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    {
+                        <li>@Html.ActionLink("Reporte Auditoria", "Index", "ReporteAuditoria")</li>
+                    }
 
                     if (User.IsInRole("Desarrollo2"))
                     {
