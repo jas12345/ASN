@@ -1411,23 +1411,23 @@
           <Parameter Name="Country" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatClientBySiteCMB" ReturnType="Collection(ASNModel.CatClientBySiteCMB_Result)">
-          <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="SiteId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatContractTypeByProgramCMB" ReturnType="Collection(ASNModel.CatContractTypeByProgramCMB_Result)">
-          <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="SiteId" Mode="In" Type="Int32" />
             <Parameter Name="ClientId" Mode="In" Type="Int32" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatLocationByCityCMB" ReturnType="Collection(ASNModel.CatLocationByCityCMB_Result)">
-          <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatProgramByClientCMB" ReturnType="Collection(ASNModel.CatProgramByClientCMB_Result)">
-          <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="SiteId" Mode="In" Type="Int32" />
             <Parameter Name="ClientId" Mode="In" Type="Int32" />
@@ -2258,6 +2258,7 @@
           <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="NombreDelSolicitante" Nullable="true" MaxLength="752" />
           <Property Type="DateTime" Name="FechaDeModificacion" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Anio" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ReporteAuditoriasDetalleSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -3514,6 +3515,7 @@
                 <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
                 <ScalarProperty Name="NombreDelSolicitante" ColumnName="NombreDelSolicitante" />
                 <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

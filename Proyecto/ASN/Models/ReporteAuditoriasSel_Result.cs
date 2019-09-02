@@ -20,5 +20,6 @@ namespace ASN.Models
         public string EstatusSolicitudId { get; set; }
         public string NombreDelSolicitante { get; set; }
         public System.DateTime FechaDeModificacion { get; set; }
+        public Nullable<int> Anio { get; set; }
     }
 }
