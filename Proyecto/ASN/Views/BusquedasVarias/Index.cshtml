@@ -18,6 +18,7 @@
                     .Name("grid")
                     .Columns(columns =>
                     {
+                        columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
                         columns.Bound(c => c.Ident).Title("id").Visible(false).Filterable(false).Width(50);
                         //columns.Bound(c => c.AnioId).Width(150).Title("Descripción");
                         columns.ForeignKey(c => c.AnioId, (System.Collections.IEnumerable)ViewData["AniosCMB"], "Ident", "Valor").Width(125).Title("Año");
@@ -28,7 +29,6 @@
                         columns.Bound(c => c.FechaInicio).Width(150).Title("Fecha de Inicio");
                         columns.Bound(c => c.FechaCierre).Width(150).Title("Fecha de Cierre");
                         columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
-                        columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
                     }
                     )
                     .ToolBar(toolBar =>

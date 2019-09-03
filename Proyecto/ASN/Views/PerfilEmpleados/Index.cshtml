@@ -3,6 +3,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .k-grid .k-hierarchy-col {
+        width: 6px;
+    }
+
+    #grid {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+</style>
+
 @if (User.Identity.IsAuthenticated)
 {
     <div class="container-fluid">
@@ -13,85 +32,87 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                @(Html.Kendo().Grid<ASN.Models.CatPerfilEmpleadosViewModel>()
-                                .Name("grid")
-                                .Columns(columns =>
-                                {
-                                    columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(100);
-                                    columns.Bound(c => c.Perfil_Ident).Title("Perfil").Visible(false).Filterable(false).Width(50);
-                                    columns.Bound(c => c.NombrePerfilEmpleados).Title("Nombre de Perfil").Width(220);
-                                    columns.ForeignKey(c => c.Country_Ident, (System.Collections.IEnumerable)ViewData["Pais"], "Id", "Value").Title("Pais").Visible(true).Filterable(true).Width(220);
-                                    columns.ForeignKey(c => c.City_Ident, (System.Collections.IEnumerable)ViewData["Ciudad"], "Id", "Value").Title("Ciudad").Visible(true).Filterable(true).Width(220);
-                                    columns.ForeignKey(c => c.Location_Ident, (System.Collections.IEnumerable)ViewData["Site"], "Id", "Value").Title("Site").Visible(true).Filterable(true).Width(220);
-                                    columns.ForeignKey(c => c.Client_Ident, (System.Collections.IEnumerable)ViewData["Cliente"], "Id", "Value").Title("Cliente").Visible(true).Filterable(true).Width(220);
-                                    columns.ForeignKey(c => c.Program_Ident, (System.Collections.IEnumerable)ViewData["Programa"], "Id", "Value").Title("Programa").Visible(true).Filterable(true).Width(220);
-                                    columns.ForeignKey(c => c.Contract_Type_Ident, (System.Collections.IEnumerable)ViewData["Tipocontrato"], "Id", "Value").Title("Tipo de Contrato").Visible(true).Filterable(true).Width(220);
-                                    columns.ForeignKey(c => c.ConceptoId, (System.Collections.IEnumerable)ViewData["Concepto"], "Ident", "Valor").Title("Concepto").Visible(true).Filterable(true).ClientTemplate("#:ConceptoId == -1  ? '- Todos -' : Concepto #").Width(220);
-                                    columns.ForeignKey(c => c.TipoAccesoId, (System.Collections.IEnumerable)ViewData["TipoAcceso"], "Ident", "Valor").Title("Tipo de Acceso").Visible(true).Filterable(true).Width(220);
-                                    columns.Bound(c => c.Active).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #").Width(100);
-                                })
-                                .ToolBar(toolBar =>
-                                {
-                                    toolBar.Create().Text("Nuevo");
-                                    toolBar.Excel().Text("Exportar a excel");
-                                })
-                                .Excel(ex => ex.AllPages(true))
-                                .HtmlAttributes(new { style = "height: 475px;" })
-                                .Scrollable(sorteable => sorteable.Virtual(false))
-                                .Sortable()
-                                .Resizable(c => c.Columns(true))
-                                //.Editable(editable => editable.Mode(GridEditMode.InCell))
-                                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("PerfilEmpleadosPopUp"))
-                                .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
-                                .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
-                                .DataSource(dataSource => dataSource
-                                    .Ajax()
-                                    .Batch(true)
-                                    .ServerOperation(false)
-                                    .Model(model =>
-                                    {
-                                        model.Id(c => c.Perfil_Ident);
-                                        model.Field(c => c.NombrePerfilEmpleados).Editable(true);
-                                        model.Field(c => c.Country_Ident).Editable(true);
-                                        model.Field(c => c.City_Ident).Editable(true);
-                                        model.Field(c => c.Location_Ident).Editable(true);
-                                        model.Field(c => c.Client_Ident).Editable(true);
-                                        model.Field(c => c.Program_Ident).Editable(true);
-                                        model.Field(c => c.Contract_Type_Ident).Editable(true);
-                                        model.Field(c => c.ConceptoId).Editable(true);
-                                        model.Field(c => c.TipoAccesoId).Editable(true);
-                                        model.Field(c => c.Active).Editable(true).DefaultValue(true);
-                                    })
-                                    .Read(read => read.Action("GetPerfilEmpleados", "PerfilEmpleados"))
-                                    .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
-                                    .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
-                                    .PageSize(10)
-                                .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
-                                )
-                                .Navigatable()
-                                .Pageable(pageable => pageable
-                                    .Refresh(true)
-                                    .PageSizes(true)
-                                    .ButtonCount(5)
-                                    .Numeric(true)
-                                    .PreviousNext(true)
-                                .Messages(messages =>
-                                {
-                                    messages.ItemsPerPage("Registros por página");
-                                    messages.Empty("Sin información para mostrar");
-                                    messages.First("Primera");
-                                    messages.Page("Página");
-                                    messages.Last("Última");
-                                    messages.Previous("Anterior");
-                                    messages.Next("Siguiente");
-                                    messages.Refresh("Actualizar");
-                                    messages.Of("De");
-                                    messages.MorePages("Mas páginas");
-                                    //messages.Display("Prueba");
-                                    messages.Display("{0} a {1} de {2}");
-                                })
-                                )
-                )
+                <div id="parent">
+                    @(Html.Kendo().Grid<ASN.Models.CatPerfilEmpleadosViewModel>()
+                        .Name("grid")
+                        .Columns(columns =>
+                        {
+                            columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(100);
+                            columns.Bound(c => c.Perfil_Ident).Title("Perfil").Visible(false).Filterable(false).Width(50);
+                            columns.Bound(c => c.NombrePerfilEmpleados).Title("Nombre de Perfil").Width(220);
+                            columns.ForeignKey(c => c.Country_Ident, (System.Collections.IEnumerable)ViewData["Pais"], "Id", "Value").Title("Pais").Visible(true).Filterable(true).Width(220);
+                            columns.ForeignKey(c => c.City_Ident, (System.Collections.IEnumerable)ViewData["Ciudad"], "Id", "Value").Title("Ciudad").Visible(true).Filterable(true).Width(220);
+                            columns.ForeignKey(c => c.Location_Ident, (System.Collections.IEnumerable)ViewData["Site"], "Id", "Value").Title("Site").Visible(true).Filterable(true).Width(220);
+                            columns.ForeignKey(c => c.Client_Ident, (System.Collections.IEnumerable)ViewData["Cliente"], "Id", "Value").Title("Cliente").Visible(true).Filterable(true).Width(220);
+                            columns.ForeignKey(c => c.Program_Ident, (System.Collections.IEnumerable)ViewData["Programa"], "Id", "Value").Title("Programa").Visible(true).Filterable(true).Width(220);
+                            columns.ForeignKey(c => c.Contract_Type_Ident, (System.Collections.IEnumerable)ViewData["Tipocontrato"], "Id", "Value").Title("Tipo de Contrato").Visible(true).Filterable(true).Width(220);
+                            columns.ForeignKey(c => c.ConceptoId, (System.Collections.IEnumerable)ViewData["Concepto"], "Ident", "Valor").Title("Concepto").Visible(true).Filterable(true).ClientTemplate("#:ConceptoId == -1  ? '- Todos -' : Concepto #").Width(220);
+                            columns.ForeignKey(c => c.TipoAccesoId, (System.Collections.IEnumerable)ViewData["TipoAcceso"], "Ident", "Valor").Title("Tipo de Acceso").Visible(true).Filterable(true).Width(220);
+                            columns.Bound(c => c.Active).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #").Width(100);
+                        })
+                        .ToolBar(toolBar =>
+                        {
+                            toolBar.Create().Text("Nuevo");
+                            toolBar.Excel().Text("Exportar a excel");
+                        })
+                        .Excel(ex => ex.AllPages(true))
+                        //.HtmlAttributes(new { style = "height: 475px;" })
+                        .Scrollable(sorteable => sorteable.Virtual(false))
+                        .Sortable()
+                        .Resizable(c => c.Columns(true))
+                        //.Editable(editable => editable.Mode(GridEditMode.InCell))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("PerfilEmpleadosPopUp"))
+                        .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
+                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Batch(true)
+                            .ServerOperation(false)
+                            .Model(model =>
+                            {
+                                model.Id(c => c.Perfil_Ident);
+                                model.Field(c => c.NombrePerfilEmpleados).Editable(true);
+                                model.Field(c => c.Country_Ident).Editable(true);
+                                model.Field(c => c.City_Ident).Editable(true);
+                                model.Field(c => c.Location_Ident).Editable(true);
+                                model.Field(c => c.Client_Ident).Editable(true);
+                                model.Field(c => c.Program_Ident).Editable(true);
+                                model.Field(c => c.Contract_Type_Ident).Editable(true);
+                                model.Field(c => c.ConceptoId).Editable(true);
+                                model.Field(c => c.TipoAccesoId).Editable(true);
+                                model.Field(c => c.Active).Editable(true).DefaultValue(true);
+                            })
+                            .Read(read => read.Action("GetPerfilEmpleados", "PerfilEmpleados"))
+                            .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
+                            .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
+                            .PageSize(10)
+                        .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
+                        )
+                        .Navigatable()
+                        .Pageable(pageable => pageable
+                            .Refresh(true)
+                            .PageSizes(true)
+                            .ButtonCount(5)
+                            .Numeric(true)
+                            .PreviousNext(true)
+                        .Messages(messages =>
+                        {
+                            messages.ItemsPerPage("Registros por página");
+                            messages.Empty("Sin información para mostrar");
+                            messages.First("Primera");
+                            messages.Page("Página");
+                            messages.Last("Última");
+                            messages.Previous("Anterior");
+                            messages.Next("Siguiente");
+                            messages.Refresh("Actualizar");
+                            messages.Of("De");
+                            messages.MorePages("Mas páginas");
+                            //messages.Display("Prueba");
+                            messages.Display("{0} a {1} de {2}");
+                        })
+                        )
+                    )
+                </div>
             </div>
         </div>
     </div>
