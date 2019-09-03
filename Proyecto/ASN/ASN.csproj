@@ -142,6 +142,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
+    <Compile Include="Controllers\DescargaArchivosController.cs" />
     <Compile Include="Controllers\ReporteAuditoriaController.cs" />
     <Compile Include="Controllers\ResponsableAutorizaController.cs" />
     <Compile Include="Controllers\AutorizaSolicitudController.cs" />
@@ -472,6 +473,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatUserInfoSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DescargaArchivoSolicitud_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ELAViewModel.cs" />
@@ -859,6 +863,7 @@
     <Content Include="Views\Notificaciones\Index.cshtml" />
     <Content Include="Views\Notificaciones\NotificacionEmail.cshtml" />
     <Content Include="Views\ReporteAuditoria\Index.cshtml" />
+    <Content Include="Views\DescargaArchivos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

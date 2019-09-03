@@ -628,6 +628,9 @@
           <Parameter Name="Responsable_Ident" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="DescargaArchivoSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="EmpleadoId" Type="int" Mode="In" />
+        </Function>
         <Function Name="EmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
@@ -1464,6 +1467,9 @@
           </FunctionImport>
           <FunctionImport Name="ReporteAuditoriasDetalleAutorizadoresSel" ReturnType="Collection(ASNModel.ReporteAuditoriasDetalleAutorizadoresSel_Result)">
           <Parameter Name="FolioId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DescargaArchivoSolicitud" ReturnType="Collection(ASNModel.DescargaArchivoSolicitud_Result)">
+            <Parameter Name="EmpleadoId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2305,6 +2311,21 @@
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
           <Property Type="String" Name="ConceptoDesc" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="DescargaArchivoSolicitud_Result">
+          <Property Type="Int32" Name="EMPLEADO" Nullable="false" />
+          <Property Type="String" Name="CONCEPTO" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ACCION" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UNIDAD" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="IMPORTE" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PORCENTAJE" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FECHA" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="INICIO" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FIN" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FOLIO" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CONSECUENCIA" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CONTROL" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SEMANA" Nullable="false" MaxLength="1" />
         </ComplexType>
        
         </Schema>
@@ -3578,6 +3599,25 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
                 <ScalarProperty Name="ConceptoDesc" ColumnName="ConceptoDesc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DescargaArchivoSolicitud" FunctionName="ASNModel.Store.DescargaArchivoSolicitud">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.DescargaArchivoSolicitud_Result">
+                <ScalarProperty Name="EMPLEADO" ColumnName="EMPLEADO" />
+                <ScalarProperty Name="CONCEPTO" ColumnName="CONCEPTO" />
+                <ScalarProperty Name="ACCION" ColumnName="ACCION" />
+                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+                <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
+                <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="INICIO" ColumnName="INICIO" />
+                <ScalarProperty Name="FIN" ColumnName="FIN" />
+                <ScalarProperty Name="FOLIO" ColumnName="FOLIO" />
+                <ScalarProperty Name="CONSECUENCIA" ColumnName="CONSECUENCIA" />
+                <ScalarProperty Name="CONTROL" ColumnName="CONTROL" />
+                <ScalarProperty Name="SEMANA" ColumnName="SEMANA" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
