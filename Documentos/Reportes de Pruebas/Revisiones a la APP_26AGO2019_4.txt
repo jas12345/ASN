@@ -1,0 +1,14 @@
+Rev. 10
+Ya se despliega la información correctamente
+
+Rev. 11
+Ya se corrigió el despliegue de información
+
+Rev. 12
+Ya se despliega la información del concepto correctamente.
+
+El campo de Responsable de Incidente es editable por el usuario.
+No es un valor requerido en caso de que el solicitante no pueda identificar quien fué responsable del incidente, o no aplica responsabilidad por el incidente.
+
+Rev. 13
+Se corrigió el comportamiento. El botón Enviar permanecerá desactivado mientras no exista una solicitud en el formulario de captura.

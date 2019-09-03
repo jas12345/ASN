@@ -1,6 +1,28 @@
 ﻿//var _perfil = 0;
 
+function resizeGrid() {
+    var gridElement = $("#gridAutorizacion"),
+        dataArea = gridElement.find(".k-grid-content"),
+        gridHeight = gridElement.innerHeight(),
+        otherElements = gridElement.children().not(".k-grid-content"),
+        otherElementsHeight = 0;
+    otherElements.each(function () {
+        otherElementsHeight += $(this).outerHeight();
+    });
+    dataArea.height(gridHeight - otherElementsHeight);
+}
+
+function resizeWrapper() {
+    $("#parent").height(document.body.offsetHeight - 400);
+}
+
+$(window).resize(function () {
+    resizeWrapper();
+    resizeGrid();
+});
+
 $(document).ready(function () {
+    $(window).trigger("resize");
     //debugger;
     FolioSolicitud = $("#FolioSolicitud").val();
     calculaEstatusSolicitud();
@@ -10,8 +32,8 @@ $(document).ready(function () {
     $("#AutorizarSolicitudALL").hide();
     $("#RechazarSolicitudALL").hide();
 
-    $("#AutorizarSolicitud").hide();
-    $("#RechazarSolicitud").hide();
+    //$("#AutorizarSolicitud").hide();
+    //$("#RechazarSolicitud").hide();
 });
 
 function getFolio() {
@@ -56,8 +78,8 @@ function autorizarSolicitud() {
             notification.show("No se pudo procesar la Autorización ", "error");
         }
         else {
-            $("#AutorizarSolicitud").hide();
-            $("#RechazarSolicitud").hide();
+            //$("#AutorizarSolicitud").hide();
+            //$("#RechazarSolicitud").hide();
             $("#CancelarSolicitud").hide();
 
             calculaEstatusSolicitud();
@@ -82,8 +104,8 @@ function rechazarSolicitud() {
             notification.show("No se pudo procesar la Autorización ", "error");
         }
         else {
-            $("#AutorizarSolicitud").hide();
-            $("#RechazarSolicitud").hide();
+            //$("#AutorizarSolicitud").hide();
+            //$("#RechazarSolicitud").hide();
             $("#CancelarSolicitud").hide();
 
             calculaEstatusSolicitud();
@@ -108,8 +130,8 @@ function cancelarSolicitud() {
             notification.show("No se pudo procesar la Autorización ", "error");
         }
         else {
-            $("#AutorizarSolicitud").hide();
-            $("#RechazarSolicitud").hide();
+            //$("#AutorizarSolicitud").hide();
+            //$("#RechazarSolicitud").hide();
             $("#CancelarSolicitud").hide();
 
             calculaEstatusSolicitud();
@@ -233,16 +255,16 @@ function editarEmpleadoSolicitud(e) {
     ConParametroConceptoMonto = dataItem.Monto;
 
     // Activar botones Autorizar, Rechazar y Cancelar Solicitud
-    if (dataItem.BtnAutorizarBorrar==1) {
-        $("#AutorizarSolicitud").show();
-        $("#RechazarSolicitud").show();
-    }
-    else {
-        $("#AutorizarSolicitud").hide();
-        $("#RechazarSolicitud").hide();
-    }
+    //if (dataItem.BtnAutorizarBorrar==1) {
+    //    $("#AutorizarSolicitud").show();
+    //    $("#RechazarSolicitud").show();
+    //}
+    //else {
+    //    $("#AutorizarSolicitud").hide();
+    //    $("#RechazarSolicitud").hide();
+    //}
     
-    $("#CancelarSolicitud").show();
+    //$("#CancelarSolicitud").show();
 
     // Se actualiza comboBox de Conceptos
     $("#Conceptos").data("kendoDropDownList").dataSource.read(getIdent);
@@ -272,10 +294,10 @@ function editarEmpleadoSolicitud(e) {
     $("#CCMSIDIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
     $('#CCMSIDIncidente').data('kendoNumericTextBox').trigger('change');
 
-    //debugger;
-    var rowIndex = $(e.currentTarget).closest("tr").index();
-    var grid = $("#gridAutorizacion").data("kendoGrid");
-    grid.select("tr:eq(" + rowIndex + ")");
+    ////debugger;
+    //var rowIndex = $(e.currentTarget).closest("tr").index();
+    //var grid = $("#gridAutorizacion").data("kendoGrid");
+    //grid.select("tr:eq(" + rowIndex + ")");
 }
 
 function borrarEmpleadoSolicitud(e) {
@@ -776,8 +798,8 @@ function autorizarSolicitudALLx(folioid,eid,conId,nivId) {
             notification.show("No se pudo procesar la Autorización ", "error");
         }
         else {
-            $("#AutorizarSolicitud").hide();
-            $("#RechazarSolicitud").hide();
+            //$("#AutorizarSolicitud").hide();
+            //$("#RechazarSolicitud").hide();
             $("#CancelarSolicitud").hide();
 
             //calculaEstatusSolicitud();
@@ -803,8 +825,8 @@ function rechazarSolicitudALLx(folioid, eid, conId, nivId) {
             notification.show("No se pudo procesar la Autorización ", "error");
         }
         else {
-            $("#AutorizarSolicitud").hide();
-            $("#RechazarSolicitud").hide();
+            //$("#AutorizarSolicitud").hide();
+            //$("#RechazarSolicitud").hide();
             $("#CancelarSolicitud").hide();
 
             //calculaEstatusSolicitud();

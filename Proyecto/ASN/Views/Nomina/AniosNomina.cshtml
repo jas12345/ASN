@@ -4,6 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    #grid {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+</style>
+
 @if (User.Identity.IsAuthenticated)
 {
     <div class="container-fluid">
@@ -14,15 +29,16 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                @(Html.Kendo().Grid<ASN.Models.CatAniosNominaSel_Result>()
+                <div id="parent">
+                    @(Html.Kendo().Grid<ASN.Models.CatAniosNominaSel_Result>()
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Bound(c => c.AnioId).Title("Año").Visible(true).Filterable(true).Width(50);
-                            columns.Bound(c => c.FechaInicio).Width(150).Title("Fecha Inicio").Format("{0:yyyy-MM-dd}").Visible(true).Filterable(false);
-                            columns.Bound(c => c.FechaCierre).Width(150).Title("Fecha Cierre").Format("{0:yyyy-MM-dd}").Visible(true).Filterable(false);
+                            columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(15).HtmlAttributes(new { style = "text-align: center;" });
+                            columns.Bound(c => c.AnioId).Title("Año").Visible(true).Width(50).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                            columns.Bound(c => c.FechaInicio).Width(50).Title("Fecha Inicio").Format("{0:yyyy-MM-dd}").Visible(true).Filterable(false);
+                            columns.Bound(c => c.FechaCierre).Width(50).Title("Fecha Cierre").Format("{0:yyyy-MM-dd}").Visible(true).Filterable(false);
                             columns.Bound(c => c.Active).Width(50).Title("Activo").Visible(true).Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
-                            columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
                         }
                         )
                         .ToolBar(toolBar =>
@@ -32,7 +48,7 @@
                         }
                         )
                         .Excel(ex => ex.AllPages(true))
-                        .HtmlAttributes(new { style = "height: 475px;" })
+                        //.HtmlAttributes(new { style = "height: 475px;" })
                         .Scrollable(sorteable => sorteable.Virtual(false))
                         .Sortable()
                         .Resizable(c => c.Columns(true))
@@ -78,7 +94,8 @@
                             messages.Display("{0} a {1} de {2}");
                         })
                         )
-                )
+                    )
+                </div>
             </div>
         </div>
     </div>

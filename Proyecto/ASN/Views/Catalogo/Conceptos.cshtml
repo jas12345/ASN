@@ -106,6 +106,8 @@
                             .Name("grid")
                             .Columns(columns =>
                             {
+                                columns.Command(command => command.Custom("UPLOAD").Text("<span class='k-icon k-i-upload'></span>Upload").Click("uploadFotoPopup")).Width(75).HtmlAttributes(new { style = "text-align: center;" });
+                                columns.Command(command => command.Custom("VIEW").Text("<span class='k-icon k-i-preview'></span>View").Click("viewFotoPopup")).Width(75).HtmlAttributes(new { style = "text-align: center;" });
                                 columns.Bound(c => c.CatProDeproId).Title("id").Visible(false).Filterable(false);
                                 columns.Bound(c => c.FullName).Width(150).Title("Name");
                                 columns.Bound(c => c.CCMSID).Width(100).Title("EmployeeId").Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("gridFilterIntegerNumericTextbox")));
@@ -115,9 +117,6 @@
                                 columns.Bound(c => c.FechaFin).Width(150).Title("DateEnd");
                                 columns.Bound(c => c.UPLOAD).Width(150).Title("Upload").Visible(false);
                                 columns.Bound(c => c.NombreFile).Width(150).Title("NombreFile").Visible(false);
-                                columns.Command(command => command.Custom("UPLOAD").Text("<span class='k-icon k-i-upload'></span>Upload").Click("uploadFotoPopup")).Width(75).HtmlAttributes(new { style = "text-align: center;" });
-                                columns.Command(command => command.Custom("VIEW").Text("<span class='k-icon k-i-preview'></span>View").Click("viewFotoPopup")).Width(75).HtmlAttributes(new { style = "text-align: center;" });
-
                             }
                             )
                             .ToolBar(toolBar =>

@@ -16,6 +16,19 @@
     .k-grid-header th.k-header {
         text-align: center;
     }
+
+    #gridResponsabilidad {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
 </style>
 
 
@@ -46,46 +59,46 @@
             <div class="col-lg-3">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
-                                                        .Enable(false)
-                                                        .Spinners(false)
-                                                        .Decimals(0)
-                                                        .Format("0")
-                                                        .Min(0)
-                                                        .Events(e => e.Change("onChangeFolioSolicitud"))
-                                                        //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
-                                                        .Value(Model.FolioSolicitud)
-                                                        .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
+                    .Enable(false)
+                    .Spinners(false)
+                    .Decimals(0)
+                    .Format("0")
+                    .Min(0)
+                    .Events(e => e.Change("onChangeFolioSolicitud"))
+                    //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
+                    .Value(Model.FolioSolicitud)
+                    .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
                 )
             </div>
             <div class="col-lg-3">
                 @Html.Label("Periodo de nómina actual: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                                    {
-                                                        source.Read(read =>
-                                                        {
-                                                            read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
-                                                        }
-                                                        );
-                                                    //.ServerFiltering(true);
-                                                }
-                                                    )
-                                                    .Filter("contains")
-                                                    .OptionLabel("- Seleccione Periodo de Nomina - ")
-                                                    .DataValueField("Ident")
-                                                    .DataTextField("Valor")
-                                                    .Name("PeriodoNomina_Id")
-                                                    .SelectedIndex(1)
-                                                    .Enable(false)
-                                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
+                        }
+                        );
+                    //.ServerFiltering(true);
+                    }
+                    )
+                    .Filter("contains")
+                    .OptionLabel("- Seleccione Periodo de Nomina - ")
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .Name("PeriodoNomina_Id")
+                    .SelectedIndex(1)
+                    .Enable(false)
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                 )
             </div>
             <div class="col-lg-3">
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })
-                @Html.TextBox("Estatus", "", new { disabled = "disabled" })
+                @Html.TextBox("Estatus", "", new { disabled = "disabled", style = "width:13em;" })
             </div>
             <div class="col-lg-1">
-                @(Html.Kendo().Button().Name("CerrarSolicitud").Content("Cerrar")
-                    .Events(x => x.Click("cerrarSolicitud"))
+                @(Html.Kendo().Button().Name("CerrarSolicitud").Content("Cerrar").Icon("close")
+                    .Events(x => x.Click("cerrarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                 )
             </div>
             <p></p>
@@ -213,7 +226,7 @@
                                     .Min(0)
                                     //.Step(5)
                                     //.Value(0)
-.HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
@@ -339,11 +352,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                @(Html.Kendo().Grid<ASN.Models.CatResponsabilidadesSel_Result>()
+                <div id="parent">
+                     @(Html.Kendo().Grid<ASN.Models.CatResponsabilidadesSel_Result>()
                         .Name("gridResponsabilidad")
                         .Columns(column =>
                         {
-                            column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(25);
+                            column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(25);
                             //column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(25);
                             column.Bound(c => c.Ident).Width(40).Title("# Empleado").Filterable(false).Visible(true);
                             column.Bound(c => c.Nombre).Title("Nombre").Filterable(false).Visible(true).Width(70);
@@ -352,7 +366,7 @@
                             column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
                             column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
                         })
-                        .HtmlAttributes(new { style = "height: 475px;" })
+                        //.HtmlAttributes(new { style = "height: 475px;" })
                         .Scrollable(sorteable => sorteable.Virtual(false))
                         .Sortable()
                         .PersistSelection()
@@ -408,6 +422,7 @@
                         })
                         )
                 )
+                </div>
             </div>
         </div>
     </div>

@@ -131,9 +131,13 @@ namespace ASN
             //Comentarios
             bundles.Add(new ScriptBundle("~/bundles/Comentarios").Include("~/Scripts/Comentarios.js"));
 
-
+            //Notificaciones
             bundles.Add(new ScriptBundle("~/bundles/Notificaciones").Include(
             "~/Scripts/Notificaciones.js"));
+
+            //ReporteAuditoria
+            bundles.Add(new ScriptBundle("~/bundles/ReporteAuditoria").Include(
+            "~/Scripts/ReporteAuditoria.js"));
         }
     }
 }

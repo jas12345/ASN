@@ -1,0 +1,24 @@
+Rev. 14 (Rev. 2)
+Ya está funcionando sin problemas este formulario de Captura Rápida.
+
+Rev. 15 (Rev. 2)
+El Menú nunca desaparece de la pantalla, por lo que siempre está disponible para el usuario. Incluso en caso de que se desplace el formulario hacia arriba.
+No existe otra manea de operar del menú.
+ 
+
+Rev. 15 (Rev. 2)
+Comportamiento correcto.
+El botón Enviar solicitud se configuró para que no aparezca mientras no esté capturada una solicitud.
+
+Rev. 16
+Comportamiento correcto.
+El botón Enviar Solicitud permanecerá desactivado mientras no exista una solicitud en el formulario de captura.
+
+Rev. 17
+Aparecen las columnas, pero no aparecen botones de Editar y borrar. Por lo tanto, no es posible ni editar ni borrar estos conceptos. Solo sepueden visualizar.
+
+Rev. 18
+Se corrigió el detalle que despliega los conceptos de manera duplicada.
+
+Rev. 18.1
+Este detalle está en corrección por parte de Javier Raygoza.

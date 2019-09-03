@@ -2508,5 +2508,62 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatNotificacionesManualesSel_Result>("CatNotificacionesManualesSel", responsableCCMSIDParameter);
         }
+    
+        public virtual ObjectResult<ReporteAuditoriasSel_Result> ReporteAuditoriasSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteAuditoriasSel_Result>("ReporteAuditoriasSel");
+        }
+    
+        public virtual ObjectResult<ReporteAuditoriasDetalleSel_Result> ReporteAuditoriasDetalleSel(Nullable<int> folioId)
+        {
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteAuditoriasDetalleSel_Result>("ReporteAuditoriasDetalleSel", folioIdParameter);
+        }
+    
+        public virtual ObjectResult<ReporteAuditoriasDetalleHistorialSel_Result> ReporteAuditoriasDetalleHistorialSel(Nullable<int> folioId, Nullable<int> eID, Nullable<int> conceptoId)
+        {
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            var eIDParameter = eID.HasValue ?
+                new ObjectParameter("EID", eID) :
+                new ObjectParameter("EID", typeof(int));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteAuditoriasDetalleHistorialSel_Result>("ReporteAuditoriasDetalleHistorialSel", folioIdParameter, eIDParameter, conceptoIdParameter);
+        }
+    
+        public virtual ObjectResult<ReporteAuditoriasDetalleHistorialAutorizadoresSel_Result> ReporteAuditoriasDetalleHistorialAutorizadoresSel(Nullable<int> folioId, Nullable<int> eID, Nullable<int> conceptoId)
+        {
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            var eIDParameter = eID.HasValue ?
+                new ObjectParameter("EID", eID) :
+                new ObjectParameter("EID", typeof(int));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteAuditoriasDetalleHistorialAutorizadoresSel_Result>("ReporteAuditoriasDetalleHistorialAutorizadoresSel", folioIdParameter, eIDParameter, conceptoIdParameter);
+        }
+    
+        public virtual ObjectResult<ReporteAuditoriasDetalleAutorizadoresSel_Result> ReporteAuditoriasDetalleAutorizadoresSel(Nullable<int> folioId)
+        {
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteAuditoriasDetalleAutorizadoresSel_Result>("ReporteAuditoriasDetalleAutorizadoresSel", folioIdParameter);
+        }
     }
 }
