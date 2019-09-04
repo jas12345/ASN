@@ -142,6 +142,10 @@ namespace ASN
             //ReporteGeneral
             bundles.Add(new ScriptBundle("~/bundles/ReporteGeneral").Include(
             "~/Scripts/ReporteGeneral.js"));
+
+            //ReporteIndividual
+            bundles.Add(new ScriptBundle("~/bundles/ReporteIndividual").Include(
+            "~/Scripts/ReporteIndividual.js"));
         }
     }
 }

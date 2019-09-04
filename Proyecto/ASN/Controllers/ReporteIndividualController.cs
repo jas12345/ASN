@@ -10,10 +10,9 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
-    [Authorize]
-    public class ReporteGeneralController : Controller
+    public class ReporteIndividualController : Controller
     {
-        // GET: ReporteGeneral
+        // GET: ReporteIndividual
         public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
@@ -32,8 +31,10 @@ namespace ASN.Controllers
             {
                 using (ASNContext context = new ASNContext())
                 {
+                    int.TryParse(User.Identity.Name, out int userCCMSID);
+
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.ReporteGeneralSel().ToList();
+                    var lstSolicitudes = context.ReporteIndividualSel(userCCMSID).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok);
                 }
@@ -54,7 +55,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.ReporteGeneralDetalleSel(folioId).ToList();
+                    var lstSolicitudes = context.ReporteIndividualDetalleSel(folioId).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok);
                 }

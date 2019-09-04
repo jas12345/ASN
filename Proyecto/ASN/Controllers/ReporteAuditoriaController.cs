@@ -32,8 +32,6 @@ namespace ASN.Controllers
             {
                 using (ASNContext context = new ASNContext())
                 {
-                    int.TryParse(User.Identity.Name, out int idAdmin);
-
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     var lstSolicitudes = context.ReporteAuditoriasSel().ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
@@ -55,8 +53,6 @@ namespace ASN.Controllers
             {
                 using (ASNContext context = new ASNContext())
                 {
-                    int.TryParse(User.Identity.Name, out int idAdmin);
-
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     var lstSolicitudes = context.ReporteAuditoriasDetalleSel(folioId).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);

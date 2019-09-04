@@ -2592,5 +2592,23 @@ namespace ASN.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteGeneralSel_Result>("ReporteGeneralSel");
         }
+    
+        public virtual ObjectResult<ReporteIndividualDetalleSel_Result> ReporteIndividualDetalleSel(Nullable<int> folioId)
+        {
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteIndividualDetalleSel_Result>("ReporteIndividualDetalleSel", folioIdParameter);
+        }
+    
+        public virtual ObjectResult<ReporteIndividualSel_Result> ReporteIndividualSel(Nullable<int> solicitanteIdent)
+        {
+            var solicitanteIdentParameter = solicitanteIdent.HasValue ?
+                new ObjectParameter("SolicitanteIdent", solicitanteIdent) :
+                new ObjectParameter("SolicitanteIdent", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteIndividualSel_Result>("ReporteIndividualSel", solicitanteIdentParameter);
+        }
     }
 }
