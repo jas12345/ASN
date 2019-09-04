@@ -22,13 +22,15 @@ namespace ASN.Controllers
         {
             try
             {
-                var lstSol = new List<DescargaArchivoSolicitud_Result>();
+                var lstActivos = new List<DescargaArchivoSolicitud_Result>();
+                //var lstInactivos = new List<DescargaArchivoSolicitud_Result>();
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    //lstSol = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value).ToList();
+                    lstActivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value,1).ToList();
+                    //lstInactivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 1).ToList();
                 }
                 using (var memo = new System.IO.MemoryStream())
                 using (var sw = new System.IO.StreamWriter(memo))
@@ -36,7 +38,7 @@ namespace ASN.Controllers
                     Type itemType = typeof(DescargaArchivoSolicitud_Result);
                     var props = itemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
 
-                    foreach (var item in lstSol)
+                    foreach (var item in lstActivos)
                     {
                         sw.WriteLine(string.Join(",", props.Select(p => string.Format("\"{0}\"", p.GetValue(item, null)))));                        
                     }
