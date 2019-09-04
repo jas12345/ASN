@@ -77,6 +77,8 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Dynamic" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security">
       <Private>True</Private>

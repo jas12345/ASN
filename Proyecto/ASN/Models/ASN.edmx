@@ -630,6 +630,7 @@
         </Function>
         <Function Name="DescargaArchivoSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="EmpleadoId" Type="int" Mode="In" />
+          <Parameter Name="Activos" Type="int" Mode="In" />
         </Function>
         <Function Name="EmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
@@ -1473,10 +1474,11 @@
           <Parameter Name="FolioId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DescargaArchivoSolicitud" ReturnType="Collection(ASNModel.DescargaArchivoSolicitud_Result)">
-            <Parameter Name="EmpleadoId" Mode="In" Type="Int32" />
+          <Parameter Name="EmpleadoId" Mode="In" Type="Int32" />
+            <Parameter Name="Activos" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteGeneralDetalleSel" ReturnType="Collection(ASNModel.ReporteGeneralDetalleSel_Result)">
-            <Parameter Name="FolioId" Mode="In" Type="Int32" />
+          <Parameter Name="FolioId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteGeneralSel" ReturnType="Collection(ASNModel.ReporteGeneralSel_Result)" />
           </EntityContainer>
@@ -2355,19 +2357,19 @@
           <Property Type="Int32" Name="Anio" Nullable="true" />
         </ComplexType>
         <ComplexType Name="DescargaArchivoSolicitud_Result">
-          <Property Type="Int32" Name="EMPLEADO" Nullable="false" />
+          <Property Type="String" Name="EMPLEADO" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="CONCEPTO" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ACCION" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ACCION" Nullable="false" MaxLength="6" />
           <Property Type="String" Name="UNIDAD" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="IMPORTE" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="PORCENTAJE" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="FECHA" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="INICIO" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="FIN" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="FOLIO" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="CONSECUENCIA" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="CONTROL" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="SEMANA" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FECHA" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="INICIO" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="FIN" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="FOLIO" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="CONSECUENCIA" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="CONTROL" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="SEMANA" Nullable="false" MaxLength="6" />
         </ComplexType>
        
         </Schema>

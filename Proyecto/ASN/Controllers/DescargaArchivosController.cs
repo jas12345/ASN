@@ -7,6 +7,8 @@ using ASN.Models;
 using System.Configuration;
 using System.Data.Entity.Core.Objects;
 using CsvHelper;
+using System.IO.Compression;
+using System.IO;
 
 namespace ASN.Controllers
 {
@@ -23,34 +25,80 @@ namespace ASN.Controllers
             try
             {
                 var lstActivos = new List<DescargaArchivoSolicitud_Result>();
-                //var lstInactivos = new List<DescargaArchivoSolicitud_Result>();
+                var lstInactivos = new List<DescargaArchivoSolicitud_Result>();
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-
+                var listPeriodoNomina = new List<CatPeriodosNominaCMB_Result>();
+                string strPeriodo = "";
+                
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     lstActivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value,1).ToList();
-                    //lstInactivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 1).ToList();
+                    lstInactivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 0).ToList();
+                    listPeriodoNomina = ctx.CatPeriodosNominaCMB(1).ToList();
                 }
-                using (var memo = new System.IO.MemoryStream())
-                using (var sw = new System.IO.StreamWriter(memo))
+
+                if (listPeriodoNomina.Count > 0)
                 {
-                    Type itemType = typeof(DescargaArchivoSolicitud_Result);
-                    var props = itemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-
-                    foreach (var item in lstActivos)
-                    {
-                        sw.WriteLine(string.Join(",", props.Select(p => string.Format("\"{0}\"", p.GetValue(item, null)))));                        
-                    }
-                    sw.Flush();
-
-                    return File(memo.ToArray(), "text/csv", "Report123.csv");                    
+                    strPeriodo = string.Format("_{0}", listPeriodoNomina[0].Valor);
                 }
-                
 
-                //string csv = "Charlie, Chaplin, Chuckles";
-                //return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", "Report123.csv");
-                
+                if (lstInactivos.Count > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                        {
+                            var file1 = archive.CreateEntry(string.Format("NominaManual_Activos{0}.csv",strPeriodo));
+                            using (var streamWriter = new StreamWriter(file1.Open()))
+                            {
+                                //streamWriter.Write("content1");
+                                Type itemType = typeof(DescargaArchivoSolicitud_Result);
+                                var props = itemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+
+                                foreach (var item in lstActivos)
+                                {
+                                    streamWriter.WriteLine(string.Join(",", props.Select(p => string.Format("\"{0}\"", p.GetValue(item, null)))));
+                                }
+                                streamWriter.Flush();
+                            }
+
+                            var file2 = archive.CreateEntry(string.Format("NominaManual_Inactivos{0}.csv",strPeriodo));
+                            using (var streamWriter = new StreamWriter(file2.Open()))
+                            {
+                                //streamWriter.Write("content2");
+                                Type itemType = typeof(DescargaArchivoSolicitud_Result);
+                                var props = itemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+
+                                foreach (var item in lstInactivos)
+                                {
+                                    streamWriter.WriteLine(string.Join(",", props.Select(p => string.Format("\"{0}\"", p.GetValue(item, null)))));
+                                }
+                                streamWriter.Flush();
+                            }
+                        }
+
+                        return File(memoryStream.ToArray(), "application/zip", string.Format("NominaManual{0}.zip",strPeriodo));
+                    }
+
+
+                }
+                else
+                {
+                    var memo = new System.IO.MemoryStream();
+                    using (var sw = new System.IO.StreamWriter(memo))
+                    {
+                        Type itemType = typeof(DescargaArchivoSolicitud_Result);
+                        var props = itemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+
+                        foreach (var item in lstActivos)
+                        {
+                            sw.WriteLine(string.Join(",", props.Select(p => string.Format("\"{0}\"", p.GetValue(item, null)))));
+                        }
+                        sw.Flush();
+                    }
+                    return File(memo.ToArray(), "text/csv", string.Format("NominaManual{0}.csv",strPeriodo));
+                }
             }
             catch (Exception ex)
             {

@@ -13,7 +13,7 @@ namespace ASN.Models
     
     public partial class DescargaArchivoSolicitud_Result
     {
-        public int EMPLEADO { get; set; }
+        public string EMPLEADO { get; set; }
         public string CONCEPTO { get; set; }
         public string ACCION { get; set; }
         public string UNIDAD { get; set; }
