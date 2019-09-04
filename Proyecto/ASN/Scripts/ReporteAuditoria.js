@@ -23,17 +23,26 @@ $(document).ready(function () {
     $(window).trigger("resize");
 });
 
-function errorsote(args) {
-
-    if (args.errors) {
-
-        $(document).ready(function () {
-            var notification = $("#popupNotification").data("kendoNotification");
-            notification.show(args.errors.error.errors[0], "error");
-        });
-
-    }
+function columnas(e) {
+    var columns = e.workbook.sheets[0].columns;
+    columns.forEach(function (column) {
+        // also delete the width if it is set
+        delete column.width;
+        column.autoWidth = true;
+    });
 }
+
+//function errorsote(args) {
+
+//    if (args.errors) {
+
+//        $(document).ready(function () {
+//            var notification = $("#popupNotification").data("kendoNotification");
+//            notification.show(args.errors.error.errors[0], "error");
+//        });
+
+//    }
+//}
 
 //function MandaFolio() {
 //    return {

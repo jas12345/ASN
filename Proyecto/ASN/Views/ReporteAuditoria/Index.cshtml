@@ -49,7 +49,7 @@
                                 columns.Bound(e => e.NombreDelSolicitante).Width(100).Title("Nombre del solicitante");
                                 columns.Bound(e => e.EstatusSolicitudId).Title("Estatus").Width(30);
                             })
-                            .ToolBar(tools => tools.Excel().Text("Exportar"))
+                            .ToolBar(tools => tools.Excel().Text("Exportar Solicitudes"))
                             .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")).AllPages(true).Filterable(true))
                             .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                             .Sortable()
@@ -324,14 +324,6 @@ $(function(){
 }
 
 <script>
-    function columnas(e) {
-        var columns = e.workbook.sheets[0].columns;
-        columns.forEach(function (column) {
-            // also delete the width if it is set
-            delete column.width;
-            column.autoWidth = true;
-        });
-    }
 
     //$('#expand').click(function (e) {
     //    var grid = $("#grid").data("kendoGrid");

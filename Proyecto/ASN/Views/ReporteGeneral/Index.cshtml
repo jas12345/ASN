@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .k-grid .k-hierarchy-col {
+        width: 6px;
+    }
+
+    #grid {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+</style>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12">
+            <div class="row">
+                @Html.Label("Reporte General", new { style = "font-size: 18px" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div id="parent">
+                    @(Html.Kendo().Grid<ASN.Models.ReporteGeneralSel_Result>()
+                        .Name("grid")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(e => e.Anio).Title("Año").Width(25).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                            columns.Bound(e => e.PeriodoNominaId).Width(25).Title("Periodo").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                            columns.Bound(e => e.FolioSolicitud).Width(25).Title("Folio").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                            columns.Bound(e => e.Fecha_Solicitud).Title("Fecha de solicitud").Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
+                            columns.Bound(e => e.FechaDeModificacion).Title("Fecha de modificación").Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
+                            columns.Bound(e => e.Solicitante_Ident).Width(35).Title("Solicitante CCMSID").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))); ;
+                            columns.Bound(e => e.NombreDelSolicitante).Width(100).Title("Nombre del solicitante");
+                            columns.Bound(e => e.EstatusSolicitudId).Title("Estatus").Width(30);
+                        })
+                        .ToolBar(tools => tools.Excel().Text("Exportar Solcitudes"))
+                        .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")).AllPages(true).Filterable(true))
+                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                        .Sortable()
+                        .Scrollable()
+                        .ClientDetailTemplateId("template")
+                        //.HtmlAttributes(new { style = "height: 775px;" })
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Batch(true)
+                            .ServerOperation(true)
+                            .Model(model =>
+                            {
+                                model.Id(c => c.FolioSolicitud);
+                            })
+                            .Read(read => read.Action("GetSolicitudes", "ReporteGeneral"))
+                        )
+                        .Navigatable()
+                        //.Events(e => e.DataBound("dataBound").ExcelExport("excelexport").DetailInit("detailInit"))
+                        //.Events(e => e.DataBound("dataBound"))
+                        .Events(e => e.ExcelExport("columnas"))
+                        .Pageable(pageable => pageable
+                            .Refresh(true)
+                            .PageSizes(true)
+                            .ButtonCount(5)
+                            .Numeric(true)
+                            .PreviousNext(true)
+                            .Messages(messages =>
+                            {
+                                messages.ItemsPerPage("Registros por página");
+                                messages.Empty("Sin información para mostrar");
+                                messages.First("Primera");
+                                messages.Page("Página");
+                                messages.Last("Última");
+                                messages.Previous("Anterior");
+                                messages.Next("Siguiente");
+                                messages.Refresh("Actualizar");
+                                messages.Of("De");
+                                messages.MorePages("Mas páginas");
+                                //messages.Display("Prueba");
+                                messages.Display("{0} a {1} de {2}");
+                            })
+                        )
+                    )
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script id="template" type="text/kendo-tmpl">
+        <h3>Conceptos</h3>
+        @(Html.Kendo().Grid<ASN.Models.ReporteGeneralDetalleSel_Result>()
+            .Name("grid_#=FolioSolicitud#") // template expression, to be evaluated in the master context
+            .Columns(columns =>
+            {
+                columns.Bound(o => o.FolioSolicitud).Title("FolioId").Width(15).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                //columns.Bound(o => o.FechaDeCreacion).Width(30).Format("{0:yyyy-MM-dd}").Filterable(true).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
+                //columns.Bound(o => o.FechaDeModificacion).Width(30).Format("{0:yyyy-MM-dd}").Filterable(true).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
+                columns.Bound(o => o.country_ident).Width(30).Title("PaisId").Visible(false);
+                columns.Bound(o => o.country_full_name).Width(20).Title("Pais");
+                columns.Bound(o => o.Location_Ident).Width(30).Title("SiteId").Visible(false);
+                columns.Bound(o => o.Location_Name).Width(30).Title("Site");
+                columns.Bound(o => o.Client_Ident).Width(30).Title("Cliented").Visible(false);
+                columns.Bound(o => o.Client_Name).Width(30).Title("Cliente");
+                columns.Bound(o => o.Program_Ident).Width(30).Title("ProgramaId").Visible(false);
+                columns.Bound(o => o.Program_Name).Width(30).Title("Programa");
+                columns.Bound(o => o.JefeInmediatoCCMSID).Width(30).Title("JefeCCMSID").Visible(false);
+                columns.Bound(o => o.JefeInmediatoNombre).Width(30).Title("Jefe Inmediato");
+                columns.Bound(o => o.EmpleadoCCMSID).Width(30).Title("EmpleadoCCMSID").Visible(false);
+                columns.Bound(o => o.EmpleadoNombre).Width(30).Title("Nombre Empleado");
+                columns.Bound(o => o.ConceptoId).Width(30).Title("ConceptoId").Visible(false);
+                columns.Bound(o => o.ConceptoDesc).Width(30).Title("Concepto");
+                columns.Bound(o => o.MotivosSolicitudId).Width(30).Title("MotivoId").Visible(false);
+                columns.Bound(o => o.MotivoSolicitudDesc).Width(30).Title("Motivo");
+                columns.Bound(o => o.ConceptoMotivoId).Width(30).Title("ConceptoMotivoId").Visible(false);
+                columns.Bound(o => o.ConceptoMotivoDesc).Width(30).Title("Concepto Motivo");
+                columns.Bound(o => o.ResponsableId).Width(30).Title("ResponsableId").Visible(false);
+                columns.Bound(o => o.NombreResponsable).Width(30).Title("Nombre Responsable");
+                columns.Bound(o => o.Monto).Width(30).Title("Monto");
+            })
+            //.ClientDetailTemplateId("template2")
+            //.Events(e => e.DataBound("dataBound"))
+            //.Events(e => e.ExcelExport("employees_excelExport2").DetailInit("employees_detailInit2"))
+            .Events(e => e.ExcelExport("columnas"))
+            .ToolBar(tools => tools.Excel().Text("ExportarConceptos"))
+            .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") + "_Conceptos_Detalle").AllPages(true).Filterable(true))
+            .HtmlAttributes(new { style = "height: 450px;" })
+            .Scrollable()
+            .Sortable()
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(10)
+            .Read(read => read.Action("GetSolicitudesDetalle", "ReporteGeneral", new { folioId = "#=FolioSolicitud#" }))
+            )
+            .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(true)
+                .ButtonCount(10)
+                .Numeric(true)
+                .PreviousNext(true)
+                .Messages(messages =>
+                {
+                    messages.ItemsPerPage("Registros por página");
+                    messages.Empty("Sin información para mostrar");
+                    messages.First("Primera");
+                    messages.Page("Página");
+                    messages.Last("Última");
+                    messages.Previous("Anterior");
+                    messages.Next("Siguiente");
+                    messages.Refresh("Actualizar");
+                    messages.Of("De");
+                    messages.MorePages("Mas páginas");
+            //messages.Display("Prueba");
+            messages.Display("{0} a {1} de {2}");
+                })
+            )
+            .Sortable()
+            .ToClientTemplate()
+        )
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+$(function(){
+    window.location.href = "@Url.Action("Index","Inicio")";
+});
+    </script>
+}
+
+
+@Scripts.Render("~/bundles/ReporteGeneral");

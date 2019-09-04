@@ -138,6 +138,10 @@ namespace ASN
             //ReporteAuditoria
             bundles.Add(new ScriptBundle("~/bundles/ReporteAuditoria").Include(
             "~/Scripts/ReporteAuditoria.js"));
+
+            //ReporteGeneral
+            bundles.Add(new ScriptBundle("~/bundles/ReporteGeneral").Include(
+            "~/Scripts/ReporteGeneral.js"));
         }
     }
 }

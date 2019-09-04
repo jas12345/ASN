@@ -2565,5 +2565,19 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteAuditoriasDetalleAutorizadoresSel_Result>("ReporteAuditoriasDetalleAutorizadoresSel", folioIdParameter);
         }
+    
+        public virtual ObjectResult<ReporteGeneralDetalleSel_Result> ReporteGeneralDetalleSel(Nullable<int> folioId)
+        {
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteGeneralDetalleSel_Result>("ReporteGeneralDetalleSel", folioIdParameter);
+        }
+    
+        public virtual ObjectResult<ReporteGeneralSel_Result> ReporteGeneralSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteGeneralSel_Result>("ReporteGeneralSel");
+        }
     }
 }

@@ -10,9 +10,9 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Consultante,Administrador")]
     public class ReporteAuditoriaController : Controller
     {
-        [Authorize]
         // GET: ReporteAuditoria
         public ActionResult Index()
         {

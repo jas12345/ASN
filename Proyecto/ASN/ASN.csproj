@@ -143,6 +143,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\ReporteAuditoriaController.cs" />
+    <Compile Include="Controllers\ReporteGeneralController.cs" />
     <Compile Include="Controllers\ResponsableAutorizaController.cs" />
     <Compile Include="Controllers\AutorizaSolicitudController.cs" />
     <Compile Include="Controllers\CapturaSolicitudController.cs" />
@@ -507,6 +508,12 @@
     <Compile Include="Models\ReporteAuditoriasSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReporteGeneralDetalleSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReporteGeneralSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SolicitudEmpleadosxPerfilCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -656,6 +663,7 @@
     <Content Include="Scripts\Comentarios.js" />
     <Content Include="Scripts\ReporteAuditoria.js" />
     <Content Include="Scripts\Notificaciones.js" />
+    <Content Include="Scripts\ReporteGeneral.js" />
     <Content Include="Scripts\ResponsableAutoriza.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -859,6 +867,7 @@
     <Content Include="Views\Notificaciones\Index.cshtml" />
     <Content Include="Views\Notificaciones\NotificacionEmail.cshtml" />
     <Content Include="Views\ReporteAuditoria\Index.cshtml" />
+    <Content Include="Views\ReporteGeneral\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

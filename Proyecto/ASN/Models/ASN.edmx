@@ -679,6 +679,10 @@
           <Parameter Name="FolioId" Type="int" Mode="In" />
         </Function>
         <Function Name="ReporteAuditoriasSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="ReporteGeneralDetalleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReporteGeneralSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="SolicitudEmpleadosxPerfilCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
           <Parameter Name="Solicitud" Type="int" Mode="In" />
@@ -1465,6 +1469,10 @@
           <FunctionImport Name="ReporteAuditoriasDetalleAutorizadoresSel" ReturnType="Collection(ASNModel.ReporteAuditoriasDetalleAutorizadoresSel_Result)">
           <Parameter Name="FolioId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ReporteGeneralDetalleSel" ReturnType="Collection(ASNModel.ReporteGeneralDetalleSel_Result)">
+            <Parameter Name="FolioId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteGeneralSel" ReturnType="Collection(ASNModel.ReporteGeneralSel_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2305,6 +2313,40 @@
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
           <Property Type="String" Name="ConceptoDesc" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ReporteGeneralDetalleSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="String" Name="country_full_name" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="country_ident" Nullable="true" />
+          <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Location_Ident" Nullable="true" />
+          <Property Type="String" Name="Client_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
+          <Property Type="String" Name="Program_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Program_Ident" Nullable="true" />
+          <Property Type="Int32" Name="JefeInmediatoCCMSID" Nullable="true" />
+          <Property Type="String" Name="JefeInmediatoNombre" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="EmpleadoCCMSID" Nullable="true" />
+          <Property Type="String" Name="EmpleadoNombre" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="String" Name="ConceptoDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="MotivosSolicitudId" Nullable="false" />
+          <Property Type="String" Name="MotivoSolicitudDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="false" />
+          <Property Type="String" Name="ConceptoMotivoDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ResponsableId" Nullable="true" />
+          <Property Type="String" Name="NombreResponsable" Nullable="true" MaxLength="752" />
+          <Property Type="String" Name="Monto" Nullable="true" MaxLength="73" />
+        </ComplexType>
+        <ComplexType Name="ReporteGeneralSel_Result">
+          <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="NombreDelSolicitante" Nullable="true" MaxLength="752" />
+          <Property Type="DateTime" Name="FechaDeModificacion" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Anio" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -3578,6 +3620,48 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
                 <ScalarProperty Name="ConceptoDesc" ColumnName="ConceptoDesc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteGeneralDetalleSel" FunctionName="ASNModel.Store.ReporteGeneralDetalleSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteGeneralDetalleSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="country_full_name" ColumnName="country_full_name" />
+                <ScalarProperty Name="country_ident" ColumnName="country_ident" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
+                <ScalarProperty Name="Program_Name" ColumnName="Program_Name" />
+                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
+                <ScalarProperty Name="JefeInmediatoCCMSID" ColumnName="JefeInmediatoCCMSID" />
+                <ScalarProperty Name="JefeInmediatoNombre" ColumnName="JefeInmediatoNombre" />
+                <ScalarProperty Name="EmpleadoCCMSID" ColumnName="EmpleadoCCMSID" />
+                <ScalarProperty Name="EmpleadoNombre" ColumnName="EmpleadoNombre" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="ConceptoDesc" ColumnName="ConceptoDesc" />
+                <ScalarProperty Name="MotivosSolicitudId" ColumnName="MotivosSolicitudId" />
+                <ScalarProperty Name="MotivoSolicitudDesc" ColumnName="MotivoSolicitudDesc" />
+                <ScalarProperty Name="ConceptoMotivoId" ColumnName="ConceptoMotivoId" />
+                <ScalarProperty Name="ConceptoMotivoDesc" ColumnName="ConceptoMotivoDesc" />
+                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
+                <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteGeneralSel" FunctionName="ASNModel.Store.ReporteGeneralSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteGeneralSel_Result">
+                <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="NombreDelSolicitante" ColumnName="NombreDelSolicitante" />
+                <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
