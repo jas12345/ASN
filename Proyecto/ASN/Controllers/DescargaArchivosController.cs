@@ -28,7 +28,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstSol = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value).ToList();
+                    //lstSol = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value).ToList();
                 }
                 using (var memo = new System.IO.MemoryStream())
                 using (var sw = new System.IO.StreamWriter(memo))

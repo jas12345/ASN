@@ -2566,13 +2566,17 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteAuditoriasDetalleAutorizadoresSel_Result>("ReporteAuditoriasDetalleAutorizadoresSel", folioIdParameter);
         }
     
-        public virtual ObjectResult<DescargaArchivoSolicitud_Result> DescargaArchivoSolicitud(Nullable<int> empleadoId)
+        public virtual ObjectResult<DescargaArchivoSolicitud_Result> DescargaArchivoSolicitud(Nullable<int> empleadoId, Nullable<int> activos)
         {
             var empleadoIdParameter = empleadoId.HasValue ?
                 new ObjectParameter("EmpleadoId", empleadoId) :
                 new ObjectParameter("EmpleadoId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DescargaArchivoSolicitud_Result>("DescargaArchivoSolicitud", empleadoIdParameter);
+            var activosParameter = activos.HasValue ?
+                new ObjectParameter("Activos", activos) :
+                new ObjectParameter("Activos", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DescargaArchivoSolicitud_Result>("DescargaArchivoSolicitud", empleadoIdParameter, activosParameter);
         }
     
         public virtual ObjectResult<ReporteGeneralDetalleSel_Result> ReporteGeneralDetalleSel(Nullable<int> folioId)
@@ -2587,6 +2591,24 @@ namespace ASN.Models
         public virtual ObjectResult<ReporteGeneralSel_Result> ReporteGeneralSel()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteGeneralSel_Result>("ReporteGeneralSel");
+        }
+    
+        public virtual ObjectResult<ReporteIndividualDetalleSel_Result> ReporteIndividualDetalleSel(Nullable<int> folioId)
+        {
+            var folioIdParameter = folioId.HasValue ?
+                new ObjectParameter("FolioId", folioId) :
+                new ObjectParameter("FolioId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteIndividualDetalleSel_Result>("ReporteIndividualDetalleSel", folioIdParameter);
+        }
+    
+        public virtual ObjectResult<ReporteIndividualSel_Result> ReporteIndividualSel(Nullable<int> solicitanteIdent)
+        {
+            var solicitanteIdentParameter = solicitanteIdent.HasValue ?
+                new ObjectParameter("SolicitanteIdent", solicitanteIdent) :
+                new ObjectParameter("SolicitanteIdent", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteIndividualSel_Result>("ReporteIndividualSel", solicitanteIdentParameter);
         }
     }
 }

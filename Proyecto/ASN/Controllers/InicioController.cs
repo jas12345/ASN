@@ -19,13 +19,6 @@ namespace ASN.Controllers
                 {
                     MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
 
-                    //using (ITALEntities ctx = new ITALEntities())
-                    //{
-                    //    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    //    var urlimg = ctx.CatImagePromotionByCityId(usuario.UserInfo.CityIdBIOS.Value).SingleOrDefault();
-                    //    ViewBag.URLImagen = urlimg == null ? string.Empty : urlimg.ImageView;
-                    //}
-
                     return View(usuario);
                 }
                 else

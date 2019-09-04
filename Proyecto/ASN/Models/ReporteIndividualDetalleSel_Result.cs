@@ -11,7 +11,7 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class ReporteGeneralDetalleSel_Result
+    public partial class ReporteIndividualDetalleSel_Result
     {
         public int FolioSolicitud { get; set; }
         public string country_full_name { get; set; }
