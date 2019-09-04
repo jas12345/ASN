@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: auto;
+        margin-top: auto;
+        width: 50%;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+<div class="container">    
+    <div class="row">
+        <div class="col-lg-12">
+            <input type="button" title="Descargar" name="btnDescargar" value="Descargar" onclick="window.location.href='@Url.Action("DownloadCSV")'" />
+        </div>
+    </div>
+</div>
+}
+else
+{
+    <p>You are not logged in</p>
+
+    Response.Redirect(Url.Action("Login", "Home"));
+}
