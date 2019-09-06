@@ -361,7 +361,7 @@
                                 column.Bound(c => c.Autorizador).Title("Autorizador Asignado").Filterable(false).Width(70);
                             })
                             //.HtmlAttributes(new { style = "height: 475px;" })
-                            .Scrollable(sorteable => sorteable.Virtual(false))
+                            .Scrollable(Scrollable => Scrollable.Virtual(false))
                             .Sortable()
                             //.PersistSelection()
                             .AutoBind(false)
@@ -395,7 +395,7 @@
                             //.Create(create => create.Action("CrearSolicitudPorEmpleado", "AutorizaSolicitud").Type(HttpVerbs.Post))
                             //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
                             )
-                            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                            //.Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
                             //.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple).Type(GridSelectionType.Row))
                             .Navigatable()
                             .Pageable(pageable => pageable
@@ -493,8 +493,8 @@
                 var ConParametroId = ""
                 var ConParametroNombre = ""
                 var ConParametroConceptoMonto = ""
-        var ConNivelesAutorizacion = ""
-        var ConEmpleadoident = ""
+                var ConNivelesAutorizacion = ""
+                var ConEmpleadoident = ""
 
                 // Sección Responsable de Incidente
                 var CCMSIdResponsable = "";

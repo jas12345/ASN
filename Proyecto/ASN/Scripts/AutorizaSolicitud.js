@@ -715,7 +715,7 @@ function onChange(e) {
     else {
         $("#AutorizarSolicitudALL").hide();
         $("#RechazarSolicitudALL").hide();
-        console.log(rows.length);
+        //console.log(rows.length);
     }
 
 
@@ -730,6 +730,16 @@ function autorizarSolicitudALL() {
     var rows = $("#gridAutorizacion").data("kendoGrid").select();
 
     if (rows.length > 0) {
+        //rows.each(function (e) {
+        //    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+        //    console.log(dataItem.FolioSolicitud);
+        //    console.log(dataItem.Ident);
+        //    console.log(dataItem.ConceptoId);
+        //    console.log(dataItem.NivelAutorizacion);
+        //});
+
+
         $.when(rows.each(function (e) {
             //var grid = $("#gridAutorizacion").data("kendoGrid");
             var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
@@ -743,13 +753,15 @@ function autorizarSolicitudALL() {
                 console.log("done_" + dataItem.FolioSolicitud + "_" + dataItem.Ident + "_" + dataItem.ConceptoId + "_" + dataItem.NivelAutorizacion);
             });
         })).done(function () {
-            console.log("finito");
+            console.log("finito_A");
 
             var grid = $("#gridAutorizacion").data("kendoGrid");
             grid._selectedIds = {};
             grid.clearSelection();
             actualizaGrid();
         });
+
+        //console.log($("#gridAutorizacion").data("kendoGrid").dataItem($("#gridAutorizacion").data("kendoGrid").select()) + "_A");
     }
 }
 
@@ -763,31 +775,37 @@ function rechazarSolicitudALL() {
     var rows = $("#gridAutorizacion").data("kendoGrid").select();
 
     if (rows.length > 0) {
+
+        //rows.each(function (e) {
+        //    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+        //    console.log(dataItem.FolioSolicitud);
+        //    console.log(dataItem.Ident);
+        //    console.log(dataItem.ConceptoId);
+        //    console.log(dataItem.NivelAutorizacion);
+        //});
+
         $.when(rows.each(function (e) {
             //var grid = $("#gridAutorizacion").data("kendoGrid");
             var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
-
-            console.log(dataItem.FolioSolicitud);
-            console.log(dataItem.Ident);
-            console.log(dataItem.ConceptoId);
-            console.log(dataItem.NivelAutorizacion);
 
             $.when(rechazarSolicitudALLx(dataItem.FolioSolicitud, dataItem.Ident, dataItem.ConceptoId, dataItem.NivelAutorizacion), calculaEstatusSolicitudALL(dataItem.FolioSolicitud)).done(function () {
                 console.log("done_" + dataItem.FolioSolicitud + "_" + dataItem.Ident + "_" + dataItem.ConceptoId + "_" + dataItem.NivelAutorizacion);
             });
         })).done(function () {
-            console.log("finito");
+            console.log("finito_R");
 
             var grid = $("#gridAutorizacion").data("kendoGrid");
             grid._selectedIds = {};
             grid.clearSelection();
             actualizaGrid();
         });
+
+        //console.log($("#gridAutorizacion").data("kendoGrid").dataItem($("#gridAutorizacion").data("kendoGrid").select()) + "_R");
     }
 }
 
 function autorizarSolicitudALLx(folioid,eid,conId,nivId) {
-
 
     $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + folioid + "&Empleado_Ident=" + eid + "&ConceptoId=" + conId + "&NivelAutorizacion=" + nivId + "&Accion=" + 2, function (data) {
 
@@ -810,7 +828,7 @@ function autorizarSolicitudALLx(folioid,eid,conId,nivId) {
         //debugger;
     });
 
-    //console.log(folioid + "_" + eid + "_" + conId + "_" + nivId);
+    //console.log(folioid + "_" + eid + "_" + conId + "_" + nivId + "_A");
 
 }
 
@@ -837,7 +855,7 @@ function rechazarSolicitudALLx(folioid, eid, conId, nivId) {
         //debugger;
     });
 
-        //console.log(folioid + "_" + eid + "_" + conId + "_" + nivId);
+    //console.log(folioid + "_" + eid + "_" + conId + "_" + nivId + "_R");
 }
 
 
