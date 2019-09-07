@@ -29,6 +29,11 @@
     body {
         height: 100%;
     }
+
+    #gridAutorizacion > .k-grid-header > div > table,
+    #gridAutorizacion > .k-grid-content > table {
+        width: 100% !important;
+    }
 </style>
 
 
@@ -346,7 +351,10 @@
                             .Name("gridAutorizacion")
                             .Columns(column =>
                             {
-                                column.Select().Width(9).HtmlAttributes(new { style = "text-align: left;" }).HeaderHtmlAttributes(new { style = "text-align: left;" });
+                                if(Model.EstatusId == "PA")
+                                {
+                                    column.Select().Width(9).HtmlAttributes(new { style = "text-align: left;" }).HeaderHtmlAttributes(new { style = "text-align: left;" });
+                                }
                                 column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Ver").Width(25).HtmlAttributes(new { style = "text-align: center;" });
                                 //column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(25);
                                 column.Bound(c => c.FolioSolicitud).Width(35).Title("Comentarios").ClientTemplate("<input class='k-button k-button-icontext' style='text-align:center;' type='button' value='Comentarios' onclick='getComments(#=FolioSolicitud#,#=Ident#,#=ConceptoId#);' />").Filterable(false);
@@ -359,13 +367,14 @@
                                 column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
                                 column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
                                 column.Bound(c => c.Autorizador).Title("Autorizador Asignado").Filterable(false).Width(70);
+                                column.Bound(c => c.Autorizador_Ident).Title("Autorizador CCMSID").Filterable(false).Width(70).Visible(false);
                             })
                             //.HtmlAttributes(new { style = "height: 475px;" })
                             .Scrollable(Scrollable => Scrollable.Virtual(false))
                             .Sortable()
                             //.PersistSelection()
                             .AutoBind(false)
-                            .Events(eve => eve.Change("onChange"))
+                            .Events(eve => eve.Change("onChange").DataBound("ocultaCheckbox"))
                             //.Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                             .DataSource(dataSource => dataSource
                                 .Ajax()
@@ -541,19 +550,19 @@
                 var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
 
                 // Liga para crear Solicitud
-                var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "AutorizaSolicitud")';
+                //var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "AutorizaSolicitud")';
 
                 // Liga para enviar solicitud a Autorizadores
-                var urlEnviaSolicitud = '@Url.Action("EnviaSolicitud", "AutorizaSolicitud")';
+                //var urlEnviaSolicitud = '@Url.Action("EnviaSolicitud", "AutorizaSolicitud")';
 
                 //
-                var urlUpdateEmpleadoSolicitud = '@Url.Action("UpdateEmpleadoSolicitud", "AutorizaSolicitud")';
+                //var urlUpdateEmpleadoSolicitud = '@Url.Action("UpdateEmpleadoSolicitud", "AutorizaSolicitud")';
 
                 //
-                var urlCrearEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "AutorizaSolicitud")';
+                //var urlCrearEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "AutorizaSolicitud")';
 
                 //
-                var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "AutorizaSolicitud")';
+                //var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "AutorizaSolicitud")';
 
         //
         var urlAutorizaSolicitud = '@Url.Action("ProcesaSolicitud", "AutorizaSolicitud")';
@@ -570,6 +579,9 @@
 
                 //debugger;
                 //var urlSolicitud = grid.selectedKeyNames().join(", ");
+
+        var usuarioCCMSID = '@User.Identity.Name';
+        var estatusId = '@Model.EstatusId';
     </script>
 }
 else

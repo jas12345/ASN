@@ -238,7 +238,7 @@ function EditaAutorizacion(e) {
     debugger;
     //@Html.ActionLink("CapturaSolicitud", "Index", "CapturaSolicitud")
 
-    window.location.href = urlEditar +"?FolioSolicitud="+ d.FolioSolicitud;
+    window.location.href = urlEditar + "?FolioSolicitud=" + d.FolioSolicitud + "&estatus=" + d.EstatusSolicitudId;
 }
 
 //$(document).ready(function () {

@@ -45,25 +45,25 @@ function getFolio() {
     };
 }
 
-function agregarSolicitud() {
-    //console.log("Salvado");
-    //debugger;
-    //infoSolicitud();
-    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9 + "&Active=" + 1, function (data) {
-        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
+//function agregarSolicitud() {
+//    //console.log("Salvado");
+//    //debugger;
+//    //infoSolicitud();
+//    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9 + "&Active=" + 1, function (data) {
+//        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
 
-        FolioSolicitud = data.FolioSolicitud;
+//        FolioSolicitud = data.FolioSolicitud;
 
-        if (data.res == -2) {
-            var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Ya existe un registro con este Empleado y Concepto", "error");
-        }
+//        if (data.res == -2) {
+//            var notification = $("#popupNotification").data("kendoNotification");
+//            notification.show("Ya existe un registro con este Empleado y Concepto", "error");
+//        }
 
-        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
-        actualizaGrid();
-        //debugger;
-    });
-}
+//        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+//        actualizaGrid();
+//        //debugger;
+//    });
+//}
 
 function autorizarSolicitud() {
     //console.log("Salvado");
@@ -143,26 +143,26 @@ function cancelarSolicitud() {
     });
 }
 
-function enviarSolicitud() {
-    //console.log("Salvado");
-    //debugger;
-    //infoSolicitud();
-    $.post(urlEnviaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
-        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
-        //debugger;
+//function enviarSolicitud() {
+//    //console.log("Salvado");
+//    //debugger;
+//    //infoSolicitud();
+//    $.post(urlEnviaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+//        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
+//        //debugger;
 
-        if (data.res == -1) {
-            var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Error al Enviar Solicitud", "error");
-        }
+//        if (data.res == -1) {
+//            var notification = $("#popupNotification").data("kendoNotification");
+//            notification.show("Error al Enviar Solicitud", "error");
+//        }
 
-        //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
-        calculaEstatusSolicitud();
-        deshabilitaControlesEdicion();
-        actualizaGrid();
-        //debugger;
-    });
-}
+//        //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+//        calculaEstatusSolicitud();
+//        deshabilitaControlesEdicion();
+//        actualizaGrid();
+//        //debugger;
+//    });
+//}
 
 function calculaEstatusSolicitud() {
     //debugger;
@@ -300,36 +300,36 @@ function editarEmpleadoSolicitud(e) {
     //grid.select("tr:eq(" + rowIndex + ")");
 }
 
-function borrarEmpleadoSolicitud(e) {
-    //debugger;
+//function borrarEmpleadoSolicitud(e) {
+//    //debugger;
 
-    if (confirm("Desea eliminar este registro?")) {
+//    if (confirm("Desea eliminar este registro?")) {
 
-        e.preventDefault(); // sho J
-        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-        //debugger;
-        var Solicitud_Ident = dataItem.FolioSolicitud;
-        var Empleado_Ident = dataItem.Ident;
-        var ConceptoId = dataItem.ConceptoId;
-        //Se ejecuta Update con Active=false para eliminar el acceso respondiendo al botón Borrar
-        var Active = false;
+//        e.preventDefault(); // sho J
+//        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+//        //debugger;
+//        var Solicitud_Ident = dataItem.FolioSolicitud;
+//        var Empleado_Ident = dataItem.Ident;
+//        var ConceptoId = dataItem.ConceptoId;
+//        //Se ejecuta Update con Active=false para eliminar el acceso respondiendo al botón Borrar
+//        var Active = false;
 
-        //int Perfil_Ident, int Ident, bool Active
-        $.post(urlUpdateEmpleadoSolicitud + "/?FolioSolicitud=" + Solicitud_Ident + "&Empleado_Ident=" + Empleado_Ident + "&ConceptoId=" + ConceptoId + "&Activo=" + Active, function (data) {
-            //debugger;
+//        //int Perfil_Ident, int Ident, bool Active
+//        $.post(urlUpdateEmpleadoSolicitud + "/?FolioSolicitud=" + Solicitud_Ident + "&Empleado_Ident=" + Empleado_Ident + "&ConceptoId=" + ConceptoId + "&Activo=" + Active, function (data) {
+//            //debugger;
 
-            var grid = $("#gridAutorizacion").data("kendoGrid");
-            var selectedRows = grid.select();
+//            var grid = $("#gridAutorizacion").data("kendoGrid");
+//            var selectedRows = grid.select();
 
-            actualizaGrid();
+//            actualizaGrid();
 
-            //grid.select("tr:eq(" + selectedRows(0) + ")");
+//            //grid.select("tr:eq(" + selectedRows(0) + ")");
 
-        }).fail(function (ex) {
-            console.log("fail" + ex);
-        });
-    }
-}
+//        }).fail(function (ex) {
+//            console.log("fail" + ex);
+//        });
+//    }
+//}
 
 function onChangeFolioSolicitud() {
     //debugger;
@@ -698,8 +698,39 @@ function onChange(e) {
 
     //$(item).context.outerText
 
+
+    var grid = $("#gridAutorizacion").data("kendoGrid");
+    var rowss = $("#gridAutorizacion").data("kendoGrid").tbody.children();
+    
+    for (var j = 0; j < rowss.length; j++) {
+        var row = $(rowss[j]);
+        var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(row);
+
+        // Disable the checkbox if the location isn't set
+        if (dataItem.get("Autorizador_Ident") != usuarioCCMSID) {
+            //row.css('background-color', '#FFFFCF');
+            // What goes here?
+            //grid.table.find("tr").find("td:first input").attr("checked", true);
+            //row.context.cells[0].firstElementChild.setAttribute("disabled", "disabled");
+            //row.context.cells[0].firstElementChild.remove();
+            //row.context.cells[0].firstElementChild.remove();
+            //console.log(row.context.cells[0].firstElementChild.attributes["disabled"]);
+            //console.log(row.context.cells[0].firstElementChild.attributes["disabled"] == undefined);
+
+            if (row.context.cells[0].firstElementChild.attributes["disabled"] != undefined) {
+                row.context.cells[0].firstElementChild.checked = false;
+                row.context.cells[0].firstElementChild.parentElement.parentElement.classList.remove("k-state-selected");
+            } else {
+                checkboxActivos++;
+            }
+        }
+    }
+
     var rows = e.sender.select();
 
+    //var countador = $("#gridAutorizacion").data("kendoGrid").tbody.find("input:checked").closest("tr").length;
+
+    //if (countador > 0) {
     if (rows.length > 0) {
         //rows.each(function (e) {
         //    var grid = $("#gridAutorizacion").data("kendoGrid");
@@ -713,6 +744,7 @@ function onChange(e) {
         $("#RechazarSolicitudALL").show();
     }
     else {
+        this.element.find("input")[0].checked = false;
         $("#AutorizarSolicitudALL").hide();
         $("#RechazarSolicitudALL").hide();
         //console.log(rows.length);
@@ -720,6 +752,55 @@ function onChange(e) {
 
 
     //console.log("The selected product ids are: [" + this.selectedKeyNames().join(", ") + "]");
+}
+
+function ocultaCheckbox(e) {
+    if (estatusId == 'PA') {
+        var grid = e.sender;
+        var rows = e.sender.tbody.children();
+        var checkboxActivos = 0;
+        //var x = 0;
+        for (var j = 0; j < rows.length; j++) {
+            var row = $(rows[j]);
+            var dataItem = e.sender.dataItem(row);
+
+            // Disable the checkbox if the location isn't set
+            if (dataItem.get("Autorizador_Ident") != usuarioCCMSID) {
+                //row.css('background-color', '#FFFFCF');
+                // What goes here?
+                //grid.table.find("tr").find("td:first input").attr("checked", true);
+                //if (j == x) {
+                row.context.cells[0].firstElementChild.setAttribute("disabled", "disabled");
+                //row.context.cells[0].firstElementChild.remove();
+                //row.context.cells[0].firstElementChild.remove();
+                //}
+
+                //if (row.context.cells[0].firstElementChild.attributes["disabled"] == undefined) {
+                //    //row.context.cells[0].firstElementChild.checked = false;
+                //    //row.context.cells[0].firstElementChild.parentElement.parentElement.classList.remove("k-state-selected");
+                //    //checkboxActivos++;
+                //}
+
+                //row.context.cells[0].firstElementChild.remove();
+                //row.context.cells[0].firstElementChild.remove();
+            }
+            else if (dataItem.get("Autorizador_Ident") == usuarioCCMSID) {
+                checkboxActivos++;
+            }
+        }
+
+        if (checkboxActivos == 0) {
+            grid.hideColumn(0);
+        }
+        else {
+            grid.showColumn(0);
+        }
+    }
+    else {
+        //FolioSolicitud
+        var grid = e.sender;
+        grid.hideColumn("FolioSolicitud");
+    }
 }
 
 function autorizarSolicitudALL() {
@@ -744,10 +825,10 @@ function autorizarSolicitudALL() {
             //var grid = $("#gridAutorizacion").data("kendoGrid");
             var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 
-            console.log(dataItem.FolioSolicitud);
-            console.log(dataItem.Ident);
-            console.log(dataItem.ConceptoId);
-            console.log(dataItem.NivelAutorizacion);
+            //console.log(dataItem.FolioSolicitud);
+            //console.log(dataItem.Ident);
+            //console.log(dataItem.ConceptoId);
+            //console.log(dataItem.NivelAutorizacion);
 
             $.when(autorizarSolicitudALLx(dataItem.FolioSolicitud, dataItem.Ident, dataItem.ConceptoId, dataItem.NivelAutorizacion), calculaEstatusSolicitudALL(dataItem.FolioSolicitud)).done(function () {
                 console.log("done_" + dataItem.FolioSolicitud + "_" + dataItem.Ident + "_" + dataItem.ConceptoId + "_" + dataItem.NivelAutorizacion);
@@ -775,7 +856,6 @@ function rechazarSolicitudALL() {
     var rows = $("#gridAutorizacion").data("kendoGrid").select();
 
     if (rows.length > 0) {
-
         //rows.each(function (e) {
         //    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 

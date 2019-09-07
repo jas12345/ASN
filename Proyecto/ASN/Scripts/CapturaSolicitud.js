@@ -190,7 +190,7 @@ function calculaEstatusSolicitud() {
             if (ClaveEstatusSolicitud == 'EB') {
                 $("#EnviarSolicitud").show();
                 $("#Conceptos").data("kendoDropDownList").enable(true);
-                //$("#CancelarSolicitud").show();
+                $("#CancelarSolicitud").show();
                 
                 //$("#EnviarSolicitud").enable(true);
             }
@@ -204,6 +204,7 @@ function calculaEstatusSolicitud() {
             if (ClaveEstatusSolicitud == 'C') {
                 //$("#EnviarSolicitud").enable(false);
                 $("#AgregarSolicitud").hide();
+                $("#CancelarSolicitud").hide();
             }
 
             if (ClaveEstatusSolicitud == 'CE') {
@@ -412,14 +413,17 @@ function editarEmpleadoSolicitud(e) {
     // Activar / Desactivar botón Rechazar
     if (dataItem_EstatusId == 'R') {
         $("#AgregarSolicitud").show();
+        $("#CancelarEmpleadoSolicitud").show();
     }
     else if (dataItem_EstatusId == 'EB') {
         $("#AgregarSolicitud").show();
         $("#EnviarSolicitud").show();
+        $("#CancelarEmpleadoSolicitud").hide();
     }
     else {
         $("#AgregarSolicitud").hide();
         $("#EnviarSolicitud").hide();
+        $("#CancelarEmpleadoSolicitud").hide();
     }
 
     //// Procesar el estatus de EmpleadoSolicitud
