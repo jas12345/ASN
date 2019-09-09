@@ -16,6 +16,11 @@
     .k-grid-header th.k-header {
         text-align: center;
     }
+
+    #gridSolicitud > .k-grid-header > div > table,
+    #gridSolicitud > .k-grid-content > table {
+        width: 100% !important;
+    }
 </style>
 
 
@@ -636,8 +641,9 @@
                         column.Bound(c => c.Autorizador).Title("Autorizador Asignado").Filterable(false).Width(70);
                     })
                     .HtmlAttributes(new { style = "height: 425px;" })
-                    .Scrollable(sorteable => sorteable.Virtual(false))
+                    .Scrollable()
                     .Sortable()
+                    .Resizable(res => res.Columns(true))
                     .PersistSelection()
                     .AutoBind(false)
                     .Events(eve => eve.DataBound("onDataBound"))

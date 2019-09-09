@@ -370,7 +370,7 @@
                                 column.Bound(c => c.Autorizador_Ident).Title("Autorizador CCMSID").Filterable(false).Width(70).Visible(false);
                             })
                             //.HtmlAttributes(new { style = "height: 475px;" })
-                            .Scrollable(Scrollable => Scrollable.Virtual(false))
+                            .Scrollable()
                             .Sortable()
                             //.PersistSelection()
                             .AutoBind(false)

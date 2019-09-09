@@ -367,7 +367,7 @@
                             column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
                         })
                         //.HtmlAttributes(new { style = "height: 475px;" })
-                        .Scrollable(sorteable => sorteable.Virtual(false))
+                        .Scrollable()
                         .Sortable()
                         .PersistSelection()
                         .AutoBind(false)

@@ -175,6 +175,8 @@ function calculaEstatusSolicitud() {
         $.post(urlConsultarEstatusSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
             //debugger;
 
+            var grid = $("#gridSolicitud").data("kendoGrid");
+
             if (data.res == -1) {
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("Error al Calcular Estatus", "error");
@@ -191,6 +193,8 @@ function calculaEstatusSolicitud() {
                 $("#EnviarSolicitud").show();
                 $("#Conceptos").data("kendoDropDownList").enable(true);
                 $("#CancelarSolicitud").show();
+                grid.hideColumn(2);
+                grid.hideColumn(3);
                 
                 //$("#EnviarSolicitud").enable(true);
             }
@@ -205,21 +209,29 @@ function calculaEstatusSolicitud() {
                 //$("#EnviarSolicitud").enable(false);
                 $("#AgregarSolicitud").hide();
                 $("#CancelarSolicitud").hide();
+                grid.hideColumn(0);
+                grid.hideColumn(1);
             }
 
             if (ClaveEstatusSolicitud == 'CE') {
                 //$("#EnviarSolicitud").enable(false);
                 $("#AgregarSolicitud").hide();
+                grid.hideColumn(0);
+                grid.hideColumn(1);
             }
 
             if (ClaveEstatusSolicitud == 'PA') {
                 //$("#EnviarSolicitud").enable(false);
                 $("#AgregarSolicitud").hide();
+                grid.hideColumn(0);
+                grid.hideColumn(1);
             }
 
             if (ClaveEstatusSolicitud == 'A') {
                 //$("#EnviarSolicitud").enable(false);
                 $("#AgregarSolicitud").hide();
+                grid.hideColumn(0);
+                grid.hideColumn(1);
             }
 
             // Activar / Desactivar botón Rechazar
@@ -227,6 +239,7 @@ function calculaEstatusSolicitud() {
                 //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(false);
                 //$("#CancelarEmpleadoSolicitud").data("kendoButton").enable(true);
                 //$("#CancelarEmpleadoSolicitud").hide();
+                grid.hideColumn(1);
                 $("#AgregarSolicitud").hide();
                 $("#CCMSIDSolicitado").data("kendoNumericTextBox").enable(false);
                 $("#Conceptos").data("kendoDropDownList").enable(false);
