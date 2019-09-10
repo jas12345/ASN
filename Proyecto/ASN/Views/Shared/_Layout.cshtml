@@ -102,6 +102,7 @@
                     if (User.IsInRole("Responsable"))
                     {
                         <li>@Html.ActionLink("Mis Responsabilidades", "Index", "MisResponsabilidades")</li>
+                        <li>@Html.ActionLink("Descargar Archivo de Nómina","Index","DescargaArchivos")</li>
                     }
 
                     if (User.IsInRole("Responsable"))
