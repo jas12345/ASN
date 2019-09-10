@@ -210,6 +210,7 @@
     <Compile Include="Models\AutorizadoresxPerfilSolicitanteSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AutorizaViewModel.cs" />
     <Compile Include="Models\AvisoSolicitantesManual_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

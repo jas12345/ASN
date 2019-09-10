@@ -820,27 +820,69 @@ function autorizarSolicitudALL() {
         //    console.log(dataItem.NivelAutorizacion);
         //});
 
+        var listaA = [];
 
-        $.when(rows.each(function (e) {
-            //var grid = $("#gridAutorizacion").data("kendoGrid");
+        rows.each(function (e) {
             var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 
-            //console.log(dataItem.FolioSolicitud);
-            //console.log(dataItem.Ident);
-            //console.log(dataItem.ConceptoId);
-            //console.log(dataItem.NivelAutorizacion);
+            var algo = {
+                FolioSolicitud : dataItem.FolioSolicitud,
+                Empleado_Ident: dataItem.Ident,
+                ConceptoId : dataItem.ConceptoId,
+                NivelAutorizacion: dataItem.NivelAutorizacion,
+                Accion : 2
+            };
 
-            $.when(autorizarSolicitudALLx(dataItem.FolioSolicitud, dataItem.Ident, dataItem.ConceptoId, dataItem.NivelAutorizacion), calculaEstatusSolicitudALL(dataItem.FolioSolicitud)).done(function () {
-                console.log("done_" + dataItem.FolioSolicitud + "_" + dataItem.Ident + "_" + dataItem.ConceptoId + "_" + dataItem.NivelAutorizacion);
-            });
-        })).done(function () {
-            console.log("finito_A");
+            listaA.push(algo);
+        });
 
+        var listones = JSON.stringify({ 'liston': listaA });
+
+        $.when(
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: urlAutorizaSolicitud,
+                data: listones,
+                success: function () {
+                    //$('#result').html('"PassThings()" successfully called.');
+                    //console.log("todo bien");
+                },
+                failure: function (response) {
+                    //$('#result').html(response);
+                    //console.log("algo paso");
+                }
+            }) 
+        ).done(function () {
+            //console.log("finito_A");
             var grid = $("#gridAutorizacion").data("kendoGrid");
             grid._selectedIds = {};
             grid.clearSelection();
+            calculaEstatusSolicitud();
             actualizaGrid();
         });
+
+        //$.when(rows.each(function (e) {
+        //    //var grid = $("#gridAutorizacion").data("kendoGrid");
+        //    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+        //    //console.log(dataItem.FolioSolicitud);
+        //    //console.log(dataItem.Ident);
+        //    //console.log(dataItem.ConceptoId);
+        //    //console.log(dataItem.NivelAutorizacion);
+
+        //    $.when(autorizarSolicitudALLx(dataItem.FolioSolicitud, dataItem.Ident, dataItem.ConceptoId, dataItem.NivelAutorizacion), calculaEstatusSolicitudALL(dataItem.FolioSolicitud)).done(function () {
+        //        console.log("done_" + dataItem.FolioSolicitud + "_" + dataItem.Ident + "_" + dataItem.ConceptoId + "_" + dataItem.NivelAutorizacion);
+        //    });
+        //})).done(function () {
+        //    console.log("finito_A");
+
+        //    var grid = $("#gridAutorizacion").data("kendoGrid");
+        //    grid._selectedIds = {};
+        //    grid.clearSelection();
+        //    actualizaGrid();
+        //});
 
         //console.log($("#gridAutorizacion").data("kendoGrid").dataItem($("#gridAutorizacion").data("kendoGrid").select()) + "_A");
     }
@@ -865,78 +907,121 @@ function rechazarSolicitudALL() {
         //    console.log(dataItem.NivelAutorizacion);
         //});
 
-        $.when(rows.each(function (e) {
-            //var grid = $("#gridAutorizacion").data("kendoGrid");
+        var listaR = [];
+
+        rows.each(function (e) {
             var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 
-            $.when(rechazarSolicitudALLx(dataItem.FolioSolicitud, dataItem.Ident, dataItem.ConceptoId, dataItem.NivelAutorizacion), calculaEstatusSolicitudALL(dataItem.FolioSolicitud)).done(function () {
-                console.log("done_" + dataItem.FolioSolicitud + "_" + dataItem.Ident + "_" + dataItem.ConceptoId + "_" + dataItem.NivelAutorizacion);
-            });
-        })).done(function () {
-            console.log("finito_R");
+            var algo = {
+                FolioSolicitud: dataItem.FolioSolicitud,
+                Empleado_Ident: dataItem.Ident,
+                ConceptoId: dataItem.ConceptoId,
+                NivelAutorizacion: dataItem.NivelAutorizacion,
+                Accion: 3
+            };
 
+            listaR.push(algo);
+        });
+
+        var listones = JSON.stringify({ 'liston': listaR });
+
+        $.when(
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: urlAutorizaSolicitud,
+                data: listones,
+                success: function () {
+                    //$('#result').html('"PassThings()" successfully called.');
+                    //console.log("todo bien");
+                },
+                failure: function (response) {
+                    //$('#result').html(response);
+                    //console.log("algo paso");
+                }
+            })
+        ).done(function () {
+            //console.log("finito_R");
             var grid = $("#gridAutorizacion").data("kendoGrid");
             grid._selectedIds = {};
             grid.clearSelection();
+            calculaEstatusSolicitud();
             actualizaGrid();
         });
+
+        //$.when(rows.each(function (e) {
+        //    //var grid = $("#gridAutorizacion").data("kendoGrid");
+        //    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+        //    $.when(rechazarSolicitudALLx(dataItem.FolioSolicitud, dataItem.Ident, dataItem.ConceptoId, dataItem.NivelAutorizacion), calculaEstatusSolicitudALL(dataItem.FolioSolicitud)).done(function () {
+        //        console.log("done_" + dataItem.FolioSolicitud + "_" + dataItem.Ident + "_" + dataItem.ConceptoId + "_" + dataItem.NivelAutorizacion);
+        //    });
+        //})).done(function () {
+        //    console.log("finito_R");
+
+        //    var grid = $("#gridAutorizacion").data("kendoGrid");
+        //    grid._selectedIds = {};
+        //    grid.clearSelection();
+        //    actualizaGrid();
+        //});
 
         //console.log($("#gridAutorizacion").data("kendoGrid").dataItem($("#gridAutorizacion").data("kendoGrid").select()) + "_R");
     }
 }
 
-function autorizarSolicitudALLx(folioid,eid,conId,nivId) {
+//function autorizarSolicitudALLx(folioid,eid,conId,nivId) {
 
-    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + folioid + "&Empleado_Ident=" + eid + "&ConceptoId=" + conId + "&NivelAutorizacion=" + nivId + "&Accion=" + 2, function (data) {
+//    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + folioid + "&Empleado_Ident=" + eid + "&ConceptoId=" + conId + "&NivelAutorizacion=" + nivId + "&Accion=" + 2, function (data) {
 
-        FolioSolicitud = data.FolioSolicitud;
+//        FolioSolicitud = data.FolioSolicitud;
 
-        if (data.res == -1) {
-            var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("No se pudo procesar la Autorización ", "error");
-        }
-        else {
-            //$("#AutorizarSolicitud").hide();
-            //$("#RechazarSolicitud").hide();
-            $("#CancelarSolicitud").hide();
+//        if (data.res == -1) {
+//            var notification = $("#popupNotification").data("kendoNotification");
+//            notification.show("No se pudo procesar la Autorización ", "error");
+//        }
+//        else {
+//            //$("#AutorizarSolicitud").hide();
+//            //$("#RechazarSolicitud").hide();
+//            $("#CancelarSolicitud").hide();
 
-            //calculaEstatusSolicitud();
-        }
+//            //calculaEstatusSolicitud();
+//        }
 
-        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
-        //actualizaGrid();
-        //debugger;
-    });
+//        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+//        //actualizaGrid();
+//        //debugger;
+//    });
 
-    //console.log(folioid + "_" + eid + "_" + conId + "_" + nivId + "_A");
+//    //console.log(folioid + "_" + eid + "_" + conId + "_" + nivId + "_A");
 
-}
+//}
 
-function rechazarSolicitudALLx(folioid, eid, conId, nivId) {
+//function rechazarSolicitudALLx(folioid, eid, conId, nivId) {
 
-    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + folioid + "&Empleado_Ident=" + eid + "&ConceptoId=" + conId + "&NivelAutorizacion=" + nivId + "&Accion=" + 3, function (data) {
+//    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + folioid + "&Empleado_Ident=" + eid + "&ConceptoId=" + conId + "&NivelAutorizacion=" + nivId + "&Accion=" + 3, function (data) {
 
-        FolioSolicitud = data.FolioSolicitud;
+//        FolioSolicitud = data.FolioSolicitud;
 
-        if (data.res == -1) {
-            var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("No se pudo procesar la Autorización ", "error");
-        }
-        else {
-            //$("#AutorizarSolicitud").hide();
-            //$("#RechazarSolicitud").hide();
-            $("#CancelarSolicitud").hide();
+//        if (data.res == -1) {
+//            var notification = $("#popupNotification").data("kendoNotification");
+//            notification.show("No se pudo procesar la Autorización ", "error");
+//        }
+//        else {
+//            //$("#AutorizarSolicitud").hide();
+//            //$("#RechazarSolicitud").hide();
+//            $("#CancelarSolicitud").hide();
 
-            //calculaEstatusSolicitud();
-        }
+//            //calculaEstatusSolicitud();
+//        }
 
-        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
-        //actualizaGrid();
-        //debugger;
-    });
+//        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+//        //actualizaGrid();
+//        //debugger;
+//    });
 
-    //console.log(folioid + "_" + eid + "_" + conId + "_" + nivId + "_R");
-}
+//    //console.log(folioid + "_" + eid + "_" + conId + "_" + nivId + "_R");
+//}
 
 
 function calculaEstatusSolicitudALL(folioId) {

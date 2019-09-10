@@ -423,13 +423,15 @@ namespace ASN.Controllers
         //    }
         //}
 
-        public ActionResult ProcesaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, Nullable<int> NivelAutorizacion, int Accion)
+        //public ActionResult ProcesaSolicitud(int FolioSolicitud, int Empleado_Ident, int ConceptoId, Nullable<int> NivelAutorizacion, int Accion)
+        public ActionResult ProcesaSolicitud(List<AutorizaViewModel> liston)
         {
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
                     int res = 0;
+                    int FolioSolicitud = 0;
                     //int ccmsidAdmin = 0;
 
                     //int.TryParse(User.Identity.Name, out ccmsidAdmin);
@@ -441,19 +443,34 @@ namespace ASN.Controllers
 
                     int.TryParse(User.Identity.Name, out int idAdmin);
 
-                    context.CatSolicitudEmpleadosAutorizantesSu(
-                          FolioSolicitud
-                        , Empleado_Ident
-                        , ConceptoId
-                        , NivelAutorizacion
-                        , idAdmin
-                        , Accion
-                        , idAdmin
-                        , resultado);
+                    foreach(var obj in liston)
+                    {
+                        FolioSolicitud = obj.FolioSolicitud;
+
+                        context.CatSolicitudEmpleadosAutorizantesSu(
+                              obj.FolioSolicitud
+                            , obj.Empleado_Ident
+                            , obj.ConceptoId
+                            , obj.NivelAutorizacion
+                            , idAdmin
+                            , obj.Accion
+                            , idAdmin
+                            , resultado);
+                    }
+
+                    //context.CatSolicitudEmpleadosAutorizantesSu(
+                    //      FolioSolicitud
+                    //    , Empleado_Ident
+                    //    , ConceptoId
+                    //    , NivelAutorizacion
+                    //    , idAdmin
+                    //    , Accion
+                    //    , idAdmin
+                    //    , resultado);
 
                     int.TryParse(resultado.Value.ToString(), out res);
 
-                    return Json(new { FolioSolicitud, Empleado_Ident, res }, JsonRequestBehavior.AllowGet);
+                    return Json(new { FolioSolicitud, Empleado_Ident = 1, res }, JsonRequestBehavior.AllowGet);
 
                     //return Json(new { Id = 0, type = "create", response = new { Errors = resultadoAccion } }, JsonRequestBehavior.AllowGet);
 
@@ -466,7 +483,7 @@ namespace ASN.Controllers
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json(new { FolioSolicitud, Empleado_Ident, res = 0 }, JsonRequestBehavior.AllowGet);
+                return Json(new { FolioSolicitud = -1, Empleado_Ident = -1, res = 0 }, JsonRequestBehavior.AllowGet);
             }
         }
 
