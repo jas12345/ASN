@@ -16,7 +16,7 @@ function resizeWrapper() {
 
 $(window).resize(function () {
     resizeWrapper();
-    resizeGrid();
+    //resizeGrid();
 });
 
 $(document).ready(function () {
