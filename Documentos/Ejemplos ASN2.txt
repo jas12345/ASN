@@ -12,7 +12,8 @@ Autorizantes
 666229		villarreal.144		Miguel Angel Villarreal Mancha		Software Developer
 666336		navarroloera.5		Carlos Adrian Navarro Loera		Software Development Coordinator	
 893576		lopezserna.6		Gaudencio Lopez Serna			Application Support Specialist	
-960310		guerrerolopez.8		Alfredo Guerrero Lopez			Admin Software Developer	
+960310		guerrerolopez.8		Alfredo Guerrero Lopez			Admin Software Developer
+1689541     munizflores.5	
 
 Responsables Universidad
 656654		cavazosaranda.5		Mireya Cavazos Aranda			Payroll Sr. Manager

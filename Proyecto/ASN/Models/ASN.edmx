@@ -27,6 +27,17 @@
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatAdminSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatAdminSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="CCMSID" Type="int" Mode="In" />
+          <Parameter Name="UserCCMSID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatAdminSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="CCMSID" Type="int" Mode="In" />
+          <Parameter Name="UserCCMSID" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="RelUserRoleId" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatAnioFechasCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
         </Function>
@@ -480,6 +491,7 @@
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Responsable_Ident" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatRoleCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatSolicitudAutorizantesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
@@ -1488,11 +1500,23 @@
           </FunctionImport>
           <FunctionImport Name="ReporteGeneralSel" ReturnType="Collection(ASNModel.ReporteGeneralSel_Result)" />
           <FunctionImport Name="ReporteIndividualDetalleSel" ReturnType="Collection(ASNModel.ReporteIndividualDetalleSel_Result)">
-            <Parameter Name="FolioId" Mode="In" Type="Int32" />
+          <Parameter Name="FolioId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteIndividualSel" ReturnType="Collection(ASNModel.ReporteIndividualSel_Result)">
-            <Parameter Name="SolicitanteIdent" Mode="In" Type="Int32" />
+          <Parameter Name="SolicitanteIdent" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatAdminSel" ReturnType="Collection(ASNModel.CatAdminSel_Result)" />
+          <FunctionImport Name="CatAdminSi">
+            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+            <Parameter Name="UserCCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatAdminSu">
+            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+            <Parameter Name="UserCCMSID" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="RelUserRoleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatRoleCMB" ReturnType="Collection(ASNModel.CatRoleCMB_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2419,6 +2443,17 @@
           <Property Type="String" Name="NombreDelSolicitante" Nullable="true" MaxLength="752" />
           <Property Type="DateTime" Name="FechaDeModificacion" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="Anio" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CatAdminSel_Result">
+          <Property Type="Int32" Name="RelUserRoleId" Nullable="false" />
+          <Property Type="Int32" Name="CatRoleId" Nullable="false" />
+          <Property Type="Int32" Name="UserCCMSId" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+        </ComplexType>
+        <ComplexType Name="CatRoleCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
         </ComplexType>
        
         </Schema>
@@ -3798,6 +3833,27 @@
                 <ScalarProperty Name="NombreDelSolicitante" ColumnName="NombreDelSolicitante" />
                 <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
                 <ScalarProperty Name="Anio" ColumnName="Anio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatAdminSel" FunctionName="ASNModel.Store.CatAdminSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatAdminSel_Result">
+                <ScalarProperty Name="RelUserRoleId" ColumnName="RelUserRoleId" />
+                <ScalarProperty Name="CatRoleId" ColumnName="CatRoleId" />
+                <ScalarProperty Name="UserCCMSId" ColumnName="UserCCMSId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatAdminSi" FunctionName="ASNModel.Store.CatAdminSi" />
+          <FunctionImportMapping FunctionImportName="CatAdminSu" FunctionName="ASNModel.Store.CatAdminSu" />
+          <FunctionImportMapping FunctionImportName="CatRoleCMB" FunctionName="ASNModel.Store.CatRoleCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatRoleCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
