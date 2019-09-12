@@ -2610,5 +2610,49 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteIndividualSel_Result>("ReporteIndividualSel", solicitanteIdentParameter);
         }
+    
+        public virtual ObjectResult<CatAdminSel_Result> CatAdminSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAdminSel_Result>("CatAdminSel");
+        }
+    
+        public virtual int CatAdminSi(Nullable<int> cCMSID, Nullable<int> userCCMSID)
+        {
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            var userCCMSIDParameter = userCCMSID.HasValue ?
+                new ObjectParameter("UserCCMSID", userCCMSID) :
+                new ObjectParameter("UserCCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAdminSi", cCMSIDParameter, userCCMSIDParameter);
+        }
+    
+        public virtual int CatAdminSu(Nullable<int> cCMSID, Nullable<int> userCCMSID, Nullable<bool> active, Nullable<int> relUserRoleId)
+        {
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            var userCCMSIDParameter = userCCMSID.HasValue ?
+                new ObjectParameter("UserCCMSID", userCCMSID) :
+                new ObjectParameter("UserCCMSID", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            var relUserRoleIdParameter = relUserRoleId.HasValue ?
+                new ObjectParameter("RelUserRoleId", relUserRoleId) :
+                new ObjectParameter("RelUserRoleId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAdminSu", cCMSIDParameter, userCCMSIDParameter, activeParameter, relUserRoleIdParameter);
+        }
+    
+        public virtual ObjectResult<CatRoleCMB_Result> CatRoleCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatRoleCMB_Result>("CatRoleCMB");
+        }
     }
 }
