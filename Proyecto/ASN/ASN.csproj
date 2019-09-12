@@ -143,6 +143,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdministradoresController.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\DescargaArchivosController.cs" />
     <Compile Include="Controllers\ReporteAuditoriaController.cs" />
@@ -215,6 +216,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CargaMasivaRegistroViewModel.cs" />
+    <Compile Include="Models\CatAdminSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatAnioFechasCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -453,6 +457,9 @@
     <Compile Include="Models\CatResponsabilidadesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatRoleCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatSolicitudAutorizantesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -674,6 +681,7 @@
       <DependentUpon>ASN.edmx</DependentUpon>
       <LastGenOutput>ASN.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Administradores.js" />
     <Content Include="Scripts\Comentarios.js" />
     <Content Include="Scripts\ReporteAuditoria.js" />
     <Content Include="Scripts\Notificaciones.js" />
@@ -885,11 +893,14 @@
     <Content Include="Views\DescargaArchivos\Index.cshtml" />
     <Content Include="Views\ReporteGeneral\Index.cshtml" />
     <Content Include="Views\ReporteIndividual\Index.cshtml" />
+    <Content Include="Views\Administradores\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\UsuariosPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Evidencias\" />
     <Folder Include="Views\ResponsableDeSolicitudes\" />
+    <Folder Include="Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

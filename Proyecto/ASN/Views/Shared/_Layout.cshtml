@@ -72,6 +72,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li class="dropdown-header"><div class="fa"></div></li>
+                                <li>@Html.ActionLink("Administradores", "Index", "Administradores")</li>
                                 <li>@Html.ActionLink("Años Nómina", "AniosNomina", "Nomina")</li>
                                 <li>@Html.ActionLink("Meses Nómina", "MesesNomina", "Nomina")</li>
                                 <li>@Html.ActionLink("Periodicidad Nómina", "index", "PeriodicidadNomina")</li>
@@ -102,7 +103,7 @@
                     if (User.IsInRole("Responsable"))
                     {
                         <li>@Html.ActionLink("Mis Responsabilidades", "Index", "MisResponsabilidades")</li>
-                        <li>@Html.ActionLink("Descargar Archivo de Nómina","Index","DescargaArchivos")</li>
+                        <li>@Html.ActionLink("Descargar Archivo de Nómina", "Index", "DescargaArchivos")</li>
                     }
 
                     if (User.IsInRole("Responsable"))

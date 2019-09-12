@@ -1,5 +1,9 @@
 Administradores
 844795		raygozatorres.5		Javier Raygoza Torres			Admin Software Development Coordinator
+656654		cavazosaranda.5		Mireya Cavazos Aranda			Payroll Sr. Manager
+1993069		torresflores.17		Emilio Torres Flores			Business Evolution VP
+2087374		leonbarrera.6		Ana Silvia Leon Barrera			Business Evolution Sr. Consultant
+
 
 Solicitantes
 2881731		barrerapedraza.5	Enrique Gerardo Barrera Pedraza		Admin Software Development Sr. Manager	
@@ -8,11 +12,13 @@ Solicitantes
 666484		rangelalonso.5		Juana Janeth Rangel Alonso		Admin Software Developer	
 599670		rosadobaez.5		Luis Enrique Rosado Baez		Software Development Director
 
+
 Autorizantes
 666229		villarreal.144		Miguel Angel Villarreal Mancha		Software Developer
 666336		navarroloera.5		Carlos Adrian Navarro Loera		Software Development Coordinator	
 893576		lopezserna.6		Gaudencio Lopez Serna			Application Support Specialist	
-960310		guerrerolopez.8		Alfredo Guerrero Lopez			Admin Software Developer	
+960310		guerrerolopez.8		Alfredo Guerrero Lopez			Admin Software Developer
+1689541     munizflores.5	
 
 Responsables Universidad
 656654		cavazosaranda.5		Mireya Cavazos Aranda			Payroll Sr. Manager
