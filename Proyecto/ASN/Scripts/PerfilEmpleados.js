@@ -16,7 +16,7 @@ function resizeWrapper() {
 
 $(window).resize(function () {
     resizeWrapper();
-    //resizeGrid();
+    resizeGrid();
 });
 
 $(document).ready(function () {
@@ -121,76 +121,76 @@ function errorsote(args) {
     }
 }
 
-function onSave(e) {
-    var hayCambios = false;
-    var sonNuevos = false;
-    jQuery.grep(e.sender._data, function (item) {
+//function onSave(e) {
+//    var hayCambios = false;
+//    var sonNuevos = false;
+//    jQuery.grep(e.sender._data, function (item) {
 
-        if (item.dirty || item.id <= 0) {
-            hayCambios = true;
-        }
+//        if (item.dirty || item.id <= 0) {
+//            hayCambios = true;
+//        }
 
-        if (item.id <= 0) {
-            sonNuevos = true;
-        }
+//        if (item.id <= 0) {
+//            sonNuevos = true;
+//        }
 
-    });
+//    });
 
-    if (hayCambios) {
-        //$.blockUI({ message: null });
-        if (sonNuevos) {
-            handleSaveChanges(e, this);
-        }
-        else {
-            handleEditChanges(e, this);
-        }
-    }
-}
+//    if (hayCambios) {
+//        //$.blockUI({ message: null });
+//        if (sonNuevos) {
+//            handleSaveChanges(e, this);
+//        }
+//        else {
+//            handleEditChanges(e, this);
+//        }
+//    }
+//}
 
 
-function handleEditChanges(e, grid) {
-    var valid = true;
-    var rows = grid.tbody.find("tr");
-    var objeto = jQuery.grep(grid._data, function (item) {
-        return (item.dirty);
-    });
+//function handleEditChanges(e, grid) {
+//    var valid = true;
+//    var rows = grid.tbody.find("tr");
+//    var objeto = jQuery.grep(grid._data, function (item) {
+//        return (item.dirty);
+//    });
 
-    for (var i = 0; i < objeto.length; i++) {
+//    for (var i = 0; i < objeto.length; i++) {
 
-        var cols = $(rows[i]).find("td");
-        //var disposition = objeto[i].Disposition;
-        var displayname = objeto[i].Mercado;
+//        var cols = $(rows[i]).find("td");
+//        //var disposition = objeto[i].Disposition;
+//        var displayname = objeto[i].Mercado;
 
-    }
+//    }
 
-    if (!valid) {
-        e.preventDefault(true);
-        //setTimeout($.unblockUI, 1000);
-    }
-}
+//    if (!valid) {
+//        e.preventDefault(true);
+//        //setTimeout($.unblockUI, 1000);
+//    }
+//}
 
-function handleSaveChanges(e, grid) {
-    var valid = true;
-    var rows = grid.tbody.find("tr");
-    for (var i = 0; i < rows.length; i++) {
+//function handleSaveChanges(e, grid) {
+//    var valid = true;
+//    var rows = grid.tbody.find("tr");
+//    for (var i = 0; i < rows.length; i++) {
 
-        var model = grid.dataItem(rows[i]);
+//        var model = grid.dataItem(rows[i]);
 
-        var cols = $(rows[i]).find("td");
-        var displaynameObj = $(cols[0]);
-        //var dispositionObj = $(cols[1]);
+//        var cols = $(rows[i]).find("td");
+//        var displaynameObj = $(cols[0]);
+//        //var dispositionObj = $(cols[1]);
 
-        if (model && model.id <= 0 && valid) {
-        }
-        else {
-            break;
-        }
-    }
+//        if (model && model.id <= 0 && valid) {
+//        }
+//        else {
+//            break;
+//        }
+//    }
 
-    if (!valid) {
-        e.preventDefault(true);
-    }
-}
+//    if (!valid) {
+//        e.preventDefault(true);
+//    }
+//}
 
 function OcultaSave() {
     $(".k-grid-update").css("display", "none");
