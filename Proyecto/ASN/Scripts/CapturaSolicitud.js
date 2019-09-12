@@ -890,22 +890,31 @@ function onChangeConceptos(e) {
 
         $('#AutorizadorNivel1').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel1").data("kendoDropDownList").refresh();
+        $("#AutorizadorNivel1").data("kendoDropDownList").value(-1);
         $('#AutorizadorNivel2').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel2").data("kendoDropDownList").refresh();
+        $("#AutorizadorNivel2").data("kendoDropDownList").value(-1);
         $('#AutorizadorNivel3').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel3").data("kendoDropDownList").refresh();
+        $("#AutorizadorNivel3").data("kendoDropDownList").value(-1);
         $('#AutorizadorNivel4').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel4").data("kendoDropDownList").refresh();
+        $("#AutorizadorNivel4").data("kendoDropDownList").value(-1);
         $('#AutorizadorNivel5').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel5").data("kendoDropDownList").refresh();
+        $("#AutorizadorNivel5").data("kendoDropDownList").value(-1);
         $('#AutorizadorNivel6').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel6").data("kendoDropDownList").refresh();
+        $("#AutorizadorNivel6").data("kendoDropDownList").value(-1);
         $('#AutorizadorNivel7').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel7").data("kendoDropDownList").refresh();
+        $("#AutorizadorNivel7").data("kendoDropDownList").value(-1);
         $('#AutorizadorNivel8').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel8").data("kendoDropDownList").refresh();
+        $("#AutorizadorNivel8").data("kendoDropDownList").value(-1);
         $('#AutorizadorNivel9').data('kendoDropDownList').dataSource.read();
         $("#AutorizadorNivel9").data("kendoDropDownList").refresh();
+        $("#AutorizadorNivel9").data("kendoDropDownList").value(-1);
 
         $.when(conceptoParametroConcepto(ConConceptoIdent, ConParametroNombre))
             .done(function () {
@@ -1170,9 +1179,9 @@ function validaAutorizador(valor) {
     $(autorizadores).each(function (nivel) {
 
         if ($("#AutorizadorNivel" + (nivel + 1)).val() == valor) {
-            
+
             igualesTotales++;
-        }
+        }        
     });
 
     if (igualesTotales == 1) {
