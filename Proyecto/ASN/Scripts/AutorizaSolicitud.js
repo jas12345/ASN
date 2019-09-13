@@ -707,7 +707,7 @@ function onChange(e) {
         var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(row);
 
         // Disable the checkbox if the location isn't set
-        if (dataItem.get("Autorizador_Ident") != usuarioCCMSID) {
+        if (dataItem.get("Autorizador_Ident") != usuarioCCMSID || dataItem.get("EstatusId") == "R") {
             //row.css('background-color', '#FFFFCF');
             // What goes here?
             //grid.table.find("tr").find("td:first input").attr("checked", true);
@@ -765,7 +765,7 @@ function ocultaCheckbox(e) {
             var dataItem = e.sender.dataItem(row);
 
             // Disable the checkbox if the location isn't set
-            if (dataItem.get("Autorizador_Ident") != usuarioCCMSID) {
+            if (dataItem.get("Autorizador_Ident") != usuarioCCMSID || dataItem.get("EstatusId") == "R") {
                 //row.css('background-color', '#FFFFCF');
                 // What goes here?
                 //grid.table.find("tr").find("td:first input").attr("checked", true);
