@@ -23,6 +23,11 @@ $(document).ready(function () {
     $(window).trigger("resize");
 });
 
+function adjustDropDownWidth(e) {
+    var listContainer = e.sender.list.closest(".k-list-container");
+    listContainer.width(listContainer.width() + kendo.support.scrollbar());
+}
+
 var editando = 0;
 
 function edit(e) {
