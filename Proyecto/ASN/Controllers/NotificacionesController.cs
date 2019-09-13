@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Responsable")]
     public class NotificacionesController : Controller
     {
         // GET: Notificaciones

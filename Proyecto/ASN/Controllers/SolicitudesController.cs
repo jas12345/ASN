@@ -14,6 +14,7 @@ using System.Web.Routing;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "NOSEUSA")]
     public class SolicitudesController : Controller
     {
         // GET: Solicitudes

@@ -36,7 +36,7 @@
                            {
                                columns.Command(command => { command.Edit().Text("Edit").UpdateText("Save").CancelText("Cancel"); }).Width(75);
                                columns.Bound(c => c.RelUserRoleId).Title("id").Visible(false).Filterable(false);
-                               //columns.ForeignKey(c => c.CatRoleId, (System.Collections.IEnumerable)ViewData["roles"], "Id", "Valor").Width(125).Title("Rol");
+                               columns.ForeignKey(c => c.CatRoleId, (System.Collections.IEnumerable)ViewData["roles"], "Id", "Valor").Width(125).Title("Rol");
                                columns.Bound(c => c.UserCCMSId).Width(100).Title("CCMSID").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
                                columns.Bound(c => c.Nombre).Width(175).Title("Nombre");
                                columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");

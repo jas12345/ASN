@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "NOSEUSA")]
     public class ResponsableAutorizaController : Controller
     {
         // GET: AutorizaSolicitud

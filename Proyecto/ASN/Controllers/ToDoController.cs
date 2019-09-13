@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "NOSEUSA")]
     public class ToDoController : Controller
     {
         // GET: Index

@@ -12,6 +12,7 @@ using System.IO;
 
 namespace ASN.Controllers
 {
+    [Authorize(Roles = "Responsable")]
     public class DescargaArchivosController : Controller
     {
         // GET: DescargaArchivos
