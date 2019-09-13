@@ -44,7 +44,7 @@ namespace ASN.Controllers
                     strPeriodo = string.Format("_{0}", listPeriodoNomina[0].Valor);
                 }
 
-                if (lstInactivos.Count > 0)
+                if (lstInactivos.Count > 1)
                 {
                     using (var memoryStream = new MemoryStream())
                     {
