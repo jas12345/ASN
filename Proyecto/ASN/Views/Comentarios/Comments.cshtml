@@ -1,6 +1,9 @@
 ﻿
 @model List<ASN.Models.TraCommentSel_Result>
 
+@{ 
+    var contador = 0;
+}
 <style>
     textarea {
         resize: none;
@@ -36,13 +39,21 @@
             {
                 foreach (var obj in Model)
                 {
+                    if (obj.FolioId != 0 && contador == 0)
+                    {
+                        @Html.Hidden("IlusionDefinida", obj.FolioId)
+                        @Html.Hidden("IlusionDefinidaEID", obj.EmployeeId == 0 ? Model.Where(x => x.EmployeeId != 0).FirstOrDefault().EmployeeId : obj.EmployeeId)
+                        @Html.Hidden("IlusionDefinidaConcept", obj.ConceptoId == 0 ? Model.Where(x => x.ConceptoId != 0).FirstOrDefault().ConceptoId : obj.ConceptoId)
+                        contador++;
+                    }
+
                     if (obj.TraCommentId != -1)
                     {
                         if (obj.CCMSIDAutor == userCCMSID)
                         {
-                            @Html.Hidden("IlusionDefinida", obj.FolioId)
+                            @*@Html.Hidden("IlusionDefinida", obj.FolioId)
                             @Html.Hidden("IlusionDefinidaEID", obj.EmployeeId)
-                            @Html.Hidden("IlusionDefinidaConcept", obj.ConceptoId)
+                            @Html.Hidden("IlusionDefinidaConcept", obj.ConceptoId)*@
                             <div style="background-color:beige;">
                                 <hr />
                                 <div class="">
@@ -60,9 +71,6 @@
                         }
                         else
                         {
-                            @Html.Hidden("IlusionDefinida", obj.FolioId)
-                            @Html.Hidden("IlusionDefinidaEID", obj.EmployeeId)
-                            @Html.Hidden("IlusionDefinidaConcept", obj.ConceptoId)
                             <div style="background-color:azure;">
                                 <hr />
                                 <div class="">

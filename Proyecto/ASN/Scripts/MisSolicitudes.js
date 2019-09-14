@@ -235,7 +235,7 @@ function dateFilter(e) {
 function EditaSolicitud(e) {
     e.preventDefault();
     var d = this.dataItem($(e.currentTarget).closest("tr"));
-    debugger;
+    //debugger;
     //@Html.ActionLink("CapturaSolicitud", "Index", "CapturaSolicitud")
 
     window.location.href = urlEditar +"?FolioSolicitud="+ d.FolioSolicitud;

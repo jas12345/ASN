@@ -244,7 +244,7 @@ function actualizaGrid() {
 }
 
 function editarEmpleadoSolicitud(e) {
-    debugger;
+    //debugger;
     e.preventDefault(); // sho J
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
     CCMSIdResponsable = dataItem.ResponsableId;
@@ -344,7 +344,7 @@ function getIdent() {
     return {
         Ident: ConEmpleadoident,
         Ident_Solicitante: Solicitante_Ident
-    }
+    };
 }
 
 function onChangeCCMSId() {
@@ -467,7 +467,7 @@ function onChangeCCMSId() {
 }
 
 function onChangeConceptos() {
-    debugger;
+    //debugger;
 
     if ($("#Conceptos").val().length > 0 || ConceptoId.toString().length > 0) {
         //$('#grid').data('kendoGrid').dataSource.data([]);
@@ -589,7 +589,7 @@ function onChangePeriodoIncidente() {
 }
 
 function onChangeParametro() {
-    debugger;
+    //debugger;
 
     if ($("#Parametro").val().length > 0) {
         //debugger;
@@ -600,7 +600,7 @@ function onChangeParametro() {
         //ConConceptoMotivo = $("#Motivo.value").text();
         ConConceptoMotivo = $("#Parametro").val() + ' ' + ConParametroNombre;
         ConParametroConceptoMonto = $("#Parametro").val();
-        debugger;
+        //debugger;
 
         //rellenaPerfilTipoAcceso();
 
@@ -614,7 +614,7 @@ function onChangeParametro() {
 
 function onChangeCCMSIdIncidente()
 {
-    debugger;
+    //debugger;
 
     responsableId = "";
     NombreResponsableIncidente = "";

@@ -101,6 +101,12 @@ function agregarSolicitud() {
             notification.show("Ya existe un registro con este Empleado y Concepto", "error");
         }
 
+        //if (ClaveEstatusEmpleadoSolicitud == "EB" || ClaveEstatusEmpleadoSolicitud == "R") {
+        //    $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Guardar');
+        //} else {
+        $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Agregar');
+        //}
+
         $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
         actualizaGrid();
         //debugger;
@@ -295,7 +301,7 @@ function actualizaGrid() {
 }
 
 function editarEmpleadoSolicitud(e) {
-    debugger;
+    //debugger;
     e.preventDefault(); // sho J
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
 
@@ -335,6 +341,11 @@ function editarEmpleadoSolicitud(e) {
     //dataItem_AutorizadorNivel9 = dataItem.AutorizadorNivel9;
     //dataItem_Active = dataItem.
 
+    if (dataItem_EstatusId == "EB" || dataItem_EstatusId == "R") {
+        $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Guardar');
+    } else {
+        $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Agregar');
+    }
 
     $.when($("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem_Ident),
         $('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change')
