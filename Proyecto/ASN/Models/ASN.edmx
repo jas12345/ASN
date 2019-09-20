@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ASNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="ActualizaEstatusConcepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="Empleado_Ident" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="EstatusSolicitudId" Type="varchar" Mode="In" />
+          <Parameter Name="CCMS_User" Type="int" Mode="In" />
+        </Function>
         <Function Name="AutorizadoresxConceptoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
         </Function>
@@ -1517,6 +1524,13 @@
             <Parameter Name="RelUserRoleId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatRoleCMB" ReturnType="Collection(ASNModel.CatRoleCMB_Result)" />
+          <FunctionImport Name="ActualizaEstatusConcepto">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="EstatusSolicitudId" Mode="In" Type="String" />
+            <Parameter Name="CCMS_User" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -3857,6 +3871,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ActualizaEstatusConcepto" FunctionName="ASNModel.Store.ActualizaEstatusConcepto" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

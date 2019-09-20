@@ -476,7 +476,7 @@
                                 .Events(x => x.Click("enviarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                                 )
 
-                                @(Html.Kendo().Button().Name("CancelarEmpleadoSolicitud").Content("Cancelar").Icon("close")
+                                @(Html.Kendo().Button().Name("CancelarEmpleadoSolicitud").Content("Cancelar Concepto").Icon("close")
                                 .Events(x => x.Click("cancelarEmpleadoSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                                 )
                             </td>
@@ -909,6 +909,8 @@
                 //var urlSolicitud = grid.selectedKeyNames().join(", ");
 
         var urlMisSolicitudes = '@Url.Action("Index", "MisSolicitudes")'
+
+        var urlCancelaEmpleadoSolicitud = '@Url.Action("CancelaEmpleadoSolicitud", "CapturaSolicitud")'
     </script>
 }
 else

@@ -2654,5 +2654,30 @@ namespace ASN.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatRoleCMB_Result>("CatRoleCMB");
         }
+    
+        public virtual int ActualizaEstatusConcepto(Nullable<int> folioSolicitud, Nullable<int> empleado_Ident, Nullable<int> conceptoId, string estatusSolicitudId, Nullable<int> cCMS_User)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var empleado_IdentParameter = empleado_Ident.HasValue ?
+                new ObjectParameter("Empleado_Ident", empleado_Ident) :
+                new ObjectParameter("Empleado_Ident", typeof(int));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var estatusSolicitudIdParameter = estatusSolicitudId != null ?
+                new ObjectParameter("EstatusSolicitudId", estatusSolicitudId) :
+                new ObjectParameter("EstatusSolicitudId", typeof(string));
+    
+            var cCMS_UserParameter = cCMS_User.HasValue ?
+                new ObjectParameter("CCMS_User", cCMS_User) :
+                new ObjectParameter("CCMS_User", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizaEstatusConcepto", folioSolicitudParameter, empleado_IdentParameter, conceptoIdParameter, estatusSolicitudIdParameter, cCMS_UserParameter);
+        }
     }
 }

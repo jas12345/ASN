@@ -160,7 +160,8 @@ function cancelarEmpleadoSolicitud() {
     //console.log("Salvado");
     //debugger;
     //infoSolicitud();
-    $.post(urlCancelaEmpleadoSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+
+    $.post(urlCancelaEmpleadoSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
         //debugger;
 

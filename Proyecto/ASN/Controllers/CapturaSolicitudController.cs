@@ -350,6 +350,34 @@ namespace ASN.Controllers
             }
         }
 
+        public ActionResult CancelaEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    //int res = 0;
+                    //int ccmsid = 0;
+                    //int.TryParse(User.Identity.Name, out ccmsid);
+                    MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                    context.ActualizaEstatusConcepto(FolioSolicitud, Empleado_Ident, ConceptoId, "C", usuario.UserInfo.Ident.Value);
+
+                    return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         public JsonResult GetConceptosMotivosCMB()
         {
