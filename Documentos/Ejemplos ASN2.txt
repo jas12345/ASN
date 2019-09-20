@@ -11,14 +11,14 @@ Solicitantes
 1621097		esparza.26		Jesus Armando Esparza Rodriguez		Database Services Specialist	
 666484		rangelalonso.5		Juana Janeth Rangel Alonso		Admin Software Developer	
 599670		rosadobaez.5		Luis Enrique Rosado Baez		Software Development Director
-
+1286941		gomezrodriguez.24	Alma Aracely Gomez Rodriguez		Application Support Specialist
 
 Autorizantes
 666229		villarreal.144		Miguel Angel Villarreal Mancha		Software Developer
 666336		navarroloera.5		Carlos Adrian Navarro Loera		Software Development Coordinator	
 893576		lopezserna.6		Gaudencio Lopez Serna			Application Support Specialist	
 960310		guerrerolopez.8		Alfredo Guerrero Lopez			Admin Software Developer
-1689541     munizflores.5	
+1689541     	munizflores.5	
 
 Responsables Universidad
 656654		cavazosaranda.5		Mireya Cavazos Aranda			Payroll Sr. Manager

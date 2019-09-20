@@ -211,7 +211,7 @@ function calculaEstatusSolicitud() {
                 //$("#EnviarSolicitud").enable(false);
            }
 
-            if (ClaveEstatusSolicitud == 'C') {
+            if (ClaveEstatusSolicitud == 'C' || ClaveEstatusSolicitud == 'A') {
                 //$("#EnviarSolicitud").enable(false);
                 $("#AgregarSolicitud").hide();
                 $("#CancelarSolicitud").hide();
