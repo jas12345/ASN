@@ -76,7 +76,7 @@
                     {
                         source.Read(read =>
                         {
-                            read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
+                            read.Action("GetPeriodoNominaCMB", "ResponsableAutoriza");
                         }
                         );
                     //.ServerFiltering(true);
@@ -196,7 +196,7 @@
                                 @(Html.Kendo().DropDownList().DataSource(source => {
                                 source.Read(read =>
                                 {
-                                    read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "AutorizaSolicitud").Data("getIdent"); ;
+                                    read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "ResponsableAutoriza").Data("getIdent"); ;
                                 }
                                 );
                                 //.ServerFiltering(true);
@@ -234,7 +234,7 @@
                                     {
                                     source.Read(read =>
                                     {
-                                    read.Action("GetMotivosCMB", "AutorizaSolicitud");
+                                    read.Action("GetMotivosCMB", "ResponsableAutoriza");
                                     }
                                     );
                                     //.ServerFiltering(true);
@@ -257,7 +257,7 @@
                                     {
                                     source.Read(read =>
                                     {
-                                        read.Action("GetConceptosMotivosCMB", "AutorizaSolicitud");
+                                        read.Action("GetConceptosMotivosCMB", "ResponsableAutoriza");
                                     });
                                                 //.ServerFiltering(true);
                                             })
@@ -293,7 +293,7 @@
                                     {
                                     source.Read(read =>
                                     {
-                                        read.Action("GetPeriodoNominaCerradosCMB", "AutorizaSolicitud");
+                                        read.Action("GetPeriodoNominaCerradosCMB", "ResponsableAutoriza");
                                     });
                                                 //.ServerFiltering(true);
                                             })
@@ -395,7 +395,7 @@
                             })
                             .Read(read => read.Action("GetResponsabilidades", "ResponsableAutoriza").Data("getFolio"))
                         //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
-                        //.Create(create => create.Action("CrearSolicitudPorEmpleado", "AutorizaSolicitud").Type(HttpVerbs.Post))
+                        //.Create(create => create.Action("CrearSolicitudPorEmpleado", "ResponsableAutoriza").Type(HttpVerbs.Post))
                         //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
                         )
                         .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
@@ -438,7 +438,7 @@
                 //var listaEmpleados = "";
                 //var selectedEmpleados = new Array();
                 var grid = $('#grid');
-                //var urlDeletePerfilEmpleadosAccesos = '@Url.Action("DeleteEmpleados", "AutorizaSolicitud")';
+                //var urlDeletePerfilEmpleadosAccesos = '@Url.Action("DeleteEmpleados", "ResponsableAutoriza")';
 
                 //Datos a extraer Empleado - Puesto - Contrato - Site
                 var EmpCCMSId = "";
@@ -503,31 +503,31 @@
                 var autorizadorNivel9 = "";
 
                 // URL para consultar datos de Empleado
-                var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "AutorizaSolicitud")';
+                var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "ResponsableAutoriza")';
 
                 //
-                var urlEmpleadoxSolicitante = '@Url.Action("GetEmpleadoxSolicitante", "AutorizaSolicitud")';
+                var urlEmpleadoxSolicitante = '@Url.Action("GetEmpleadoxSolicitante", "ResponsableAutoriza")';
 
                 //
-                var urlConceptoParametroConcepto = '@Url.Action("GetConceptoParametroConcepto", "AutorizaSolicitud")';
+                var urlConceptoParametroConcepto = '@Url.Action("GetConceptoParametroConcepto", "ResponsableAutoriza")';
 
                 //
                 var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
 
                 // Liga para crear Solicitud
-                var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "AutorizaSolicitud")';
+                var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "ResponsableAutoriza")';
 
                 // Liga para enviar solicitud a Autorizadores
-                var urlEnviaSolicitud = '@Url.Action("EnviaSolicitud", "AutorizaSolicitud")';
+                var urlEnviaSolicitud = '@Url.Action("EnviaSolicitud", "ResponsableAutoriza")';
 
                 //
-                var urlUpdateEmpleadoSolicitud = '@Url.Action("UpdateEmpleadoSolicitud", "AutorizaSolicitud")';
+                var urlUpdateEmpleadoSolicitud = '@Url.Action("UpdateEmpleadoSolicitud", "ResponsableAutoriza")';
 
                 //
-                var urlCrearEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "AutorizaSolicitud")';
+                var urlCrearEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "ResponsableAutoriza")';
 
                 //
-                var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "AutorizaSolicitud")';
+                var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "ResponsableAutoriza")';
 
         //
         var urlAutorizaConcepto = '@Url.Action("ProcesaConcepto", "ResponsableAutoriza")';
@@ -545,7 +545,7 @@
         var urlCierraSolicitud = '@Url.Action("CierraSolicitud", "ResponsableAutoriza")';
 
         // Función para calcular Estatus de Solicitud
-        var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "AutorizaSolicitud")';
+        var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "ResponsableAutoriza")';
 
                 //debugger;
                 //var urlSolicitud = grid.selectedKeyNames().join(", ");
