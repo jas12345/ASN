@@ -92,6 +92,7 @@ function edit(e) {
         client.enable(false);
         program.enable(false);
         contract_Type.enable(false);
+        conceptoId.enable(false);
         
 
         $("#Active").attr("disabled", "disabled");
@@ -547,6 +548,7 @@ function CargaCascada() {
     var cliente = $("#Client_Ident").data("kendoDropDownList");
     var programa = $("#Program_Ident").data("kendoDropDownList");
     var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+    var concepto = $("#ConceptoId").data("kendoDropDownList");
 
     //if (contrato.value() == -1) {
     //    contrato.dataSource.read();
@@ -594,6 +596,7 @@ function validando() {
         var cliente = $("#Client_Ident").data("kendoDropDownList");
         var programa = $("#Program_Ident").data("kendoDropDownList");
         var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+        var concepto = $("#ConceptoId").data("kendoDropDownList");
 
         pais.enable(false);
         ciudad.enable(false);
@@ -601,6 +604,7 @@ function validando() {
         cliente.enable(false);
         programa.enable(false);
         contrato.enable(false);
+        concepto.enable(false);
     }
 }
 

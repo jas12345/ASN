@@ -166,7 +166,8 @@
                             source.Read(read =>
                             {
                                 read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto");
-                            });
+                            })
+                        .ServerFiltering(true);
                         })
                         .Filter("contains")
                         .DataValueField("Ident")
@@ -174,6 +175,8 @@
                         .Name("ConceptoId")
                         .OptionLabel(" - Todos - ")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
+                        .CascadeFrom("Client_Ident")
             )
         </div>
         <div class="editor-label">
@@ -214,6 +217,7 @@
         var ClientDDL = $("#Client_Ident").data("kendoDropDownList");
         var ProgramDDL = $("#Program_Ident").data("kendoDropDownList");
         var ContractDDL = $("#Contract_Type_Ident").data("kendoDropDownList");
+        var ConceptoDDL = $("#ConceptoId").data("kendoDropDownList");
 
         CountryDDL.list.width("auto");
         CityDDL.list.width("auto");
@@ -221,6 +225,7 @@
         ClientDDL.list.width("auto");
         ProgramDDL.list.width("auto");
         ContractDDL.list.width("auto");
+        ConceptoDDL.list.width("auto");
     });
 </script>
 
