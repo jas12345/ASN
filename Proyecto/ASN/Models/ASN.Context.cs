@@ -2679,5 +2679,19 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizaEstatusConcepto", folioSolicitudParameter, empleado_IdentParameter, conceptoIdParameter, estatusSolicitudIdParameter, cCMS_UserParameter);
         }
+    
+        public virtual ObjectResult<DescargaArchivoSolicitudSel_Result> DescargaArchivoSolicitudSel(Nullable<bool> activos)
+        {
+            var activosParameter = activos.HasValue ?
+                new ObjectParameter("Activos", activos) :
+                new ObjectParameter("Activos", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DescargaArchivoSolicitudSel_Result>("DescargaArchivoSolicitudSel", activosParameter);
+        }
+    
+        public virtual ObjectResult<ReporteConceptoGeneralSel_Result> ReporteConceptoGeneralSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoGeneralSel_Result>("ReporteConceptoGeneralSel");
+        }
     }
 }

@@ -127,35 +127,40 @@
                         <li>@Html.ActionLink("Reporte General", "Index", "ReporteGeneral")</li>
                     }
 
-                    @*if (User.IsInRole("Desarrollo2"))
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
                     {
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vistas / Consultas<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-header"><div class="fa fa-angellist"></div></li>
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("5.9.1 To-Do (Acciones pendientes)", "Index", "ToDo")</li>
-                                }
+                        <li>@Html.ActionLink("Reporte Conceptos", "Index", "Reportero")</li>
+                    }
 
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("5.9.2 Mis solicitudes", "Index", "MisSolicitudes")</li>
-                                }
+                    @*if (User.IsInRole("Desarrollo2"))
+            {
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vistas / Consultas<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header"><div class="fa fa-angellist"></div></li>
+                        @if (User.IsInRole("Desarrollo"))
+                        {
+                            <li>@Html.ActionLink("5.9.1 To-Do (Acciones pendientes)", "Index", "ToDo")</li>
+                        }
 
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("5.9.3 Solicitudes (todas)", "index", "SolicitudesTodas")</li>
-                                }
+                        @if (User.IsInRole("Desarrollo"))
+                        {
+                            <li>@Html.ActionLink("5.9.2 Mis solicitudes", "Index", "MisSolicitudes")</li>
+                        }
 
-                                @if (User.IsInRole("Desarrollo"))
-                                {
-                                    <li>@Html.ActionLink("5.9.4 Búsquedas varias.", "index", "BusquedasVarias")</li>
-                                }
-                            </ul>
-                        </li>
+                        @if (User.IsInRole("Desarrollo"))
+                        {
+                            <li>@Html.ActionLink("5.9.3 Solicitudes (todas)", "index", "SolicitudesTodas")</li>
+                        }
 
-                    }*@
+                        @if (User.IsInRole("Desarrollo"))
+                        {
+                            <li>@Html.ActionLink("5.9.4 Búsquedas varias.", "index", "BusquedasVarias")</li>
+                        }
+                    </ul>
+                </li>
+
+            }*@
                 }
 
                 <li>

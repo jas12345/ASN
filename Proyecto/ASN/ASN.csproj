@@ -149,6 +149,7 @@
     <Compile Include="Controllers\ReporteAuditoriaController.cs" />
     <Compile Include="Controllers\ReporteGeneralController.cs" />
     <Compile Include="Controllers\ReporteIndividualController.cs" />
+    <Compile Include="Controllers\ReporteroController.cs" />
     <Compile Include="Controllers\ResponsableAutorizaController.cs" />
     <Compile Include="Controllers\AutorizaSolicitudController.cs" />
     <Compile Include="Controllers\CapturaSolicitudController.cs" />
@@ -487,6 +488,9 @@
     <Compile Include="Models\CatUserInfoSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DescargaArchivoSolicitudSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DescargaArchivoSolicitud_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -521,6 +525,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReporteAuditoriasSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReporteConceptoGeneralSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReporteGeneralDetalleSel_Result.cs">
@@ -683,6 +690,7 @@
     </Content>
     <Content Include="Scripts\Administradores.js" />
     <Content Include="Scripts\Comentarios.js" />
+    <Content Include="Scripts\Reportero.js" />
     <Content Include="Scripts\ReporteAuditoria.js" />
     <Content Include="Scripts\Notificaciones.js" />
     <Content Include="Scripts\ReporteIndividual.js" />
@@ -895,6 +903,10 @@
     <Content Include="Views\ReporteIndividual\Index.cshtml" />
     <Content Include="Views\Administradores\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UsuariosPopUp.cshtml" />
+    <Content Include="Views\Reportero\General.cshtml" />
+    <Content Include="Views\Reportero\Index.cshtml" />
+    <Content Include="Views\Reportero\NominaActivos.cshtml" />
+    <Content Include="Views\Reportero\NominaInactivos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
