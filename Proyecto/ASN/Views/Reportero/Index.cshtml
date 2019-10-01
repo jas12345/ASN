@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    #grid {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <label>Reporte de conceptos</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @(Html.Kendo().DropDownList()
+                    .OptionLabel("- Selecionar tipo de reporte -")
+                    .DataTextField("GridNameVal")
+                    .DataValueField("GridNameID")
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                    {
+                        read.Action("gridNames", "Reportero");
+                    });
+                    })
+                    .Name("GridName")
+                    .HtmlAttributes(new { style = "width: 17em;text-align:center;" })
+                )
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="partialPlaceHolder" style="display:none;margin-left:-15px;"></div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <p>You are not logged in</p>
+}
+
+<script>
+
+    var urlGridPath = '@Url.Action("MyGrid","Reportero")';
+
+    $('#GridName').change(function () {
+
+        /* Get the selected value of dropdownlist */
+        var selectedID = $(this).val();
+        $('#GridName').data("kendoDropDownList").enable(false);
+
+        if (selectedID.length <= 0) {
+            $('#partialPlaceHolder').empty();
+            $('#GridName').data("kendoDropDownList").enable(true);
+        } else {
+            /* Request the partial view with .get request. */
+            $.post(urlGridPath + '/?selectedID=' + selectedID, function (data) {
+
+                /* data is the pure html returned from action method, load it to your page */
+                $('#partialPlaceHolder').html(data);
+                /* little fade in effect */
+                $('#partialPlaceHolder').fadeIn('fast');
+            })
+            .always(function () {
+                $('#GridName').data("kendoDropDownList").enable(true);
+            });
+        }
+    });
+
+</script>
+
+@Scripts.Render("~/bundles/Administradores")

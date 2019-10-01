@@ -150,6 +150,10 @@ namespace ASN
             //Administradores
             bundles.Add(new ScriptBundle("~/bundles/Administradores").Include(
             "~/Scripts/Administradores.js"));
+
+            //Reportero
+            bundles.Add(new ScriptBundle("~/bundles/Reportero").Include(
+            "~/Scripts/Reportero.js"));
         }
     }
 }

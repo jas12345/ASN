@@ -651,6 +651,9 @@
           <Parameter Name="EmpleadoId" Type="int" Mode="In" />
           <Parameter Name="Activos" Type="int" Mode="In" />
         </Function>
+        <Function Name="DescargaArchivoSolicitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Activos" Type="bit" Mode="In" />
+        </Function>
         <Function Name="EmpleadosxPerfilSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
@@ -702,6 +705,7 @@
           <Parameter Name="FolioId" Type="int" Mode="In" />
         </Function>
         <Function Name="ReporteAuditoriasSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="ReporteConceptoGeneralSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="ReporteGeneralDetalleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioId" Type="int" Mode="In" />
         </Function>
@@ -1531,6 +1535,10 @@
             <Parameter Name="EstatusSolicitudId" Mode="In" Type="String" />
             <Parameter Name="CCMS_User" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="DescargaArchivoSolicitudSel" ReturnType="Collection(ASNModel.DescargaArchivoSolicitudSel_Result)">
+          <Parameter Name="Activos" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteConceptoGeneralSel" ReturnType="Collection(ASNModel.ReporteConceptoGeneralSel_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2468,6 +2476,27 @@
         <ComplexType Name="CatRoleCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="DescargaArchivoSolicitudSel_Result">
+          <Property Type="String" Name="EMPLEADO" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CONCEPTO" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ACCION" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UNIDAD" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="IMPORTE" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PORCENTAJE" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FECHA" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="INICIO" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FIN" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="FOLIO" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CONSECUENCIA" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CONTROL" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SEMANA" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="ReporteConceptoGeneralSel_Result">
+          <Property Type="Int32" Name="CONTEO" Nullable="true" />
+          <Property Type="String" Name="CONCEPTO" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="IMPORTE" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
         </ComplexType>
        
         </Schema>
@@ -3872,6 +3901,35 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ActualizaEstatusConcepto" FunctionName="ASNModel.Store.ActualizaEstatusConcepto" />
+          <FunctionImportMapping FunctionImportName="DescargaArchivoSolicitudSel" FunctionName="ASNModel.Store.DescargaArchivoSolicitudSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.DescargaArchivoSolicitudSel_Result">
+                <ScalarProperty Name="EMPLEADO" ColumnName="EMPLEADO" />
+                <ScalarProperty Name="CONCEPTO" ColumnName="CONCEPTO" />
+                <ScalarProperty Name="ACCION" ColumnName="ACCION" />
+                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+                <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
+                <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="INICIO" ColumnName="INICIO" />
+                <ScalarProperty Name="FIN" ColumnName="FIN" />
+                <ScalarProperty Name="FOLIO" ColumnName="FOLIO" />
+                <ScalarProperty Name="CONSECUENCIA" ColumnName="CONSECUENCIA" />
+                <ScalarProperty Name="CONTROL" ColumnName="CONTROL" />
+                <ScalarProperty Name="SEMANA" ColumnName="SEMANA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteConceptoGeneralSel" FunctionName="ASNModel.Store.ReporteConceptoGeneralSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteConceptoGeneralSel_Result">
+                <ScalarProperty Name="CONTEO" ColumnName="CONTEO" />
+                <ScalarProperty Name="CONCEPTO" ColumnName="CONCEPTO" />
+                <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
