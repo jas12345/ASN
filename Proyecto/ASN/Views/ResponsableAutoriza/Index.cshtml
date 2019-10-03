@@ -97,8 +97,8 @@
                 @Html.TextBox("Estatus", "", new { disabled = "disabled", style = "width:13em;" })
             </div>
             <div class="col-lg-1">
-                @(Html.Kendo().Button().Name("CerrarSolicitud").Content("Cerrar").Icon("close")
-                    .Events(x => x.Click("cerrarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+                @(Html.Kendo().Button().Name("CerrarSolicitud").Content("Cerrar Solicitud").Icon("close")
+                    .Events(x => x.Click("cerrarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                 )
             </div>
             <p></p>
