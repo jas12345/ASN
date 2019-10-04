@@ -1,7 +1,7 @@
 -- Datos de Solicitud
 USE ASN3;
 go
-DECLARE @FolioSolicitud INT = 143
+DECLARE @FolioSolicitud INT = 159
 
 SELECT * FROM app620.CatSolicitudes WHERE FolioSolicitud = @FolioSolicitud
 SELECT * FROM app620.CatEmpleadosSolicitudes WHERE FolioSolicitud = @FolioSolicitud

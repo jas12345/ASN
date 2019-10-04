@@ -7,6 +7,7 @@ $(document).ready(function () {
     actualizaGrid();
 
     habilitaCombosAutorizadores(1);
+    deshabilitaControlesEdicion()
 
     // Activar / Desactivar botón Enviar Solicitud
     if (FolioSolicitud == '-1') {
@@ -292,6 +293,50 @@ function calculaEstatusSolicitud() {
             //debugger;
         });
     }
+}
+
+function habilitaControlesEdicion() {
+
+    var tempDL = $("#Conceptos").data("kendoDropDownList");
+    tempDL.enable(true);
+
+    tempDL = $("#Motivo").data("kendoDropDownList");
+    tempDL.enable(true);
+
+    tempDL = $("#ConceptoMotivo").data("kendoDropDownList");
+    tempDL.enable(true);
+
+    tempDL = $("#PeriodoIncidente").data("kendoDropDownList");
+    tempDL.enable(true);
+
+    var Parametro = $("#Parametro").data("kendoNumericTextBox");
+    Parametro.enable(true);
+
+    var CCMSIDIncidente = $("#CCMSIDIncidente").data("kendoNumericTextBox");
+    CCMSIDIncidente.enable(true);
+
+}
+
+function deshabilitaControlesEdicion() {
+
+    var tempDL = $("#Conceptos").data("kendoDropDownList");
+    tempDL.enable(false);
+
+    tempDL = $("#Motivo").data("kendoDropDownList");
+    tempDL.enable(false);
+
+    tempDL = $("#ConceptoMotivo").data("kendoDropDownList");
+    tempDL.enable(false);
+
+    tempDL = $("#PeriodoIncidente").data("kendoDropDownList");
+    tempDL.enable(false);
+
+    var Parametro = $("#Parametro").data("kendoNumericTextBox");
+    Parametro.enable(false);
+
+    var CCMSIDIncidente = $("#CCMSIDIncidente").data("kendoNumericTextBox");
+    CCMSIDIncidente.enable(false);
+
 }
 
 function actualizaGrid() {
@@ -844,6 +889,7 @@ function onChangeCCMSId() {
 
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("No tiene permiso para crear una solicitud a este empleado.", "error");
+                deshabilitaControlesEdicion();
             }
 
             if (EmpCCMSId == -2) {
@@ -851,11 +897,13 @@ function onChangeCCMSId() {
 
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("Este empleado no existe o no está activo.", "error");
+                deshabilitaControlesEdicion();
             }
 
             if (EmpCCMSId > 0) {
                 //$("#AgregarSolicitud").kendoButton({ enable: true });
                 $("#AgregarSolicitud").data("kendoButton").enable(true);
+                habilitaControlesEdicion();
             }
 
         }).fail(function (ex) {
