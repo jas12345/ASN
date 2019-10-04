@@ -770,7 +770,7 @@ function ocultaCheckbox(e) {
             var dataItem = e.sender.dataItem(row);
 
             // Disable the checkbox if the location isn't set
-            if (dataItem.get("Autorizador_Ident") != usuarioCCMSID || dataItem.get("EstatusId") == "R") {
+            if (dataItem.get("Autorizador_Ident") != usuarioCCMSID || dataItem.get("EstatusId") == "R" || dataItem.get("EstatusId") == "C") {
                 //row.css('background-color', '#FFFFCF');
                 // What goes here?
                 //grid.table.find("tr").find("td:first input").attr("checked", true);
