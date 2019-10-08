@@ -217,6 +217,7 @@ function calculaEstatusSolicitud() {
                 //$("#EnviarSolicitud").enable(false);
                 $("#AgregarSolicitud").hide();
                 $("#CancelarSolicitud").hide();
+                deshabilitaControlesEdicion();
                 grid.hideColumn(0);
                 grid.hideColumn(1);
             }
@@ -224,6 +225,8 @@ function calculaEstatusSolicitud() {
             if (ClaveEstatusSolicitud == 'CE') {
                 //$("#EnviarSolicitud").enable(false);
                 $("#AgregarSolicitud").hide();
+                $("#CancelarSolicitud").hide();
+                deshabilitaControlesEdicion();
                 grid.hideColumn(0);
                 grid.hideColumn(1);
             }
@@ -339,6 +342,136 @@ function deshabilitaControlesEdicion() {
 
 }
 
+function verEmpleadoSolicitud(e) {
+    //debugger;
+    e.preventDefault(); // sho J
+    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
+    //Calcular los valores que retorna dataItem
+    dataItem_FolioSolicitud = dataItem.FolioSolicitud;
+    dataItem_Ident = dataItem.Ident;
+    dataItem_Nombre = dataItem.Nombre;
+    dataItem_ConceptoId = dataItem.ConceptoId;
+    //dataItem_ConceptoDesc = dataItem.
+    dataItem_Monto = dataItem.Monto;
+    dataItem_MotivosSolicitudId = dataItem.MotivosSolicitudId;
+    //dataItem_MotivosSolicitudDesc = dataItem.
+    dataItem_ConceptoMotivoId = dataItem.ConceptoMotivoId;
+    //dataItem_ConceptoMotivoDesc = dataItem.
+    dataItem_ResponsableId = dataItem.ResponsableId;
+    //dataItem_NombreResponsable = dataItem.
+    dataItem_PeriodoOriginalId = dataItem.PeriodoOriginalId;
+    dataItem_EstatusId = dataItem.EstatusId;
+    //dataItem_EstatusSolicitud = dataItem.
+
+    if (dataItem_EstatusId == "EB" || dataItem_EstatusId == "R") {
+        $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Guardar');
+        //} else if (dataItem_EstatusId == "CE") {
+        //    deshabilitaControlesEdicion();
+    } else {
+        $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Agregar');
+    }
+
+    $.when($("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem_Ident),
+        $('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change')
+    ).done(function () {
+        console.log("CCMSID Change");
+        $.when(
+            $("#CCMSIDIncidente").data('kendoNumericTextBox').value(dataItem_ResponsableId),
+            $('#CCMSIDIncidente').data('kendoNumericTextBox').trigger('change')
+        ).done(function () {
+            console.log("CCMSIdIncidente Change");
+            $.when(
+
+                $("#Conceptos").data("kendoDropDownList").dataSource.read(),
+                $("#Conceptos").data("kendoDropDownList").refresh(),
+
+            ).done(function () {
+                console.log("Conceptos Fill");
+                $.when(
+                    $("#Conceptos").data('kendoDropDownList').value(dataItem_ConceptoId),
+                    $('#Conceptos').data('kendoDropDownList').trigger('change'),
+                    conceptoParametroConcepto(dataItem_ConceptoId, dataItem_Monto)
+                ).done(function () {
+                    console.log("Conceptos Change");
+                    $.when(
+                        inicializaAutorizadores(dataItem_Ident, dataItem_ConceptoId)
+                        //solicitudAutorizantes()
+                    ).done(function () {
+                        console.log("Solicitud Autorizantes Change");
+                        $.when(
+                            //inicializaAutorizadores(dataItem_Ident, dataItem_ConceptoId)
+                            solicitudAutorizantes()
+                        ).done(function () {
+                            console.log("Inicializa Autorizantes");
+                        });
+                    });
+
+                });
+            });
+        });
+
+        deshabilitaControlesEdicion();
+
+    });
+
+    // Procesar el estatus de EmpleadoSolicitud
+    // Activar / Desactivar botón Rechazar
+    if (dataItem_EstatusId == 'R') {
+        $("#AgregarSolicitud").show();
+        $("#CancelarEmpleadoSolicitud").show();
+    }
+    else if (dataItem_EstatusId == 'EB') {
+        $("#AgregarSolicitud").show();
+        $("#EnviarSolicitud").show();
+        $("#CancelarEmpleadoSolicitud").hide();
+    }
+    else {
+        $("#AgregarSolicitud").hide();
+        $("#EnviarSolicitud").hide();
+        $("#CancelarEmpleadoSolicitud").hide();
+    }
+
+    //debugger;
+    $("#Parametro").data('kendoNumericTextBox').value(dataItem_Monto);
+    $('#Parametro').data('kendoNumericTextBox').trigger('change');
+
+    $("#Motivo").data('kendoDropDownList').value(dataItem_MotivosSolicitudId);
+    $('#Motivo').data('kendoDropDownList').trigger('change');
+
+    $("#ConceptoMotivo").data('kendoDropDownList').value(dataItem_ConceptoMotivoId);
+    $('#ConceptoMotivo').data('kendoDropDownList').trigger('change');
+
+    $("#PeriodoIncidente").data('kendoDropDownList').value(dataItem_PeriodoOriginalId);
+    $('#PeriodoIncidente').data('kendoDropDownList').trigger('change');
+
+    $("#AutorizadorNivel1").data('kendoDropDownList').value(dataItem_AutorizadorNivel1);
+
+    $("#AutorizadorNivel2").data('kendoDropDownList').value(dataItem_AutorizadorNivel2);
+
+    $("#AutorizadorNivel3").data('kendoDropDownList').value(dataItem_AutorizadorNivel3);
+
+    $("#AutorizadorNivel4").data('kendoDropDownList').value(dataItem_AutorizadorNivel4);
+
+    $("#AutorizadorNivel5").data('kendoDropDownList').value(dataItem_AutorizadorNivel5);
+
+    $("#AutorizadorNivel6").data('kendoDropDownList').value(dataItem_AutorizadorNivel6);
+
+    $("#AutorizadorNivel7").data('kendoDropDownList').value(dataItem_AutorizadorNivel7);
+
+    $("#AutorizadorNivel8").data('kendoDropDownList').value(dataItem_AutorizadorNivel8);
+
+    $("#AutorizadorNivel9").data('kendoDropDownList').value(dataItem_AutorizadorNivel9);
+
+    //debugger;
+    var rowIndex = $(e.currentTarget).closest("tr").index();
+    var grid = $("#gridSolicitud").data("kendoGrid");
+    grid.select("tr:eq(" + rowIndex + ")");    
+
+    //Al final se desactiva la edición de los controles 
+    //deshabilitaControlesEdicion();
+}
+
 function actualizaGrid() {
     $("#gridSolicitud").data("kendoGrid").dataSource.read();
     $("#gridSolicitud").data("kendoGrid").refresh();
@@ -389,6 +522,8 @@ function editarEmpleadoSolicitud(e) {
 
     if (dataItem_EstatusId == "EB" || dataItem_EstatusId == "R") {
         $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Guardar');
+    //} else if (dataItem_EstatusId == "CE") {
+    //    deshabilitaControlesEdicion();
     } else {
         $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Agregar');
     }
@@ -490,6 +625,12 @@ function editarEmpleadoSolicitud(e) {
         $("#EnviarSolicitud").show();
         $("#CancelarEmpleadoSolicitud").hide();
     }
+    //else if (dataItem_EstatusId == 'CE') {
+    //    $("#AgregarSolicitud").hide();
+    //    $("#EnviarSolicitud").hide();
+    //    $("#CancelarEmpleadoSolicitud").hide();
+    //    deshabilitaControlesEdicion();
+    //}
     else {
         $("#AgregarSolicitud").hide();
         $("#EnviarSolicitud").hide();
@@ -905,6 +1046,10 @@ function onChangeCCMSId() {
                 $("#AgregarSolicitud").data("kendoButton").enable(true);
                 habilitaControlesEdicion();
             }
+
+            //if ($("#Estatus").val() == "Cerrada" || $("#Estatus").val() == "Cancelada") {
+            //    deshabilitaControlesEdicion();
+            //}
 
         }).fail(function (ex) {
             //debugger;

@@ -248,21 +248,21 @@
             )
         </div>
 
-        @*<div class="editor-label">
+        <div class="editor-label">
             <label for="NumeroNivelAutorizante">Número de niveles de autorizantes</label>
-        </div>*@
+        </div>@**@
 
-        @*<div class="editor-field">
+        <div class="editor-field">
             @(Html.Kendo().NumericTextBoxFor(x => x.NumeroNivelAutorizante)
                 .Name("NumeroNivelAutorizante")
                 .Format("0")
                 .Decimals(0)
                 .Min(1)
                 .Max(9)
-                .Events(e => e.Change("onChangeNumeroNivelAutorizante"))
+                //.Events(e => e.Change("onChangeNumeroNivelAutorizante"))
                 .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
-        </div>*@
+        </div>@**@
 
         @*<div id="ocultaAutorizantes">
             <div class="editor-label">
@@ -347,13 +347,13 @@
         </div>*@
 
 
-            <div class="editor-label">
-                <label for="Active">Activo</label>
-            </div>
-            <div class="editor-field">
-                @(Html.Kendo().CheckBox().Name("Active"))
-            </div>
-
+        <div class="editor-label">
+            <label for="Active">Activo</label>
         </div>
+        <div class="editor-field">
+            @(Html.Kendo().CheckBox().Name("Active"))
+        </div>
+
+    </div>
 </div>
 
