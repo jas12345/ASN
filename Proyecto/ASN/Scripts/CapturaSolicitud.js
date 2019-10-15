@@ -522,6 +522,8 @@ function editarEmpleadoSolicitud(e) {
 
     if (dataItem_EstatusId == "EB" || dataItem_EstatusId == "R") {
         $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Guardar');
+    //} else if (dataItem_EstatusId == "CE") {
+    //    deshabilitaControlesEdicion();
     } else {
         $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Agregar');
     }
@@ -623,6 +625,12 @@ function editarEmpleadoSolicitud(e) {
         $("#EnviarSolicitud").show();
         $("#CancelarEmpleadoSolicitud").hide();
     }
+    //else if (dataItem_EstatusId == 'CE') {
+    //    $("#AgregarSolicitud").hide();
+    //    $("#EnviarSolicitud").hide();
+    //    $("#CancelarEmpleadoSolicitud").hide();
+    //    deshabilitaControlesEdicion();
+    //}
     else {
         $("#AgregarSolicitud").hide();
         $("#EnviarSolicitud").hide();
@@ -1038,6 +1046,10 @@ function onChangeCCMSId() {
                 $("#AgregarSolicitud").data("kendoButton").enable(true);
                 habilitaControlesEdicion();
             }
+
+            //if ($("#Estatus").val() == "Cerrada" || $("#Estatus").val() == "Cancelada") {
+            //    deshabilitaControlesEdicion();
+            //}
 
         }).fail(function (ex) {
             //debugger;
