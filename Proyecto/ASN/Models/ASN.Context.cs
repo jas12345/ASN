@@ -939,7 +939,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosCMB_Result>("CatPerfilEmpleadosCMB", tipoAccesoIdParameter);
         }
     
-        public virtual int CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, Nullable<int> city_Ident, Nullable<int> location_Ident, Nullable<int> client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, Nullable<int> conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, Nullable<int> city_Ident, Nullable<int> location_Ident, Nullable<int> client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, string conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var nombrePerfilEmpleadosParameter = nombrePerfilEmpleados != null ?
                 new ObjectParameter("NombrePerfilEmpleados", nombrePerfilEmpleados) :
@@ -969,9 +969,9 @@ namespace ASN.Models
                 new ObjectParameter("Contract_Type_Ident", contract_Type_Ident) :
                 new ObjectParameter("Contract_Type_Ident", typeof(int));
     
-            var conceptoIdParameter = conceptoId.HasValue ?
+            var conceptoIdParameter = conceptoId != null ?
                 new ObjectParameter("ConceptoId", conceptoId) :
-                new ObjectParameter("ConceptoId", typeof(int));
+                new ObjectParameter("ConceptoId", typeof(string));
     
             var tipoAccesoIdParameter = tipoAccesoId.HasValue ?
                 new ObjectParameter("TipoAccesoId", tipoAccesoId) :

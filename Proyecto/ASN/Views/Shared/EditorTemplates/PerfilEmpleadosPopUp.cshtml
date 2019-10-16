@@ -102,7 +102,7 @@
                         .OptionLabel("- Seleccione Cliente -")
                         .Name("Client_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        //.Events(eve => eve.Change("CargaPrograma"))
+                        .Events(eve => eve.Change("CargaPrograma"))
                         .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
                         .CascadeFrom("Location_Ident")
             )
@@ -160,7 +160,7 @@
             <label for="Concepto">Concepto de Nómina</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.ConceptoId)
+            @*@(Html.Kendo().DropDownListFor(x => x.ConceptoId)
                         .DataSource(source =>
                         {
                             source.Read(read =>
@@ -177,6 +177,26 @@
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                         .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
                         .CascadeFrom("Client_Ident")
+            )*@
+            @(Html.Kendo().MultiSelectFor(x => x.Concepto)
+                        //.AutoBind(false)
+                        .ValuePrimitive(true)
+                        .Filter("contains")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("Concepto")
+                        .AutoBind(true)
+                        .ClearButton(true)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto2");
+                            });
+                        //.ServerFiltering(true);
+                        })                        
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un Concepto." })
+                        //.CascadeFrom("Country_Ident", "")
             )
         </div>
         <div class="editor-label">
@@ -210,23 +230,23 @@
 </div>
 
 <script>
-    $(function () {
-        var CountryDDL = $("#Country_Ident").data("kendoDropDownList");
-        var CityDDL = $("#City_Ident").data("kendoDropDownList");
-        var LocationDDL = $("#Location_Ident").data("kendoDropDownList");
-        var ClientDDL = $("#Client_Ident").data("kendoDropDownList");
-        var ProgramDDL = $("#Program_Ident").data("kendoDropDownList");
-        var ContractDDL = $("#Contract_Type_Ident").data("kendoDropDownList");
-        var ConceptoDDL = $("#ConceptoId").data("kendoDropDownList");
+    //$(function () {
+    //    var CountryDDL = $("#Country_Ident").data("kendoDropDownList");
+    //    var CityDDL = $("#City_Ident").data("kendoDropDownList");
+    //    var LocationDDL = $("#Location_Ident").data("kendoDropDownList");
+    //    var ClientDDL = $("#Client_Ident").data("kendoDropDownList");
+    //    var ProgramDDL = $("#Program_Ident").data("kendoDropDownList");
+    //    var ContractDDL = $("#Contract_Type_Ident").data("kendoDropDownList");
+    //    //var ConceptoDDL = $("#ConceptoId").data("kendoDropDownList");
 
-        CountryDDL.list.width("auto");
-        CityDDL.list.width("auto");
-        LocationDDL.list.width("auto");
-        ClientDDL.list.width("auto");
-        ProgramDDL.list.width("auto");
-        ContractDDL.list.width("auto");
-        ConceptoDDL.list.width("auto");
-    });
+    //    CountryDDL.list.width("auto");
+    //    CityDDL.list.width("auto");
+    //    LocationDDL.list.width("auto");
+    //    ClientDDL.list.width("auto");
+    //    ProgramDDL.list.width("auto");
+    //    ContractDDL.list.width("auto");
+    //    //ConceptoDDL.list.width("auto");
+    //});
 </script>
 
 @Scripts.Render("~/bundles/PerfilEmpleados")

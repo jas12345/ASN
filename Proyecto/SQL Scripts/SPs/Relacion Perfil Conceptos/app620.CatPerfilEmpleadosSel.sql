@@ -20,7 +20,7 @@ BEGIN
 		,Program.Program_Name
 		,Perfil.[Contract_Type_Ident]
 		,Contract.Contract_Type
-		,Perfil.ConceptoId
+		--,Perfil.ConceptoId
 		,Concepto.Descripcion Concepto
 		,Perfil.TipoAccesoId
 		,TipoAcceso.Descripcion TipoAcceso
@@ -33,6 +33,18 @@ BEGIN
 								JOIN app620.CatConceptos B ON A.ConceptoId = B.ConceptoId
 						WHERE	A.Perfil_Ident = Perfil.Perfil_Ident)
 		END AS ConceptoNombre
+		,(SELECT DISTINCT  
+    SUBSTRING(
+        (
+            SELECT ',' + CONVERT(VARCHAR(1500),REC1.ConceptoId)  AS [text()]
+            FROM app620.RelPerfilEmpleadosConceptos REC1
+				JOIN app620.CatConceptos B ON REC1.ConceptoId = B.ConceptoId
+            WHERE REC1.Perfil_Ident = REC2.Perfil_Ident
+            ORDER BY REC1.Perfil_Ident
+            FOR XML PATH ('')
+        ), 2, 1000) [ConceptoId]
+FROM app620.RelPerfilEmpleadosConceptos REC2 WHERE REC2.Perfil_Ident = Perfil.Perfil_Ident)
+		 AS ConceptoId
 	FROM [app620].[CatPerfilEmpleados] Perfil
 	JOIN [app620].[RelPerfilEmpleadosConceptos] REC WITH(NOLOCK) ON REC.Perfil_Ident = Perfil.Perfil_Ident
 	LEFT JOIN [app620].[CatCountryVw] Pais ON Pais.[Country_Ident] = Perfil.Country_Ident
