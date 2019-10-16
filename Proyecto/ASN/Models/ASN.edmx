@@ -409,7 +409,7 @@
           <Parameter Name="Client_Ident" Type="int" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
           <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
-          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -1021,7 +1021,7 @@
             <Parameter Name="Client_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="String" />
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
@@ -1820,7 +1820,7 @@
           <Property Type="String" Name="Program_Name" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
           <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
+          <Property Type="String" Name="ConceptoId" Nullable="true" />
           <Property Type="String" Name="Concepto" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
           <Property Type="String" Name="TipoAcceso" Nullable="true" MaxLength="50" />

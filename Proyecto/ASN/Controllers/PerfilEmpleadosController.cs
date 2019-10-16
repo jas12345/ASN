@@ -31,7 +31,7 @@ namespace ASN.Controllers
                         ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
                         ViewData["Programa"] = context.CatProgramTodosCMB().ToList();
                         ViewData["TipoContrato"] = context.CatContractTypeTodosCMB().ToList();
-                        ViewData["Concepto"] = context.CatConceptosCMB(0).ToList();
+                        //ViewData["Concepto"] = context.CatConceptosCMB(0).ToList();
                         ViewData["TipoAcceso"] = context.CatTiposAccesoCMB().ToList();
                     }
 
@@ -225,7 +225,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptosCMB(int? country, int? client)
+        public JsonResult GetConceptosCMB(string country = "0", string client = "0")
         {
             try
             {
@@ -234,9 +234,11 @@ namespace ASN.Controllers
 
                 using (ASNContext ctx = new ASNContext())
                 {
+                    int.TryParse(country, out int pais);
+                    int.TryParse(client, out int cliente);
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatConceptosCMB(0).ToList();
-                    lstCMB = ctx.CatConceptosPaisClienteCMB(0, country, client).ToList();
+                    lstCMB = ctx.CatConceptosPaisClienteCMB(0, pais, cliente).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -301,7 +303,7 @@ namespace ASN.Controllers
                             Contract_Type_Ident = (item.Contract_Type_Ident != null ? item.Contract_Type_Ident.ToString():"-1"),
                             Contract_Type = item.Contract_Type,
                             ConceptoId = (item.ConceptoId != null ? item.ConceptoId.ToString():"-1"),
-                            Concepto = item.Concepto,
+                            Concepto = item.ConceptoNombre,
                             TipoAccesoId = item.TipoAccesoId,
                             TipoAcceso =item.TipoAcceso,
                             Active = item.Active
@@ -323,7 +325,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles)
+        public ActionResult CreatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string ConceptoId)
         {
             try
             {
@@ -340,6 +342,8 @@ namespace ASN.Controllers
                         foreach (var obj in profiles)
                         {
                             int i = 0;
+                            obj.ConceptoId = ConceptoId;
+
                             context.CatPerfilEmpleadosSi(
                                 obj.NombrePerfilEmpleados,
                                 (string.IsNullOrEmpty(obj.Country_Ident)?-1:int.Parse(obj.Country_Ident)),
@@ -348,9 +352,11 @@ namespace ASN.Controllers
                                 (string.IsNullOrEmpty(obj.Location_Ident) ?-1:int.Parse(obj.Location_Ident)),
                                 (string.IsNullOrEmpty(obj.Client_Ident)?-1:int.Parse(obj.Client_Ident)),
                                 (string.IsNullOrEmpty(obj.Program_Ident)?-1:int.Parse(obj.Program_Ident)),
-                                (string.IsNullOrEmpty(obj.Contract_Type_Ident) ?-1:int.Parse(obj.Contract_Type_Ident)), 
-                                ((Int32.TryParse(obj.ConceptoId, out i) ? i : (int?)null)),
-                                obj.TipoAccesoId, ccmsidAdmin, resultado);
+                                (string.IsNullOrEmpty(obj.Contract_Type_Ident) ?-1:int.Parse(obj.Contract_Type_Ident)),
+                                //((Int32.TryParse(obj.ConceptoId, out i) ? i : (int?)null)),
+                                obj.ConceptoId,
+                                obj.TipoAccesoId, ccmsidAdmin, resultado
+                            );
                         }
 
                         int.TryParse(resultado.Value.ToString(), out res);
