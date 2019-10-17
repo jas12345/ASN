@@ -300,9 +300,6 @@ function calculaEstatusSolicitud() {
 
 function habilitaControlesEdicion() {
 
-    var tempDL = $("#Conceptos").data("kendoDropDownList");
-    tempDL.enable(true);
-
     tempDL = $("#Motivo").data("kendoDropDownList");
     tempDL.enable(true);
 
@@ -322,9 +319,6 @@ function habilitaControlesEdicion() {
 
 function deshabilitaControlesEdicion() {
 
-    var tempDL = $("#Conceptos").data("kendoDropDownList");
-    tempDL.enable(false);
-
     tempDL = $("#Motivo").data("kendoDropDownList");
     tempDL.enable(false);
 
@@ -340,6 +334,23 @@ function deshabilitaControlesEdicion() {
     var CCMSIDIncidente = $("#CCMSIDIncidente").data("kendoNumericTextBox");
     CCMSIDIncidente.enable(false);
 
+}
+
+function habilitaControlesLlave() {
+
+    //var tempDL = $("#Conceptos").data("kendoDropDownList");
+    //tempDL.enable(true);
+    $("#CCMSIDSolicitado").data("kendoNumericTextBox").enable(true);
+    $("#Conceptos").data("kendoDropDownList").enable(true);
+}
+
+function deshabilitaControlesLlave() {
+
+    //var tempDL = $("#Conceptos").data("kendoDropDownList");
+    //tempDL.enable(false);
+
+    $("#CCMSIDSolicitado").data("kendoNumericTextBox").enable(false);
+    $("#Conceptos").data("kendoDropDownList").enable(false);
 }
 
 function verEmpleadoSolicitud(e) {
@@ -411,9 +422,21 @@ function verEmpleadoSolicitud(e) {
             });
         });
 
-        deshabilitaControlesEdicion();
+        //deshabilitaControlesEdicion();
 
     });
+
+    if (dataItem_EstatusId == "EB" || dataItem_EstatusId == "") {
+
+        habilitaControlesLave();
+        habilitaControlesEdicion();
+
+    }
+    else {
+
+        deshabilitaControlesLave();
+
+   }
 
     // Procesar el estatus de EmpleadoSolicitud
     // Activar / Desactivar botón Rechazar
@@ -519,6 +542,19 @@ function editarEmpleadoSolicitud(e) {
     ////dataItem_NivelAutorizacion9 = dataItem.
     //dataItem_AutorizadorNivel9 = dataItem.AutorizadorNivel9;
     //dataItem_Active = dataItem.
+
+    if (dataItem_EstatusId == 'EB') {
+        habilitaControlesLlave();
+        habilitaControlesEdicion();
+    }
+    else if (dataItem_EstatusId == 'R') {
+        deshabilitaControlesLlave();
+        habilitaControlesEdicion();
+    }
+    else {
+        deshabilitaControlesLlave();
+        deshabilitaControlesEdicion();
+    }
 
     if (dataItem_EstatusId == "EB" || dataItem_EstatusId == "R") {
         $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Guardar');
@@ -1025,6 +1061,19 @@ function onChangeCCMSId() {
                 //dataItem_ResponsableId = 0;
             }
             //debugger;
+            if (dataItem_EstatusId == 'EB' || dataItem_EstatusId == '') {
+                habilitaControlesLlave();
+                habilitaControlesEdicion();
+            }
+            else if (dataItem_EstatusId == 'R') {
+                deshabilitaControlesLlave();
+                habilitaControlesEdicion();
+            }
+            else {
+                deshabilitaControlesLlave();
+                deshabilitaControlesEdicion();
+            }
+
             if (EmpCCMSId == -1) {
                 $("#AgregarSolicitud").kendoButton({enable: false});
 
@@ -1044,7 +1093,7 @@ function onChangeCCMSId() {
             if (EmpCCMSId > 0) {
                 //$("#AgregarSolicitud").kendoButton({ enable: true });
                 $("#AgregarSolicitud").data("kendoButton").enable(true);
-                habilitaControlesEdicion();
+            //habilitaControlesEdicion();
             }
 
             //if ($("#Estatus").val() == "Cerrada" || $("#Estatus").val() == "Cancelada") {

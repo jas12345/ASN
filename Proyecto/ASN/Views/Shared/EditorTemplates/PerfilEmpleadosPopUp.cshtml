@@ -5,7 +5,22 @@
         padding-bottom: 1em;
     }
 </style>
+
 <div>
+    <style>
+        .myClass .k-multiselect-wrap {
+            /* enable scrollability */
+            overflow: auto;
+            /* control selected items' container - use height or min-height and/or max-height */
+            max-height: 100px;
+        }
+
+            .myClass .k-multiselect-wrap .k-button {
+                /* force each selected item on a new line, if required */
+                clear: left;
+            }
+    </style>
+
     <div class="k-edit-form-container">
         <div class="editor-label">
             <label for="Descripcion">Descripción</label>
@@ -31,7 +46,7 @@
                         .OptionLabel("- Seleccione Pais -")
                         .Name("Country_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        //.Events(eve => eve.Change("CargaCiudad"))   
+                        //.Events(eve => eve.Change("CargaCiudad"))
                         .Events(eve => eve.Open("adjustDropDownWidth"))
             )
         </div>
@@ -161,23 +176,23 @@
         </div>
         <div class="editor-field">
             @*@(Html.Kendo().DropDownListFor(x => x.ConceptoId)
-                        .DataSource(source =>
-                        {
-                            source.Read(read =>
+                            .DataSource(source =>
                             {
-                                read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto");
+                                source.Read(read =>
+                                {
+                                    read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto");
+                                })
+                            .ServerFiltering(true);
                             })
-                        .ServerFiltering(true);
-                        })
-                        .Filter("contains")
-                        .DataValueField("Ident")
-                        .DataTextField("Valor")
-                        .Name("ConceptoId")
-                        .OptionLabel(" - Todos - ")
-                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
-                        .CascadeFrom("Client_Ident")
-            )*@
+                            .Filter("contains")
+                            .DataValueField("Ident")
+                            .DataTextField("Valor")
+                            .Name("ConceptoId")
+                            .OptionLabel(" - Todos - ")
+                            .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                            .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
+                            .CascadeFrom("Client_Ident")
+                )*@
             @(Html.Kendo().MultiSelectFor(x => x.Concepto)
                         //.AutoBind(false)
                         .ValuePrimitive(true)
@@ -194,8 +209,8 @@
                                 read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto2");
                             });
                         //.ServerFiltering(true);
-                        })                        
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un Concepto." })
+                        })
+                        .HtmlAttributes(new { @class = "myClass", required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un Concepto." })
                         //.CascadeFrom("Country_Ident", "")
             )
         </div>
@@ -230,23 +245,50 @@
 </div>
 
 <script>
-    //$(function () {
-    //    var CountryDDL = $("#Country_Ident").data("kendoDropDownList");
-    //    var CityDDL = $("#City_Ident").data("kendoDropDownList");
-    //    var LocationDDL = $("#Location_Ident").data("kendoDropDownList");
-    //    var ClientDDL = $("#Client_Ident").data("kendoDropDownList");
-    //    var ProgramDDL = $("#Program_Ident").data("kendoDropDownList");
-    //    var ContractDDL = $("#Contract_Type_Ident").data("kendoDropDownList");
-    //    //var ConceptoDDL = $("#ConceptoId").data("kendoDropDownList");
+    var multiselect = $("#Concepto").kendoMultiSelect({
+        select: onSelect
+    }).data('kendoMultiSelect');
 
-    //    CountryDDL.list.width("auto");
-    //    CityDDL.list.width("auto");
-    //    LocationDDL.list.width("auto");
-    //    ClientDDL.list.width("auto");
-    //    ProgramDDL.list.width("auto");
-    //    ContractDDL.list.width("auto");
-    //    //ConceptoDDL.list.width("auto");
-    //});
+    var multiselectwrap = multiselect.element.closest('.k-multiselect').find('.k-multiselect-wrap');
+
+    multiselectwrap.on('mousedown', function (e) {
+        e.stopPropagation();
+    });
+
+    multiselectwrap.on('click', function (e) {
+        multiselect.open();
+    });
+
+    // set the custom class that applies all custom styling related to heights, scrollability and selected items arrangement
+    $("#Concepto").data("kendoMultiSelect").wrapper.addClass("myClass");
+
+    function onSelect(e) {
+        setTimeout(function () {
+            // scroll the selected items' container to its bottom
+            var container = e.sender.wrapper.children(".k-multiselect-wrap");
+            container.scrollTop(container[0].scrollHeight);
+        });
+    }
+</script>
+
+<script>
+        //$(function () {
+        //    var CountryDDL = $("#Country_Ident").data("kendoDropDownList");
+        //    var CityDDL = $("#City_Ident").data("kendoDropDownList");
+        //    var LocationDDL = $("#Location_Ident").data("kendoDropDownList");
+        //    var ClientDDL = $("#Client_Ident").data("kendoDropDownList");
+        //    var ProgramDDL = $("#Program_Ident").data("kendoDropDownList");
+        //    var ContractDDL = $("#Contract_Type_Ident").data("kendoDropDownList");
+        //    //var ConceptoDDL = $("#ConceptoId").data("kendoDropDownList");
+
+        //    CountryDDL.list.width("auto");
+        //    CityDDL.list.width("auto");
+        //    LocationDDL.list.width("auto");
+        //    ClientDDL.list.width("auto");
+        //    ProgramDDL.list.width("auto");
+        //    ContractDDL.list.width("auto");
+        //    //ConceptoDDL.list.width("auto");
+        //});
 </script>
 
 @Scripts.Render("~/bundles/PerfilEmpleados")
