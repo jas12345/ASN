@@ -1446,6 +1446,20 @@ function validaAutorizador(valor) {
     }
 }
 
+function habilitaConceptoMotivoPeriodoOriginal() {
+
+    $("#ConceptoMotivo").data("kendoDropDownList").enable(true);
+    $("#PeriodoIncidente").data("kendoDropDownList").enable(true);
+
+}
+
+function deshabilitaConceptoMotivoPeriodoOriginal() {
+
+    $("#ConceptoMotivo").data("kendoDropDownList").enable(false);
+    $("#PeriodoIncidente").data("kendoDropDownList").enable(false);
+
+}
+
 function habilitaCombosAutorizadores(nivelAutorizador) {
     var autorizadores = $("div[name='nivel']");
     //debugger;
@@ -1485,9 +1499,6 @@ function onChangeAutorizadorNivel1() {
         }
     }
 }
-
-
-
 
 function onChangeAutorizadorNivel2() {
     //debugger;
