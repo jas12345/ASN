@@ -1310,6 +1310,16 @@ function onChangeMotivo() {
         $("#MotivoX").text("");
 
     }
+
+    if ($("#Motivo").data('kendoDropDownList').text() == 'N/A') {
+        $("#ConceptoMotivo").data('kendoDropDownList').value('-1');
+        $("#ConceptoMotivo").data('kendoDropDownList').enable(false);
+        $("#ConceptoMotivoX").val("");
+        $("#ConceptoMotivoX").text("");
+    }
+    else {
+        $("#ConceptoMotivo").data('kendoDropDownList').enable(true);
+    }
 }
 
 function onChangeConceptoMotivo() {
