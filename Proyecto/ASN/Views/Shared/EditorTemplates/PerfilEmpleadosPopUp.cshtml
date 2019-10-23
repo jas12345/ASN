@@ -7,20 +7,6 @@
 </style>
 
 <div>
-    <style>
-        .myClass .k-multiselect-wrap {
-            /* enable scrollability */
-            overflow: auto;
-            /* control selected items' container - use height or min-height and/or max-height */
-            max-height: 100px;
-        }
-
-            .myClass .k-multiselect-wrap .k-button {
-                /* force each selected item on a new line, if required */
-                clear: left;
-            }
-    </style>
-
     <div class="k-edit-form-container">
         <div class="editor-label">
             <label for="Descripcion">Descripción</label>
@@ -210,7 +196,7 @@
                             });
                         //.ServerFiltering(true);
                         })
-                        .HtmlAttributes(new { @class = "myClass", required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un Concepto." })
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un Concepto." })
                         //.CascadeFrom("Country_Ident", "")
             )
         </div>
@@ -243,33 +229,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    var multiselect = $("#Concepto").kendoMultiSelect({
-        select: onSelect
-    }).data('kendoMultiSelect');
-
-    var multiselectwrap = multiselect.element.closest('.k-multiselect').find('.k-multiselect-wrap');
-
-    multiselectwrap.on('mousedown', function (e) {
-        e.stopPropagation();
-    });
-
-    multiselectwrap.on('click', function (e) {
-        multiselect.open();
-    });
-
-    // set the custom class that applies all custom styling related to heights, scrollability and selected items arrangement
-    $("#Concepto").data("kendoMultiSelect").wrapper.addClass("myClass");
-
-    function onSelect(e) {
-        setTimeout(function () {
-            // scroll the selected items' container to its bottom
-            var container = e.sender.wrapper.children(".k-multiselect-wrap");
-            container.scrollTop(container[0].scrollHeight);
-        });
-    }
-</script>
 
 <script>
         //$(function () {

@@ -50,8 +50,7 @@
                             source.Read(read =>
                             {
                                 read.Action("GetPerfilCMB", "PerfilEmpleadosAccesos");
-                            })
-                            .ServerFiltering(true);
+                            });
                         })
                         .Filter("contains")
                         .OptionLabel("- Seleccione perfil de empleados- ")
