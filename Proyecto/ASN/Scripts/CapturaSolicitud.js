@@ -92,26 +92,35 @@ function agregarSolicitud() {
     //console.log("Salvado");
     //debugger;
     //infoSolicitud();
-    $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&PeriodoNomina_Id=" + $("#PeriodoNomina_Id").val() + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9, function (data) {
-        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
 
-        FolioSolicitud = data.FolioSolicitud;
+    if (EmpCCMSId == '' || ConParametroConceptoMonto == '' || ConConceptoIdent == '' || ConMotivoIdent == '') {
+        var notificationDatos = $("#popupNotification").data("kendoNotification");
+        notificationDatos.show("Existen campos que no han sido capturados.", "warning");
+    }
+    else {
 
-        if (data.res == -2) {
-            var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Ya existe un registro con este Empleado y Concepto", "error");
-        }
+        $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&PeriodoNomina_Id=" + $("#PeriodoNomina_Id").val() + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9, function (data) {
+            //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
 
-        //if (ClaveEstatusEmpleadoSolicitud == "EB" || ClaveEstatusEmpleadoSolicitud == "R") {
-        //    $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Guardar');
-        //} else {
-        $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Agregar');
-        //}
+            FolioSolicitud = data.FolioSolicitud;
 
-        $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
-        actualizaGrid();
-        //debugger;
-    });
+            if (data.res == -2) {
+                var notification = $("#popupNotification").data("kendoNotification");
+                notification.show("Ya existe un registro con este Empleado y Concepto", "error");
+            }
+
+            //if (ClaveEstatusEmpleadoSolicitud == "EB" || ClaveEstatusEmpleadoSolicitud == "R") {
+            //    $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Guardar');
+            //} else {
+            $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Agregar');
+            //}
+
+            $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+            actualizaGrid();
+            //debugger;
+        });
+
+    }
 }
 
 function enviarSolicitud() {
