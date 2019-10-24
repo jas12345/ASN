@@ -95,7 +95,7 @@ function agregarSolicitud() {
 
     if (EmpCCMSId == '' || ConParametroConceptoMonto == '' || ConConceptoIdent == '' || ConMotivoIdent == '') {
         var notificationDatos = $("#popupNotification").data("kendoNotification");
-        notificationDatos.show("Existen campos que no han sido capturados.", "warning");
+        notificationDatos.show("Existen campos requeridos que no han sido capturados.", "warning");
     }
     else {
 
