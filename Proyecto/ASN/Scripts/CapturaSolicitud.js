@@ -1312,13 +1312,22 @@ function onChangeMotivo() {
     }
 
     if ($("#Motivo").data('kendoDropDownList').text() == 'N/A') {
+        //Se inicializa y deshabilita control Motivo de Solicitud
         $("#ConceptoMotivo").data('kendoDropDownList').value('-1');
         $("#ConceptoMotivo").data('kendoDropDownList').enable(false);
         $("#ConceptoMotivoX").val("");
         $("#ConceptoMotivoX").text("");
+
+        //Se inicializa y deshabilita control Período original
+        $("#PeriodoIncidente").data('kendoDropDownList').value('-1');
+        $("#PeriodoIncidente").data('kendoDropDownList').enable(false);
+        $("#PeriodoIncidente").val("");
+        $("#PeriodoIncidente").text("");
     }
     else {
+        //Se habilitan los controles Concepto Motivo y Período Original de Pago
         $("#ConceptoMotivo").data('kendoDropDownList').enable(true);
+        $("#PeriodoIncidente").data('kendoDropDownList').enable(true);
     }
 }
 
