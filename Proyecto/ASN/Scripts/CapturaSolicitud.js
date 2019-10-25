@@ -106,7 +106,7 @@ function agregarSolicitud() {
     });
 
     // Se validan valores de la solicitud
-    if (EmpCCMSId == '' || ConParametroConceptoMonto == '' || ConConceptoIdent == '' || ConMotivoIdent == '') {
+    if ($("#CCMSIDSolicitado").val().length <= 0 || $("#Conceptos").val() == '' || $("#Parametro").val().length <= 0 || $("#Motivo").val() == '') {
         var notificationDatos = $("#popupNotification").data("kendoNotification");
         notificationDatos.show("Existen campos requeridos que no han sido capturados.", "warning");
     }
