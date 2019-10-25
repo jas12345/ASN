@@ -93,10 +93,29 @@ function agregarSolicitud() {
     //debugger;
     //infoSolicitud();
 
+    // Se valida que se seleccionen autorizadores en todos los niveles del Concepto
+    var autorizadores = $("div[name='nivel']");
+    var igualesTotales = 0;
+
+    // Se valida que se seleccionen autorizadores en todos los niveles del Concepto
+    //debugger;
+    $(autorizadores).each(function (nivel) {
+        if (($("#AutorizadorNivel" + (nivel + 1)).val() !== "") && ((nivel) < ConNivelesAutorizacion)) {
+            igualesTotales++;
+        }
+    });
+
+    // Se validan valores de la solicitud
     if (EmpCCMSId == '' || ConParametroConceptoMonto == '' || ConConceptoIdent == '' || ConMotivoIdent == '') {
         var notificationDatos = $("#popupNotification").data("kendoNotification");
         notificationDatos.show("Existen campos requeridos que no han sido capturados.", "warning");
     }
+
+    else if (igualesTotales !== ConNivelesAutorizacion) {
+        var notificationDatos = $("#popupNotification").data("kendoNotification");
+        notificationDatos.show("Seleccione Autorizador en cada uno de los niveles del Concepto.", "warning");
+    }
+
     else {
 
         $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&PeriodoNomina_Id=" + $("#PeriodoNomina_Id").val() + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9, function (data) {
