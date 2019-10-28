@@ -20,6 +20,16 @@
                             .Decimals(0)
             )
         </div>
+        <div class="editor-label">
+            <label for="Nombre">Nombre</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBox()
+                            .Name("Nombre")
+                            .Enable(false)
+            )
+        </div>
+
         @*<div class="editor-label">
             <label for="Rol">Rol</label>
         </div>

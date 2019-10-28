@@ -34,7 +34,7 @@
                            .Name("grid")
                            .Columns(columns =>
                            {
-                               columns.Command(command => { command.Edit().Text("Edit").UpdateText("Save").CancelText("Cancel"); }).Width(75);
+                               columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(75);
                                columns.Bound(c => c.RelUserRoleId).Title("id").Visible(false).Filterable(false);
                                columns.ForeignKey(c => c.CatRoleId, (System.Collections.IEnumerable)ViewData["roles"], "Id", "Valor").Width(125).Title("Rol");
                                columns.Bound(c => c.UserCCMSId).Width(100).Title("CCMSID").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
