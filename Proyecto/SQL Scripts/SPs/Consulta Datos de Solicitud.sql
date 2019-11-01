@@ -1,7 +1,7 @@
 -- Datos de Solicitud
 USE ASN3;
 go
-DECLARE @FolioSolicitud INT = 178
+DECLARE @FolioSolicitud INT = 180
 
 SELECT * FROM app620.CatSolicitudes WHERE FolioSolicitud = @FolioSolicitud
 SELECT * FROM app620.CatEmpleadosSolicitudes WHERE FolioSolicitud = @FolioSolicitud
@@ -20,14 +20,14 @@ AND Autorizador_Ident IS NOT NULL
 --AND NivelAutorizacion = 1
 
 --UPDATE app620.CatEmpleadosSolicitudes
---SET EstatusSolicitudId = 'PA'
---WHERE FolioSolicitud = 177
---AND Empleado_Ident = 1000256
---AND ConceptoId = 44
+--SET EstatusSolicitudId = 'R'
+--WHERE FolioSolicitud = 180
+--AND Empleado_Ident = 993780
+--AND ConceptoId = 46
 
 --UPDATE app620.CatSolicitudes
---SET EstatusSolicitudId = 'PA'
---WHERE FolioSolicitud = 44
+--SET EstatusSolicitudId = 'R'
+--WHERE FolioSolicitud = 180
 
 --INSERT INTO app620.CatSolicitudEmpleadosAutorizantes
 --SELECT 

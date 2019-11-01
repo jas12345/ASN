@@ -48,16 +48,16 @@ function edit(e) {
 
         $("#City_Ident").val(e.model.City_Ident).change();
         //debugger;
-        //nombrePerfilEmpleados.enable(false);
-        country.enable(false);
-        city.enable(false);
-        //company.enable(false);
-        location.enable(false);
-        client.enable(false);
-        program.enable(false);
-        contract_Type.enable(false);
-        tipoAccesoId.enable(false);
-        //conceptoId.enable(false);
+        //////////nombrePerfilEmpleados.enable(false);
+        ////////country.enable(false);
+        ////////city.enable(false);
+        //////////company.enable(false);
+        ////////location.enable(false);
+        ////////client.enable(false);
+        ////////program.enable(false);
+        ////////contract_Type.enable(false);
+        ////////tipoAccesoId.enable(false);
+        //////////conceptoId.enable(false);
         //$("#ConceptoId").closest(".k-widget").hide();
         //MultiConcepto.enable(false);
 
@@ -324,16 +324,16 @@ function CargaCiudad() {
     //    programa.refresh();
     //}
         
-    site.enable(false);
+    ////////site.enable(false);
     site.value("-1");
 
-    cliente.enable(false);
+    ////////cliente.enable(false);
     cliente.value("-1");
 
-    programa.enable(false);
+    ////////programa.enable(false);
     programa.value("-1");
 
-    contrato.enable(false);
+    ////////contrato.enable(false);
     contrato.value("-1");
 
     ciudad.enable(true);
@@ -388,13 +388,13 @@ function CargaSite() {
     //    programa.refresh();
     //}    
 
-    cliente.enable(false);
+    ////////cliente.enable(false);
     cliente.value("-1");
 
-    programa.enable(false);
+    ////////programa.enable(false);
     programa.value("-1");
 
-    contrato.enable(false);
+    ////////contrato.enable(false);
     contrato.value("-1");
 
     site.enable(true);
@@ -447,10 +447,10 @@ function CargaCliente() {
     //    programa.dataSource.read();
     //    programa.refresh();
     //}
-    programa.enable(false);
+    ////////programa.enable(false);
     programa.value("-1");
 
-    contrato.enable(false);
+    ////////contrato.enable(false);
     contrato.value("-1");
 
     cliente.enable(true);
@@ -666,13 +666,13 @@ function validando() {
         var MultiConcepto = $("#Concepto").data("kendoMultiSelect");
         MultiConcepto.value(editandoConceptos);
 
-        pais.enable(false);
-        ciudad.enable(false);
-        site.enable(false);
-        cliente.enable(false);
-        programa.enable(false);
-        contrato.enable(false);
-        MultiConcepto.enable(false);
+        ////////pais.enable(false);
+        ////////ciudad.enable(false);
+        ////////site.enable(false);
+        ////////cliente.enable(false);
+        ////////programa.enable(false);
+        ////////contrato.enable(false);
+        ////////MultiConcepto.enable(false);
         //concepto.enable(false);
         //$("#ConceptoId").closest(".k-widget").hide();
     }

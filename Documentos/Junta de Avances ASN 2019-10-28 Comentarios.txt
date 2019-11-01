@@ -1,0 +1,27 @@
+Atender el BackLog en el siguiente orden de prioridad
+* Edición de Perfiles
+* Reporteo de Salida
+* Generación de Archivos PeopleSoft
+
+Pendiente: Revisar campos adicionales en Generación de Archivos PeopleSoft, y otros comentarios de NextG
+
+En Edición de Perfiles-Acceso:
+* Ordenar por nombre (Default)
+* Filtrar por Contains (No por StartWith)
+* Agregar Filtro en columna Activo
+
+En Edición de Mis Autorizaciones:
+* Dejar fijos los botones Autorizar / Rechazar
+* Al rechazar un concepto, regresar al nivel 1 de autorizadores
+* Obligar la captura de Comentarios
+
+En Edicion de Mis Solicitudes
+* En el caso de conceptos Rechazados, revisar que el checkbox Todos, no seleccione conceptos que no esten en estatus Por Autorizar 
+
+En Reporte General
+* Mostrar en la columna Estatus la descripción, no la clave.
+
+Revisar el punto 5.2.2 del análisis para ver las responsabilidades del Administrador en el sistema.
+
+
+

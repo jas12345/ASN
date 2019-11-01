@@ -123,8 +123,8 @@
                             column.Command(command => command.Custom("DELETE").Text("<span class='k-icon k-i-delete'></span>Borrar").Click("borrarAcceso")).Width(15).HtmlAttributes(new { style = "text-align: center;" });
                             //column.Bound(c => c.Ident).Width(40).Title("CCMS Id").Visible(true).Filterable(true);
                             column.Bound(c => c.Ident).Width(40).Title("CCMS Id").Visible(true).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
-                            column.Bound(c => c.Nombre).Width(50).Title("Nombre").Filterable(true);
-                            column.Bound(c => c.Position_Code_Title).Width(50).Title("Puesto").Filterable(true);
+                            column.Bound(c => c.Nombre).Width(50).Title("Nombre").Filterable(ftb => ftb.Cell(cell => cell.Operator("Contains").SuggestionOperator(FilterType.Contains)));
+                            column.Bound(c => c.Position_Code_Title).Width(50).Title("Puesto").Filterable(ftb => ftb.Cell(cell => cell.Operator("Contains").SuggestionOperator(FilterType.Contains)));
                             column.Bound(c => c.Nivel).Width(50).Title("Nivel").Visible(true).Filterable(true);
                             //column.Bound(c => c.PerfilEmpleadoAcceso_Activo).Title("PerfilEmpleadoAcceso_Activo").Visible(false).Filterable(false).Width(50);//.ClientTemplate("#:PerfilEmpleadoAcceso_Activo  ? 'Si' : 'No' #");
                         })
