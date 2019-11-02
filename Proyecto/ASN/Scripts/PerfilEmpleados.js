@@ -678,3 +678,20 @@ function validando() {
     }
 }
 
+function selectAll() {
+    var multiselect = $("#Concepto").data("kendoMultiSelect");
+    var selectedValues = [];
+
+    if (editandoConceptos == 0 && multiselect.value().indexOf(-1) > -1) {
+        for (var i = 0; i < multiselect.dataSource.data().length; i++) {
+            var item = multiselect.dataSource.data()[i];
+            var data = multiselect.dataSource.data();
+            if (data[i].Ident > 0) {
+                selectedValues.push(data[i].Ident);
+            }
+        }
+        multiselect.value(selectedValues);
+        multiselect.close();
+    }
+}
+

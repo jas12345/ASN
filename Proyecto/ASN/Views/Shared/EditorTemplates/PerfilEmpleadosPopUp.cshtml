@@ -196,7 +196,8 @@
                             });
                         //.ServerFiltering(true);
                         })
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em", validationMessage = "Seleccione un Concepto." })
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "Seleccione un Concepto." })
+                        .Events(eve => eve.Change("selectAll"))
                         //.CascadeFrom("Country_Ident", "")
             )
         </div>
