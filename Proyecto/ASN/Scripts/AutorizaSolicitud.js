@@ -707,7 +707,7 @@ function onChange(e) {
         var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(row);
 
         // Disable the checkbox if the location isn't set
-        if (dataItem.get("Autorizador_Ident") != usuarioCCMSID || dataItem.get("EstatusId") == "R") {
+        if (dataItem.get("Autorizador_Ident") != usuarioCCMSID || dataItem.get("EstatusId") == "R" || dataItem.get("EstatusId") == "C") {
             debugger;
             //row.css('background-color', '#FFFFCF');
             // What goes here?
