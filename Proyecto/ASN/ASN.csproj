@@ -150,6 +150,7 @@
     <Compile Include="Controllers\ReporteGeneralController.cs" />
     <Compile Include="Controllers\ReporteIndividualController.cs" />
     <Compile Include="Controllers\ReporteroController.cs" />
+    <Compile Include="Controllers\ReporteSolicitudController.cs" />
     <Compile Include="Controllers\ResponsableAutorizaController.cs" />
     <Compile Include="Controllers\AutorizaSolicitudController.cs" />
     <Compile Include="Controllers\CapturaSolicitudController.cs" />
@@ -530,6 +531,9 @@
     <Compile Include="Models\ReporteConceptoGeneralSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReporteConceptoXEstatusSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReporteGeneralDetalleSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -540,6 +544,12 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReporteIndividualSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReporteSolcitudSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReporteSolicitudXEstatusSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SolicitudEmpleadosxPerfilCMB_Result.cs">
@@ -695,6 +705,7 @@
     <Content Include="Scripts\Notificaciones.js" />
     <Content Include="Scripts\ReporteIndividual.js" />
     <Content Include="Scripts\ReporteGeneral.js" />
+    <Content Include="Scripts\ReporteSolicitud.js" />
     <Content Include="Scripts\ResponsableAutoriza.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -907,6 +918,7 @@
     <Content Include="Views\Reportero\Index.cshtml" />
     <Content Include="Views\Reportero\NominaActivos.cshtml" />
     <Content Include="Views\Reportero\NominaInactivos.cshtml" />
+    <Content Include="Views\ReporteSolicitud\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

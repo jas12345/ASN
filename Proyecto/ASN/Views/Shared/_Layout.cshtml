@@ -132,6 +132,11 @@
                         <li>@Html.ActionLink("Reporte Conceptos", "Index", "Reportero")</li>
                     }
 
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    {
+                        <li>@Html.ActionLink("Reporte Solicitud", "Index", "ReporteSolicitud")</li>
+                    }
+
                     @*if (User.IsInRole("Desarrollo2"))
             {
                 <li class="dropdown">

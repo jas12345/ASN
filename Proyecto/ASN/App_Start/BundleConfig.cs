@@ -154,6 +154,10 @@ namespace ASN
             //Reportero
             bundles.Add(new ScriptBundle("~/bundles/Reportero").Include(
             "~/Scripts/Reportero.js"));
+
+            //ReporteSolicitud
+            bundles.Add(new ScriptBundle("~/bundles/ReporteSolicitud").Include(
+            "~/Scripts/ReporteSolicitud.js"));
         }
     }
 }
