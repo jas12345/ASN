@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .k-grid .k-hierarchy-col {
+        width: 6px;
+    }
+
+    #grid {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12">
+            <div class="row">
+                @Html.Label("Reporte concepto por estatus", new { style = "font-size: 18px" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-md-10 col-sm-10">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    @Html.Label("Fecha inicial ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().DatePicker()
+                            .Name("FechaInicio")
+                            .Format("yyyy-MM-dd")
+                            .ParseFormats(new string[] {
+                                "ddd, M/d/yyyy",
+                                "ddd, MM/dd/yyyy",
+                                "ddd, M/dd/yyyy"
+                            })
+                            //.Min(DateTime.Now.AddMonths(-6))
+                            .Max(DateTime.Now)
+                            .Value(DateTime.Now.AddMonths(-1))
+                            //.Events(x => x.Change("delimitaRango"))
+                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em" })
+                    )
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    @Html.Label("Fecha final ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().DatePicker()
+                            .Name("FechaFin")
+                            .Format("yyyy-MM-dd")
+                            .ParseFormats(new string[] {
+                                "ddd, M/d/yyyy",
+                                "ddd, MM/dd/yyyy",
+                                "ddd, M/dd/yyyy"
+                            })
+                            //.Min(DateTime.Now.AddMonths(-6))
+                            .Max(DateTime.Now)
+                            .Value(DateTime.Now)
+                            //.Events(x => x.Change("delimitaRango"))
+                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em" })
+                    )
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    @Html.Label("Estatus solicitud: ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().DropDownList().DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetEstatusCMB", "ReporteSolicitudXEstatus");
+                                }
+                                );
+                                //.ServerFiltering(true);
+                            })
+                            .Filter("contains")
+                            .OptionLabel("- Seleccione - ")
+                            .DataValueField("Id")
+                            .DataTextField("Value")
+                            .Name("EstatusSol")
+                            //.SelectedIndex(1)
+                            .HtmlAttributes(new { style = "text-align:center;width: 10em" })
+                    )
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    @Html.Label("Estatus concepto: ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().DropDownList().DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetEstatusCMB", "ReporteSolicitudXEstatus");
+                                }
+                                );
+                                //.ServerFiltering(true);
+                            })
+                            .Filter("contains")
+                            .OptionLabel("- Seleccione - ")
+                            .DataValueField("Id")
+                            .DataTextField("Value")
+                            .Name("EstatusCon")
+                            //.SelectedIndex(1)
+                            .HtmlAttributes(new { style = "text-align:center;width: 10em" })
+                    )
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    @(Html.Kendo().Button().Name("Buscar").Content("Buscar").Icon("search")
+                            .Events(x => x.Click("searchSolicitud"))
+                            .HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;" })
+                    )
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div id="parent">
+                    @(Html.Kendo().Grid<ASN.Models.ReporteConceptoXEstatusSel_Result>()
+                            .Name("grid")
+                            .Columns(columns =>
+                            {
+                                columns.Bound(e => e.Ciudad).Title("Ciudad").Width(30);
+                                columns.Bound(e => e.Site).Width(30).Title("Site");
+                                columns.Bound(e => e.Concepto).Title("Concepto").Width(30);
+                                columns.Bound(e => e.Total).Title("Total").Width(30);
+                                columns.Bound(e => e.EstatusSol).Title("Estatus solciitud").Width(30);
+                                columns.Bound(e => e.EstatusCon).Title("Estatus concepto").Width(30);
+                            })
+                            .ToolBar(tools => tools.Excel().Text("Exportar"))
+                            .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")).AllPages(true).Filterable(true))
+                            .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                            .Sortable()
+                            .Scrollable()
+                            .AutoBind(false)
+                            //.HtmlAttributes(new { style = "height: 775px;" })
+                            .DataSource(dataSource => dataSource
+                                .Ajax()
+                                .Batch(true)
+                                .ServerOperation(true)
+                                .Model(model =>
+                                {
+                                    model.Id(c => c.Ciudad);
+                                })
+                                .Read(read => read.Action("GetSolicitudes", "ReporteConceptoXEstatus").Data("infoSolicitud"))
+                                .PageSize(20)
+                            )
+                            .Navigatable()
+                            //.Events(e => e.DataBound("dataBound").ExcelExport("excelexport").DetailInit("detailInit"))
+                            //.Events(e => e.DataBound("dataBound"))
+                            //.Events(e => e.ExcelExport("columnas"))
+                            .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(true)
+                                .ButtonCount(5)
+                                .Numeric(true)
+                                .PreviousNext(true)
+                                .Messages(messages =>
+                                {
+                                    messages.ItemsPerPage("Registros por página");
+                                    messages.Empty("Sin información para mostrar");
+                                    messages.First("Primera");
+                                    messages.Page("Página");
+                                    messages.Last("Última");
+                                    messages.Previous("Anterior");
+                                    messages.Next("Siguiente");
+                                    messages.Refresh("Actualizar");
+                                    messages.Of("De");
+                                    messages.MorePages("Mas páginas");
+                                    //messages.Display("Prueba");
+                                    messages.Display("{0} a {1} de {2}");
+                                })
+                            )
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <script type="text/javascript">
+        $(function(){
+            window.location.href = "@Url.Action("Index","Inicio")";
+        });
+    </script>
+}
+
+@Scripts.Render("~/bundles/ReporteConceptoXEstatus");

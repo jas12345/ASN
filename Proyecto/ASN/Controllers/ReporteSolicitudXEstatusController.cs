@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace ASN.Controllers
 {
     [Authorize(Roles = "Consultante,Administrador")]
-    public class ReporteSolicitudController : Controller
+    public class ReporteSolicitudXEstatusController : Controller
     {
         // GET: ReporteSolicitud
         public ActionResult Index()
@@ -26,14 +26,14 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request,string fechaIni, string fechaFin)//, string estatus, int? site, int? solicitanteCCMSID, int? city)
+        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request,string fechaIni, string fechaFin, string estatusConcepto, string estatusSolicitud)//, string estatus, int? site, int? solicitanteCCMSID, int? city)
         {
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.ReporteSolcitudSel(fechaIni, fechaFin).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
+                    var lstSolicitudes = context.ReporteSolicitudXEstatusSel(fechaIni, fechaFin,estatusSolicitud,estatusConcepto).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok);
                 }

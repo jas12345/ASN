@@ -11,13 +11,9 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class ReporteConceptoXEstatusSel_Result
+    public partial class CatEstatusCMB_Result
     {
-        public string Ciudad { get; set; }
-        public string Site { get; set; }
-        public string Concepto { get; set; }
-        public Nullable<decimal> Total { get; set; }
-        public string EstatusSol { get; set; }
-        public string EstatusCon { get; set; }
+        public string Id { get; set; }
+        public string Value { get; set; }
     }
 }

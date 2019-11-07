@@ -158,6 +158,14 @@ namespace ASN
             //ReporteSolicitud
             bundles.Add(new ScriptBundle("~/bundles/ReporteSolicitud").Include(
             "~/Scripts/ReporteSolicitud.js"));
+
+            //ReporteSolicitudXEstatus
+            bundles.Add(new ScriptBundle("~/bundles/ReporteSolicitudXEstatus").Include(
+            "~/Scripts/ReporteSolicitudXEstatus.js"));
+
+            //ReporteConceptoXEstatus
+            bundles.Add(new ScriptBundle("~/bundles/ReporteConceptoXEstatus").Include(
+            "~/Scripts/ReporteConceptoXEstatus.js"));
         }
     }
 }

@@ -11,7 +11,7 @@
 }
 
 function resizeWrapper() {
-    $("#parent").height(document.body.offsetHeight - 190);
+    $("#parent").height(document.body.offsetHeight - 220);
 }
 
 $(window).resize(function () {
@@ -29,11 +29,12 @@ $(document).ready(function () {
 function infoSolicitud() {
     return {
         fechaIni: $("#FechaInicio").val(),//"2019-09-28",
-        fechaFin: $("#FechaFin").val()//"2019-10-30"
+        fechaFin: $("#FechaFin").val(),//"2019-10-30"
         //city: 1,
         //site: 317,
         //solicitanteCCMSID: 1286941,
-        //estatus: "CE"
+        estatusConcepto: $("#EstatusCon").val(),//"A"
+        estatusSolicitud: $("#EstatusSol").val()//"A"
     };
 }
 

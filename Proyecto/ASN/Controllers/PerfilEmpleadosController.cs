@@ -407,10 +407,26 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                            context.CatPerfilEmpleadosSu(obj.Perfil_Ident, obj.NombrePerfilEmpleados, ccmsidAdmin, obj.Active, resultado);
+                            context.CatPerfilEmpleadosSu(
+                                obj.Perfil_Ident, 
+                                obj.NombrePerfilEmpleados,
+
+                                (string.IsNullOrEmpty(obj.Country_Ident) ? -1 : int.Parse(obj.Country_Ident)),
+                                obj.City_Ident,
+                                (string.IsNullOrEmpty(obj.Location_Ident) ? -1 : int.Parse(obj.Location_Ident)),
+                                (string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
+                                (string.IsNullOrEmpty(obj.Program_Ident) ? -1 : int.Parse(obj.Program_Ident)),
+                                (string.IsNullOrEmpty(obj.Contract_Type_Ident) ? -1 : int.Parse(obj.Contract_Type_Ident)),
+                                obj.ConceptoId,
+                                obj.TipoAccesoId, 
+
+                                ccmsidAdmin, 
+                                obj.Active, 
+                                resultado
+                            );
                         }
 
-                        int.TryParse(resultado.Value.ToString(), out res);
+                    int.TryParse(resultado.Value.ToString(), out res);
 
                     if (res == -1)
                     {

@@ -150,6 +150,8 @@
     <Compile Include="Controllers\ReporteGeneralController.cs" />
     <Compile Include="Controllers\ReporteIndividualController.cs" />
     <Compile Include="Controllers\ReporteroController.cs" />
+    <Compile Include="Controllers\ReporteConceptoXEstatusController.cs" />
+    <Compile Include="Controllers\ReporteSolicitudXEstatusController.cs" />
     <Compile Include="Controllers\ReporteSolicitudController.cs" />
     <Compile Include="Controllers\ResponsableAutorizaController.cs" />
     <Compile Include="Controllers\AutorizaSolicitudController.cs" />
@@ -341,6 +343,9 @@
     <Compile Include="Models\CatEmpleadoPuestoSupervisorSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatEmpleadoSolicitanteCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatEmpleadosPerfilAccesoCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -360,6 +365,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatEmployeeSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatEstatusCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatEstatusSolicitudSel_Result.cs">
@@ -460,6 +468,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatRoleCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatSiteCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatSolicitudAutorizantesSel_Result.cs">
@@ -705,6 +716,8 @@
     <Content Include="Scripts\Notificaciones.js" />
     <Content Include="Scripts\ReporteIndividual.js" />
     <Content Include="Scripts\ReporteGeneral.js" />
+    <Content Include="Scripts\ReporteConceptoXEstatus.js" />
+    <Content Include="Scripts\ReporteSolicitudXEstatus.js" />
     <Content Include="Scripts\ReporteSolicitud.js" />
     <Content Include="Scripts\ResponsableAutoriza.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -919,6 +932,8 @@
     <Content Include="Views\Reportero\NominaActivos.cshtml" />
     <Content Include="Views\Reportero\NominaInactivos.cshtml" />
     <Content Include="Views\ReporteSolicitud\Index.cshtml" />
+    <Content Include="Views\ReporteSolicitudXEstatus\Index.cshtml" />
+    <Content Include="Views\ReporteConceptoXEstatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

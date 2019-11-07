@@ -117,24 +117,34 @@
                         <li>@Html.ActionLink("Reporte", "Index", "ReporteIndividual")</li>
                     }
 
-                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
-                    {
-                        <li>@Html.ActionLink("Reporte Auditoria", "Index", "ReporteAuditoria")</li>
-                    }
+                    @*if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+            {
+                <li>@Html.ActionLink("Reporte Auditoria", "Index", "ReporteAuditoria")</li>
+            }*@
 
                     if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
                     {
                         <li>@Html.ActionLink("Reporte General", "Index", "ReporteGeneral")</li>
                     }
 
-                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Responsable"))
+                    @*if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Responsable"))
                     {
                         <li>@Html.ActionLink("Reporte Conceptos", "Index", "Reportero")</li>
-                    }
+                    }*@
 
                     if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
                     {
                         <li>@Html.ActionLink("Reporte Solicitud", "Index", "ReporteSolicitud")</li>
+                    }
+
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    {
+                        <li>@Html.ActionLink("Reporte Solicitud por Estatus", "Index", "ReporteSolicitudXEstatus")</li>
+                    }
+
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    {
+                        <li>@Html.ActionLink("Reporte Concepto por Estatus", "Index", "ReporteConceptoXEstatus")</li>
                     }
 
                     @*if (User.IsInRole("Desarrollo2"))

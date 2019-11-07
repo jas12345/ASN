@@ -27,9 +27,54 @@
     <div class="container-fluid">
         <div class="col-lg-12 col-md-12">
             <div class="row">
-                @Html.Label("Reporte Solciitud", new { style = "font-size: 18px" })
+                @Html.Label("Reporte solicitud", new { style = "font-size: 18px" })
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    @Html.Label("Fecha inicial ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().DatePicker()
+                        .Name("FechaInicio")
+                        .Format("yyyy-MM-dd")
+                        .ParseFormats(new string[] {
+                            "ddd, M/d/yyyy",
+                            "ddd, MM/dd/yyyy",
+                            "ddd, M/dd/yyyy"
+                        })
+                        //.Min(DateTime.Now.AddMonths(-6))
+                        .Max(DateTime.Now)
+                        .Value(DateTime.Now.AddMonths(-1))
+                        //.Events(x => x.Change("delimitaRango"))
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 20.4em" })
+                    )
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    @Html.Label("Fecha final ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().DatePicker()
+                        .Name("FechaFin")
+                        .Format("yyyy-MM-dd")
+                        .ParseFormats(new string[] {
+                            "ddd, M/d/yyyy",
+                            "ddd, MM/dd/yyyy",
+                            "ddd, M/dd/yyyy"
+                        })
+                        //.Min(DateTime.Now.AddMonths(-6))
+                        .Max(DateTime.Now)
+                        .Value(DateTime.Now)
+                        //.Events(x => x.Change("delimitaRango"))
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 20.4em" })
+                    )
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    @(Html.Kendo().Button().Name("Buscar").Content("Buscar").Icon("search")
+                    .Events(x => x.Click("searchSolicitud"))
+                    .HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;" })
+                    )
+                </div>
+            </div>
+        </div>
+        <br />
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div id="parent">
@@ -37,18 +82,19 @@
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Bound(e => e.Ciudad).Title("Ciudad").Width(25);
-                            columns.Bound(e => e.Site).Width(25).Title("Site");
-                            columns.Bound(e => e.SolicitanteCCMSID).Width(25).Title("Solicitante CCMSID").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
-                            columns.Bound(e => e.Fecha).Title("Fecha de solicitud").Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
-                            columns.Bound(e => e.Folio).Width(35).Title("Folio").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))); ;
+                            columns.Bound(e => e.Ciudad).Title("Ciudad").Width(30);
+                            columns.Bound(e => e.Site).Width(30).Title("Site");
+                            columns.Bound(e => e.SolicitanteCCMSID).Width(30).Title("Solicitante CCMSID").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                            columns.Bound(e => e.Fecha).Title("Fecha de solicitud").Width(30);//.Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
+                            columns.Bound(e => e.Folio).Width(30).Title("Folio").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))); ;
                             columns.Bound(e => e.Estatus).Title("Estatus").Width(30);
                         })
-                        .ToolBar(tools => tools.Excel().Text("Exportar Solicitudes"))
+                        .ToolBar(tools => tools.Excel().Text("Exportar"))
                         .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")).AllPages(true).Filterable(true))
                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                         .Sortable()
                         .Scrollable()
+                        .AutoBind(false)
                         //.HtmlAttributes(new { style = "height: 775px;" })
                         .DataSource(dataSource => dataSource
                             .Ajax()
@@ -58,7 +104,8 @@
                             {
                                 model.Id(c => c.Folio);
                             })
-                            .Read(read => read.Action("GetSolicitudes", "ReporteSolicitud"))
+                            .Read(read => read.Action("GetSolicitudes", "ReporteSolicitud").Data("infoSolicitud"))
+                            .PageSize(20)
                         )
                         .Navigatable()
                         //.Events(e => e.DataBound("dataBound").ExcelExport("excelexport").DetailInit("detailInit"))

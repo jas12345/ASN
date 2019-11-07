@@ -19,6 +19,8 @@ namespace ASN.Models
         public string Ciudad { get; set; }
         public string Site { get; set; }
         public string Fecha { get; set; }
-        public string Estatus { get; set; }
+        public Nullable<int> SolicitanteCCMSID { get; set; }
+        public string EstatusSol { get; set; }
+        public string EstatusCon { get; set; }
     }
 }
