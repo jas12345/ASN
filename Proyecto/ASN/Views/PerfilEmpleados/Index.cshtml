@@ -85,7 +85,7 @@
                                 model.Field(c => c.Concepto).Editable(true).DefaultValue("");
                             })
                             .Read(read => read.Action("GetPerfilEmpleados", "PerfilEmpleados"))
-                            .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
+                            .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("ObtieneMultiConceptos"))
                             .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("ObtieneMultiConceptos"))
                             .PageSize(10)
                         .Events(ev => ev.Error("errorsote").RequestEnd("hola"))

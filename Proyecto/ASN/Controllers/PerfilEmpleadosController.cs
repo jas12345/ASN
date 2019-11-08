@@ -391,7 +391,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles)
+        public ActionResult UpdatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string ConceptoId)
         {
             try
             {
@@ -407,7 +407,9 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                            context.CatPerfilEmpleadosSu(
+                        obj.ConceptoId = ConceptoId;
+
+                        context.CatPerfilEmpleadosSu(
                                 obj.Perfil_Ident, 
                                 obj.NombrePerfilEmpleados,
 

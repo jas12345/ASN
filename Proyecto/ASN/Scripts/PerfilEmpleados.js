@@ -43,6 +43,7 @@ function edit(e) {
     var tipoAccesoId = $("#TipoAccesoId").data("kendoDropDownList");
     //var conceptoId = $("#ConceptoId").data("kendoDropDownList");
     var MultiConcepto = $("#Concepto").data("kendoMultiSelect");
+    var f = $("#Concepto").data("kendoMultiSelect");
     
     if (e.model.isNew() === false) {
 
