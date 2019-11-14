@@ -35,7 +35,7 @@ namespace ASN.Controllers
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     var lstSolicitudes = context.ReporteConceptoXEstatusSel(fechaIni, fechaFin,estatusSolicitud,estatusConcepto).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
-                    return Json(ok);
+                    return Json(ok, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)
