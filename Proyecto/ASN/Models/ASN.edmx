@@ -38,6 +38,7 @@
         <Function Name="CatAdminSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
           <Parameter Name="UserCCMSID" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatAdminSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
@@ -1555,6 +1556,7 @@
           <FunctionImport Name="CatAdminSi">
             <Parameter Name="CCMSID" Mode="In" Type="Int32" />
             <Parameter Name="UserCCMSID" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatAdminSu">
             <Parameter Name="CCMSID" Mode="In" Type="Int32" />

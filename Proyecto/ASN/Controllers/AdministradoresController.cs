@@ -3,6 +3,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Configuration;
 using System.Linq;
 using System.Web;
@@ -85,13 +86,34 @@ namespace ASN.Controllers
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     int ccmsidAdmin = 0;
+                    int res = 0;
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
 
                     foreach (var obj in profiles)
                     {
                         if (int.TryParse(User.Identity.Name, out ccmsidAdmin))
                         {
-                            context.CatAdminSi(ccmsidAdmin, obj.UserCCMSId);
+                            context.CatAdminSi(ccmsidAdmin, obj.UserCCMSId, resultado);
                         }
+                    }
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    if (res == -1)
+                    {
+                        ModelState.AddModelError("error", "Este administrador ya está dado de alta.");
+                    }
+
+                    if (res == -2)
+                    {
+                        ModelState.AddModelError("error", "No existe un empleado con este CCMSId.");
+                    }
+
+                    if (res == -3)
+                    {
+                        ModelState.AddModelError("error", "Este empleado no está activo.");
                     }
 
                     return Json(profiles.ToDataSourceResult(request, ModelState));
@@ -172,6 +194,28 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
-        
+
+        public ActionResult GetUserInfo(int ccms)
+        {
+            var emp = new CatEmployeeInfoSel_Result();
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    emp = context.CatEmployeeInfoSel(ccms).ToList().SingleOrDefault();
+                }
+
+                return Json(emp, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
     }
 }

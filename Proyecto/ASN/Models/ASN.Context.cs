@@ -2648,7 +2648,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAdminSel_Result>("CatAdminSel");
         }
     
-        public virtual int CatAdminSi(Nullable<int> cCMSID, Nullable<int> userCCMSID)
+        public virtual int CatAdminSi(Nullable<int> cCMSID, Nullable<int> userCCMSID, ObjectParameter estatus)
         {
             var cCMSIDParameter = cCMSID.HasValue ?
                 new ObjectParameter("CCMSID", cCMSID) :
@@ -2658,7 +2658,7 @@ namespace ASN.Models
                 new ObjectParameter("UserCCMSID", userCCMSID) :
                 new ObjectParameter("UserCCMSID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAdminSi", cCMSIDParameter, userCCMSIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAdminSi", cCMSIDParameter, userCCMSIDParameter, estatus);
         }
     
         public virtual int CatAdminSu(Nullable<int> cCMSID, Nullable<int> userCCMSID, Nullable<bool> active, Nullable<int> relUserRoleId)

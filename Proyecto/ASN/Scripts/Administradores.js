@@ -34,6 +34,23 @@ function edit(e) {
     }
 }
 
+function onChangeCCMSId() {
+    //debugger;
+
+    //CCMSId = "";
+
+    $.post(InfoCCMSID + "/?ccms=" + UserCCMSId.value, function (data) {
+
+        //FolioSolicitud = data.FolioSolicitud;
+
+        //UserCCMSId = data.Ident
+        Nombre.value = data.Nombre;
+    }).fail(function (ex) {
+        //debugger;
+        console.log("fail" + ex);
+    });
+}
+
 function reload(e) {
     if ((e.type == "create" || e.type == "update")) {
         $('#grid').data('kendoGrid').dataSource.data([]);

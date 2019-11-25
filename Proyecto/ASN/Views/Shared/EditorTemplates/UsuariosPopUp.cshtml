@@ -15,6 +15,7 @@
                             .Name("UserCCMSId")
                             .Spinners(false)
                             .Format("0.")
+                            .Events(e => e.Change("onChangeCCMSId"))
                             .Min(0)
                             .Step(5)
                             .Decimals(0)
