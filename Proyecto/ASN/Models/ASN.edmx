@@ -2554,7 +2554,7 @@
           <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Site" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="Total" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="EstatusSol" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="EstatusCon" Nullable="true" MaxLength="50" />
           </ComplexType>
@@ -2569,7 +2569,7 @@
         <ComplexType Name="ReporteSolicitudXEstatusSel_Result">
           <Property Type="Int32" Name="Folio" Nullable="false" />
           <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="Total" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Site" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Fecha" Nullable="true" MaxLength="19" />

@@ -15,7 +15,7 @@ namespace ASN.Models
     {
         public int Folio { get; set; }
         public string Concepto { get; set; }
-        public Nullable<decimal> Total { get; set; }
+        public string Total { get; set; }
         public string Ciudad { get; set; }
         public string Site { get; set; }
         public string Fecha { get; set; }

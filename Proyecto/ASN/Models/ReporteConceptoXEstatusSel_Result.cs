@@ -16,7 +16,7 @@ namespace ASN.Models
         public string Ciudad { get; set; }
         public string Site { get; set; }
         public string Concepto { get; set; }
-        public Nullable<decimal> Total { get; set; }
+        public string Total { get; set; }
         public string EstatusSol { get; set; }
         public string EstatusCon { get; set; }
     }
