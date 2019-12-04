@@ -26,17 +26,40 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request,string fechaIni, string fechaFin)//, string estatus, int? site, int? solicitanteCCMSID, int? city)
+        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request,int periodoNomina)//, string fechaFin)//, string estatus, int? site, int? solicitanteCCMSID, int? city)
         {
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.ReporteSolcitudSel(fechaIni, fechaFin).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
+                    var lstSolicitudes = context.ReporteSolcitudSel(periodoNomina).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok, JsonRequestBehavior.AllowGet);
                 }
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult GetPeriodoNominaCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatPeriodoNominaCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatPeriodoNominaCMB().ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

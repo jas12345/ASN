@@ -456,6 +456,7 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatPeriodoNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodosNominaCerradosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Active" Type="int" Mode="In" />
         </Function>
@@ -719,8 +720,7 @@
         <Function Name="ReporteAuditoriasSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="ReporteConceptoGeneralSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="ReporteConceptoXEstatusSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="FechaIni" Type="varchar" Mode="In" />
-          <Parameter Name="FechaFin" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
           <Parameter Name="EstatusSolicitud" Type="varchar" Mode="In" />
           <Parameter Name="EstatusConcepto" Type="varchar" Mode="In" />
         </Function>
@@ -735,12 +735,10 @@
           <Parameter Name="SolicitanteIdent" Type="int" Mode="In" />
         </Function>
         <Function Name="ReporteSolcitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="FechaIni" Type="varchar" Mode="In" />
-          <Parameter Name="FechaFin" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
         </Function>
         <Function Name="ReporteSolicitudXEstatusSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="FechaIni" Type="varchar" Mode="In" />
-          <Parameter Name="FechaFin" Type="varchar" Mode="In" />
+          <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
           <Parameter Name="EstatusSolicitud" Type="varchar" Mode="In" />
           <Parameter Name="EstatusConcepto" Type="varchar" Mode="In" />
         </Function>
@@ -1577,24 +1575,22 @@
           </FunctionImport>
           <FunctionImport Name="ReporteConceptoGeneralSel" ReturnType="Collection(ASNModel.ReporteConceptoGeneralSel_Result)" />
           <FunctionImport Name="ReporteConceptoXEstatusSel" ReturnType="Collection(ASNModel.ReporteConceptoXEstatusSel_Result)">
-            <Parameter Name="FechaIni" Mode="In" Type="String" />
-            <Parameter Name="FechaFin" Mode="In" Type="String" />
+            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
             <Parameter Name="EstatusSolicitud" Mode="In" Type="String" />
             <Parameter Name="EstatusConcepto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ReporteSolcitudSel" ReturnType="Collection(ASNModel.ReporteSolcitudSel_Result)">
-            <Parameter Name="FechaIni" Mode="In" Type="String" />
-            <Parameter Name="FechaFin" Mode="In" Type="String" />
+          <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteSolicitudXEstatusSel" ReturnType="Collection(ASNModel.ReporteSolicitudXEstatusSel_Result)">
-            <Parameter Name="FechaIni" Mode="In" Type="String" />
-            <Parameter Name="FechaFin" Mode="In" Type="String" />
+            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
             <Parameter Name="EstatusSolicitud" Mode="In" Type="String" />
             <Parameter Name="EstatusConcepto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatSiteCMB" ReturnType="Collection(ASNModel.CatSiteCMB_Result)" />
           <FunctionImport Name="CatEmpleadoSolicitanteCMB" ReturnType="Collection(ASNModel.CatEmpleadoSolicitanteCMB_Result)" />
           <FunctionImport Name="CatEstatusCMB" ReturnType="Collection(ASNModel.CatEstatusCMB_Result)" />
+          <FunctionImport Name="CatPeriodoNominaCMB" ReturnType="Collection(ASNModel.CatPeriodoNominaCMB_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2592,6 +2588,10 @@
         <ComplexType Name="CatEstatusCMB_Result">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="Value" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatPeriodoNominaCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="true" MaxLength="18" />
         </ComplexType>
        
         </Schema>
@@ -4085,6 +4085,14 @@
               <ComplexTypeMapping TypeName="ASNModel.CatEstatusCMB_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodoNominaCMB" FunctionName="ASNModel.Store.CatPeriodoNominaCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPeriodoNominaCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

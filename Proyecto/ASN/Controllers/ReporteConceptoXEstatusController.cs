@@ -26,14 +26,14 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request,string fechaIni, string fechaFin, string estatusConcepto, string estatusSolicitud)//, string estatus, int? site, int? solicitanteCCMSID, int? city)
+        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request,int periodoNomina, string estatusConcepto, string estatusSolicitud)//, string estatus, int? site, int? solicitanteCCMSID, int? city)
         {
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.ReporteConceptoXEstatusSel(fechaIni, fechaFin,estatusSolicitud,estatusConcepto).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
+                    var lstSolicitudes = context.ReporteConceptoXEstatusSel(periodoNomina, estatusSolicitud,estatusConcepto).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok, JsonRequestBehavior.AllowGet);
                 }

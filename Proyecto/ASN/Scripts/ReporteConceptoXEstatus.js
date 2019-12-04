@@ -22,17 +22,18 @@ $(window).resize(function () {
 $(document).ready(function () {
     $(window).trigger("resize");
 
-    $("#FechaInicio").attr("readonly", true);
-    $("#FechaFin").attr("readonly", true);
+    //$("#FechaInicio").attr("readonly", true);
+    //$("#FechaFin").attr("readonly", true);
 });
 
 function infoSolicitud() {
     return {
-        fechaIni: $("#FechaInicio").val(),//"2019-09-28",
-        fechaFin: $("#FechaFin").val(),//"2019-10-30"
+        //fechaIni: $("#FechaInicio").val(),//"2019-09-28",
+        //fechaFin: $("#FechaFin").val(),//"2019-10-30"
         //city: 1,
         //site: 317,
         //solicitanteCCMSID: 1286941,
+        periodoNomina: $("#PeriodoNomina").val(),
         estatusConcepto: $("#EstatusCon").val(),//"A"
         estatusSolicitud: $("#EstatusSol").val()//"A"
     };

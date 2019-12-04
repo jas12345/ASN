@@ -2726,15 +2726,11 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoGeneralSel_Result>("ReporteConceptoGeneralSel");
         }
     
-        public virtual ObjectResult<ReporteConceptoXEstatusSel_Result> ReporteConceptoXEstatusSel(string fechaIni, string fechaFin, string estatusSolicitud, string estatusConcepto)
+        public virtual ObjectResult<ReporteConceptoXEstatusSel_Result> ReporteConceptoXEstatusSel(Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
         {
-            var fechaIniParameter = fechaIni != null ?
-                new ObjectParameter("FechaIni", fechaIni) :
-                new ObjectParameter("FechaIni", typeof(string));
-    
-            var fechaFinParameter = fechaFin != null ?
-                new ObjectParameter("FechaFin", fechaFin) :
-                new ObjectParameter("FechaFin", typeof(string));
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
     
             var estatusSolicitudParameter = estatusSolicitud != null ?
                 new ObjectParameter("EstatusSolicitud", estatusSolicitud) :
@@ -2744,31 +2740,23 @@ namespace ASN.Models
                 new ObjectParameter("EstatusConcepto", estatusConcepto) :
                 new ObjectParameter("EstatusConcepto", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoXEstatusSel_Result>("ReporteConceptoXEstatusSel", fechaIniParameter, fechaFinParameter, estatusSolicitudParameter, estatusConceptoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoXEstatusSel_Result>("ReporteConceptoXEstatusSel", periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
         }
     
-        public virtual ObjectResult<ReporteSolcitudSel_Result> ReporteSolcitudSel(string fechaIni, string fechaFin)
+        public virtual ObjectResult<ReporteSolcitudSel_Result> ReporteSolcitudSel(Nullable<int> periodoNomina)
         {
-            var fechaIniParameter = fechaIni != null ?
-                new ObjectParameter("FechaIni", fechaIni) :
-                new ObjectParameter("FechaIni", typeof(string));
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
     
-            var fechaFinParameter = fechaFin != null ?
-                new ObjectParameter("FechaFin", fechaFin) :
-                new ObjectParameter("FechaFin", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolcitudSel_Result>("ReporteSolcitudSel", fechaIniParameter, fechaFinParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolcitudSel_Result>("ReporteSolcitudSel", periodoNominaParameter);
         }
     
-        public virtual ObjectResult<ReporteSolicitudXEstatusSel_Result> ReporteSolicitudXEstatusSel(string fechaIni, string fechaFin, string estatusSolicitud, string estatusConcepto)
+        public virtual ObjectResult<ReporteSolicitudXEstatusSel_Result> ReporteSolicitudXEstatusSel(Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
         {
-            var fechaIniParameter = fechaIni != null ?
-                new ObjectParameter("FechaIni", fechaIni) :
-                new ObjectParameter("FechaIni", typeof(string));
-    
-            var fechaFinParameter = fechaFin != null ?
-                new ObjectParameter("FechaFin", fechaFin) :
-                new ObjectParameter("FechaFin", typeof(string));
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
     
             var estatusSolicitudParameter = estatusSolicitud != null ?
                 new ObjectParameter("EstatusSolicitud", estatusSolicitud) :
@@ -2778,7 +2766,7 @@ namespace ASN.Models
                 new ObjectParameter("EstatusConcepto", estatusConcepto) :
                 new ObjectParameter("EstatusConcepto", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolicitudXEstatusSel_Result>("ReporteSolicitudXEstatusSel", fechaIniParameter, fechaFinParameter, estatusSolicitudParameter, estatusConceptoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolicitudXEstatusSel_Result>("ReporteSolicitudXEstatusSel", periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
         }
     
         public virtual ObjectResult<CatSiteCMB_Result> CatSiteCMB()
@@ -2794,6 +2782,11 @@ namespace ASN.Models
         public virtual ObjectResult<CatEstatusCMB_Result> CatEstatusCMB()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEstatusCMB_Result>("CatEstatusCMB");
+        }
+    
+        public virtual ObjectResult<CatPeriodoNominaCMB_Result> CatPeriodoNominaCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodoNominaCMB_Result>("CatPeriodoNominaCMB");
         }
     }
 }
