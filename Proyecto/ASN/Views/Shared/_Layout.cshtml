@@ -122,10 +122,10 @@
                         <li>@Html.ActionLink("Reporte Auditoria", "Index", "ReporteAuditoria")</li>
                     } *@
 
-                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    @*if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
                     {
                         <li>@Html.ActionLink("Reporte General", "Index", "ReporteGeneral")</li>
-                    }
+                    }*@
 
                     if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Responsable"))
                     {
@@ -179,7 +179,7 @@
                 }
 
                 <li>
-                    @Html.ActionLink("Exit", "Logout", "Home")
+                    @Html.ActionLink("Salir", "Logout", "Home")
                 </li>
             </ul>
         </nav>
