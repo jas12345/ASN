@@ -1,16 +1,20 @@
 ﻿
 
     <div>
-        <div class="col-lg-4">
+        <div class="col-lg-8">
             <div id="parent">
                 @(Html.Kendo().Grid<ASN.Models.ReporteConceptoGeneralSel_Result>()
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Bound(c => c.ConceptoId).Title("ConceptoId").Visible(false).Filterable(false).Width(5);
-                            columns.Bound(c => c.CONCEPTO).Title("Concepto").Filterable(true).Width(10);
-                            columns.Bound(c => c.CONTEO).Title("Conteo").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(5);
-                            columns.Bound(c => c.IMPORTE).Title("Importe").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(5);
+                            columns.Bound(c => c.AnioId).Title("Año").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(10);
+                            columns.Bound(c => c.MesId).Title("Mes").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(10);
+                            columns.Bound(c => c.ConsecutivoId).Title("Consecutivo").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(10);
+                            columns.Bound(c => c.ConceptoId).Title("ConceptoId").Visible(false).Filterable(false).Width(10);
+                            columns.Bound(c => c.CONCEPTO).Title("Concepto").Filterable(true).Width(15);
+                            columns.Bound(c => c.CONTEO).Title("Conteo").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(10);
+                            //columns.Bound(c => c.IMPORTE).Title("Importe").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(5);
+                            columns.Bound(c => c.IMPORTE).Title("Importe").Filterable(true).Width(10);
                         }
                     )
                     .ToolBar(toolBar =>
@@ -34,6 +38,9 @@
                         {
                             model.Id(c => c.ConceptoId);
                             model.Field(c => c.ConceptoId).Editable(false);
+                            model.Field(c => c.AnioId).Editable(false);
+                            model.Field(c => c.MesId).Editable(false);
+                            model.Field(c => c.ConsecutivoId).Editable(false);
                             model.Field(c => c.CONTEO).Editable(true);
                             model.Field(c => c.CONCEPTO).Editable(true);
                             model.Field(c => c.IMPORTE).Editable(true).DefaultValue(true);

@@ -15,7 +15,10 @@ namespace ASN.Models
     {
         public Nullable<int> CONTEO { get; set; }
         public string CONCEPTO { get; set; }
-        public Nullable<decimal> IMPORTE { get; set; }
+        public string IMPORTE { get; set; }
         public int ConceptoId { get; set; }
+        public int AnioId { get; set; }
+        public int MesId { get; set; }
+        public string ConsecutivoId { get; set; }
     }
 }

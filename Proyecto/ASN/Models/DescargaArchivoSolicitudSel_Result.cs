@@ -26,5 +26,8 @@ namespace ASN.Models
         public string CONSECUENCIA { get; set; }
         public string CONTROL { get; set; }
         public string SEMANA { get; set; }
+        public int AnioId { get; set; }
+        public int MesId { get; set; }
+        public string ConsecutivoId { get; set; }
     }
 }

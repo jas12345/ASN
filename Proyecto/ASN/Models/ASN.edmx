@@ -2534,7 +2534,7 @@
           <Property Type="String" Name="CONCEPTO" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ACCION" Nullable="false" MaxLength="1" />
           <Property Type="String" Name="UNIDAD" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="IMPORTE" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="IMPORTE" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="PORCENTAJE" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FECHA" Nullable="false" MaxLength="1" />
           <Property Type="String" Name="INICIO" Nullable="false" MaxLength="1" />
@@ -2543,12 +2543,18 @@
           <Property Type="String" Name="CONSECUENCIA" Nullable="false" MaxLength="1" />
           <Property Type="String" Name="CONTROL" Nullable="false" MaxLength="1" />
           <Property Type="String" Name="SEMANA" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="AnioId" Nullable="false" />
+          <Property Type="Int32" Name="MesId" Nullable="false" />
+          <Property Type="String" Name="ConsecutivoId" Nullable="false" MaxLength="5" />
         </ComplexType>
         <ComplexType Name="ReporteConceptoGeneralSel_Result">
           <Property Type="Int32" Name="CONTEO" Nullable="true" />
           <Property Type="String" Name="CONCEPTO" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="IMPORTE" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="IMPORTE" Nullable="true" MaxLength="4000" />
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="Int32" Name="AnioId" Nullable="false" />
+          <Property Type="Int32" Name="MesId" Nullable="false" />
+          <Property Type="String" Name="ConsecutivoId" Nullable="false" MaxLength="5" />
         </ComplexType>
         <ComplexType Name="ReporteConceptoXEstatusSel_Result">
           <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
@@ -4012,6 +4018,9 @@
                 <ScalarProperty Name="CONSECUENCIA" ColumnName="CONSECUENCIA" />
                 <ScalarProperty Name="CONTROL" ColumnName="CONTROL" />
                 <ScalarProperty Name="SEMANA" ColumnName="SEMANA" />
+                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
+                <ScalarProperty Name="MesId" ColumnName="MesId" />
+                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4022,6 +4031,9 @@
                 <ScalarProperty Name="CONCEPTO" ColumnName="CONCEPTO" />
                 <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
                 <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="AnioId" ColumnName="AnioId" />
+                <ScalarProperty Name="MesId" ColumnName="MesId" />
+                <ScalarProperty Name="ConsecutivoId" ColumnName="ConsecutivoId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

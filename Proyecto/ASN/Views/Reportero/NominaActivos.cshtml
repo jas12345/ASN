@@ -1,16 +1,19 @@
 ﻿
 <div>
-    <div class="col-lg-6">
+    <div class="col-lg-10">
         <div id="parent">
             @(Html.Kendo().Grid<ASN.Models.DescargaArchivoSolicitudSel_Result>()
                 .Name("grid")
                 .Columns(columns =>
                 {
-                    columns.Bound(c => c.EMPLEADO).Title("Empleado").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(11);
-                    columns.Bound(c => c.CONCEPTO).Title("Concepto").Filterable(true).Width(20);
-                    columns.Bound(c => c.UNIDAD).Title("Unidad").Filterable(true).Width(11);
-                    columns.Bound(c => c.IMPORTE).Title("Importe").Filterable(true).Width(10);
-                    columns.Bound(c => c.PORCENTAJE).Title("Porcentaje").Filterable(true).Width(10);
+                    columns.Bound(c => c.AnioId).Title("Año").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(20);
+                    columns.Bound(c => c.MesId).Title("Mes").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(20);
+                    columns.Bound(c => c.ConsecutivoId).Title("Consecutivo").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(20);
+                    columns.Bound(c => c.EMPLEADO).Title("Empleado").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(25);
+                    columns.Bound(c => c.CONCEPTO).Title("Concepto").Filterable(true).Width(30);
+                    columns.Bound(c => c.UNIDAD).Title("Unidad").Filterable(true).Width(22);
+                    columns.Bound(c => c.IMPORTE).Title("Importe").Filterable(true).Width(24);
+                    columns.Bound(c => c.PORCENTAJE).Title("Porcentaje").Filterable(true).Width(22);
                 }
             )
             .ToolBar(toolBar =>
@@ -34,6 +37,9 @@
                 {
                     model.Id(c => c.EMPLEADO);
                     model.Field(c => c.EMPLEADO).Editable(false);
+                    model.Field(c => c.AnioId).Editable(false);
+                    model.Field(c => c.MesId).Editable(false);
+                    model.Field(c => c.ConsecutivoId).Editable(false);
                     model.Field(c => c.CONCEPTO).Editable(false);
                     model.Field(c => c.UNIDAD).Editable(false);
                     model.Field(c => c.IMPORTE).Editable(false);
