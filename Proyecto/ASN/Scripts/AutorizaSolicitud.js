@@ -29,8 +29,8 @@ $(document).ready(function () {
     deshabilitaControlesEdicion();
     actualizaGrid();
 
-    //$("#AutorizarSolicitudALL").hide();
-    //$("#RechazarSolicitudALL").hide();
+    $("#AutorizarSolicitudALL").hide();
+    $("#RechazarSolicitudALL").hide();
 
     //$("#AutorizarSolicitud").hide();
     //$("#RechazarSolicitud").hide();
@@ -743,14 +743,14 @@ function onChange(e) {
         //    console.log(dataItem.ConceptoId);
         //});
         debugger;
-        //$("#AutorizarSolicitudALL").show();
-        //$("#RechazarSolicitudALL").show();
+        $("#AutorizarSolicitudALL").show();
+        $("#RechazarSolicitudALL").show();
     }
     else {
         debugger;
         this.element.find("input")[0].checked = false;
-        //$("#AutorizarSolicitudALL").hide();
-        //$("#RechazarSolicitudALL").hide();
+        $("#AutorizarSolicitudALL").hide();
+        $("#RechazarSolicitudALL").hide();
         //console.log(rows.length);
     }
 
