@@ -432,6 +432,7 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="CatPerfilesDetalleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPerfilTipoAccesoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
         </Function>
@@ -1591,6 +1592,7 @@
           <FunctionImport Name="CatEmpleadoSolicitanteCMB" ReturnType="Collection(ASNModel.CatEmpleadoSolicitanteCMB_Result)" />
           <FunctionImport Name="CatEstatusCMB" ReturnType="Collection(ASNModel.CatEstatusCMB_Result)" />
           <FunctionImport Name="CatPeriodoNominaCMB" ReturnType="Collection(ASNModel.CatPeriodoNominaCMB_Result)" />
+          <FunctionImport Name="CatPerfilesDetalleSel" ReturnType="Collection(ASNModel.CatPerfilesDetalleSel_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2598,6 +2600,14 @@
         <ComplexType Name="CatPeriodoNominaCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="true" MaxLength="18" />
+        </ComplexType>
+        <ComplexType Name="CatPerfilesDetalleSel_Result">
+          <Property Type="String" Name="Perfil" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CCMSIDEmpleado" Nullable="false" />
+          <Property Type="String" Name="NombreEmpleado" Nullable="true" MaxLength="752" />
+          <Property Type="Int32" Name="Nivel" Nullable="true" />
+          <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
+          <Property Type="String" Name="Puesto" Nullable="true" MaxLength="150" />
         </ComplexType>
        
         </Schema>
@@ -4105,6 +4115,18 @@
               <ComplexTypeMapping TypeName="ASNModel.CatPeriodoNominaCMB_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPerfilesDetalleSel" FunctionName="ASNModel.Store.CatPerfilesDetalleSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPerfilesDetalleSel_Result">
+                <ScalarProperty Name="Perfil" ColumnName="Perfil" />
+                <ScalarProperty Name="CCMSIDEmpleado" ColumnName="CCMSIDEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

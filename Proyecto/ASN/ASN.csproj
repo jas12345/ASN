@@ -149,6 +149,7 @@
     <Compile Include="Controllers\ReporteAuditoriaController.cs" />
     <Compile Include="Controllers\ReporteGeneralController.cs" />
     <Compile Include="Controllers\ReporteIndividualController.cs" />
+    <Compile Include="Controllers\ReportePerfilController.cs" />
     <Compile Include="Controllers\ReporteroController.cs" />
     <Compile Include="Controllers\ReporteConceptoXEstatusController.cs" />
     <Compile Include="Controllers\ReporteSolicitudXEstatusController.cs" />
@@ -431,6 +432,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatPerfilEmpleadosViewModel.cs" />
+    <Compile Include="Models\CatPerfilesDetalleSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatPerfilTipoAccesoSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -720,6 +724,7 @@
     <Content Include="Scripts\ReporteIndividual.js" />
     <Content Include="Scripts\ReporteGeneral.js" />
     <Content Include="Scripts\ReporteConceptoXEstatus.js" />
+    <Content Include="Scripts\ReportePerfil.js" />
     <Content Include="Scripts\ReporteSolicitudXEstatus.js" />
     <Content Include="Scripts\ReporteSolicitud.js" />
     <Content Include="Scripts\ResponsableAutoriza.js" />
@@ -937,6 +942,7 @@
     <Content Include="Views\ReporteSolicitud\Index.cshtml" />
     <Content Include="Views\ReporteSolicitudXEstatus\Index.cshtml" />
     <Content Include="Views\ReporteConceptoXEstatus\Index.cshtml" />
+    <Content Include="Views\ReportePerfil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

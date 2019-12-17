@@ -2788,5 +2788,10 @@ namespace ASN.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodoNominaCMB_Result>("CatPeriodoNominaCMB");
         }
+    
+        public virtual ObjectResult<CatPerfilesDetalleSel_Result> CatPerfilesDetalleSel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilesDetalleSel_Result>("CatPerfilesDetalleSel");
+        }
     }
 }

@@ -166,6 +166,10 @@ namespace ASN
             //ReporteConceptoXEstatus
             bundles.Add(new ScriptBundle("~/bundles/ReporteConceptoXEstatus").Include(
             "~/Scripts/ReporteConceptoXEstatus.js"));
+
+            //ReportePerfil
+            bundles.Add(new ScriptBundle("~/bundles/ReportePerfil").Include(
+            "~/Scripts/ReportePerfil.js"));
         }
     }
 }
