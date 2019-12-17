@@ -38,7 +38,7 @@
                                 columns.Bound(c => c.ConceptoId).Title("Concepto").Visible(false).Filterable(false);
                                 columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
                                 columns.ForeignKey(c => c.Paises, (System.Collections.IEnumerable)ViewData["Paises"], "Id", "Value").Width(70).Title("Pais").Visible(false);
-                                columns.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Id", "Value").Width(70).Title("Cliente").Visible(true).Filterable(true).ClientTemplate("#:ClienteId == -1  ? '- Todos -' : Cliente #");
+                                columns.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Id", "Value").Width(70).Title("Cliente").Visible(true).Filterable(true);
                                 columns.ForeignKey(c => c.PeopleSoftId, (System.Collections.IEnumerable)ViewData["PeopleSoft"], "Ident", "Valor").Width(90).Title("PeopleSoft").Visible(true).Filterable(true);
                                 columns.ForeignKey(c => c.TipoConceptoId, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(70).Title("Tipo concepto");
                                 columns.Bound(c => c.NumeroNivelAutorizante).Width(65).Title("Número de Nivel de Autorizante").Filterable(false);
@@ -84,15 +84,15 @@
                                     model.Field(c => c.TipoConceptoId).Editable(true);
                                     model.Field(c => c.Vigencia).Editable(true);
                                     model.Field(c => c.PagosFijos).Editable(true);
-                                    model.Field(c => c.Tope).Editable(true);
+                                    model.Field(c => c.Tope).Editable(true).DefaultValue(0.0m);
                                     model.Field(c => c.PeriodicidadNominaId).Editable(true);
                                     model.Field(c => c.FechaInicio).Editable(true);
                                     model.Field(c => c.FechaFin).Editable(true);
                                     model.Field(c => c.ParametroConceptoId).Editable(true);
 
-                                    //model.Field(c => c.NumeroNivelAutorizante).Editable(false);
-                                    //model.Field(c => c.AutorizacionAutomatica).Editable(false);
-                                    //model.Field(c => c.AutorizacionObligatoria).Editable(false);
+                                    model.Field(c => c.NumeroNivelAutorizante).Editable(true).DefaultValue(0);
+                                    model.Field(c => c.AutorizacionAutomatica).Editable(false).DefaultValue(false);
+                                    model.Field(c => c.AutorizacionObligatoria).Editable(false).DefaultValue(false);
                                     model.Field(c => c.Active).Editable(true).DefaultValue(true);
 
                                 })
