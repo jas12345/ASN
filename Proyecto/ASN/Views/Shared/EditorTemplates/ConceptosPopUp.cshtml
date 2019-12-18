@@ -269,7 +269,7 @@
             <label for="NumeroNivel">Niveles de autorizacion</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.ConceptoId)
+            @(Html.Kendo().DropDownListFor(x => x.NumeroNivelAutorizante)
                                                 .DataSource(source =>
                                                 {
                                                     source.Read(Read =>
@@ -325,7 +325,7 @@
         </div>
 
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.ConceptoId)
+            @(Html.Kendo().DropDownListFor(x => x.NumeroNivelAutorizante)
                                                 .DataSource(source =>
                                                 {
                                                     source.Read(Read =>
