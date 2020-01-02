@@ -17,9 +17,17 @@ namespace ASN.Controllers
         // GET: CapturaSolicitud
         public ActionResult Index(int? FolioSolicitud)
         {
-            var obj = new CatSolicitudesSel_Result();
-            obj.FolioSolicitud = (int)(FolioSolicitud ?? -1);
-            return View(obj);
+            if (User.Identity.IsAuthenticated)
+            {
+                var obj = new CatSolicitudesSel_Result();
+                obj.FolioSolicitud = (int)(FolioSolicitud ?? -1);
+                return View(obj);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             //return View();
         }
 
