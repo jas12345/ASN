@@ -47,7 +47,7 @@
           <Parameter Name="RelUserRoleId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatAnioFechasCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="AnioId" Type="int" Mode="In" />
+          <Parameter Name="AniosNominaId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatAnioMesesConsecutivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="AnioId" Type="int" Mode="In" />
@@ -66,13 +66,16 @@
           <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
         </Function>
         <Function Name="CatAniosNominaSu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="AniosNominaId" Type="int" Mode="In" />
           <Parameter Name="AnioId" Type="int" Mode="In" />
           <Parameter Name="FechaInicio" Type="varchar" Mode="In" />
           <Parameter Name="FechaCierre" Type="varchar" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatAutorizacionesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -846,11 +849,13 @@
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatAñosNominaSu">
+            <Parameter Name="AniosNominaId" Mode="In" Type="Int32" />
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
             <Parameter Name="FechaInicio" Mode="In" Type="String" />
             <Parameter Name="FechaCierre" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatMesesNominaSel" ReturnType="Collection(ASNModel.CatMesesNominaSel_Result)" />
@@ -876,13 +881,16 @@
             <Parameter Name="FechaCierre" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatAniosNominaSu">
+            <Parameter Name="AniosNominaId" Mode="In" Type="Int32" />
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
             <Parameter Name="FechaInicio" Mode="In" Type="String" />
             <Parameter Name="FechaCierre" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
@@ -975,7 +983,7 @@
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatAnioFechasCMB" ReturnType="Collection(ASNModel.CatAnioFechasCMB_Result)">
-          <Parameter Name="AnioId" Mode="In" Type="Int32" />
+          <Parameter Name="AniosNominaId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatConsecutivoPeriodosSi">
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
@@ -1684,6 +1692,7 @@
           <Property Type="String" Name="DescripcionMes" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Anio" Nullable="false" />
           <Property Type="Boolean" Name="ActiveAnio" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1706,10 +1715,12 @@
           <Property Type="DateTime" Name="FechaInicio" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="FechaCierre" Nullable="false" Precision="23" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AniosNominaId" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatAniosNominaCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
-          <Property Type="Int32" Name="Valor" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatMesesCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
@@ -2756,6 +2767,7 @@
                 <ScalarProperty Name="DescripcionMes" ColumnName="DescripcionMes" />
                 <ScalarProperty Name="Anio" ColumnName="Anio" />
                 <ScalarProperty Name="ActiveAnio" ColumnName="ActiveAnio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2770,6 +2782,8 @@
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="AniosNominaId" ColumnName="AniosNominaId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

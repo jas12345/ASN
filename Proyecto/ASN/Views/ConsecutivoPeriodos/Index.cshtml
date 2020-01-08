@@ -34,10 +34,11 @@
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(56);
+                            columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(70);
                             columns.Bound(c => c.Ident).Title("id").Visible(false).Filterable(false).Width(15);
                             //columns.Bound(c => c.AnioId).Width(150).Title("Descripción");
                             columns.ForeignKey(c => c.AnioId, (System.Collections.IEnumerable)ViewData["AniosCMB"], "Ident", "Valor").Width(125).Title("Año");
+                            //columns.Bound(c => c.AnioId).Title("Año").Visible(true).Width(100).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
                             columns.ForeignKey(c => c.MesId, (System.Collections.IEnumerable)ViewData["MesCMB"], "Ident", "Valor").Width(125).Title("Mes");
                             columns.ForeignKey(c => c.PeriodicidadNominaId, (System.Collections.IEnumerable)ViewData["TipoPeriodicidad"], "Ident", "Valor").Width(125).Title("Periodicidad").ClientTemplate("#:PeriodicidadActiva ? DescripcionPeriodicidad : DescripcionPeriodicidad #");
                             columns.ForeignKey(c => c.ConsecutivoId, (System.Collections.IEnumerable)ViewData["ConsecutivosPeriodo"], "Ident", "Valor").Width(125).Title("Consecutivo").ClientTemplate("#:PeriodicidadActiva ? ConsecutivoId : Consecutivo #");

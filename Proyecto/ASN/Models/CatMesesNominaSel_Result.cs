@@ -24,5 +24,6 @@ namespace ASN.Models
         public string DescripcionMes { get; set; }
         public int Anio { get; set; }
         public bool ActiveAnio { get; set; }
+        public string Descripcion { get; set; }
     }
 }

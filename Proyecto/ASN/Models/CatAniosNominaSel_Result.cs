@@ -17,5 +17,7 @@ namespace ASN.Models
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime FechaCierre { get; set; }
         public bool Active { get; set; }
+        public string Descripcion { get; set; }
+        public int AniosNominaId { get; set; }
     }
 }

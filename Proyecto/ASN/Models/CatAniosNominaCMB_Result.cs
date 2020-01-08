@@ -14,6 +14,6 @@ namespace ASN.Models
     public partial class CatAniosNominaCMB_Result
     {
         public int Ident { get; set; }
-        public int Valor { get; set; }
+        public string Valor { get; set; }
     }
 }

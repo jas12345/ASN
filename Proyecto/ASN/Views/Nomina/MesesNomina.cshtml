@@ -35,12 +35,14 @@
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(27);
-                            columns.Bound(c => c.AnioMesId).Title("AñoMesId").Visible(false).Filterable(false);
-                            columns.ForeignKey(c => c.AnioId, (System.Collections.IEnumerable)ViewData["AniosCMB"], "Ident", "Valor").Title("Año").Visible(true).Filterable(true).Width(50).ClientTemplate("#:ActiveAnio ? AnioId : Anio #");
-                            columns.ForeignKey(c => c.MesId, (System.Collections.IEnumerable)ViewData["MesCMB"], "Ident", "Valor").Title("Mes").Visible(true).Filterable(true).Width(80);
-                            columns.Bound(c => c.FechaInicio).Width(150).Title("Fecha Inicio").Format("{0:yyyy-MM-dd}").Filterable(false);
-                            columns.Bound(c => c.FechaCierre).Width(150).Title("Fecha Cierre").Format("{0:yyyy-MM-dd}").Filterable(false);
+                            columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(35);
+                            columns.Bound(c => c.AnioMesId).Title("AñoMesId").Visible(false).Filterable(false).Width(20);
+                            columns.Bound(c => c.Descripcion).Title("Tipo de año").Width(50);
+                            columns.Bound(c => c.Anio).Title("Año").Width(50);
+                            //columns.ForeignKey(c => c.AnioId, (System.Collections.IEnumerable)ViewData["AniosCMB"], "Ident", "Valor").Title("Año").Visible(true).Filterable(true).Width(50).ClientTemplate("#:ActiveAnio ? AnioId : Anio #");
+                            columns.ForeignKey(c => c.MesId, (System.Collections.IEnumerable)ViewData["MesCMB"], "Ident", "Valor").Title("Mes").Visible(true).Filterable(true).Width(70);
+                            columns.Bound(c => c.FechaInicio).Width(70).Title("Fecha Inicio").Format("{0:yyyy-MM-dd}").Filterable(false);
+                            columns.Bound(c => c.FechaCierre).Width(70).Title("Fecha Cierre").Format("{0:yyyy-MM-dd}").Filterable(false);
                             columns.Bound(c => c.Active).Width(50).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
                         }
                         )
@@ -65,6 +67,7 @@
                             .Model(model =>
                             {
                                 model.Id(c => c.AnioMesId);
+                                model.Field(c => c.Descripcion);
                                 model.Field(c => c.AnioId);
                                 model.Field(c => c.MesId);
                                 model.Field(c => c.FechaInicio).Editable(false);
@@ -74,7 +77,7 @@
                             .Read(read => read.Action("GetMesesNomina", "Nomina"))
                             .Update(update => update.Action("UpdateMesNomina", "Nomina").Type(HttpVerbs.Post).Data("accionado"))
                             .Create(create => create.Action("CreateMesNomina", "Nomina").Type(HttpVerbs.Post).Data("accionado"))
-                            .PageSize(10)
+                            .PageSize(20)
                         .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
                         )
                         .Navigatable()

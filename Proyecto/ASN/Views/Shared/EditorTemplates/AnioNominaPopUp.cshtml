@@ -8,11 +8,26 @@
 <div>
     <div class="k-edit-form-container">
         <div class="editor-label">
+            <label for="AnioId">Descripción</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.Descripcion)
+                .Name("Descripcion")
+                .HtmlAttributes(new { required = "required", validationMessage = "El campo descripción es requerido." })
+            )
+        </div>
+        <div class="editor-label">
             <label for="AnioId">Año</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().TextBoxFor(x => x.AnioId)
+            @(Html.Kendo().NumericTextBoxFor(x => x.AnioId)
                 .Name("AnioId")
+                .Spinners(true)
+                .Format("0.")
+                .Min(DateTime.Now.Year-5)
+                .Step(1)
+                .Value(DateTime.Now.Year)
+                .Decimals(0)
             )
         </div>
         <div class="editor-label">
@@ -20,18 +35,18 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DatePicker()
-                .Format("yyyy-MM-dd")
-                .ParseFormats(new string[]
-                    {
+                    .Format("yyyy-MM-dd")
+                    .ParseFormats(new string[]
+                        {
                     "ddd, M/d/yyyy",
                     "ddd, MM/dd/yyyy",
                     "ddd, M/dd/yyyy"
-                    }
-                )
-                .Name("FechaInicio")
-                .Value(DateTime.Now)
-                .Enable(true)
-                .Events(e => e.Change("FechaInicioOpen"))
+                        }
+                    )
+                    .Name("FechaInicio")
+                    .Value(DateTime.Now)
+                    .Enable(true)
+                    .Events(e => e.Change("FechaInicioOpen"))
             )
         </div>
         <div class="editor-label">
@@ -39,18 +54,18 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().DatePicker()
-                .Format("yyyy-MM-dd")
-                .ParseFormats(new string[]
-                    {
-                "ddd, M/d/yyyy",
-                "ddd, MM/dd/yyyy",
-                "ddd, M/dd/yyyy"
-                    }
-                )
-                .Name("FechaCierre")
-                .Value(DateTime.Now)
-                .Enable(true)
-                .Events(e => e.Change("FechaCierreOpen"))
+                    .Format("yyyy-MM-dd")
+                    .ParseFormats(new string[]
+                            {
+                    "ddd, M/d/yyyy",
+                    "ddd, MM/dd/yyyy",
+                    "ddd, M/dd/yyyy"
+                        }
+                    )
+                    .Name("FechaCierre")
+                    .Value(DateTime.Now)
+                    .Enable(true)
+                    .Events(e => e.Change("FechaCierreOpen"))
             )
         </div>
         <div class="editor-label">
@@ -61,3 +76,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#AnioId").val(anioss);
+    });
+</script>

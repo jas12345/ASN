@@ -209,7 +209,7 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                            context.CatAniosNominaSi(obj.AnioId, fechaInicio, fechaCierre, ccmsidAdmin, resultado);
+                            //context.CatAniosNominaSi(obj.AnioId, fechaInicio, fechaCierre, ccmsidAdmin, resultado);
                         }
 
                         int.TryParse(resultado.Value.ToString(), out res);
@@ -256,7 +256,7 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                            context.CatAniosNominaSu(obj.AnioId, fechaInicio, fechaCierre, ccmsidAdmin, obj.Active, resultado);
+                            //context.CatAniosNominaSu(obj.AnioId, fechaInicio, fechaCierre, ccmsidAdmin, obj.Active, resultado);
                         }
 
                         int.TryParse(resultado.Value.ToString(), out res);

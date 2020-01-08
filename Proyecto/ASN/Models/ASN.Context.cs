@@ -292,8 +292,12 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAñosNominaSi", añoIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatAñosNominaSu(Nullable<int> anioId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatAñosNominaSu(Nullable<int> aniosNominaId, Nullable<int> anioId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, string descripcion, ObjectParameter estatus)
         {
+            var aniosNominaIdParameter = aniosNominaId.HasValue ?
+                new ObjectParameter("AniosNominaId", aniosNominaId) :
+                new ObjectParameter("AniosNominaId", typeof(int));
+    
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
                 new ObjectParameter("AnioId", typeof(int));
@@ -314,7 +318,11 @@ namespace ASN.Models
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAñosNominaSu", anioIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, estatus);
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAñosNominaSu", aniosNominaIdParameter, anioIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, descripcionParameter, estatus);
         }
     
         public virtual ObjectResult<CatMesesNominaSel_Result> CatMesesNominaSel()
@@ -380,7 +388,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAniosNominaSel_Result>("CatAniosNominaSel");
         }
     
-        public virtual int CatAniosNominaSi(Nullable<int> anioId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        public virtual int CatAniosNominaSi(Nullable<int> anioId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus, string descripcion)
         {
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
@@ -398,11 +406,19 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAniosNominaSi", anioIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, estatus);
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAniosNominaSi", anioIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, estatus, descripcionParameter);
         }
     
-        public virtual int CatAniosNominaSu(Nullable<int> anioId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
+        public virtual int CatAniosNominaSu(Nullable<int> aniosNominaId, Nullable<int> anioId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, Nullable<bool> active, string descripcion, ObjectParameter estatus)
         {
+            var aniosNominaIdParameter = aniosNominaId.HasValue ?
+                new ObjectParameter("AniosNominaId", aniosNominaId) :
+                new ObjectParameter("AniosNominaId", typeof(int));
+    
             var anioIdParameter = anioId.HasValue ?
                 new ObjectParameter("AnioId", anioId) :
                 new ObjectParameter("AnioId", typeof(int));
@@ -423,7 +439,11 @@ namespace ASN.Models
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAniosNominaSu", anioIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, estatus);
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatAniosNominaSu", aniosNominaIdParameter, anioIdParameter, fechaInicioParameter, fechaCierreParameter, userEmployeeIdParameter, activeParameter, descripcionParameter, estatus);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -715,13 +735,13 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosMotivosSu", conceptoMotivoIdParameter, descripcionParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
-        public virtual ObjectResult<CatAnioFechasCMB_Result> CatAnioFechasCMB(Nullable<int> anioId)
+        public virtual ObjectResult<CatAnioFechasCMB_Result> CatAnioFechasCMB(Nullable<int> aniosNominaId)
         {
-            var anioIdParameter = anioId.HasValue ?
-                new ObjectParameter("AnioId", anioId) :
-                new ObjectParameter("AnioId", typeof(int));
+            var aniosNominaIdParameter = aniosNominaId.HasValue ?
+                new ObjectParameter("AniosNominaId", aniosNominaId) :
+                new ObjectParameter("AniosNominaId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAnioFechasCMB_Result>("CatAnioFechasCMB", anioIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatAnioFechasCMB_Result>("CatAnioFechasCMB", aniosNominaIdParameter);
         }
     
         public virtual int CatConsecutivoPeriodosSi(Nullable<int> anioId, Nullable<int> mesId, string consecutivoId, string periodicidadNominaId, Nullable<int> tipoConsecutivoId, string fechaInicio, string fechaCierre, Nullable<int> userEmployeeId, ObjectParameter estatus)
