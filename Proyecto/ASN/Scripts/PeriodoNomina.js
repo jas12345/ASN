@@ -369,8 +369,11 @@ function formatDateTime(date) {
 
 function getName() {
     if (editando == 0)
-     {
-        var anioVl = $("#AnioId").val();
+    {
+        var anioVl = "";
+        if ($("#AnioId").val() != "") {
+            anioVl = $("#AnioId").data("kendoDropDownList").text().substr(0, 4); //$("#AnioId").val();
+        }
         var mesVl = $("#MesId").val();
         var periodisidadVl = $("#PeriodicidadNominaId").val();
         var consecutivoVl = $("#ConsecutivoId").val();
