@@ -18,11 +18,43 @@ namespace ASN.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    ViewData["PeriodosNomina"] = context.CatPeriodosNominaCMB(0).ToList();
+                }
+
                 return View();
             }
             else
             {
                 return RedirectToAction("Login", "Home");
+            }
+        }
+
+        /// <summary>
+        /// Método que devuelve todos los periodos de nomina para un ComboBox
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetPeriodoNominaCMB()
+        {
+            try
+            {
+                var listPeriodoNomina = new List<CatPeriodosNominaCMB_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(1).ToList();
+                }
+
+                return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
             }
         }
 

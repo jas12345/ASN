@@ -2243,6 +2243,8 @@
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
           <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
+          <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
+          <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatAutorizacionesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -3591,6 +3593,8 @@
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
                 <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
                 <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
+                <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
+                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
