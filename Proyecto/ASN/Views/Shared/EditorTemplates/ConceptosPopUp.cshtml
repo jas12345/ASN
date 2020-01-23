@@ -265,7 +265,7 @@
         </div>@**@
 
     <div id="ocultaAutorizantes">
-        <div class="editor-label">
+        @*<div class="editor-label">
             <label for="NumeroNivel">Niveles de autorizacion</label>
         </div>
         <div class="editor-field">
@@ -290,7 +290,7 @@
         </div>
 
 
-        @*<div class="editor-label">
+        <div class="editor-label">
             <label for="AutorizacionAutomatica">Autorización automática</label>
         </div>
         <div class="editor-field">
@@ -318,7 +318,7 @@
         </div>
         <div class="editor-field">
             @(Html.Kendo().CheckBox().Name("AutorizacionObligatoria").HtmlAttributes(new { onchange = "AdministraAutorizacionObligatoria()" }))
-        </div>*@
+        </div>
 
         <div class="editor-label">
             <label for="AutorizanteIdent">Autorizante</label>
@@ -343,7 +343,7 @@
                                                 .Events(e => e.Change("salvadoAutor"))
                                                 .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
             )
-        </div>
+        </div>*@
     </div>
 
 

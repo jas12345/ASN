@@ -450,6 +450,9 @@
     <Compile Include="Models\CatPeriodoNominaCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatPeriodoNominaSolicitudSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatPeriodosNominaCerradosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -798,6 +801,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\General.js" />

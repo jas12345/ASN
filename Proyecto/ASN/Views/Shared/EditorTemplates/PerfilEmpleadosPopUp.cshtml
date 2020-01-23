@@ -228,6 +228,15 @@
         <div class="editor-field">
             @Html.CheckBox("Active")
         </div>
+
+        <div class="editor-label">
+            <label for="Active"></label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().Button().Name("CopiarPerfilEmpleado").Content("Copiar Perfil de Empleado").Icon("copy")
+                        .Events(x => x.Click("copiarPerfilEmpleados")).HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;" })
+            )
+        </div>
     </div>
 </div>
 

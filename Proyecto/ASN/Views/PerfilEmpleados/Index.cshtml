@@ -87,6 +87,7 @@
                             .Read(read => read.Action("GetPerfilEmpleados", "PerfilEmpleados"))
                             .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("ObtieneMultiConceptos"))
                             .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("ObtieneMultiConceptos"))
+                            //.Copy(copy => create.Action("CopyPerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
                             .PageSize(10)
                         .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
                         )
@@ -119,6 +120,11 @@
         </div>
     </div>
 
+    <script>
+        //Copia de Perfil de Empleados
+        var urlCopyPerfilEmpleados = '@Url.Action("CopyPerfilEmpleados", "PerfilEmpleados")';
+
+    </script>
 }
 else
 {

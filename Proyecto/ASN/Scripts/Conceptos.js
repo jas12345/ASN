@@ -28,8 +28,8 @@ var valorVigencia = "";
 var valorPeriodicidad = "";
 function edit(e) {
 
-    var autoCMB = $('#AutorizanteIdent').data('kendoDropDownList').select(-1);
-    var f = $('#NivelAutorizante').data('kendoDropDownList').select(-1);
+    //var autoCMB = $('#AutorizanteIdent').data('kendoDropDownList').select(-1);
+    //var f = $('#NivelAutorizante').data('kendoDropDownList').select(-1);
     var validator = e.container.data('kendoValidator');
 
     $('input[name="Descripcion"]').blur(function () {

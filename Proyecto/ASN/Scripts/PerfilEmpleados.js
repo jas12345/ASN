@@ -404,6 +404,37 @@ function CargaSite() {
     site.value("-1");
 }
 
+function copiarPerfilEmpleados() {
+
+    Perfil_Ident = "";
+    NombrePerfilEmpleados = "";
+
+    Perfil_Ident = $("#PerfilUsuarioId").val();
+    NombrePerfilEmpleados = $("#NombrePerfilEmpleados").val();
+
+    if (confirm("¿Desea copiar este pefil de empleado?")) {
+
+        $.post(urlCopyPerfilEmpleados + "/?Perfil_Ident=" + Perfil_Ident + "&NombrePerfilEmpleados=" + NombrePerfilEmpleados + "&Estatus=" + 0, function (data) {
+            //debugger;
+
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show(data, "success");
+
+            actualizaGrid();
+
+            //grid.select("tr:eq(" + selectedRows(0) + ")");
+
+        }).fail(function (ex) {
+            console.log("fail" + ex);
+        });
+    }
+}
+
+function actualizaGrid() {
+    $("#grid").data("kendoGrid").dataSource.read();
+    $("#grid").data("kendoGrid").refresh();
+}
+
 function filterSite() {
     return {
         country: $("#Country_Ident").val(),
@@ -639,6 +670,16 @@ function CargaCascada() {
     //    pais.dataSource.read();
     //    pais.refresh();
     //}       
+}
+
+function CargaPerfilEmpleado() {
+    var pais = $("#Country_Ident").data("kendoDropDownList");
+    var ciudad = $("#City_Ident").data("kendoDropDownList");
+    var site = $("#Location_Ident").data("kendoDropDownList");
+    var cliente = $("#Client_Ident").data("kendoDropDownList");
+    var programa = $("#Program_Ident").data("kendoDropDownList");
+    var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+
 }
 
 function filterConcepto() {

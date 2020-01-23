@@ -106,7 +106,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB(1).ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(0).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
@@ -332,6 +332,29 @@ namespace ASN.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al consultar Estatus.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult ConsultarPeriodoNominaSolicitud(int folioSolicitud)
+        {
+            try
+            {
+                var lstPeriodoNominaSolicitud = new List<CatPeriodoNominaSolicitudSel_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstPeriodoNominaSolicitud = context.CatPeriodoNominaSolicitudSel(folioSolicitud).ToList();
+                }
+
+                return Json(lstPeriodoNominaSolicitud, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al consultar Perído de Nómina.");
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);

@@ -294,7 +294,7 @@
                                     {
                                         source.Read(read =>
                                                     {
-                                        read.Action("GetPeriodoNominaCerradosCMB", "AutorizaSolicitud");
+                                        read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
                                     });
                                                     //.ServerFiltering(true);
                                                 })
@@ -303,7 +303,7 @@
                                     .DataValueField("Ident")
                                     .DataTextField("Valor")
                                     .Name("PeriodoIncidente")
-                                    .Enable(false)
+                                    //.Enable(false)
                                     .Events(e => e.Change("onChangePeriodoIncidente"))
                                     //.SelectedIndex(1)
                                     .Enable(true)
@@ -577,8 +577,11 @@
         // Función para calcular Estatus de Solicitud
         var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "AutorizaSolicitud")';
 
-                //debugger;
-                //var urlSolicitud = grid.selectedKeyNames().join(", ");
+        // Función para calcular Perído de Nómina de Solicitud
+        var urlConsultarPeriodoNominaSolicitud = '@Url.Action("ConsultarPeriodoNominaSolicitud", "AutorizaSolicitud")';
+
+        //debugger;
+        //var urlSolicitud = grid.selectedKeyNames().join(", ");
 
         var usuarioCCMSID = '@User.Identity.Name';
         var estatusId = '@Model.EstatusId';

@@ -101,7 +101,7 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
-
+        
         public JsonResult GetMercadosCMB()
         {
             try
@@ -456,6 +456,88 @@ namespace ASN.Controllers
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json(profiles.ToDataSourceResult(request, ModelState));
             }
+        }
+
+        [HttpPost]
+        public ActionResult CopyPerfilEmpleados([DataSourceRequest]DataSourceRequest request, Nullable<int> Perfil_Ident, string NombrePerfilEmpleados)
+        {
+            try
+            {
+                int res = 0;
+                var result = new object();
+                int ccmsidAdmin = 0;
+                string mensaje = "";
+
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+
+                    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                    resultado.Value = 0;
+
+                    int.TryParse(User.Identity.Name, out ccmsidAdmin);
+
+                    context.CatPerfilEmpleadosCopy(
+                            Perfil_Ident,
+                            NombrePerfilEmpleados,
+
+                            ccmsidAdmin,
+                            resultado
+                        );
+
+                    int.TryParse(resultado.Value.ToString(), out res);
+
+                    switch (res)
+                    {
+                        case -1:
+                            mensaje = "Ya existe un Perfil de Empleados copiado con la misma descripción.";
+                            break;
+                        //case -2:
+                        //    mensaje = "El empleado no existe en CCMS o no está activo.";
+                        //    break;
+                        //case -3:
+                        //    mensaje = "El puesto del empleado no es válido para este perfil.";
+                        //    break;
+                        //case -4:
+                        //    mensaje = "El nivel ya está asignado a otro empleado";
+                        //    break;
+                    }
+
+                    //return Json(profiles.ToDataSourceResult(request, ModelState));
+                    //return Json(ModelState);
+
+                    return Json(mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "Ocurrió un error al procesar la solicitud.";
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(mensaje);
+            }
+            //        if (res == -1)
+            //        {
+            //            resultadoAccion = "Ya existe un Perfil de Empleados copiado con la misma descripción.";
+            //            Error = new { Errors = resultadoAccion };
+            //            ModelState.AddModelError("error", "Ya existe un Perfil de Empleados copiado con la misma descripción.");
+            //        }
+
+            //    result = new { Id = Perfil_Ident, responseError = Error, status = res.ToString() };
+
+            //    }
+            //    return Json(result, JsonRequestBehavior.AllowGet);
+            //}
+            //catch (Exception ex)
+            //{
+            //    ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+            //    MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            //    LogError log = new LogError();
+            //    log.RecordError(ex, usuario.UserInfo.Ident.Value);
+            //    var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
+            //    return Json(new { Id = 0, responseError = new { Errors = resultadoAccion }, status = "-1" }, JsonRequestBehavior.AllowGet);
+            //}
         }
 
     }

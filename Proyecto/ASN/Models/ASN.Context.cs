@@ -2813,5 +2813,31 @@ namespace ASN.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilesDetalleSel_Result>("CatPerfilesDetalleSel");
         }
+    
+        public virtual ObjectResult<CatPeriodoNominaSolicitudSel_Result> CatPeriodoNominaSolicitudSel(Nullable<int> folioSolicitud)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodoNominaSolicitudSel_Result>("CatPeriodoNominaSolicitudSel", folioSolicitudParameter);
+        }
+    
+        public virtual int CatPerfilEmpleadosCopy(Nullable<int> perfil_Ident, string nombrePerfilEmpleados, Nullable<int> userEmployeeId, ObjectParameter estatus)
+        {
+            var perfil_IdentParameter = perfil_Ident.HasValue ?
+                new ObjectParameter("Perfil_Ident", perfil_Ident) :
+                new ObjectParameter("Perfil_Ident", typeof(int));
+    
+            var nombrePerfilEmpleadosParameter = nombrePerfilEmpleados != null ?
+                new ObjectParameter("NombrePerfilEmpleados", nombrePerfilEmpleados) :
+                new ObjectParameter("NombrePerfilEmpleados", typeof(string));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosCopy", perfil_IdentParameter, nombrePerfilEmpleadosParameter, userEmployeeIdParameter, estatus);
+        }
     }
 }

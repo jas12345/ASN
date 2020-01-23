@@ -401,6 +401,12 @@
         <Function Name="CatPerfilEmpleadosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatPerfilEmpleadosCopy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Perfil_Ident" Type="int" Mode="In" />
+          <Parameter Name="NombrePerfilEmpleados" Type="varchar" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="CatPerfilEmpleadoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Ident" Type="int" Mode="In" />
         </Function>
@@ -461,6 +467,9 @@
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CatPeriodoNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatPeriodoNominaSolicitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatPeriodosNominaCerradosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Active" Type="int" Mode="In" />
         </Function>
@@ -1601,6 +1610,15 @@
           <FunctionImport Name="CatEstatusCMB" ReturnType="Collection(ASNModel.CatEstatusCMB_Result)" />
           <FunctionImport Name="CatPeriodoNominaCMB" ReturnType="Collection(ASNModel.CatPeriodoNominaCMB_Result)" />
           <FunctionImport Name="CatPerfilesDetalleSel" ReturnType="Collection(ASNModel.CatPerfilesDetalleSel_Result)" />
+          <FunctionImport Name="CatPeriodoNominaSolicitudSel" ReturnType="Collection(ASNModel.CatPeriodoNominaSolicitudSel_Result)">
+          <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatPerfilEmpleadosCopy">
+            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2621,6 +2639,10 @@
           <Property Type="Int32" Name="Nivel" Nullable="true" />
           <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
           <Property Type="String" Name="Puesto" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="CatPeriodoNominaSolicitudSel_Result">
+          <Property Type="Int32" Name="PeriodoNominaId" Nullable="false" />
+          <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -4148,6 +4170,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodoNominaSolicitudSel" FunctionName="ASNModel.Store.CatPeriodoNominaSolicitudSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPeriodoNominaSolicitudSel_Result">
+                <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
+                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosCopy" FunctionName="ASNModel.Store.CatPerfilEmpleadosCopy" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
