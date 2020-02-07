@@ -131,7 +131,7 @@ namespace ASN.Controllers
         /// Método que devuelve todos los periodos de nomina para un ComboBox
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetPeriodoNominaCMB()
+        public JsonResult GetPeriodoNominaCMB(int? active)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB(1).ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(active).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);

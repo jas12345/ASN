@@ -293,7 +293,8 @@
                                     {
                                     source.Read(read =>
                                     {
-                                        read.Action("GetPeriodoNominaCerradosCMB", "ResponsableAutoriza");
+                                        //read.Action("GetPeriodoNominaCerradosCMB", "ResponsableAutoriza");
+                                        read.Action("GetPeriodoNominaCMB", "ResponsableAutoriza").Data("parametroPeriodosNominaPasados");
                                     });
                                                 //.ServerFiltering(true);
                                             })

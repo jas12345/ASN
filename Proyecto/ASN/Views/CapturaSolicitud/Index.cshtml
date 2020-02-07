@@ -62,15 +62,21 @@
                 </div>
                  <div class="col-lg-4">
                     @Html.Label("Periodo de nómina actual: ", new { style = "font-size: 15px" })
-                    @(Html.Kendo().DropDownList().DataSource(source =>
-                        {
-                            source.Read(read =>
-                            {
-                                read.Action("GetPeriodoNominaCMB", "CapturaSolicitud");
-                            }
-                            );
-                        //.ServerFiltering(true);
-                        })
+                    @(Html.Kendo().DropDownList()
+                        .DataSource(source => source
+                            .Custom()
+                            .Sort(
+                                s => s.Add("Valor")
+                            )
+                            .Transport( tr => tr
+                                .Read(read =>
+                                    {
+                                        read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaTodos");
+                                    }
+                                )
+                            )
+                                //.ServerFiltering(true);parametroPeriodosNominaTodos
+                        )
                         .Filter("contains")
                         .OptionLabel("- Seleccione Periodo de Nomina - ")
                         .DataValueField("Ident")
@@ -342,7 +348,8 @@
                                     {
                                         source.Read(read =>
                                         {
-                                            read.Action("GetPeriodoNominaCerradosCMB", "CapturaSolicitud");
+                                            ///read.Action("GetPeriodoNominaCerradosCMB", "CapturaSolicitud");
+                                            read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaPasados");
                                         });
                                                     //.ServerFiltering(true);
                                     })

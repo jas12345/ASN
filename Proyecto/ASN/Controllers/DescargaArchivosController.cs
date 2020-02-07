@@ -36,7 +36,7 @@ namespace ASN.Controllers
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     lstActivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value,1).ToList();
                     lstInactivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 0).ToList();
-                    listPeriodoNomina = ctx.CatPeriodosNominaCMB(1).ToList();
+                    listPeriodoNomina = ctx.CatPeriodosNominaCMB(4).ToList();
                 }
 
                 if (listPeriodoNomina.Count > 0)
@@ -123,7 +123,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB(1).ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(4).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);

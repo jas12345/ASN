@@ -673,6 +673,46 @@ function onChangeCCMSIdIncidente()
     }
 }
 
+function parametroPeriodosNominaTodos() {
+    var Active = 0;
+
+    return {
+        Active: Active
+    };
+};
+
+function parametroPeriodosNominaActualFuturos() {
+    var Active = 1;
+
+    return {
+        Active: Active
+    };
+};
+
+function parametroPeriodosNominaPasados() {
+    var Active = 2;
+
+    return {
+        Active: Active
+    };
+};
+
+function parametroPeriodosNominaFuturos() {
+    var Active = 3;
+
+    return {
+        Active: Active
+    };
+};
+
+function parametroPeriodosNominaActualPasados() {
+    var Active = 4;
+
+    return {
+        Active: Active
+    };
+};
+
 function rellenaPerfilTipoAcceso() {
     //debugger;
 
