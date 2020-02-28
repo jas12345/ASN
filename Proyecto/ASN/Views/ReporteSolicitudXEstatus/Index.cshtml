@@ -35,14 +35,14 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     @Html.Label("Periodos ", new { style = "font-size: 15px" })
                     @(Html.Kendo().DropDownList()
-                        .OptionLabel(" Año_Mes_NumeroDePago ")
+                        .OptionLabel("- Período Incidente - ")
                         .DataTextField("Valor")
-                        .DataValueField("Id")
+                        .DataValueField("Ident")
                         .DataSource(source =>
                         {
                             source.Read(read =>
                         {
-                            read.Action("GetPeriodoNominaCMB", "ReporteSolicitud");
+                            read.Action("GetPeriodosNominaCMB", "ReporteSolicitudXEstatus");
                         });
                         })
                         .Name("PeriodoNomina")
@@ -68,7 +68,7 @@
                     @Html.Label("Fecha final ", new { style = "font-size: 15px" })
                     @(Html.Kendo().DatePicker()
                                 .Name("FechaFin")
-                                .Format("yyyy-MM-dd")
+                                .Format("yyyy-MM-dd")requ
                                 .ParseFormats(new string[] {
                                     "ddd, M/d/yyyy",
                                     "ddd, MM/dd/yyyy",
@@ -143,10 +143,11 @@
                                     columns.Bound(e => e.Ciudad).Title("Ciudad").Width(30);
                                     columns.Bound(e => e.Site).Width(30).Title("Site");
                                     columns.Bound(e => e.SolicitanteCCMSID).Width(30).Title("Solicitante CCMSID").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
-                                    columns.Bound(e => e.Fecha).Title("Fecha de solicitud").Width(30);//.Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
+                                    columns.Bound(e => e.Periodo).Title("Período").Width(30);//.Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
+                                    //columns.Bound(e => e.Fecha).Title("Fecha de solicitud").Width(30);//.Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
                                     columns.Bound(e => e.Folio).Width(30).Title("Folio").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))); ;
                                     columns.Bound(e => e.Concepto).Title("Concepto").Width(30);
-                                    columns.Bound(e => e.Total).Title("Total").Width(30);
+                                    columns.Bound(e => e.Total).Title("Total").Width(30).HtmlAttributes(new { style = "text-align: right;" });
                                     columns.Bound(e => e.EstatusSol).Title("Estatus solciitud").Width(30);
                                     columns.Bound(e => e.EstatusCon).Title("Estatus concepto").Width(30);
                                 })

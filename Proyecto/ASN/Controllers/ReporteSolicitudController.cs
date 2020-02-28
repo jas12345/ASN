@@ -47,16 +47,16 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetPeriodoNominaCMB()
+        public JsonResult GetPeriodosNominaCMB()
         {
             try
             {
-                var lstCMB = new List<CatPeriodoNominaCMB_Result>();
+                var lstCMB = new List<CatPeriodosNominaCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatPeriodoNominaCMB().ToList();
+                    lstCMB = ctx.CatPeriodosNominaCMB(4).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);

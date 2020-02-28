@@ -2530,16 +2530,19 @@
           <Property Type="String" Name="JefeInmediatoNombre" Nullable="true" MaxLength="752" />
           <Property Type="Int32" Name="EmpleadoCCMSID" Nullable="true" />
           <Property Type="String" Name="EmpleadoNombre" Nullable="true" MaxLength="752" />
-          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
-          <Property Type="String" Name="ConceptoDesc" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="MotivosSolicitudId" Nullable="false" />
-          <Property Type="String" Name="MotivoSolicitudDesc" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="false" />
-          <Property Type="String" Name="ConceptoMotivoDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
+          <Property Type="String" Name="ConceptoDesc" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="MotivosSolicitudId" Nullable="true" />
+          <Property Type="String" Name="MotivoSolicitudDesc" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ConceptoMotivoId" Nullable="true" />
+          <Property Type="String" Name="ConceptoMotivoDesc" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="ResponsableId" Nullable="true" />
           <Property Type="String" Name="NombreResponsable" Nullable="true" MaxLength="752" />
-          <Property Type="String" Name="Monto" Nullable="true" MaxLength="73" />
-          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="Monto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="EstatusSolicitud" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ParametroConcepto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="ReporteIndividualSel_Result">
           <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
@@ -2550,6 +2553,8 @@
           <Property Type="String" Name="NombreDelSolicitante" Nullable="true" MaxLength="752" />
           <Property Type="DateTime" Name="FechaDeModificacion" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="Anio" Nullable="true" />
+          <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatAdminSel_Result">
           <Property Type="Int32" Name="RelUserRoleId" Nullable="false" />
@@ -2608,13 +2613,13 @@
         <ComplexType Name="ReporteSolicitudXEstatusSel_Result">
           <Property Type="Int32" Name="Folio" Nullable="false" />
           <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Total" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Total" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Site" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="Fecha" Nullable="true" MaxLength="19" />
           <Property Type="Int32" Name="SolicitanteCCMSID" Nullable="true" />
           <Property Type="String" Name="EstatusSol" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="EstatusCon" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Periodo" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatSiteCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -4013,6 +4018,9 @@
                 <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
+                <ScalarProperty Name="ParametroConcepto" ColumnName="ParametroConcepto" />
+                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4027,6 +4035,8 @@
                 <ScalarProperty Name="NombreDelSolicitante" ColumnName="NombreDelSolicitante" />
                 <ScalarProperty Name="FechaDeModificacion" ColumnName="FechaDeModificacion" />
                 <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
+                <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4119,10 +4129,10 @@
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
                 <ScalarProperty Name="Site" ColumnName="Site" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="SolicitanteCCMSID" ColumnName="SolicitanteCCMSID" />
                 <ScalarProperty Name="EstatusSol" ColumnName="EstatusSol" />
                 <ScalarProperty Name="EstatusCon" ColumnName="EstatusCon" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

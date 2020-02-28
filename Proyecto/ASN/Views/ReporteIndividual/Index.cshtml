@@ -39,13 +39,15 @@
                                 .Columns(columns =>
                                 {
                                     columns.Bound(e => e.Anio).Title("Año").Width(25).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
-                                    columns.Bound(e => e.PeriodoNominaId).Width(25).Title("Periodo").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                                    //columns.Bound(e => e.PeriodoNominaId).Width(25).Title("Periodo").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                                    columns.Bound(e => e.NombrePeriodo).Width(35).Title("Período").Filterable(true);
                                     columns.Bound(e => e.FolioSolicitud).Width(25).Title("Folio").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
                                     columns.Bound(e => e.Fecha_Solicitud).Title("Fecha de solicitud").Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
                                     columns.Bound(e => e.FechaDeModificacion).Title("Fecha de modificación").Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
                                     columns.Bound(e => e.Solicitante_Ident).Width(35).Title("Solicitante CCMSID").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))); ;
                                     columns.Bound(e => e.NombreDelSolicitante).Width(100).Title("Nombre del solicitante");
-                                    columns.Bound(e => e.EstatusSolicitudId).Title("Estatus").Width(30);
+                                    //columns.Bound(e => e.EstatusSolicitudId).Title("Estatus").Width(30);
+                                    columns.Bound(e => e.EstatusSolicitud).Title("Estatus").Width(30);
                                 })
                                 .ToolBar(tools => tools.Excel().Text("Exportar Solcitudes"))
                                 .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")).AllPages(true).Filterable(true))
@@ -106,7 +108,7 @@
                         columns.Bound(o => o.FolioSolicitud).Title("FolioId").Width(15).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
                         //columns.Bound(o => o.FechaDeCreacion).Width(30).Format("{0:yyyy-MM-dd}").Filterable(true).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
                         //columns.Bound(o => o.FechaDeModificacion).Width(30).Format("{0:yyyy-MM-dd}").Filterable(true).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
-                        columns.Bound(o => o.country_ident).Width(30).Title("PaisId").Visible(false);
+                        columns.Bound(o => o.NombrePeriodo).Width(30).Title("Período");
                         columns.Bound(o => o.country_full_name).Width(20).Title("Pais");
                         columns.Bound(o => o.Location_Ident).Width(30).Title("SiteId").Visible(false);
                         columns.Bound(o => o.Location_Name).Width(30).Title("Site");
@@ -126,8 +128,10 @@
                         columns.Bound(o => o.ConceptoMotivoDesc).Width(30).Title("Concepto Motivo");
                         columns.Bound(o => o.ResponsableId).Width(30).Title("ResponsableId").Visible(false);
                         columns.Bound(o => o.NombreResponsable).Width(30).Title("Nombre Responsable");
-                        columns.Bound(o => o.Monto).Width(30).Title("Monto");
-                        columns.Bound(o => o.EstatusSolicitudId).Width(30).Title("Estatus");
+                        columns.Bound(o => o.Monto).Width(18).Title("Monto").HtmlAttributes(new { style = "text-align: right;" });
+                        columns.Bound(o => o.ParametroConcepto).Width(18).Title("Parámetro");
+                        columns.Bound(o => o.EstatusSolicitudId).Width(30).Title("Estatus Solicitud Id").Visible(false);
+                        columns.Bound(o => o.EstatusSolicitud).Width(30).Title("Estatus");
                     })
                     //.ClientDetailTemplateId("template2")
                     //.Events(e => e.DataBound("dataBound"))

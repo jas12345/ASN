@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
-    [Authorize(Roles = "Consultante,Administrador")]
+    [Authorize(Roles = "Consultante,Administrador,Solicitante,Autorizante,Responsable")]
     public class ReporteSolicitudXEstatusController : Controller
     {
         // GET: ReporteSolicitud
@@ -26,7 +26,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request,int periodoNomina, string estatusConcepto, string estatusSolicitud)//, string estatus, int? site, int? solicitanteCCMSID, int? city)
+        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request,int? periodoNomina, string estatusConcepto, string estatusSolicitud)//, string estatus, int? site, int? solicitanteCCMSID, int? city)
         {
             try
             {
@@ -138,5 +138,29 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
+
+        public JsonResult GetPeriodosNominaCMB()
+        {
+            try
+            {
+                var lstCMB = new List<CatPeriodosNominaCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatPeriodosNominaCMB(4).ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
     }
 }

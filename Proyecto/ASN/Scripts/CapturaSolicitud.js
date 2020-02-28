@@ -96,6 +96,9 @@ function agregarSolicitud() {
     // Se valida que se seleccionen autorizadores en todos los niveles del Concepto
     var autorizadores = $("div[name='nivel']");
     var igualesTotales = 0;
+    var autorizadoresDistintos = true;
+
+    var mapaAutorizadores = new Map();
 
     // Se valida que se seleccionen autorizadores en todos los niveles del Concepto
     //debugger;
@@ -104,6 +107,21 @@ function agregarSolicitud() {
             igualesTotales++;
         }
     });
+
+    $(autorizadores).each(function (nivel) {
+
+        if (mapaAutorizadores.get($("#AutorizadorNivel" + (nivel + 1)).val()) == undefined || ($("#AutorizadorNivel" + (nivel + 1)).val() == "")) {
+            if ($("#AutorizadorNivel" + (nivel + 1)).val() != "") {
+                mapaAutorizadores.set($("#AutorizadorNivel" + (nivel + 1)).val(), $("#AutorizadorNivel" + (nivel + 1)).val());
+            }
+            autorizadoresDistintos = autorizadoresDistintos && true
+        }
+        else {
+            autorizadoresDistintos = autorizadoresDistintos && false
+        }
+        
+    });
+
 
     // Se validan valores de la solicitud
     if ($("#CCMSIDSolicitado").val().length <= 0 || $("#Conceptos").val() == '' || $("#Parametro").val().length <= 0 || $("#Motivo").val() == '') {
@@ -114,6 +132,10 @@ function agregarSolicitud() {
     else if (igualesTotales !== ConNivelesAutorizacion) {
         var notificationDatos = $("#popupNotification").data("kendoNotification");
         notificationDatos.show("Seleccione Autorizador en cada uno de los niveles del Concepto.", "warning");
+    }
+    else if (!autorizadoresDistintos) {
+        var notificationDatos = $("#popupNotification").data("kendoNotification");
+        notificationDatos.show("Aparece el mismo autorizador en mas de un nivel.", "warning");
     }
 
     else {
@@ -134,8 +156,14 @@ function agregarSolicitud() {
             $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Agregar');
             //}
 
+            //$("EnviarSolicitud").
+
             $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
+
+            calculaEstatusSolicitud();
+
             actualizaGrid();
+            limpiaConcepto();
             //debugger;
         });
 
@@ -232,6 +260,11 @@ function calculaEstatusSolicitud() {
                 grid.hideColumn(2);
                 grid.hideColumn(3);
                 
+                //Se carga el combo de Períodos en base a períodos actuales y futuros
+                $.post(urlGetPeriodosNomina + "/?active=" + 1, function (data) {
+                    $("#PeriodoNomina_Id").data("kendoDropDownList").setDataSource(data);
+                    //$("#PeriodoNomina_Id").data("kendoDropDownList").data()
+                });                
                 //$("#EnviarSolicitud").enable(true);
             }
             else {
@@ -239,6 +272,12 @@ function calculaEstatusSolicitud() {
                 $("#Conceptos").data("kendoDropDownList").enable(false);
                 //$("#EnviarSolicitud").attr("disabled", "disabled");
                 //$("#EnviarSolicitud").enable(false);
+
+                //Se carga el combo de Períodos en base a todos los periodos de nómina 
+                $.post(urlGetPeriodosNomina + "/?active=" + 0, function (data2) {
+                    $("#PeriodoNomina_Id").data("kendoDropDownList").setDataSource(data2);
+                    //$("#PeriodoNomina_Id").data("kendoDropDownList").data()
+                });                
            }
 
             if (ClaveEstatusSolicitud == 'C' || ClaveEstatusSolicitud == 'A') {
@@ -528,6 +567,33 @@ function actualizaGrid() {
     $("#gridSolicitud").data("kendoGrid").refresh();
     //$("#Estatus").value = calculaEstatusSolicitud();
     //debugger;
+}
+
+function limpiaConcepto() {
+    $.when($("#Parametro").data('kendoNumericTextBox').value("")       
+    ).done(function () {
+        $('#Parametro').data('kendoNumericTextBox').trigger('change')
+    });
+
+
+    //$.when($("#CCMSIDSolicitado").data('kendoNumericTextBox').value(""),
+    //    $('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change')
+    //).done(function () {
+    //    console.log("CCMSID Change");
+    //    $.when(
+    //        $("#Conceptos").data("kendoDropDownList").dataSource.read(),
+    //        $("#Conceptos").data("kendoDropDownList").refresh(),
+    //        $("#Conceptos").data("kendoDropDownList").value(-1)
+    //    ).done(function () {
+    //        console.log("CCMSIdIncidente Change");
+    //        $.when(
+    //            $("#Parametro").data("kendoNumericTextBox").value(""),
+    //            $("#Parametro").data("kendoNumericTextBox").trigger('change')
+    //        ).done(function () {
+    //            console.log("Conceptos Fill");
+    //        });
+    //    });
+    //});
 }
 
 function editarEmpleadoSolicitud(e) {

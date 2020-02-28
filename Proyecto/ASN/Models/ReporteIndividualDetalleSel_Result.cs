@@ -26,15 +26,18 @@ namespace ASN.Models
         public string JefeInmediatoNombre { get; set; }
         public Nullable<int> EmpleadoCCMSID { get; set; }
         public string EmpleadoNombre { get; set; }
-        public int ConceptoId { get; set; }
+        public Nullable<int> ConceptoId { get; set; }
         public string ConceptoDesc { get; set; }
-        public int MotivosSolicitudId { get; set; }
+        public Nullable<int> MotivosSolicitudId { get; set; }
         public string MotivoSolicitudDesc { get; set; }
-        public int ConceptoMotivoId { get; set; }
+        public Nullable<int> ConceptoMotivoId { get; set; }
         public string ConceptoMotivoDesc { get; set; }
         public Nullable<int> ResponsableId { get; set; }
         public string NombreResponsable { get; set; }
-        public string Monto { get; set; }
+        public Nullable<decimal> Monto { get; set; }
         public string EstatusSolicitudId { get; set; }
+        public string EstatusSolicitud { get; set; }
+        public string ParametroConcepto { get; set; }
+        public string NombrePeriodo { get; set; }
     }
 }

@@ -61,7 +61,7 @@
                     )
                 </div>
                  <div class="col-lg-4">
-                    @Html.Label("Periodo de nómina actual: ", new { style = "font-size: 15px" })
+                    @Html.Label("Periodo de nómina: ", new { style = "font-size: 15px" })
                     @(Html.Kendo().DropDownList()
                         .DataSource(source => source
                             .Custom()
@@ -71,7 +71,7 @@
                             .Transport( tr => tr
                                 .Read(read =>
                                     {
-                                        read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaTodos");
+                                        read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaActualFuturos");
                                     }
                                 )
                             )
@@ -772,6 +772,7 @@
         var dataItem_Ident = "";
         var dataItem_Nombre = "";
         var dataItem_ConceptoId = "";
+        var dataItem_PeriodoNominaId = "";
         //dataItem_ConceptoDesc = dataItem.
         var dataItem_Monto = "";
         var dataItem_MotivosSolicitudId = "";
@@ -902,6 +903,9 @@
 
         // Función para calcular...
         var urlGetEmpleadosPerfilAutorizadores = '@Url.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud")';
+
+        // Función para llenar Combo de Períodos...
+        var urlGetPeriodosNomina = '@Url.Action("GetPeriodoNominaCMB", "CapturaSolicitud")';
 
         // URS Niveles de Autorización por Empleado y Concepto
         var urlNivelesAutorizacionxEmpleadoxConcepto = '@Url.Action("GetNivelesAutorizacionxEmpleadoxConcepto", "CapturaSolicitud")';

@@ -33,6 +33,10 @@ $(document).ready(function () {
     $("#AutorizarSolicitudALL").hide();
     $("#RechazarSolicitudALL").hide();
 
+    var grid = $("#gridAutorizacion").data("kendoGrid");
+
+    //grid.thead.on("click", ".k-checkbox", onChange);
+
     //$("#AutorizarSolicitud").hide();
     //$("#RechazarSolicitud").hide();
 });
@@ -758,6 +762,19 @@ function onChange(e) {
 
     //$(item).context.outerText
 
+    ////////var gridAll = $("#gridAutorizacion").data("kendoGrid");
+
+    ////////oldPageSize = gridAll.dataSource.pageSize();
+    ////////gridAll.dataSource.pageSize(gridAll.dataSource.data().length);
+
+    ////////if (gridAll.dataSource.data().length === gridAll.select().length) {
+    ////////    gridAll.clearSelection();
+    ////////} else {
+    ////////    gridAll.select("tr");
+    ////////};
+
+    ////////gridAll.dataSource.pageSize(oldPageSize);
+
 
     var grid = $("#gridAutorizacion").data("kendoGrid");
     var rowss = $("#gridAutorizacion").data("kendoGrid").tbody.children();
@@ -768,7 +785,7 @@ function onChange(e) {
 
         // Disable the checkbox if the location isn't set
         if (dataItem.get("Autorizador_Ident") != usuarioCCMSID || dataItem.get("EstatusId") == "R" || dataItem.get("EstatusId") == "C") {
-            debugger;
+            //debugger;
             //row.css('background-color', '#FFFFCF');
             // What goes here?
             //grid.table.find("tr").find("td:first input").attr("checked", true);
@@ -783,7 +800,7 @@ function onChange(e) {
                 row.context.cells[0].firstElementChild.parentElement.parentElement.classList.remove("k-state-selected");
             } else {
                 checkboxActivos++;
-                debugger;
+                //debugger;
             }
         }
     }
@@ -802,12 +819,12 @@ function onChange(e) {
         //    console.log(dataItem.Ident);
         //    console.log(dataItem.ConceptoId);
         //});
-        debugger;
+        //debugger;
         $("#AutorizarSolicitudALL").show();
         $("#RechazarSolicitudALL").show();
     }
     else {
-        debugger;
+        //debugger;
         this.element.find("input")[0].checked = false;
         $("#AutorizarSolicitudALL").hide();
         $("#RechazarSolicitudALL").hide();
@@ -819,7 +836,7 @@ function onChange(e) {
 }
 
 function ocultaCheckbox(e) {
-    debugger;
+    //debugger;
     if (estatusId == 'PA' || estatusId == 'R') {
         var grid = e.sender;
         var rows = e.sender.tbody.children();
@@ -862,7 +879,7 @@ function ocultaCheckbox(e) {
         }
     }
     else {
-        debugger;
+        //debugger;
         //FolioSolicitud
         var grid = e.sender;
         grid.hideColumn("FolioSolicitud");

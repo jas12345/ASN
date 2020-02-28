@@ -27,6 +27,10 @@ $(document).ready(function () {
 });
 
 function infoSolicitud() {
+    if ($("#PeriodoNomina").val() == '') {
+        //$("#PeriodoNomina").val() = 0
+        $("#PeriodoNomina").data('kendoDropDownList').value(0)
+    }
     return {
         //fechaIni: $("#FechaInicio").val(),//"2019-09-28",
         //fechaFin: $("#FechaFin").val(),//"2019-10-30"
