@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #grid {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                @Html.Label("Catálogo de conceptos", new { style = "font-size: 18px" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="parent">
+                    @(Html.Kendo().Grid<ASN.Models.CatConceptosSel_Result>()
+                            .Name("grid")
+                            .Columns(columns =>
+                            {
+                                columns.Command(command => { command.Edit().Text("Editar").UpdateText("Guardar").CancelText("Cancelar"); }).Width(25);
+                                columns.Bound(c => c.ConceptoId).Title("Concepto").Visible(false).Filterable(false);
+                                columns.Bound(c => c.Descripcion).Width(150).Title("Descripción");
+                                columns.ForeignKey(c => c.Paises, (System.Collections.IEnumerable)ViewData["Paises"], "Id", "Value").Width(70).Title("Pais").Visible(false);
+                                columns.ForeignKey(c => c.ClienteId, (System.Collections.IEnumerable)ViewData["Clientes"], "Id", "Value").Width(70).Title("Cliente").Visible(true).Filterable(true);
+                                columns.ForeignKey(c => c.PeopleSoftId, (System.Collections.IEnumerable)ViewData["PeopleSoft"], "Ident", "Valor").Width(90).Title("PeopleSoft").Visible(true).Filterable(true);
+                                columns.ForeignKey(c => c.TipoConceptoId, (System.Collections.IEnumerable)ViewData["TiposConceptos"], "Ident", "Valor").Width(70).Title("Tipo concepto");
+                                columns.Bound(c => c.NumeroNivelAutorizante).Width(65).Title("Número de Nivel de Autorizante").Filterable(false);
+
+                                columns.Bound(c => c.Vigencia).Visible(false);
+                                columns.Bound(c => c.PagosFijos).Visible(false);
+                                columns.Bound(c => c.Tope).Visible(false);
+                                columns.Bound(c => c.PeriodicidadNominaId).Visible(false);
+                                columns.Bound(c => c.FechaInicio).Visible(false);
+                                columns.Bound(c => c.FechaFin).Visible(false);
+                                columns.Bound(c => c.ParametroConceptoId).Visible(false);
+
+                                //columns.Bound(c => c.AutorizacionAutomatica).Width(65).Title("Autorización Automatica").Filterable(false).ClientTemplate("#:AutorizacionAutomatica  ? 'Si' : 'No' #");
+                                //columns.Bound(c => c.AutorizacionObligatoria).Width(60).Title("Autorización Obligatoria").Filterable(false).ClientTemplate("#:AutorizacionObligatoria  ? 'Si' : 'No' #");
+                                columns.Bound(c => c.Active).Width(20).Title("Activo").Filterable(false).ClientTemplate("#:Active  ? 'Si' : 'No' #");
+                            })
+                            .ToolBar(toolBar =>
+                            {
+                                toolBar.Create().Text("Nuevo");
+                                toolBar.Excel().Text("Exportar a excel");
+                            })
+                            .Excel(ex => ex.AllPages(true))
+                            //.HtmlAttributes(new { style = "height: 475px;" })
+                            .Scrollable(sorteable => sorteable.Virtual(false))
+                            .Sortable()
+                            .Resizable(c => c.Columns(true))
+                            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConceptosPopUp").Window(x => x.Width(900).HtmlAttributes(new { style = "width: 900px" })))
+                            .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
+                            .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                            .DataSource(dataSource => dataSource
+                                .Ajax()
+                                .Batch(true)
+                                .ServerOperation(false)
+                                .Model(model =>
+                                {
+                                    model.Id(c => c.ConceptoId);
+                                    model.Field(c => c.ConceptoId).Editable(false);
+                                    model.Field(c => c.Descripcion).Editable(true);
+                                    model.Field(c => c.PaisId).Editable(true);
+                                    model.Field(c => c.ClienteId).Editable(true);
+                                    model.Field(c => c.PeopleSoftId).Editable(true);
+
+                                    model.Field(c => c.TipoConceptoId).Editable(true);
+                                    model.Field(c => c.Vigencia).Editable(true);
+                                    model.Field(c => c.PagosFijos).Editable(true);
+                                    model.Field(c => c.Tope).Editable(true).DefaultValue(0.0m);
+                                    model.Field(c => c.PeriodicidadNominaId).Editable(true);
+                                    model.Field(c => c.FechaInicio).Editable(true);
+                                    model.Field(c => c.FechaFin).Editable(true);
+                                    model.Field(c => c.ParametroConceptoId).Editable(true);
+
+                                    model.Field(c => c.NumeroNivelAutorizante).Editable(true).DefaultValue(0);
+                                    model.Field(c => c.AutorizacionAutomatica).Editable(false).DefaultValue(false);
+                                    model.Field(c => c.AutorizacionObligatoria).Editable(false).DefaultValue(false);
+                                    model.Field(c => c.Active).Editable(true).DefaultValue(true);
+
+                                })
+                                .Read(read => read.Action("GetConceptos", "Conceptos"))
+                                .Update(update => update.Action("UpdateConcepto", "Conceptos").Type(HttpVerbs.Post).Data("fechasValor"))
+                                .Create(create => create.Action("CreateConcepto", "Conceptos").Type(HttpVerbs.Post).Data("fechasValor"))
+                                .PageSize(10)
+                            .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
+                            )
+                            .Navigatable()
+                            .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(true)
+                                .ButtonCount(5)
+                                .Numeric(true)
+                                .PreviousNext(true)
+                            .Messages(messages =>
+                            {
+                                messages.ItemsPerPage("Registros por página");
+                                messages.Empty("Sin información para mostrar");
+                                messages.First("Primera");
+                                messages.Page("Página");
+                                messages.Last("Última");
+                                messages.Previous("Anterior");
+                                messages.Next("Siguiente");
+                                messages.Refresh("Actualizar");
+                                messages.Of("De");
+                                messages.MorePages("Mas páginas");
+                                messages.Display("{0} a {1} de {2}");
+                            })
+                            )
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <p>You are not logged in</p>
+}
+<script>
+    urlSugeridos = '@Url.Action("GetSugerido","Conceptos")';
+    urlSalvado = '@Url.Action("SaveAutorizante", "Conceptos")';
+</script>
+@Scripts.Render("~/bundles/Conceptos")

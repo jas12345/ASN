@@ -1,0 +1,568 @@
+﻿@model ASN.Models.CatResponsabilidadesSel_Result
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .primerLabel {
+        font-weight: normal;
+    }
+
+    label {
+        font-size: small;
+    }
+
+    .k-grid-header th.k-header {
+        text-align: center;
+    }
+
+    #gridResponsabilidad {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+</style>
+
+
+
+@{
+    int folioId = 0;
+
+    if (Model != null)
+    {
+        folioId = Model.FolioSolicitud;
+    }
+
+    @Html.Hidden("folioId", folioId)
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+
+        <div class="col-lg-12 col-md-12">
+            <div class="col-lg-2">
+                @Html.Label("Responsable de Solicitudes", new { style = "font-size: 15px" })
+                @*<div class="container-fluid">
+                    <a href="@Url.Action("Create","MisAutorizaciones")" data-role="button" class="k-button k-button-icontext" style="float:right; margin-right:10px;" role="button" aria-disabled="false" tabindex="0">
+                    <span class="k-icon k-i-plus"></span> Autorizar
+                    </a>*@
+            </div>
+            <div class="col-lg-3">
+                @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
+                @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
+                    .Enable(false)
+                    .Spinners(false)
+                    .Decimals(0)
+                    .Format("0")
+                    .Min(0)
+                    .Events(e => e.Change("onChangeFolioSolicitud"))
+                    //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
+                    .Value(Model.FolioSolicitud)
+                    .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
+                )
+            </div>
+            <div class="col-lg-3">
+                @Html.Label("Periodo de nómina actual: ", new { style = "font-size: 15px" })
+                @(Html.Kendo().DropDownList().DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetPeriodoNominaCMB", "ResponsableAutoriza");
+                        }
+                        );
+                    //.ServerFiltering(true);
+                    }
+                    )
+                    .Filter("contains")
+                    .OptionLabel("- Seleccione Periodo de Nomina - ")
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .Name("PeriodoNomina_Id")
+                    .SelectedIndex(1)
+                    .Enable(false)
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                )
+            </div>
+            <div class="col-lg-3">
+                @Html.Label("Estatus: ", new { style = "font-size: 15px" })
+                @Html.TextBox("Estatus", "", new { disabled = "disabled", style = "width:13em;" })
+            </div>
+            <div class="col-lg-1">
+                @(Html.Kendo().Button().Name("CerrarSolicitud").Content("Cerrar Solicitud").Icon("close")
+                    .Events(x => x.Click("cerrarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+                )
+            </div>
+            <p></p>
+        </div>
+        <p></p>
+
+        <table class="table" style="margin-bottom: 5px;">
+            <tbody>
+                <tr>
+                    <td>
+                        <label class="primerLabel" id="lblCCMSID">CCMSID:</label><br />
+                        <label class="primerLabel" id="lblNombre">Nombre:</label><br />
+                        <label class="primerLabel" id="lblPuesto">Puesto:</label><br />
+                        <label class="primerLabel" id="lblContrato">Contrato:</label>
+                    </td>
+                    <td>
+                        <label id="CCMSIDX"></label><br />
+                        <label id="NombreX"></label><br />
+                        <label id="PuestoX"></label><br />
+                        <label id="ContratoX"></label>
+                    </td>
+                    <td>
+                        <label class="primerLabel" id="lblSite">Site:</label><br />
+                        <label class="primerLabel" id="lblConcepto">Concepto:</label><br />
+                        <label class="primerLabel" id="lblParametro">Parámetro:</label><br />
+                        <label class="primerLabel" id="lblMotivo">Motivo:</label>
+                    </td>
+                    <td>
+                        <label id="SiteX"></label><br />
+                        <label id="ConceptoX"></label><br />
+                        <label id="ParametroX"></label><br />
+                        <label id="MotivoX"></label>
+                    </td>
+                    <td>
+                        <label class="primerLabel" id="lblConceptoMotivo">Concepto Motivo:</label><br />
+                        <label class="primerLabel" id="lblResponsableCCMSID">Responsable de incidente:</label><br />
+                        <label class="primerLabel" id="lblNombreRespo">Nombre responsable:</label><br />
+                        <label class="primerLabel" id="lblPeriodoOP">Período original de pago:</label>
+                    </td>
+                    <td>
+                        <label id="ConceptoMotivoX"></label><br />
+                        <label id="ResponsableCCMSIDX"></label><br />
+                        <label id="NombreRespoX"></label><br />
+                        <label id="PeriodoOPX"></label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container-fluid">
+        <div id="Captura">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table-responsive table" cellpadding="1" style="margin-bottom: 5px;">
+                        <tr>
+                            <th scope="col">
+                                CCMSID
+                            </th>
+                            <th scope="col">
+                                Concepto
+                            </th>
+                            <th scope="col">
+                                Parámetro/Monto
+                            </th>
+                            <th scope="col">
+                                Motivo
+                            </th>
+                            <th scope="col">
+                                Concepto Motivo
+                            </th>
+                            <th scope="col">
+                                Responsable de Incidente (CCMSID)
+                            </th>
+                            <th scope="col">
+                                Período Original de Pago
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                @(Html.Kendo().NumericTextBox()
+                                .Name("CCMSIDSolicitado")
+                                .Spinners(false)
+                                .Decimals(0)
+                                .Format("0.")
+                                .Min(0)
+                                .Events(e => e.Change("onChangeCCMSId"))
+                                .Enable(false)
+                                //.Step(5)
+                                //.Value(0)
+                                .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().DropDownList().DataSource(source => {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "ResponsableAutoriza").Data("getIdent"); ;
+                                }
+                                );
+                                //.ServerFiltering(true);
+                                }
+                                )
+                                .Filter("contains")
+                                .AutoBind(false)
+                                .OptionLabel("- Conceptos - ")
+                                .DataValueField("Ident")
+                                .DataTextField("Valor")
+                                .Name("Conceptos")
+                                .Enable(false)
+                                .Events(e => e.Change("onChangeConceptos"))
+                                //.SelectedIndex(1)
+                                .Enable(true)
+                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().NumericTextBox()
+                                    .Name("Parametro")
+                                    .Enable(false)
+                                    .Events(e => e.Change("onChangeParametro"))
+                                    .Spinners(false)
+                                    .Decimals(2)
+                                    .Format("0.00")
+                                    .Min(0)
+                                    //.Step(5)
+                                    //.Value(0)
+                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().DropDownList().DataSource(source =>
+                                    {
+                                    source.Read(read =>
+                                    {
+                                    read.Action("GetMotivosCMB", "ResponsableAutoriza");
+                                    }
+                                    );
+                                    //.ServerFiltering(true);
+                                    }
+                                                                            )
+                                    .Filter("contains")
+                                    .OptionLabel("- Motivo - ")
+                                    .DataValueField("Id")
+                                    .DataTextField("Valor")
+                                    .Name("Motivo")
+                                    .Enable(false)
+                                    .Events(e => e.Change("onChangeMotivo"))
+                                    //.SelectedIndex(1)
+                                    .Enable(true)
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().DropDownList().DataSource(source =>
+                                    {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetConceptosMotivosCMB", "ResponsableAutoriza");
+                                    });
+                                                //.ServerFiltering(true);
+                                            })
+                                    .Filter("contains")
+                                    .OptionLabel("- Concepto Motivo - ")
+                                    .DataValueField("Ident")
+                                    .DataTextField("Valor")
+                                    .Name("ConceptoMotivo")
+                                    .Enable(false)
+                                    .Events(e => e.Change("onChangeConceptoMotivo"))
+                                    //.SelectedIndex(1)
+                                    .Enable(true)
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().NumericTextBox()
+                                    .Name("CCMSIDIncidente")
+                                                                    .Enable(false)
+
+                                    .Spinners(false)
+                                    .Decimals(0)
+                                    .Format("0.")
+                                    .Min(0)
+                                    .Events(e => e.Change("onChangeCCMSIdIncidente"))
+                                    //.Step(5)
+                                    //.Value(0)
+                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().DropDownList().DataSource(source =>
+                                    {
+                                    source.Read(read =>
+                                    {
+                                        //read.Action("GetPeriodoNominaCerradosCMB", "ResponsableAutoriza");
+                                        read.Action("GetPeriodoNominaCMB", "ResponsableAutoriza").Data("parametroPeriodosNominaPasados");
+                                    });
+                                                //.ServerFiltering(true);
+                                            })
+                                    .Filter("contains")
+                                    .OptionLabel("- Período Incidente - ")
+                                    .DataValueField("Ident")
+                                    .DataTextField("Valor")
+                                    .Name("PeriodoIncidente")
+                                    .Enable(false)
+                                    .Events(e => e.Change("onChangePeriodoIncidente"))
+                                    //.SelectedIndex(1)
+                                    .Enable(true)
+                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                )
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-12">
+                    <table class="table-responsive table" cellpadding="1" style="margin-bottom: 5px;">
+                        <tr>
+                            <td style="width : 6em">
+                                @*@(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar")
+                                .Events(x => x.Click("autorizarSolicitud"))
+                                )*@
+                            </td>
+                            <td style="width : 6em">
+                                <div name="nivel" id="1">
+                                    @*@(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar")
+                                    .Events(x => x.Click("rechazarSolicitud"))
+                                    )*@
+                                </div>
+                            </td>
+                            <td style="width : 6em">
+                                <div name="nivel" id="2">
+                                    @*@(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar")
+                                    .Events(x => x.Click("cancelarSolicitud"))
+                                    )*@
+                                </div>
+                            </td>
+                            <td style="width : 6em">
+                                @*<div name="nivel" id="3">
+                                </div>*@
+                            </td>
+                            <td>
+                                @*<div name="nivel" id="4">
+                                </div>*@
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="parent">
+                     @(Html.Kendo().Grid<ASN.Models.CatResponsabilidadesSel_Result>()
+                        .Name("gridResponsabilidad")
+                        .Columns(column =>
+                        {
+                            column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(25);
+                            //column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(25);
+                            column.Bound(c => c.Ident).Width(40).Title("# Empleado").Filterable(false).Visible(true);
+                            column.Bound(c => c.Nombre).Title("Nombre").Filterable(false).Visible(true).Width(70);
+                            column.Bound(c => c.ConceptoDesc).Title("Concepto").Filterable(false).Width(70);
+                            column.Bound(c => c.Monto).Title("Monto").Filterable(false).Width(70);
+                            column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
+                            column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
+                        })
+                        //.HtmlAttributes(new { style = "height: 475px;" })
+                        .Scrollable()
+                        .Sortable()
+                        .PersistSelection()
+                        .AutoBind(false)
+                        //.Events(eve => eve.SaveChanges("onSave"))//.Change("onChange")
+                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Model(model =>
+                            {
+                                model.Id(c => c.FolioSolicitud);
+                                model.Field(c => c.Ident).Editable(true);
+                                model.Field(c => c.Nombre).Editable(true);
+                                model.Field(c => c.ConceptoId).Editable(true);
+                                model.Field(c => c.ConceptoDesc).Editable(true);
+                                model.Field(c => c.Monto).Editable(false);
+                                model.Field(c => c.MotivosSolicitudId).Editable(true);
+                                model.Field(c => c.MotivosSolicitudDesc).Editable(true);
+                                model.Field(c => c.ConceptoMotivoId).Editable(true);
+                                model.Field(c => c.ConceptoMotivoDesc).Editable(true);
+                                model.Field(c => c.ResponsableId).Editable(true);
+                                model.Field(c => c.PeriodoOriginalId).Editable(true);
+                                model.Field(c => c.EstatusSolicitud).Editable(false);
+                                //model.Field(c => c.NivelAutorizacion).Editable(false);
+                                model.Field(c => c.Solicitante_Ident).Editable(false);
+                            })
+                            .Read(read => read.Action("GetResponsabilidades", "ResponsableAutoriza").Data("getFolio"))
+                        //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
+                        //.Create(create => create.Action("CrearSolicitudPorEmpleado", "ResponsableAutoriza").Type(HttpVerbs.Post))
+                        //.Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                        )
+                        .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                        .Navigatable()
+                        .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(true)
+                        .ButtonCount(5)
+                        .Numeric(true)
+                        .PreviousNext(true)
+                        .Messages(messages =>
+                        {
+                            messages.ItemsPerPage("Registros por página");
+                            messages.Empty("Sin información para mostrar");
+                            messages.First("Primera");
+                            messages.Page("Página");
+                            messages.Last("Última");
+                            messages.Previous("Anterior");
+                            messages.Next("Siguiente");
+                            messages.Refresh("Actualizar");
+                            messages.Of("De");
+                            messages.MorePages("Mas páginas");
+                            messages.Display("{0} a {1} de {2}");
+                        })
+                        )
+                )
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+                @*var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';*@
+                var urlSolicitudEmpleados = '@Url.Action("GuardaEmpleados", "Solicitudes")';
+                var urlDefault = '@Url.Action("Index", "Solicitudes")';
+                var urlGridEmpleadosAutorizadores = '@Url.Action("GridEmpleadosAutorizantes", "EmpleadosSolicitudes")';
+    </script>
+
+    <script>
+                //var listaEmpleados = "";
+                //var selectedEmpleados = new Array();
+                var grid = $('#grid');
+                //var urlDeletePerfilEmpleadosAccesos = '@Url.Action("DeleteEmpleados", "ResponsableAutoriza")';
+
+                //Datos a extraer Empleado - Puesto - Contrato - Site
+                var EmpCCMSId = "";
+                var EmpNombre = "";
+                var EmpPuestoId = "";
+                var EmpPuesto = "";
+                var EmpContratoId = "";
+                var EmpContrato = "";
+                var EmpSiteId = "";
+                var EmpSite = "";
+
+                // Sección Empleado - Puesto
+                var EmpPosition_Code_Ident = "";
+                var EmpPosition_Code_Title = "";
+                var EmpContract_Type_Ident = "";
+                var EmpContract_Type = "";
+                var EmpLocation_Ident = "";
+                var EmpLocation_Name = "";
+                var EmpActive = "";
+                var EmpCCMSIdManager = "";
+                var EmpNombreManager = "";
+
+                // Sección Conceptos - Parámetro - Conceptos - Valor
+                var ConConceptoIdent = ""
+                var ConConceptoNombre = ""
+                var ConParametroId = ""
+                var ConParametroNombre = ""
+                var ConParametroConceptoMonto = ""
+        var ConNivelesAutorizacion = ""
+        var ConEmpleadoident = ""
+
+                // Sección Responsable de Incidente
+                var CCMSIdResponsable = "";
+                var NombreResponsableIncidente = "";
+
+                // Sección alta de Empleados - Solicitudes
+                var FolioSolicitud = -1
+                var Fecha_Solicitud = ""
+                var Solicitante_Ident = ""
+
+                //Sección alta de
+                var conceptoMotivoId = ""
+                var responsableId = ""
+                var periododOriginalId = ""
+                var ConMotivoNombre = "";
+                var ConMotivoIdent = "";
+
+                //Datos a extraer Perfil - Tipo de Acceso
+                var nivel = "";
+                var Active = "";
+                var Error = "";
+
+                // Autorizadores
+                var autorizadorNivel1 = "";
+                var autorizadorNivel2 = "";
+                var autorizadorNivel3 = "";
+                var autorizadorNivel4 = "";
+                var autorizadorNivel5 = "";
+                var autorizadorNivel6 = "";
+                var autorizadorNivel7 = "";
+                var autorizadorNivel8 = "";
+                var autorizadorNivel9 = "";
+
+                // URL para consultar datos de Empleado
+                var urlEmpleadoPuesto = '@Url.Action("GetEmpleadoPuesto", "ResponsableAutoriza")';
+
+                //
+                var urlEmpleadoxSolicitante = '@Url.Action("GetEmpleadoxSolicitante", "ResponsableAutoriza")';
+
+                //
+                var urlConceptoParametroConcepto = '@Url.Action("GetConceptoParametroConcepto", "ResponsableAutoriza")';
+
+                //
+                var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
+
+                // Liga para crear Solicitud
+                var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "ResponsableAutoriza")';
+
+                // Liga para enviar solicitud a Autorizadores
+                var urlEnviaSolicitud = '@Url.Action("EnviaSolicitud", "ResponsableAutoriza")';
+
+                //
+                var urlUpdateEmpleadoSolicitud = '@Url.Action("UpdateEmpleadoSolicitud", "ResponsableAutoriza")';
+
+                //
+                var urlCrearEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "ResponsableAutoriza")';
+
+                //
+                var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "ResponsableAutoriza")';
+
+        //
+        var urlAutorizaConcepto = '@Url.Action("ProcesaConcepto", "ResponsableAutoriza")';
+
+        //
+        var urlRechazaConcepto = '@Url.Action("ProcesaConcepto", "ResponsableAutoriza")';
+
+        //
+        var urlCancelaConcepto = '@Url.Action("ProcesaConcepto", "ResponsableAutoriza")';
+
+        //
+        var urlCancelaSolicitud = '@Url.Action("CancelaSolicitud", "ResponsableAutoriza")';
+
+        //
+        var urlCierraSolicitud = '@Url.Action("CierraSolicitud", "ResponsableAutoriza")';
+
+        // Función para calcular Estatus de Solicitud
+        var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "ResponsableAutoriza")';
+
+                //debugger;
+                //var urlSolicitud = grid.selectedKeyNames().join(", ");
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+        $(function () {
+            window.location.href = "@Url.Action("Index","Inicio", new { area = "" }, null)";
+        });
+    </script>
+}
+
+<script>
+        var InfoCCMSID = '@Url.Action("GetUserInfo","ResponsableAutoriza")';
+</script>
+
+@Scripts.Render("~/bundles/ResponsableAutoriza")

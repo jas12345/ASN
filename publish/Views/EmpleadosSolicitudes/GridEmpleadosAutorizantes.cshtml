@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "GridEmpleadosAutorizantes";
+    var Solicitud = ViewBag.SolicitudBaseId;
+    var Perfil = ViewBag.perfilId;
+}
+
+<div class="container-fluid">
+    
+    <div class="k-form-inline" style="padding:5px; display:none;">
+        <div class="k-form-field">
+            <div class="editor-label">
+                <label for="perfilId">Perfil de usuario</label>
+            </div>
+            <input type="hidden" id="Solicitud_Id" value="@Solicitud" />
+            <input type="hidden" id="Perfil_Id" value="@Perfil" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            @(Html.Kendo().Grid<ASN.Models.CatSolicitudEmpleadosAutorizantesSel_Result>()
+                            .Name("GridEmpleadosAutorizantes")
+                            .Columns(column =>
+                            {
+                                column.Command(command => { command.Edit().Text("Edita").HtmlAttributes(new { @class = "k-edit" }); }).Width(75);
+                                column.Bound(c => c.FolioSolicitud).Title("Solicitud").Visible(false).Filterable(true);
+                                column.Bound(c => c.Empleado_Ident).Title("CCMS ID").Width(80).Filterable(true);
+                                column.Bound(c => c.Autorizador_Ident).Visible(false);
+                                column.Bound(c => c.NombreEmpleado).Title("Nombre").Visible(true).Filterable(true).Width(130);
+                                column.Bound(c => c.NivelAutorizacion).Title("Nivel").Width(100).Visible(true);
+                                column.Bound(c => c.NombreAutorizador).Title("Autorizante").Width(150).Visible(true).Filterable(true);
+                                column.Bound(c => c.EsObligatorio).Title("Es obligatorio").Width(120).Visible(true).Filterable(false);
+                                column.Bound(c => c.Obligatorio).Width(100).Visible(false);
+                                column.Bound(c => c.Perfil).Visible(false);
+                                column.Bound(c => c.MontoAutorizacionAutomatica).Title("Monto autorización automatica").Width(60).Visible(true);
+                                column.Bound(c => c.Estatus).Width(50).Visible(false);
+                            })
+                            .HtmlAttributes(new { style = "height: 480px;" })
+                            .Scrollable(sorteable => sorteable.Virtual(false))
+                            .Sortable()
+                            .PersistSelection()
+                            .Resizable(c => c.Columns(true))
+                            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("AutorizadorSolicitudesPopUp").Window(x => x.Width(630).HtmlAttributes(new { style = "width: 630px" })))//EmpleadoMotivoConceptoPopUp
+                            .Events(eve => eve.SaveChanges("onSave").Edit("edit"))
+                            .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                            .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .Model(model =>
+                                    {
+                                        model.Id(c => c.FolioSolicitud);
+                                        model.Field(c => c.Empleado_Ident).Editable(false);
+                                        model.Field(c => c.Autorizador_Ident).Editable(true);
+                                        model.Field(c => c.NivelAutorizacion).Editable(true);
+                                        model.Field(c => c.Obligatorio).Editable(true);
+                                        model.Field(c => c.MontoAutorizacionAutomatica).Editable(true);
+                                        model.Field(c => c.Estatus).Editable(true);
+                                        model.Field(c => c.Perfil).Editable(false);
+                                        model.Field(c => c.Active).Editable(true);
+                                    })
+                                    .Read(read => read.Action("GridEmpleadosAutorizantesSel", "EmpleadosSolicitudes").Data("GetSolicitudAutoriza"))
+                                    .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                                    .Update(update => update.Action("UpdateAutorizantesEmpleado", "EmpleadosSolicitudes").Data("GetAutorizador"))//.Data("GetParametros")
+                                    )
+                                           .Navigatable()
+                                           .Pageable(pageable => pageable
+                                           .Refresh(true)
+                                           .PageSizes(true)
+                                           .ButtonCount(5)
+                                           .Numeric(true)
+                                           .PreviousNext(true)
+                                           .Messages(messages =>
+                                           {
+                                               messages.ItemsPerPage("Registros por página");
+                                               messages.Empty("Sin información para mostrar");
+                                               messages.First("Primera");
+                                               messages.Page("Página");
+                                               messages.Last("Última");
+                                               messages.Previous("Anterior");
+                                               messages.Next("Siguiente");
+                                               messages.Refresh("Actualizar");
+                                               messages.Of("De");
+                                               messages.MorePages("Mas páginas");
+                                               messages.Display("{0} a {1} de {2}");
+                                           })
+                                           )
+            )
+        </div>
+    </div>    
+</div>
+

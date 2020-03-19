@@ -1,0 +1,94 @@
+﻿@model  ASN.Models.CatAdminSel_Result
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="CCMSID">CCMSID</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().NumericTextBox()
+                            .Name("UserCCMSId")
+                            .Spinners(false)
+                            .Format("0.")
+                            .Events(e => e.Change("onChangeCCMSId"))
+                            .Min(0)
+                            .Step(5)
+                            .Decimals(0)
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Nombre">Nombre</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBox()
+                            .Name("Nombre")
+                            .Enable(false)
+            )
+        </div>
+
+        @*<div class="editor-label">
+            <label for="Rol">Rol</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.Rol)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetRolesCMB", "Usuario");
+                            });
+                        //.ServerFiltering(true);
+                    })
+                        .Filter("contains")
+                        .OptionLabel("- Rol - ")
+                        .DataValueField("RolId")
+                        .DataTextField("Rol")
+                        .Name("RolId")
+                        .HtmlAttributes(new { required = "required" })
+            )
+        </div>*@
+        <div class="editor-label">
+            <label for="Activo">Activo</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("Active")
+        </div>
+    </div>
+</div>
+
+<script>
+    ////Custom validation
+    //$("#grid").kendoValidator({
+    //    rules: {
+    //        // custom rules
+    //        custom: function (input, params) {
+    //            if (input.is("[name=Proyecto]") || input.is("[name=Departamento]")) {
+
+    //                //If the input is StartDate or EndDate
+    //                var container = $(input).closest("tr");
+
+    //                var proyecto = container.find("input[name=Proyecto]").data("kendoDatePicker").value();
+    //                var departamento = container.find("input[name=Departamento]").data("kendoDatePicker").value();
+
+
+
+    //                    return false;
+
+    //            }
+    //            //check for the rule attribute
+    //            return true;
+    //        }
+    //    },
+    //    messages: {
+    //        custom: function (input) {
+    //            // return the message text
+    //            return "Start Date must be greater than End Date!";
+    //        }
+    //    }
+    //})
+</script>

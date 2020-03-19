@@ -1,0 +1,35 @@
+﻿@model  ASN.Models.EmpleadosSolicitudesViewModel
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+<div class="col-lg-12 col-md-12">
+    <div class="k-edit-form-container" style="width:500px;">
+        <div class="editor-label">
+            <label for="MotivoId">Concepto de motivo</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().MultiSelect()
+                        .Name("LstConceptoMotivo")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Placeholder("- Concepto de motivo -")
+                        .Filter("contains")
+                        .AutoBind(true)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetConceptosMotivosCMB", "ConceptosMotivos");
+                            });
+                        })
+
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em" })
+            )
+            @*@(Html.Kendo().CheckBox().Name("TTConceptoMotivoId").Label("(Aplicar a todos)"))*@
+        </div>
+        <input type="hidden" id="PeriodicidadId" value="" />
+    </div>
+</div>

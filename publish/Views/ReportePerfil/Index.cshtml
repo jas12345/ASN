@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .k-grid .k-hierarchy-col {
+        width: 6px;
+    }
+
+    #grid {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12">
+            <div class="row">
+                @Html.Label("Reporte perfiles", new { style = "font-size: 18px" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div id="parent">
+                    @(Html.Kendo().Grid<ASN.Models.CatPerfilesDetalleSel_Result>()
+                                .Name("grid")
+                                .Columns(columns =>
+                                {
+                                    columns.Bound(e => e.Perfil_Ident).Width(30).Title("id").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Visible(false);
+                                    columns.Bound(e => e.Perfil).Title("Perfil").Width(30);
+                                    columns.Bound(e => e.NombreEmpleado).Width(30).Title("Nombre");
+                                    columns.Bound(e => e.CCMSIDEmpleado).Width(30).Title("CCMSID").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                                    columns.Bound(e => e.Puesto).Width(30).Title("Puesto");
+                                    columns.Bound(e => e.Nivel).Width(30).Title("Nivel").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))); ;
+                                })
+                                .ToolBar(tools => tools.Excel().Text("Exportar"))
+                                .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")).AllPages(true).Filterable(true))
+                                .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                .Sortable()
+                                .Scrollable()
+                                .AutoBind(true)
+                                //.HtmlAttributes(new { style = "height: 775px;" })
+                                .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .Batch(true)
+                                    .ServerOperation(true)
+                                    .Model(model =>
+                                    {
+                                        model.Id(c => c.Perfil_Ident);
+                                    })
+                                    .Read(read => read.Action("GetPerfiles", "ReportePerfil"))
+                                    .PageSize(20)
+                                )
+                                .Navigatable()
+                                //.Events(e => e.DataBound("dataBound").ExcelExport("excelexport").DetailInit("detailInit"))
+                                //.Events(e => e.DataBound("dataBound"))
+                                //.Events(e => e.ExcelExport("columnas"))
+                                .Pageable(pageable => pageable
+                                    .Refresh(true)
+                                    .PageSizes(true)
+                                    .ButtonCount(10)
+                                    .Numeric(true)
+                                    .PreviousNext(true)
+                                    .Messages(messages =>
+                                    {
+                                        messages.ItemsPerPage("Registros por página");
+                                        messages.Empty("Sin información para mostrar");
+                                        messages.First("Primera");
+                                        messages.Page("Página");
+                                        messages.Last("Última");
+                                        messages.Previous("Anterior");
+                                        messages.Next("Siguiente");
+                                        messages.Refresh("Actualizar");
+                                        messages.Of("De");
+                                        messages.MorePages("Mas páginas");
+                                        //messages.Display("Prueba");
+                                        messages.Display("{0} a {1} de {2}");
+                                    })
+                                )
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <script type="text/javascript">
+        $(function(){
+            window.location.href = "@Url.Action("Index","Inicio")";
+        });
+    </script>
+}
+
+@Scripts.Render("~/bundles/ReportePerfil");

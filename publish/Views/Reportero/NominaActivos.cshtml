@@ -1,0 +1,108 @@
+﻿
+<div>
+    <div class="col-lg-10">
+        <div id="parent">
+            @(Html.Kendo().Grid<ASN.Models.DescargaArchivoSolicitudSel_Result>()
+                .Name("grid")
+                .Columns(columns =>
+                {
+                    columns.Bound(c => c.AnioId).Title("Año").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(20);
+                    columns.Bound(c => c.MesId).Title("Mes").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(20);
+                    columns.Bound(c => c.ConsecutivoId).Title("Consecutivo").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(20);
+                    columns.Bound(c => c.EMPLEADO).Title("Empleado").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false))).Width(25);
+                    columns.Bound(c => c.CONCEPTO).Title("Concepto").Filterable(true).Width(30);
+                    columns.Bound(c => c.UNIDAD).Title("Unidad").Filterable(true).Width(22);
+                    columns.Bound(c => c.IMPORTE).Title("Importe").Filterable(true).Width(24);
+                    columns.Bound(c => c.PORCENTAJE).Title("Porcentaje").Filterable(true).Width(22);
+                }
+            )
+            .ToolBar(toolBar =>
+            {
+                toolBar.Excel().Text("Exportar a excel");
+            })
+            .Excel(ex => ex.AllPages(true))
+            //.HtmlAttributes(new { style = "height: 700px;" })
+            .Scrollable(sorteable => sorteable.Virtual(false))
+            .Sortable()
+            .Resizable(c => c.Columns(true))
+            //.Editable(editable => editable.Mode(GridEditMode.InCell))
+            //.Editable(editable => editable.Mode(GridEditMode.PopUp))
+            //.Events(eve => eve.Edit("edit"))
+            .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Batch(true)
+                .ServerOperation(true)
+                .Model(model =>
+                {
+                    model.Id(c => c.EMPLEADO);
+                    model.Field(c => c.EMPLEADO).Editable(false);
+                    model.Field(c => c.AnioId).Editable(false);
+                    model.Field(c => c.MesId).Editable(false);
+                    model.Field(c => c.ConsecutivoId).Editable(false);
+                    model.Field(c => c.CONCEPTO).Editable(false);
+                    model.Field(c => c.UNIDAD).Editable(false);
+                    model.Field(c => c.IMPORTE).Editable(false);
+                    model.Field(c => c.PORCENTAJE).Editable(false);
+                })
+                .Read(read => read.Action("GetNominaActivos", "Reportero"))
+                .PageSize(20)
+            //.Events(ev => ev.Error("errores").RequestEnd("reload"))
+            )
+            .Navigatable()
+            .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(true)
+                .ButtonCount(5)
+                .Numeric(true)
+                .PreviousNext(true)
+            //.Messages(messages =>
+            //{
+            //    messages.ItemsPerPage("Registros por página");
+            //    messages.Empty("Sin información para mostrar");
+            //    messages.First("Primera");
+            //    messages.Page("Página");
+            //    messages.Last("Última");
+            //    messages.Previous("Anterior");
+            //    messages.Next("Siguiente");
+            //    messages.Refresh("Actualizar");
+            //    messages.Of("De");
+            //    messages.MorePages("Mas páginas");
+            //    //messages.Display("Prueba");
+            //    messages.Display("{0} a {1} de {2}");
+            //})
+            )
+            )
+        </div>
+    </div>
+</div>
+
+<script>
+    function resizeGrid() {
+    var gridElement = $("#gridSolicitud"),
+        dataArea = gridElement.find(".k-grid-content"),
+        gridHeight = gridElement.innerHeight(),
+        otherElements = gridElement.children().not(".k-grid-content"),
+        otherElementsHeight = 0;
+        otherElements.each(function () {
+            otherElementsHeight += $(this).outerHeight();
+        });
+        dataArea.height(gridHeight - otherElementsHeight);
+    }
+
+    function resizeWrapper() {
+        $("#parent").height(document.body.offsetHeight - 180);
+    }
+
+    $(window).resize(function () {
+        resizeWrapper();
+        resizeGrid();
+    });
+
+    $(document).ready(function () {
+        $(window).trigger("resize");
+    });
+
+</script>
+
+

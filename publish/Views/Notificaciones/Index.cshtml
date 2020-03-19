@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-offset-3 col-lg-6 text-center">
+                @(Html.Kendo().Button().Name("NotificionesManualesBtn").Icon("email").Content("Notificaciones Manuales")
+                            .Events(x => x.Click("Notificaciones")).HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;" })
+                )
+            </div>
+        </div>
+    </div>
+    <div id="loader"></div>
+    @(Html.Kendo().Notification()
+        .Name("popupNotificationCom")
+        .Position(p => p.Pinned(true).Top(30).Right(30))
+        .Stacking(NotificationStackingSettings.Down)
+        .Events(e => e.Show("onShow"))
+    //.HtmlAttributes( new { @style = "background:rgba(0%,60%,0%,.7);color:white;"})
+    )
+}
+else
+{
+    <script type="text/javascript">
+        $(function(){
+            window.location.href = "@Url.Action("Index","Inicio")";
+        });
+    </script>
+}
+
+<script>
+    var urlNotificacionesSel = '@Url.Action("GetNotificaciones", "Notificaciones")';
+</script>
+
+@Scripts.Render("~/bundles/Notificaciones")

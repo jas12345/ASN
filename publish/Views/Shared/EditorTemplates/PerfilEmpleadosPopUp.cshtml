@@ -1,0 +1,263 @@
+﻿@model  ASN.Models.CatPerfilEmpleadosViewModel
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="Descripcion">Descripción</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.NombrePerfilEmpleados).HtmlAttributes(new { required = "required", validationmessage = "El Nombre del Perfil de Empleados es requerido" }))
+        </div>
+        <div class="editor-label">
+            <label for="Country_Ident">Pais</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.Country_Ident)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetPaisesCMB", "PerfilEmpleados"); //.Data("filterCountry");
+                            });
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .OptionLabel("- Seleccione Pais -")
+                        .Name("Country_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        //.Events(eve => eve.Change("CargaCiudad"))
+                        .Events(eve => eve.Open("adjustDropDownWidth"))
+            )
+        </div>
+        <div class="editor-label">
+            <label for="City_Ident">Ciudad</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.City_Ident)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetCiudadesCMB", "PerfilEmpleados").Data("filterCity");
+                            })
+                         .ServerFiltering(true);
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .OptionLabel("- Seleccione Ciudad -")
+                        .Name("City_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        //.Events(eve => eve.Change("CargaSite"))
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
+                        .CascadeFrom("Country_Ident")
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Site">Site</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.Location_Ident)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetSitesCMB", "PerfilEmpleados").Data("filterSite");
+                            })
+                         .ServerFiltering(true);
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .OptionLabel("- Seleccione Site -")
+                        .Name("Location_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        //.Events(eve => eve.Change("CargaCliente"))
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
+                        .CascadeFrom("City_Ident")
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Cliente">Cliente</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.Client_Ident)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetClientesCMB", "PerfilEmpleados").Data("filterClient");
+                            })
+                        .ServerFiltering(true);
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .OptionLabel("- Seleccione Cliente -")
+                        .Name("Client_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        .Events(eve => eve.Change("CargaPrograma"))
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
+                        .CascadeFrom("Location_Ident")
+            )
+        </div>
+        <div class="editor-label">
+            <label for="Programa">Programa</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.Program_Ident)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram");
+                            })
+                        .ServerFiltering(true);
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .OptionLabel("- Seleccione Programa -")
+                        .Name("Program_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        //.Events(eve => eve.Change("CargaContrato"))
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
+                        .CascadeFrom("Client_Ident")
+            )
+        </div>
+        <div class="editor-label">
+            <label for="TipoContrato">Tipo de contrato</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.Contract_Type_Ident)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetTiposContratoCMB", "PerfilEmpleados").Data("filterContract");
+                            })
+                        .ServerFiltering(true);
+                        })
+                        .Filter("contains")
+                        .DataValueField("Id")
+                        .DataTextField("Value")
+                        .OptionLabel("- Seleccione Contrato -")
+                        .Name("Contract_Type_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                        //.Events(eve => eve.Change("CargaCascada"))
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
+                        .CascadeFrom("Program_Ident")
+            )
+        </div>
+
+        <div class="editor-label">
+            <label for="Concepto">Concepto de Nómina</label>
+        </div>
+        <div class="editor-field">
+            @*@(Html.Kendo().DropDownListFor(x => x.ConceptoId)
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto");
+                                })
+                            .ServerFiltering(true);
+                            })
+                            .Filter("contains")
+                            .DataValueField("Ident")
+                            .DataTextField("Valor")
+                            .Name("ConceptoId")
+                            .OptionLabel(" - Todos - ")
+                            .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
+                            .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
+                            .CascadeFrom("Client_Ident")
+                )*@
+            @(Html.Kendo().MultiSelectFor(x => x.Concepto)
+                        //.AutoBind(false)
+                        .ValuePrimitive(true)
+                        .Filter("contains")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("Concepto")
+                        .AutoBind(true)
+                        .ClearButton(true)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto2");
+                            });
+                        //.ServerFiltering(true);
+                        })
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "Seleccione un Concepto." })
+                        .Events(eve => eve.Change("selectAll"))
+                        //.CascadeFrom("Country_Ident", "")
+            )
+        </div>
+        <div class="editor-label">
+            <label for="TipoAcceso">Tipo de acceso</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(x => x.TipoAccesoId)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetTiposAccesoCMB", "PerfilEmpleados");
+                            });
+                        })
+                        .Filter("contains")
+                        .OptionLabel("- Tipo de acceso - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("TipoAccesoId")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em", required = "required", validationmessage = "El Tipo de Acceso es requerido" })
+            )
+        </div>
+
+        <div class="editor-label">
+            <label for="Active">Activo</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("Active")
+        </div>
+
+        <div class="editor-label">
+            <label for="Active"></label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().Button().Name("CopiarPerfilEmpleado").Content("Copiar Perfil de Empleado").Icon("copy")
+                        .Events(x => x.Click("copiarPerfilEmpleados")).HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;" })
+            )
+        </div>
+    </div>
+</div>
+
+<script>
+        //$(function () {
+        //    var CountryDDL = $("#Country_Ident").data("kendoDropDownList");
+        //    var CityDDL = $("#City_Ident").data("kendoDropDownList");
+        //    var LocationDDL = $("#Location_Ident").data("kendoDropDownList");
+        //    var ClientDDL = $("#Client_Ident").data("kendoDropDownList");
+        //    var ProgramDDL = $("#Program_Ident").data("kendoDropDownList");
+        //    var ContractDDL = $("#Contract_Type_Ident").data("kendoDropDownList");
+        //    //var ConceptoDDL = $("#ConceptoId").data("kendoDropDownList");
+
+        //    CountryDDL.list.width("auto");
+        //    CityDDL.list.width("auto");
+        //    LocationDDL.list.width("auto");
+        //    ClientDDL.list.width("auto");
+        //    ProgramDDL.list.width("auto");
+        //    ContractDDL.list.width("auto");
+        //    //ConceptoDDL.list.width("auto");
+        //});
+</script>
+
+@Scripts.Render("~/bundles/PerfilEmpleados")

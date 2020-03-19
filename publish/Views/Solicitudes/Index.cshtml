@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="row">
+                <div class="container-fluid">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row">
+                            @Html.Label("Mis Solicitudes", new { style = "font-size: 15px" })
+                            <a href="@Url.Action("Create","Solicitudes")" data-role="button" class="k-button k-button-icontext" style="float:right; margin-right:10px;" role="button"  aria-disabled="false" tabindex="0">
+                                <span class="k-icon k-i-plus"></span> Crear Solicitud
+                            </a>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                @(Html.Kendo().Grid<ASN.Models.CatSolicitudesSel_Result>()
+                                        .Name("gridSolicitud")
+                                        .Columns(column =>
+                                        {
+                                            column.Command(command => { command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span> Editar").Click("EditaSolicitud"); }).Width(40);
+                                            column.Bound(c => c.FolioSolicitud).Width(40).Title("Solicitud").Visible(false).Filterable(true);
+                                            column.Bound(c => c.Solicintante_Nombre).Width(50).Title("Solicitante").Filterable(true).Width(70);
+                                            column.Bound(c => c.NombrePerfilEmpleados).Width(50).Title("Perfil").Filterable(true).Width(70);
+                                            column.Bound(c => c.NombreConcepto).Width(50).Title("Concepto").Filterable(true).Width(70);
+                                            column.Bound(c => c.NombreMotivo).Width(50).Title("Motivo").Filterable(true).Width(70);
+                                            column.Bound(c => c.Fecha_Solicitud).Title("Fecha Solicitud").Visible(true).Filterable(true).Width(50);
+                                            column.Bound(c => c.Solicitante_Ident).Visible(false);
+                                            column.Bound(c => c.Puesto_solicitante_Ident).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaAnio_Id).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaMes_Id).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaConsecutivoid).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaPeriodicidadNomina_Id).Visible(false);
+                                            column.Bound(c => c.PeriodoNominaTipoPeriodo_Id).Visible(false);
+                                            column.Bound(c => c.ConceptoId).Visible(false);
+                                            column.Bound(c => c.MotivoId).Visible(false);
+                                            column.Bound(c => c.Justficacion).Title("Justificanción").Visible(true).Width(70);
+                                            column.Bound(c => c.Responsable_Id).Visible(false);
+                                        })
+                                       .HtmlAttributes(new { style = "height: 475px;" })
+                                       .Scrollable(sorteable => sorteable.Virtual(false))
+                                       .Sortable()
+                                       .PersistSelection()
+                                       .Events(eve => eve.SaveChanges("onSave"))//.Change("onChange")
+                                       .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                       .DataSource(dataSource => dataSource
+                                           .Ajax()
+                                           .Model(model =>
+                                           {
+                                               model.Id(c => c.FolioSolicitud);
+                                               model.Field(c => c.Solicitante_Ident).Editable(true);
+                                               model.Field(c => c.Puesto_solicitante_Ident).Editable(true);
+                                               model.Field(c => c.PeriodoNominaAnio_Id).Editable(true);
+                                               model.Field(c => c.PeriodoNominaMes_Id).Editable(true);
+                                               model.Field(c => c.PeriodoNominaConsecutivoid).Editable(true);
+                                               model.Field(c => c.PeriodoNominaPeriodicidadNomina_Id).Editable(true);
+                                               model.Field(c => c.PeriodoNominaTipoPeriodo_Id).Editable(true);
+                                               model.Field(c => c.ConceptoId).Editable(true);
+                                               model.Field(c => c.MotivoId).Editable(true);
+                                               model.Field(c => c.Justficacion).Editable(true);
+                                               model.Field(c => c.Responsable_Id).Editable(true);
+                                           })
+                                           .Read(read => read.Action("GetSolicitudes", "Solicitudes").Data("GetPerfil"))
+                                           .Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
+                                           .Create(create => create.Action("CreatePeriodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
+                                           .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                                       )
+                                       .Navigatable()
+                                       .Pageable(pageable => pageable
+                                       .Refresh(true)
+                                       .PageSizes(true)
+                                       .ButtonCount(5)
+                                       .Numeric(true)
+                                       .PreviousNext(true)
+                                       .Messages(messages =>
+                                       {
+                                           messages.ItemsPerPage("Registros por página");
+                                           messages.Empty("Sin información para mostrar");
+                                           messages.First("Primera");
+                                           messages.Page("Página");
+                                           messages.Last("Última");
+                                           messages.Previous("Anterior");
+                                           messages.Next("Siguiente");
+                                           messages.Refresh("Actualizar");
+                                           messages.Of("De");
+                                           messages.MorePages("Mas páginas");
+                                           messages.Display("{0} a {1} de {2}");
+                                       })
+                                       )
+                                )
+                            </div>
+                        </div>
+                    </div>
+                
+        </div>
+    </div>
+    <script>
+        var urlSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';
+		var urlEditar = '@Url.Action("Editar", "Solicitudes")'
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+$(function(){
+    window.location.href = "@Url.Action("Index","Inicio")";
+});
+    </script>
+}
+
+@Scripts.Render("~/bundles/Solicitudes")
+

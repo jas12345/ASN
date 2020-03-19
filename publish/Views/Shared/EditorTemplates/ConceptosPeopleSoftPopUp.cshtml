@@ -1,0 +1,31 @@
+﻿@model  ASN.Models.CatConceptosPeopleSoftSel_Result
+
+<style>
+    tr.spaceUnder > td {
+        padding-bottom: 1em;
+    }
+</style>
+<div>
+    <div class="k-edit-form-container">
+        <div class="editor-label">
+            <label for="Descripcion">Clave PeopleSoft</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.Descripcion)
+                    .HtmlAttributes(new { required = "required", validationMessage = "Este campo es requerido." }))
+        </div>
+        <div class="editor-label">
+            <label for="Descripcion">Descripción PeopleSoft</label>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().TextBoxFor(x => x.DescripcionPeopleSoft)
+                        .HtmlAttributes(new { required = "required", validationMessage = "Este campo es requerido." }))
+        </div>
+        <div class="editor-label">
+            <label for="Active">Activo</label>
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("Active")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,161 @@
+﻿@model List<ASN.Models.CatNotificacionesManualesSel_Result>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>M N</title>
+    <style type="text/css">
+        .datagrid table {
+            border-collapse: collapse;
+            text-align: center;
+            width: 50%;
+        }
+
+        .datagrid {
+            font: normal 12px/150% Arial, Helvetica, sans-serif;
+            background: #fff;
+            overflow: hidden;
+            border: 1px solid #006699;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+            .datagrid table td, .datagrid table th {
+                padding: 3px 10px;
+            }
+
+            .datagrid table thead th {
+                background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );
+                background: -moz-linear-gradient( center top, #006699 5%, #00557F 50% );
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');
+                background-color: #006699;
+                color: #FFFFFF;
+                font-size: 15px;
+                font-weight: bold;
+                border-left: 2px solid #0070A8;
+            }
+
+            .datagrid table thead th:first-child {
+                border: none;
+            }
+
+            .datagrid table tbody td {
+                color: #00496B;
+                border-left: 2px solid #E1EEF4;
+                font-size: 12px;
+                font-weight: normal;
+                text-align: center;
+            }
+
+            .datagrid table tbody .alt td {
+                background: #E1EEF4;
+                color: #00496B;
+            }
+
+            .datagrid table tbody td:first-child {
+                border-left: none;
+            }
+
+            .datagrid table tbody tr:last-child td {
+                border-bottom: none;
+                text-align: center;
+            }
+    </style>
+</head>
+<body bgcolor="#3f3f3f" text="#919191" alink="#cccccc" vlink="#cccccc" style="margin: 0;padding: 0;background-color: #ffffff;color: #919191;">
+    <center>
+        <table width="770" border="0" cellpadding="0" cellspacing="18" class="vb-container fullpad" bgcolor="#ffffff" style="border-collapse: separate;border-spacing: 18px;padding-left: 0;padding-right: 0;width: 100%;max-width: 770px;">
+            <tbody>
+                <tr>
+                    <td width="100%" valign="top" align="center" class="links-color">
+                        <img border="0" hspace="0" vspace="0" class="mobile-full" alt="" style="border: 0px;display: block;vertical-align: top;max-width: 534px;width: 100%;height: auto;" src="cid:imagens" />
+                    </td>
+                </tr>
+                <div class="datagrid" style="text-align:center;">
+                    @{
+                        if (Model.Exists(d => d.Accesos == 1))
+                        {
+                            <tr>
+                                <td>
+                                    <h1>Solicitudes pendientes</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Folio
+                                                </th>
+                                                <th>
+                                                    Estatus
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            @foreach (var obj in Model.Where(x => x.Accesos == 1))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @obj.FolioId
+                                                    </td>
+                                                    <td>
+                                                        @obj.Estatus
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    @{
+                        if (Model.Exists(d => d.Accesos == 2))
+                        {
+                            <tr>
+                                <td>
+                                    <h1>Autorizaciones pendientes</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Folio
+                                                </th>
+                                                <th>
+                                                    Estatus
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var obj in Model.Where(x => x.Accesos == 2))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @obj.FolioId
+                                                    </td>
+                                                    <td>
+                                                        @obj.Estatus
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </div>
+            </tbody>
+        </table>
+    </center>
+</body>
+</html>

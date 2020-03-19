@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "Seleccionar Personal";
+    var SolicitudId = TempData["SolicitudId"];
+    var Periodo = TempData["PerfilId"];
+}
+<style>
+    .head-item {
+        width: 20%;
+        height: 25px;
+        color: white;
+        text-align: center;
+        display: inline-block;
+        /*border: 1px solid gray;*/
+        background-color: black;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <input type="hidden" id="SolicitudId" value="@SolicitudId" />
+    <input type="hidden" id="PeriodoId" value="@Periodo" />
+    <div class="container-fluid">
+        <div class="row">
+            <div id="tab1">
+                <div class="container-fluid">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row" style="color:white;background-color:black;">
+                            <div class="header">
+                                <div class="head-item">@Html.Label("Solicitud", new { style = "font-size: 15px;color:#a9a9a987;" })</div>
+                                <div class="head-item">@Html.Label("Selección de empleados", new { style = "font-size: 15px;" })</div>
+                                <div class="head-item">@Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px; color:#a9a9a987;" })</div>
+                                <div class="head-item">@Html.Label("Selección de Autorizantes", new { style = "font-size: 15px; color:#a9a9a987;" })</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            @(Html.Kendo().Grid<ASN.Models.EmpleadosxPerfilSel_Result>()
+                                    .Name("grid")
+                                    .Columns(column =>
+                                    {
+                                        column.Select().Width(7).HtmlAttributes(new { style = "text-align:center" });
+                                        column.Bound(c => c.Ident).Width(40).Title("CCMSId").Visible(true).Filterable(true);
+                                        column.Bound(c => c.First_Name).Width(50).Title("Nombre").Filterable(true);
+                                        column.Bound(c => c.Last_Name).Title("Apellido(s)").Visible(true).Filterable(true).Width(50);
+                                        column.Bound(c => c.Position_Code_Title).Title("Puesto").Visible(true).Filterable(true).Width(70);
+                                        column.Bound(c => c.Current_Status).Width(50).Visible(false);
+                                        column.Bound(c => c.Existe).Width(50).Visible(false);
+                                        column.Bound(c => c.EsNuevo).Width(50).Visible(false);
+                                        //column.Command(command => { command.Edit().Text("Editar"); }).Width(20);
+                                    })
+                                    .HtmlAttributes(new { style = "height: 470px;" })
+                                    .Scrollable(sorteable => sorteable.Virtual(false))
+                                    .Sortable()
+                                    .PersistSelection()
+                                    .Resizable(c => c.Columns(true))
+                                    //.Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EmpleadosSolicitudesPopUp").Window(x => x.Width(530).HtmlAttributes(new { style = "width: 530px" })))
+                                    .Events(eve => eve.SaveChanges("onSave").DataBound("validacheckdefault"))//.Edit("edit")
+                                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                    .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Model(model =>
+                                            {
+                                                model.Id(c => c.Ident);
+                                                model.Field(c => c.First_Name).Editable(true);
+                                                model.Field(c => c.Last_Name).Editable(true);
+                                                model.Field(c => c.Position_Code_Title).Editable(true);
+                                            })
+                                            .Read(read => read.Action("GetEmployee", "Solicitudes").Data("GetPerfil"))
+                                            .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                                            .Update(update => update.Action("CreateSolicitudEmpleadosDetalle", "EmpleadosSolicitudes"))//.Data("GetParametros")
+                                            )
+                                                   .Navigatable()
+                                                   .Pageable(pageable => pageable
+                                                   .Refresh(true)
+                                                   .PageSizes(true)
+                                                   .ButtonCount(5)
+                                                   .Numeric(true)
+                                                   .PreviousNext(true)
+                                                   .Messages(messages =>
+                                                   {
+                                                       messages.ItemsPerPage("Registros por página");
+                                                       messages.Empty("Sin información para mostrar");
+                                                       messages.First("Primera");
+                                                       messages.Page("Página");
+                                                       messages.Last("Última");
+                                                       messages.Previous("Anterior");
+                                                       messages.Next("Siguiente");
+                                                       messages.Refresh("Actualizar");
+                                                       messages.Of("De");
+                                                       messages.MorePages("Mas páginas");
+                                                       messages.Display("{0} a {1} de {2}");
+                                                   })
+                                                   )
+                            )
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="k-form-field" style="float:right; margin-right:35px; margin-top:10px;">
+                            <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext " onclick="accion(5);" role="button" aria-disabled="false" tabindex="0">
+                                <span class="k-icon k-i-close"></span>Salir
+                            </button>
+                            <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(4);" role="button" aria-disabled="false" tabindex="0">
+                                <span class="k-icon k-i-save"></span> Guardar
+                            </button>
+                            <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext k-primary" onclick="accion(2);" role="button" aria-disabled="false" tabindex="0">
+                                <span class="k-icon k-i-redo"></span> Continuar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="tab2" hidden>
+                <div class="col-lg-12 col-md-12">
+                    <div class="row" style="color:white;background-color:black;">
+                        <div class="header">
+                            <div class="head-item">@Html.Label("Solicitud", new { style = "font-size:15px;color:#a9a9a987;" })</div>
+                            <div class="head-item">@Html.Label("Selección de empleados", new { style = "font-size: 15px;color:#a9a9a987;" })</div>
+                            <div class="head-item">@Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px;" })</div>
+                            <div class="head-item">@Html.Label("Selección de Autorizantes", new { style = "font-size: 15px; color:#a9a9a987;" })</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="cuerpo2" class="row"></div>
+                <div class="row">
+                    <div class="k-form-field" style="float:right; margin-right:35px; margin-top:10px;">
+                        <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(5);" role="button" aria-disabled="false" tabindex="0">
+                            <span class="k-icon k-i-close"></span>Salir
+                        </button>
+                        <button type="button" data-role="button" class="k-button k-button-icontext" role="button" aria-disabled="false" tabindex="0" onclick="accion(4);">
+                            <span class="k-icon k-i-save"></span> Guardar
+                        </button>
+                        <button type="button" data-role="button" class="k-button k-button-icontext k-primary" role="button k-primary" aria-disabled="false" tabindex="0" onclick="accion(3);">
+                            <span class="k-icon k-i-redo"></span> Continuar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="tab3" hidden>
+                <div class="col-lg-12 col-md-12">
+                    <div class="row" style="color:white;background-color:black;">
+                        <div class="header">
+                            <div class="head-item">@Html.Label("Solicitud", new { style = "font-size:15px;color:#a9a9a987;" })</div>
+                            <div class="head-item">@Html.Label("Selección de empleados", new { style = "font-size: 15px;color:#a9a9a987;" })</div>
+                            <div class="head-item">@Html.Label("Conceptos motivos por empleado", new { style = "font-size: 15px;color:#a9a9a987;" })</div>
+                            <div class="head-item">@Html.Label("Selección de Autorizantes", new { style = "font-size: 15px;" })</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="cuerpo3" class="row"></div>
+                <div class="row">
+                    <div class="k-form-field" style="float:right; margin-right:35px; margin-top:10px;">
+                        <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext" onclick="accion(5);" role="button" aria-disabled="false" tabindex="0">
+                            <span class="k-icon k-i-close"></span>Salir
+                        </button>
+                        <button id="Anterior" type="button" data-role="button" class="k-button k-button-icontext k-primary" onclick="accion(6);" role="button" aria-disabled="false" tabindex="0">
+                            <span class="k-icon k-i-save"></span> Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';
+        var urlSolicitudEmpleados = '@Url.Action("GuardaEmpleados", "Solicitudes")';
+        var urlDefault = '@Url.Action("Index", "Solicitudes")';
+        var urlGridEmpleadosAutorizadores = '@Url.Action("GridEmpleadosAutorizantes", "EmpleadosSolicitudes")';
+        var urlEnviaSolicitud = '@Url.Action("EnviarSolicitud", "Solicitudes")';
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+    $(function(){
+        window.location.href = "@Url.Action("Index","Inicio")";
+    });
+    </script>
+}
+
+@Scripts.Render("~/bundles/Solicitudes")
+

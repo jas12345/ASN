@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="@Url.Content("~/favicon.ico")" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Payroll Request</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/kendo/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+
+    <script>
+
+        function onClose() {
+            location.reload();
+        }
+
+        @*function generaNotificaciones() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Index", "Notificaciones")',
+                dataType: "json",
+                success: function (response) {
+
+                    var notification = $("#popupNotification").data("kendoNotification");
+                    if (response.status == 0) {
+                        notification.show(" <b>Se enviaron correos a los Solicitantes que tienen solicitudes pendientes por concluir.<br /><br /> Se enviaron correo a los autorizadores que tienen solicitudes pendientes por autorizar.</b>", "success");
+                    }
+                    else if (response.status === "-1") {
+                        var errorMsg = response.mensaje;
+                        notification.show(errorMsg, "error");
+                    }
+                    
+                },
+                error: function (response) {
+                    var notification = $("#popupNotification").data("kendoNotification");
+                    notification.show("Ocurrio un problema durante el proceso. Intente de nuevo más tarde.", "error");
+                }
+            });
+        }*@
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        PR
+                    </a>
+                </li>
+                @{
+                    <li>@Html.ActionLink("Inicio", "Index", "Inicio")</li>
+
+
+
+
+                    if (User.IsInRole("Administrador"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-header"><div class="fa"></div></li>
+                                <li>@Html.ActionLink("Administradores", "Index", "Administradores")</li>
+                                <li>@Html.ActionLink("Años Nómina", "AniosNomina", "Nomina")</li>
+                                <li>@Html.ActionLink("Meses Nómina", "MesesNomina", "Nomina")</li>
+                                <li>@Html.ActionLink("Periodicidad Nómina", "index", "PeriodicidadNomina")</li>
+                                <li>@Html.ActionLink("Periodos consecutivos", "index", "ConsecutivoPeriodos")</li>
+                                <li>@Html.ActionLink("Tipos de Periodo", "Index", "TiposPeriodoNomina")</li>
+                                <li>@Html.ActionLink("Periodos de Nómina", "index", "PeriodoNomina")</li>
+                                <li>@Html.ActionLink("Conceptos PeopleSoft", "index", "ConceptosPeopleSoft")</li>
+                                <li>@Html.ActionLink("Conceptos", "index", "Conceptos")</li>
+                                <li>@Html.ActionLink("Motivos de Incidencia", "index", "ConceptosMotivos")</li>
+                                <li>@Html.ActionLink("Perfil de Empleados", "Index", "PerfilEmpleados")</li>
+                                <li>@Html.ActionLink("Perfil / Accesos", "Index", "PerfilEmpleadosAccesos")</li>
+                            </ul>
+                        </li>
+                    }
+
+                    if (User.IsInRole("Solicitante"))
+                    {
+                        @*<li>@Html.ActionLink("Solicitudes", "Index", "Solicitudes")</li>*@
+                        <li>@Html.ActionLink("Solicitudes", "Index", "CapturaSolicitud")</li>
+                        <li>@Html.ActionLink("Mis Solicitudes", "Index", "MisSolicitudes")</li>
+                    }
+
+                    if (User.IsInRole("Autorizante"))
+                    {
+                        <li>@Html.ActionLink("Mis Autorizaciones", "Index", "MisAutorizaciones")</li>
+                    }
+
+                    if (User.IsInRole("Responsable"))
+                    {
+                        <li>@Html.ActionLink("Mis Responsabilidades", "Index", "MisResponsabilidades")</li>
+                        <li>@Html.ActionLink("Descargar Archivo de Nómina", "Index", "DescargaArchivos")</li>
+                    }
+
+                    if (User.IsInRole("Responsable"))
+                    {
+                        <li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>
+                        @*<li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>*@
+                    }
+
+                    if (User.IsInRole("Solicitante"))
+                    {
+                        <li>@Html.ActionLink("Reporte", "Index", "ReporteIndividual")</li>
+                    }
+
+                    @*if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+            {
+                <li>@Html.ActionLink("Reporte Auditoria", "Index", "ReporteAuditoria")</li>
+            } *@
+
+                    @*if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+            {
+                <li>@Html.ActionLink("Reporte General", "Index", "ReporteGeneral")</li>
+            }*@
+
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Responsable"))
+                    {
+                        <li>@Html.ActionLink("Reporte Conceptos", "Index", "Reportero")</li>
+                    }
+
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    {
+                        <li>@Html.ActionLink("Reporte perfiles", "Index", "ReportePerfil")</li>
+                    }
+
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    {
+                        <li>@Html.ActionLink("Reporte Solicitud", "Index", "ReporteSolicitud")</li>
+                    }
+
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Solicitante") || User.IsInRole("Autorizante") || User.IsInRole("Responsable"))
+                    {
+                        <li>@Html.ActionLink("Reporte Solicitud por Estatus", "Index", "ReporteSolicitudXEstatus")</li>
+                    }
+
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    {
+                        <li>@Html.ActionLink("Reporte Concepto por Estatus", "Index", "ReporteConceptoXEstatus")</li>
+                    }
+
+                    @*if (User.IsInRole("Desarrollo2"))
+            {
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vistas / Consultas<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header"><div class="fa fa-angellist"></div></li>
+                        @if (User.IsInRole("Desarrollo"))
+                        {
+                            <li>@Html.ActionLink("5.9.1 To-Do (Acciones pendientes)", "Index", "ToDo")</li>
+                        }
+
+                        @if (User.IsInRole("Desarrollo"))
+                        {
+                            <li>@Html.ActionLink("5.9.2 Mis solicitudes", "Index", "MisSolicitudes")</li>
+                        }
+
+                        @if (User.IsInRole("Desarrollo"))
+                        {
+                            <li>@Html.ActionLink("5.9.3 Solicitudes (todas)", "index", "SolicitudesTodas")</li>
+                        }
+
+                        @if (User.IsInRole("Desarrollo"))
+                        {
+                            <li>@Html.ActionLink("5.9.4 Búsquedas varias.", "index", "BusquedasVarias")</li>
+                        }
+                    </ul>
+                </li>
+
+            }*@
+                }
+
+                <li>
+                    @Html.ActionLink("Salir", "Logout", "Home")
+                </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+        <div class="overlay"></div>
+        <div class="page-content-wrapper">
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+            <div class="">
+                @*<div>
+                        <label id="contador"></label>
+                    </div>*@
+                <div class="col-lg-1" style="margin-left: 50px; margin-top: -40px;">
+                    <a href="@Url.Action("Index","Inicio")">
+                    <img src="@Url.Content("~/Content/images/logo.png")" , alt="Inicio" />
+                    </a>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="wrapper">
+                @RenderBody()
+            </div>
+            @*<hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>*@
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+    
+    
+@(Html.Kendo().Notification()
+.Name("popupNotification")
+.Position(p => p.Pinned(true).Top(30).Right(30))
+.Stacking(NotificationStackingSettings.Down)
+.Events(e => e.Show("onShow"))
+//.AutoHideAfter(0)
+//.HtmlAttributes( new { @style = "background:rgba(0%,60%,0%,.7);color:white;"})
+)
+
+@(Html.Kendo().Dialog()
+.Name("dialog")
+.Title("ASN")
+.Content("<center><p>Session expired</p></center>")
+.Width(400)
+.Modal(true)
+.Actions(actions =>
+{
+    actions.Add().Text("OK").Primary(true).Action("onClose");
+})
+.Visible(false)
+.Events(ev => ev.Close("onClose"))
+)
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,240 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .k-grid .k-hierarchy-col {
+        width: 6px;
+    }
+
+    #grid {
+        height: 99%;
+    }
+
+    #parent {
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.Label("Catálago de perfil de accesos", new { id = "lblTitulo", style = "font-size: 18px" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-4 col-md-4">
+            @Html.Label("Seleccion de Perfil - Accesos", new { id = "lblPerfilAccesos", style = "font-size: 15px" })
+        </div>
+        <div class="col-lg-4 col-md-4">
+            @Html.Label("Seleccion de Empleado - Nivel", new { id = "lblEmpleadoNivel", style = "font-size: 15px" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4">
+            <div class="k-form-field">
+                <div class="editor-field">
+                    @(Html.Kendo().DropDownList()
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetPerfilCMB", "PerfilEmpleadosAccesos");
+                            });
+                        })
+                        .Filter("contains")
+                        .OptionLabel("- Seleccione perfil de empleados- ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("PerfilUsuarioId")
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                    )
+                </div>
+            </div>
+        </div>
+        <div class="k-form-inline, col-lg-4 col-md-4">
+            <div class="k-form-field">
+                <div class="editor-field">
+                    @(Html.Kendo().NumericTextBox()
+                        .Name("CCMSId")
+                        .Events(e => e
+                            .Change("onChangeCCMSId")
+                        )
+                        .Format("#")
+                        .Max(9999999999)
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 13em" })
+                    )
+                    @(Html.Kendo().NumericTextBox()
+                        .Name("NumeroNivel")
+                        //.Events(e => e
+                        //    .Change("onChangeNumeroNivel")
+                        //)
+                        .Format("#")
+                        .Min(1)
+                        .Max(9)
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 13em" })
+                    )
+                    @(Html.Kendo().Button().Name("Agregar").Content("Agregar").Icon("add")
+                        .Events(x => x.Click("agregaEmpleado")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-3 col-md-3">
+            @*@Html.Label("lblAccesos",           "X       Accesos: ",    new { id = "lblAccesos", style = "font-weight:normal" })*@
+
+            @Html.Label("lblPerfil", "Perfil:", new { id = "lblPerfil", style = "display: none;" })
+            @Html.Label("lblPerfilNombre", " ", new { id = "lblPerfilNombre", style = "font-weight:normal;" })
+            @Html.Label("lblAccesos", ", Accesos: ", new { id = "lblAccesos", style = "display: none;" })
+            @Html.Label("lblAccesosNombre", " ", new { id = "lblAccesosNombre", style = "font-weight:normal;" })
+
+        </div>
+        <div class="col-lg-9 col-md-9">
+            @Html.Label("lblCCMSId", "CCMSId: ", new { id = "lblCCMSId", style = "display: none;" })
+            @Html.Label("lblCCMSIdClave", " ", new { id = "lblCCMSIdClave", style = "font-weight:normal" })
+            @Html.Label("lblEmpleado", ", Empleado: ", new { id = "lblEmpleado", style = "display: none;" })
+            @Html.Label("lblEmpleadoNombre", " ", new { id = "lblEmpleadoNombre", style = "font-weight:normal" })
+            @Html.Label("lblPuesto", ", Puesto: ", new { id = "lblPuesto", style = "display: none;" })
+            @Html.Label("lblPuestoNombre", " ", new { id = "lblPuestoNombre", style = "font-weight:normal" })
+            @Html.Label("lblSupervisor", ", Supervisor: ", new { id = "lblSupervisor", style = "display: none;" })
+            @Html.Label("lblSupervisorNombre", " ", new { id = "lblSupervisorNombre", style = "font-weight:normal" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div id="parent">
+                @(Html.Kendo().Grid<ASN.Models.CatPerfilEmpleadosAccesosSel_Result>()
+                        .Name("grid")
+                        .Columns(column =>
+                        {
+                            column.Command(command => command.Custom("DELETE").Text("<span class='k-icon k-i-delete'></span>Borrar").Click("borrarAcceso")).Width(15).HtmlAttributes(new { style = "text-align: center;" });
+                            //column.Bound(c => c.Ident).Width(40).Title("CCMS Id").Visible(true).Filterable(true);
+                            column.Bound(c => c.Ident).Width(40).Title("CCMS Id").Visible(true).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                            column.Bound(c => c.Nombre).Width(50).Title("Nombre").Filterable(ftb => ftb.Cell(cell => cell.Operator("Contains").SuggestionOperator(FilterType.Contains)));
+                            column.Bound(c => c.Position_Code_Title).Width(50).Title("Puesto").Filterable(ftb => ftb.Cell(cell => cell.Operator("Contains").SuggestionOperator(FilterType.Contains)));
+                            column.Bound(c => c.Nivel).Width(50).Title("Nivel").Visible(true).Filterable(true);
+                            //column.Bound(c => c.PerfilEmpleadoAcceso_Activo).Title("PerfilEmpleadoAcceso_Activo").Visible(false).Filterable(false).Width(50);//.ClientTemplate("#:PerfilEmpleadoAcceso_Activo  ? 'Si' : 'No' #");
+                        })
+                        //.HtmlAttributes(new { style = "height: 445px;" })
+                        .Scrollable(sorteable => sorteable.Virtual(false))
+                        .Sortable()
+                        .Resizable(c => c.Columns(true))
+                        .PersistSelection()
+                        //.Events(eve => eve.SaveChanges("onSave").Edit("edit"))
+                        //.Events(eve => eve.SaveChanges("onSave"))
+                        .Events(
+                            events => events
+                            .Change("onChange")
+                            .DataBound("onDataBound")
+                        )
+                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                        .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Model(model =>
+                        {
+                            model.Id(c => c.Ident);
+                            model.Field(c => c.Nombre);
+                            model.Field(c => c.PerfilEmpleadoAcceso_Activo);
+                            model.Field(c => c.Nivel);
+                        })
+                        .Read(read => read.Action("GetPerfilEmpleadosAccesos", "PerfilEmpleadosAccesos").Data("GetPerfil"))
+                        .Update(update => update.Action("UpdatePerfilEmpleadosAccesos", "PerfilEmpleadosAccesos").Type(HttpVerbs.Post))
+                        .Events(ev => ev.Error("errorsote").RequestEnd("valida"))
+                        )
+                        .Navigatable()
+                        .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(true)
+                        .ButtonCount(5)
+                        .Numeric(true)
+                        .PreviousNext(true)
+                        .Messages(messages =>
+                        {
+                            messages.ItemsPerPage("Registros por página");
+                            messages.Empty("Sin información para mostrar");
+                            messages.First("Primera");
+                            messages.Page("Página");
+                            messages.Last("Última");
+                            messages.Previous("Anterior");
+                            messages.Next("Siguiente");
+                            messages.Refresh("Actualizar");
+                            messages.Of("De");
+                            messages.MorePages("Mas páginas");
+                            messages.Display("{0} a {1} de {2}");
+                        })
+                    )
+                )
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        var listaEmpleados = "";
+        var selectedEmpleados = new Array();
+        var grid = $('#grid');
+
+    </script>
+    <script>
+        var listaEmpleados = "";
+        var selectedEmpleados = new Array();
+        var grid = $('#grid');
+        var urlDeletePerfilEmpleadosAccesos = '@Url.Action("DeletePerfilEmpleadosAccesos", "PerfilEmpleadosAccesos")';
+
+        //Datos a extraer Empleado - Puesto - Supervisor
+        var CCMSId = "";
+        var NombreEmpleado = "";
+        var PuestoEmpleado = "";
+        var SupervisorEmpleado = "";
+
+        var urlEmpleadoPuestoSupervisor = '@Url.Action("GetEmpleadoPuestoSupervisor", "PerfilEmpleadosAccesos")';
+
+        //Datos a extraer Perfil - Tipo de Acceso
+        var Ident = "";
+        var Nombre = "";
+        var Position_Code_Ident = "";
+        var Position_Code_Title = "";
+        var Manager_Ident = "";
+        var Nombre_Manager = "";
+        var ClavePerfil = "";
+        var NombrePerfil = "";
+        var nivel = "";
+        var Active = "";
+        var TipoAccesoId = "";
+        var TipoAcceso = "";
+        var AccesoSolicitante = "";
+        var AccesoAutorizante = "";
+        var AccesoResponsable = "";
+        var AccesoConsultante = "";
+        var AccesoOtros = "";        
+        var Error = "";
+
+        var urlPerfilTipoAcceso = '@Url.Action("GetPerfilTipoAcceso", "PerfilEmpleadosAccesos")';
+
+        var urlCreatePerfilEmpleadosAccesos = '@Url.Action("CreatePerfilEmpleadosAccesos", "PerfilEmpleadosAccesos")';
+
+        var urlUpdatePerfilEmpleadosAccesos = '@Url.Action("UpdatePerfilEmpleadosAccesos", "PerfilEmpleadosAccesos")';
+
+    //debugger;
+    //var urlSolicitud = grid.selectedKeyNames().join(", ");
+    </script>
+}
+else
+{
+    <p>You are not logged in</p>
+}
+
+@Scripts.Render("~/bundles/PerfilEmpleadosAccesos")
+
