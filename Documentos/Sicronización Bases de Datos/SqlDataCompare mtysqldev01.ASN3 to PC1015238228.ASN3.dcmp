@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataComparison>
+  <Version>10</Version>
+  <ConnectionProperties1>
+    <ConnectionString>Data Source=mtysqldev01;Initial Catalog=ASN3;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
+    <FullDisplayName>mtysqldev01.ASN3 (DB\jesusde.lossantos)</FullDisplayName>
+  </ConnectionProperties1>
+  <ConnectionProperties2>
+    <ConnectionString>Data Source=PC1015238228;Initial Catalog=ASN3;Persist Security Info=True;User ID=sa;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</ConnectionString>
+    <FullDisplayName>PC1015238228.ASN3 (sa)</FullDisplayName>
+  </ConnectionProperties2>
+  <SessionSettings>Default</SessionSettings>
+  <DeselectedTable>[app620].[CatConceptos]</DeselectedTable>
+  <DeselectedTable>[app620].[CatConceptosMotivos]</DeselectedTable>
+  <DeselectedTable>[app620].[CatConceptosNivelAutorizador]</DeselectedTable>
+  <DeselectedTable>[app620].[CatConceptosNivelMontoAutorizacion]</DeselectedTable>
+  <DeselectedTable>[app620].[CatConceptosPeopleSoft]</DeselectedTable>
+  <DeselectedTable>[app620].[CatConsecutivoPeriodicidad]</DeselectedTable>
+  <DeselectedTable>[app620].[CatConsecutivoPeriodos]</DeselectedTable>
+  <DeselectedTable>[app620].[CatConsecutivoPeriodosBKP]</DeselectedTable>
+  <DeselectedTable>[app620].[CatEmpleadosSolicitudes]</DeselectedTable>
+  <DeselectedTable>[app620].[CatEstatusConceptos]</DeselectedTable>
+  <DeselectedTable>[app620].[CatEstatusSolicitudes]</DeselectedTable>
+  <DeselectedTable>[app620].[CatMeses]</DeselectedTable>
+  <DeselectedTable>[app620].[CatMesesNomina]</DeselectedTable>
+  <DeselectedTable>[app620].[CatMesesNominaBKP]</DeselectedTable>
+  <DeselectedTable>[app620].[CatMotivosSolicitud]</DeselectedTable>
+  <DeselectedTable>[app620].[CatParametroConceptos]</DeselectedTable>
+  <DeselectedTable>[app620].[CatPerfilEmpleados]</DeselectedTable>
+  <DeselectedTable>[app620].[CatPerfilEmpleadosAccesos]</DeselectedTable>
+  <DeselectedTable>[app620].[CatPeriodicidadNomina]</DeselectedTable>
+  <DeselectedTable>[app620].[CatPeriodosNomina]</DeselectedTable>
+  <DeselectedTable>[app620].[CatPeriodosNominaBKP]</DeselectedTable>
+  <DeselectedTable>[app620].[CatRole]</DeselectedTable>
+  <DeselectedTable>[app620].[CatSolicitudEmpleadosAutorizantes]</DeselectedTable>
+  <DeselectedTable>[app620].[CatSolicitudEmpleadosDetalle]</DeselectedTable>
+  <DeselectedTable>[app620].[CatSolicitudes]</DeselectedTable>
+  <DeselectedTable>[app620].[CatTipoConceptos]</DeselectedTable>
+  <DeselectedTable>[app620].[CatTipoDeMoneda]</DeselectedTable>
+  <DeselectedTable>[app620].[CatTiposAcceso]</DeselectedTable>
+  <DeselectedTable>[app620].[CatTiposConsecutivo]</DeselectedTable>
+  <DeselectedTable>[app620].[CatTiposPeriodoNomina]</DeselectedTable>
+  <DeselectedTable>[app620].[Pivote]</DeselectedTable>
+  <DeselectedTable>[app620].[RelConceptoPais]</DeselectedTable>
+  <DeselectedTable>[app620].[RelPerfilEmpleadosConceptos]</DeselectedTable>
+  <DeselectedTable>[app620].[RelPeriodicidadPais]</DeselectedTable>
+  <DeselectedTable>[app620].[RelUserRole]</DeselectedTable>
+  <DeselectedTable>[app620].[TraComment]</DeselectedTable>
+</DataComparison>

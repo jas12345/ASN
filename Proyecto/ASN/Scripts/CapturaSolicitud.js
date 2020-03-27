@@ -1353,29 +1353,47 @@ function inicializaAutorizadores(empleadoIdent, conceptoId) {
     });
 }
 
+//function conceptoParametroConceptoPre(conceptoIdent) {
+//    $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + conceptoIdent + "&eid=" + $("#CCMSIDSolicitado").val(), function (data) {
+//        //debugger;
+//        ConConceptoIdent = data[0].ConceptoId;
+//        ConConceptoNombre = data[0].DescripcionConcepto;
+//        ConParametroId = data[0].TipoconceptoId;
+//        ConParametroNombre = ConParametroConceptoMonto + ' ' + data[0].DescripcionParametroConcepto;//(monto.length <= 0 ? ConParametroConceptoMonto : monto) + " " + data[0].DescripcionParametroConcepto;
+//        ConNivelesAutorizacion = data[0].NivelesAutorizacion;
+
+//        $("#ConceptoX").val(ConConceptoNombre);
+//        $("#ConceptoX").text(ConConceptoNombre);
+//        $("#ParametroX").val(ConParametroNombre);
+//        $("#ParametroX").text(ConParametroNombre);
+//    }).fail(function (ex) {
+//        //debugger;
+//        console.log("fail" + ex);
+//    })
+//}
+
 function conceptoParametroConcepto(conceptoIdent) {
-    $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + conceptoIdent + "&eid=" + $("#CCMSIDSolicitado").val(), function (data) {
-        //debugger;
-        ConConceptoIdent = data[0].ConceptoId;
-        ConConceptoNombre = data[0].DescripcionConcepto;
-        ConParametroId = data[0].TipoconceptoId;
-        ConParametroNombre = ConParametroConceptoMonto + ' ' + data[0].DescripcionParametroConcepto;//(monto.length <= 0 ? ConParametroConceptoMonto : monto) + " " + data[0].DescripcionParametroConcepto;
-        ConNivelesAutorizacion = data[0].NivelesAutorizacion;
+    $.when(
+        //conceptoParametroConceptoPre(conceptoIdent)
+        $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + conceptoIdent + "&eid=" + $("#CCMSIDSolicitado").val(), function (data) {
+            //debugger;
+            ConConceptoIdent = data[0].ConceptoId;
+            ConConceptoNombre = data[0].DescripcionConcepto;
+            ConParametroId = data[0].TipoconceptoId;
+            ConParametroNombre = ConParametroConceptoMonto + ' ' + data[0].DescripcionParametroConcepto;//(monto.length <= 0 ? ConParametroConceptoMonto : monto) + " " + data[0].DescripcionParametroConcepto;
+            ConNivelesAutorizacion = data[0].NivelesAutorizacion;
 
-        $("#ConceptoX").val(ConConceptoNombre);
-        $("#ConceptoX").text(ConConceptoNombre);
-        $("#ParametroX").val(ConParametroNombre);
-        $("#ParametroX").text(ConParametroNombre);
-
+            $("#ConceptoX").val(ConConceptoNombre);
+            $("#ConceptoX").text(ConConceptoNombre);
+            $("#ParametroX").val(ConParametroNombre);
+            $("#ParametroX").text(ConParametroNombre);
+        }).fail(function (ex) {
+            //debugger;
+            console.log("fail" + ex);
+        })
+    ).done(function () {
         habilitaCombosAutorizadores(ConNivelesAutorizacion);
-        //debugger;
-
-
-    }).fail(function (ex) {
-        //debugger;
-        console.log("fail" + ex);
     });
-
 }
 
 function onChangeMotivo() {
