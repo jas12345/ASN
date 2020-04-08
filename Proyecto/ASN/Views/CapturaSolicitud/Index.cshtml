@@ -48,7 +48,7 @@
             </div>
             <div class="col-lg-3">
                 @(Html.Kendo().Upload()
-                    .Name("CargaComedores")
+                    .Name("files")
                     .Async(a => a
                         .Save("Async_Save", "CapturaSolicitud")
                         .AutoUpload(true)

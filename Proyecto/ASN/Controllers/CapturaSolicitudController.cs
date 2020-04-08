@@ -389,95 +389,96 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult Save(IEnumerable<HttpPostedFileBase> files, int solicitudid, int useremployeeid)
-        {
-            try
-            {
-                int solicitudId = solicitudid;
-                int userEmployeeId = useremployeeid;
-                int ccmsId = 0;
-                int parametro = 0;
-                string detalle = string.Empty;
+        //////public JsonResult Save(IEnumerable<HttpPostedFileBase> files, int solicitudid, int useremployeeid)
+        //////{
+        //////    try
+        //////    {
+        //////        int solicitudId = solicitudid;
+        //////        int userEmployeeId = useremployeeid;
+        //////        int ccmsId = 0;
+        //////        //string parametro = string.Empty;
+        //////        //decimal detalle = 0;
 
-                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
-                resultado.Value = String.Empty;
+        //////        ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
+        //////        resultado.Value = String.Empty;
 
-                var lista = new List<CargaMasivaRegistroViewModel>();
+        //////        var lista = new List<CargaMasivaRegistroViewModel>();
 
-                if (files != null)
-                {
-                    foreach (var file in files)
-                    {
-                        if (file != null)
-                        {
-                            var fileName = Path.GetFileName(file.FileName);
-                            var ext = Path.GetExtension(fileName);
+        //////        if (files != null)
+        //////        {
+        //////            foreach (var file in files)
+        //////            {
+        //////                if (file != null)
+        //////                {
+        //////                    var fileName = Path.GetFileName(file.FileName);
+        //////                    var ext = Path.GetExtension(fileName);
 
-                            if (ext.ToUpper() == ".CSV")
-                            {
-                                var postedFile = file;
+        //////                    if (ext.ToUpper() == ".CSV")
+        //////                    {
+        //////                        var postedFile = file;
 
-                                if (postedFile.ContentLength > 0)
-                                {
+        //////                        if (postedFile.ContentLength > 0)
+        //////                        {
 
-                                    using (var csvReader = new StreamReader(postedFile.InputStream))
-                                    {
+        //////                            using (var csvReader = new StreamReader(postedFile.InputStream))
+        //////                            {
 
-                                        using (var csv = new CsvReader(csvReader))
-                                        {
+        //////                                using (var csv = new CsvReader(csvReader))
+        //////                                {
 
-                                            while (csv.Read())
-                                            {
-                                                var objeton = new CargaMasivaRegistroViewModel();
+        //////                                    while (csv.Read())
+        //////                                    {
+        //////                                        var objeton = new CargaMasivaRegistroViewModel();
 
-                                                if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
-                                                {
-                                                    objeton.parametro = parametro;
-                                                    objeton.detalle = detalle;
-                                                    objeton.solicitudId = solicitudId;
-                                                    objeton.userEmployeeId = userEmployeeId;
-                                                    objeton.catEmployeeId = ccmsId;
-                                                    objeton.estatus = string.Empty;
+        //////                                        if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out string parametro) && csv.TryGetField(2, out decimal detalle))
+        //////                                        {
+        //////                                            objeton.parametro = parametro;
+        //////                                            objeton.detalle = detalle;
+        //////                                            objeton.solicitudId = solicitudId;
+        //////                                            objeton.userEmployeeId = userEmployeeId;
+        //////                                            objeton.catEmployeeId = ccmsId;
+        //////                                            objeton.estatus = string.Empty;
 
-                                                    lista.Add(objeton);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+        //////                                            lista.Add(objeton);
+        //////                                        }
+        //////                                    }
+        //////                                }
+        //////                            }
+        //////                        }
 
 
-                                using (ASNContext context = new ASNContext())
-                                {
+        //////                        using (ASNContext context = new ASNContext())
+        //////                        {
 
-                                    foreach (var obj in lista)
-                                    {
-                                        if (obj.solicitudId == -1) {
-                                            obj.solicitudId = solicitudId;
-                                        }
-                                        context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
-                                        //context.CatEmpleadosSolicitudesSi(obj.solicitudId, obj.catEmployeeId,);
-                                        // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
-                                        obj.estatus = resultado.Value.ToString();
+        //////                            foreach (var obj in lista)
+        //////                            {
+        //////                                if (obj.solicitudId == -1)
+        //////                                {
+        //////                                    obj.solicitudId = solicitudId;
+        //////                                }
+        //////                                ////////context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
+        //////                                //////context.CatSolicitudSimpleSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, string.Empty, obj.parametro, obj.detalle, resultado);
+        //////                                //////// context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
+        //////                                //////obj.estatus = resultado.Value.ToString();
 
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+        //////                            }
+        //////                        }
+        //////                    }
+        //////                }
+        //////            }
+        //////        }
 
-                return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(e, usuario.UserInfo.Ident.Value);
+        //////        return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+        //////    }
+        //////    catch (Exception e)
+        //////    {
+        //////        MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+        //////        LogError log = new LogError();
+        //////        log.RecordError(e, usuario.UserInfo.Ident.Value);
 
-                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
-            }
-        }
+        //////        return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+        //////    }
+        //////}
 
         public JsonResult GetConceptosMotivosCMB()
         {
@@ -764,103 +765,106 @@ namespace ASN.Controllers
 
 
 
-            try
-            {
-                int solicitudId = 0;
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                int.TryParse(User.Identity.Name, out int userEmployeeId);
-                //int userEmployeeId = usuario.UserNumerito;
+            //////try
+            //////{
+            //////    int solicitudIdActual = 0;
+            //////    MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            //////    int.TryParse(User.Identity.Name, out int userEmployeeId);
+            //////    //int userEmployeeId = usuario.UserNumerito;
 
-                int ccmsId = 0;
-                int parametro = 0;
-                string detalle = string.Empty;
+            //////    int ccmsId = 0;
+            //////    string parametro = string.Empty;
+            //////    decimal detalle = 0;
 
-                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
-                resultado.Value = String.Empty;
+            //////    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
+            //////    ObjectParameter solicitudId = new ObjectParameter("Estatus", typeof(int));
+            //////    resultado.Value = String.Empty;
 
-                var lista = new List<CargaMasivaRegistroViewModel>();
+            //////    var lista = new List<CargaMasivaRegistroViewModel>();
 
-                if (files != null)
-                {
-                    foreach (var file in files)
-                    {
-                        if (file != null)
-                        {
-                            var fileName = Path.GetFileName(file.FileName);
-                            var ext = Path.GetExtension(fileName);
+            //////    if (files != null)
+            //////    {
+            //////        foreach (var file in files)
+            //////        {
+            //////            if (file != null)
+            //////            {
+            //////                var fileName = Path.GetFileName(file.FileName);
+            //////                var ext = Path.GetExtension(fileName);
 
-                            if (ext.ToUpper() == ".CSV")
-                            {
-                                var postedFile = file;
+            //////                if (ext.ToUpper() == ".CSV")
+            //////                {
+            //////                    var postedFile = file;
 
-                                if (postedFile.ContentLength > 0)
-                                {
+            //////                    if (postedFile.ContentLength > 0)
+            //////                    {
 
-                                    using (var csvReader = new StreamReader(postedFile.InputStream))
-                                    {
+            //////                        using (var csvReader = new StreamReader(postedFile.InputStream))
+            //////                        {
 
-                                        using (var csv = new CsvReader(csvReader))
-                                        {
+            //////                            using (var csv = new CsvReader(csvReader))
+            //////                            {
 
-                                            while (csv.Read())
-                                            {
-                                                var objeton = new CargaMasivaRegistroViewModel();
+            //////                                while (csv.Read())
+            //////                                {
+            //////                                    var objeton = new CargaMasivaRegistroViewModel();
 
-                                                if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
-                                                {
-                                                    objeton.parametro = parametro;
-                                                    objeton.detalle = detalle;
-                                                    objeton.solicitudId = solicitudId;
-                                                    objeton.userEmployeeId = userEmployeeId;
-                                                    objeton.catEmployeeId = ccmsId;
-                                                    objeton.estatus = string.Empty;
+            //////                                    if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
+            //////                                    {
+            //////                                        objeton.parametro = parametro;
+            //////                                        objeton.detalle = detalle;
+            //////                                        objeton.solicitudId = -1;
+            //////                                        objeton.userEmployeeId = userEmployeeId;
+            //////                                        objeton.catEmployeeId = ccmsId;
+            //////                                        objeton.estatus = string.Empty;
 
-                                                    lista.Add(objeton);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+            //////                                        lista.Add(objeton);
+            //////                                    }
+            //////                                }
+            //////                            }
+            //////                        }
+            //////                    }
 
 
-                                using (ASNContext context = new ASNContext())
-                                {
+            //////                    using (ASNContext context = new ASNContext())
+            //////                    {
 
-                                    foreach (var obj in lista)
-                                    {
-                                        if (obj.solicitudId == -1)
-                                        {
-                                            obj.solicitudId = solicitudId;
-                                        }
-                                        //context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
-                                        context.CatSolicitudSimpleSi(obj.solicitudId, obj.catEmployeeId);
-                                        // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
-                                        obj.estatus = resultado.Value.ToString();
+            //////                        foreach (var obj in lista)
+            //////                        {
+            //////                            if (obj.solicitudId == -1)
+            //////                            {
+            //////                                obj.solicitudId = solicitudIdActual;
 
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            //////                            }
+            //////                            //context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
+            //////                            context.CatSolicitudSimpleSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitudId, resultado);
+            //////                            // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
+            //////                            int.TryParse(solicitudId.Value.ToString(), out solicitudIdActual);
+            //////                            obj.estatus = resultado.Value.ToString();
 
-                return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(e, usuario.UserInfo.Ident.Value);
+            //////                        }
+            //////                    }
+            //////                }
+            //////            }
+            //////        }
+            //////    }
 
-                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
-            }
+            //////    return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+            //////}
+            //////catch (Exception e)
+            //////{
+            //////    MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            //////    LogError log = new LogError();
+            //////    log.RecordError(e, usuario.UserInfo.Ident.Value);
+
+            //////    return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+            //////}
 
 
 
 
 
             // Return an empty string to signify success
-            //return Content("");
+            return Content("");
         }
 
         //public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int conceptoMotivoId, int responsableId, int periododOriginalId)

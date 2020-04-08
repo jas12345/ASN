@@ -439,8 +439,8 @@ namespace ASN.Controllers
                 int solicitudId = solicitudid;
                 int userEmployeeId = useremployeeid;
                 int ccmsId = 0;
-                int parametro = 0;
-                string detalle = string.Empty;
+                string parametro = string.Empty;
+                decimal detalle = 0;
 
                 ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
                 resultado.Value = String.Empty;
@@ -469,42 +469,42 @@ namespace ASN.Controllers
                                         using (var csv = new CsvReader(csvReader))
                                         {
 
-                                            while (csv.Read())
-                                            {
+                                            //while (csv.Read())
+                                            //{
 
-                                                var objeton = new CargaMasivaRegistroViewModel();
+                                            //    var objeton = new CargaMasivaRegistroViewModel();
 
-                                                if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
-                                                {
+                                            //    if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out string parametro) && csv.TryGetField(2, out decimal detalle))
+                                            //    {
 
-                                                    objeton.parametro = parametro;
-                                                    objeton.detalle = detalle;
-                                                    objeton.solicitudId = solicitudId;
-                                                    objeton.userEmployeeId = userEmployeeId;
-                                                    objeton.catEmployeeId = ccmsId;
-                                                    objeton.estatus = string.Empty;
+                                            //        objeton.parametro = parametro;
+                                            //        objeton.detalle = detalle;
+                                            //        objeton.solicitudId = solicitudId;
+                                            //        objeton.userEmployeeId = userEmployeeId;
+                                            //        objeton.catEmployeeId = ccmsId;
+                                            //        objeton.estatus = string.Empty;
 
-                                                    lista.Add(objeton);
+                                            //        lista.Add(objeton);
 
-                                                }
-                                            }
+                                            //    }
+                                            //}
                                         }
                                     }
                                 }
 
 
-                                using (ASNContext context = new ASNContext())
-                                {
+                                //using (ASNContext context = new ASNContext())
+                                //{
 
-                                    foreach (var obj in lista)
-                                    {
-                                        context.ProcesaSolicitudEmpleados(obj.solicitudId,obj.catEmployeeId,string.Empty,obj.userEmployeeId,string.Empty,obj.parametro,obj.detalle,resultado);
-                                        //context.CatEmpleadosSolicitudesSi(obj.solicitudId, obj.catEmployeeId,);
-                                        // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
-                                        obj.estatus = resultado.Value.ToString();
+                                //    foreach (var obj in lista)
+                                //    {
+                                //        context.ProcesaSolicitudEmpleados(obj.solicitudId,obj.catEmployeeId,string.Empty,obj.userEmployeeId,string.Empty,obj.parametro,obj.detalle,resultado);
+                                //        //context.CatEmpleadosSolicitudesSi(obj.solicitudId, obj.catEmployeeId,);
+                                //        // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
+                                //        obj.estatus = resultado.Value.ToString();
 
-                                    }
-                                }
+                                //    }
+                                //}
                             }
                         }
                     }

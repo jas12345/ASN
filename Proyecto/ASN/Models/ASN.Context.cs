@@ -2840,7 +2840,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosCopy", perfil_IdentParameter, nombrePerfilEmpleadosParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual int CatSolicitudSimpleSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, string conceptoPS, Nullable<decimal> conceptoMonto, Nullable<int> periodoNomina_Id, Nullable<bool> active, Nullable<int> userEmployeeId, ObjectParameter folioSolicitudOut, ObjectParameter estatus)
+        public virtual int CatSolicitudSimpleSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, string conceptoPS, Nullable<decimal> conceptoMonto, Nullable<int> userEmployeeId, ObjectParameter folioSolicitudOut, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -2858,19 +2858,11 @@ namespace ASN.Models
                 new ObjectParameter("ConceptoMonto", conceptoMonto) :
                 new ObjectParameter("ConceptoMonto", typeof(decimal));
     
-            var periodoNomina_IdParameter = periodoNomina_Id.HasValue ?
-                new ObjectParameter("PeriodoNomina_Id", periodoNomina_Id) :
-                new ObjectParameter("PeriodoNomina_Id", typeof(int));
-    
-            var activeParameter = active.HasValue ?
-                new ObjectParameter("Active", active) :
-                new ObjectParameter("Active", typeof(bool));
-    
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudSimpleSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, periodoNomina_IdParameter, activeParameter, userEmployeeIdParameter, folioSolicitudOut, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudSimpleSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, folioSolicitudOut, estatus);
         }
     }
 }

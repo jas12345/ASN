@@ -652,8 +652,6 @@
           <Parameter Name="EmployeeId" Type="int" Mode="In" />
           <Parameter Name="ConceptoPS" Type="varchar" Mode="In" />
           <Parameter Name="ConceptoMonto" Type="decimal" Mode="In" />
-          <Parameter Name="PeriodoNomina_Id" Type="int" Mode="In" />
-          <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="FolioSolicitudOut" Type="int" Mode="InOut" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
@@ -1635,8 +1633,6 @@
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoPS" Mode="In" Type="String" />
             <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
-            <Parameter Name="PeriodoNomina_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="FolioSolicitudOut" Mode="InOut" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
