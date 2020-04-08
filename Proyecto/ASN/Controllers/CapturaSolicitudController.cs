@@ -767,7 +767,10 @@ namespace ASN.Controllers
             try
             {
                 int solicitudId = 0;
-                int userEmployeeId = useremployeeid;
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                int.TryParse(User.Identity.Name, out int userEmployeeId);
+                //int userEmployeeId = usuario.UserNumerito;
+
                 int ccmsId = 0;
                 int parametro = 0;
                 string detalle = string.Empty;
@@ -829,8 +832,8 @@ namespace ASN.Controllers
                                         {
                                             obj.solicitudId = solicitudId;
                                         }
-                                        context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
-                                        //context.CatEmpleadosSolicitudesSi(obj.solicitudId, obj.catEmployeeId,);
+                                        //context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
+                                        context.CatSolicitudSimpleSi(obj.solicitudId, obj.catEmployeeId);
                                         // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
                                         obj.estatus = resultado.Value.ToString();
 

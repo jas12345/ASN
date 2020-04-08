@@ -647,6 +647,17 @@
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatSolicitudSimpleSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="ConceptoPS" Type="varchar" Mode="In" />
+          <Parameter Name="ConceptoMonto" Type="decimal" Mode="In" />
+          <Parameter Name="PeriodoNomina_Id" Type="int" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="FolioSolicitudOut" Type="int" Mode="InOut" />
+          <Parameter Name="Estatus" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="CatTipoConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatTiposAccesoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatTiposConsecutivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -1617,6 +1628,17 @@
             <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
             <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatSolicitudSimpleSi">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoPS" Mode="In" Type="String" />
+            <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
+            <Parameter Name="PeriodoNomina_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="FolioSolicitudOut" Mode="InOut" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -4189,6 +4211,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosCopy" FunctionName="ASNModel.Store.CatPerfilEmpleadosCopy" />
+          <FunctionImportMapping FunctionImportName="CatSolicitudSimpleSi" FunctionName="ASNModel.Store.CatSolicitudSimpleSi" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
