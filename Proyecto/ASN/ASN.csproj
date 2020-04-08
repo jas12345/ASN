@@ -954,6 +954,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Evidencias\" />
     <Folder Include="Views\ResponsableDeSolicitudes\" />
+    <Folder Include="Views\Upload\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>

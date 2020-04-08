@@ -746,118 +746,114 @@ namespace ASN.Controllers
 
         public ActionResult Async_Save(IEnumerable<HttpPostedFileBase> files)
         {
-            // The Name of the Upload component is "files"
-            if (files != null)
-            {
-                foreach (var file in files)
-                {
-                    // Some browsers send file names with full path.
-                    // We are only interested in the file name.
-                    var fileName = Path.GetFileName(file.FileName);
-                    var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
-
-                    // The files are not actually saved in this demo
-                    file.SaveAs(physicalPath);
-                }
-            }
-
-
-
-
-
-            //////try
+            //////// The Name of the Upload component is "files"
+            //////if (files != null)
             //////{
-            //////    int solicitudIdActual = 0;
-            //////    MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-            //////    int.TryParse(User.Identity.Name, out int userEmployeeId);
-            //////    //int userEmployeeId = usuario.UserNumerito;
-
-            //////    int ccmsId = 0;
-            //////    string parametro = string.Empty;
-            //////    decimal detalle = 0;
-
-            //////    ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
-            //////    ObjectParameter solicitudId = new ObjectParameter("Estatus", typeof(int));
-            //////    resultado.Value = String.Empty;
-
-            //////    var lista = new List<CargaMasivaRegistroViewModel>();
-
-            //////    if (files != null)
+            //////    foreach (var file in files)
             //////    {
-            //////        foreach (var file in files)
-            //////        {
-            //////            if (file != null)
-            //////            {
-            //////                var fileName = Path.GetFileName(file.FileName);
-            //////                var ext = Path.GetExtension(fileName);
+            //////        // Some browsers send file names with full path.
+            //////        // We are only interested in the file name.
+            //////        var fileName = Path.GetFileName(file.FileName);
+            //////        var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
 
-            //////                if (ext.ToUpper() == ".CSV")
-            //////                {
-            //////                    var postedFile = file;
-
-            //////                    if (postedFile.ContentLength > 0)
-            //////                    {
-
-            //////                        using (var csvReader = new StreamReader(postedFile.InputStream))
-            //////                        {
-
-            //////                            using (var csv = new CsvReader(csvReader))
-            //////                            {
-
-            //////                                while (csv.Read())
-            //////                                {
-            //////                                    var objeton = new CargaMasivaRegistroViewModel();
-
-            //////                                    if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
-            //////                                    {
-            //////                                        objeton.parametro = parametro;
-            //////                                        objeton.detalle = detalle;
-            //////                                        objeton.solicitudId = -1;
-            //////                                        objeton.userEmployeeId = userEmployeeId;
-            //////                                        objeton.catEmployeeId = ccmsId;
-            //////                                        objeton.estatus = string.Empty;
-
-            //////                                        lista.Add(objeton);
-            //////                                    }
-            //////                                }
-            //////                            }
-            //////                        }
-            //////                    }
-
-
-            //////                    using (ASNContext context = new ASNContext())
-            //////                    {
-
-            //////                        foreach (var obj in lista)
-            //////                        {
-            //////                            if (obj.solicitudId == -1)
-            //////                            {
-            //////                                obj.solicitudId = solicitudIdActual;
-
-            //////                            }
-            //////                            //context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
-            //////                            context.CatSolicitudSimpleSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitudId, resultado);
-            //////                            // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
-            //////                            int.TryParse(solicitudId.Value.ToString(), out solicitudIdActual);
-            //////                            obj.estatus = resultado.Value.ToString();
-
-            //////                        }
-            //////                    }
-            //////                }
-            //////            }
-            //////        }
+            //////        // The files are not actually saved in this demo
+            //////        file.SaveAs(physicalPath);
             //////    }
-
-            //////    return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
             //////}
-            //////catch (Exception e)
-            //////{
-            //////    MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-            //////    LogError log = new LogError();
-            //////    log.RecordError(e, usuario.UserInfo.Ident.Value);
 
-            //////    return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
-            //////}
+            try
+            {
+                int solicitudIdActual = 0;
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                int.TryParse(User.Identity.Name, out int userEmployeeId);
+                //int userEmployeeId = usuario.UserNumerito;
+
+                int ccmsId = 0;
+                string parametro = string.Empty;
+                decimal detalle = 0;
+
+                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
+                ObjectParameter solicitudId = new ObjectParameter("Estatus", typeof(int));
+                resultado.Value = String.Empty;
+
+                var lista = new List<CargaMasivaRegistroViewModel>();
+
+                if (files != null)
+                {
+                    foreach (var file in files)
+                    {
+                        if (file != null)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var ext = Path.GetExtension(fileName);
+
+                            if (ext.ToUpper() == ".CSV")
+                            {
+                                var postedFile = file;
+
+                                if (postedFile.ContentLength > 0)
+                                {
+
+                                    using (var csvReader = new StreamReader(postedFile.InputStream))
+                                    {
+
+                                        using (var csv = new CsvReader(csvReader))
+                                        {
+
+                                            while (csv.Read())
+                                            {
+                                                var objeton = new CargaMasivaRegistroViewModel();
+
+                                                if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
+                                                {
+                                                    objeton.parametro = parametro;
+                                                    objeton.detalle = detalle;
+                                                    objeton.solicitudId = -1;
+                                                    objeton.userEmployeeId = userEmployeeId;
+                                                    objeton.catEmployeeId = ccmsId;
+                                                    objeton.estatus = string.Empty;
+
+                                                    lista.Add(objeton);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                using (ASNContext context = new ASNContext())
+                                {
+
+                                    foreach (var obj in lista)
+                                    {
+                                        if (obj.solicitudId == -1)
+                                        {
+                                            obj.solicitudId = solicitudIdActual;
+
+                                        }
+                                        //context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
+                                        context.CatSolicitudSimpleSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitudId, resultado);
+                                        // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
+                                        int.TryParse(solicitudId.Value.ToString(), out solicitudIdActual);
+                                        obj.estatus = resultado.Value.ToString();
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(e, usuario.UserInfo.Ident.Value);
+
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+            }
 
 
 
