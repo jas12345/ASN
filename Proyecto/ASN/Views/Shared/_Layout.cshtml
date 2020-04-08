@@ -84,6 +84,7 @@
                                 <li>@Html.ActionLink("Motivos de Incidencia", "index", "ConceptosMotivos")</li>
                                 <li>@Html.ActionLink("Perfil de Empleados", "Index", "PerfilEmpleados")</li>
                                 <li>@Html.ActionLink("Perfil / Accesos", "Index", "PerfilEmpleadosAccesos")</li>
+                                <li>@Html.ActionLink("Solicitudes / Carga Masiva", "Index", "Solicitudes")</li>
                             </ul>
                         </li>
                     }
@@ -109,6 +110,7 @@
                     if (User.IsInRole("Responsable"))
                     {
                         <li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>
+                        <li>@Html.ActionLink("Solicitudes / Carga Masiva", "Index", "Solicitudes")</li>
                         @*<li><a href="javascript:generaNotificaciones();">Notificaciones</a></li>*@
                     }
 

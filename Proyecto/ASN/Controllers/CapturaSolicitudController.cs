@@ -1,10 +1,12 @@
 ﻿using ASN.Models;
+using CsvHelper;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Core.Objects;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -387,6 +389,96 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult Save(IEnumerable<HttpPostedFileBase> files, int solicitudid, int useremployeeid)
+        {
+            try
+            {
+                int solicitudId = solicitudid;
+                int userEmployeeId = useremployeeid;
+                int ccmsId = 0;
+                int parametro = 0;
+                string detalle = string.Empty;
+
+                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
+                resultado.Value = String.Empty;
+
+                var lista = new List<CargaMasivaRegistroViewModel>();
+
+                if (files != null)
+                {
+                    foreach (var file in files)
+                    {
+                        if (file != null)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var ext = Path.GetExtension(fileName);
+
+                            if (ext.ToUpper() == ".CSV")
+                            {
+                                var postedFile = file;
+
+                                if (postedFile.ContentLength > 0)
+                                {
+
+                                    using (var csvReader = new StreamReader(postedFile.InputStream))
+                                    {
+
+                                        using (var csv = new CsvReader(csvReader))
+                                        {
+
+                                            while (csv.Read())
+                                            {
+                                                var objeton = new CargaMasivaRegistroViewModel();
+
+                                                if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
+                                                {
+                                                    objeton.parametro = parametro;
+                                                    objeton.detalle = detalle;
+                                                    objeton.solicitudId = solicitudId;
+                                                    objeton.userEmployeeId = userEmployeeId;
+                                                    objeton.catEmployeeId = ccmsId;
+                                                    objeton.estatus = string.Empty;
+
+                                                    lista.Add(objeton);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                using (ASNContext context = new ASNContext())
+                                {
+
+                                    foreach (var obj in lista)
+                                    {
+                                        if (obj.solicitudId == -1) {
+                                            obj.solicitudId = solicitudId;
+                                        }
+                                        context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
+                                        //context.CatEmpleadosSolicitudesSi(obj.solicitudId, obj.catEmployeeId,);
+                                        // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
+                                        obj.estatus = resultado.Value.ToString();
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(e, usuario.UserInfo.Ident.Value);
+
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult GetConceptosMotivosCMB()
         {
             try
@@ -481,6 +573,37 @@ namespace ASN.Controllers
                         , idAdmin
                         , folioSolicitudOut
                         , resultado);
+
+                    var lstResultado = resultado.Value.ToString().Split('_');
+                    int.TryParse(lstResultado[0], out res);
+                    var resultadoAccion = "";
+                    int SolicitudId = 0;
+                    object Error = null;
+
+                    //////if (FolioSolicitud != -1)
+                    //////{
+                    //////     if (files2 != null)
+                    //////    {
+                    //////        lista = Save(files2, int.Parse(lstResultado[1].ToString()), ccmsidAdmin);
+                    //////    }
+                    //////}
+
+                    if (res == -1)
+                    {
+                        resultadoAccion = "Ya existe un concepto con la misma descripción.";
+                        Error = new { Errors = resultadoAccion };
+                        ModelState.AddModelError("error", "Ya existe un concepto con la misma descripción.");
+                    }
+                    else
+                    {
+                        if (lstResultado.Length > 1)
+                        {
+                            SolicitudId = int.Parse(lstResultado[1].ToString());
+                        }
+                    }
+
+                    ///result = new { Id = SolicitudId, type = "create", responseError = Error, listaEmpleados = lista, status = res.ToString() };
+
 
                     int.TryParse(resultado.Value.ToString(), out res);
                     int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
@@ -613,6 +736,128 @@ namespace ASN.Controllers
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json("");
             }
+        }
+
+        //public ActionResult Right_To_Left_Support()
+        //{
+        //    return View();
+        //}
+
+        public ActionResult Async_Save(IEnumerable<HttpPostedFileBase> files)
+        {
+            // The Name of the Upload component is "files"
+            if (files != null)
+            {
+                foreach (var file in files)
+                {
+                    // Some browsers send file names with full path.
+                    // We are only interested in the file name.
+                    var fileName = Path.GetFileName(file.FileName);
+                    var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+
+                    // The files are not actually saved in this demo
+                    file.SaveAs(physicalPath);
+                }
+            }
+
+
+
+
+
+            try
+            {
+                int solicitudId = 0;
+                int userEmployeeId = useremployeeid;
+                int ccmsId = 0;
+                int parametro = 0;
+                string detalle = string.Empty;
+
+                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
+                resultado.Value = String.Empty;
+
+                var lista = new List<CargaMasivaRegistroViewModel>();
+
+                if (files != null)
+                {
+                    foreach (var file in files)
+                    {
+                        if (file != null)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var ext = Path.GetExtension(fileName);
+
+                            if (ext.ToUpper() == ".CSV")
+                            {
+                                var postedFile = file;
+
+                                if (postedFile.ContentLength > 0)
+                                {
+
+                                    using (var csvReader = new StreamReader(postedFile.InputStream))
+                                    {
+
+                                        using (var csv = new CsvReader(csvReader))
+                                        {
+
+                                            while (csv.Read())
+                                            {
+                                                var objeton = new CargaMasivaRegistroViewModel();
+
+                                                if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
+                                                {
+                                                    objeton.parametro = parametro;
+                                                    objeton.detalle = detalle;
+                                                    objeton.solicitudId = solicitudId;
+                                                    objeton.userEmployeeId = userEmployeeId;
+                                                    objeton.catEmployeeId = ccmsId;
+                                                    objeton.estatus = string.Empty;
+
+                                                    lista.Add(objeton);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                using (ASNContext context = new ASNContext())
+                                {
+
+                                    foreach (var obj in lista)
+                                    {
+                                        if (obj.solicitudId == -1)
+                                        {
+                                            obj.solicitudId = solicitudId;
+                                        }
+                                        context.ProcesaSolicitudEmpleados(obj.solicitudId, obj.catEmployeeId, string.Empty, obj.userEmployeeId, string.Empty, obj.parametro, obj.detalle, resultado);
+                                        //context.CatEmpleadosSolicitudesSi(obj.solicitudId, obj.catEmployeeId,);
+                                        // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
+                                        obj.estatus = resultado.Value.ToString();
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(e, usuario.UserInfo.Ident.Value);
+
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+            }
+
+
+
+
+
+            // Return an empty string to signify success
+            //return Content("");
         }
 
         //public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int conceptoMotivoId, int responsableId, int periododOriginalId)
