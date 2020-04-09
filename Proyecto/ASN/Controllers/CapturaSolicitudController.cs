@@ -763,7 +763,7 @@ namespace ASN.Controllers
 
             try
             {
-                int solicitudIdActual = 0;
+                int solicitudIdActual = -1;
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 int.TryParse(User.Identity.Name, out int userEmployeeId);
                 //int userEmployeeId = usuario.UserNumerito;
@@ -772,9 +772,9 @@ namespace ASN.Controllers
                 string parametro = string.Empty;
                 decimal detalle = 0;
 
-                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(string));
-                ObjectParameter solicitudId = new ObjectParameter("Estatus", typeof(int));
-                resultado.Value = String.Empty;
+                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                ObjectParameter solicitudId = new ObjectParameter("FolioSolicitudOut", typeof(int));
+                resultado.Value = -1;
 
                 var lista = new List<CargaMasivaRegistroViewModel>();
 
@@ -811,7 +811,7 @@ namespace ASN.Controllers
                                                     objeton.solicitudId = -1;
                                                     objeton.userEmployeeId = userEmployeeId;
                                                     objeton.catEmployeeId = ccmsId;
-                                                    objeton.estatus = string.Empty;
+                                                    objeton.estatus = -1;
 
                                                     lista.Add(objeton);
                                                 }
@@ -835,8 +835,7 @@ namespace ASN.Controllers
                                         context.CatSolicitudSimpleSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitudId, resultado);
                                         // context.CatSolicitudEmpleadosDetalleMasivoSi(obj.solicitudId, obj.catEmployeeId, obj.detalle, obj.userEmployeeId, resultado);// obj.parametro,
                                         int.TryParse(solicitudId.Value.ToString(), out solicitudIdActual);
-                                        obj.estatus = resultado.Value.ToString();
-
+                                        //int.TryParse(resultado.Value, out obj.estatus);
                                     }
                                 }
                             }

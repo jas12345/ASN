@@ -7,7 +7,7 @@ namespace ASN.Models
 {
     public class CargaMasivaRegistroViewModel
     {
-        public string estatus { get; set; }
+        public int estatus { get; set; }
         public string parametro { get; set; }
         public decimal detalle { get; set; }
         public int solicitudId { get; set; }
