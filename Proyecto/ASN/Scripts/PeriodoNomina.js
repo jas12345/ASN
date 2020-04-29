@@ -289,15 +289,15 @@ function delimitaRango() {
     dtFinal = new Date(dtFechaFinal + " 23:55");
     dtFinal.setDate(dtFinal.getDate());
 
-        FInicio.setOptions({
-            max: dtFinal,
-            min: dtFInicio
-        });
+        //FInicio.setOptions({
+        //    max: dtFinal,
+        //    min: dtFInicio
+        //});
 
-        FFin.setOptions({
-            max: dtFinal,
-            min: dtFInicio
-        });
+        //FFin.setOptions({
+        //    max: dtFinal,
+        //    min: dtFInicio
+        //});
 }
 
 function tipoPerio() {

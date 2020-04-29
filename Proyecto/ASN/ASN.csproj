@@ -510,6 +510,7 @@
     <Compile Include="Models\CatUserInfoSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KendoDropDownListSelectedViewModel.cs" />
     <Compile Include="Models\DescargaArchivoSolicitudSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -721,6 +722,7 @@
     </Content>
     <Content Include="Scripts\Administradores.js" />
     <Content Include="Scripts\Comentarios.js" />
+    <Content Include="Scripts\DescargaArchivos.js" />
     <Content Include="Scripts\Reportero.js" />
     <Content Include="Scripts\ReporteAuditoria.js" />
     <Content Include="Scripts\Notificaciones.js" />

@@ -170,6 +170,11 @@ namespace ASN
             //ReportePerfil
             bundles.Add(new ScriptBundle("~/bundles/ReportePerfil").Include(
             "~/Scripts/ReportePerfil.js"));
+
+            //DescargaArchivos
+            bundles.Add(new ScriptBundle("~/bundles/DescargaArchivos").Include(
+            "~/Scripts/DescargaArchivos.js"));
+            
         }
     }
 }

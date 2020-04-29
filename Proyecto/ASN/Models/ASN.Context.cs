@@ -2618,7 +2618,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteAuditoriasDetalleAutorizadoresSel_Result>("ReporteAuditoriasDetalleAutorizadoresSel", folioIdParameter);
         }
     
-        public virtual ObjectResult<DescargaArchivoSolicitud_Result> DescargaArchivoSolicitud(Nullable<int> empleadoId, Nullable<int> activos)
+        public virtual ObjectResult<DescargaArchivoSolicitud_Result> DescargaArchivoSolicitud(Nullable<int> empleadoId, Nullable<int> activos, Nullable<int> periodoNomina)
         {
             var empleadoIdParameter = empleadoId.HasValue ?
                 new ObjectParameter("EmpleadoId", empleadoId) :
@@ -2628,7 +2628,11 @@ namespace ASN.Models
                 new ObjectParameter("Activos", activos) :
                 new ObjectParameter("Activos", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DescargaArchivoSolicitud_Result>("DescargaArchivoSolicitud", empleadoIdParameter, activosParameter);
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DescargaArchivoSolicitud_Result>("DescargaArchivoSolicitud", empleadoIdParameter, activosParameter, periodoNominaParameter);
         }
     
         public virtual ObjectResult<ReporteGeneralDetalleSel_Result> ReporteGeneralDetalleSel(Nullable<int> folioId)

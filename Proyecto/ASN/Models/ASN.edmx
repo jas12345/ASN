@@ -685,6 +685,7 @@
         <Function Name="DescargaArchivoSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="EmpleadoId" Type="int" Mode="In" />
           <Parameter Name="Activos" Type="int" Mode="In" />
+          <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
         </Function>
         <Function Name="DescargaArchivoSolicitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Activos" Type="bit" Mode="In" />
@@ -1566,6 +1567,7 @@
           <FunctionImport Name="DescargaArchivoSolicitud" ReturnType="Collection(ASNModel.DescargaArchivoSolicitud_Result)">
             <Parameter Name="EmpleadoId" Mode="In" Type="Int32" />
             <Parameter Name="Activos" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteGeneralDetalleSel" ReturnType="Collection(ASNModel.ReporteGeneralDetalleSel_Result)">
           <Parameter Name="FolioId" Mode="In" Type="Int32" />

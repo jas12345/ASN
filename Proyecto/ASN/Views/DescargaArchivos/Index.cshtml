@@ -1,8 +1,18 @@
-﻿
+﻿@model ASN.Models.KendoDropDownListSelectedViewModel;
+
 @{
     ViewBag.Title = "Index";
+    ViewBag.strPeriodoNomina = "";
+    ViewBag.intIdPeriodoNomina = 0;
+
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Model.IdPeriodoNomina = 0;
+    Model.PeriodoNomina = "";
+
 }
+@*var tmpViewBag = Html.Raw(Json.Encode(ViewBag.MyObject));
+    var myOptions = [];*@
+
 <style>
     .center {
         display: block;
@@ -16,21 +26,50 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-<div class="container-fluid">
-    <div class="col-lg-12 col-md-12">
-        <div class="row">
-            @Html.Label("Descarga Archivo", new { style = "font-size: 18px" })
-            @*<a href="@Url.Action("Create","Solicitudes")" data-role="button" class="k-button k-button-icontext" style="float:right; margin-right:10px;" role="button" aria-disabled="false" tabindex="0">
-                <span class="k-icon k-i-plus"></span> Crear Solicitud
-                </a>*@
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12">
+            <div class="col-lg-4">
+                @Html.Label("Período de nómina: ", new { style = "font-size: 15px" })
+                @(Html.Kendo().DropDownList()
+                        .DataSource(source => source
+                            .Custom()
+                            .Transport( tr => tr
+                                .Read(read =>
+                                    {
+                                        read.Action("GetPeriodoNominaCMB", "DescargaArchivos").Data("parametroPeriodosNominaActualPasados");
+                                    }
+                                )
+                            )
+                        )
+                        .Filter("contains")
+                        .OptionLabel("- Seleccione Periodo de Nomina - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("PeriodoNomina_Id")
+                        .SelectedIndex(1)
+                        .Enable(true)
+                        .Events(e => e.Change("onDropDownChange"))
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                    )
+            </div>
+            <div class="col-lg-6">
+                @Html.Label("Descarga Archivo", new { style = "font-size: 15px" })
+                @*<input type="button" title="Descargar" name="btnDescargar" value="Descargar" onclick="window.location.href='@Url.Action("DownloadCSV")'" />*@
+                <input type="button" title="Descargar" name="btnDescargar" value="Descargar" onclick="onClickDescargarArchivo" />
+                @*<a href="@Url.Action("Create","Solicitudes")" data-role="button" class="k-button k-button-icontext" style="float:right; margin-right:10px;" role="button" aria-disabled="false" tabindex="0">
+                    <span class="k-icon k-i-plus"></span> Crear Solicitud
+                    </a>*@
+            </div>
+            <div class="col-lg-2">
+            </div>
         </div>
-    </div>    
-    <div class="row">
-        <div class="col-lg-12">
-            <input type="button" title="Descargar" name="btnDescargar" value="Descargar" onclick="window.location.href='@Url.Action("DownloadCSV")'" />
+        <div class="row">
+            <div class="col-lg-12">
+                @Html.HiddenFor(x => x.Model.IdPeriodoNomina).Name(IdPeriodoNominaHdn)
+                @Html.HiddenFor(x => x.Model.PeriodoNomina).Name(PeriodoNominaHdn)
+            </div>
         </div>
     </div>
-</div>
 }
 else
 {
@@ -38,3 +77,12 @@ else
 
     Response.Redirect(Url.Action("Login", "Home"));
 }
+
+<script>
+    @*@Html.HiddenFor(item => item.IdPeriodoNomina)
+    @Html.HiddenFor(item => item.PeriodoNomina)*@
+    //var IdPeriodoNomina = 0;
+    //var PeriodoNomina = '';
+</script>
+
+@Scripts.Render("~/bundles/DescargaArchivos")

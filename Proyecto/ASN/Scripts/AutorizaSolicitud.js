@@ -30,7 +30,7 @@ $(document).ready(function () {
     deshabilitaControlesEdicion();
     actualizaGrid();
 
-    $("#AutorizarSolicitudALL").hide();
+    //$("#AutorizarSolicitudALL").hide();
     $("#RechazarSolicitudALL").hide();
 
     var grid = $("#gridAutorizacion").data("kendoGrid");
@@ -820,13 +820,13 @@ function onChange(e) {
         //    console.log(dataItem.ConceptoId);
         //});
         //debugger;
-        $("#AutorizarSolicitudALL").show();
+        //$("#AutorizarSolicitudALL").show();
         $("#RechazarSolicitudALL").show();
     }
     else {
         //debugger;
         this.element.find("input")[0].checked = false;
-        $("#AutorizarSolicitudALL").hide();
+        //$("#AutorizarSolicitudALL").hide();
         $("#RechazarSolicitudALL").hide();
         //console.log(rows.length);
     }
@@ -971,6 +971,57 @@ function autorizarSolicitudALL() {
         //console.log($("#gridAutorizacion").data("kendoGrid").dataItem($("#gridAutorizacion").data("kendoGrid").select()) + "_A");
     }
 }
+
+    //else {
+    //    if (confirm("Desea autorizar todos los conceptos?")) {
+    //        var notification = $("#popupNotification").data("kendoNotification");
+    //        notification.show("Conceptos Autorizados", "success");        }
+    //}
+function autorizarTodaSolicitud() {
+    //Se autoriza todos los conceptos de la solicitud independientemente del grid
+    var listaA = [];
+    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+    var algo = {
+        FolioSolicitud: $("#FolioSolicitud").val(),
+        Autorizador_Ident: usuarioCCMSID,
+        ConceptoId: 0,
+        NivelAutorizacion: 0,
+        Accion: 5
+    };
+
+    listaA.push(algo);
+
+    var listones = JSON.stringify({ 'liston': listaA });
+
+    $.when(
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: urlAutorizaSolicitud,
+            data: listones,
+            success: function () {
+                //$('#result').html('"PassThings()" successfully called.');
+                //console.log("todo bien");
+            },
+            failure: function (response) {
+                //$('#result').html(response);
+                //console.log("algo paso");
+            }
+        })
+    ).done(function () {
+        //console.log("finito_A");
+        var grid = $("#gridAutorizacion").data("kendoGrid");
+        grid._selectedIds = {};
+        grid.clearSelection();
+        calculaEstatusSolicitud();
+        calculaPeriodoNominaSolicitud();
+        actualizaGrid();
+    });
+
+}
+
 
 function rechazarSolicitudALL() {
 
