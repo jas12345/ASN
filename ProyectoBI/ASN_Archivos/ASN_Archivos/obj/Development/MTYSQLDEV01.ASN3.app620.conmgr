@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="MTYSQLDEV01.ASN3.app620"
+  DTS:DTSID="{31B95366-98DA-440A-8285-C7A9A7AAA736}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=MTYSQLDEV01;User ID=app620;Initial Catalog=ASN3;Persist Security Info=True;Application Name=SSIS-ASN_Archivos-{31B95366-98DA-440A-8285-C7A9A7AAA736}MTYSQLDEV01.ASN3.app620;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

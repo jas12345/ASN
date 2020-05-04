@@ -22,7 +22,7 @@ $(window).resize(function () {
 
 $(document).ready(function () {
     $(window).trigger("resize");
-    debugger;
+    //debugger;
     FolioSolicitud = $("#FolioSolicitud").val();
     calculaEstatusSolicitud();
     deshabilitaControlesEdicion();
@@ -40,7 +40,7 @@ function getFolio() {
 
 function agregarSolicitud() {
     //console.log("Salvado");
-    debugger;
+    //debugger;
     //infoSolicitud();
     $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9 + "&Active=" + 1, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
@@ -60,7 +60,7 @@ function agregarSolicitud() {
 
 function autorizarSolicitud() {
     //console.log("Salvado");
-    debugger;
+    //debugger;
     //infoSolicitud();
     $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConceptoId + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 2, function (data) {
 
@@ -86,7 +86,7 @@ function autorizarSolicitud() {
 
 function rechazarSolicitud() {
     //console.log("Salvado");
-    debugger;
+    //debugger;
     //infoSolicitud();
     $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConceptoId + "&NivelAutorizacion=" + NivelAutorizacion + "&Accion=" + 3, function (data) {
 
@@ -112,7 +112,7 @@ function rechazarSolicitud() {
 
 function cancelarSolicitud() {
     //console.log("Salvado");
-    debugger;
+    //debugger;
     //infoSolicitud();
     $.post(urlCancelaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Accion=" + 4, function (data) {
 
@@ -138,7 +138,7 @@ function cancelarSolicitud() {
 
 function cerrarSolicitud() {
     //console.log("Salvado");
-    debugger;
+    //debugger;
     //infoSolicitud();
     $.post(urlCierraSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
 
@@ -164,11 +164,11 @@ function cerrarSolicitud() {
 
 function enviarSolicitud() {
     //console.log("Salvado");
-    debugger;
+    //debugger;
     //infoSolicitud();
     $.post(urlEnviaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
-        debugger;
+        //debugger;
 
         if (data.res == -1) {
             var notification = $("#popupNotification").data("kendoNotification");
@@ -179,45 +179,45 @@ function enviarSolicitud() {
         calculaEstatusSolicitud();
         deshabilitaControlesEdicion();
         actualizaGrid();
-        debugger;
+        //debugger;
     });
 }
 
 function calculaEstatusSolicitud() {
-    debugger;
+    //debugger;
     $.post(urlConsultarEstatusSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
-        debugger;
+        //debugger;
 
         if (data.res == -1) {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("Error al Calcular Estatus", "error");
         }
-        debugger;
+        //debugger;
         $("#Estatus").val(data[0].Descripcion);
-        debugger;
+        //debugger;
     });
 }
 
 function habilitaControlesEdicion() {
     var autorizadores = $("div[name='nivel']");
-    debugger;
+    //debugger;
     $(autorizadores).each(function (nivel) {
         //console.log(index + ": " + $(this).text());
         //console.log("ssss");
         if (this.id <= nivelAutorizador) {
-            debugger;
+            //debugger;
             $(this).show();
         }
         if (this.id > nivelAutorizador) {
-            debugger;
+            //debugger;
             $(this).hide();
         }
     });
 }
 
 function deshabilitaControlesEdicion() {
-    debugger;
+    //debugger;
 
     var tempDL = $("#Conceptos").data("kendoDropDownList");
     tempDL.enable(false);
@@ -241,7 +241,7 @@ function deshabilitaControlesEdicion() {
 
     //$("Conceptos").disabled = 'true';
 
-    debugger;
+    //debugger;
     //$(autorizadores).each(function (nivel) {
     //    //console.log(index + ": " + $(this).text());
     //    //console.log("ssss");
@@ -257,18 +257,18 @@ function deshabilitaControlesEdicion() {
 }
 
 function calculaEstatusSolicitud() {
-    debugger;
+    //debugger;
     FolioSolicitud = $("#FolioSolicitud").val();
 
     if (FolioSolicitud != -1) {
         $.post(urlConsultarEstatusSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
-            debugger;
+            //debugger;
 
             if (data.res == -1) {
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("Error al Calcular Estatus", "error");
             }
-            debugger;
+            //debugger;
 
             DescripcionEstatusSolicitud = data[0].Descripcion;
             ClaveEstatusSolicitud = data[0].EstatusSolicitudId;
@@ -283,7 +283,7 @@ function calculaEstatusSolicitud() {
             }
 
             $("#Estatus").val(DescripcionEstatusSolicitud);
-            debugger;
+            //debugger;
         });
     }
 }
@@ -292,11 +292,11 @@ function actualizaGrid() {
     $("#gridResponsabilidad").data("kendoGrid").dataSource.read();
     $("#gridResponsabilidad").data("kendoGrid").refresh();
     $("#Estatus").value = calculaEstatusSolicitud();
-    debugger;
+    //debugger;
 }
 
 function editarEmpleadoSolicitud(e) {
-    debugger;
+    //debugger;
     e.preventDefault(); // sho J
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
     CCMSIdResponsable = dataItem.ResponsableId;
@@ -315,14 +315,14 @@ function editarEmpleadoSolicitud(e) {
     $("#Conceptos").data("kendoDropDownList").dataSource.read(getIdent);
     $("#Conceptos").data("kendoDropDownList").refresh();
 
-    debugger;
+    //debugger;
     $("#CCMSIDSolicitado").data('kendoNumericTextBox').value(dataItem.Ident);
     //$("#CCMSIDSolicitado").data('kendoNumericTextBox').text(dataItem.Ident);
     $('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change');
 
     $("#Conceptos").data('kendoDropDownList').value(dataItem.ConceptoId);
     $('#Conceptos').data('kendoDropDownList').trigger('change');
-    debugger;
+    //debugger;
     $("#Parametro").data('kendoNumericTextBox').value(dataItem.Monto);
     $('#Parametro').data('kendoNumericTextBox').trigger('change');
 
@@ -339,7 +339,7 @@ function editarEmpleadoSolicitud(e) {
     $("#CCMSIDIncidente").data('kendoNumericTextBox').value(dataItem.ResponsableId);
     $('#CCMSIDIncidente').data('kendoNumericTextBox').trigger('change');
 
-    debugger;
+    //debugger;
     var rowIndex = $(e.currentTarget).closest("tr").index();
     var grid = $("#gridResponsabilidad").data("kendoGrid");
     grid.select("tr:eq(" + rowIndex + ")");
@@ -352,7 +352,7 @@ function borrarEmpleadoSolicitud(e) {
 
         e.preventDefault(); // sho J
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-        debugger;
+        //debugger;
         var Solicitud_Ident = dataItem.FolioSolicitud;
         var Empleado_Ident = dataItem.Ident;
         var ConceptoId = dataItem.ConceptoId;
@@ -377,7 +377,7 @@ function borrarEmpleadoSolicitud(e) {
 }
 
 function onChangeFolioSolicitud() {
-    debugger;
+    //debugger;
 
     //FolioSolicitud = data.FolioSolicitud;
     //FolioSolicitud: $("#FolioSolicitud").val();
@@ -393,7 +393,7 @@ function getIdent() {
 }
 
 function onChangeCCMSId() {
-    debugger;
+    //debugger;
 
     CCMSId = "";
     NombreEmpleado = "";
@@ -433,7 +433,7 @@ function onChangeCCMSId() {
                 $("#CCMSIDX").val(EmpCCMSId);
                 $("#CCMSIDX").text(EmpCCMSId);
 
-                debugger;
+                //debugger;
                 $("#Conceptos").data("kendoDropDownList").dataSource.read(EmpCCMSId);
                 $("#Conceptos").data("kendoDropDownList").refresh();
 
@@ -454,7 +454,7 @@ function onChangeCCMSId() {
             $("#SiteX").val(EmpLocation_Name);
             $("#SiteX").text(EmpLocation_Name);
 
-            debugger;
+            //debugger;
 
             
             //if ($("#CCMSIDIncidente").data("kendoNumericTextBox").value() == 0) {
@@ -512,7 +512,7 @@ function onChangeCCMSId() {
 }
 
 function onChangeConceptos() {
-    debugger;
+    //debugger;
 
     if ($("#Conceptos").val().length > 0 || ConceptoId.toString().length > 0) {
         //$('#grid').data('kendoGrid').dataSource.data([]);
@@ -524,12 +524,12 @@ function onChangeConceptos() {
         ConNivelesAutorizacion = ""
 
         ConConceptoIdent = $("#Conceptos").val().length > 0 ? $("#Conceptos").val() : ConceptoId;
-        debugger;
+        //debugger;
 
         //rellenaPerfilTipoAcceso();
 
         $.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent + "&eid=" + $("#CCMSIDSolicitado").val(), function (data) {
-            debugger;
+            //debugger;
             ConConceptoIdent = data[0].ConceptoId;
             ConConceptoNombre = data[0].DescripcionConcepto;
             ConParametroId = data[0].TipoconceptoId;
@@ -588,7 +588,7 @@ function onChangeMotivo() {
 }
 
 function onChangeConceptoMotivo() {
-    debugger;
+    //debugger;
 
     if ($("#ConceptoMotivo").data('kendoDropDownList').text().length > 0) {
         ConConceptoMotivo = ""
@@ -597,7 +597,7 @@ function onChangeConceptoMotivo() {
         //ConConceptoMotivo = $("#Motivo.value").text();
         ConConceptoMotivo = $("#ConceptoMotivo").data('kendoDropDownList').text();
         conceptoMotivoId = $("#ConceptoMotivo").val();
-        debugger;
+        //debugger;
 
         //rellenaPerfilTipoAcceso();
 
@@ -612,7 +612,7 @@ function onChangeConceptoMotivo() {
 }
 
 function onChangePeriodoIncidente() {
-    debugger;
+    //debugger;
 
     if ($("#PeriodoIncidente").data('kendoDropDownList').text().length > 0) {
         ConPeriodoIncidente = ""
@@ -635,7 +635,7 @@ function onChangePeriodoIncidente() {
 }
 
 function onChangeParametro() {
-    debugger;
+    //debugger;
 
     if ($("#Parametro").val().length > 0) {
         //debugger;
@@ -646,7 +646,7 @@ function onChangeParametro() {
         //ConConceptoMotivo = $("#Motivo.value").text();
         ConConceptoMotivo = $("#Parametro").val() + ' ' + ConParametroNombre;
         ConParametroConceptoMonto = $("#Parametro").val()
-        debugger;
+        //debugger;
 
         //rellenaPerfilTipoAcceso();
 
@@ -660,7 +660,7 @@ function onChangeParametro() {
 
 function onChangeCCMSIdIncidente()
 {
-    debugger;
+    //debugger;
 
     responsableId = "";
     NombreResponsableIncidente = "";
@@ -679,7 +679,7 @@ function onChangeCCMSIdIncidente()
             responsableId  = data[0].Ident
             NombreResponsableIncidente = data[0].Nombre;
 
-            debugger;
+            //debugger;
             $("#ResponsableCCMSIDX").val(responsableId );
             $("#ResponsableCCMSIDX").text(responsableId );
             $("#NombreRespoX").val(NombreResponsableIncidente);

@@ -63,13 +63,13 @@ function rellenaPerfilTipoAcceso() {
 }
 
 function onDropDownChange(e) {
-    ViewBag(strPeriodoNomina) = $("#PeriodoNomina_Id").data("ViewModel").text();
-    ViewBag(intIdPeriodoNomina) = $("#PeriodoNomina_Id").data("kendoDropDownList").value();
+    PeriodoNomina_selected = $("#PeriodoNomina_Id").data("kendoDropDownList").text();
+    PeriodoNomina_Id_selected = $("#PeriodoNomina_Id").data("kendoDropDownList").value();
 }
 
 function onClickDescargarArchivo() {
-    TempData["Data1"] = ViewBag.intIdPeriodoNomina;
-    TempData["Data2"] = ViewBag.strPeriodoNomina;
+    //TempData["Data1"] = ViewBag.intIdPeriodoNomina;
+    //TempData["Data2"] = ViewBag.strPeriodoNomina;
     window.location.href = '@Url.Action("DownloadCSV")';
 }
 

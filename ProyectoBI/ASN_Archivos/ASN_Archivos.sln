@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ASN_Archivos", "ASN_Archivos\ASN_Archivos.dtproj", "{558DA4D0-956D-4BE4-84A5-025971948FC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{558DA4D0-956D-4BE4-84A5-025971948FC1}.Development|Default.ActiveCfg = Development
+		{558DA4D0-956D-4BE4-84A5-025971948FC1}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26748876-D872-4C05-957E-BA85DBD9E981}
+	EndGlobalSection
+EndGlobal

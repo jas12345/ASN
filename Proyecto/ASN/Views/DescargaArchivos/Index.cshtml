@@ -1,15 +1,11 @@
-﻿@model ASN.Models.KendoDropDownListSelectedViewModel;
+﻿@*@model ASN.Models.KendoDropDownListSelectedViewModel; *@
 
 @{
     ViewBag.Title = "Index";
-    ViewBag.strPeriodoNomina = "";
-    ViewBag.intIdPeriodoNomina = 0;
 
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Model.IdPeriodoNomina = 0;
-    Model.PeriodoNomina = "";
-
 }
+
 @*var tmpViewBag = Html.Raw(Json.Encode(ViewBag.MyObject));
     var myOptions = [];*@
 
@@ -28,7 +24,7 @@
 {
     <div class="container-fluid">
         <div class="col-lg-12 col-md-12">
-            <div class="col-lg-4">
+            <div class="col-lg-4" style="display: none">
                 @Html.Label("Período de nómina: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().DropDownList()
                         .DataSource(source => source
@@ -54,8 +50,8 @@
             </div>
             <div class="col-lg-6">
                 @Html.Label("Descarga Archivo", new { style = "font-size: 15px" })
-                @*<input type="button" title="Descargar" name="btnDescargar" value="Descargar" onclick="window.location.href='@Url.Action("DownloadCSV")'" />*@
-                <input type="button" title="Descargar" name="btnDescargar" value="Descargar" onclick="onClickDescargarArchivo" />
+                <input type="button" title="Descargar" name="btnDescargar" value="Descargar" onclick="window.location.href='@Url.Action("DownloadCSV")'" />
+                @*<input type="button" title="Descargar" name="btnDescargar" value="Descargar" onclick="onClickDescargarArchivo" />*@
                 @*<a href="@Url.Action("Create","Solicitudes")" data-role="button" class="k-button k-button-icontext" style="float:right; margin-right:10px;" role="button" aria-disabled="false" tabindex="0">
                     <span class="k-icon k-i-plus"></span> Crear Solicitud
                     </a>*@
@@ -65,8 +61,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                @Html.HiddenFor(x => x.Model.IdPeriodoNomina).Name(IdPeriodoNominaHdn)
-                @Html.HiddenFor(x => x.Model.PeriodoNomina).Name(PeriodoNominaHdn)
+                @*@Html.HiddenFor(x => x.Model.IdPeriodoNomina).Name(IdPeriodoNominaHdn)
+                @Html.HiddenFor(x => x.Model.PeriodoNomina).Name(PeriodoNominaHdn)*@
             </div>
         </div>
     </div>
@@ -79,10 +75,8 @@ else
 }
 
 <script>
-    @*@Html.HiddenFor(item => item.IdPeriodoNomina)
-    @Html.HiddenFor(item => item.PeriodoNomina)*@
-    //var IdPeriodoNomina = 0;
-    //var PeriodoNomina = '';
+    var IdPeriodoNomina_selected = 0;
+    var PeriodoNomina_selected = '';
 </script>
 
 @Scripts.Render("~/bundles/DescargaArchivos")

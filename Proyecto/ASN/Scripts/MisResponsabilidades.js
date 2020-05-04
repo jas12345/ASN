@@ -235,7 +235,7 @@ function dateFilter(e) {
 function EditaResponsabilidad(e) {
     e.preventDefault();
     var d = this.dataItem($(e.currentTarget).closest("tr"));
-    debugger;
+    //debugger;
     //@Html.ActionLink("CapturaResponsabilidad", "Index", "CapturaResponsabilidad")
 
     window.location.href = urlEditar + "?FolioSolicitud=" + d.FolioSolicitud;
