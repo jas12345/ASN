@@ -38,39 +38,13 @@ function parametroPeriodosNominaActualPasados() {
     };
 };
 
-function rellenaPerfilTipoAcceso() {
-    //debugger;
-
-    $.post(urlPerfilTipoAcceso + "/?Perfil_Ident=" + ClavePerfil, function (data) {
-        //debugger;
-        //ClavePerfil = data[0].Perfil_Ident;
-        NombrePerfil = data[0].NombrePerfilEmpleados;
-        TipoAccesoId = data[0].TipoAccesoId;
-        TipoAcceso = data[0].Descripcion;
-        //$("#FechaCierreAnio").val(data[0].Active);
-        $("#lblPerfilNombre").val(NombrePerfil);
-        $("#lblPerfilNombre").text(NombrePerfil);
-        $("#lblAccesos").val(TipoAcceso);
-        $("#lblAccesos").text(TipoAcceso);
-
-        //@Html.Label("lblPerfilNombre", ",", new { id = "lblPerfilNombre", style = "font-weight:normal" })
-        //@Html.Label("lblAccesosNombre", ",", new { id = "lblAccesosNombre", style = "font-weight:normal" })
-
-    })
-        .fail(function (ex) {
-            console.log("fail" + ex);
-        });
-}
-
 function onDropDownChange(e) {
     PeriodoNomina_selected = $("#PeriodoNomina_Id").data("kendoDropDownList").text();
     PeriodoNomina_Id_selected = $("#PeriodoNomina_Id").data("kendoDropDownList").value();
 }
 
 function onClickDescargarArchivo() {
-    //TempData["Data1"] = ViewBag.intIdPeriodoNomina;
-    //TempData["Data2"] = ViewBag.strPeriodoNomina;
-    window.location.href = '@Url.Action("DownloadCSV")';
+    window.location.href = '../DescargaArchivos/DownloadCSV?PeriodoNominaSelected=' + PeriodoNomina_selected + '&IdPeriodoNominaSelected=' + PeriodoNomina_Id_selected;
 }
 
 function getPeriodoNomina() {
