@@ -50,7 +50,7 @@ namespace ASN.Controllers
                     {
                         //strPeriodo = string.Format("_{0}", listPeriodoNomina[0].Valor);
                         kddslv.IdPeriodoNomina = listPeriodoNomina[0].Ident;
-                        kddslv.PeriodoNomina = string.Format("_{0}", listPeriodoNomina[0].Valor); ;
+                        kddslv.PeriodoNomina = string.Format("{0}", listPeriodoNomina[0].Valor); ;
                     }
 
                     //lstActivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 1, IdPeriodoNomina).ToList();
