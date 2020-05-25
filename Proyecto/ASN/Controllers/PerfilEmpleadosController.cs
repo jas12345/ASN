@@ -28,7 +28,7 @@ namespace ASN.Controllers
                         ViewData["Ciudad"] = context.CatCityTodosCMB().ToList();
                         ViewData["Mercado"] = context.CatCompanyTodosCMB().ToList();
                         ViewData["Site"] = context.CatLocationTodosCMB().ToList();
-                        ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
+                        //ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
                         ViewData["Programa"] = context.CatProgramTodosCMB().ToList();
                         ViewData["TipoContrato"] = context.CatContractTypeTodosCMB().ToList();
                         //ViewData["Concepto"] = context.CatConceptosCMB(0).ToList();
@@ -296,14 +296,14 @@ namespace ASN.Controllers
                             City_Name = item.City_Name,
                             Location_Ident = (item.Location_Ident != null? item.Location_Ident.ToString():"-1"),
                             Location_Name = item.Location_Name,
-                            Client_Ident = (item.Client_Ident != null ? item.Client_Ident.ToString():"-1"),
+                            Client_Ident = item.Client_Ident,
                             Client_Name = item.Client_Name,
                             Program_Ident = (item.Program_Ident != null ? item.Program_Ident.ToString():"-1"),
                             Program_Name = item.Program_Name,
                             Contract_Type_Ident = (item.Contract_Type_Ident != null ? item.Contract_Type_Ident.ToString():"-1"),
                             Contract_Type = item.Contract_Type,
                             ConceptoId = (item.ConceptoId != null ? item.ConceptoId.ToString():"-1"),
-                            Concepto = item.ConceptoNombre,
+                            ConceptoNombre = item.ConceptoNombre,
                             TipoAccesoId = item.TipoAccesoId,
                             TipoAcceso =item.TipoAcceso,
                             Active = item.Active
@@ -350,7 +350,8 @@ namespace ASN.Controllers
                                 //obj.City_Ident,
                                 obj.City_Ident,
                                 (string.IsNullOrEmpty(obj.Location_Ident) ?-1:int.Parse(obj.Location_Ident)),
-                                (string.IsNullOrEmpty(obj.Client_Ident)?-1:int.Parse(obj.Client_Ident)),
+                                obj.Client_Ident,
+                                //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
                                 (string.IsNullOrEmpty(obj.Program_Ident)?-1:int.Parse(obj.Program_Ident)),
                                 (string.IsNullOrEmpty(obj.Contract_Type_Ident) ?-1:int.Parse(obj.Contract_Type_Ident)),
                                 //((Int32.TryParse(obj.ConceptoId, out i) ? i : (int?)null)),
@@ -416,7 +417,8 @@ namespace ASN.Controllers
                                 (string.IsNullOrEmpty(obj.Country_Ident) ? -1 : int.Parse(obj.Country_Ident)),
                                 obj.City_Ident,
                                 (string.IsNullOrEmpty(obj.Location_Ident) ? -1 : int.Parse(obj.Location_Ident)),
-                                (string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
+                                obj.Client_Ident,
+                                //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
                                 (string.IsNullOrEmpty(obj.Program_Ident) ? -1 : int.Parse(obj.Program_Ident)),
                                 (string.IsNullOrEmpty(obj.Contract_Type_Ident) ? -1 : int.Parse(obj.Contract_Type_Ident)),
                                 obj.ConceptoId,

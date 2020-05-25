@@ -88,7 +88,7 @@
             <label for="Cliente">Cliente</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.Client_Ident)
+            @*@(Html.Kendo().DropDownListFor(x => x.Client_Ident)
                         .DataSource(source =>
                         {
                             source.Read(read =>
@@ -105,7 +105,26 @@
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                         .Events(eve => eve.Change("CargaPrograma"))
                         .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
-                        .CascadeFrom("Location_Ident")
+                        .CascadeFrom("Location_Ident")*@
+            @(Html.Kendo().MultiSelectFor(x => x.Client_Ident)
+                        //.AutoBind(false)
+                        .ValuePrimitive(true)
+                        .Filter("contains")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("Client_Ident")
+                        .AutoBind(true)
+                        .ClearButton(true)
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetClientesCMB", "PerfilEmpleados").Data("filterClient2");
+                            });
+                            //.ServerFiltering(true);
+                        })
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "Seleccione un Cliente." })
+                        .Events(eve => eve.Change("selectAllClientes"))
             )
         </div>
         <div class="editor-label">
@@ -115,12 +134,12 @@
             @(Html.Kendo().DropDownListFor(x => x.Program_Ident)
                         .DataSource(source =>
                         {
-                            source.Read(read =>
-                            {
-                                read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram");
-                            })
-                        .ServerFiltering(true);
+                        source.Read(read =>
+                        {
+                            read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram");
                         })
+                    .ServerFiltering(true);
+                    })
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
@@ -139,12 +158,12 @@
             @(Html.Kendo().DropDownListFor(x => x.Contract_Type_Ident)
                         .DataSource(source =>
                         {
-                            source.Read(read =>
-                            {
-                                read.Action("GetTiposContratoCMB", "PerfilEmpleados").Data("filterContract");
-                            })
-                        .ServerFiltering(true);
-                        })
+                    source.Read(read =>
+                    {
+                        read.Action("GetTiposContratoCMB", "PerfilEmpleados").Data("filterContract");
+                    })
+                .ServerFiltering(true);
+                })
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
@@ -179,7 +198,7 @@
                             .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
                             .CascadeFrom("Client_Ident")
                 )*@
-            @(Html.Kendo().MultiSelectFor(x => x.Concepto)
+            @(Html.Kendo().MultiSelectFor(x => x.ConceptoNombre)
                         //.AutoBind(false)
                         .ValuePrimitive(true)
                         .Filter("contains")
@@ -197,8 +216,8 @@
                         //.ServerFiltering(true);
                         })
                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "Seleccione un Concepto." })
-                        .Events(eve => eve.Change("selectAll"))
-                        //.CascadeFrom("Country_Ident", "")
+                        .Events(eve => eve.Change("selectAllConceptos"))
+                        //.CascadeFrom("Client_Ident", "")
             )
         </div>
         <div class="editor-label">
