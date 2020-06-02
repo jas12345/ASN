@@ -746,7 +746,7 @@
     @(Html.Kendo().Dialog()
         .Name("dialog")
         .Title("Advertencia")
-        .Content("<p><strong>Se va cancelar la solicitud...</strong></p><p><strong>Deseas continuar?</strong></p>")
+        .Content("<p><strong>Se va a cancelar la solicitud...</strong></p><p>No es posible deshacer esta operación.</p><p><strong>Deseas continuar?</strong></p>")
         .Width(400)
         .Modal(true)
         .Animation(true)
@@ -754,11 +754,12 @@
         .Actions(actions =>
         {
             actions.Add()
-            .Text("Cancel")
-            .Action("onCancel");
-            actions.Add().Text("OK")
-            .Primary(true)
+            .Text("Cancelar Solicitud")
             .Action("onOK");
+            actions.Add()
+            .Text("No cancelar")
+            .Action("onCancel")
+            .Primary(true);
         })
     )
 
