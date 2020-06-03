@@ -923,7 +923,6 @@
     <Content Include="Views\SolicitudesTodas\Index.cshtml" />
     <Content Include="Views\BusquedasVarias\Index.cshtml" />
     <Content Include="Views\Solicitudes\Editar.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\AutorizadorSolicitudesPopUp.cshtml" />
     <Content Include="Views\Shared\Mail\NoticacionSolicitud.cshtml" />
     <Content Include="Views\PerfilEmpleadosAccesos\Index.cshtml" />
     <Content Include="Views\CapturaSolicitud\Index.cshtml" />
@@ -932,7 +931,6 @@
     <Content Include="Views\MisAutorizaciones\Index.cshtml" />
     <Content Include="Views\AutorizaSolicitud\Index.cshtml" />
     <Content Include="Views\MisResponsabilidades\Index.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\ResponsableSolicitudesPopUp.cshtml" />
     <Content Include="Views\ResponsableAutoriza\Index.cshtml" />
     <Content Include="Views\Comentarios\Comments.cshtml" />
     <Content Include="Views\Notificaciones\Index.cshtml" />
