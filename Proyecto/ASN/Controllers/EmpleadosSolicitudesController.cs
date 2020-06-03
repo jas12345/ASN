@@ -175,33 +175,6 @@ namespace ASN.Controllers
             }
         }
 
-        /// <summary>
-        /// Método que retorna todos los empleados que pueden ser responsables de alguna solicitud de motivo de concepto
-        /// </summary>
-        /// <returns></returns>
-        public JsonResult GetEmpleadosCMB()
-        {
-            try
-            {
-                var listEmpleados = new List<CatEmpleadosPerfilEmpleadosCMB_Result>();
-                using (ASNContext context = new ASNContext())
-                {
-                    TempData["PerfilId"] = (!string.IsNullOrEmpty(TempData["PerfilId"].ToString()) ? TempData["PerfilId"] :0);
-                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listEmpleados = context.CatEmpleadosPerfilEmpleadosCMB(int.Parse(TempData["PerfilId"].ToString())).ToList();
-                }
-
-                return Json(listEmpleados, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json("");
-            }
-        }
-
         public JsonResult GetAutorizanteXperfilCMB(string perfilBase)
         {
             try

@@ -225,33 +225,6 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptosCMB(string country = "0", string client = "0")
-        {
-            try
-            {
-                //var lstCMB = new List<CatConceptosCMB_Result>();
-                var lstCMB = new List<CatConceptosPaisClienteCMB_Result>();
-
-                using (ASNContext ctx = new ASNContext())
-                {
-                    int.TryParse(country, out int pais);
-                    int.TryParse(client, out int cliente);
-                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    //lstCMB = ctx.CatConceptosCMB(0).ToList();
-                    lstCMB = ctx.CatConceptosPaisClienteCMB(0, pais, cliente).ToList();
-                }
-
-                return Json(lstCMB, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json("");
-            }
-        }
-
         public JsonResult GetTiposAccesoCMB()
         {
             try

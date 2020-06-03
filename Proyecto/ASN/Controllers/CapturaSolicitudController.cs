@@ -233,28 +233,6 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptosCMB()
-        {
-            try
-            {
-                var listPeriodoNomina = new List<CatConceptosCMB_Result>();
-                using (ASNContext context = new ASNContext())
-                {
-                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatConceptosCMB(0).OrderBy(x => x.Valor).ToList();
-                }
-
-                return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json("");
-            }
-        }
-
         public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident)
             {
             try
