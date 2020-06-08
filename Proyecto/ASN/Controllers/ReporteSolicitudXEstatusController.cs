@@ -32,8 +32,10 @@ namespace ASN.Controllers
             {
                 using (ASNContext context = new ASNContext())
                 {
+                    int.TryParse(User.Identity.Name, out int idAdmin);
+
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.ReporteSolicitudXEstatusSel(periodoNomina, estatusSolicitud,estatusConcepto).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
+                    var lstSolicitudes = context.ReporteSolicitudXEstatusSel(idAdmin, periodoNomina, estatusSolicitud,estatusConcepto).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok,JsonRequestBehavior.AllowGet);
                 }

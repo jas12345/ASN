@@ -2776,8 +2776,12 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolcitudSel_Result>("ReporteSolcitudSel", periodoNominaParameter);
         }
     
-        public virtual ObjectResult<ReporteSolicitudXEstatusSel_Result> ReporteSolicitudXEstatusSel(Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
+        public virtual ObjectResult<ReporteSolicitudXEstatusSel_Result> ReporteSolicitudXEstatusSel(Nullable<int> responsable_Ident, Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
         {
+            var responsable_IdentParameter = responsable_Ident.HasValue ?
+                new ObjectParameter("Responsable_Ident", responsable_Ident) :
+                new ObjectParameter("Responsable_Ident", typeof(int));
+    
             var periodoNominaParameter = periodoNomina.HasValue ?
                 new ObjectParameter("PeriodoNomina", periodoNomina) :
                 new ObjectParameter("PeriodoNomina", typeof(int));
@@ -2790,7 +2794,7 @@ namespace ASN.Models
                 new ObjectParameter("EstatusConcepto", estatusConcepto) :
                 new ObjectParameter("EstatusConcepto", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolicitudXEstatusSel_Result>("ReporteSolicitudXEstatusSel", periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolicitudXEstatusSel_Result>("ReporteSolicitudXEstatusSel", responsable_IdentParameter, periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
         }
     
         public virtual ObjectResult<CatSiteCMB_Result> CatSiteCMB()

@@ -761,6 +761,7 @@
           <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
         </Function>
         <Function Name="ReporteSolicitudXEstatusSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Responsable_Ident" Type="int" Mode="In" />
           <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
           <Parameter Name="EstatusSolicitud" Type="varchar" Mode="In" />
           <Parameter Name="EstatusConcepto" Type="varchar" Mode="In" />
@@ -1612,6 +1613,7 @@
           <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteSolicitudXEstatusSel" ReturnType="Collection(ASNModel.ReporteSolicitudXEstatusSel_Result)">
+            <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
             <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
             <Parameter Name="EstatusSolicitud" Mode="In" Type="String" />
             <Parameter Name="EstatusConcepto" Mode="In" Type="String" />
