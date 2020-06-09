@@ -7,12 +7,12 @@
   DTS:CreatorName="DB\raygozatorres.5"
   DTS:DTSID="{A0AB5E27-2BD3-41A3-BCC8-F7EF45B9E742}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LastModifiedProductVersion="15.0.2000.94"
   DTS:LocaleID="1033"
   DTS:ObjectName="Bonos"
   DTS:PackageType="5"
-  DTS:VersionBuild="25"
-  DTS:VersionGUID="{20B947C8-BA5E-4CED-8D84-77A5473DEF75}">
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{D1AE77DC-5422-43F8-A320-4CAD7DB19778}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -76,6 +76,7 @@
       DTS:refId="Package\Borrar unidad de red"
       DTS:CreationName="Microsoft.ExecuteProcess"
       DTS:Description="Execute Process Task"
+      DTS:Disabled="True"
       DTS:DTSID="{121fd790-fe8d-4e65-b683-3d5e59d470a7}"
       DTS:ExecutableType="Microsoft.ExecuteProcess"
       DTS:LocaleID="-1"
@@ -93,6 +94,7 @@
       DTS:refId="Package\Crear unidad de red"
       DTS:CreationName="Microsoft.ExecuteProcess"
       DTS:Description="Execute Process Task"
+      DTS:Disabled="True"
       DTS:DTSID="{2338210b-9281-4a58-99bc-d396b00b6c78}"
       DTS:ExecutableType="Microsoft.ExecuteProcess"
       DTS:LocaleID="-1"
@@ -1557,7 +1559,7 @@ AAAAAAAAAAAAAAA=</BinaryItem>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{11BD71C3-8FDB-42CD-B64B-4F013F27BF83}"
+              SQLTask:Connection="{3F4F7A5D-C3EC-4671-976F-08EE384CB55C}"
               SQLTask:SqlStatementSource="EXEC  [app620].[GeneraArchivoSolicitudSel] 1"
               SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
@@ -1623,12 +1625,12 @@ AAAAAAAAAAAAAAA=</BinaryItem>
           Id="Package\Sequence Container\Enviar Archivo o Depositar Archivo"
           TopLeft="25,126" />
         <NodeLayout
-          Size="178,42"
+          Size="173,42"
           Id="Package\Sequence Container\Obtener Bonos NM"
           TopLeft="57,27" />
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
-          TopLeft="147.75,69">
+          TopLeft="146.5,69">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
