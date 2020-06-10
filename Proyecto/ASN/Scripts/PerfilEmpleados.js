@@ -38,13 +38,15 @@ function edit(e) {
     var city = $("#City_Ident").data("kendoDropDownList");
     //var company = $("#Company_Ident").data("kendoDropDownList");
     var location = $("#Location_Ident").data("kendoDropDownList");
-    var client = $("#Client_Ident").data("kendoDropDownList");
+    //var client = $("#Client_Ident").data("kendoDropDownList");
+    var MultiCliente = $("#Client_Ident").data("kendoMultiSelect");
+    //var c = $("#Cliente").data("kendoMultiSelect");
     var program = $("#Program_Ident").data("kendoDropDownList");
     var contract_Type = $("#Contract_Type_Ident").data("kendoDropDownList");
     var tipoAccesoId = $("#TipoAccesoId").data("kendoDropDownList");
     //var conceptoId = $("#ConceptoId").data("kendoDropDownList");
     var MultiConcepto = $("#Concepto").data("kendoMultiSelect");
-    var f = $("#Concepto").data("kendoMultiSelect");
+    //var f = $("#Concepto").data("kendoMultiSelect");
     
     if (e.model.isNew() === false) {
 
@@ -67,7 +69,7 @@ function edit(e) {
         //    conceptoId.select(0);
         //}
 
-        var clientes = e.model.Cliente_Ident.split(',');
+        var clientes = e.model.Client_Ident.split(',');
         editandoClientes = clientes;
         MultiCliente.value(clientes);
 

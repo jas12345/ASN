@@ -28,10 +28,10 @@ namespace ASN.Controllers
                         ViewData["Ciudad"] = context.CatCityTodosCMB().ToList();
                         ViewData["Mercado"] = context.CatCompanyTodosCMB().ToList();
                         ViewData["Site"] = context.CatLocationTodosCMB().ToList();
-                        //ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
+                        ViewData["Cliente"] = context.CatClientTodosCMB().ToList();
                         ViewData["Programa"] = context.CatProgramTodosCMB().ToList();
                         ViewData["TipoContrato"] = context.CatContractTypeTodosCMB().ToList();
-                        //ViewData["Concepto"] = context.CatConceptosCMB(0).ToList();
+                        ViewData["Concepto"] = context.CatConceptosCMB(0).ToList();
                         ViewData["TipoAcceso"] = context.CatTiposAccesoCMB().ToList();
                     }
 
