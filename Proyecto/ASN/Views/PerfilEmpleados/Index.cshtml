@@ -86,8 +86,8 @@
                                 model.Field(c => c.Active).Editable(true).DefaultValue(true);
                             })
                             .Read(read => read.Action("GetPerfilEmpleados", "PerfilEmpleados"))
-                            .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("ObtieneMultiConceptos"))
-                            .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("ObtieneMultiConceptos"))
+                            .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("MultiClientesMultiConceptos"))
+                            .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("MultiClientesMultiConceptos"))
                             //.Copy(copy => create.Action("CopyPerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
                             .PageSize(10)
                         .Events(ev => ev.Error("errorsote").RequestEnd("hola"))

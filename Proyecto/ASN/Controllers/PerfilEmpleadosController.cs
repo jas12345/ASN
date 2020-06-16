@@ -225,6 +225,33 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult GetConceptosCMB(string country = "0", string client = "0")
+        {
+            try
+            {
+                //var lstCMB = new List<CatConceptosCMB_Result>();
+                var lstCMB = new List<CatConceptosPaisClienteCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    int.TryParse(country, out int pais);
+                    int.TryParse(client, out int cliente);
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    //lstCMB = ctx.CatConceptosCMB(0).ToList();
+                    lstCMB = ctx.CatConceptosPaisClienteCMB(0, pais, cliente).ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
         public JsonResult GetTiposAccesoCMB()
         {
             try
@@ -298,7 +325,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string ConceptoId)
+        public ActionResult CreatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string client_Ident, string conceptoId)
         {
             try
             {
@@ -315,16 +342,17 @@ namespace ASN.Controllers
                         foreach (var obj in profiles)
                         {
                             int i = 0;
-                            obj.ConceptoId = ConceptoId;
+                            obj.Client_Ident = client_Ident;
+                            obj.ConceptoId = conceptoId;
 
-                            context.CatPerfilEmpleadosSi(
+                        context.CatPerfilEmpleadosSi(
                                 obj.NombrePerfilEmpleados,
                                 (string.IsNullOrEmpty(obj.Country_Ident)?-1:int.Parse(obj.Country_Ident)),
                                 //obj.City_Ident,
                                 obj.City_Ident,
                                 (string.IsNullOrEmpty(obj.Location_Ident) ?-1:int.Parse(obj.Location_Ident)),
-                                obj.Client_Ident,
                                 //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
+                                obj.Client_Ident,
                                 (string.IsNullOrEmpty(obj.Program_Ident)?-1:int.Parse(obj.Program_Ident)),
                                 (string.IsNullOrEmpty(obj.Contract_Type_Ident) ?-1:int.Parse(obj.Contract_Type_Ident)),
                                 //((Int32.TryParse(obj.ConceptoId, out i) ? i : (int?)null)),
@@ -365,7 +393,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string ConceptoId)
+        public ActionResult UpdatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string client_Ident, string conceptoId)
         {
             try
             {
@@ -381,7 +409,8 @@ namespace ASN.Controllers
 
                         foreach (var obj in profiles)
                         {
-                        obj.ConceptoId = ConceptoId;
+                        obj.Client_Ident = client_Ident;
+                        obj.ConceptoId = conceptoId;
 
                         context.CatPerfilEmpleadosSu(
                                 obj.Perfil_Ident, 
@@ -390,8 +419,8 @@ namespace ASN.Controllers
                                 (string.IsNullOrEmpty(obj.Country_Ident) ? -1 : int.Parse(obj.Country_Ident)),
                                 obj.City_Ident,
                                 (string.IsNullOrEmpty(obj.Location_Ident) ? -1 : int.Parse(obj.Location_Ident)),
-                                obj.Client_Ident,
                                 //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
+                                obj.Client_Ident,
                                 (string.IsNullOrEmpty(obj.Program_Ident) ? -1 : int.Parse(obj.Program_Ident)),
                                 (string.IsNullOrEmpty(obj.Contract_Type_Ident) ? -1 : int.Parse(obj.Contract_Type_Ident)),
                                 obj.ConceptoId,
