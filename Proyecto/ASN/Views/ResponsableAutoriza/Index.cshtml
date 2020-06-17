@@ -71,8 +71,9 @@
                 )
             </div>
             <div class="col-lg-3">
-                @Html.Label("Periodo de nómina actual: ", new { style = "font-size: 15px" })
-                @(Html.Kendo().DropDownList().DataSource(source =>
+                @Html.Label("Periodo de nómina: ", new { style = "font-size: 15px" })
+                @Html.TextBox("PeriodoNomina", "", new { disabled = "disabled", style = "width:13em;" })
+                @*@(Html.Kendo().DropDownList().DataSource(source =>
                     {
                         source.Read(read =>
                         {
@@ -90,7 +91,7 @@
                     .SelectedIndex(1)
                     .Enable(false)
                     .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                )
+                )*@
             </div>
             <div class="col-lg-3">
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })
@@ -547,6 +548,9 @@
 
         // Función para calcular Estatus de Solicitud
         var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "ResponsableAutoriza")';
+
+        // Función para calcular el Periodo de Nómina de la Solicitud
+        var urlConsultarPeriodoNominaSolicitud = '@Url.Action("ConsultarPeriodoNominaSolicitud", "ResponsableAutoriza")';
 
                 //debugger;
                 //var urlSolicitud = grid.selectedKeyNames().join(", ");

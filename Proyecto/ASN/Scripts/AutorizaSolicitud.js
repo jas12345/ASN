@@ -199,13 +199,13 @@ function calculaPeriodoNominaSolicitud() {
             notification.show("Error al Calcular Período de Nómina", "error");
         }
         //debugger;
-        $("#Estatus").val(data[0].Descripcion);
+        $("#PeriodoNomina").val(data[0].NombrePeriodo);
         //debugger;
     });
 }
 
 function habilitaControlesEdicion() {
-    var autorizadores = $("div[name='nivel']");
+    var autorizadores = $("PeriodoNomina_Id[name='nivel']");
     //debugger;
     $(autorizadores).each(function (nivel) {
         //console.log(index + ": " + $(this).text());

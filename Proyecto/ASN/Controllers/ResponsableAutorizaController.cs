@@ -313,6 +313,29 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult ConsultarPeriodoNominaSolicitud(int folioSolicitud)
+        {
+            try
+            {
+                var lstPeriodoNominaSolicitud = new List<CatPeriodoNominaSolicitudSel_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstPeriodoNominaSolicitud = context.CatPeriodoNominaSolicitudSel(folioSolicitud).ToList();
+                }
+
+                return Json(lstPeriodoNominaSolicitud, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al consultar Periodo de Nomina.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
         //public ActionResult EnviaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
         //{
         //    try
