@@ -43,7 +43,7 @@
                             columns.ForeignKey(c => c.Country_Ident, (System.Collections.IEnumerable)ViewData["Pais"], "Id", "Value").Title("Pais").Visible(true).Filterable(true).Width(220);
                             columns.ForeignKey(c => c.City_Ident, (System.Collections.IEnumerable)ViewData["Ciudad"], "Id", "Value").Title("Ciudad").Visible(true).Filterable(true).Width(220);
                             columns.ForeignKey(c => c.Location_Ident, (System.Collections.IEnumerable)ViewData["Site"], "Id", "Value").Title("Site").Visible(true).Filterable(true).Width(220);
-                            columns.ForeignKey(c => c.Client_Ident, (System.Collections.IEnumerable)ViewData["Cliente"], "Id", "Value").Title("Cliente").Visible(true).Filterable(true).Width(220);
+                            //columns.ForeignKey(c => c.Client_Ident, (System.Collections.IEnumerable)ViewData["Cliente"], "Id", "Value").Title("Cliente").Visible(true).Filterable(true).Width(220);
                             columns.ForeignKey(c => c.Program_Ident, (System.Collections.IEnumerable)ViewData["Programa"], "Id", "Value").Title("Programa").Visible(true).Filterable(true).Width(220);
                             columns.ForeignKey(c => c.Contract_Type_Ident, (System.Collections.IEnumerable)ViewData["Tipocontrato"], "Id", "Value").Title("Tipo de Contrato").Visible(true).Filterable(true).Width(220);
                             //columns.ForeignKey(c => c.ConceptoId, (System.Collections.IEnumerable)ViewData["Concepto"], "Ident", "Valor").Title("Concepto").Visible(false).Filterable(true).Width(220);
@@ -77,16 +77,17 @@
                                 model.Field(c => c.City_Ident).Editable(true);
                                 model.Field(c => c.Location_Ident).Editable(true);
                                 model.Field(c => c.Client_Ident).Editable(true).DefaultValue("0");
+                                model.Field(c => c.Client_Name).Editable(true).DefaultValue("0");
                                 model.Field(c => c.Program_Ident).Editable(true);
                                 model.Field(c => c.Contract_Type_Ident).Editable(true);
                                 model.Field(c => c.ConceptoId).Editable(true);
+                                model.Field(c => c.ConceptoNombre).Editable(true).DefaultValue("");
                                 model.Field(c => c.TipoAccesoId).Editable(true);
                                 model.Field(c => c.Active).Editable(true).DefaultValue(true);
-                                model.Field(c => c.Concepto).Editable(true).DefaultValue("");
                             })
                             .Read(read => read.Action("GetPerfilEmpleados", "PerfilEmpleados"))
-                            .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("ObtieneMultiConceptos"))
-                            .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("ObtieneMultiConceptos"))
+                            .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("MultiClientesMultiConceptos"))
+                            .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("MultiClientesMultiConceptos"))
                             //.Copy(copy => create.Action("CopyPerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
                             .PageSize(10)
                         .Events(ev => ev.Error("errorsote").RequestEnd("hola"))

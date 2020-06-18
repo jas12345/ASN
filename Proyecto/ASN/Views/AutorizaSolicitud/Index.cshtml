@@ -77,7 +77,8 @@
             </div>
             <div class="col-lg-4">
                 @Html.Label("Periodo de nómina: ", new { style = "font-size: 15px" })
-                @(Html.Kendo().DropDownList().DataSource(source =>
+                @Html.TextBox("PeriodoNomina", "", new { disabled = "disabled", style = "width:13em;" })
+                @*@(Html.Kendo().DropDownList().DataSource(source =>
                     {
                         source.Read(read =>
                         {
@@ -95,7 +96,7 @@
                     .SelectedIndex(1)
                     .Enable(false)
                     .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                )
+                )*@
             </div>
             <div class="col-lg-4">
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })

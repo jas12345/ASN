@@ -24,7 +24,7 @@ namespace ASN.Models
         public string Contract_Type_Ident { get; set; }
         public string Contract_Type { get; set; }
         public string ConceptoId { get; set; }
-        public string Concepto { get; set; }
+        public string ConceptoNombre { get; set; }
         public int TipoAccesoId { get; set; }
         public string TipoAcceso { get; set; }
         public bool Active { get; set; }

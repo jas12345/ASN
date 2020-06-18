@@ -21,14 +21,13 @@ namespace ASN.Models
         public string City_Name { get; set; }
         public Nullable<int> Location_Ident { get; set; }
         public string Location_Name { get; set; }
-        public Nullable<int> Client_Ident { get; set; }
+        public string Client_Ident { get; set; }
         public string Client_Name { get; set; }
         public Nullable<int> Program_Ident { get; set; }
         public string Program_Name { get; set; }
         public Nullable<int> Contract_Type_Ident { get; set; }
         public string Contract_Type { get; set; }
         public string ConceptoId { get; set; }
-        public string Concepto { get; set; }
         public int TipoAccesoId { get; set; }
         public string TipoAcceso { get; set; }
         public bool Active { get; set; }

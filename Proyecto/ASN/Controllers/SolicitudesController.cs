@@ -137,29 +137,6 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptosCMB(string perfil)
-        {
-            try
-            {
-                var listConceptos = new List<CatConceptosCMB_Result>();
-                using (ASNContext context = new ASNContext())
-                {
-                    perfil = (string.IsNullOrEmpty(perfil) ? "0": perfil);
-                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listConceptos = context.CatConceptosCMB(int.Parse(perfil)).ToList();
-                }
-
-                return Json(listConceptos, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json("");
-            }
-        }
-
         /// <summary>
         /// Método para obtener el listado de los conceptos de motivos
         /// </summary>

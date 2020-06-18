@@ -150,32 +150,6 @@ namespace ASN.Controllers
         /// Método que devuelve todos los periodos de nomina para un ComboBox
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetEmpleadosPerfilAccesoCMB()
-        {
-            try
-            {
-                var listPeriodoNomina = new List<CatEmpleadosPerfilAccesoCMB_Result>();
-                using (ASNContext context = new ASNContext())
-                {
-                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatEmpleadosPerfilAccesoCMB(32).ToList();
-                }
-
-                return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                LogError log = new LogError();
-                log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                return Json("");
-            }
-        }
-
-        /// <summary>
-        /// Método que devuelve todos los periodos de nomina para un ComboBox
-        /// </summary>
-        /// <returns></returns>
         public JsonResult GetEmpleadosPerfilNivelAccesoCMB()
         {
             try
@@ -332,6 +306,29 @@ namespace ASN.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al consultar Estatus.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+        public JsonResult ConsultarPeriodoNominaSolicitud(int folioSolicitud)
+        {
+            try
+            {
+                var lstPeriodoNominaSolicitud = new List<CatPeriodoNominaSolicitudSel_Result>();
+
+                using (ASNContext context = new ASNContext())
+                {
+                    lstPeriodoNominaSolicitud = context.CatPeriodoNominaSolicitudSel(folioSolicitud).ToList();
+                }
+
+                return Json(lstPeriodoNominaSolicitud, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al consultar Periodo de Nomina.");
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);

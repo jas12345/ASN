@@ -25,6 +25,7 @@ $(document).ready(function () {
     //debugger;
     FolioSolicitud = $("#FolioSolicitud").val();
     calculaEstatusSolicitud();
+    calculaPeriodoNominaSolicitud();
     deshabilitaControlesEdicion();
     actualizaGrid();
 });
@@ -195,6 +196,22 @@ function calculaEstatusSolicitud() {
         }
         //debugger;
         $("#Estatus").val(data[0].Descripcion);
+        //debugger;
+    });
+}
+
+function calculaPeriodoNominaSolicitud() {
+    //debugger;
+    $.post(urlConsultarPeriodoNominaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
+        //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
+        //debugger;
+
+        if (data.res == -1) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Error al Calcular Periodo de Nomina", "error");
+        }
+        //debugger;
+        $("#PeriodoNomina").val(data[0].NombrePeriodo);
         //debugger;
     });
 }

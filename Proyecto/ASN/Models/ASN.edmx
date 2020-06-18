@@ -418,7 +418,7 @@
           <Parameter Name="Country_Ident" Type="int" Mode="In" />
           <Parameter Name="City_Ident" Type="int" Mode="In" />
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
-          <Parameter Name="Client_Ident" Type="int" Mode="In" />
+          <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
           <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
@@ -432,7 +432,7 @@
           <Parameter Name="Country_Ident" Type="int" Mode="In" />
           <Parameter Name="City_Ident" Type="int" Mode="In" />
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
-          <Parameter Name="Client_Ident" Type="int" Mode="In" />
+          <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
           <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
@@ -1073,7 +1073,7 @@
             <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
             <Parameter Name="City_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Client_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Client_Ident" Mode="In" Type="String" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="String" />
@@ -1087,7 +1087,7 @@
             <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
             <Parameter Name="City_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Client_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Client_Ident" Mode="In" Type="String" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="String" />
@@ -1919,14 +1919,13 @@
           <Property Type="String" Name="City_Name" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Location_Ident" Nullable="true" />
           <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
+          <Property Type="String" Name="Client_Ident" Nullable="true" />
           <Property Type="String" Name="Client_Name" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="Program_Ident" Nullable="true" />
           <Property Type="String" Name="Program_Name" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
           <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ConceptoId" Nullable="true" />
-          <Property Type="String" Name="Concepto" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
           <Property Type="String" Name="TipoAcceso" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Active" Nullable="false" />
@@ -3129,7 +3128,6 @@
                 <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
                 <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
                 <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
                 <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
                 <ScalarProperty Name="TipoAcceso" ColumnName="TipoAcceso" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
