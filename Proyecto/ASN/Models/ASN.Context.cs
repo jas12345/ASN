@@ -2485,7 +2485,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatLocationByCityCMB_Result>("CatLocationByCityCMB", countryParameter, cityIdParameter);
         }
     
-        public virtual ObjectResult<CatProgramByClientCMB_Result> CatProgramByClientCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, Nullable<int> clientId)
+        public virtual ObjectResult<CatProgramByClientCMB_Result> CatProgramByClientCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, string clientId)
         {
             var countryParameter = country.HasValue ?
                 new ObjectParameter("Country", country) :
@@ -2499,9 +2499,9 @@ namespace ASN.Models
                 new ObjectParameter("SiteId", siteId) :
                 new ObjectParameter("SiteId", typeof(int));
     
-            var clientIdParameter = clientId.HasValue ?
+            var clientIdParameter = clientId != null ?
                 new ObjectParameter("ClientId", clientId) :
-                new ObjectParameter("ClientId", typeof(int));
+                new ObjectParameter("ClientId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatProgramByClientCMB_Result>("CatProgramByClientCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter);
         }

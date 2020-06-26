@@ -175,7 +175,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetProgramasCMB(int? country, int? city, int? site, int? client)
+        public JsonResult GetProgramasCMB(int? country, int? city, int? site, string client)
         {
             try
             {

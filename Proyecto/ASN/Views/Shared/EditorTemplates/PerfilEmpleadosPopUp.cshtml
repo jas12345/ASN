@@ -79,8 +79,8 @@
                         .OptionLabel("- Seleccione Site -")
                         .Name("Location_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        .Events(eve => eve.Change("CargaCliente"))
-                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
+                        //.Events(eve => eve.Change("CargaCliente"))
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth").Select("selectAllClientes").Change("CargaCliente"))
                         .CascadeFrom("City_Ident")
             )
         </div>
@@ -112,6 +112,7 @@
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
+                        //.OptionLabel("- Seleccione Clientes -")
                         .Name("Cliente")
                         .AutoBind(true)
                         .ClearButton(true)
@@ -120,11 +121,11 @@
                             source.Read(read =>
                             {
                                 read.Action("GetClientesCMB", "PerfilEmpleados").Data("filterClient");
-                            });
-                            //.ServerFiltering(true);
+                            })
+                            .ServerFiltering(true);
                         })
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "Seleccione un Cliente." })
-                        .Events(eve => eve.Change("selectAllClientes"))
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "- Seleccione Clientes -" })
+                        .Events(eve => eve.Select("selectCliente"))
             )
             @*@(Html.Kendo().MultiSelectFor(x => x.ConceptoNombre)
                         //.AutoBind(false)

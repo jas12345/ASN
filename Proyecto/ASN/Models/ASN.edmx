@@ -512,7 +512,7 @@
           <Parameter Name="Country" Type="int" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="SiteId" Type="int" Mode="In" />
-          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="varchar" Mode="In" />
         </Function>
         <Function Name="CatProgramCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatProgramTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -1530,7 +1530,7 @@
             <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="SiteId" Mode="In" Type="Int32" />
-            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatCountryByCascadeCMB" ReturnType="Collection(ASNModel.CatCountryByCascadeCMB_Result)">
             <Parameter Name="Country" Mode="In" Type="Int32" />
@@ -2427,7 +2427,7 @@
           <Property Type="Int32" Name="FolioId" Nullable="true" />
           <Property Type="String" Name="Estatus" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="EID" Nullable="true" />
-          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="Accesos" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="250" />
         </ComplexType>
