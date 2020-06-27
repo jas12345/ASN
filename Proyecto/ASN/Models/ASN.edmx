@@ -251,7 +251,7 @@
           <Parameter Name="Country" Type="int" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="SiteId" Type="int" Mode="In" />
-          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="varchar" Mode="In" />
           <Parameter Name="ProgramId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatContractTypeCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -1519,7 +1519,7 @@
             <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="SiteId" Mode="In" Type="Int32" />
-            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
             <Parameter Name="ProgramId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatLocationByCityCMB" ReturnType="Collection(ASNModel.CatLocationByCityCMB_Result)">

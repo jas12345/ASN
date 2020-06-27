@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ASN.Controllers
@@ -200,7 +199,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetTiposContratoCMB(int? country, int? city, int? site, int? client, int? program)
+        public JsonResult GetTiposContratoCMB(int? country, int? city, int? site, string client, int? program)
         {
             try
             {

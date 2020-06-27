@@ -245,6 +245,64 @@ function MuestraSave() {
 function ValidaDisplayNameVal(obj) {
 }
 
+function MultiClientes() {
+
+    var multiselectCli = $("#Cliente").data("kendoMultiSelect");
+
+    // get data items for the selected options.
+    var dataItemsCli = multiselectCli.dataItems();
+
+    var clientes = "";
+
+    if (dataItemsCli.length > 0) {
+        dataItemsCli.forEach(function (dataItem) {
+            clientes += dataItem.Id + ",";
+        });
+    }
+
+    //foreach(var dataIdent in dataItemsCli)
+    //{ 
+    //    clientes += dataIdent.Ident + ",";
+    //}
+
+    if (clientes.length > 1) {
+        clientes = clientes.substring(0, clientes.length - 1);
+    }
+
+    return {
+        client_Ident: clientes
+    }; 
+}
+
+function MultiConceptos() {
+
+    var multiselectCon = $("#Concepto").data("kendoMultiSelect");
+
+    // get data items for the selected options.
+    var dataItemsCon = multiselectCon.dataItems();
+
+    var conceptos = "";
+
+    if (dataItemsCon.length > 0) {
+        dataItemsCon.forEach(function (dataItem) {
+            conceptos += dataItem.Ident + ",";
+        });
+    }
+
+    //foreach(var dataIdent in dataItemsCon)
+    //{ 
+    //    conceptos += dataIdent.Ident + ","; 
+    //}
+
+    if (conceptos.length > 1) {
+        conceptos = conceptos.substring(0, conceptos.length - 1);
+    }
+
+    return {
+        conceptoId: conceptos
+    };
+}
+
 function MultiClientesMultiConceptos() {
 
     var multiselectCli = $("#Cliente").data("kendoMultiSelect");
@@ -293,7 +351,7 @@ function MultiClientesMultiConceptos() {
 
     return {
         client_Ident: clientes, conceptoId: conceptos
-    }; 
+    };
 }
 
 //function ObtieneMultiClientes() {
@@ -684,40 +742,54 @@ function CargaPrograma() {
 }
 
 function filterProgram() {
-    var multiselect = $("#Concepto").data("kendoMultiSelect");
-    var selectedValues = [];
 
-    if (multiselect == undefined) {
-        //multiselect = -1
-        selectedValues.push(-1)
+    var multiselect = $("#Cliente").data("kendoMultiSelect");
+    var selectedValues = multiselect.value;
+
+    var texto = "";
+    for (i = 0; i < selectedValues.length; i++) {
+        texto += selectedValues[i] + ",";
     }
 
-    else {
-
-        //Se calculan todos los conceptos seleccionados
-        if (editandoConceptos == 0 && multiselect.value().indexOf(-1) > -1) {
-            for (var i = 0; i < multiselect.dataSource.data().length; i++) {
-                var item = multiselect.dataSource.data()[i];
-                var data = multiselect.dataSource.data();
-                if (data[i].Ident > 0) {
-                    selectedValues.push(data[i].Ident);
-                }
-            }
-	    }
+    if (texto.length > 1) {
+        texto = texto.substring(0, texto.length - 1);
     }
+
+    if (texto =="undefined") {
+        texto = "-1"
+    }
+
+    //var multiselect = $("#Concepto").data("kendoMultiSelect");
+    //var selectedValues = [];
+
+    //var Client_Ident = MultiClientes();
+
+    //if (multiselect == undefined) {
+    //    //multiselect = -1
+    //    selectedValues.push(-1)
+    //}
+    //else {
+
+    //    //Se calculan todos los conceptos seleccionados
+    //    if (editandoConceptos == 0 && multiselect.value().indexOf(-1) > -1) {
+    //        for (var i = 0; i < multiselect.dataSource.data().length; i++) {
+    //            var item = multiselect.dataSource.data()[i];
+    //            var data = multiselect.dataSource.data();
+    //            if (data[i].Ident > 0) {
+    //                selectedValues.push(data[i].Ident);
+    //            }
+    //        }
+	   // }
+    //}
 	
     return {
         country: $("#Country_Ident").val(),
         city: $("#City_Ident").val(),
         site: $("#Location_Ident").val(),
-        //client: $("#Client_Ident").val(),
-        //multicliente: $("#Clientes").data("kendoMultiSelect"),
-        //client: $("#Clientes").data("kendoMultiSelect").value()
-        client: multiselect
-        //program: $("#Program_Ident").val(),
-        //contract: $("#Contract_Type_Ident").val()
+        client: texto //selectedValues
     };
 }
+
 function CargaContrato() {    
     
     var pais = $("#Country_Ident").data("kendoDropDownList");
@@ -899,72 +971,21 @@ function selectCliente(e) {
         selectedValues.push(e.dataItem.Id)
     }
 
-    //clear filter
-    //multiselect.dataSource.filter({});
+    multiselect.value = selectedValues
 
-    if (e.dataItem.Id != -1) {
-        multiselect.dataItems();
+    var texto = "";
+    for (i = 0; i < selectedValues.length; i++) {
+        texto += selectedValues[i] + ",";
     }
 
-    ////////Multicliente.enable(true);
-    ////////Multicliente.dataSource.read(filterClient());
-    ////////Multicliente.refresh();
-    //////////Multicliente.value(-1)
-
-    //////////return {
-    //////////        country: $("#Country_Ident").val(),
-    //////////        city: $("#City_Ident").val(),
-    //////////        site: $("#Location_Ident").val(),
-    //////////        client: selectedValues
-    //////////}
+    if (texto.length > 1) {
+        texto = texto.substring(0, texto.length - 1);
+    }
 
     programa.enable(true);
-    programa.dataSource.read({
-            country: $("#Country_Ident").val(),
-            city: $("#City_Ident").val(),
-            site: $("#Location_Ident").val(),
-            client: selectedValues
-       });
+    programa.dataSource.read(filterProgram());
     programa.refresh();
     //programa.value("-1");
-
-    ////////if (editandoClientes.length == 0 && multiselect.value().indexOf(-1) > -1) {
-    //////if (editandoClientes.length > 0) {
-    //////    for (var i = 0; i < multiselect.dataItems().length; i++) {
-    //////        var item = multiselect.dataItems()[i].Id;
-    //////        //var data = multiselect.dataSource.data();
-    //////        if (item > 0) {
-    //////            selectedValues.push(item);
-    //////        }
-    //////        selectedValues.push(e.dataItem.Id)
-    //////    }
-    //////    editandoClientes = selectedValues;
-    //////    multiselect.value(editandoClientes);
-    //////    //multiselect.close();
-    //////}
-
-    ///var item = e.dataItem.Id;
-    ///var text = e.dataItem.Value;
-    ///var $data = $('#Cliente');
-    ///$data.val($data.val() + text);
-
-    ///for (var i = 0; i < multiselect.dataSource.data().length; i++) {
-    ///    var item = multiselect.dataSource.data()[i];
-    ///    var data = multiselect.dataSource.data();
-    ///    if (data[i].Id > 0) {
-    ///        selectedValues.push(data[i].Id);
-    ///    }
-    ///}
-    ///multiselect.value(selectedValues);
-    ///multiselect.close();s
-
-    ///if (editandoClientes) {
-
-    ///}
-    ///else {
-    ///    selectedValues = multiselect.selectedValues
-
-    ///}
 }
 
 function selectAllConceptos() {
