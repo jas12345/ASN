@@ -327,6 +327,10 @@ function MultiClientesMultiConceptos() {
         clientes = clientes.substring(0, clientes.length - 1);
     }
 
+    if (clientes.length == 0) {
+        clientes = "-1";
+    }
+
     var multiselectCon = $("#Concepto").data("kendoMultiSelect");
 
     // get data items for the selected options.
@@ -695,13 +699,13 @@ function CargaPrograma() {
     $("#Concepto").data("kendoMultiSelect").dataSource.read();
     $("#Concepto").data("kendoMultiSelect").enable(true);
 
-    var MultiConcepto = $("#Concepto").data("kendoMultiSelect");
-    MultiConcepto.enable(true);
-    MultiConcepto.dataSource.read();
-    MultiConcepto.refresh();
-    if (editandoConceptos != 0) {
-        MultiConcepto.value(editandoConceptos);
-    }    
+    ////////var MultiConcepto = $("#Concepto").data("kendoMultiSelect");
+    ////////MultiConcepto.enable(true);
+    ////////MultiConcepto.dataSource.read();
+    ////////MultiConcepto.refresh();
+    ////////if (editandoConceptos != 0) {
+    ////////    MultiConcepto.value(editandoConceptos);
+    ////////}    
 
     //$("#ConceptoId").closest(".k-widget").hide();
     //concepto.dataSource.read();
@@ -741,23 +745,23 @@ function CargaPrograma() {
     //programa.value("-1");
 }
 
-function filterProgram() {
+function filterProgram(clientes) {
 
-    var multiselect = $("#Cliente").data("kendoMultiSelect");
-    var selectedValues = multiselect.value;
+    ////////////var multiselect = $("#Cliente").data("kendoMultiSelect");
+    ////////////var selectedValues = multiselect.value;
 
-    var texto = "";
-    for (i = 0; i < selectedValues.length; i++) {
-        texto += selectedValues[i] + ",";
-    }
+    ////////////var texto = "";
+    ////////////for (i = 0; i < selectedValues.length; i++) {
+    ////////////    texto += selectedValues[i] + ",";
+    ////////////}
 
-    if (texto.length > 1) {
-        texto = texto.substring(0, texto.length - 1);
-    }
+    ////////////if (texto.length > 1) {
+    ////////////    texto = texto.substring(0, texto.length - 1);
+    ////////////}
 
-    if (texto =="undefined") {
-        texto = "-1"
-    }
+    ////////////if (texto =="undefined") {
+    ////////////    texto = "-1"
+    ////////////}
 
     //var multiselect = $("#Concepto").data("kendoMultiSelect");
     //var selectedValues = [];
@@ -786,7 +790,7 @@ function filterProgram() {
         country: $("#Country_Ident").val(),
         city: $("#City_Ident").val(),
         site: $("#Location_Ident").val(),
-        client: texto //selectedValues
+        client: clientes //selectedValues
     };
 }
 
@@ -796,7 +800,7 @@ function CargaContrato() {
     var ciudad = $("#City_Ident").data("kendoDropDownList");
     var site = $("#Location_Ident").data("kendoDropDownList");
     //var cliente = $("#Client_Ident").data("kendoDropDownList");
-    var Multicliente = $("#Clientes").data("kendoMultiSelect");
+    var Multicliente = $("#Cliente").data("kendoMultiSelect");
     var programa = $("#Program_Ident").data("kendoDropDownList");
     var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
 
@@ -839,13 +843,13 @@ function CargaContrato() {
     
 }
 
-function filterContract() {
+function filterContract(clientes, programa) {
     return {
         country: $("#Country_Ident").val(),
         city: $("#City_Ident").val(),
         site: $("#Location_Ident").val(),
-        client: $("#Client_Ident").val(),
-        program: $("#Program_Ident").val(),
+        client: clientes, //$("#Client_Ident").val(),
+        program: programa,
         //contract: $("#Contract_Type_Ident").val()
     };
 }
@@ -948,7 +952,7 @@ function selectAllClientes(e) {
     var multiselect = $("#Cliente").data("kendoMultiSelect");
     var selectedValues = [];
 
-    if (editandoClientes == 0 && multiselect.value().indexOf(-1) > -1) {
+    if (e.dataItem.Id == -1) {
         for (var i = 0; i < multiselect.dataSource.data().length; i++) {
             var item = multiselect.dataSource.data()[i];
             var data = multiselect.dataSource.data();
@@ -956,9 +960,12 @@ function selectAllClientes(e) {
                 selectedValues.push(data[i].Ident);
             }
         }
-        multiselect.value(selectedValues);
-        multiselect.close();
+    } else {
+        selectedValues.push(e.dataItem.Id)
     }
+
+    multiselect.value(selectedValues);
+    multiselect.close();
 }
 
 function selectCliente(e) {
@@ -966,12 +973,26 @@ function selectCliente(e) {
     var multiselect = $("#Cliente").data("kendoMultiSelect");
     var programa = $("#Program_Ident").data("kendoDropDownList");
     var selectedValues = multiselect.value();
+    //var selectedValues = [];
 
-    if (e.dataItem.Id != -1) {
+    var data = multiselect.dataSource.data();
+
+    if (e.dataItem.Id == -1) {
+
+        selectedValues = []
+
+        for (var i = 0; i < multiselect.dataSource.data().length; i++) {
+            var item = multiselect.dataSource.data()[i];
+            if (item.Id > 0) {
+                selectedValues.push(item.Id);
+            }
+        }
+    }
+    else {
         selectedValues.push(e.dataItem.Id)
     }
 
-    multiselect.value = selectedValues
+    ////////multiselect.value = selectedValues
 
     var texto = "";
     for (i = 0; i < selectedValues.length; i++) {
@@ -983,8 +1004,32 @@ function selectCliente(e) {
     }
 
     programa.enable(true);
-    programa.dataSource.read(filterProgram());
+    programa.dataSource.read(filterProgram(texto));
     programa.refresh();
+    //programa.value("-1");
+}
+
+function selectPrograma(e) {
+    //var multiselect = $("#Client_Ident").data("kendoMultiSelect");
+    var multiselect = $("#Cliente").data("kendoMultiSelect");
+    var programa = e.dataItem.Id
+    var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
+    var selectedValues = multiselect.value();
+
+    var clientes = "";
+    for (i = 0; i < selectedValues.length; i++) {
+        clientes += selectedValues[i] + ",";
+    }
+
+    if (clientes.length > 1) {
+        clientes = clientes.substring(0, clientes.length - 1);
+    }
+
+    //var program = programa.value();
+
+    contrato.enable(true);
+    contrato.dataSource.read(filterContract(clientes, programa));
+    contrato.refresh();
     //programa.value("-1");
 }
 

@@ -125,7 +125,7 @@
                             .ServerFiltering(true);
                         })
                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "- Seleccione Clientes -" })
-                        .Events(eve => eve.Select("selectCliente"))
+                        .Events(eve => eve.Select("selectCliente").Change("selectCliente"))
             )
             @*@(Html.Kendo().MultiSelectFor(x => x.ConceptoNombre)
                         //.AutoBind(false)
@@ -163,7 +163,7 @@
                         {
                         source.Read(read =>
                         {
-                            read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram");
+                            read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram('-1')");
                         })
                     .ServerFiltering(true);
                     })
@@ -174,8 +174,8 @@
                         .Name("Program_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                         //.Events(eve => eve.Change("CargaContrato"))
-                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
-                        .CascadeFrom("Client_Ident")
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth").Select("selectPrograma").Change("selectPrograma"))
+                        //.CascadeFrom("Client_Ident")
             )
         </div>
         <div class="editor-label">
@@ -187,7 +187,7 @@
                         {
                     source.Read(read =>
                     {
-                        read.Action("GetTiposContratoCMB", "PerfilEmpleados").Data("filterContract");
+                        read.Action("GetTiposContratoCMB", "PerfilEmpleados").Data("filterContract('-1', -1)");
                     })
                 .ServerFiltering(true);
                 })
@@ -199,7 +199,7 @@
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                         //.Events(eve => eve.Change("CargaCascada"))
                         .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
-                        .CascadeFrom("Program_Ident")
+                        //.CascadeFrom("Program_Ident")
             )
         </div>
 
