@@ -125,7 +125,7 @@
                             .ServerFiltering(true);
                         })
                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "- Seleccione Clientes -" })
-                        .Events(eve => eve.Select("selectCliente").Change("selectCliente"))
+                        .Events(eve => eve.Select("selectCliente"))//.Change("selectCliente")
             )
             @*@(Html.Kendo().MultiSelectFor(x => x.ConceptoNombre)
                         //.AutoBind(false)

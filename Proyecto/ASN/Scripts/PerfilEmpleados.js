@@ -929,11 +929,13 @@ function validando() {
         //var cliente = $("#Client_Ident").data("kendoDropDownList");
         var MultiCliente = $("#Cliente").data("kendoMultiSelect");
         MultiCliente.value(editandoClientes);
+        //MultiCliente.value = editandoClientes;
         var programa = $("#Program_Ident").data("kendoDropDownList");
         var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
         //var concepto = $("#ConceptoId").data("kendoDropDownList");
         var MultiConcepto = $("#Concepto").data("kendoMultiSelect");
         MultiConcepto.value(editandoConceptos);
+        //MultiConcepto.value = editandoConceptos;
 
         ////////pais.enable(false);
         ////////ciudad.enable(false);
@@ -992,7 +994,7 @@ function selectCliente(e) {
         selectedValues.push(e.dataItem.Id)
     }
 
-    ////////multiselect.value = selectedValues
+    multiselect.value = selectedValues
 
     var texto = "";
     for (i = 0; i < selectedValues.length; i++) {
