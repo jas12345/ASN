@@ -854,6 +854,14 @@ function filterContract(clientes, programa) {
     };
 }
 
+////////function filterConcepto(pais, clientes) {
+////////    return {
+////////        country: pais,
+////////        client: clientes, //$("#Client_Ident").val(),
+////////        program: programa,
+////////    };
+////////}
+
 function CargaCascada() {
 
     var pais = $("#Country_Ident").data("kendoDropDownList");
@@ -907,10 +915,10 @@ function CargaPerfilEmpleado() {
 
 }
 
-function filterConcepto() {
+function filterConcepto(pais, clientes) {
     return {
-        country: $("#Country_Ident").val(),
-        client: $("#Client_Ident").val()
+        country: pais,
+        client: clientes
     };
 }
 
@@ -974,6 +982,7 @@ function selectCliente(e) {
     //var multiselect = $("#Client_Ident").data("kendoMultiSelect");
     var multiselect = $("#Cliente").data("kendoMultiSelect");
     var programa = $("#Program_Ident").data("kendoDropDownList");
+    var multiConceptos = $("#Concepto").data("kendoMultiSelect"); 
     var selectedValues = multiselect.value();
     //var selectedValues = [];
 
@@ -1009,6 +1018,10 @@ function selectCliente(e) {
     programa.dataSource.read(filterProgram(texto));
     programa.refresh();
     //programa.value("-1");
+
+    multiConceptos.enable(true);
+    multiConceptos.dataSource.read(filterConcepto());
+    multiConceptos.refresh();
 }
 
 function selectPrograma(e) {
@@ -1032,6 +1045,30 @@ function selectPrograma(e) {
     contrato.enable(true);
     contrato.dataSource.read(filterContract(clientes, programa));
     contrato.refresh();
+    //programa.value("-1");
+}
+
+function selectConcepto(e) {
+    //var multiselect = $("#Client_Ident").data("kendoMultiSelect");
+    var multiselect = $("#Cliente").data("kendoMultiSelect");
+    var programa = e.dataItem.Id
+    var concepto = $("#Contract_Type_Ident").data("kendoDropDownList");
+    var selectedValues = multiselect.value();
+
+    var clientes = "";
+    for (i = 0; i < selectedValues.length; i++) {
+        clientes += selectedValues[i] + ",";
+    }
+
+    if (clientes.length > 1) {
+        clientes = clientes.substring(0, clientes.length - 1);
+    }
+
+    //var program = programa.value();
+
+    concepto.enable(true);
+    concepto.dataSource.read(filterContract(pais, clientes));
+    concepto.refresh();
     //programa.value("-1");
 }
 

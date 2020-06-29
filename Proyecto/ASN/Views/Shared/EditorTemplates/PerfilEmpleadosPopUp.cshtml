@@ -238,12 +238,12 @@
                         {
                             source.Read(read =>
                             {
-                                read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto2");
+                                read.Action("GetConceptosCMB", "PerfilEmpleados").Data("filterConcepto(-1, '-1')");
                             });
                         //.ServerFiltering(true);
                         })
                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "Seleccione un Concepto." })
-                        .Events(eve => eve.Change("selectAllConceptos"))
+                        .Events(eve => eve.Change("selectConcepto"))
                         //.CascadeFrom("Client_Ident", "")
             )
         </div>
