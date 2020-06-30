@@ -116,6 +116,7 @@
                         .Name("Cliente")
                         .AutoBind(true)
                         .ClearButton(true)
+                        .Placeholder("- Seleccione Clientes -")
                         .DataSource(source =>
                         {
                             source.Read(read =>
@@ -163,7 +164,8 @@
                         {
                         source.Read(read =>
                         {
-                            read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram('-1')");
+                            read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram(-1,-1,-1,'-1')");
+                            //read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram");
                         })
                     .ServerFiltering(true);
                     })
@@ -174,7 +176,7 @@
                         .Name("Program_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                         //.Events(eve => eve.Change("CargaContrato"))
-                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth").Select("selectPrograma").Change("selectPrograma"))
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth").Select("selectPrograma"))
                         //.CascadeFrom("Client_Ident")
             )
         </div>
@@ -243,7 +245,7 @@
                         //.ServerFiltering(true);
                         })
                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 16.4em;overflow: auto;max-height: 120px", validationMessage = "Seleccione un Concepto." })
-                        .Events(eve => eve.Change("selectConcepto"))
+                        //.Events(eve => eve.Change("selectConcepto"))
                         //.CascadeFrom("Client_Ident", "")
             )
         </div>

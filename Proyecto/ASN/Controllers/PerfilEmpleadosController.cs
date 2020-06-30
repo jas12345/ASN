@@ -234,10 +234,10 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     int.TryParse(country, out int pais);
-                    int.TryParse(client, out int cliente);
+                    //client;
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatConceptosCMB(0).ToList();
-                    lstCMB = ctx.CatConceptosPaisClienteCMB(0, pais, cliente).ToList();
+                    lstCMB = ctx.CatConceptosPaisClienteCMB(0, pais, client).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);

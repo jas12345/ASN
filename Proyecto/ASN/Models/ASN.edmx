@@ -143,7 +143,7 @@
         <Function Name="CatConceptosPaisClienteCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil" Type="int" Mode="In" />
           <Parameter Name="PaisId" Type="int" Mode="In" />
-          <Parameter Name="ClienteId" Type="int" Mode="In" />
+          <Parameter Name="ClienteId" Type="varchar" Mode="In" />
         </Function>
         <Function Name="CatConceptosParametroConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
@@ -1543,7 +1543,7 @@
           <FunctionImport Name="CatConceptosPaisClienteCMB" ReturnType="Collection(ASNModel.CatConceptosPaisClienteCMB_Result)">
             <Parameter Name="Perfil" Mode="In" Type="Int32" />
             <Parameter Name="PaisId" Mode="In" Type="Int32" />
-            <Parameter Name="ClienteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClienteId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatNotificacionesManualesSel" ReturnType="Collection(ASNModel.CatNotificacionesManualesSel_Result)">
           <Parameter Name="ResponsableCCMSID" Mode="In" Type="Int32" />

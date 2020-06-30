@@ -2535,7 +2535,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCountryByCascadeCMB_Result>("CatCountryByCascadeCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter, programIdParameter, crontactIdParameter);
         }
     
-        public virtual ObjectResult<CatConceptosPaisClienteCMB_Result> CatConceptosPaisClienteCMB(Nullable<int> perfil, Nullable<int> paisId, Nullable<int> clienteId)
+        public virtual ObjectResult<CatConceptosPaisClienteCMB_Result> CatConceptosPaisClienteCMB(Nullable<int> perfil, Nullable<int> paisId, string clienteId)
         {
             var perfilParameter = perfil.HasValue ?
                 new ObjectParameter("Perfil", perfil) :
@@ -2545,9 +2545,9 @@ namespace ASN.Models
                 new ObjectParameter("PaisId", paisId) :
                 new ObjectParameter("PaisId", typeof(int));
     
-            var clienteIdParameter = clienteId.HasValue ?
+            var clienteIdParameter = clienteId != null ?
                 new ObjectParameter("ClienteId", clienteId) :
-                new ObjectParameter("ClienteId", typeof(int));
+                new ObjectParameter("ClienteId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosPaisClienteCMB_Result>("CatConceptosPaisClienteCMB", perfilParameter, paisIdParameter, clienteIdParameter);
         }

@@ -680,18 +680,6 @@ function CargaPrograma() {
     var ciudad = $("#City_Ident").data("kendoDropDownList");
     var site = $("#Location_Ident").data("kendoDropDownList");
 
-    ////var cliente = $("#Client_Ident").data("kendoDropDownList");
-    //$("#Client_Ident").data("kendoMultiSelect").dataSource.read();
-    //$("#Client_Ident").data("kendoMultiSelect").enable(true);
-
-    //var MultiCliente = $("#Client_Ident").data("kendoMultiSelect");
-    //MultiCliente.enable(true);
-    //MultiCliente.dataSource.read();
-    //MultiCliente.refresh();
-    //if (editandoClientes != 0) {
-    //    MultiCliente.value(editandoClientes);
-    //}    
-
     var programa = $("#Program_Ident").data("kendoDropDownList");
     var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
     //var concepto = $("#ConceptoId").data("kendoDropDownList");
@@ -699,98 +687,19 @@ function CargaPrograma() {
     $("#Concepto").data("kendoMultiSelect").dataSource.read();
     $("#Concepto").data("kendoMultiSelect").enable(true);
 
-    ////////var MultiConcepto = $("#Concepto").data("kendoMultiSelect");
-    ////////MultiConcepto.enable(true);
-    ////////MultiConcepto.dataSource.read();
-    ////////MultiConcepto.refresh();
-    ////////if (editandoConceptos != 0) {
-    ////////    MultiConcepto.value(editandoConceptos);
-    ////////}    
-
-    //$("#ConceptoId").closest(".k-widget").hide();
-    //concepto.dataSource.read();
-    //concepto.refresh();
-
-    //if (contrato.value() == -1) {
-    //    contrato.dataSource.read();
-    //    contrato.refresh();
-    //}
-
-    //if (cliente.value() == -1) {
-    //    cliente.dataSource.read();
-    //    cliente.refresh();
-    //}
-
-    //if (site.value() == -1) {
-    //    site.dataSource.read();
-    //    site.refresh();
-    //}
-
-    //if (ciudad.value() == -1) {
-    //    ciudad.dataSource.read();
-    //    ciudad.refresh();
-    //}
-
-    //if (pais.value() == -1) {
-    //    pais.dataSource.read();
-    //    pais.refresh();
-    //}
-
-    //contrato.enable(false);
-    //contrato.value("-1");
-
     programa.enable(true);
     programa.dataSource.read(filterProgram());
     programa.refresh();
     //programa.value("-1");
 }
 
-function filterProgram(clientes) {
-
-    ////////////var multiselect = $("#Cliente").data("kendoMultiSelect");
-    ////////////var selectedValues = multiselect.value;
-
-    ////////////var texto = "";
-    ////////////for (i = 0; i < selectedValues.length; i++) {
-    ////////////    texto += selectedValues[i] + ",";
-    ////////////}
-
-    ////////////if (texto.length > 1) {
-    ////////////    texto = texto.substring(0, texto.length - 1);
-    ////////////}
-
-    ////////////if (texto =="undefined") {
-    ////////////    texto = "-1"
-    ////////////}
-
-    //var multiselect = $("#Concepto").data("kendoMultiSelect");
-    //var selectedValues = [];
-
-    //var Client_Ident = MultiClientes();
-
-    //if (multiselect == undefined) {
-    //    //multiselect = -1
-    //    selectedValues.push(-1)
-    //}
-    //else {
-
-    //    //Se calculan todos los conceptos seleccionados
-    //    if (editandoConceptos == 0 && multiselect.value().indexOf(-1) > -1) {
-    //        for (var i = 0; i < multiselect.dataSource.data().length; i++) {
-    //            var item = multiselect.dataSource.data()[i];
-    //            var data = multiselect.dataSource.data();
-    //            if (data[i].Ident > 0) {
-    //                selectedValues.push(data[i].Ident);
-    //            }
-    //        }
-	   // }
-    //}
+function filterProgram(country, city, site, clientes) {
 	
     return {
-        country: $("#Country_Ident").val(),
-        city: $("#City_Ident").val(),
-        site: $("#Location_Ident").val(),
-        client: clientes //selectedValues
+        country: country,
+        city: city,
+        site: site,
+        client: clientes
     };
 }
 
@@ -936,13 +845,13 @@ function validando() {
         var site = $("#Location_Ident").data("kendoDropDownList");
         //var cliente = $("#Client_Ident").data("kendoDropDownList");
         var MultiCliente = $("#Cliente").data("kendoMultiSelect");
-        MultiCliente.value(editandoClientes);
+        ////////////////MultiCliente.value(editandoClientes);
         //MultiCliente.value = editandoClientes;
         var programa = $("#Program_Ident").data("kendoDropDownList");
         var contrato = $("#Contract_Type_Ident").data("kendoDropDownList");
         //var concepto = $("#ConceptoId").data("kendoDropDownList");
         var MultiConcepto = $("#Concepto").data("kendoMultiSelect");
-        MultiConcepto.value(editandoConceptos);
+        ////////////////MultiConcepto.value(editandoConceptos);
         //MultiConcepto.value = editandoConceptos;
 
         ////////pais.enable(false);
@@ -974,7 +883,7 @@ function selectAllClientes(e) {
         selectedValues.push(e.dataItem.Id)
     }
 
-    multiselect.value(selectedValues);
+    //multiselect.value(selectedValues);
     multiselect.close();
 }
 
@@ -983,7 +892,7 @@ function selectCliente(e) {
     var multiselect = $("#Cliente").data("kendoMultiSelect");
     var programa = $("#Program_Ident").data("kendoDropDownList");
     var multiConceptos = $("#Concepto").data("kendoMultiSelect"); 
-    var selectedValues = multiselect.value();
+    var selectedValues = $("#Cliente").data("kendoMultiSelect").value();
     //var selectedValues = [];
 
     var data = multiselect.dataSource.data();
@@ -1003,7 +912,7 @@ function selectCliente(e) {
         selectedValues.push(e.dataItem.Id)
     }
 
-    multiselect.value = selectedValues
+    ////////////multiselect.value(selectedValues);
 
     var texto = "";
     for (i = 0; i < selectedValues.length; i++) {
@@ -1014,13 +923,18 @@ function selectCliente(e) {
         texto = texto.substring(0, texto.length - 1);
     }
 
+    var country = $("#Country_Ident").val();
+    var city = $("#City_Ident").val();
+    var site = $("#Location_Ident").val();
+    var clientes = texto; //selectedValues
+
     programa.enable(true);
-    programa.dataSource.read(filterProgram(texto));
+    programa.dataSource.read(filterProgram(country, city, site, clientes));
     programa.refresh();
     //programa.value("-1");
 
     multiConceptos.enable(true);
-    multiConceptos.dataSource.read(filterConcepto());
+    multiConceptos.dataSource.read(filterConcepto(country, clientes));
     multiConceptos.refresh();
 }
 
@@ -1067,7 +981,7 @@ function selectConcepto(e) {
     //var program = programa.value();
 
     concepto.enable(true);
-    concepto.dataSource.read(filterContract(pais, clientes));
+    concepto.dataSource.read(filterContract(clientes, programa));
     concepto.refresh();
     //programa.value("-1");
 }
