@@ -1,0 +1,57 @@
+Procedimeinto para atender soicitudes con conceptos rechazados.
+
+1.- El Autorizante rechaza un concepto en una solicitud a su cargo. Al rechazarlo, captura las razones para rechazar el movimiento.
+El motivo puede ser que algún dato esté mal capturado, o que el concepto no aplica y no debe procesarse.
+(Movimiento pasa a estatus "Rechazado")
+(Solicitud pasa a estatus "Rechazada")
+
+2.- La solicitud completa se marca con el estatus de rechazada. 
+Hay que entender en esta parte que el estatus no es de toda la solicitud, sino de uno o varios de los movimientos que la componen.
+Esto con la finalidad de detectar rápidamente que algún solicitante tiene pendientes de revisar en esa solicitud.
+
+3.- El Solicitante entra a la opción de "Mis Solicitudes" en Payroll Request; selecciona una solicitud en estatus "Rechazada".
+
+Revisa los conceptos y encuentra uno con el estatus de "Rechazado" En este momento el Solicitante puede realizar dos operacionnes 
+posibles sobre el concepto rechazado	
+
+a) Editar los datos del concepto rechazado de acuerdo a los comentarios capturados por el Autorizante y guardarlo
+(Movimiento pasa a estatus "Pendiente de Autorizar")
+
+b) Rechazar el movimiento también de acuerdo a los comentarios del Autorizante.
+(Movimiento pasa a estatus "Cancelado")
+
+4.- Si el Solicitante edita el movimiento rechazado y lo guarda entonce pueden ocurrir una de dos cosas:
+a) Si el movimiento editado era es el último concepto con estatus de Rechazado, toda la solicitud cambia nuevamente a estatus "Pendiente de Autorizar"
+(Solicitud pasa a estatus "Pendiente de Autorizar")
+b) Si aún hay mas movimientos con estatus de Rechazado, la Solicitud permanece en estatus de "Rechazada"
+(Solicitud continua en estatus "Rechazada)
+c) El Autorizante revisa nuevamente el Concepto previamente rechazado y le da seguimiento.
+
+5.- Si el Solicitante Cancela movimiento rechazado, este deja de aparecerle a los Autorizantes para su atención y entonce pueden ocurrir una de dos cosas:
+a) Si el movimiento Cancelado no era el último concepto con estatus de Rechazado, la solicitud permanece en estatus de "Rechazada" para que el solicitante 
+continúe atendiendo los otros movimientos en estatus "Rechazado"
+(Solicitud continua en estatus "Rechazada)
+b) Si el movimiento Cancelado era es el último concepto con estatus de Rechazado, se revisan los movimientos de la solicitud y esta
+pasa a estatus "Pendiente de Autorizar" (si aún existen movimientos Pendientes de Autorizar), o al estatus "Autorizada" (si todos los conceptos
+de la solicitud están en estatus "Autorizado" o "Cancelado").
+(Solicitud pasa a estatus "Pendiente de Autorizar" con algunos conceptos en estatus "Pendiente de Autorizar")
+(Solicitud pasa a estatus "Autorizada" sin ningún  concepto en estatus "Pendiente de Autorizar")
+
+Notas:
+
+Hay que recordar en este momento que en todos los conceptos de una solicitud, se debe llevar cada una de ellas a uno de estos dos estatus 
+"Autorizado" o "Cancelado", para que la solicitud pueda se cerrada por un Responsable.
+
+Esto implica que una solicitud con algún concepto en estatus de "Pendiente de Autorizar" o "Rechazado" impide que una solicitud pueda ser Cerrada.
+Se tienen que atender estos conceptos por parte del Autorizante (estatus "Pendiente de Autorizar") o del Solicitante (estatus "Rechazado").
+
+
+
+TODO:
+Notas:
+, este nuevamente aparece como pendiente de autorizar, así como la Solicitud 
+(solo encaso de que no queden mas conceptos en estatus de Rechazado)
+
+
+
+

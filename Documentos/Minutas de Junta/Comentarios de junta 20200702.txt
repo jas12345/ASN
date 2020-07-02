@@ -1,0 +1,4 @@
+Alerta de montos mayores de 20,000
+Configurable
+
+
