@@ -738,6 +738,11 @@ function rellenaPerfilTipoAcceso() {
         });
 }
 
+function onCancel(e) {
+    //kendoConsole.log("action :: Cancel");
+    //console.log("cancel");
+}
+
 function onChange(e) {
     //var selected = $.map(this.select(), function (item) {
     //    //return $(item).text();
@@ -1105,6 +1110,60 @@ function rechazarSolicitudALL() {
         //console.log($("#gridAutorizacion").data("kendoGrid").dataItem($("#gridAutorizacion").data("kendoGrid").select()) + "_R");
     }
 }
+
+function rechazarTodaSolicitud() {
+    //Se rechazan todos los conceptos de la solicitud independientemente del grid
+    var listaA = [];
+    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+    var algo = {
+        FolioSolicitud: $("#FolioSolicitud").val(),
+        Autorizador_Ident: usuarioCCMSID,
+        ConceptoId: 0,
+        NivelAutorizacion: 0,
+        Accion: 6
+    };
+
+    listaA.push(algo);
+
+    var listones = JSON.stringify({ 'liston': listaA });
+
+    $.when(
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: urlRechazaSolicitud,
+            data: listones,
+            success: function () {
+                //$('#result').html('"PassThings()" successfully called.');
+                //console.log("todo bien");
+            },
+            failure: function (response) {
+                //$('#result').html(response);
+                //console.log("algo paso");
+            }
+        })
+    ).done(function () {
+        //console.log("finito_A");
+        var grid = $("#gridAutorizacion").data("kendoGrid");
+        grid._selectedIds = {};
+        grid.clearSelection();
+        calculaEstatusSolicitud();
+        calculaPeriodoNominaSolicitud();
+        actualizaGrid();
+    });
+
+}
+
+function autorizarTodaSolicitudDialog() {
+    $("#dialogAutorizaTodo").data("kendoDialog").open();
+}
+
+function rechazarTodaSolicitudDialog() {
+    $("#dialogRechazaTodo").data("kendoDialog").open();
+}
+
 
 //function autorizarSolicitudALLx(folioid,eid,conId,nivId) {
 

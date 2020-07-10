@@ -138,8 +138,7 @@
                     {
                         <li>@Html.ActionLink("Reporte perfiles", "Index", "ReportePerfil")</li>
                     }
-
-                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Responsable"))
                     {
                         <li>@Html.ActionLink("Reporte Solicitud", "Index", "ReporteSolicitud")</li>
                     }
