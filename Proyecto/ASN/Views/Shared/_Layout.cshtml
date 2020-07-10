@@ -138,7 +138,8 @@
                     {
                         <li>@Html.ActionLink("Reporte perfiles", "Index", "ReportePerfil")</li>
                     }
-                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Responsable"))
+
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
                     {
                         <li>@Html.ActionLink("Reporte Solicitud", "Index", "ReporteSolicitud")</li>
                     }
@@ -147,6 +148,7 @@
                     if (User.IsInRole("Responsable"))
                     {
                         <li>@Html.ActionLink("Reporte Solicitud por Estatus", "Index", "ReporteSolicitudXEstatus")</li>
+                        <li>@Html.ActionLink("Reporte Folios Contrato Empresa", "Index", "ReporteFoliosContratoEmpresa")</li>
                     }
 
                     if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))

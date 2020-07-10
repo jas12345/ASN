@@ -59,8 +59,8 @@
         </div>
         <div class="col-lg-12 col-md-12">
             @*<div class="col-lg-2">
-                    @Html.Label("Autoriza Solicitud", new { style = "font-size: 15px" })
-                </div>*@
+                @Html.Label("Autoriza Solicitud", new { style = "font-size: 15px" })
+            </div>*@
             <div class="col-lg-4">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
@@ -79,24 +79,24 @@
                 @Html.Label("Periodo de nómina: ", new { style = "font-size: 15px" })
                 @Html.TextBox("PeriodoNomina", "", new { disabled = "disabled", style = "width:13em;" })
                 @*@(Html.Kendo().DropDownList().DataSource(source =>
+                    {
+                        source.Read(read =>
                         {
-                            source.Read(read =>
-                            {
-                                read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
-                            }
-                            );
-                        //.ServerFiltering(true);
+                            read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
                         }
-                        )
-                        .Filter("contains")
-                        .OptionLabel("- Seleccione Periodo de Nomina - ")
-                        .DataValueField("Ident")
-                        .DataTextField("Valor")
-                        .Name("PeriodoNomina_Id")
-                        .SelectedIndex(1)
-                        .Enable(false)
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                    )*@
+                        );
+                    //.ServerFiltering(true);
+                    }
+                    )
+                    .Filter("contains")
+                    .OptionLabel("- Seleccione Periodo de Nomina - ")
+                    .DataValueField("Ident")
+                    .DataTextField("Valor")
+                    .Name("PeriodoNomina_Id")
+                    .SelectedIndex(1)
+                    .Enable(false)
+                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                )*@
             </div>
             <div class="col-lg-4">
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })
@@ -317,15 +317,15 @@
                 <div class="col-lg-12">
                     <div class="col-lg-9">
                         @*<div class="col-lg-2">
-                                @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar").Icon("check")
-                                .Events(x => x.Click("autorizarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
-                                )
-                            </div>*@
+                            @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar").Icon("check")
+                            .Events(x => x.Click("autorizarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+                            )
+                        </div>*@
                         @*<div class="col-lg-2">
-                                @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar").Icon("close")
-                                .Events(x => x.Click("rechazarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
-                                )
-                            </div>*@
+                            @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar").Icon("close")
+                            .Events(x => x.Click("rechazarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+                            )
+                        </div>*@
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("AutorizarSolicitudALL").Content("Autorizar").Icon("check")
                             .Events(x => x.Click("autorizarSolicitudALL")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
@@ -333,17 +333,12 @@
                         </div>
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("AutorizarTodaSolicitud").Content("Autorizar Toda Solicitud").Icon("check")
-                            .Events(x => x.Click("autorizarTodaSolicitudDialog")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+                            .Events(x => x.Click("autorizarTodaSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                             )
                         </div>
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("RechazarSolicitudALL").Content("Rechazar").Icon("close")
                             .Events(x => x.Click("rechazarSolicitudALL")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
-                            )
-                        </div>
-                        <div class="col-lg-3">
-                            @(Html.Kendo().Button().Name("RechazarTodaSolicitud").Content("Rechazar Toda Solicitud").Icon("check")
-                            .Events(x => x.Click("rechazarTodaSolicitudDialog")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                             )
                         </div>
                     </div>
@@ -464,7 +459,7 @@
         .Modal(true)
     )
 
-
+    
     @(Html.Kendo().Notification()
         .Name("popupNotificationCom")
         .Position(p => p.Pinned(true).Top(30).Right(30))
@@ -472,48 +467,6 @@
         .Events(e => e.Show("onShow"))
     //.HtmlAttributes( new { @style = "background:rgba(0%,60%,0%,.7);color:white;"})
     )
-
-    @(Html.Kendo().Dialog()
-        .Name("dialogAutorizaTodo")
-        .Title("Advertencia")
-        .Content("<p><strong>Se van a autorizar todos los conceptos de la solicitud...</strong></p><p>No es posible deshacer esta operación.</p><p><strong>Deseas continuar?</strong></p>")
-        .Width(400)
-        .Modal(true)
-        .Animation(true)
-        .Visible(false)
-        .Actions(actions =>
-        {
-            actions.Add()
-            .Text("Autorizar Todo")
-            .Action("autorizarTodaSolicitud");
-            actions.Add()
-            .Text("No autorizar")
-            .Action("onCancel")
-            .Primary(true);
-        })
-    )
-
-
-    @(Html.Kendo().Dialog()
-        .Name("dialogRechazaTodo")
-        .Title("Advertencia")
-        .Content("<p><strong>Se van a rechazar todos los conceptos de la solicitud...</strong></p><p>No es posible deshacer esta operación.</p><p><strong>Deseas continuar?</strong></p>")
-        .Width(400)
-        .Modal(true)
-        .Animation(true)
-        .Visible(false)
-        .Actions(actions =>
-        {
-            actions.Add()
-            .Text("Rechazar Todo")
-            .Action("rechazarTodaSolicitud");
-            actions.Add()
-            .Text("No rechazar")
-            .Action("onCancel")
-            .Primary(true);
-        })
-    )
-
 
     <script>
                 @*var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';*@
@@ -621,7 +574,7 @@
         var urlAutorizaSolicitud = '@Url.Action("ProcesaSolicitud", "AutorizaSolicitud")';
 
         //
-        var urlRechazaSolicitud = '@Url.Action("ProcesaSolicitud", "AutorizaSolicitud")';
+        //var urlRechazaSolicitud = '@Url.Action("ProcesaSolicitud", "AutorizaSolicitud")';
 
         //
         //var urlCancelaSolicitud = '@Url.Action("ProcesaSolicitud", "AutorizaSolicitud")';
@@ -651,7 +604,7 @@ else
 
 <script>
     var InfoCCMSID = '@Url.Action("GetUserInfo","AutorizaSolicitud")';
-
+    
     function getComments(a,b,c) {
 
         var dialog = $("#Comentarios").data("kendoWindow");

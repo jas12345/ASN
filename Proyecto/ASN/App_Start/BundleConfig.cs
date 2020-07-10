@@ -174,7 +174,10 @@ namespace ASN
             //DescargaArchivos
             bundles.Add(new ScriptBundle("~/bundles/DescargaArchivos").Include(
             "~/Scripts/DescargaArchivos.js"));
-            
+
+            //ReporteSolicitud
+            bundles.Add(new ScriptBundle("~/bundles/ReporteFoliosContratoEmpresa").Include(
+            "~/Scripts/ReporteFoliosContratoEmpresa.js"));
         }
     }
 }

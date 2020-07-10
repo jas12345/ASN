@@ -185,7 +185,7 @@ namespace ASN.Controllers
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatProgramTodosCMB().ToList();
-                    lstCMB = ctx.CatProgramByClientCMB(country, city, site, client).ToList();
+                    lstCMB = ctx.CatProgramByClientCMB(country, city, site, 0).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -210,7 +210,7 @@ namespace ASN.Controllers
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatContractTypeTodosCMB().ToList();
-                    lstCMB = ctx.CatContractTypeByProgramCMB(country, city, site, client, program).ToList();
+                    lstCMB = ctx.CatContractTypeByProgramCMB(country, city, site, 0, program).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -237,7 +237,7 @@ namespace ASN.Controllers
                     //client;
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatConceptosCMB(0).ToList();
-                    lstCMB = ctx.CatConceptosPaisClienteCMB(0, pais, client).ToList();
+                    lstCMB = ctx.CatConceptosPaisClienteCMB(0, pais, 0).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -351,7 +351,7 @@ namespace ASN.Controllers
                                 obj.City_Ident,
                                 (string.IsNullOrEmpty(obj.Location_Ident) ?-1:int.Parse(obj.Location_Ident)),
                                 //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
-                                obj.Client_Ident,
+                                0,
                                 (string.IsNullOrEmpty(obj.Program_Ident)?-1:int.Parse(obj.Program_Ident)),
                                 (string.IsNullOrEmpty(obj.Contract_Type_Ident) ?-1:int.Parse(obj.Contract_Type_Ident)),
                                 //((Int32.TryParse(obj.ConceptoId, out i) ? i : (int?)null)),
@@ -419,7 +419,7 @@ namespace ASN.Controllers
                                 obj.City_Ident,
                                 (string.IsNullOrEmpty(obj.Location_Ident) ? -1 : int.Parse(obj.Location_Ident)),
                                 //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
-                                obj.Client_Ident,
+                               0,
                                 (string.IsNullOrEmpty(obj.Program_Ident) ? -1 : int.Parse(obj.Program_Ident)),
                                 (string.IsNullOrEmpty(obj.Contract_Type_Ident) ? -1 : int.Parse(obj.Contract_Type_Ident)),
                                 obj.ConceptoId,
