@@ -143,7 +143,7 @@
         <Function Name="CatConceptosPaisClienteCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil" Type="int" Mode="In" />
           <Parameter Name="PaisId" Type="int" Mode="In" />
-          <Parameter Name="ClienteId" Type="int" Mode="In" />
+          <Parameter Name="ClienteId" Type="varchar" Mode="In" />
         </Function>
         <Function Name="CatConceptosParametroConceptosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
@@ -251,7 +251,7 @@
           <Parameter Name="Country" Type="int" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="SiteId" Type="int" Mode="In" />
-          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="varchar" Mode="In" />
           <Parameter Name="ProgramId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatContractTypeCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -418,7 +418,7 @@
           <Parameter Name="Country_Ident" Type="int" Mode="In" />
           <Parameter Name="City_Ident" Type="int" Mode="In" />
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
-          <Parameter Name="Client_Ident" Type="int" Mode="In" />
+          <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
           <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
@@ -432,7 +432,7 @@
           <Parameter Name="Country_Ident" Type="int" Mode="In" />
           <Parameter Name="City_Ident" Type="int" Mode="In" />
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
-          <Parameter Name="Client_Ident" Type="int" Mode="In" />
+          <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
           <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
@@ -512,7 +512,7 @@
           <Parameter Name="Country" Type="int" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="SiteId" Type="int" Mode="In" />
-          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="ClientId" Type="varchar" Mode="In" />
         </Function>
         <Function Name="CatProgramCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatProgramTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -1071,34 +1071,6 @@
           <FunctionImport Name="CatPerfilEmpleadosCMB" ReturnType="Collection(ASNModel.CatPerfilEmpleadosCMB_Result)" >
           <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CatPerfilEmpleadosSi">
-            <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
-            <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="City_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Client_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="ConceptoId" Mode="In" Type="String" />
-            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatPerfilEmpleadosSu">
-            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
-            <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="City_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Client_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="ConceptoId" Mode="In" Type="String" />
-            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="Active" Mode="In" Type="Boolean" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="CatCityCMB" ReturnType="Collection(ASNModel.CatCityCMB_Result)" />
           <FunctionImport Name="CatCompanyCMB" ReturnType="Collection(ASNModel.CatCompanyCMB_Result)" />
           <FunctionImport Name="CatContractTypeCMB" ReturnType="Collection(ASNModel.CatContractTypeCMB_Result)" />
@@ -1518,22 +1490,9 @@
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="SiteId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CatContractTypeByProgramCMB" ReturnType="Collection(ASNModel.CatContractTypeByProgramCMB_Result)">
-            <Parameter Name="Country" Mode="In" Type="Int32" />
-            <Parameter Name="CityId" Mode="In" Type="Int32" />
-            <Parameter Name="SiteId" Mode="In" Type="Int32" />
-            <Parameter Name="ClientId" Mode="In" Type="Int32" />
-            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="CatLocationByCityCMB" ReturnType="Collection(ASNModel.CatLocationByCityCMB_Result)">
             <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatProgramByClientCMB" ReturnType="Collection(ASNModel.CatProgramByClientCMB_Result)">
-            <Parameter Name="Country" Mode="In" Type="Int32" />
-            <Parameter Name="CityId" Mode="In" Type="Int32" />
-            <Parameter Name="SiteId" Mode="In" Type="Int32" />
-            <Parameter Name="ClientId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatCountryByCascadeCMB" ReturnType="Collection(ASNModel.CatCountryByCascadeCMB_Result)">
             <Parameter Name="Country" Mode="In" Type="Int32" />
@@ -1546,7 +1505,7 @@
           <FunctionImport Name="CatConceptosPaisClienteCMB" ReturnType="Collection(ASNModel.CatConceptosPaisClienteCMB_Result)">
             <Parameter Name="Perfil" Mode="In" Type="Int32" />
             <Parameter Name="PaisId" Mode="In" Type="Int32" />
-            <Parameter Name="ClienteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClienteId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatNotificacionesManualesSel" ReturnType="Collection(ASNModel.CatNotificacionesManualesSel_Result)">
           <Parameter Name="ResponsableCCMSID" Mode="In" Type="Int32" />
@@ -1645,7 +1604,48 @@
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteFoliosContratoEmpresaSel" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresaSel_Result)">
-            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
+          <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatProgramByClientCMB" ReturnType="Collection(ASNModel.CatProgramByClientCMB_Result)">
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CatContractTypeByProgramCMB" ReturnType="Collection(ASNModel.CatContractTypeByProgramCMB_Result)">
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatPerfilEmpleadosSu">
+            <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
+            <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="City_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Client_Ident" Mode="In" Type="String" />
+            <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="String" />
+            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatPerfilEmpleadosSi" ReturnType="Collection(ASNModel.CatPerfilEmpleadosSi_Result)">
+            <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
+            <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="City_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Client_Ident" Mode="In" Type="String" />
+            <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="String" />
+            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2409,15 +2409,7 @@
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
         </ComplexType>
-        <ComplexType Name="CatContractTypeByProgramCMB_Result">
-          <Property Type="Int32" Name="Id" Nullable="true" />
-          <Property Type="String" Name="Value" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="CatLocationByCityCMB_Result">
-          <Property Type="Int32" Name="Id" Nullable="true" />
-          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
-        </ComplexType>
-        <ComplexType Name="CatProgramByClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
         </ComplexType>
@@ -2681,6 +2673,34 @@
           <Property Type="String" Name="Compañia" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Contrato" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CatProgramByClientCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="CatContractTypeByProgramCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatPerfilEmpleadosSi_Result">
+          <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
+          <Property Type="String" Name="NombrePerfilEmpleados" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Country_Ident" Nullable="true" />
+          <Property Type="Int32" Name="City_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Location_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Program_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
+          <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DeactivatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DeactivatedBy" Nullable="true" />
+          <Property Type="Int32" Name="LastModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastModifiedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="LastModifiedFromPCName" Nullable="false" MaxLength="64" />
         </ComplexType>
        
         </Schema>
@@ -2992,8 +3012,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSi" FunctionName="ASNModel.Store.CatPerfilEmpleadosSi" />
-          <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSu" FunctionName="ASNModel.Store.CatPerfilEmpleadosSu" />
           <FunctionImportMapping FunctionImportName="CatCityCMB" FunctionName="ASNModel.Store.CatCityCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatCityCMB_Result">
@@ -3834,25 +3852,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatContractTypeByProgramCMB" FunctionName="ASNModel.Store.CatContractTypeByProgramCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatContractTypeByProgramCMB_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatLocationByCityCMB" FunctionName="ASNModel.Store.CatLocationByCityCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatLocationByCityCMB_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatProgramByClientCMB" FunctionName="ASNModel.Store.CatProgramByClientCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatProgramByClientCMB_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
               </ComplexTypeMapping>
@@ -4229,6 +4231,47 @@
                 <ScalarProperty Name="Compañia" ColumnName="Compañia" />
                 <ScalarProperty Name="Contrato" ColumnName="Contrato" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatProgramByClientCMB" FunctionName="ASNModel.Store.CatProgramByClientCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatProgramByClientCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatContractTypeByProgramCMB" FunctionName="ASNModel.Store.CatContractTypeByProgramCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatContractTypeByProgramCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSu" FunctionName="ASNModel.Store.CatPerfilEmpleadosSu" />
+          <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSi" FunctionName="ASNModel.Store.CatPerfilEmpleadosSi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPerfilEmpleadosSi_Result">
+                <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
+                <ScalarProperty Name="NombrePerfilEmpleados" ColumnName="NombrePerfilEmpleados" />
+                <ScalarProperty Name="Country_Ident" ColumnName="Country_Ident" />
+                <ScalarProperty Name="City_Ident" ColumnName="City_Ident" />
+                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
+                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
+                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
+                <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

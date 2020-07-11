@@ -432,6 +432,9 @@
     <Compile Include="Models\CatPerfilEmpleadosSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatPerfilEmpleadosSi_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatPerfilEmpleadosViewModel.cs" />
     <Compile Include="Models\CatPerfilesDetalleSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
