@@ -419,7 +419,7 @@ namespace ASN.Controllers
                                 obj.City_Ident,
                                 (string.IsNullOrEmpty(obj.Location_Ident) ? -1 : int.Parse(obj.Location_Ident)),
                                 //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
-                               obj.Client_Ident,
+                                obj.Client_Ident,
                                 (string.IsNullOrEmpty(obj.Program_Ident) ? -1 : int.Parse(obj.Program_Ident)),
                                 (string.IsNullOrEmpty(obj.Contract_Type_Ident) ? -1 : int.Parse(obj.Contract_Type_Ident)),
                                 obj.ConceptoId,
