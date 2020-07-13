@@ -747,7 +747,7 @@
           <Parameter Name="EstatusSolicitud" Type="varchar" Mode="In" />
           <Parameter Name="EstatusConcepto" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="ReporteFoliosContratoEmpresaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+        <Function Name="ReporteFoliosContratoEmpresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
         </Function>
         <Function Name="ReporteGeneralDetalleSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1603,9 +1603,6 @@
             <Parameter Name="FolioSolicitudOut" Mode="InOut" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ReporteFoliosContratoEmpresaSel" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresaSel_Result)">
-          <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="CatProgramByClientCMB" ReturnType="Collection(ASNModel.CatProgramByClientCMB_Result)">
             <Parameter Name="Country" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
@@ -1646,6 +1643,9 @@
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteFoliosContratoEmpresa" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresa_Result)">
+            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2668,12 +2668,6 @@
           <Property Type="Int32" Name="PeriodoNominaId" Nullable="false" />
           <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="ReporteFoliosContratoEmpresaSel_Result">
-          <Property Type="Int32" Name="Folio" Nullable="false" />
-          <Property Type="String" Name="Compañia" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="Contrato" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Total" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="CatProgramByClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
@@ -2701,6 +2695,12 @@
           <Property Type="Int32" Name="LastModifiedBy" Nullable="false" />
           <Property Type="DateTime" Name="LastModifiedDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="LastModifiedFromPCName" Nullable="false" MaxLength="64" />
+        </ComplexType>
+        <ComplexType Name="ReporteFoliosContratoEmpresa_Result">
+          <Property Type="Int32" Name="Folio" Nullable="false" />
+          <Property Type="String" Name="Compañia" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Contrato" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -4224,16 +4224,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosCopy" FunctionName="ASNModel.Store.CatPerfilEmpleadosCopy" />
           <FunctionImportMapping FunctionImportName="CatSolicitudSimpleSi" FunctionName="ASNModel.Store.CatSolicitudSimpleSi" />
-          <FunctionImportMapping FunctionImportName="ReporteFoliosContratoEmpresaSel" FunctionName="ASNModel.Store.ReporteFoliosContratoEmpresaSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.ReporteFoliosContratoEmpresaSel_Result">
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Compañia" ColumnName="Compañia" />
-                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatProgramByClientCMB" FunctionName="ASNModel.Store.CatProgramByClientCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatProgramByClientCMB_Result">
@@ -4272,6 +4262,16 @@
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteFoliosContratoEmpresa" FunctionName="ASNModel.Store.ReporteFoliosContratoEmpresa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteFoliosContratoEmpresa_Result">
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Compañia" ColumnName="Compañia" />
+                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

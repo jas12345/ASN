@@ -11,7 +11,7 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class ReporteFoliosContratoEmpresaSel_Result
+    public partial class ReporteFoliosContratoEmpresa_Result
     {
         public int Folio { get; set; }
         public string Compañia { get; set; }

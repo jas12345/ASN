@@ -33,7 +33,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    var lstSolicitudes = context.ReporteFoliosContratoEmpresaSel(periodoNomina).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
+                    var lstSolicitudes = context.ReporteFoliosContratoEmpresa(periodoNomina).ToList();//, city,site,solicitanteCCMSID,estatus).ToList();
                     DataSourceResult ok = lstSolicitudes.ToDataSourceResult(request);
                     return Json(ok, JsonRequestBehavior.AllowGet);
                 }

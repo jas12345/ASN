@@ -560,7 +560,7 @@
     <Compile Include="Models\ReporteConceptoXEstatusSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ReporteFoliosContratoEmpresaSel_Result.cs">
+    <Compile Include="Models\ReporteFoliosContratoEmpresa_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReporteGeneralDetalleSel_Result.cs">

@@ -2729,15 +2729,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudSimpleSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, folioSolicitudOut, estatus);
         }
     
-        public virtual ObjectResult<ReporteFoliosContratoEmpresaSel_Result> ReporteFoliosContratoEmpresaSel(Nullable<int> periodoNomina)
-        {
-            var periodoNominaParameter = periodoNomina.HasValue ?
-                new ObjectParameter("PeriodoNomina", periodoNomina) :
-                new ObjectParameter("PeriodoNomina", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresaSel_Result>("ReporteFoliosContratoEmpresaSel", periodoNominaParameter);
-        }
-    
         public virtual ObjectResult<CatProgramByClientCMB_Result> CatProgramByClientCMB(Nullable<int> country, Nullable<int> cityId, Nullable<int> siteId, string clientId)
         {
             var countryParameter = country.HasValue ?
@@ -2880,6 +2871,15 @@ namespace ASN.Models
                 new ObjectParameter("UserEmployeeId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosSi_Result>("CatPerfilEmpleadosSi", nombrePerfilEmpleadosParameter, country_IdentParameter, city_IdentParameter, location_IdentParameter, client_IdentParameter, program_IdentParameter, contract_Type_IdentParameter, conceptoIdParameter, tipoAccesoIdParameter, userEmployeeIdParameter, estatus);
+        }
+    
+        public virtual ObjectResult<ReporteFoliosContratoEmpresa_Result> ReporteFoliosContratoEmpresa(Nullable<int> periodoNomina)
+        {
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
         }
     }
 }
