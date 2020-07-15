@@ -287,7 +287,7 @@ function editarEmpleadoSolicitud(e) {
     //    $("#AutorizarSolicitud").hide();
     //    $("#RechazarSolicitud").hide();
     //}
-    
+
     //$("#CancelarSolicitud").show();
 
     // Se actualiza comboBox de Conceptos
@@ -435,7 +435,7 @@ function onChangeCCMSId() {
 
             //debugger;
 
-            
+
             //if ($("#CCMSIDIncidente").data("kendoNumericTextBox").value() == 0) {
             if (CCMSIdResponsable == 0) {
                 $("#CCMSIDIncidente").data("kendoNumericTextBox").value(CCMSIdResponsable);
@@ -448,12 +448,12 @@ function onChangeCCMSId() {
             }
             else {
                 $("#CCMSIDIncidente").data("kendoNumericTextBox").value(responsableId);
-                 // Sugerencia de responsable de incidente es el Manager del empleado
+                // Sugerencia de responsable de incidente es el Manager del empleado
                 $("#ResponsableCCMSIDX").val(responsableId);
                 $("#ResponsableCCMSIDX").text(responsableId);
                 $("#NombreRespoX").val(NombreResponsableIncidente);
                 $("#NombreRespoX").text(NombreResponsableIncidente);
-           }
+            }
 
             if (EmpCCMSId == -1) {
                 var notification = $("#popupNotification").data("kendoNotification");
@@ -512,11 +512,11 @@ function onChangeConceptos() {
             ConConceptoIdent = data[0].ConceptoId;
             ConConceptoNombre = data[0].DescripcionConcepto;
             ConParametroId = data[0].TipoconceptoId;
-            ConParametroNombre = ConParametroConceptoMonto + " " +  data[0].DescripcionParametroConcepto;
+            ConParametroNombre = ConParametroConceptoMonto + " " + data[0].DescripcionParametroConcepto;
             ConNivelesAutorizacion = data[0].NivelesAutorizacion;
 
             $("#ConceptoX").val(ConConceptoNombre);
-            $("#ConceptoX").text(ConConceptoNombre);    
+            $("#ConceptoX").text(ConConceptoNombre);
             $("#ParametroX").val(ConParametroNombre);
             $("#ParametroX").text(ConParametroNombre);
 
@@ -545,7 +545,7 @@ function onChangeMotivo() {
         ConMotivoIdent = "";
 
         //ConConceptoMotivo = $("#Motivo.value").text();
-        ConMotivoNombre = $("#Motivo").data('kendoDropDownList').text();        
+        ConMotivoNombre = $("#Motivo").data('kendoDropDownList').text();
         ConMotivoIdent = $("#Motivo").val();
         //debugger;
 
@@ -634,10 +634,10 @@ function onChangeParametro() {
     else {
         $("#ParametroX").val("");
         $("#ParametroX").text("");
-    }}
+    }
+}
 
-function onChangeCCMSIdIncidente()
-{
+function onChangeCCMSIdIncidente() {
     //debugger;
 
     responsableId = "";
@@ -653,13 +653,13 @@ function onChangeCCMSIdIncidente()
 
     if ($("#CCMSIDIncidente").val().length > 0) {
         //debugger;
-        $.post(urlEmpleadoPuesto + "/?Ident=" + responsableId , function (data) {
-            responsableId  = data[0].Ident
+        $.post(urlEmpleadoPuesto + "/?Ident=" + responsableId, function (data) {
+            responsableId = data[0].Ident
             NombreResponsableIncidente = data[0].Nombre;
 
             //debugger;
-            $("#ResponsableCCMSIDX").val(responsableId );
-            $("#ResponsableCCMSIDX").text(responsableId );
+            $("#ResponsableCCMSIDX").val(responsableId);
+            $("#ResponsableCCMSIDX").text(responsableId);
             $("#NombreRespoX").val(NombreResponsableIncidente);
             $("#NombreRespoX").text(NombreResponsableIncidente);
 
@@ -738,6 +738,11 @@ function rellenaPerfilTipoAcceso() {
         });
 }
 
+function onCancel(e) {
+    //kendoConsole.log("action :: Cancel");
+    //console.log("cancel");
+}
+
 function onChange(e) {
     //var selected = $.map(this.select(), function (item) {
     //    //return $(item).text();
@@ -778,7 +783,7 @@ function onChange(e) {
 
     var grid = $("#gridAutorizacion").data("kendoGrid");
     var rowss = $("#gridAutorizacion").data("kendoGrid").tbody.children();
-    
+
     for (var j = 0; j < rowss.length; j++) {
         var row = $(rowss[j]);
         var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(row);
@@ -909,11 +914,11 @@ function autorizarSolicitudALL() {
             var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 
             var algo = {
-                FolioSolicitud : dataItem.FolioSolicitud,
+                FolioSolicitud: dataItem.FolioSolicitud,
                 Empleado_Ident: dataItem.Ident,
-                ConceptoId : dataItem.ConceptoId,
+                ConceptoId: dataItem.ConceptoId,
                 NivelAutorizacion: dataItem.NivelAutorizacion,
-                Accion : 2
+                Accion: 2
             };
 
             listaA.push(algo);
@@ -936,7 +941,7 @@ function autorizarSolicitudALL() {
                     //$('#result').html(response);
                     //console.log("algo paso");
                 }
-            }) 
+            })
         ).done(function () {
             //console.log("finito_A");
             var grid = $("#gridAutorizacion").data("kendoGrid");
@@ -972,11 +977,11 @@ function autorizarSolicitudALL() {
     }
 }
 
-    //else {
-    //    if (confirm("Desea autorizar todos los conceptos?")) {
-    //        var notification = $("#popupNotification").data("kendoNotification");
-    //        notification.show("Conceptos Autorizados", "success");        }
-    //}
+//else {
+//    if (confirm("Desea autorizar todos los conceptos?")) {
+//        var notification = $("#popupNotification").data("kendoNotification");
+//        notification.show("Conceptos Autorizados", "success");        }
+//}
 function autorizarTodaSolicitud() {
     //Se autoriza todos los conceptos de la solicitud independientemente del grid
     var listaA = [];
@@ -1106,6 +1111,60 @@ function rechazarSolicitudALL() {
     }
 }
 
+function rechazarTodaSolicitud() {
+    //Se rechazan todos los conceptos de la solicitud independientemente del grid
+    var listaA = [];
+    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+    var algo = {
+        FolioSolicitud: $("#FolioSolicitud").val(),
+        Autorizador_Ident: usuarioCCMSID,
+        ConceptoId: 0,
+        NivelAutorizacion: 0,
+        Accion: 6
+    };
+
+    listaA.push(algo);
+
+    var listones = JSON.stringify({ 'liston': listaA });
+
+    $.when(
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: urlRechazaSolicitud,
+            data: listones,
+            success: function () {
+                //$('#result').html('"PassThings()" successfully called.');
+                //console.log("todo bien");
+            },
+            failure: function (response) {
+                //$('#result').html(response);
+                //console.log("algo paso");
+            }
+        })
+    ).done(function () {
+        //console.log("finito_A");
+        var grid = $("#gridAutorizacion").data("kendoGrid");
+        grid._selectedIds = {};
+        grid.clearSelection();
+        calculaEstatusSolicitud();
+        calculaPeriodoNominaSolicitud();
+        actualizaGrid();
+    });
+
+}
+
+function autorizarTodaSolicitudDialog() {
+    $("#dialogAutorizaTodo").data("kendoDialog").open();
+}
+
+function rechazarTodaSolicitudDialog() {
+    $("#dialogRechazaTodo").data("kendoDialog").open();
+}
+
+
 //function autorizarSolicitudALLx(folioid,eid,conId,nivId) {
 
 //    $.post(urlAutorizaSolicitud + "?FolioSolicitud=" + folioid + "&Empleado_Ident=" + eid + "&ConceptoId=" + conId + "&NivelAutorizacion=" + nivId + "&Accion=" + 2, function (data) {
@@ -1161,7 +1220,7 @@ function rechazarSolicitudALL() {
 
 
 function calculaEstatusSolicitudALL(folioId) {
-    
+
     $.post(urlConsultarEstatusSolicitud + "?FolioSolicitud=" + folioId, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
         if (data.res == -1) {
