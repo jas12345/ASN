@@ -1532,27 +1532,74 @@ function onChangeParametro() {
     //debugger;
 
     if ($("#Parametro").val().length > 0) {
-        //debugger;
-        ConConceptoMotivo = "";
-        ConParametroConceptoValor = 0;
-        ConParametroConceptoMonto = 0;
+        if ($("#Parametro").val() <= 20000) {
+            //debugger;
+            ConConceptoMotivo = "";
+            ConParametroConceptoValor = 0;
+            ConParametroConceptoMonto = 0;
 
-        //ConConceptoMotivo = $("#Motivo.value").text();
-        ConConceptoMotivo = $("#Parametro").val(); // + ' ' + ConParametro;
-        ConParametroConceptoMonto = $("#Parametro").val();
-        //debugger;
+            //ConConceptoMotivo = $("#Motivo.value").text();
+            ConConceptoMotivo = $("#Parametro").val(); // + ' ' + ConParametro;
+            ConParametroConceptoMonto = $("#Parametro").val();
+            //debugger;
 
-        //rellenaPerfilTipoAcceso();
+            //rellenaPerfilTipoAcceso();
 
-        var valor = $("#Parametro").val() + " " + ConParametroNombre.substring(ConParametroNombre.indexOf(" ") + 1);
+            var valor = $("#Parametro").val() + " " + ConParametroNombre.substring(ConParametroNombre.indexOf(" ") + 1);
 
-        $("#ParametroX").val(valor);
-        $("#ParametroX").text(valor);
+            $("#ParametroX").val(valor);
+            $("#ParametroX").text(valor);
+        }
+        else {
+            $("#dialogValidaMonto").data("kendoDialog").open();
+        }
     }
     else {
         $("#ParametroX").val("");
         $("#ParametroX").text("");
     }}
+
+function aceptarMonto() {
+    //ConConceptoMotivo = "";
+    //ConParametroConceptoValor = 0;
+    ConParametroConceptoMonto = 0;
+
+    var controlParametro = $("#Parametro").data("kendoNumericTextBox");
+
+    //ConConceptoMotivo = $("#Parametro").val();
+    ConParametroConceptoMonto = $("#Parametro").val();
+
+    var valor = $("#Parametro").val() + " " + ConParametroNombre.substring(ConParametroNombre.indexOf(" ") + 1);
+
+    $("#Parametro").val(ConParametroConceptoMonto);
+    $("#Parametro").text(ConParametroConceptoMonto);
+
+    $("#ParametroX").val(valor);
+    $("#ParametroX").text(valor);
+
+    return true;
+}
+
+function rechazarMonto() {
+    ConParametroConceptoMonto = 0;
+
+    var controlParametro = $("#Parametro").data("kendoNumericTextBox");
+
+    controlParametro.value(0);
+    //controlParametro.text("0");
+
+    //ConConceptoMotivo = $("#Parametro").val();
+    ConParametroConceptoMonto = controlParametro.val();
+
+    var valor = "0 " + ConParametroNombre.substring(ConParametroNombre.indexOf(" ") + 1);
+
+    //var valor = $("#Parametro").val();
+
+    $("#ParametroX").val(valor);
+    $("#ParametroX").text(valor);
+
+    return true;
+}
 
 function onChangeCCMSIdIncidente()
 {

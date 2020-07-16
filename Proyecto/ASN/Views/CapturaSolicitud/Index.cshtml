@@ -24,7 +24,6 @@
 </style>
 
 
-
 @{
     int folioId = 0;
 
@@ -117,51 +116,51 @@
                 </div>
             </div>
         </div>
-            <p></p>
+        <p></p>
 
-            <table class="table" style="margin-bottom: 5px;">
-                <tbody>
-                    <tr>
-                        <td>
-                            <label class="primerLabel" id="lblCCMSID">CCMSID:</label><br />
-                            <label class="primerLabel" id="lblNombre">Nombre:</label><br />
-                            <label class="primerLabel" id="lblPuesto">Puesto:</label><br />
-                            <label class="primerLabel" id="lblContrato">Contrato:</label>
-                        </td>
-                        <td>
-                            <label id="CCMSIDX"></label><br />
-                            <label id="NombreX"></label><br />
-                            <label id="PuestoX"></label><br />
-                            <label id="ContratoX"></label>
-                        </td>
-                        <td>
-                            <label class="primerLabel" id="lblSite">Site:</label><br />
-                            <label class="primerLabel" id="lblConcepto">Concepto:</label><br />
-                            <label class="primerLabel" id="lblParametro">Parámetro:</label><br />
-                            <label class="primerLabel" id="lblMotivo">Motivo:</label>
-                        </td>
-                        <td>
-                            <label id="SiteX"></label><br />
-                            <label id="ConceptoX"></label><br />
-                            <label id="ParametroX"></label><br />
-                            <label id="MotivoX"></label>
-                        </td>
-                        <td>
-                            <label class="primerLabel" id="lblConceptoMotivo">Concepto Motivo:</label><br />
-                            <label class="primerLabel" id="lblResponsableCCMSID">Responsable de incidente:</label><br />
-                            <label class="primerLabel" id="lblNombreRespo">Nombre responsable:</label><br />
-                            <label class="primerLabel" id="lblPeriodoOP">Período original de pago:</label>
-                        </td>
-                        <td>
-                            <label id="ConceptoMotivoX"></label><br />
-                            <label id="ResponsableCCMSIDX"></label><br />
-                            <label id="NombreRespoX"></label><br />
-                            <label id="PeriodoOPX"></label>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="table" style="margin-bottom: 5px;">
+            <tbody>
+                <tr>
+                    <td>
+                        <label class="primerLabel" id="lblCCMSID">CCMSID:</label><br />
+                        <label class="primerLabel" id="lblNombre">Nombre:</label><br />
+                        <label class="primerLabel" id="lblPuesto">Puesto:</label><br />
+                        <label class="primerLabel" id="lblContrato">Contrato:</label>
+                    </td>
+                    <td>
+                        <label id="CCMSIDX"></label><br />
+                        <label id="NombreX"></label><br />
+                        <label id="PuestoX"></label><br />
+                        <label id="ContratoX"></label>
+                    </td>
+                    <td>
+                        <label class="primerLabel" id="lblSite">Site:</label><br />
+                        <label class="primerLabel" id="lblConcepto">Concepto:</label><br />
+                        <label class="primerLabel" id="lblParametro">Parámetro:</label><br />
+                        <label class="primerLabel" id="lblMotivo">Motivo:</label>
+                    </td>
+                    <td>
+                        <label id="SiteX"></label><br />
+                        <label id="ConceptoX"></label><br />
+                        <label id="ParametroX"></label><br />
+                        <label id="MotivoX"></label>
+                    </td>
+                    <td>
+                        <label class="primerLabel" id="lblConceptoMotivo">Concepto Motivo:</label><br />
+                        <label class="primerLabel" id="lblResponsableCCMSID">Responsable de incidente:</label><br />
+                        <label class="primerLabel" id="lblNombreRespo">Nombre responsable:</label><br />
+                        <label class="primerLabel" id="lblPeriodoOP">Período original de pago:</label>
+                    </td>
+                    <td>
+                        <label id="ConceptoMotivoX"></label><br />
+                        <label id="ResponsableCCMSIDX"></label><br />
+                        <label id="NombreRespoX"></label><br />
+                        <label id="PeriodoOPX"></label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     @*
         <div class="container-fluid">
             <div class="row">
@@ -499,7 +498,6 @@
                                 @(Html.Kendo().Button().Name("EnviarSolicitud").Content("Enviar solicitud").Icon("email")
                                 .Events(x => x.Click("enviarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                                 )
-
                                 @(Html.Kendo().Button().Name("CancelarEmpleadoSolicitud").Content("Cancelar Concepto").Icon("close")
                                 .Events(x => x.Click("cancelarEmpleadoSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                                 )
@@ -762,6 +760,27 @@
             actions.Add()
             .Text("No cancelar")
             .Action("onCancel")
+            .Primary(true);
+        })
+    )
+
+    @(Html.Kendo().Dialog()
+        .Name("dialogValidaMonto")
+        .Title("Advertencia")
+        .Content("<p><strong>Se está capturando un monto superior a 20,000...</strong></p><p><strong>¿Deseas continuar?</strong></p>")
+        .Width(400)
+        .Closable(false)
+        .Modal(true)
+        .Animation(true)
+        .Visible(false)
+        .Actions(actions =>
+        {
+            actions.Add()
+            .Text("Aceptar monto")
+            .Action("aceptarMonto");
+            actions.Add()
+            .Text("Rechazar monto")
+            .Action("rechazarMonto")
             .Primary(true);
         })
     )
