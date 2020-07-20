@@ -59,8 +59,8 @@
         </div>
         <div class="col-lg-12 col-md-12">
             @*<div class="col-lg-2">
-                @Html.Label("Autoriza Solicitud", new { style = "font-size: 15px" })
-            </div>*@
+                    @Html.Label("Autoriza Solicitud", new { style = "font-size: 15px" })
+                </div>*@
             <div class="col-lg-4">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
@@ -79,24 +79,24 @@
                 @Html.Label("Periodo de nómina: ", new { style = "font-size: 15px" })
                 @Html.TextBox("PeriodoNomina", "", new { disabled = "disabled", style = "width:13em;" })
                 @*@(Html.Kendo().DropDownList().DataSource(source =>
-                    {
-                        source.Read(read =>
                         {
-                            read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
+                            source.Read(read =>
+                            {
+                                read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
+                            }
+                            );
+                        //.ServerFiltering(true);
                         }
-                        );
-                    //.ServerFiltering(true);
-                    }
-                    )
-                    .Filter("contains")
-                    .OptionLabel("- Seleccione Periodo de Nomina - ")
-                    .DataValueField("Ident")
-                    .DataTextField("Valor")
-                    .Name("PeriodoNomina_Id")
-                    .SelectedIndex(1)
-                    .Enable(false)
-                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                )*@
+                        )
+                        .Filter("contains")
+                        .OptionLabel("- Seleccione Periodo de Nomina - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("PeriodoNomina_Id")
+                        .SelectedIndex(1)
+                        .Enable(false)
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                    )*@
             </div>
             <div class="col-lg-4">
                 @Html.Label("Estatus: ", new { style = "font-size: 15px" })
@@ -317,15 +317,15 @@
                 <div class="col-lg-12">
                     <div class="col-lg-9">
                         @*<div class="col-lg-2">
-                            @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar").Icon("check")
-                            .Events(x => x.Click("autorizarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
-                            )
-                        </div>*@
+                                @(Html.Kendo().Button().Name("AutorizarSolicitud").Content("Autorizar").Icon("check")
+                                .Events(x => x.Click("autorizarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+                                )
+                            </div>*@
                         @*<div class="col-lg-2">
-                            @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar").Icon("close")
-                            .Events(x => x.Click("rechazarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
-                            )
-                        </div>*@
+                                @(Html.Kendo().Button().Name("RechazarSolicitud").Content("Rechazar").Icon("close")
+                                .Events(x => x.Click("rechazarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+                                )
+                            </div>*@
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("AutorizarSolicitudALL").Content("Autorizar").Icon("check")
                             .Events(x => x.Click("autorizarSolicitudALL")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
@@ -357,7 +357,7 @@
                             .Name("gridAutorizacion")
                             .Columns(column =>
                             {
-                                if(Model.EstatusId == "PA" || Model.EstatusId == "R" )
+                                if (Model.EstatusId == "PA" || Model.EstatusId == "R")
                                 {
                                     column.Select().Width(9).HtmlAttributes(new { style = "text-align: left;" }).HeaderHtmlAttributes(new { style = "text-align: left;" });
                                 }
@@ -380,10 +380,13 @@
                             .Sortable()
                             //.PersistSelection()
                             .AutoBind(false)
+
                             .Events(eve => eve.Change("onChange").DataBound("ocultaCheckbox"))
                             //.Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                             .DataSource(dataSource => dataSource
                                 .Ajax()
+                                .Batch(true)
+                                .ServerOperation(false)
                                 .Model(model =>
                                 {
                                     model.Id(c => c.FolioSolicitud);
@@ -434,7 +437,7 @@
                                 messages.Display("{0} a {1} de {2}");
                             })
                             )
-                )
+                    )
                 </div>
             </div>
         </div>
@@ -459,7 +462,47 @@
         .Modal(true)
     )
 
-    
+    @(Html.Kendo().Dialog()
+       .Name("dialogValidaMontoSelect")
+       .Title("Advertencia")
+       .Content("<p><strong>Se está autorizando un monto superior a 20,000...</strong></p><p><strong>¿Deseas continuar?</strong></p>")
+       .Width(400)
+       .Closable(false)
+       .Modal(true)
+       .Animation(true)
+       .Visible(false)
+       .Actions(actions =>
+       {
+           actions.Add()
+           .Text("Aceptar monto")
+           .Action("aceptarMontoSelect");
+           actions.Add()
+           .Text("Rechazar monto")
+           .Action("rechazarMontoSelect")
+           .Primary(true);
+       })
+    )
+    @(Html.Kendo().Dialog()
+       .Name("dialogValidaMontoTodas")
+       .Title("Advertencia")
+       .Content("<p><strong>Se está autorizando un monto superior a 20,000...</strong></p><p><strong>¿Deseas continuar?</strong></p>")
+       .Width(400)
+       .Closable(false)
+       .Modal(true)
+       .Animation(true)
+       .Visible(false)
+       .Actions(actions =>
+       {
+           actions.Add()
+           .Text("Aceptar monto")
+           .Action("aceptarMontoTodas");
+           actions.Add()
+           .Text("Rechazar monto")
+           .Action("rechazarMontoTodas")
+           .Primary(true);
+       })
+    )
+
     @(Html.Kendo().Notification()
         .Name("popupNotificationCom")
         .Position(p => p.Pinned(true).Top(30).Right(30))
@@ -604,7 +647,7 @@ else
 
 <script>
     var InfoCCMSID = '@Url.Action("GetUserInfo","AutorizaSolicitud")';
-    
+
     function getComments(a,b,c) {
 
         var dialog = $("#Comentarios").data("kendoWindow");
