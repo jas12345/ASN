@@ -899,59 +899,67 @@ function autorizarSolicitudALL() {
     var rows = $("#gridAutorizacion").data("kendoGrid").select();
 
     if (rows.length > 0) {
-        //rows.each(function (e) {
-        //    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 
-        //    console.log(dataItem.FolioSolicitud);
-        //    console.log(dataItem.Ident);
-        //    console.log(dataItem.ConceptoId);
-        //    console.log(dataItem.NivelAutorizacion);
-        //});
+        if (montoMayor20000(rows, 'select')) {
 
-        var listaA = [];
+            //rows.each(function (e) {
+            //    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 
-        rows.each(function (e) {
-            var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+            //    console.log(dataItem.FolioSolicitud);
+            //    console.log(dataItem.Ident);
+            //    console.log(dataItem.ConceptoId);
+            //    console.log(dataItem.NivelAutorizacion);
+            //});
 
-            var algo = {
-                FolioSolicitud: dataItem.FolioSolicitud,
-                Empleado_Ident: dataItem.Ident,
-                ConceptoId: dataItem.ConceptoId,
-                NivelAutorizacion: dataItem.NivelAutorizacion,
-                Accion: 2
-            };
+            var listaA = [];
 
-            listaA.push(algo);
-        });
+            rows.each(function (e) {
+                var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 
-        var listones = JSON.stringify({ 'liston': listaA });
+                var algo = {
+                    FolioSolicitud: dataItem.FolioSolicitud,
+                    Empleado_Ident: dataItem.Ident,
+                    ConceptoId: dataItem.ConceptoId,
+                    NivelAutorizacion: dataItem.NivelAutorizacion,
+                    Accion: 2
+                };
 
-        $.when(
-            $.ajax({
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                type: 'POST',
-                url: urlAutorizaSolicitud,
-                data: listones,
-                success: function () {
-                    //$('#result').html('"PassThings()" successfully called.');
-                    //console.log("todo bien");
-                },
-                failure: function (response) {
-                    //$('#result').html(response);
-                    //console.log("algo paso");
-                }
-            })
-        ).done(function () {
-            //console.log("finito_A");
-            var grid = $("#gridAutorizacion").data("kendoGrid");
-            grid._selectedIds = {};
-            grid.clearSelection();
-            calculaEstatusSolicitud();
-            calculaPeriodoNominaSolicitud();
-            actualizaGrid();
-        });
+                listaA.push(algo);
+            });
 
+            var listones = JSON.stringify({ 'liston': listaA });
+
+            $.when(
+                $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    type: 'POST',
+                    url: urlAutorizaSolicitud,
+                    data: listones,
+                    success: function () {
+                        //$('#result').html('"PassThings()" successfully called.');
+                        //console.log("todo bien");
+                    },
+                    failure: function (response) {
+                        //$('#result').html(response);
+                        //console.log("algo paso");
+                    }
+                })
+            ).done(function () {
+                //console.log("finito_A");
+                var grid = $("#gridAutorizacion").data("kendoGrid");
+                grid._selectedIds = {};
+                grid.clearSelection();
+                calculaEstatusSolicitud();
+                calculaPeriodoNominaSolicitud();
+                actualizaGrid();
+            });
+
+
+        }
+        else {
+            $("#dialogValidaMontoSelect").data("kendoDialog").open();
+        }
         //$.when(rows.each(function (e) {
         //    //var grid = $("#gridAutorizacion").data("kendoGrid");
         //    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
@@ -985,45 +993,55 @@ function autorizarSolicitudALL() {
 function autorizarTodaSolicitud() {
     //Se autoriza todos los conceptos de la solicitud independientemente del grid
     var listaA = [];
-    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 
-    var algo = {
-        FolioSolicitud: $("#FolioSolicitud").val(),
-        Autorizador_Ident: usuarioCCMSID,
-        ConceptoId: 0,
-        NivelAutorizacion: 0,
-        Accion: 5
-    };
+    var rows = $("#gridAutorizacion").data("kendoGrid").dataSource.data();
 
-    listaA.push(algo);
+    if (rows.length > 0) {
+        if (montoMayor20000(rows, 'todas')) {
 
-    var listones = JSON.stringify({ 'liston': listaA });
+            var algo = {
+                FolioSolicitud: $("#FolioSolicitud").val(),
+                Autorizador_Ident: usuarioCCMSID,
+                ConceptoId: 0,
+                NivelAutorizacion: 0,
+                Accion: 5
+            };
 
-    $.when(
-        $.ajax({
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            type: 'POST',
-            url: urlAutorizaSolicitud,
-            data: listones,
-            success: function () {
-                //$('#result').html('"PassThings()" successfully called.');
-                //console.log("todo bien");
-            },
-            failure: function (response) {
-                //$('#result').html(response);
-                //console.log("algo paso");
-            }
-        })
-    ).done(function () {
-        //console.log("finito_A");
-        var grid = $("#gridAutorizacion").data("kendoGrid");
-        grid._selectedIds = {};
-        grid.clearSelection();
-        calculaEstatusSolicitud();
-        calculaPeriodoNominaSolicitud();
-        actualizaGrid();
-    });
+            listaA.push(algo);
+
+            var listones = JSON.stringify({ 'liston': listaA });
+
+            $.when(
+                $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    type: 'POST',
+                    url: urlAutorizaSolicitud,
+                    data: listones,
+                    success: function () {
+                        //$('#result').html('"PassThings()" successfully called.');
+                        //console.log("todo bien");
+                    },
+                    failure: function (response) {
+                        //$('#result').html(response);
+                        //console.log("algo paso");
+                    }
+                })
+            ).done(function () {
+                //console.log("finito_A");
+                var grid = $("#gridAutorizacion").data("kendoGrid");
+                grid._selectedIds = {};
+                grid.clearSelection();
+                calculaEstatusSolicitud();
+                calculaPeriodoNominaSolicitud();
+                actualizaGrid();
+            });
+
+        }
+        else {
+            $("#dialogValidaMontoTodas").data("kendoDialog").open();
+        }
+    }
 
 }
 
@@ -1231,4 +1249,149 @@ function calculaEstatusSolicitudALL(folioId) {
     });
 
     //console.log("calculastatus_" + folioId);
+}
+
+function aceptarMontoSelect() {
+
+    var rows = $("#gridAutorizacion").data("kendoGrid").select();
+
+    if (rows.length > 0) {
+
+
+        var listaA = [];
+
+        rows.each(function (e) {
+            var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+            var algo = {
+                FolioSolicitud: dataItem.FolioSolicitud,
+                Empleado_Ident: dataItem.Ident,
+                ConceptoId: dataItem.ConceptoId,
+                NivelAutorizacion: dataItem.NivelAutorizacion,
+                Accion: 2
+            };
+
+            listaA.push(algo);
+        });
+
+        var listones = JSON.stringify({ 'liston': listaA });
+
+        $.when(
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: urlAutorizaSolicitud,
+                data: listones,
+                success: function () {
+                    //$('#result').html('"PassThings()" successfully called.');
+                    //console.log("todo bien");
+                },
+                failure: function (response) {
+                    //$('#result').html(response);
+                    //console.log("algo paso");
+                }
+            })
+        ).done(function () {
+            //console.log("finito_A");
+            var grid = $("#gridAutorizacion").data("kendoGrid");
+            grid._selectedIds = {};
+            grid.clearSelection();
+            calculaEstatusSolicitud();
+            calculaPeriodoNominaSolicitud();
+            actualizaGrid();
+        });
+
+    }
+    return true;
+}
+
+function rechazarMontoSelect() {
+
+    return true;
+}
+
+function aceptarMontoTodas() {
+
+    var rows = $("#gridAutorizacion").data("kendoGrid").dataSource.data();
+    var listaA = [];
+
+    if (rows.length > 0) {
+
+        var algo = {
+            FolioSolicitud: $("#FolioSolicitud").val(),
+            Autorizador_Ident: usuarioCCMSID,
+            ConceptoId: 0,
+            NivelAutorizacion: 0,
+            Accion: 5
+        };
+
+        listaA.push(algo);
+
+        var listones = JSON.stringify({ 'liston': listaA });
+
+        $.when(
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: urlAutorizaSolicitud,
+                data: listones,
+                success: function () {
+                    //$('#result').html('"PassThings()" successfully called.');
+                    //console.log("todo bien");
+                },
+                failure: function (response) {
+                    //$('#result').html(response);
+                    //console.log("algo paso");
+                }
+            })
+        ).done(function () {
+            //console.log("finito_A");
+            var grid = $("#gridAutorizacion").data("kendoGrid");
+            grid._selectedIds = {};
+            grid.clearSelection();
+            calculaEstatusSolicitud();
+            calculaPeriodoNominaSolicitud();
+            actualizaGrid();
+        });
+    }
+    return true;
+}
+
+function rechazarMontoTodas() {
+
+    return true;
+}
+
+function montoMayor20000(rows, param) {
+
+    retorno = new Boolean(true);
+    // si el if es verdadero se validara las solicitudes seleccionadas
+    // el else es para cuando se autorizan todoas las solicitudes
+    if (param == 'select') {
+        rows.each(function (e) {
+            var item = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+            if (item.Monto.indexOf('MXN') > -1) {
+                var monto = parseFloat(item.Monto.replace('MXN', ''));
+                if (monto >= 20000) {
+                    retorno = false;
+                }
+            }
+        });
+    }
+    else {
+        $.each(rows, function (index, value) {
+            var valor = 0;
+            if (value.Monto.indexOf('MXN') > -1) {
+                valor = parseFloat(value.Monto.replace('MXN', ''));
+                if (valor >= 20000) {
+                    retorno = false;
+                }
+            }
+        });
+    }
+
+
+    return retorno;
 }

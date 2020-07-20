@@ -362,7 +362,7 @@
                             .Name("gridAutorizacion")
                             .Columns(column =>
                             {
-                                if(Model.EstatusId == "PA" || Model.EstatusId == "R" )
+                                if (Model.EstatusId == "PA" || Model.EstatusId == "R")
                                 {
                                     column.Select().Width(9).HtmlAttributes(new { style = "text-align: left;" }).HeaderHtmlAttributes(new { style = "text-align: left;" });
                                 }
@@ -385,10 +385,13 @@
                             .Sortable()
                             //.PersistSelection()
                             .AutoBind(false)
+
                             .Events(eve => eve.Change("onChange").DataBound("ocultaCheckbox"))
                             //.Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                             .DataSource(dataSource => dataSource
                                 .Ajax()
+                                .Batch(true)
+                                .ServerOperation(false)
                                 .Model(model =>
                                 {
                                     model.Id(c => c.FolioSolicitud);
@@ -439,7 +442,7 @@
                                 messages.Display("{0} a {1} de {2}");
                             })
                             )
-                )
+                    )
                 </div>
             </div>
         </div>
@@ -464,6 +467,46 @@
         .Modal(true)
     )
 
+    @(Html.Kendo().Dialog()
+       .Name("dialogValidaMontoSelect")
+       .Title("Advertencia")
+       .Content("<p><strong>Se está autorizando un monto superior a 20,000...</strong></p><p><strong>¿Deseas continuar?</strong></p>")
+       .Width(400)
+       .Closable(false)
+       .Modal(true)
+       .Animation(true)
+       .Visible(false)
+       .Actions(actions =>
+       {
+           actions.Add()
+           .Text("Aceptar monto")
+           .Action("aceptarMontoSelect");
+           actions.Add()
+           .Text("Rechazar monto")
+           .Action("rechazarMontoSelect")
+           .Primary(true);
+       })
+    )
+    @(Html.Kendo().Dialog()
+       .Name("dialogValidaMontoTodas")
+       .Title("Advertencia")
+       .Content("<p><strong>Se está autorizando un monto superior a 20,000...</strong></p><p><strong>¿Deseas continuar?</strong></p>")
+       .Width(400)
+       .Closable(false)
+       .Modal(true)
+       .Animation(true)
+       .Visible(false)
+       .Actions(actions =>
+       {
+           actions.Add()
+           .Text("Aceptar monto")
+           .Action("aceptarMontoTodas");
+           actions.Add()
+           .Text("Rechazar monto")
+           .Action("rechazarMontoTodas")
+           .Primary(true);
+       })
+    )
 
     @(Html.Kendo().Notification()
         .Name("popupNotificationCom")
