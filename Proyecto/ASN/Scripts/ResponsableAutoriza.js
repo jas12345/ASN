@@ -776,3 +776,9 @@ function rellenaPerfilTipoAcceso() {
             console.log("fail" + ex);
         });
 }
+
+function uploadFile(e) {
+    e.data = {
+        folioSolicitud: $("#folioId").val()
+    }
+}

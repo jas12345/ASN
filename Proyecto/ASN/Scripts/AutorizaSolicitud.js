@@ -1395,3 +1395,9 @@ function montoMayor20000(rows, param) {
 
     return retorno;
 }
+
+function uploadFile(e) {
+    e.data = {
+        folioSolicitud: $("#folioId").val()
+    }
+}

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Core.Objects;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -547,6 +548,47 @@ namespace ASN.Controllers
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json(new { FolioSolicitud, Empleado_Ident, res = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult Async_SaveFiles(IEnumerable<HttpPostedFileBase> evidencias, int? folioSolicitud) //
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    string fullPath = Request.MapPath("~/Evidencias/");
+
+                    //int folioSolicitud = -1;
+
+                    //var obj = new CatSolicitudesSel_Result();
+                    //folioSolicitud = obj.FolioSolicitud;
+
+                    if (!System.IO.File.Exists(fullPath))
+                    {
+                        Directory.CreateDirectory(fullPath);
+                    }
+
+                    foreach (var item in evidencias)
+                    {
+                        if (item != null)
+                        {   // s
+                            var nombreArchivo = folioSolicitud.ToString() + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + item.FileName;
+                            item.SaveAs(fullPath + Path.GetFileName(nombreArchivo));
+                        }
+                    }
+
+                    return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+
             }
         }
 

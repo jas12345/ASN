@@ -837,7 +837,48 @@ namespace ASN.Controllers
 
 
             // Return an empty string to signify success
-            return Content("");
+            //return Content("");
+        }
+
+        public ActionResult Async_SaveFiles(IEnumerable<HttpPostedFileBase> evidencias, int? folioSolicitud) //
+        {
+            try
+            {   
+                using (ASNContext context = new ASNContext())
+                {
+                    string fullPath = Request.MapPath("~/Evidencias/");
+
+                    //int folioSolicitud = -1;
+
+                    //var obj = new CatSolicitudesSel_Result();
+                    //folioSolicitud = obj.FolioSolicitud;
+
+                    if (!System.IO.File.Exists(fullPath))
+                    {
+                        Directory.CreateDirectory(fullPath);
+                    }
+
+                    foreach (var item in evidencias)
+                        {
+                            if (item != null)
+                            {   // s
+                                var nombreArchivo = folioSolicitud.ToString() + "_" +DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + item.FileName;
+                                item.SaveAs(fullPath + Path.GetFileName(nombreArchivo));
+                            }
+                        }
+
+                   return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+
+            }
         }
 
         //public ActionResult CreateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, decimal ParametroConceptoMonto, int conceptoMotivoId, int responsableId, int periododOriginalId)

@@ -47,16 +47,27 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div class="container-fluid">
-
-        <div class="col-lg-12 col-md-12">
-            <div class="col-lg-2">
+        <div class="row">
+            <div class="col-lg-7">
                 @Html.Label("Responsable de Solicitudes", new { style = "font-size: 15px" })
-                @*<div class="container-fluid">
-                    <a href="@Url.Action("Create","MisAutorizaciones")" data-role="button" class="k-button k-button-icontext" style="float:right; margin-right:10px;" role="button" aria-disabled="false" tabindex="0">
-                    <span class="k-icon k-i-plus"></span> Autorizar
-                    </a>*@
+            </div>
+            <div class="col-lg-2">
+                @Html.Label("Evidencias (40 MB máximo)")
             </div>
             <div class="col-lg-3">
+                @(Html.Kendo().Upload()
+                    .Name("evidencias")
+                    .Async(a => a
+                        .Save("Async_SaveFiles", "ResponsableAutoriza")
+                        .AutoUpload(true)
+                    )
+                    .Events(e => e.Upload("uploadFile"))
+                )
+            </div>            
+        </div>
+        <p></p>
+        <div class="col-lg-12 col-md-12">
+            <div class="col-lg-4">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
                     .Enable(false)
@@ -70,7 +81,7 @@
                     .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
                 )
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 @Html.Label("Periodo de nómina: ", new { style = "font-size: 15px" })
                 @Html.TextBox("PeriodoNomina", "", new { disabled = "disabled", style = "width:13em;" })
                 @*@(Html.Kendo().DropDownList().DataSource(source =>
@@ -102,7 +113,6 @@
                     .Events(x => x.Click("cerrarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                 )
             </div>
-            <p></p>
         </div>
         <p></p>
 

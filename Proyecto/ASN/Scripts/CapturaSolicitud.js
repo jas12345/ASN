@@ -2061,3 +2061,9 @@ function onOK(e) {
 
     //window.location.href = urlMisSolicitudes;
 }
+
+function uploadFile(e) {
+    e.data = {
+        folioSolicitud: $("#folioId").val()
+    }
+}
