@@ -151,7 +151,7 @@
                         <li>@Html.ActionLink("Reporte Folios Contrato Empresa", "Index", "ReporteFoliosContratoEmpresa")</li>
                     }
 
-                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Responsable"))
                     {
                         <li>@Html.ActionLink("Reporte Concepto por Estatus", "Index", "ReporteConceptoXEstatus")</li>
                     }
