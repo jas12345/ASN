@@ -1589,7 +1589,7 @@ function rechazarMonto() {
     //controlParametro.text("0");
 
     //ConConceptoMotivo = $("#Parametro").val();
-    ConParametroConceptoMonto = controlParametro.val();
+    //jas ConParametroConceptoMonto = controlParametro.val();
 
     var valor = "0 " + ConParametroNombre.substring(ConParametroNombre.indexOf(" ") + 1);
 
