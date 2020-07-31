@@ -25,6 +25,18 @@ $(document).ready(function () {
         $("#CancelarEmpleadoSolicitud").hide();
     }
 
+    $("#Parametro").on("blur", function () {
+        onBlurParametro();
+
+    }); //.on("focus", function () {
+    //    if (this.value == placeholder) {
+            
+    //        $(this).focus();
+    //        alert('2')
+    //    }
+        
+    //});
+
     //$("#Conceptos").change(function () {
     //    //debugger;
 
@@ -80,41 +92,180 @@ $(document).ready(function () {
 });
 
 function excelExport(e) {
-    var sheet = e.workbook.sheets[0];
-    var data = e.data;
-
-
-    sheet.rows[0].cells[0].value = 'Folio';
-
-    // Hace un barrido a los datos, para hacer la suma del monto y el total de registros
-    // si el estatus es diferente de CanceladA
-    var cont    = 0;
-    var suma    = 0;
+    var cont = 0;
+    var suma = 0;
     var moneda = 'MXN';
     var status = 'Cancelada';
-    for (var i = 0; i < data.length; i++) {
-        var rowCells = [];
-        var existe = data[i].Monto.indexOf(moneda);
-        if (data[i].EstatusSolicitud != status && existe > -1) {
-            cont = cont + 1;
-            suma = suma + parseFloat(data[i].Monto.replace(moneda, ''));
-        }  
+    var back = "#0707BE"; //"#A7A5A4";
+
+    sheet = e.workbook.sheets[0];
+    var sheet1 =[];
+    var cols = sheet.columns.length;
+    
+    var myHeaders = [{
+        value: "Folio",
+        fontSize: 14,
+        textAlign: "center",
+        background: back,
+        color: "#ffffff"
+    }, {
+        value: "#Empleado",
+        fontSize: 14,
+        textAlign: "center",
+        background: back,
+        color: "#ffffff"
+    }, {
+        value: "Nombre",
+        fontSize: 14,
+        textAlign: "center",
+        background: back,
+        color: "#ffffff"
+    }, {
+        value: "Concepto",
+        fontSize: 14,
+        textAlign: "center",
+        background: back,
+        color: "#ffffff"
+    }, {
+        value: "Monto",
+        fontSize: 14,
+        textAlign: "center",
+        background: back,
+        color: "#ffffff"
+    }, {
+        value: "Motivo",
+        fontSize: 14,
+        textAlign: "center",
+        background: back,
+        color: "#ffffff"
+    }, {
+        value: "Estatus",
+        fontSize: 14,
+        textAlign: "center",
+        background: back,
+        color: "#ffffff"
+    },
+    {
+        value: "Autorizador Asignado",
+        fontSize: 14,
+        verticalAlign: "center",
+        width: '120px',
+        textAlign: "center",
+        background: back,
+        color: "#ffffff"
+    }];
+    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 30 });
+
+    if (cols == 7) {
+        sheet1.splice(0, 0, { cells: myHeaders, type: "header", height: 30 });
+        for (var i = 2; i < sheet.rows.length; i++) {
+            var row = sheet.rows[i];
+            rowCells = [];
+            rowCells.push({ value: $('#FolioSolicitud').val() });
+            rowCells.push({ value: row.cells[0].value});
+            rowCells.push({ value: row.cells[1].value });
+            rowCells.push({ value: row.cells[2].value });
+            rowCells.push({ value: row.cells[3].value});
+            rowCells.push({ value: row.cells[4].value });
+            rowCells.push({ value: row.cells[5].value });
+            rowCells.push({ value: row.cells[6].value });
+           
+            sheet1.push({ type: "data", cells: rowCells });
+            
+        }
+
+        var data = e.data;
+        for (var i = 0; i < data.length; i++) {
+            var rowCells = [];
+            var existe = data[i].Monto.indexOf(moneda);
+            if (data[i].EstatusSolicitud != status && existe > -1) {
+                cont = cont + 1;
+                suma = suma + parseFloat(data[i].Monto.replace(moneda, ''));
+            }
+        }
+        // Crea un objeto con la informacion a agrgar al excel
+        rowCells = [];
+        
+        rowCells.push({
+            value: "Cantidad : " + cont.toString(),
+            fontSize: 14,
+            textAlign: "center",
+            background: back,
+            color: "#ffffff",
+            colSpan: 3});
+        
+        rowCells.push({
+            value: "Suma : " + suma.toString() + " " + moneda,
+            fontSize: 14,
+            textAlign: "center",
+            background: back,
+            color: "#ffffff",
+            colSpan: 3});
+       
+        rowCells.push({
+            value: "",
+            fontSize: 14,
+            textAlign: "center",
+            background: back,
+            color: "#ffffff",
+            colSpan: 2 });
+       
+        sheet1.push({ type: "data", cells: rowCells });
+
+        e.workbook.sheets[0].rows = sheet1;
     }
+    else {
 
-    // Crea un objeto con la informacion a agrgar al excel
-    rowCells = [];
-    rowCells.push({ value: "" });
-    rowCells.push({ value: "Cantidad : " + cont.toString() });
-    rowCells.push({ value: "" });
-    rowCells.push({ value: "" });
-    rowCells.push({ value: "Suma : " + suma.toString() + " " + moneda });
-    rowCells.push({ value: "" });
-    rowCells.push({ value: "" });
-    rowCells.push({ value: "" });
+        var numerOfrows = e.workbook.sheets[0].rows.length;
+        sheet = e.workbook.sheets[0];
+        var newSheet = sheet.rows.splice(2, numerOfrows + 1) // +1 is for the header row
+        
+        e.workbook.sheets[0].rows = newSheet
+        e.workbook.sheets[0].rows.splice(0, 0, { cells: myHeaders, type: "header", height: 30 });
 
-    // Agergar el registro a la hoja de excel
-    sheet.rows.push({ type: "data", cells: rowCells  });
-    //sheet.rows = rows;
+        var data = e.data;
+        for (var i = 0; i < data.length; i++) {
+            var rowCells = [];
+            var existe = data[i].Monto.indexOf(moneda);
+            if (data[i].EstatusSolicitud != status && existe > -1) {
+                cont = cont + 1;
+                suma = suma + parseFloat(data[i].Monto.replace(moneda, ''));
+            }
+        }
+        // Crea un objeto con la informacion a agrgar al excel
+        rowCells = [];
+        rowCells.push({
+            value: "Cantidad : " + cont.toString(),
+            fontSize: 14,
+            textAlign: "center",
+            background: back,
+            color: "#ffffff",
+            colSpan: 3
+        });
+
+        rowCells.push({
+            value: "Suma : " + suma.toString() + " " + moneda,
+            fontSize: 14,
+            textAlign: "center",
+            background: back,
+            color: "#ffffff",
+            colSpan: 3
+        });
+
+        rowCells.push({
+            value: "",
+            fontSize: 14,
+            textAlign: "center",
+            background: back,
+            color: "#ffffff",
+            colSpan: 2
+        });
+
+        // Agergar el registro a la hoja de excel
+        sheet.rows.push({ type: "data", cells: rowCells });
+
+    }
+   
 }
 
 function getFolio() {
@@ -1528,7 +1679,7 @@ function onChangePeriodoIncidente() {
     }
 }
 
-function onChangeParametro() {
+function onBlurParametro() {
     //debugger;
 
     if ($("#Parametro").val().length > 0) {
@@ -2060,10 +2211,4 @@ function onOK(e) {
     });
 
     //window.location.href = urlMisSolicitudes;
-}
-
-function uploadFile(e) {
-    e.data = {
-        folioSolicitud: $("#folioId").val()
-    }
 }
