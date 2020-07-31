@@ -368,6 +368,9 @@
                             column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
                             column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
                         })
+                        .Events(e => e.ExcelExport("excelExport"))
+                        .ToolBar(tools => tools.Excel().Text("Excel solicitud"))
+                        .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") + "_Folio_Detalle").AllPages(true).Filterable(true))
                         //.HtmlAttributes(new { style = "height: 475px;" })
                         .Scrollable()
                         .Sortable()
