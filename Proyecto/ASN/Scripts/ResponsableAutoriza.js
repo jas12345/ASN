@@ -776,6 +776,7 @@ function rellenaPerfilTipoAcceso() {
             console.log("fail" + ex);
         });
 }
+
 function excelExport(e) {
     var cont = 0;
     var suma = 0;
@@ -945,4 +946,11 @@ function excelExport(e) {
 
     }
 
+}
+
+
+function uploadFile(e) {
+    e.data = {
+        folioSolicitud: $("#folioId").val()
+    }
 }

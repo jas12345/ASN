@@ -1708,7 +1708,40 @@ function onBlurParametro() {
     else {
         $("#ParametroX").val("");
         $("#ParametroX").text("");
-    }}
+    }
+}
+
+function onChangeParametro() {
+    //debugger;
+
+    if ($("#Parametro").val().length > 0) {
+        if ($("#Parametro").val() <= 20000) {
+            //debugger;
+            ConConceptoMotivo = "";
+            ConParametroConceptoValor = 0;
+            ConParametroConceptoMonto = 0;
+
+            //ConConceptoMotivo = $("#Motivo.value").text();
+            ConConceptoMotivo = $("#Parametro").val(); // + ' ' + ConParametro;
+            ConParametroConceptoMonto = $("#Parametro").val();
+            //debugger;
+
+            //rellenaPerfilTipoAcceso();
+
+            var valor = $("#Parametro").val() + " " + ConParametroNombre.substring(ConParametroNombre.indexOf(" ") + 1);
+
+            $("#ParametroX").val(valor);
+            $("#ParametroX").text(valor);
+        }
+        else {
+            $("#dialogValidaMonto").data("kendoDialog").open();
+        }
+    }
+    else {
+        $("#ParametroX").val("");
+        $("#ParametroX").text("");
+    }
+}
 
 function aceptarMonto() {
     //ConConceptoMotivo = "";
@@ -2211,4 +2244,10 @@ function onOK(e) {
     });
 
     //window.location.href = urlMisSolicitudes;
+}
+
+function uploadFile(e) {
+    e.data = {
+        folioSolicitud: $("#folioId").val()
+    }
 }
