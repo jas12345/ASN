@@ -1,0 +1,124 @@
+﻿<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: auto;
+        margin-top: auto;
+        width: 50%;
+    }
+</style>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12">
+            <div class="col-lg-4">
+                @Html.Label("Período de nómina: ", new { style = "font-size: 15px" })
+                @(Html.Kendo().DropDownList()
+                                                                .DataSource(source => source
+                                                                    .Custom()
+                                                                    .Transport(tr => tr
+                                                                       .Read(read =>
+                                                                       {
+                                                                           read.Action("GetPeriodoNominaCMB", "EnviaArchivoNomina").Data("parametroPeriodosNominaActualPasados");
+                                                                       }
+                                                                       )
+                                                                    )
+                                                                )
+                                                                .Filter("contains")
+                                                                .OptionLabel("- Seleccione Periodo de Nomina - ")
+                                                                .DataValueField("Ident")
+                                                                .DataTextField("Valor")
+                                                                .Name("PeriodoNomina_Id")
+                                                                .SelectedIndex(0)
+                                                                .Enable(true)
+                                                                .Events(e => e.Change("onDropDownChange"))
+                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                )
+            </div>
+            <div class="col-lg-4">
+                @Html.Label("Empresa:", new { style = "font-size:15px" })
+                @(Html.Kendo().DropDownList()
+                                                                .DataSource(source => source
+                                                                    .Custom()
+                                                                    .Transport(tr => tr
+                                                                       .Read(read =>
+                                                                       {
+                                                                           read.Action("GetEmpresaCMB", "EnviaArchivoNomina");
+                                                                       }
+                                                                       )
+                                                                    )
+                                                                )
+                                                                //.Filter("contains")
+                                                                .OptionLabel("- Seleccione una Empresa - ")
+                                                                .DataValueField("ID_Empresa")
+                                                                .DataTextField("Empresa")
+                                                                .Name("ddlEmpresa")
+                                                                .SelectedIndex(0)
+                                                                .Enable(true)
+                                                                .Events(e => e.Change("onEmpresaDropDownChange"))
+                                                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                )
+            </div>
+            <div class="col-lg-2">
+                @*@Html.Label("Enviar Archivo Nómina", new { style = "font-size: 15px" })*@
+                <input type="button" title="Enviar Archivo" name="btnEnviarArchivoNomina" value="Enviar" onclick='onClickEnviaArchivo()' />
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @*@Html.HiddenFor(x => x.Ident).Name(PeriodoNomina_Id_selected)
+                    @Html.HiddenFor(x => x.Value).Name(PeriodoNomina_selected)*@
+            </div>
+        </div>
+    </div>
+    <div id="divShow" style="display:none">
+        <strong><span id="Title"></span></strong><span id="dtMessage"></span>
+    </div>
+
+    @section Scripts{
+        <script type="text/javascript">
+            function SubmitForm(form) {
+                $.ajax({
+                    type: "POST",
+                    url: "/EnviaArchivoNomina/EnviaArchivo",  //form.action,
+                    data: { PeriodoNominaIdSelected: $("#PeriodoNomina_Id").data("kendoDropDownList").value(), EmpresaIdSelected: $("#ddlEmpresa").data("kendoDropDownList").value() },
+                    success: function (data) {
+                        if (data.success) {
+                            alert(data.message);
+                            $("#divShow").removeClass();
+                            $("#divShow").css("display", "block");
+                            $("#divShow").addClass(data.CssClassName);
+                            $("#Title").text(data.Title);
+                            $("#dtMessage").text(data.detailMessage);
+                            // do what you want after update or add successfully
+                        } else {
+                            alert(data.message);
+                            $("#divShow").css("display", "none");
+                            // do what you want after failure
+                        }
+                    },
+
+                });
+                return false;
+            }
+        </script>
+
+    }
+}
+else
+{
+    <p>You are not logged in</p>
+
+    Response.Redirect(Url.Action("Login", "Home"));
+}
+
+<script>
+    var PeriodoNomina_Id_selected = 0;
+    var PeriodoNomina_selected = '';
+    var Empresa_selected = '';
+    var EmpresaId_selected = 0;
+</script>
+
+@Scripts.Render("~/bundles/EnviaArchivoNomina")

@@ -105,6 +105,7 @@
                     {
                         <li>@Html.ActionLink("Mis Responsabilidades", "Index", "MisResponsabilidades")</li>
                         <li>@Html.ActionLink("Descargar Archivo de Nómina", "Index", "DescargaArchivos")</li>
+                        <li>@Html.ActionLink("Envía Archivo Nómina","Index","EnviaArchivoNomina")</li>
                     }
 
                     if (User.IsInRole("Responsable"))
@@ -129,7 +130,7 @@
                 <li>@Html.ActionLink("Reporte General", "Index", "ReporteGeneral")</li>
             }*@
 
-                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Responsable"))
+                    if (User.IsInRole("Consultante") || User.IsInRole("Administrador"))
                     {
                         <li>@Html.ActionLink("Reporte Conceptos", "Index", "Reportero")</li>
                     }

@@ -86,9 +86,6 @@
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -110,14 +107,11 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -146,6 +140,7 @@
     <Compile Include="Controllers\AdministradoresController.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\DescargaArchivosController.cs" />
+    <Compile Include="Controllers\EnviaArchivoNominaController.cs" />
     <Compile Include="Controllers\ReporteAuditoriaController.cs" />
     <Compile Include="Controllers\ReporteGeneralController.cs" />
     <Compile Include="Controllers\ReporteIndividualController.cs" />
@@ -369,6 +364,9 @@
     <Compile Include="Models\CatEmployeeSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatEmpresaByResponsableCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatEstatusCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -512,6 +510,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatUserInfoSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneraArchivoSolicitudSel_Button_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KendoDropDownListSelectedViewModel.cs" />
@@ -730,6 +731,7 @@
     <Content Include="Scripts\Administradores.js" />
     <Content Include="Scripts\Comentarios.js" />
     <Content Include="Scripts\DescargaArchivos.js" />
+    <Content Include="Scripts\EnviaArchivoNomina.js" />
     <Content Include="Scripts\Reportero.js" />
     <Content Include="Scripts\ReporteAuditoria.js" />
     <Content Include="Scripts\Notificaciones.js" />
@@ -958,6 +960,7 @@
     <Content Include="Views\ReporteConceptoXEstatus\Index.cshtml" />
     <Content Include="Views\ReportePerfil\Index.cshtml" />
     <Content Include="Views\ReporteFoliosContratoEmpresa\Index.cshtml" />
+    <Content Include="Views\EnviaArchivoNomina\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

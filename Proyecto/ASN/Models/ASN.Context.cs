@@ -2881,5 +2881,27 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
         }
+    
+        public virtual ObjectResult<CatEmpresaByResponsableCMB_Result> CatEmpresaByResponsableCMB(Nullable<int> cCMSID)
+        {
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpresaByResponsableCMB_Result>("CatEmpresaByResponsableCMB", cCMSIDParameter);
+        }
+    
+        public virtual ObjectResult<GeneraArchivoSolicitudSel_Button_Result> GeneraArchivoSolicitudSel_Button(Nullable<int> periodoNominaId, Nullable<int> iD_Empresa)
+        {
+            var periodoNominaIdParameter = periodoNominaId.HasValue ?
+                new ObjectParameter("PeriodoNominaId", periodoNominaId) :
+                new ObjectParameter("PeriodoNominaId", typeof(int));
+    
+            var iD_EmpresaParameter = iD_Empresa.HasValue ?
+                new ObjectParameter("ID_Empresa", iD_Empresa) :
+                new ObjectParameter("ID_Empresa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GeneraArchivoSolicitudSel_Button_Result>("GeneraArchivoSolicitudSel_Button", periodoNominaIdParameter, iD_EmpresaParameter);
+        }
     }
 }
