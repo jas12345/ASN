@@ -769,6 +769,7 @@
         </Function>
         <Function Name="ReporteSolcitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
+          <Parameter Name="TipoContrato" Type="int" Mode="In" />
         </Function>
         <Function Name="ReporteSolicitudXEstatusSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Responsable_Ident" Type="int" Mode="In" />
@@ -1578,9 +1579,6 @@
             <Parameter Name="EstatusSolicitud" Mode="In" Type="String" />
             <Parameter Name="EstatusConcepto" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ReporteSolcitudSel" ReturnType="Collection(ASNModel.ReporteSolcitudSel_Result)">
-          <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ReporteSolicitudXEstatusSel" ReturnType="Collection(ASNModel.ReporteSolicitudXEstatusSel_Result)">
             <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
             <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
@@ -1655,11 +1653,15 @@
           <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatEmpresaByResponsableCMB" ReturnType="Collection(ASNModel.CatEmpresaByResponsableCMB_Result)">
-            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GeneraArchivoSolicitudSel_Button" ReturnType="Collection(ASNModel.GeneraArchivoSolicitudSel_Button_Result)">
             <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
             <Parameter Name="ID_Empresa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteSolcitudSel" ReturnType="Collection(ASNModel.ReporteSolcitudSel_Result)">
+            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
+            <Parameter Name="TipoContrato" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2635,14 +2637,6 @@
           <Property Type="String" Name="EstatusSol" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="EstatusCon" Nullable="true" MaxLength="50" />
           </ComplexType>
-        <ComplexType Name="ReporteSolcitudSel_Result">
-          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Site" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="SolicitanteCCMSID" Nullable="true" />
-          <Property Type="String" Name="Fecha" Nullable="true" MaxLength="19" />
-          <Property Type="Int32" Name="Folio" Nullable="false" />
-          <Property Type="String" Name="Estatus" Nullable="false" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="ReporteSolicitudXEstatusSel_Result">
           <Property Type="Int32" Name="Folio" Nullable="false" />
           <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
@@ -2743,6 +2737,14 @@
           <Property Type="String" Name="ID_REP" Nullable="true" />
           <Property Type="Int32" Name="T_EX_DOB_SEM" Nullable="true" />
           <Property Type="String" Name="T_EXTRA_EXEN" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ReporteSolcitudSel_Result">
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Site" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="SolicitanteCCMSID" Nullable="true" />
+          <Property Type="String" Name="Fecha" Nullable="true" MaxLength="19" />
+          <Property Type="Int32" Name="Folio" Nullable="false" />
+          <Property Type="String" Name="Estatus" Nullable="false" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -4185,18 +4187,6 @@
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ReporteSolcitudSel" FunctionName="ASNModel.Store.ReporteSolcitudSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.ReporteSolcitudSel_Result">
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Site" ColumnName="Site" />
-                <ScalarProperty Name="SolicitanteCCMSID" ColumnName="SolicitanteCCMSID" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReporteSolicitudXEstatusSel" FunctionName="ASNModel.Store.ReporteSolicitudXEstatusSel">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.ReporteSolicitudXEstatusSel_Result">
@@ -4350,6 +4340,18 @@
                 <ScalarProperty Name="ID_REP" ColumnName="ID_REP" />
                 <ScalarProperty Name="T_EX_DOB_SEM" ColumnName="T_EX_DOB_SEM" />
                 <ScalarProperty Name="T_EXTRA_EXEN" ColumnName="T_EXTRA_EXEN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteSolcitudSel" FunctionName="ASNModel.Store.ReporteSolcitudSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteSolcitudSel_Result">
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="SolicitanteCCMSID" ColumnName="SolicitanteCCMSID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -2623,15 +2623,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoXEstatusSel_Result>("ReporteConceptoXEstatusSel", periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
         }
     
-        public virtual ObjectResult<ReporteSolcitudSel_Result> ReporteSolcitudSel(Nullable<int> periodoNomina)
-        {
-            var periodoNominaParameter = periodoNomina.HasValue ?
-                new ObjectParameter("PeriodoNomina", periodoNomina) :
-                new ObjectParameter("PeriodoNomina", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolcitudSel_Result>("ReporteSolcitudSel", periodoNominaParameter);
-        }
-    
         public virtual ObjectResult<ReporteSolicitudXEstatusSel_Result> ReporteSolicitudXEstatusSel(Nullable<int> responsable_Ident, Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
         {
             var responsable_IdentParameter = responsable_Ident.HasValue ?
@@ -2902,6 +2893,19 @@ namespace ASN.Models
                 new ObjectParameter("ID_Empresa", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GeneraArchivoSolicitudSel_Button_Result>("GeneraArchivoSolicitudSel_Button", periodoNominaIdParameter, iD_EmpresaParameter);
+        }
+    
+        public virtual ObjectResult<ReporteSolcitudSel_Result> ReporteSolcitudSel(Nullable<int> periodoNomina, Nullable<int> tipoContrato)
+        {
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
+    
+            var tipoContratoParameter = tipoContrato.HasValue ?
+                new ObjectParameter("TipoContrato", tipoContrato) :
+                new ObjectParameter("TipoContrato", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolcitudSel_Result>("ReporteSolcitudSel", periodoNominaParameter, tipoContratoParameter);
         }
     }
 }

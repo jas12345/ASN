@@ -73,10 +73,13 @@ namespace ASN.Controllers
             }
         }
 
-        public FileContentResult EnviaArchivo(int? PeriodoNominaIdSelected, int? EmpresaIdSelected)
+        public FileContentResult EnviaArchivo(int? PeriodoNominaIdSelected, int? EmpresaIdSelected, string periodoNominaNombre)
         {
             var estado = string.Empty;
             var mensajeAccion = string.Empty;
+            string IP = Request.UserHostAddress;
+          
+
             try
             {
                 var contador = 1;
@@ -169,12 +172,12 @@ namespace ASN.Controllers
 
                     var result = WriteCsvToMemory(bonosArchivo);
                     var memoryStream = new MemoryStream(result);
-
+                    
                     /// El numero 10 es simbolicos, solo es para comprobar que tegno registros, tratandose de Miles
                     /// deberia tener mas de 10 registros pues es segun los empleados que hay en la compañia con Miles.
 
                     var IdentificadorArchivo = "TP_INCID";
-                    var TipoNominas = "NO";
+                    var TipoNominas = "N"+ periodoNominaNombre.Substring(periodoNominaNombre.Length -1,1);
                     var Compania = lstBonos[0].Compania.ToUpper();
                     var ID_REP = lstBonos[0].ID_REP;
                     var Ciudad = "ALL";
@@ -185,6 +188,8 @@ namespace ASN.Controllers
                     var serverPath = @"\\10.152.32.164\tp" + FolderPathSubtring.Replace("\\", "/") + "\\" + nombreArchivo;
                     var filePath = "z:" + FolderPathSubtring + "/" + nombreArchivo;
                     //ExecuteCommand(command, 5000);
+                    
+                    return File(memoryStream.ToArray(), "application/txt", nombreArchivo);
 
                     NetworkDrive oNetDrive = new NetworkDrive();
                     oNetDrive.Force = true;

@@ -16,6 +16,6 @@ function onEmpresaDropDownChange(e) {
 }
 
 function onClickEnviaArchivo() {
-    window.location.href = '../EnviaArchivoNomina/EnviaArchivo?EmpresaIdSelected=' + EmpresaId_selected + '&PeriodoNominaIdSelected=' + PeriodoNomina_Id_selected;
+    window.location.href = '../EnviaArchivoNomina/EnviaArchivo?EmpresaIdSelected=' + EmpresaId_selected + '&PeriodoNominaIdSelected=' + PeriodoNomina_Id_selected + '&periodoNominaNombre=' + PeriodoNomina_selected;
 }
 

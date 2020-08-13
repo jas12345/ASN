@@ -94,17 +94,17 @@
                     @(Html.Kendo().DropDownList()
                         .DataSource(source => source
                             .Custom()
-                            .Sort(
-                                s => s.Add("Valor")
-                            )
+                            //.Sort(
+                            //    s => s.Add("Valor")
+                            //)
                             .Transport( tr => tr
                                 .Read(read =>
-                                    {
-    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaActualFuturos");
-}
+                                {
+                                    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaActualFuturos");
+                                }
                                 )
                             )
-                                //.ServerFiltering(true);parametroPeriodosNominaTodos
+                        //.ServerFiltering(true);parametroPeriodosNominaTodos
                         )
                         .Filter("contains")
                         .OptionLabel("- Seleccione Periodo de Nomina - ")

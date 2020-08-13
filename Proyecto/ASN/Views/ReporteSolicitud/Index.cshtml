@@ -35,52 +35,70 @@
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     @Html.Label("Periodos ", new { style = "font-size: 15px" })
                     @(Html.Kendo().DropDownList()
-                        .OptionLabel(" Año_Mes_NumeroDePago ")
-                        .DataTextField("Valor")
-                        .DataValueField("Ident")
-                        .DataSource(source =>
-                        {
-                            source.Read(read =>
-                        {
-                            read.Action("GetPeriodosNominaCMB", "ReporteSolicitud");
-                        });
-                        })
-                        .Name("PeriodoNomina")
-                        .HtmlAttributes(new { style = "width: 20em;text-align:center;" })
+            .OptionLabel(" Año_Mes_NumeroDePago ")
+            .DataTextField("Valor")
+            .DataValueField("Ident")
+            .DataSource(source =>
+            {
+                source.Read(read =>
+                {
+                    read.Action("GetPeriodosNominaCMB", "ReporteSolicitud");
+                });
+            })
+            .Name("PeriodoNomina")
+            .HtmlAttributes(new { style = "width: 20em;text-align:center;" })
                     )
                     @*@Html.Label("Fecha inicial ", new { style = "font-size: 15px" })
-                    @(Html.Kendo().DatePicker()
-                        .Name("FechaInicio")
-                        .Format("yyyy-MM-dd")
-                        .ParseFormats(new string[] {
-                            "ddd, M/d/yyyy",
-                            "ddd, MM/dd/yyyy",
-                            "ddd, M/dd/yyyy"
-                        })
-                        //.Min(DateTime.Now.AddMonths(-6))
-                        .Max(DateTime.Now)
-                        .Value(DateTime.Now.AddMonths(-1))
-                        //.Events(x => x.Change("delimitaRango"))
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 20.4em" })
-                    )*@
+                        @(Html.Kendo().DatePicker()
+                            .Name("FechaInicio")
+                            .Format("yyyy-MM-dd")
+                            .ParseFormats(new string[] {
+                                "ddd, M/d/yyyy",
+                                "ddd, MM/dd/yyyy",
+                                "ddd, M/dd/yyyy"
+                            })
+                            //.Min(DateTime.Now.AddMonths(-6))
+                            .Max(DateTime.Now)
+                            .Value(DateTime.Now.AddMonths(-1))
+                            //.Events(x => x.Change("delimitaRango"))
+                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 20.4em" })
+                        )*@
+                </div>
+                @*Combo Tipo de contrato*@
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    @Html.Label("Tipo de Contrato", new { style = "font-size:15px" })
+                    @(Html.Kendo().DropDownList()
+                            .OptionLabel("Selecciona Tipo de Contrato")
+                            .DataTextField("Value")
+                            .DataValueField("Id")
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetTiposContratoCMB", "ReporteSolicitud");
+                                });
+                            })
+                            .Name("TipoContrato")
+                            .HtmlAttributes(new { style="width:20em;text-align:center;"})
+                            )
                 </div>
                 @*<div class="col-lg-4 col-md-4 col-sm-4">
-                    @Html.Label("Fecha final ", new { style = "font-size: 15px" })
-                    @(Html.Kendo().DatePicker()
-                        .Name("FechaFin")
-                        .Format("yyyy-MM-dd")
-                        .ParseFormats(new string[] {
-                            "ddd, M/d/yyyy",
-                            "ddd, MM/dd/yyyy",
-                            "ddd, M/dd/yyyy"
-                        })
-                        //.Min(DateTime.Now.AddMonths(-6))
-                        .Max(DateTime.Now)
-                        .Value(DateTime.Now)
-                        //.Events(x => x.Change("delimitaRango"))
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 20.4em" })
-                    )
-                </div>*@
+                        @Html.Label("Fecha final ", new { style = "font-size: 15px" })
+                        @(Html.Kendo().DatePicker()
+                            .Name("FechaFin")
+                            .Format("yyyy-MM-dd")
+                            .ParseFormats(new string[] {
+                                "ddd, M/d/yyyy",
+                                "ddd, MM/dd/yyyy",
+                                "ddd, M/dd/yyyy"
+                            })
+                            //.Min(DateTime.Now.AddMonths(-6))
+                            .Max(DateTime.Now)
+                            .Value(DateTime.Now)
+                            //.Events(x => x.Change("delimitaRango"))
+                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 20.4em" })
+                        )
+                    </div>*@
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     @(Html.Kendo().Button().Name("Buscar").Content("Buscar").Icon("search")
                     .Events(x => x.Click("searchSolicitud"))
@@ -164,3 +182,4 @@ else
 }
 
 @Scripts.Render("~/bundles/ReporteSolicitud");
+http://localhost:53407/

@@ -37,12 +37,12 @@
                     @(Html.Kendo().DropDownList()
                         .OptionLabel(" Año_Mes_NumeroDePago ")
                         .DataTextField("Valor")
-                        .DataValueField("Id")
+                        .DataValueField("Ident")
                         .DataSource(source =>
                         {
                             source.Read(read =>
                         {
-                            read.Action("GetPeriodoNominaCMB", "ReporteSolicitud");
+                            read.Action("GetPeriodosNominaCMB", "ReporteSolicitud");
                         });
                         })
                         .Name("PeriodoNomina")

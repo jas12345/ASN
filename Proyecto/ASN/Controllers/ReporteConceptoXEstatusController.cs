@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
-    [Authorize(Roles = "Consultante,Administrador")]
+    [Authorize(Roles = "Consultante,Administrador,Responsable")]
     public class ReporteConceptoXEstatusController : Controller
     {
         // GET: ReporteSolicitud

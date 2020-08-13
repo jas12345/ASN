@@ -34,7 +34,8 @@ function infoSolicitud() {
         //site: 317,
         //solicitanteCCMSID: 1286941,
         //estatus: "CE"
-        periodoNomina: $("#PeriodoNomina").val()
+        periodoNomina: $("#PeriodoNomina").val(),
+        tipoContrato: $("#TipoContrato").val()
     };
 }
 
