@@ -2907,5 +2907,40 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolcitudSel_Result>("ReporteSolcitudSel", periodoNominaParameter, tipoContratoParameter);
         }
+    
+        public virtual ObjectResult<CatMontosAutorizacionesSel_Result> CatMontosAutorizacionesSel(Nullable<int> folioSolicitud, Nullable<int> autorizante_Ident)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var autorizante_IdentParameter = autorizante_Ident.HasValue ?
+                new ObjectParameter("Autorizante_Ident", autorizante_Ident) :
+                new ObjectParameter("Autorizante_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMontosAutorizacionesSel_Result>("CatMontosAutorizacionesSel", folioSolicitudParameter, autorizante_IdentParameter);
+        }
+    
+        public virtual ObjectResult<CatMontosResponsabilidadesSel_Result> CatMontosResponsabilidadesSel(Nullable<int> folioSolicitud, Nullable<int> responsable_Ident)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var responsable_IdentParameter = responsable_Ident.HasValue ?
+                new ObjectParameter("Responsable_Ident", responsable_Ident) :
+                new ObjectParameter("Responsable_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMontosResponsabilidadesSel_Result>("CatMontosResponsabilidadesSel", folioSolicitudParameter, responsable_IdentParameter);
+        }
+    
+        public virtual ObjectResult<CatMontosSolicitudesSel_Result> CatMontosSolicitudesSel(Nullable<int> folioSolicitud)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMontosSolicitudesSel_Result>("CatMontosSolicitudesSel", folioSolicitudParameter);
+        }
     }
 }

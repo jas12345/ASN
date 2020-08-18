@@ -48,6 +48,26 @@ namespace ASN.Controllers
             }
         }
 
+
+        public PartialViewResult GetMontosAutorizaciones(int? FolioSolicitud, int? AutorizateIdent)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    var lstSolicitudes = context.CatMontosAutorizacionesSel(FolioSolicitud, AutorizateIdent).ToList();
+                    return PartialView("GetMontosAutorizaciones", lstSolicitudes);
+                }
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return PartialView("");
+            }
+        }
         public ActionResult GetUserInfo(int ccms)
         {
             var emp = new CatEmployeeInfoSel_Result();

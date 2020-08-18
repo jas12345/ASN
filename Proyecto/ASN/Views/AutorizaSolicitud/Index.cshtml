@@ -342,6 +342,14 @@
                             .Events(x => x.Click("autorizarSolicitudALL")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                             )
                         </div>
+                        @*boton mostrar*@
+                        <div class="col-lg-3">
+
+                            @(Html.Kendo().Button().Name("MostrarTotales").Content("Totales").Icon("")
+                                            .Events(x => x.Click("MostrarTotalesModal")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;", type = "button" })
+                                    //.Events(x => x.Click("agregaEmpleado"))
+                                    )
+                        </div>
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("AutorizarTodaSolicitud").Content("Autorizar Toda Solicitud").Icon("check")
                             .Events(x => x.Click("autorizarTodaSolicitudDialog")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
@@ -480,6 +488,24 @@
         .Visible(false)
         .Modal(true)
     )
+
+    @(Html.Kendo().Window()
+        .Title("Totales")
+        .Name("MostrarTotalesModal")
+        .LoadContentFrom("GetMontosAutorizaciones", "AutorizaSolicitud",new { FolioSolicitud=folioId, AutorizateIdent=@User.Identity.Name})
+        .Iframe(true)
+        .Actions(a => a
+        //.Minimize()
+        .Maximize()
+        .Close()
+        )
+        .Resizable()
+        .Draggable()
+        .Width(600)
+        .Height(530)
+        .Visible(false)
+        .Modal(true)
+        )
 
     @(Html.Kendo().Dialog()
        .Name("dialogValidaMontoSelect")
@@ -708,6 +734,14 @@ else
 
 <script>
     var InfoCCMSID = '@Url.Action("GetUserInfo","AutorizaSolicitud")';
+
+    function MostrarTotalesModal() {
+
+        var mostrarDialog = $("#MostrarTotalesModal").data("kendoWindow");
+
+        mostrarDialog.open().center(true);
+
+    }
 
     function getComments(a,b,c) {
 
