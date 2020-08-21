@@ -164,21 +164,22 @@ namespace ASN.Controllers
 
         public JsonResult GetTiposContratoCMB()
         {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
             {
-                var lstCMB = new List<CatContractTypeCMB_Result>();
+                var lstCMB = new List<CatContratoByRolCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatContractTypeCMB().ToList();
+                    lstCMB = ctx.CatContratoByRolCMB(usuario.UserInfo.Ident.Value).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json("");

@@ -2882,7 +2882,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpresaByResponsableCMB_Result>("CatEmpresaByResponsableCMB", cCMSIDParameter);
         }
     
-        public virtual ObjectResult<GeneraArchivoSolicitudSel_Button_Result> GeneraArchivoSolicitudSel_Button(Nullable<int> periodoNominaId, Nullable<int> iD_Empresa)
+        public virtual ObjectResult<GeneraArchivoSolicitudSel_Button_Result> GeneraArchivoSolicitudSel_Button(Nullable<int> periodoNominaId, Nullable<int> iD_Empresa, Nullable<int> iD_RESP)
         {
             var periodoNominaIdParameter = periodoNominaId.HasValue ?
                 new ObjectParameter("PeriodoNominaId", periodoNominaId) :
@@ -2892,7 +2892,11 @@ namespace ASN.Models
                 new ObjectParameter("ID_Empresa", iD_Empresa) :
                 new ObjectParameter("ID_Empresa", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GeneraArchivoSolicitudSel_Button_Result>("GeneraArchivoSolicitudSel_Button", periodoNominaIdParameter, iD_EmpresaParameter);
+            var iD_RESPParameter = iD_RESP.HasValue ?
+                new ObjectParameter("ID_RESP", iD_RESP) :
+                new ObjectParameter("ID_RESP", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GeneraArchivoSolicitudSel_Button_Result>("GeneraArchivoSolicitudSel_Button", periodoNominaIdParameter, iD_EmpresaParameter, iD_RESPParameter);
         }
     
         public virtual ObjectResult<ReporteSolcitudSel_Result> ReporteSolcitudSel(Nullable<int> periodoNomina, Nullable<int> tipoContrato)
@@ -2941,6 +2945,15 @@ namespace ASN.Models
                 new ObjectParameter("FolioSolicitud", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMontosSolicitudesSel_Result>("CatMontosSolicitudesSel", folioSolicitudParameter);
+        }
+    
+        public virtual ObjectResult<CatContratoByRolCMB_Result> CatContratoByRolCMB(Nullable<int> cCMSID)
+        {
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatContratoByRolCMB_Result>("CatContratoByRolCMB", cCMSIDParameter);
         }
     }
 }

@@ -82,6 +82,7 @@ namespace ASN.Controllers
 
             try
             {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 var contador = 1;
                 var FechaDeCreacion = DateTime.Now.ToString("yyyyMMdd");
                 var unidad = ConfigurationManager.AppSettings["Unidad"] + ":";
@@ -90,7 +91,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstBonos = ctx.GeneraArchivoSolicitudSel_Button(PeriodoNominaIdSelected, EmpresaIdSelected).ToList();
+                    lstBonos = ctx.GeneraArchivoSolicitudSel_Button(PeriodoNominaIdSelected, EmpresaIdSelected, usuario.UserInfo.Ident.Value).ToList();
                 }
 
                 var bonosArchivo = new List<RafToolObj>();
