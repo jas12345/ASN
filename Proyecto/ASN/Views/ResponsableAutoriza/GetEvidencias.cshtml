@@ -1,0 +1,25 @@
+﻿@model List<string>
+
+<table class="table-bordered" id="tableEvidencias">
+    <tr>
+        <th>Nombre Archivo</th>
+        <th>Link</th>
+    </tr>
+    @for (var i = 0; i <= Model.Count - 1; i++)
+    {
+        <tr>
+            <td>@Model[i].ToString()</td>
+            <td>@Html.ActionLink("Download", "DownLoadEvidencia", new { EvidenciaFile = @Model[i].ToString() })</td>
+        </tr>
+    }
+</table>
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Styles.Render("~/Content/kendo/css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/kendo")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/CapturaSolicitud")
+

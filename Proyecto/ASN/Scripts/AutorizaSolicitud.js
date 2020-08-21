@@ -35,6 +35,8 @@ $(document).ready(function () {
 
     var grid = $("#gridAutorizacion").data("kendoGrid");
 
+    $("#EvidenciasAnchor").removeClass("k-button");
+
     //grid.thead.on("click", ".k-checkbox", onChange);
 
     //$("#AutorizarSolicitud").hide();
