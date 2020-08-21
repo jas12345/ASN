@@ -322,6 +322,9 @@
     <Compile Include="Models\CatContractTypeTodosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatContratoByRolCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatCountryByCascadeCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -398,6 +401,15 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatMisSolicitudesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatMontosAutorizacionesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatMontosResponsabilidadesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatMontosSolicitudesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatMotivoSolicitudCMB_Result.cs">
@@ -961,6 +973,9 @@
     <Content Include="Views\ReportePerfil\Index.cshtml" />
     <Content Include="Views\ReporteFoliosContratoEmpresa\Index.cshtml" />
     <Content Include="Views\EnviaArchivoNomina\Index.cshtml" />
+    <Content Include="Views\CapturaSolicitud\GetMontosSolicitudes.cshtml" />
+    <Content Include="Views\AutorizaSolicitud\GetMontosAutorizaciones.cshtml" />
+    <Content Include="Views\ResponsableAutoriza\GetMontosResponsabilidades.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
