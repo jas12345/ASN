@@ -976,6 +976,9 @@
     <Content Include="Views\CapturaSolicitud\GetMontosSolicitudes.cshtml" />
     <Content Include="Views\AutorizaSolicitud\GetMontosAutorizaciones.cshtml" />
     <Content Include="Views\ResponsableAutoriza\GetMontosResponsabilidades.cshtml" />
+    <Content Include="Views\AutorizaSolicitud\GetEvidencias.cshtml" />
+    <Content Include="Views\CapturaSolicitud\GetEvidencias.cshtml" />
+    <Content Include="Views\ResponsableAutoriza\GetEvidencias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
