@@ -33,7 +33,7 @@ namespace ASN.Controllers
             //return View();
         }
 
-        public ActionResult GetSolicitudes([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
+        public ActionResult GetSolicitudes([DataSourceRequest] DataSourceRequest request, int FolioSolicitud)
         {
             try
             {
@@ -255,7 +255,7 @@ namespace ASN.Controllers
         }
 
         public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident)
-            {
+        {
             try
             {
                 int.TryParse(User.Identity.Name, out int ident_Solicitante);
@@ -323,7 +323,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CancelaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
+        public ActionResult CancelaSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud)
         {
             try
             {
@@ -359,7 +359,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CancelaEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId)
+        public ActionResult CancelaEmpleadoSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId)
         {
             try
             {
@@ -510,7 +510,7 @@ namespace ASN.Controllers
 
                 using (ASNContext context = new ASNContext())
                 {
-                    if (int.TryParse(eid,out employeeId))
+                    if (int.TryParse(eid, out employeeId))
                     {
                         lstConceptosParametroConceptos = context.CatConceptosParametroConceptosSel(conceptoIdent, employeeId).ToList();
                     }
@@ -528,7 +528,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CreateSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, string PeriodoNomina_Id, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
+        public ActionResult CreateSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, string PeriodoNomina_Id, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
         {
             try
             {
@@ -609,8 +609,8 @@ namespace ASN.Controllers
                     int.TryParse(folioSolicitudOut.Value.ToString(), out FolioSolicitud);
 
                     //TODO: Guardar 
-                    
-                    return Json(new { FolioSolicitud, res }, JsonRequestBehavior.AllowGet);                    
+
+                    return Json(new { FolioSolicitud, res }, JsonRequestBehavior.AllowGet);
                 }
             }
 
@@ -624,7 +624,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult EnviaSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud)
+        public ActionResult EnviaSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud)
         {
             try
             {
@@ -664,7 +664,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult UpdateEmpleadoSolicitud([DataSourceRequest]DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, Nullable<decimal> ParametroConceptoMonto, Nullable<int> MotivosSolicitudId, bool Activo)
+        public ActionResult UpdateEmpleadoSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, Nullable<decimal> ParametroConceptoMonto, Nullable<int> MotivosSolicitudId, bool Activo)
         {
             try
             {
@@ -720,7 +720,7 @@ namespace ASN.Controllers
 
                 using (ASNContext context = new ASNContext())
                 {
-                    if(int.TryParse(folioId,out foliId))
+                    if (int.TryParse(folioId, out foliId))
                     {
                         lstAutorizadoresxEmpleadoxConcepto = context.NivelesAutorizacionxEmpleadoxConcepto(EmpleadoIdent, ConceptoId, foliId).ToList();
                     }
@@ -864,7 +864,7 @@ namespace ASN.Controllers
         public ActionResult Async_SaveFiles(IEnumerable<HttpPostedFileBase> evidencias, int? folioSolicitud) //
         {
             try
-            {   
+            {
                 using (ASNContext context = new ASNContext())
                 {
                     string fullPath = Request.MapPath("~/Evidencias/");
@@ -880,15 +880,15 @@ namespace ASN.Controllers
                     }
 
                     foreach (var item in evidencias)
-                        {
-                            if (item != null)
-                            {   // s
-                                var nombreArchivo = folioSolicitud.ToString() + "_" +DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + item.FileName;
-                                item.SaveAs(fullPath + Path.GetFileName(nombreArchivo));
-                            }
+                    {
+                        if (item != null)
+                        {   // s
+                            var nombreArchivo = folioSolicitud.ToString() + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + item.FileName;
+                            item.SaveAs(fullPath + Path.GetFileName(nombreArchivo));
                         }
+                    }
 
-                   return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+                    return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)
@@ -955,5 +955,46 @@ namespace ASN.Controllers
         //        return Json(ModelState);
         //    }
         //}
+
+        public PartialViewResult GetEvidencias(int? folio)
+        {
+                try
+                {
+                    var dir = new DirectoryInfo(Server.MapPath("~/Evidencias/"));
+
+                    FileInfo[] files = dir.GetFiles("*.*");
+                    //.Where(x=> x.Name.Contains(Convert.ToString(folioSolicitud)));
+
+                    List<string> items = new List<string>();
+
+                    foreach (var file in files)
+                    {
+                        if (file.Name.Contains(Convert.ToString(folio)))
+                        {
+                            items.Add(file.Name);
+                        }
+
+                    }
+
+                    return PartialView("GetEvidencias", items);
+                }
+                catch (Exception ex)
+                {
+
+                    MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                    LogError log = new LogError();
+                    log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                    return PartialView("");
+                }
+      
+        }
+
+        public FileResult DownLoadEvidencia(string EvidenciaFile)
+        {
+            var FileVirtualPath = "~/Evidencias/" + EvidenciaFile;
+
+            return File(FileVirtualPath, "application/force- download", Path.GetFileName(FileVirtualPath));
+        }
+
     }
 }

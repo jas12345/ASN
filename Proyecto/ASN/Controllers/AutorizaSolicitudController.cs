@@ -600,5 +600,46 @@ namespace ASN.Controllers
         //        return Json(ModelState);
         //    }
         //}
+
+
+        public PartialViewResult GetEvidencias(int? folio)
+        {
+            try
+            {
+                var dir = new DirectoryInfo(Server.MapPath("~/Evidencias/"));
+
+                FileInfo[] files = dir.GetFiles("*.*");
+                //.Where(x=> x.Name.Contains(Convert.ToString(folioSolicitud)));
+
+                List<string> items = new List<string>();
+
+                foreach (var file in files)
+                {
+                    if (file.Name.Contains(Convert.ToString(folio)))
+                    {
+                        items.Add(file.Name);
+                    }
+
+                }
+
+                return PartialView("GetEvidencias", items);
+            }
+            catch (Exception ex)
+            {
+
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return PartialView("");
+            }
+
+        }
+
+        public FileResult DownLoadEvidencia(string EvidenciaFile)
+        {
+            var FileVirtualPath = "~/Evidencias/" + EvidenciaFile;
+
+            return File(FileVirtualPath, "application/force- download", Path.GetFileName(FileVirtualPath));
+        }
     }
 }

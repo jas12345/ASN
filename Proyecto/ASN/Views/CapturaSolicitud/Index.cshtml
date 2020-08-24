@@ -47,24 +47,28 @@
             </div>
             <div class="col-lg-3">
                 @(Html.Kendo().Upload()
-                    .Name("files")
-                    .Async(a => a
-                        .Save("Async_Save", "CapturaSolicitud")
-                        .AutoUpload(true)
-                    )
+        .Name("files")
+        .Async(a => a
+            .Save("Async_Save", "CapturaSolicitud")
+            .AutoUpload(true)
+        )
                 )@**@
             </div>
             <div class="col-lg-1">
-                <a href="../Evidencias/" target="_blank">Evidencias (40 MB máximo)</a>
+                @*<a @Url.Action("ObtenerEvidencias","Evidencias") id="evidenciasAnchor">Evidencias (40 MB máximo)</a>*@
+                @(Html.Kendo().Button().Name("EvidenciasAnchor").Content("Evidencias (40 MB máximo)").Icon("")
+                                .Events(x => x.Click("MostrarEvidenciasModal")).Tag("a") //type = "anchor"
+                                                                                         //.Events(x => x.Click("agregaEmpleado"))
+                                    )
             </div>
             <div class="col-lg-3">
                 @(Html.Kendo().Upload()
-                    .Name("evidencias")
-                    .Async(a => a
-                        .Save("Async_SaveFiles", "CapturaSolicitud")
-                        .AutoUpload(true)
-                    )
-                    .Events(e => e.Upload("uploadFile"))
+        .Name("evidencias")
+        .Async(a => a
+            .Save("Async_SaveFiles", "CapturaSolicitud")
+            .AutoUpload(true)
+        )
+        .Events(e => e.Upload("uploadFile"))
                 )
             </div>
         </div>
@@ -78,15 +82,15 @@
                 <div class="col-lg-3">
                     @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                     @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
-                        .Enable(false)
-                        .Spinners(false)
-                        .Decimals(0)
-                        .Format("0")
-                        .Min(0)
-                        .Events(e => e.Change("onChangeFolioSolicitud"))
-                        //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
-                        .Value(Model.FolioSolicitud)
-                        .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
+        .Enable(false)
+        .Spinners(false)
+        .Decimals(0)
+        .Format("0")
+        .Min(0)
+        .Events(e => e.Change("onChangeFolioSolicitud"))
+        //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
+        .Value(Model.FolioSolicitud)
+        .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
                     )
                 </div>
                 <div class="col-lg-4">
@@ -124,7 +128,7 @@
             <div class="col-lg-3">
                 <div class="col-lg-12" style="text-align:right;">
                     @(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar solicitud").Icon("close")
-                                .Events(x => x.Click("cancelarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+                .Events(x => x.Click("cancelarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                     )
                     @*(Html.Kendo().Upload().Name("CancelarSolicitud2").Content("Carga Masiva").Icon("close")*@
                     @*(Html.Kendo().Upload().Name("CargaComedores").HtmlAttributes(new { aria_label = "Carga Comedores" })
@@ -274,128 +278,128 @@
                             <td>
                                 <div id="mensajeroCCMSIDSolicitado">
                                     @(Html.Kendo().NumericTextBox()
-                                    .Name("CCMSIDSolicitado")
-                                    .Spinners(false)
-                                    .Decimals(0)
-                                    .Format("0.")
-                                    .Min(0)
-                                    .Events(e => e.Change("onChangeCCMSId"))
-                                    //.Step(5)
-                                    //.Value(0)
-                                    .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
+    .Name("CCMSIDSolicitado")
+    .Spinners(false)
+    .Decimals(0)
+    .Format("0.")
+    .Min(0)
+    .Events(e => e.Change("onChangeCCMSId"))
+    //.Step(5)
+    //.Value(0)
+    .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
                                     )
                                 </div>
                             </td>
                             <td>
                                 <div id="mensajeroConceptos">
                                     @(Html.Kendo().DropDownList().DataSource(source =>
+                                {
+                                    source.Read(read =>
                                     {
-                                        source.Read(read =>
-                                        {
-                                            read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "CapturaSolicitud").Data("parametrosConceptos"); ;
-                                        }
-                                        );
-                                                    //.ServerFiltering(true);
-                                    })
-                                    .Filter("contains")
-                                    .AutoBind(false)
-                                    .OptionLabel("- Conceptos - ")
-                                    .DataValueField("Ident")
-                                    .DataTextField("Valor")
-                                    .Name("Conceptos")
-                                    .Events(e => e.Change("onChangeConceptos"))
-                                    //.SelectedIndex(1)
-                                    .Enable(true)
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                        read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "CapturaSolicitud").Data("parametrosConceptos"); ;
+                                    }
+                                    );
+                                    //.ServerFiltering(true);
+                                })
+    .Filter("contains")
+    .AutoBind(false)
+    .OptionLabel("- Conceptos - ")
+    .DataValueField("Ident")
+    .DataTextField("Valor")
+    .Name("Conceptos")
+    .Events(e => e.Change("onChangeConceptos"))
+    //.SelectedIndex(1)
+    .Enable(true)
+    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                                 </div>
                             </td>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                    .Name("Parametro")
-                                    .Events(e => e.Change("onChangeParametro"))
-                                    .Spinners(false)
-                                    .Decimals(2)
-                                    .Format("0.00")
-                                    .Min(0)
-                                    //.Step(5)
-                                    //.Value(0)
-                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+        .Name("Parametro")
+        .Events(e => e.Change("onChangeParametro"))
+        .Spinners(false)
+        .Decimals(2)
+        .Format("0.00")
+        .Min(0)
+        //.Step(5)
+        //.Value(0)
+        .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                    {
-                                        source.Read(read =>
-                                        {
-                                            read.Action("GetMotivosCMB", "CapturaSolicitud");
-                                        }
-                                        );
-                                                    //.ServerFiltering(true);
-                                    })
-                                    .Filter("contains")
-                                    .OptionLabel("- Motivo - ")
-                                    .DataValueField("Id")
-                                    .DataTextField("Valor")
-                                    .Name("Motivo")
-                                    .Events(e => e.Change("onChangeMotivo"))
-                                    //.SelectedIndex(1)
-                                    .Enable(true)
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetMotivosCMB", "CapturaSolicitud");
+                                }
+                                );
+                                //.ServerFiltering(true);
+                            })
+        .Filter("contains")
+        .OptionLabel("- Motivo - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("Motivo")
+        .Events(e => e.Change("onChangeMotivo"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                    {
-                                        source.Read(read =>
-                                        {
-                                            read.Action("GetConceptosMotivosCMB", "CapturaSolicitud");
-                                        });
-                                                    //.ServerFiltering(true);
-                                    })
-                                    .Filter("contains")
-                                    .OptionLabel("- Concepto Motivo - ")
-                                    .DataValueField("Ident")
-                                    .DataTextField("Valor")
-                                    .Name("ConceptoMotivo")
-                                    .Events(e => e.Change("onChangeConceptoMotivo"))
-                                    //.SelectedIndex(1)
-                                    .Enable(true)
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetConceptosMotivosCMB", "CapturaSolicitud");
+                                });
+                                //.ServerFiltering(true);
+                            })
+        .Filter("contains")
+        .OptionLabel("- Concepto Motivo - ")
+        .DataValueField("Ident")
+        .DataTextField("Valor")
+        .Name("ConceptoMotivo")
+        .Events(e => e.Change("onChangeConceptoMotivo"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                    .Name("CCMSIDIncidente")
-                                    .Spinners(false)
-                                    .Decimals(0)
-                                    .Format("0.")
-                                    .Min(0)
-                                    .Events(e => e.Change("onChangeCCMSIdIncidente"))
-                                    //.Step(5)
-                                    //.Value(0)
-                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+        .Name("CCMSIDIncidente")
+        .Spinners(false)
+        .Decimals(0)
+        .Format("0.")
+        .Min(0)
+        .Events(e => e.Change("onChangeCCMSIdIncidente"))
+        //.Step(5)
+        //.Value(0)
+        .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                    {
-                                        source.Read(read =>
-                                        {
-                                            ///read.Action("GetPeriodoNominaCerradosCMB", "CapturaSolicitud");
-                                            read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaPasados");
-                                        });
-                                                    //.ServerFiltering(true);
-                                    })
-                                    .Filter("contains")
-                                    .OptionLabel("- Período Incidente - ")
-                                    .DataValueField("Ident")
-                                    .DataTextField("Valor")
-                                    .Name("PeriodoIncidente")
-                                    .Events(e => e.Change("onChangePeriodoIncidente"))
-                                    //.SelectedIndex(1)
-                                    .Enable(true)
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                            {
+                                source.Read(read =>
+                                {
+                                    ///read.Action("GetPeriodoNominaCerradosCMB", "CapturaSolicitud");
+                                    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaPasados");
+                                });
+                                //.ServerFiltering(true);
+                            })
+        .Filter("contains")
+        .OptionLabel("- Período Incidente - ")
+        .DataValueField("Ident")
+        .DataTextField("Valor")
+        .Name("PeriodoIncidente")
+        .Events(e => e.Change("onChangePeriodoIncidente"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                         </tr>
@@ -406,15 +410,15 @@
                         <tr>
                             <td style="width : 8em">
                                 @(Html.Kendo().Button().Name("AgregarSolicitud").Content("Agregar").Icon("add")
-                                        .Events(x => x.Click("agregarSolicitud")).HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;", type = "button" })
-                                //.Events(x => x.Click("agregaEmpleado"))
+            .Events(x => x.Click("agregarSolicitud")).HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;", type = "button" })
+    //.Events(x => x.Click("agregaEmpleado"))
                                 )
                             </td>
                             @*boton mostrar*@
                             <td style="width : 8em">
 
                                 @(Html.Kendo().Button().Name("MostrarTotales").Content("Totales").Icon("")
-                                            .Events(x => x.Click("MostrarTotalesModal")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;", type = "button" })
+                .Events(x => x.Click("MostrarTotalesModal")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;", type = "button" })
                                     //.Events(x => x.Click("agregaEmpleado"))
                                     )
                             </td>
@@ -423,22 +427,22 @@
                                     <label class="primerLabel" id="lblAutorizadorNivel1">        Autorizador     Nivel 1:</label>
 
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
-                                            });
-                                        })
-                                        .Filter("contains")
-                                        .AutoBind(false)
-                                        .OptionLabel("- Autorizador Nivel 1 - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Valor")
-                                        .Name("AutorizadorNivel1")
-                                        .Events(e => e.Change("onChangeAutorizadorNivel1"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                    });
+                                })
+        .Filter("contains")
+        .AutoBind(false)
+        .OptionLabel("- Autorizador Nivel 1 - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("AutorizadorNivel1")
+        .Events(e => e.Change("onChangeAutorizadorNivel1"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </td>
@@ -447,22 +451,22 @@
                                     <label class="primerLabel" id="lblAutorizadorNivel2">    Nivel 2:</label>
 
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
-                                            });
-                                        })
-                                        .Filter("contains")
-                                        .AutoBind(false)
-                                        .OptionLabel("- Autorizador Nivel 2 - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Valor")
-                                        .Name("AutorizadorNivel2")
-                                        .Events(e => e.Change("onChangeAutorizadorNivel2"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                    });
+                                })
+        .Filter("contains")
+        .AutoBind(false)
+        .OptionLabel("- Autorizador Nivel 2 - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("AutorizadorNivel2")
+        .Events(e => e.Change("onChangeAutorizadorNivel2"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </td>
@@ -471,22 +475,22 @@
                                     <label class="primerLabel" id="lblAutorizadorNivel3">    Nivel 3:</label>
 
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
-                                            });
-                                        })
-                                        .Filter("contains")
-                                        .AutoBind(false)
-                                        .OptionLabel("- Autorizador Nivel 3 - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Valor")
-                                        .Name("AutorizadorNivel3")
-                                        .Events(e => e.Change("onChangeAutorizadorNivel3"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                    });
+                                })
+        .Filter("contains")
+        .AutoBind(false)
+        .OptionLabel("- Autorizador Nivel 3 - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("AutorizadorNivel3")
+        .Events(e => e.Change("onChangeAutorizadorNivel3"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </td>
@@ -495,22 +499,22 @@
                                     <label class="primerLabel" id="lblAutorizadorNivel4">    Nivel 4:</label>
 
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
-                                            });
-                                        })
-                                        .Filter("contains")
-                                        .AutoBind(false)
-                                        .OptionLabel("- Autorizador Nivel 4 - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Valor")
-                                        .Name("AutorizadorNivel4")
-                                        .Events(e => e.Change("onChangeAutorizadorNivel4"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                    });
+                                })
+        .Filter("contains")
+        .AutoBind(false)
+        .OptionLabel("- Autorizador Nivel 4 - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("AutorizadorNivel4")
+        .Events(e => e.Change("onChangeAutorizadorNivel4"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </td>
@@ -522,10 +526,10 @@
                         <tr>
                             <td style="width : 15em">
                                 @(Html.Kendo().Button().Name("EnviarSolicitud").Content("Enviar solicitud").Icon("email")
-                                .Events(x => x.Click("enviarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+    .Events(x => x.Click("enviarSolicitud")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
                                 )
                                 @(Html.Kendo().Button().Name("CancelarEmpleadoSolicitud").Content("Cancelar Concepto").Icon("close")
-                                .Events(x => x.Click("cancelarEmpleadoSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+    .Events(x => x.Click("cancelarEmpleadoSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                                 )
                             </td>
                             <td>
@@ -534,22 +538,22 @@
                                     <label class="primerLabel" id="lblAutorizadorNivel5">        Autorizador     Nivel 5:</label>
 
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
-                                            });
-                                        })
-                                        .Filter("contains")
-                                        .AutoBind(false)
-                                        .OptionLabel("- Autorizador Nivel 5 - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Valor")
-                                        .Name("AutorizadorNivel5")
-                                        .Events(e => e.Change("onChangeAutorizadorNivel5"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                    });
+                                })
+        .Filter("contains")
+        .AutoBind(false)
+        .OptionLabel("- Autorizador Nivel 5 - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("AutorizadorNivel5")
+        .Events(e => e.Change("onChangeAutorizadorNivel5"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </td>
@@ -559,22 +563,22 @@
                                     <label class="primerLabel" id="lblAutorizadorNivel6">     Nivel 6:</label>
 
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
-                                            });
-                                        })
-                                        .Filter("contains")
-                                        .AutoBind(false)
-                                        .OptionLabel("- Autorizador Nivel 6 - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Valor")
-                                        .Name("AutorizadorNivel6")
-                                        .Events(e => e.Change("onChangeAutorizadorNivel6"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                    });
+                                })
+        .Filter("contains")
+        .AutoBind(false)
+        .OptionLabel("- Autorizador Nivel 6 - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("AutorizadorNivel6")
+        .Events(e => e.Change("onChangeAutorizadorNivel6"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </td>
@@ -585,22 +589,22 @@
                                     <label class="primerLabel" id="lblAutorizadorNivel7">     Nivel 7:</label>
 
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
-                                            });
-                                        })
-                                        .Filter("contains")
-                                        .AutoBind(false)
-                                        .OptionLabel("- Autorizador Nivel 7 - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Valor")
-                                        .Name("AutorizadorNivel7")
-                                        .Events(e => e.Change("onChangeAutorizadorNivel7"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                    });
+                                })
+        .Filter("contains")
+        .AutoBind(false)
+        .OptionLabel("- Autorizador Nivel 7 - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("AutorizadorNivel7")
+        .Events(e => e.Change("onChangeAutorizadorNivel7"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </td>
@@ -610,22 +614,22 @@
                                     <label class="primerLabel" id="lblAutorizadorNivel8">     Nivel 8:</label>
 
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
-                                            });
-                                        })
-                                        .Filter("contains")
-                                        .AutoBind(false)
-                                        .OptionLabel("- Autorizador Nivel 8 - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Valor")
-                                        .Name("AutorizadorNivel8")
-                                        .Events(e => e.Change("onChangeAutorizadorNivel8"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                    });
+                                })
+        .Filter("contains")
+        .AutoBind(false)
+        .OptionLabel("- Autorizador Nivel 8 - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("AutorizadorNivel8")
+        .Events(e => e.Change("onChangeAutorizadorNivel8"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </td>
@@ -642,22 +646,22 @@
                                     <label class="primerLabel" id="lblAutorizadorNivel9">     Autorizador Nivel 9:</label>
 
                                     @(Html.Kendo().DropDownList().DataSource(source =>
-                                        {
-                                            source.Read(read =>
-                                            {
-                                                read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
-                                            });
-                                        })
-                                        .Filter("contains")
-                                        .AutoBind(false)
-                                        .OptionLabel("- Autorizador Nivel 9 - ")
-                                        .DataValueField("Id")
-                                        .DataTextField("Valor")
-                                        .Name("AutorizadorNivel9")
-                                        .Events(e => e.Change("onChangeAutorizadorNivel9"))
-                                        //.SelectedIndex(1)
-                                        .Enable(true)
-                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                    });
+                                })
+        .Filter("contains")
+        .AutoBind(false)
+        .OptionLabel("- Autorizador Nivel 9 - ")
+        .DataValueField("Id")
+        .DataTextField("Valor")
+        .Name("AutorizadorNivel9")
+        .Events(e => e.Change("onChangeAutorizadorNivel9"))
+        //.SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                     )
                                 </div>
                             </td>
@@ -673,79 +677,79 @@
         <div class="row">
             <div class="col-lg-12">
                 @(Html.Kendo().Grid<ASN.Models.CatSolicitudesSel_Result>()
-                    .Name("gridSolicitud")
-                    .Columns(column =>
-                    {
-                        column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(28).HtmlAttributes(new { style = "text-align: center;" });
-                        column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(28).HtmlAttributes(new { style = "text-align: center;" });
-                        column.Command(command => command.Custom("Ver").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Ver").Width(28).HtmlAttributes(new { style = "text-align: center;" });
-                        column.Bound(c => c.FolioSolicitud).Width(38).Title("Comentarios").ClientTemplate("<input class='k-button k-button-icontext comentarioss' style='text-align:center;' type='button' value='Comentarios' onclick='getComments(#=FolioSolicitud#,#=Ident#,#=ConceptoId#);' />").Filterable(false);
-                        column.Bound(c => c.Ident).Width(40).Title("# Empleado").Filterable(false).Visible(true);
-                        column.Bound(c => c.Nombre).Title("Nombre").Filterable(false).Visible(true).Width(70);
-                        column.Bound(c => c.ConceptoDesc).Title("Concepto").Filterable(false).Width(70);
-                        column.Bound(c => c.Monto).Title("Monto").Filterable(false).Width(70);
-                        column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
-                        column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
-                        column.Bound(c => c.Autorizador).Title("Autorizador Asignado").Filterable(false).Width(70);
-                    })
-                    .Events(e => e.ExcelExport("excelExport"))
-                    .ToolBar(tools => tools.Excel().Text("Excel solicitud"))
-                    .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") + "_Folio_Detalle").AllPages(true).Filterable(true))
-                    .HtmlAttributes(new { style = "height: 425px;" })
-                    .Scrollable()
-                    .Sortable()
-                    .Resizable(res => res.Columns(true))
-                    .PersistSelection()
-                    .AutoBind(false)
-                    .Events(eve => eve.DataBound("onDataBound"))
-                    //.Filterable(ftb => ftb.Mode(GridFilterMode.Row))
-                    .DataSource(dataSource => dataSource
-                        .Ajax()
-                        .Model(model =>
-                        {
-                            model.Id(c => c.FolioSolicitud);
-                            model.Field(c => c.Ident).Editable(true);
-                            model.Field(c => c.Nombre).Editable(true);
-                            model.Field(c => c.ConceptoId).Editable(true);
-                            model.Field(c => c.ConceptoDesc).Editable(true);
-                            model.Field(c => c.Monto).Editable(false);
-                            model.Field(c => c.MotivosSolicitudId).Editable(true);
-                            model.Field(c => c.MotivosSolicitudDesc).Editable(true);
-                            model.Field(c => c.ConceptoMotivoId).Editable(true);
-                            model.Field(c => c.ConceptoMotivoDesc).Editable(true);
-                            model.Field(c => c.ResponsableId).Editable(true);
-                            model.Field(c => c.PeriodoOriginalId).Editable(true);
-                            model.Field(c => c.EstatusSolicitud).Editable(true);
-                            model.Field(c => c.Autorizador_Ident).Editable(true);
-                            model.Field(c => c.Autorizador).Editable(true);
-                        })
-                        .Read(read => read.Action("GetSolicitudes", "CapturaSolicitud").Data("getFolio"))
-                    //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
-                    //.Create(create => create.Action("CrearSolicitudPorEmpleado", "CapturaSolicitud").Type(HttpVerbs.Post))
-                    )
-                    .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
-                    .Navigatable()
-                    .Pageable(pageable => pageable
-                    .Refresh(true)
-                    .PageSizes(true)
-                    .ButtonCount(5)
-                    .Numeric(true)
-                    .PreviousNext(true)
-                    .Messages(messages =>
-                    {
-                        messages.ItemsPerPage("Registros por página");
-                        messages.Empty("Sin información para mostrar");
-                        messages.First("Primera");
-                        messages.Page("Página");
-                        messages.Last("Última");
-                        messages.Previous("Anterior");
-                        messages.Next("Siguiente");
-                        messages.Refresh("Actualizar");
-                        messages.Of("De");
-                        messages.MorePages("Mas páginas");
-                        messages.Display("{0} a {1} de {2}");
-                    })
-                    )
+        .Name("gridSolicitud")
+        .Columns(column =>
+        {
+            column.Command(command => command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span>").Click("editarEmpleadoSolicitud")).Title("Editar").Width(28).HtmlAttributes(new { style = "text-align: center;" });
+            column.Command(command => command.Custom("Borrar").Text("<span class='k-icon k-i-delete'></span>").Click("borrarEmpleadoSolicitud")).Title("Borrar").Width(28).HtmlAttributes(new { style = "text-align: center;" });
+            column.Command(command => command.Custom("Ver").Text("<span class='k-icon k-i-preview'></span>").Click("editarEmpleadoSolicitud")).Title("Ver").Width(28).HtmlAttributes(new { style = "text-align: center;" });
+            column.Bound(c => c.FolioSolicitud).Width(38).Title("Comentarios").ClientTemplate("<input class='k-button k-button-icontext comentarioss' style='text-align:center;' type='button' value='Comentarios' onclick='getComments(#=FolioSolicitud#,#=Ident#,#=ConceptoId#);' />").Filterable(false);
+            column.Bound(c => c.Ident).Width(40).Title("# Empleado").Filterable(false).Visible(true);
+            column.Bound(c => c.Nombre).Title("Nombre").Filterable(false).Visible(true).Width(70);
+            column.Bound(c => c.ConceptoDesc).Title("Concepto").Filterable(false).Width(70);
+            column.Bound(c => c.Monto).Title("Monto").Filterable(false).Width(70);
+            column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
+            column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
+            column.Bound(c => c.Autorizador).Title("Autorizador Asignado").Filterable(false).Width(70);
+        })
+        .Events(e => e.ExcelExport("excelExport"))
+        .ToolBar(tools => tools.Excel().Text("Excel solicitud"))
+        .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") + "_Folio_Detalle").AllPages(true).Filterable(true))
+        .HtmlAttributes(new { style = "height: 425px;" })
+        .Scrollable()
+        .Sortable()
+        .Resizable(res => res.Columns(true))
+        .PersistSelection()
+        .AutoBind(false)
+        .Events(eve => eve.DataBound("onDataBound"))
+        //.Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Model(model =>
+            {
+                model.Id(c => c.FolioSolicitud);
+                model.Field(c => c.Ident).Editable(true);
+                model.Field(c => c.Nombre).Editable(true);
+                model.Field(c => c.ConceptoId).Editable(true);
+                model.Field(c => c.ConceptoDesc).Editable(true);
+                model.Field(c => c.Monto).Editable(false);
+                model.Field(c => c.MotivosSolicitudId).Editable(true);
+                model.Field(c => c.MotivosSolicitudDesc).Editable(true);
+                model.Field(c => c.ConceptoMotivoId).Editable(true);
+                model.Field(c => c.ConceptoMotivoDesc).Editable(true);
+                model.Field(c => c.ResponsableId).Editable(true);
+                model.Field(c => c.PeriodoOriginalId).Editable(true);
+                model.Field(c => c.EstatusSolicitud).Editable(true);
+                model.Field(c => c.Autorizador_Ident).Editable(true);
+                model.Field(c => c.Autorizador).Editable(true);
+            })
+            .Read(read => read.Action("GetSolicitudes", "CapturaSolicitud").Data("getFolio"))
+        //.Update(update => update.Action("UpdatePerdiodoNomina", "PeriodoNomina").Type(HttpVerbs.Post))
+        //.Create(create => create.Action("CrearSolicitudPorEmpleado", "CapturaSolicitud").Type(HttpVerbs.Post))
+        )
+        .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+        .Navigatable()
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(5)
+        .Numeric(true)
+        .PreviousNext(true)
+        .Messages(messages =>
+        {
+            messages.ItemsPerPage("Registros por página");
+            messages.Empty("Sin información para mostrar");
+            messages.First("Primera");
+            messages.Page("Página");
+            messages.Last("Última");
+            messages.Previous("Anterior");
+            messages.Next("Siguiente");
+            messages.Refresh("Actualizar");
+            messages.Of("De");
+            messages.MorePages("Mas páginas");
+            messages.Display("{0} a {1} de {2}");
+        })
+        )
                 )
             </div>
         </div>
@@ -773,7 +777,25 @@
     @(Html.Kendo().Window()
         .Title("Totales")
         .Name("MostrarTotalesModal")
-        .LoadContentFrom("GetMontosSolicitudes","CapturaSolicitud",new { FolioSolicitud=folioId})
+        .LoadContentFrom("GetMontosSolicitudes", "CapturaSolicitud", new { FolioSolicitud = folioId })
+        .Iframe(true)
+        .Actions(a => a
+        //.Minimize()
+        .Maximize()
+        .Close()
+        .Refresh()
+        )
+        .Resizable()
+        .Draggable()
+        .Width(600)
+        .Height(530)
+        .Visible(false)
+        .Modal(true)
+        )
+
+    @(Html.Kendo().Window()
+        .Title("Evidencias")
+        .Name("MostrarArchivosEvidencias")
         .Iframe(true)
         .Actions(a => a
         //.Minimize()
@@ -1006,6 +1028,8 @@
         var urlMisSolicitudes = '@Url.Action("Index", "MisSolicitudes")'
 
         var urlCancelaEmpleadoSolicitud = '@Url.Action("CancelaEmpleadoSolicitud", "CapturaSolicitud")'
+
+        var urlGetEvidencias = '@Url.Action("GetEvidencias","CapturaSolicitud")'
     </script>
 }
 else
@@ -1025,6 +1049,19 @@ else
         var mostrarDialog = $("#MostrarTotalesModal").data("kendoWindow");
 
         mostrarDialog.open().center(true);
+
+    }
+
+    function MostrarEvidenciasModal() {
+
+        var mostrarDialogEvidencias = $("#MostrarArchivosEvidencias").data("kendoWindow");
+        var folioEvidencias = $("#FolioSolicitud").val();
+
+        mostrarDialogEvidencias.refresh({
+            url: '@Url.Action("GetEvidencias","CapturaSolicitud")/?folio=' + folioEvidencias
+        })
+
+        mostrarDialogEvidencias.open().center(true);
 
     }
 

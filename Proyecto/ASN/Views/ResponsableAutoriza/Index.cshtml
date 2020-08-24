@@ -52,7 +52,12 @@
                 @Html.Label("Responsable de Solicitudes", new { style = "font-size: 15px" })
             </div>
             <div class="col-lg-2">
-                <a href="../Evidencias/" target="_blank">Evidencias (40 MB máximo)</a>
+                @*<a href="../Evidencias/" target="_blank">Evidencias (40 MB máximo)</a>*@
+                @(Html.Kendo().Button().Name("EvidenciasAnchor").Content("Evidencias (40 MB máximo)").Icon("")
+                                .Events(x => x.Click("MostrarEvidenciasModal")).Tag("a") //type = "anchor"
+                                                                                         //.Events(x => x.Click("agregaEmpleado"))
+                                    )
+
             </div>
             <div class="col-lg-3">
                 @(Html.Kendo().Upload()
@@ -467,6 +472,23 @@
         .Modal(true)
         )
 
+    @(Html.Kendo().Window()
+        .Title("Evidencias")
+        .Name("MostrarArchivosEvidencias")
+        .Iframe(true)
+        .Actions(a => a
+        //.Minimize()
+        .Maximize()
+        .Close()
+        )
+        .Resizable()
+        .Draggable()
+        .Width(600)
+        .Height(530)
+        .Visible(false)
+        .Modal(true)
+        )
+
     <script>
                 @*var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';*@
                 var urlSolicitudEmpleados = '@Url.Action("GuardaEmpleados", "Solicitudes")';
@@ -613,6 +635,20 @@ else
         mostrarDialog.open().center(true);
 
     }
+
+    function MostrarEvidenciasModal() {
+
+        var mostrarDialogEvidencias = $("#MostrarArchivosEvidencias").data("kendoWindow");
+        var folioEvidencias = $("#FolioSolicitud").val();
+
+        mostrarDialogEvidencias.refresh({
+            url: '@Url.Action("GetEvidencias","ResponsableAutoriza")/?folio=' + folioEvidencias
+        })
+
+        mostrarDialogEvidencias.open().center(true);
+
+    }
+
 </script>
 
 @Scripts.Render("~/bundles/ResponsableAutoriza")

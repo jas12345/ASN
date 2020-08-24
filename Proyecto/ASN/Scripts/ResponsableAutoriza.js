@@ -28,6 +28,7 @@ $(document).ready(function () {
     calculaPeriodoNominaSolicitud();
     deshabilitaControlesEdicion();
     actualizaGrid();
+    $("#EvidenciasAnchor").removeClass("k-button");
 });
 
 function getFolio() {

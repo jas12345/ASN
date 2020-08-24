@@ -12,9 +12,13 @@ $(document).ready(function () {
     // Activar / Desactivar botón Enviar Solicitud
     if (FolioSolicitud == '-1') {
         $("#EnviarSolicitud").hide();
+        $("#evidencias").data("kendoUpload").enable(false);
+        $("#EvidenciasAnchor").data("kendoButton").enable(false);
     }
     else {
         $("#EnviarSolicitud").show();
+        $("#evidencias").data("kendoUpload").enable(true);
+        $("#EvidenciasAnchor").data("kendoButton").enable(true);
     }
 
     // Activar / Desactivar botón Cancelar
@@ -28,13 +32,17 @@ $(document).ready(function () {
     $("#Parametro").on("blur", function () {
         onBlurParametro();
 
-    }); //.on("focus", function () {
+    });
+
+    $("#EvidenciasAnchor").removeClass("k-button");
+
+    //.on("focus", function () {
     //    if (this.value == placeholder) {
-            
+
     //        $(this).focus();
     //        alert('2')
     //    }
-        
+
     //});
 
     //$("#Conceptos").change(function () {
@@ -99,9 +107,9 @@ function excelExport(e) {
     var back = "#0707BE"; //"#A7A5A4";
 
     sheet = e.workbook.sheets[0];
-    var sheet1 =[];
+    var sheet1 = [];
     var cols = sheet.columns.length;
-    
+
     var myHeaders = [{
         value: "Folio",
         fontSize: 14,
@@ -162,16 +170,16 @@ function excelExport(e) {
             var row = sheet.rows[i];
             rowCells = [];
             rowCells.push({ value: $('#FolioSolicitud').val() });
-            rowCells.push({ value: row.cells[0].value});
+            rowCells.push({ value: row.cells[0].value });
             rowCells.push({ value: row.cells[1].value });
             rowCells.push({ value: row.cells[2].value });
-            rowCells.push({ value: row.cells[3].value});
+            rowCells.push({ value: row.cells[3].value });
             rowCells.push({ value: row.cells[4].value });
             rowCells.push({ value: row.cells[5].value });
             rowCells.push({ value: row.cells[6].value });
-           
+
             sheet1.push({ type: "data", cells: rowCells });
-            
+
         }
 
         var data = e.data;
@@ -185,31 +193,34 @@ function excelExport(e) {
         }
         // Crea un objeto con la informacion a agrgar al excel
         rowCells = [];
-        
+
         rowCells.push({
             value: "Cantidad : " + cont.toString(),
             fontSize: 14,
             textAlign: "center",
             background: back,
             color: "#ffffff",
-            colSpan: 3});
-        
+            colSpan: 3
+        });
+
         rowCells.push({
             value: "Suma : " + suma.toString() + " " + moneda,
             fontSize: 14,
             textAlign: "center",
             background: back,
             color: "#ffffff",
-            colSpan: 3});
-       
+            colSpan: 3
+        });
+
         rowCells.push({
             value: "",
             fontSize: 14,
             textAlign: "center",
             background: back,
             color: "#ffffff",
-            colSpan: 2 });
-       
+            colSpan: 2
+        });
+
         sheet1.push({ type: "data", cells: rowCells });
 
         e.workbook.sheets[0].rows = sheet1;
@@ -219,7 +230,7 @@ function excelExport(e) {
         var numerOfrows = e.workbook.sheets[0].rows.length;
         sheet = e.workbook.sheets[0];
         var newSheet = sheet.rows.splice(2, numerOfrows + 1) // +1 is for the header row
-        
+
         e.workbook.sheets[0].rows = newSheet
         e.workbook.sheets[0].rows.splice(0, 0, { cells: myHeaders, type: "header", height: 30 });
 
@@ -265,7 +276,7 @@ function excelExport(e) {
         sheet.rows.push({ type: "data", cells: rowCells });
 
     }
-   
+
 }
 
 function getFolio() {
@@ -308,7 +319,7 @@ function agregarSolicitud() {
         else {
             autorizadoresDistintos = autorizadoresDistintos && false
         }
-        
+
     });
 
 
@@ -350,9 +361,16 @@ function agregarSolicitud() {
             $("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
 
             calculaEstatusSolicitud();
-
             actualizaGrid();
             limpiaConcepto();
+
+            $("#evidencias").data("kendoUpload").enable(true);
+
+            $("#EvidenciasAnchor").data("kendoButton").enable(true);
+
+            console.log(FolioSolicitud);
+
+            getFolio();
             //debugger;
         });
 
@@ -396,7 +414,7 @@ function cancelarSolicitud() {
     //    //$("#FolioSolicitud").data("kendoNumericTextBox").value(data.FolioSolicitud);
     //    actualizaGrid();
     //    debugger;
-        
+
     //});
 
     $("#dialog").data("kendoDialog").open();
@@ -448,12 +466,12 @@ function calculaEstatusSolicitud() {
                 $("#CancelarSolicitud").show();
                 grid.hideColumn(2);
                 grid.hideColumn(3);
-                
+
                 //Se carga el combo de Períodos en base a períodos actuales y futuros
                 $.post(urlGetPeriodosNomina + "/?active=" + 1, function (data) {
                     $("#PeriodoNomina_Id").data("kendoDropDownList").setDataSource(data);
                     //$("#PeriodoNomina_Id").data("kendoDropDownList").data()
-                });                
+                });
                 //$("#EnviarSolicitud").enable(true);
             }
             else {
@@ -466,8 +484,8 @@ function calculaEstatusSolicitud() {
                 $.post(urlGetPeriodosNomina + "/?active=" + 0, function (data2) {
                     $("#PeriodoNomina_Id").data("kendoDropDownList").setDataSource(data2);
                     //$("#PeriodoNomina_Id").data("kendoDropDownList").data()
-                });                
-           }
+                });
+            }
 
             if (ClaveEstatusSolicitud == 'C' || ClaveEstatusSolicitud == 'A') {
                 //$("#EnviarSolicitud").enable(false);
@@ -510,7 +528,7 @@ function calculaEstatusSolicitud() {
                 $("#AgregarSolicitud").hide();
                 $("#CCMSIDSolicitado").data("kendoNumericTextBox").enable(false);
                 $("#Conceptos").data("kendoDropDownList").enable(false);
-                
+
                 $("#mensajeroConceptos").on("click", function () {
                     if ($("#CCMSIDSolicitado").val().length > 0) {
                         //console.log("conceptosMOD");
@@ -692,7 +710,7 @@ function verEmpleadoSolicitud(e) {
 
         deshabilitaControlesLave();
 
-   }
+    }
 
     // Procesar el estatus de EmpleadoSolicitud
     // Activar / Desactivar botón Rechazar
@@ -745,7 +763,7 @@ function verEmpleadoSolicitud(e) {
     //debugger;
     var rowIndex = $(e.currentTarget).closest("tr").index();
     var grid = $("#gridSolicitud").data("kendoGrid");
-    grid.select("tr:eq(" + rowIndex + ")");    
+    grid.select("tr:eq(" + rowIndex + ")");
 
     //Al final se desactiva la edición de los controles 
     //deshabilitaControlesEdicion();
@@ -759,7 +777,7 @@ function actualizaGrid() {
 }
 
 function limpiaConcepto() {
-    $.when($("#Parametro").data('kendoNumericTextBox').value("")       
+    $.when($("#Parametro").data('kendoNumericTextBox').value("")
     ).done(function () {
         $('#Parametro').data('kendoNumericTextBox').trigger('change')
     });
@@ -841,8 +859,8 @@ function editarEmpleadoSolicitud(e) {
 
     if (dataItem_EstatusId == "EB" || dataItem_EstatusId == "R") {
         $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Guardar');
-    //} else if (dataItem_EstatusId == "CE") {
-    //    deshabilitaControlesEdicion();
+        //} else if (dataItem_EstatusId == "CE") {
+        //    deshabilitaControlesEdicion();
     } else {
         $("#AgregarSolicitud").html('<span class="k-icon k-i-add"></span>Agregar');
     }
@@ -883,7 +901,7 @@ function editarEmpleadoSolicitud(e) {
                     });
 
                 });
-            });            
+            });
         });
     });
 
@@ -1187,7 +1205,7 @@ function onDataBound(e) {
 //    //    contentType: 'application/json',
 //    //    success: function (resultData) {
 //    //        if (resultData.status !== "0") {
-                
+
 //    //        } else {
 //    //            console.log("falso");
 //    //        }
@@ -1242,7 +1260,7 @@ function onDataBound(e) {
 //}
 
 function onChangeFolioSolicitud() {
-   // debugger;
+    // debugger;
 
     //FolioSolicitud = data.FolioSolicitud;
     //FolioSolicitud: $("#FolioSolicitud").val();
@@ -1331,12 +1349,12 @@ function onChangeCCMSId() {
             $("#SiteX").text(EmpLocation_Name);
 
             //debugger;
-            
+
             //if ($("#CCMSIDIncidente").data("kendoNumericTextBox").value() == 0) {
             if (responsableSugeridoId !== dataItem_ResponsableId) {
                 $("#CCMSIDIncidente").data("kendoNumericTextBox").value(responsableSugeridoId);
                 $("#CCMSIDIncidente").data("kendoNumericTextBox").trigger('change');
-                 // Sugerencia de responsable de incidente es el Manager del empleado
+                // Sugerencia de responsable de incidente es el Manager del empleado
                 $("#ResponsableCCMSIDX").val(responsableId);
                 $("#ResponsableCCMSIDX").text(responsableId);
                 $("#NombreRespoX").val(NombreResponsableIncidente);
@@ -1358,7 +1376,7 @@ function onChangeCCMSId() {
             }
 
             if (EmpCCMSId == -1) {
-                $("#AgregarSolicitud").kendoButton({enable: false});
+                $("#AgregarSolicitud").kendoButton({ enable: false });
 
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("No tiene permiso para crear una solicitud a este empleado.", "error");
@@ -1376,7 +1394,7 @@ function onChangeCCMSId() {
             if (EmpCCMSId > 0) {
                 //$("#AgregarSolicitud").kendoButton({ enable: true });
                 $("#AgregarSolicitud").data("kendoButton").enable(true);
-            //habilitaControlesEdicion();
+                //habilitaControlesEdicion();
             }
 
             //if ($("#Estatus").val() == "Cerrada" || $("#Estatus").val() == "Cancelada") {
@@ -1524,14 +1542,14 @@ function inicializaAutorizadores(empleadoIdent, conceptoId) {
 
         //if (this.id = (index + 1)) {
         //    debugger;
-            //$("#AutorizadorNivel" + this.id).data('kendoDropDownList').value(lista[index].Autorizador_Ident);
+        //$("#AutorizadorNivel" + this.id).data('kendoDropDownList').value(lista[index].Autorizador_Ident);
 
-            //var autorizadorNivel = "autorizadorNivel" + this.id;
-            //window[autorizadorNivel] = lista[index].Autorizador_Ident;
+        //var autorizadorNivel = "autorizadorNivel" + this.id;
+        //window[autorizadorNivel] = lista[index].Autorizador_Ident;
 
-            //this["autorizadorNivel" + this.id] = lista[index].Autorizador_Ident;
+        //this["autorizadorNivel" + this.id] = lista[index].Autorizador_Ident;
 
-            //$("#autorizadorNivel" + this.id) = lista[index].Autorizador_Ident;                    
+        //$("#autorizadorNivel" + this.id) = lista[index].Autorizador_Ident;                    
         //}
 
         //debugger;
@@ -1593,7 +1611,7 @@ function onChangeMotivo() {
         ConMotivoIdent = "";
 
         //ConConceptoMotivo = $("#Motivo.value").text();
-        ConMotivoNombre = $("#Motivo").data('kendoDropDownList').text();        
+        ConMotivoNombre = $("#Motivo").data('kendoDropDownList').text();
         ConMotivoIdent = $("#Motivo").val();
         //debugger;
 
@@ -1715,24 +1733,24 @@ function onChangeParametro() {
     //debugger;
 
     if ($("#Parametro").val().length > 0) {
-        
-            //debugger;
-            ConConceptoMotivo = "";
-            ConParametroConceptoValor = 0;
-            ConParametroConceptoMonto = 0;
 
-            //ConConceptoMotivo = $("#Motivo.value").text();
-            ConConceptoMotivo = $("#Parametro").val(); // + ' ' + ConParametro;
-            ConParametroConceptoMonto = $("#Parametro").val();
-            //debugger;
+        //debugger;
+        ConConceptoMotivo = "";
+        ConParametroConceptoValor = 0;
+        ConParametroConceptoMonto = 0;
 
-            //rellenaPerfilTipoAcceso();
+        //ConConceptoMotivo = $("#Motivo.value").text();
+        ConConceptoMotivo = $("#Parametro").val(); // + ' ' + ConParametro;
+        ConParametroConceptoMonto = $("#Parametro").val();
+        //debugger;
 
-            var valor = $("#Parametro").val() + " " + ConParametroNombre.substring(ConParametroNombre.indexOf(" ") + 1);
+        //rellenaPerfilTipoAcceso();
 
-            $("#ParametroX").val(valor);
-            $("#ParametroX").text(valor);        
-       
+        var valor = $("#Parametro").val() + " " + ConParametroNombre.substring(ConParametroNombre.indexOf(" ") + 1);
+
+        $("#ParametroX").val(valor);
+        $("#ParametroX").text(valor);
+
     }
     else {
         $("#ParametroX").val("");
@@ -1782,8 +1800,7 @@ function rechazarMonto() {
     return true;
 }
 
-function onChangeCCMSIdIncidente()
-{
+function onChangeCCMSIdIncidente() {
     //debugger;
 
     responsableId = "";
@@ -1799,13 +1816,13 @@ function onChangeCCMSIdIncidente()
 
     if ($("#CCMSIDIncidente").val().length > 0) {
         //debugger;
-        $.post(urlEmpleadoPuesto + "/?Ident=" + responsableId , function (data) {
-            responsableId  = data[0].Ident
+        $.post(urlEmpleadoPuesto + "/?Ident=" + responsableId, function (data) {
+            responsableId = data[0].Ident
             NombreResponsableIncidente = data[0].Nombre;
 
             //debugger;
-            $("#ResponsableCCMSIDX").val(responsableId );
-            $("#ResponsableCCMSIDX").text(responsableId );
+            $("#ResponsableCCMSIDX").val(responsableId);
+            $("#ResponsableCCMSIDX").text(responsableId);
             $("#NombreRespoX").val(NombreResponsableIncidente);
             $("#NombreRespoX").text(NombreResponsableIncidente);
 
@@ -1832,7 +1849,7 @@ function validaAutorizador(valor) {
         if ($("#AutorizadorNivel" + (nivel + 1)).val() == valor) {
 
             igualesTotales++;
-        }        
+        }
     });
 
     if (igualesTotales == 1) {
@@ -2140,8 +2157,7 @@ function parametrosConceptos() {
     if (CCMSId !== "") {
         ValorCCMS = CCMSId;
     }
-    else
-    {
+    else {
         ValorCCMS = dataItem_Ident;
     }
 
@@ -2245,6 +2261,7 @@ function onOK(e) {
 
 function uploadFile(e) {
     e.data = {
-        folioSolicitud: $("#folioId").val()
+        folioSolicitud: $("#FolioSolicitud").val()
     }
 }
+
