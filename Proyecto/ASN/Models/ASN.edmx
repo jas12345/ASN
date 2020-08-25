@@ -256,9 +256,6 @@
         </Function>
         <Function Name="CatContractTypeCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatContractTypeTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
-        <Function Name="CatContratoByRolCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="CCMSID" Type="int" Mode="In" />
-        </Function>
         <Function Name="CatCountryByCascadeCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Country" Type="int" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
@@ -314,9 +311,6 @@
           <Parameter Name="CCMSID" Type="int" Mode="In" />
         </Function>
         <Function Name="CatEmployeeSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
-        <Function Name="CatEmpresaByResponsableCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
-          <Parameter Name="CCMSID" Type="int" Mode="In" />
-        </Function>
         <Function Name="CatEstatusCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatEstatusSolicitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
@@ -717,7 +711,6 @@
         <Function Name="GeneraArchivoSolicitudSel_Button" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodoNominaId" Type="int" Mode="In" />
           <Parameter Name="ID_Empresa" Type="int" Mode="In" />
-          <Parameter Name="ID_RESP" Type="int" Mode="In" />
         </Function>
         <Function Name="NivelesAutorizacionxEmpleadoxConcepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="EmpleadoIdent" Type="int" Mode="In" />
@@ -1673,7 +1666,6 @@
           <FunctionImport Name="GeneraArchivoSolicitudSel_Button" ReturnType="Collection(ASNModel.GeneraArchivoSolicitudSel_Button_Result)">
             <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
             <Parameter Name="ID_Empresa" Mode="In" Type="Int32" />
-            <Parameter Name="ID_RESP" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteSolcitudSel" ReturnType="Collection(ASNModel.ReporteSolcitudSel_Result)">
             <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
@@ -2405,6 +2397,8 @@
           <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
+          <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatResponsabilidadesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -3867,6 +3861,8 @@
                 <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
                 <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
+                <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
+                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4356,14 +4352,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatEmpresaByResponsableCMB" FunctionName="ASNModel.Store.CatEmpresaByResponsableCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatEmpresaByResponsableCMB_Result">
-                <ScalarProperty Name="ID_Empresa" ColumnName="ID_Empresa" />
-                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GeneraArchivoSolicitudSel_Button" FunctionName="ASNModel.Store.GeneraArchivoSolicitudSel_Button">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.GeneraArchivoSolicitudSel_Button_Result">
@@ -4428,14 +4416,6 @@
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="ConceptoDesc" ColumnName="ConceptoDesc" />
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatContratoByRolCMB" FunctionName="ASNModel.Store.CatContratoByRolCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatContratoByRolCMB_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
