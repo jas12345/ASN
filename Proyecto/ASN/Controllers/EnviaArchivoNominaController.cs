@@ -91,7 +91,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstBonos = ctx.GeneraArchivoSolicitudSel_Button(PeriodoNominaIdSelected, EmpresaIdSelected, usuario.UserInfo.Ident.Value).ToList();
+                    lstBonos = ctx.GeneraArchivoSolicitudSel_Button(PeriodoNominaIdSelected, EmpresaIdSelected).ToList();
                 }
 
                 var bonosArchivo = new List<RafToolObj>();
