@@ -2873,15 +2873,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
         }
     
-        public virtual ObjectResult<CatEmpresaByResponsableCMB_Result> CatEmpresaByResponsableCMB(Nullable<int> cCMSID)
-        {
-            var cCMSIDParameter = cCMSID.HasValue ?
-                new ObjectParameter("CCMSID", cCMSID) :
-                new ObjectParameter("CCMSID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpresaByResponsableCMB_Result>("CatEmpresaByResponsableCMB", cCMSIDParameter);
-        }
-    
         public virtual ObjectResult<ReporteSolcitudSel_Result> ReporteSolcitudSel(Nullable<int> periodoNomina, Nullable<int> tipoContrato)
         {
             var periodoNominaParameter = periodoNomina.HasValue ?
@@ -2950,6 +2941,15 @@ namespace ASN.Models
                 new ObjectParameter("ID_Empresa", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GeneraArchivoSolicitudSel_Button_Result>("GeneraArchivoSolicitudSel_Button", periodoNominaIdParameter, iD_EmpresaParameter);
+        }
+    
+        public virtual ObjectResult<CatEmpresaByResponsableCMB_Result> CatEmpresaByResponsableCMB(Nullable<int> cCMSID)
+        {
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpresaByResponsableCMB_Result>("CatEmpresaByResponsableCMB", cCMSIDParameter);
         }
     }
 }
