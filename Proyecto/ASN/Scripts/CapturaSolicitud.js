@@ -14,11 +14,13 @@ $(document).ready(function () {
         $("#EnviarSolicitud").hide();
         $("#evidencias").data("kendoUpload").enable(false);
         $("#EvidenciasAnchor").data("kendoButton").enable(false);
+        $("#MostrarTotales").hide();
     }
     else {
         $("#EnviarSolicitud").show();
         $("#evidencias").data("kendoUpload").enable(true);
         $("#EvidenciasAnchor").data("kendoButton").enable(true);
+        $("#MostrarTotales").show();
     }
 
     // Activar / Desactivar botón Cancelar
@@ -35,6 +37,8 @@ $(document).ready(function () {
     });
 
     $("#EvidenciasAnchor").removeClass("k-button");
+
+    $("#files").data("kendoUpload").enable(false);
 
     //.on("focus", function () {
     //    if (this.value == placeholder) {
@@ -1474,8 +1478,7 @@ function onChangeConceptos(e) {
         $.when(conceptoParametroConcepto(ConConceptoIdent, ConParametroNombre))
             .done(function () {
                 inicializaAutorizadores(CCMSId, ConConceptoIdent);
-            });
-
+            });   
         //$.post(urlConceptoParametroConcepto + "/?conceptoIdent=" + ConConceptoIdent, function (data) {
         //    debugger;
         //    ConConceptoIdent = data[0].ConceptoId;
@@ -1497,6 +1500,16 @@ function onChangeConceptos(e) {
         //    //debugger;
         //    console.log("fail" + ex);
         //});
+        
+        if (ConConceptoIdent == 14 || ConConceptoIdent == 15 || ConConceptoIdent == 16 || ConConceptoIdent == 17) {
+            $("#files").data("kendoUpload").enable(true);
+
+            console.log("prueba conceptos");
+        }
+        else {
+            $("#files").data("kendoUpload").enable(false);
+
+        }
 
     }
     else {
