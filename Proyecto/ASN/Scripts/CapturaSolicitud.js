@@ -673,7 +673,7 @@ function verEmpleadoSolicitud(e) {
             $.when(
 
                 $("#Conceptos").data("kendoDropDownList").dataSource.read(),
-                $("#Conceptos").data("kendoDropDownList").refresh(),
+                $("#Conceptos").data("kendoDropDownList").refresh()
 
             ).done(function () {
                 console.log("Conceptos Fill");
@@ -1169,6 +1169,11 @@ function onDataBound(e) {
             DeleteButton.hide();
             ViewButton.hide();
             ComentariosButton.show();
+        } else if (gridData[i].EstatusId == "C") {
+            EditButton.hide();
+            DeleteButton.hide();
+            ViewButton.hide();
+            ComentariosButton.hide();
         }
         else {
             EditButton.hide();

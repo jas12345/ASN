@@ -759,7 +759,7 @@ namespace ASN.Controllers
             //////        file.SaveAs(physicalPath);
             //////    }
             //////}
-
+          
             try
             {
                 int solicitudIdActual = -1;
@@ -841,8 +841,8 @@ namespace ASN.Controllers
                         }
                     }
                 }
-
-                return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+                return Content(solicitudIdActual.ToString());
+                //return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -994,6 +994,23 @@ namespace ASN.Controllers
             var FileVirtualPath = "~/Evidencias/" + EvidenciaFile;
 
             return File(FileVirtualPath, "application/force- download", Path.GetFileName(FileVirtualPath));
+        }
+
+        public ActionResult ValidarfolioCanceladoEnCargaComedor(string Folio) {
+
+            using (ASNContext ctx = new ASNContext())
+            {
+
+                string qry = string.Format("  select 1 " +
+                                           "  from app620.CatEmpleadosSolicitudes "         +
+                                           "  where FolioSolicitud                  = {0} " +
+                                           "  and EstatusSolicitudid                =  'C'"
+                                        , Folio);
+                var sts= ctx.Database.SqlQuery<int>(qry).FirstOrDefault();
+
+                return Content(sts.ToString());
+
+            }
         }
 
     }
