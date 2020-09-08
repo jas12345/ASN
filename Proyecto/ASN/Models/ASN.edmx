@@ -717,7 +717,6 @@
         <Function Name="GeneraArchivoSolicitudSel_Button" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodoNominaId" Type="int" Mode="In" />
           <Parameter Name="ID_Empresa" Type="int" Mode="In" />
-          <Parameter Name="ID_RESP" Type="int" Mode="In" />
         </Function>
         <Function Name="NivelesAutorizacionxEmpleadoxConcepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="EmpleadoIdent" Type="int" Mode="In" />
@@ -1667,14 +1666,6 @@
           <FunctionImport Name="ReporteFoliosContratoEmpresa" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresa_Result)">
           <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CatEmpresaByResponsableCMB" ReturnType="Collection(ASNModel.CatEmpresaByResponsableCMB_Result)">
-          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GeneraArchivoSolicitudSel_Button" ReturnType="Collection(ASNModel.GeneraArchivoSolicitudSel_Button_Result)">
-            <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
-            <Parameter Name="ID_Empresa" Mode="In" Type="Int32" />
-            <Parameter Name="ID_RESP" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ReporteSolcitudSel" ReturnType="Collection(ASNModel.ReporteSolcitudSel_Result)">
             <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
             <Parameter Name="TipoContrato" Mode="In" Type="Int32" />
@@ -1691,6 +1682,13 @@
           <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatContratoByRolCMB" ReturnType="Collection(ASNModel.CatContratoByRolCMB_Result)">
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GeneraArchivoSolicitudSel_Button" ReturnType="Collection(ASNModel.GeneraArchivoSolicitudSel_Button_Result)">
+            <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Empresa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatEmpresaByResponsableCMB" ReturnType="Collection(ASNModel.CatEmpresaByResponsableCMB_Result)">
             <Parameter Name="CCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -2405,6 +2403,8 @@
           <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
           <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
+          <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatResponsabilidadesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -2740,34 +2740,6 @@
           <Property Type="String" Name="Contrato" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Total" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="CatEmpresaByResponsableCMB_Result">
-          <Property Type="Int32" Name="ID_Empresa" Nullable="false" />
-          <Property Type="String" Name="Empresa" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="GeneraArchivoSolicitudSel_Button_Result">
-          <Property Type="Int32" Name="EMPLEADO" Nullable="true" />
-          <Property Type="String" Name="REG" Nullable="true" />
-          <Property Type="String" Name="CONCEPTO" Nullable="true" />
-          <Property Type="String" Name="ACCION" Nullable="true" />
-          <Property Type="String" Name="UNIDAD" Nullable="true" />
-          <Property Type="String" Name="IMPORTE" Nullable="true" />
-          <Property Type="String" Name="PORCENTAJE" Nullable="true" />
-          <Property Type="String" Name="FECHA" Nullable="true" />
-          <Property Type="String" Name="SEMANA" Nullable="true" />
-          <Property Type="String" Name="FECHA_INI" Nullable="true" />
-          <Property Type="String" Name="FECHA_FIN" Nullable="true" />
-          <Property Type="String" Name="DURACION" Nullable="true" />
-          <Property Type="String" Name="FOLIO" Nullable="true" />
-          <Property Type="String" Name="CONSECUENCIA" Nullable="true" />
-          <Property Type="String" Name="CONTROL" Nullable="true" />
-          <Property Type="String" Name="ID_Empresa" Nullable="true" />
-          <Property Type="String" Name="CIA_IDReporteo" Nullable="true" />
-          <Property Type="String" Name="Folder" Nullable="true" />
-          <Property Type="String" Name="Compania" Nullable="true" />
-          <Property Type="String" Name="ID_REP" Nullable="true" />
-          <Property Type="Int32" Name="T_EX_DOB_SEM" Nullable="true" />
-          <Property Type="String" Name="T_EXTRA_EXEN" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="ReporteSolcitudSel_Result">
           <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="Site" Nullable="true" MaxLength="250" />
@@ -2794,6 +2766,34 @@
         <ComplexType Name="CatContratoByRolCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GeneraArchivoSolicitudSel_Button_Result">
+          <Property Type="Int32" Name="EMPLEADO" Nullable="true" />
+          <Property Type="String" Name="REG" Nullable="true" />
+          <Property Type="String" Name="CONCEPTO" Nullable="true" />
+          <Property Type="String" Name="ACCION" Nullable="true" />
+          <Property Type="String" Name="UNIDAD" Nullable="true" />
+          <Property Type="String" Name="IMPORTE" Nullable="true" />
+          <Property Type="String" Name="PORCENTAJE" Nullable="true" />
+          <Property Type="String" Name="FECHA" Nullable="true" />
+          <Property Type="String" Name="SEMANA" Nullable="true" />
+          <Property Type="String" Name="FECHA_INI" Nullable="true" />
+          <Property Type="String" Name="FECHA_FIN" Nullable="true" />
+          <Property Type="String" Name="DURACION" Nullable="true" />
+          <Property Type="String" Name="FOLIO" Nullable="true" />
+          <Property Type="String" Name="CONSECUENCIA" Nullable="true" />
+          <Property Type="String" Name="CONTROL" Nullable="true" />
+          <Property Type="String" Name="ID_Empresa" Nullable="true" />
+          <Property Type="String" Name="CIA_IDReporteo" Nullable="true" />
+          <Property Type="String" Name="Folder" Nullable="true" />
+          <Property Type="String" Name="Compania" Nullable="true" />
+          <Property Type="String" Name="ID_REP" Nullable="true" />
+          <Property Type="Int32" Name="T_EX_DOB_SEM" Nullable="true" />
+          <Property Type="String" Name="T_EXTRA_EXEN" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CatEmpresaByResponsableCMB_Result">
+          <Property Type="Int32" Name="ID_Empresa" Nullable="false" />
+          <Property Type="String" Name="Empresa" Nullable="false" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -3867,6 +3867,8 @@
                 <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
                 <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
                 <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
+                <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
+                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4356,42 +4358,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatEmpresaByResponsableCMB" FunctionName="ASNModel.Store.CatEmpresaByResponsableCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatEmpresaByResponsableCMB_Result">
-                <ScalarProperty Name="ID_Empresa" ColumnName="ID_Empresa" />
-                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GeneraArchivoSolicitudSel_Button" FunctionName="ASNModel.Store.GeneraArchivoSolicitudSel_Button">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.GeneraArchivoSolicitudSel_Button_Result">
-                <ScalarProperty Name="EMPLEADO" ColumnName="EMPLEADO" />
-                <ScalarProperty Name="REG" ColumnName="REG" />
-                <ScalarProperty Name="CONCEPTO" ColumnName="CONCEPTO" />
-                <ScalarProperty Name="ACCION" ColumnName="ACCION" />
-                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
-                <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
-                <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="SEMANA" ColumnName="SEMANA" />
-                <ScalarProperty Name="FECHA_INI" ColumnName="FECHA_INI" />
-                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
-                <ScalarProperty Name="DURACION" ColumnName="DURACION" />
-                <ScalarProperty Name="FOLIO" ColumnName="FOLIO" />
-                <ScalarProperty Name="CONSECUENCIA" ColumnName="CONSECUENCIA" />
-                <ScalarProperty Name="CONTROL" ColumnName="CONTROL" />
-                <ScalarProperty Name="ID_Empresa" ColumnName="ID_Empresa" />
-                <ScalarProperty Name="CIA_IDReporteo" ColumnName="CIA_IDReporteo" />
-                <ScalarProperty Name="Folder" ColumnName="Folder" />
-                <ScalarProperty Name="Compania" ColumnName="Compania" />
-                <ScalarProperty Name="ID_REP" ColumnName="ID_REP" />
-                <ScalarProperty Name="T_EX_DOB_SEM" ColumnName="T_EX_DOB_SEM" />
-                <ScalarProperty Name="T_EXTRA_EXEN" ColumnName="T_EXTRA_EXEN" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReporteSolcitudSel" FunctionName="ASNModel.Store.ReporteSolcitudSel">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.ReporteSolcitudSel_Result">
@@ -4436,6 +4402,42 @@
               <ComplexTypeMapping TypeName="ASNModel.CatContratoByRolCMB_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GeneraArchivoSolicitudSel_Button" FunctionName="ASNModel.Store.GeneraArchivoSolicitudSel_Button">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.GeneraArchivoSolicitudSel_Button_Result">
+                <ScalarProperty Name="EMPLEADO" ColumnName="EMPLEADO" />
+                <ScalarProperty Name="REG" ColumnName="REG" />
+                <ScalarProperty Name="CONCEPTO" ColumnName="CONCEPTO" />
+                <ScalarProperty Name="ACCION" ColumnName="ACCION" />
+                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+                <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
+                <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="SEMANA" ColumnName="SEMANA" />
+                <ScalarProperty Name="FECHA_INI" ColumnName="FECHA_INI" />
+                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
+                <ScalarProperty Name="DURACION" ColumnName="DURACION" />
+                <ScalarProperty Name="FOLIO" ColumnName="FOLIO" />
+                <ScalarProperty Name="CONSECUENCIA" ColumnName="CONSECUENCIA" />
+                <ScalarProperty Name="CONTROL" ColumnName="CONTROL" />
+                <ScalarProperty Name="ID_Empresa" ColumnName="ID_Empresa" />
+                <ScalarProperty Name="CIA_IDReporteo" ColumnName="CIA_IDReporteo" />
+                <ScalarProperty Name="Folder" ColumnName="Folder" />
+                <ScalarProperty Name="Compania" ColumnName="Compania" />
+                <ScalarProperty Name="ID_REP" ColumnName="ID_REP" />
+                <ScalarProperty Name="T_EX_DOB_SEM" ColumnName="T_EX_DOB_SEM" />
+                <ScalarProperty Name="T_EXTRA_EXEN" ColumnName="T_EXTRA_EXEN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatEmpresaByResponsableCMB" FunctionName="ASNModel.Store.CatEmpresaByResponsableCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatEmpresaByResponsableCMB_Result">
+                <ScalarProperty Name="ID_Empresa" ColumnName="ID_Empresa" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

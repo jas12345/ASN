@@ -52,7 +52,10 @@
             .Save("Async_Save", "CapturaSolicitud")
             .AutoUpload(true)
         )
-                )@**@
+        .Events(events=>events
+                .Success("onSuccess") )
+                )
+                @**@
             </div>
             <div class="col-lg-1">
                 @*<a @Url.Action("ObtenerEvidencias","Evidencias") id="evidenciasAnchor">Evidencias (40 MB máximo)</a>*@
@@ -77,9 +80,10 @@
         @*// + "/?folioSolictud=" + folioId          , new { folioSolictud = folioId })) //
             //.SaveUrl(@Url.Action("Async_SaveFiles", "CapturaSolicitud")) //, new { folioSolictud = folioId }
             //*@
+  
         <div class="col-lg-12 col-md-12">
             <div class="col-lg-9">
-                <div class="col-lg-3">
+                <div class="col-lg-3 divFolio ">
                     @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                     @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
         .Enable(false)
@@ -96,28 +100,28 @@
                 <div class="col-lg-4">
                     @Html.Label("Periodo de nómina: ", new { style = "font-size: 15px" })
                     @(Html.Kendo().DropDownList()
-                        .DataSource(source => source
-                            .Custom()
-                            //.Sort(
-                            //    s => s.Add("Valor")
-                            //)
-                            .Transport( tr => tr
-                                .Read(read =>
-                                    {
-    read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaActualFuturos");
-}
-                                )
-                            )
-                                //.ServerFiltering(true);parametroPeriodosNominaTodos
-                        )
-                        .Filter("contains")
-                        .OptionLabel("- Seleccione Periodo de Nomina - ")
-                        .DataValueField("Ident")
-                        .DataTextField("Valor")
-                        .Name("PeriodoNomina_Id")
-                        .SelectedIndex(1)
-                        .Enable(true)
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+        .DataSource(source => source
+            .Custom()
+            //.Sort(
+            //    s => s.Add("Valor")
+            //)
+            .Transport(tr => tr
+               .Read(read =>
+               {
+                   read.Action("GetPeriodoNominaCMB", "CapturaSolicitud").Data("parametroPeriodosNominaActualFuturos");
+               }
+               )
+            )
+        //.ServerFiltering(true);parametroPeriodosNominaTodos
+        )
+        .Filter("contains")
+        .OptionLabel("- Seleccione Periodo de Nomina - ")
+        .DataValueField("Ident")
+        .DataTextField("Valor")
+        .Name("PeriodoNomina_Id")
+        .SelectedIndex(1)
+        .Enable(true)
+        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                     )
                 </div>
                 <div class="col-lg-4">
@@ -132,12 +136,13 @@
                     )
                     @*(Html.Kendo().Upload().Name("CancelarSolicitud2").Content("Carga Masiva").Icon("close")*@
                     @*(Html.Kendo().Upload().Name("CargaComedores").HtmlAttributes(new { aria_label = "Carga Comedores" })
-                        .Events(x => x.Click("cancelarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })*@
+                    .Events(x => x.Click("cancelarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })*@
                     @*(Html.Kendo().Upload().Name("files2").HtmlAttributes(new { aria_label = "Carga masiva de empleados" }))
-                        )*@
+                    )*@
                 </div>
             </div>
         </div>
+  
         <p></p>
 
         <table class="table" style="margin-bottom: 5px;">
@@ -1004,7 +1009,7 @@
         //
         var urlEmpleadoSolicitud = '@Url.Action("CreateEmpleadoSolicitud", "CapturaSolicitud")';
 
-        // Función para calcular Estatus de Solicitud
+        // Función para calcular Estatus de Solicitud    ConsultarEstatusSolicitud
         var urlConsultarEstatusSolicitud = '@Url.Action("ConsultarEstatusSolicitud", "CapturaSolicitud")';
 
         // Función para calcular...
@@ -1030,6 +1035,7 @@
         var urlCancelaEmpleadoSolicitud = '@Url.Action("CancelaEmpleadoSolicitud", "CapturaSolicitud")'
 
         var urlGetEvidencias = '@Url.Action("GetEvidencias","CapturaSolicitud")'
+        var urlValidarfolioCanceladoEnCargaComedor = '@Url.Action("ValidarfolioCanceladoEnCargaComedor", "CapturaSolicitud")'
     </script>
 }
 else
@@ -1075,7 +1081,25 @@ else
 
         dialog.center().open();
 
-            }
+    }
+    function onSuccess(e) {
+
+        var folio = $("#FolioSolicitud").data("kendoNumericTextBox");
+        folio.value(e.response)
+        $("#Estatus").val("En Borrador");
+        actualizaGrid();
+         //debugger;
+        $.post(urlValidarfolioCanceladoEnCargaComedor + "?Folio=" + e.response, function (data) {
+                     
+        if (data == 1) {
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Validar el folio tiene empleados canelados", "warning");
+        }
+        
+    });
+
+
+    }
 </script>
 
 @Scripts.Render("~/bundles/CapturaSolicitud")
