@@ -1002,3 +1002,68 @@ function selectAllConceptos() {
         multiSelect.close();
     }
 }
+
+function selectContrato(e) {
+    //var multiselect = $("#Client_Ident").data("kendoMultiSelect");
+    var multiselect = $("#Contract_Type_Ident").data("kendoMultiSelect");    
+    var multiConceptos = $("#Concepto").data("kendoMultiSelect");
+    var selectedValues = $("#Contract_Type_Ident").data("kendoMultiSelect").value();
+    //var selectedValues = [];
+
+    var data = multiselect.dataSource.data();
+
+    if (e.dataItem.Id == -1) {
+
+        selectedValues = []
+
+        for (var i = 0; i < multiselect.dataSource.data().length; i++) {
+            var item = multiselect.dataSource.data()[i];
+            if (item.Id > 0) {
+                selectedValues.push(item.Id);
+            }
+        }
+    }
+    else {
+        selectedValues.push(e.dataItem.Id)
+    }
+
+    ////////////multiselect.value(selectedValues);
+
+    var texto = "";
+    for (i = 0; i < selectedValues.length; i++) {
+        texto += selectedValues[i] + ",";
+    }
+
+    if (texto.length > 1) {
+        texto = texto.substring(0, texto.length - 1);
+    }
+
+    var country = $("#Country_Ident").val();   
+    var clientes = texto; //selectedValues
+
+    //multiConceptos.enable(true);
+    //multiConceptos.dataSource.read(filterConcepto(country, clientes));
+    //multiConceptos.refresh();
+}
+
+
+//function selectAllContratos(e) {
+//    //var multiselect = $("#Client_Ident").data("kendoMultiSelect");
+//    var multiselect = $("#Contract_Type_Ident").data("kendoMultiSelect");
+//    var selectedValues = [];
+
+//    if (e.dataItem.Id == -1) {
+//        for (var i = 0; i < multiselect.dataSource.data().length; i++) {
+//            var item = multiselect.dataSource.data()[i];
+//            var data = multiselect.dataSource.data();
+//            if (data[i].Ident > 0) {
+//                selectedValues.push(data[i].Ident);
+//            }
+//        }
+//    } else {
+//        selectedValues.push(e.dataItem.Id)
+//    }
+
+//    //multiselect.value(selectedValues);
+//    multiselect.close();
+//}

@@ -162,13 +162,13 @@
             @(Html.Kendo().DropDownListFor(x => x.Program_Ident)
                         .DataSource(source =>
                         {
-                        source.Read(read =>
-                        {
-                            read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram(-1,-1,-1,'-1')");
-                            //read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram");
+                            source.Read(read =>
+                            {
+                                read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram(-1,-1,-1,'-1')");
+                                //read.Action("GetProgramasCMB", "PerfilEmpleados").Data("filterProgram");
+                            })
+                        .ServerFiltering(true);
                         })
-                    .ServerFiltering(true);
-                    })
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
@@ -176,32 +176,36 @@
                         .Name("Program_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                         //.Events(eve => eve.Change("CargaContrato"))
+                        //.Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth").Select("selectPrograma"))
                         .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth").Select("selectPrograma"))
-                        //.CascadeFrom("Client_Ident")
+                    //.CascadeFrom("Client_Ident")
             )
         </div>
         <div class="editor-label">
             <label for="TipoContrato">Tipo de contrato</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.Contract_Type_Ident)
+            @(Html.Kendo().MultiSelectFor(x => x.Contract_Type_Ident)
                         .DataSource(source =>
                         {
-                    source.Read(read =>
-                    {
-                        read.Action("GetTiposContratoCMB", "PerfilEmpleados").Data("filterContract('-1', -1)");
-                    })
-                .ServerFiltering(true);
-                })
+                            source.Read(read =>
+                            {
+                                read.Action("GetTiposContratoCMB", "PerfilEmpleados").Data("filterContract('-1', -1)");
+                            })
+                        .ServerFiltering(true);
+                        })
+                        .ValuePrimitive(true)
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
-                        .OptionLabel("- Seleccione Contrato -")
+                        //.OptionLabel("- Seleccione Contrato -")
                         .Name("Contract_Type_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                         //.Events(eve => eve.Change("CargaCascada"))
-                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
-                        //.CascadeFrom("Program_Ident")
+                        .AutoBind(true)
+                        .ClearButton(true)
+                        .Events(eve => eve.Select("selectContrato"))
+            //.CascadeFrom("Program_Ident")
             )
         </div>
 
