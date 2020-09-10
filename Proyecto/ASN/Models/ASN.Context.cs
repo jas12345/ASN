@@ -1983,15 +1983,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosPerfilNivelAccesoSel_Result>("CatEmpleadosPerfilNivelAccesoSel", perfil_IdentParameter);
         }
     
-        public virtual ObjectResult<CatMisSolicitudesSel_Result> CatMisSolicitudesSel(Nullable<int> solicitante_Ident)
-        {
-            var solicitante_IdentParameter = solicitante_Ident.HasValue ?
-                new ObjectParameter("Solicitante_Ident", solicitante_Ident) :
-                new ObjectParameter("Solicitante_Ident", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisSolicitudesSel_Result>("CatMisSolicitudesSel", solicitante_IdentParameter);
-        }
-    
         public virtual ObjectResult<CatConceptosPeopleSoftSel_Result> CatConceptosPeopleSoftSel()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosPeopleSoftSel_Result>("CatConceptosPeopleSoftSel");
@@ -2050,15 +2041,6 @@ namespace ASN.Models
                 new ObjectParameter("Ident_Solicitante", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosxEmpleadoxSolicitanteCMB_Result>("CatConceptosxEmpleadoxSolicitanteCMB", identParameter, ident_SolicitanteParameter);
-        }
-    
-        public virtual ObjectResult<CatMisAutorizacionesSel_Result> CatMisAutorizacionesSel(Nullable<int> autorizante_Ident)
-        {
-            var autorizante_IdentParameter = autorizante_Ident.HasValue ?
-                new ObjectParameter("Autorizante_Ident", autorizante_Ident) :
-                new ObjectParameter("Autorizante_Ident", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisAutorizacionesSel_Result>("CatMisAutorizacionesSel", autorizante_IdentParameter);
         }
     
         public virtual ObjectResult<CatAutorizacionesSel_Result> CatAutorizacionesSel(Nullable<int> folioSolicitud, Nullable<int> autorizante_Ident)
@@ -2950,6 +2932,24 @@ namespace ASN.Models
                 new ObjectParameter("CCMSID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpresaByResponsableCMB_Result>("CatEmpresaByResponsableCMB", cCMSIDParameter);
+        }
+    
+        public virtual ObjectResult<CatMisAutorizacionesSel_Result> CatMisAutorizacionesSel(Nullable<int> autorizante_Ident)
+        {
+            var autorizante_IdentParameter = autorizante_Ident.HasValue ?
+                new ObjectParameter("Autorizante_Ident", autorizante_Ident) :
+                new ObjectParameter("Autorizante_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisAutorizacionesSel_Result>("CatMisAutorizacionesSel", autorizante_IdentParameter);
+        }
+    
+        public virtual ObjectResult<CatMisSolicitudesSel_Result> CatMisSolicitudesSel(Nullable<int> solicitante_Ident)
+        {
+            var solicitante_IdentParameter = solicitante_Ident.HasValue ?
+                new ObjectParameter("Solicitante_Ident", solicitante_Ident) :
+                new ObjectParameter("Solicitante_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisSolicitudesSel_Result>("CatMisSolicitudesSel", solicitante_IdentParameter);
         }
     }
 }

@@ -1395,9 +1395,6 @@
           <FunctionImport Name="CatEmpleadosPerfilNivelAccesoSel" ReturnType="Collection(ASNModel.CatEmpleadosPerfilNivelAccesoSel_Result)">
           <Parameter Name="Perfil_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CatMisSolicitudesSel" ReturnType="Collection(ASNModel.CatMisSolicitudesSel_Result)">
-          <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="CatConceptosPeopleSoftSel" ReturnType="Collection(ASNModel.CatConceptosPeopleSoftSel_Result)" />
           <FunctionImport Name="CatConceptosPeopleSoftSi">
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -1416,9 +1413,6 @@
           <FunctionImport Name="CatConceptosxEmpleadoxSolicitanteCMB" ReturnType="Collection(ASNModel.CatConceptosxEmpleadoxSolicitanteCMB_Result)">
             <Parameter Name="Ident" Mode="In" Type="Int32" />
             <Parameter Name="Ident_Solicitante" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatMisAutorizacionesSel" ReturnType="Collection(ASNModel.CatMisAutorizacionesSel_Result)">
-          <Parameter Name="Autorizante_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatAutorizacionesSel" ReturnType="Collection(ASNModel.CatAutorizacionesSel_Result)">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
@@ -1689,7 +1683,13 @@
             <Parameter Name="ID_Empresa" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatEmpresaByResponsableCMB" ReturnType="Collection(ASNModel.CatEmpresaByResponsableCMB_Result)">
-            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatMisAutorizacionesSel" ReturnType="Collection(ASNModel.CatMisAutorizacionesSel_Result)">
+          <Parameter Name="Autorizante_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatMisSolicitudesSel" ReturnType="Collection(ASNModel.CatMisSolicitudesSel_Result)">
+            <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2306,14 +2306,6 @@
           <Property Type="Int32" Name="EmpleadoId" Nullable="false" />
           <Property Type="Int32" Name="Nivel" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="CatMisSolicitudesSel_Result">
-          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
-          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
-          <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
-          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
-          <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="CatConceptosPeopleSoftSel_Result">
           <Property Type="Int32" Name="ConceptoId" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
@@ -2323,17 +2315,6 @@
         <ComplexType Name="CatConceptosxEmpleadoxSolicitanteCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="CatMisAutorizacionesSel_Result">
-          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
-          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
-          <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
-          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
-          <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
-          <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
-          <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatAutorizacionesSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -2794,6 +2775,29 @@
         <ComplexType Name="CatEmpresaByResponsableCMB_Result">
           <Property Type="Int32" Name="ID_Empresa" Nullable="false" />
           <Property Type="String" Name="Empresa" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatMisAutorizacionesSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Autorizador_Ident" Nullable="true" />
+          <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
+          <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreAutorizador" Nullable="true" MaxLength="752" />
+        </ComplexType>
+        <ComplexType Name="CatMisSolicitudesSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Solicitante_Ident" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
+          <Property Type="String" Name="EstatusSolicitudId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="EstatusSolicitud" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
+          <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreAutorizador" Nullable="true" MaxLength="752" />
         </ComplexType>
        
         </Schema>
@@ -3721,18 +3725,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatMisSolicitudesSel" FunctionName="ASNModel.Store.CatMisSolicitudesSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatMisSolicitudesSel_Result">
-                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
-                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
-                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
-                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
-                <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
-                <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatConceptosPeopleSoftSel" FunctionName="ASNModel.Store.CatConceptosPeopleSoftSel">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatConceptosPeopleSoftSel_Result">
@@ -3750,21 +3742,6 @@
               <ComplexTypeMapping TypeName="ASNModel.CatConceptosxEmpleadoxSolicitanteCMB_Result">
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatMisAutorizacionesSel" FunctionName="ASNModel.Store.CatMisAutorizacionesSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatMisAutorizacionesSel_Result">
-                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
-                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
-                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
-                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
-                <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
-                <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
-                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
-                <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
-                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4438,6 +4415,37 @@
               <ComplexTypeMapping TypeName="ASNModel.CatEmpresaByResponsableCMB_Result">
                 <ScalarProperty Name="ID_Empresa" ColumnName="ID_Empresa" />
                 <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatMisAutorizacionesSel" FunctionName="ASNModel.Store.CatMisAutorizacionesSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatMisAutorizacionesSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
+                <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
+                <ScalarProperty Name="Autorizador_Ident" ColumnName="Autorizador_Ident" />
+                <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
+                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
+                <ScalarProperty Name="NombreAutorizador" ColumnName="NombreAutorizador" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatMisSolicitudesSel" FunctionName="ASNModel.Store.CatMisSolicitudesSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatMisSolicitudesSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Solicitante_Ident" ColumnName="Solicitante_Ident" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="EstatusSolicitudId" ColumnName="EstatusSolicitudId" />
+                <ScalarProperty Name="EstatusSolicitud" ColumnName="EstatusSolicitud" />
+                <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
+                <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
+                <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
+                <ScalarProperty Name="NombreAutorizador" ColumnName="NombreAutorizador" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -40,7 +40,7 @@
                                 column.Bound(c => c.EstatusSolicitud).Title("Estatus").Visible(true).Width(70);
                                 //column.Bound(c => c.PeriodoNominaId).Title("Período de Nómina").Visible(true).Filterable(true).Width(70);
                                 column.ForeignKey(c => c.PeriodoNominaId, (System.Collections.IEnumerable)ViewData["PeriodosNomina"], "Ident", "Valor").Title("Período de Nómina").Visible(true).Filterable(true).Width(70);
-
+                                column.Bound(c => c.NombreAutorizador).Title("Nombre Autorizador").Visible(true).Width(70);
                                 //column.Bound(c => c.Justificacion).Title("Justificanción").Visible(true).Width(70);
                             })
                             //.HtmlAttributes(new { style = "height: 475px;" })
