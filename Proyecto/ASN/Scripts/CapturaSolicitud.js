@@ -1740,6 +1740,14 @@ function onBlurParametro() {
         else {
             $("#dialogValidaMonto").data("kendoDialog").open();
         }
+
+        if ($('#Conceptos').val() == 12 && $('#Parametro').val() > 16) {
+            $("#Parametro").data('kendoNumericTextBox').value(16);
+            $("#ParametroX").text("16 Horas");
+
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Parámetro/Monto solo permite 16 horas", "error");
+        }
     }
     else {
         $("#ParametroX").val("");
