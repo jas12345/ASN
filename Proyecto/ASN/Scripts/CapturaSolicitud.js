@@ -1744,7 +1744,8 @@ function onBlurParametro() {
         if ($('#Conceptos').val() == 12 && $('#Parametro').val() > 16) {
             $("#Parametro").data('kendoNumericTextBox').value(16);
             $("#ParametroX").text("16 Horas");
-
+            var parametro = $("#Parametro").data('kendoNumericTextBox')
+            parametro.focus();
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("Parámetro/Monto solo permite 16 horas", "error");
         }
