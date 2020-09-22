@@ -324,7 +324,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string client_Ident, string conceptoId)
+        public ActionResult CreatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string client_Ident, string conceptoId, string contract_Type_Ident)
         {
             try
             {
@@ -343,6 +343,7 @@ namespace ASN.Controllers
                             int i = 0;
                             obj.Client_Ident = client_Ident;
                             obj.ConceptoId = conceptoId;
+                        obj.Contract_Type_Ident = contract_Type_Ident;
 
                         context.CatPerfilEmpleadosSi(
                                 obj.NombrePerfilEmpleados,
@@ -353,10 +354,13 @@ namespace ASN.Controllers
                                 //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
                                 obj.Client_Ident,
                                 (string.IsNullOrEmpty(obj.Program_Ident)?-1:int.Parse(obj.Program_Ident)),
-                                (string.IsNullOrEmpty(obj.Contract_Type_Ident) ?-1:int.Parse(obj.Contract_Type_Ident)),
+                                //(string.IsNullOrEmpty(obj.Contract_Type_Ident) ?-1:int.Parse(obj.Contract_Type_Ident)),
+                                obj.Contract_Type_Ident,
                                 //((Int32.TryParse(obj.ConceptoId, out i) ? i : (int?)null)),
                                 obj.ConceptoId,
-                                obj.TipoAccesoId, ccmsidAdmin, resultado
+                                obj.TipoAccesoId, 
+                                ccmsidAdmin, 
+                                resultado
                             );
                         }
 
@@ -392,7 +396,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string client_Ident, string conceptoId)
+        public ActionResult UpdatePerfilEmpleados([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CatPerfilEmpleadosViewModel> profiles, string client_Ident, string conceptoId, string contract_Type_Ident)
         {
             try
             {
@@ -410,6 +414,7 @@ namespace ASN.Controllers
                         {
                         obj.Client_Ident = client_Ident;
                         obj.ConceptoId = conceptoId;
+                        obj.Contract_Type_Ident = contract_Type_Ident;
 
                         context.CatPerfilEmpleadosSu(
                                 obj.Perfil_Ident, 
@@ -421,7 +426,8 @@ namespace ASN.Controllers
                                 //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
                                 obj.Client_Ident,
                                 (string.IsNullOrEmpty(obj.Program_Ident) ? -1 : int.Parse(obj.Program_Ident)),
-                                (string.IsNullOrEmpty(obj.Contract_Type_Ident) ? -1 : int.Parse(obj.Contract_Type_Ident)),
+                                //(string.IsNullOrEmpty(obj.Contract_Type_Ident) ? -1 : int.Parse(obj.Contract_Type_Ident)),
+                                obj.Contract_Type_Ident,
                                 obj.ConceptoId,
                                 obj.TipoAccesoId, 
 

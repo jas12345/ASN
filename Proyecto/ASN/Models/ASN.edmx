@@ -437,7 +437,7 @@
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
           <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
-          <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
+          <Parameter Name="Contract_Type_Ident" Type="varchar" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -451,7 +451,7 @@
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
           <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
-          <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
+          <Parameter Name="Contract_Type_Ident" Type="varchar" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -1643,24 +1643,11 @@
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Client_Ident" Mode="In" Type="String" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="String" />
             <Parameter Name="ConceptoId" Mode="In" Type="String" />
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatPerfilEmpleadosSi" ReturnType="Collection(ASNModel.CatPerfilEmpleadosSi_Result)">
-            <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
-            <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="City_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Client_Ident" Mode="In" Type="String" />
-            <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="ConceptoId" Mode="In" Type="String" />
-            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteFoliosContratoEmpresa" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresa_Result)">
@@ -1689,7 +1676,20 @@
             <Parameter Name="ID_Empresa" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatEmpresaByResponsableCMB" ReturnType="Collection(ASNModel.CatEmpresaByResponsableCMB_Result)">
-            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatPerfilEmpleadosSi" ReturnType="Collection(ASNModel.CatPerfilEmpleadosSi_Result)">
+            <Parameter Name="NombrePerfilEmpleados" Mode="In" Type="String" />
+            <Parameter Name="Country_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="City_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Client_Ident" Mode="In" Type="String" />
+            <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="String" />
+            <Parameter Name="ConceptoId" Mode="In" Type="String" />
+            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -1973,7 +1973,7 @@
           <Property Type="String" Name="Client_Name" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="Program_Ident" Nullable="true" />
           <Property Type="String" Name="Program_Name" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
+          <Property Type="String" Name="Contract_Type_Ident" Nullable="true" />
           <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ConceptoId" Nullable="true" />
           <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
@@ -2714,26 +2714,6 @@
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="CatPerfilEmpleadosSi_Result">
-          <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
-          <Property Type="String" Name="NombrePerfilEmpleados" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Country_Ident" Nullable="true" />
-          <Property Type="Int32" Name="City_Ident" Nullable="true" />
-          <Property Type="Int32" Name="Location_Ident" Nullable="true" />
-          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
-          <Property Type="Int32" Name="Program_Ident" Nullable="true" />
-          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
-          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
-          <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
-          <Property Type="Boolean" Name="Active" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="DeactivatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="DeactivatedBy" Nullable="true" />
-          <Property Type="Int32" Name="LastModifiedBy" Nullable="false" />
-          <Property Type="DateTime" Name="LastModifiedDate" Nullable="false" Precision="23" />
-          <Property Type="String" Name="LastModifiedFromPCName" Nullable="false" MaxLength="64" />
-        </ComplexType>
         <ComplexType Name="ReporteFoliosContratoEmpresa_Result">
           <Property Type="Int32" Name="Folio" Nullable="false" />
           <Property Type="String" Name="Compañia" Nullable="true" MaxLength="250" />
@@ -2794,6 +2774,26 @@
         <ComplexType Name="CatEmpresaByResponsableCMB_Result">
           <Property Type="Int32" Name="ID_Empresa" Nullable="false" />
           <Property Type="String" Name="Empresa" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatPerfilEmpleadosSi_Result">
+          <Property Type="Int32" Name="Perfil_Ident" Nullable="false" />
+          <Property Type="String" Name="NombrePerfilEmpleados" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Country_Ident" Nullable="true" />
+          <Property Type="Int32" Name="City_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Location_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Client_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Program_Ident" Nullable="true" />
+          <Property Type="Int32" Name="Contract_Type_Ident" Nullable="true" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="true" />
+          <Property Type="Int32" Name="TipoAccesoId" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DeactivatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DeactivatedBy" Nullable="true" />
+          <Property Type="Int32" Name="LastModifiedBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastModifiedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="LastModifiedFromPCName" Nullable="false" MaxLength="64" />
         </ComplexType>
        
         </Schema>
@@ -4324,30 +4324,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSu" FunctionName="ASNModel.Store.CatPerfilEmpleadosSu" />
-          <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSi" FunctionName="ASNModel.Store.CatPerfilEmpleadosSi">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatPerfilEmpleadosSi_Result">
-                <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
-                <ScalarProperty Name="NombrePerfilEmpleados" ColumnName="NombrePerfilEmpleados" />
-                <ScalarProperty Name="Country_Ident" ColumnName="Country_Ident" />
-                <ScalarProperty Name="City_Ident" ColumnName="City_Ident" />
-                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
-                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
-                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
-                <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
-                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
-                <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
-                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReporteFoliosContratoEmpresa" FunctionName="ASNModel.Store.ReporteFoliosContratoEmpresa">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.ReporteFoliosContratoEmpresa_Result">
@@ -4438,6 +4414,30 @@
               <ComplexTypeMapping TypeName="ASNModel.CatEmpresaByResponsableCMB_Result">
                 <ScalarProperty Name="ID_Empresa" ColumnName="ID_Empresa" />
                 <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSi" FunctionName="ASNModel.Store.CatPerfilEmpleadosSi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPerfilEmpleadosSi_Result">
+                <ScalarProperty Name="Perfil_Ident" ColumnName="Perfil_Ident" />
+                <ScalarProperty Name="NombrePerfilEmpleados" ColumnName="NombrePerfilEmpleados" />
+                <ScalarProperty Name="Country_Ident" ColumnName="Country_Ident" />
+                <ScalarProperty Name="City_Ident" ColumnName="City_Ident" />
+                <ScalarProperty Name="Location_Ident" ColumnName="Location_Ident" />
+                <ScalarProperty Name="Client_Ident" ColumnName="Client_Ident" />
+                <ScalarProperty Name="Program_Ident" ColumnName="Program_Ident" />
+                <ScalarProperty Name="Contract_Type_Ident" ColumnName="Contract_Type_Ident" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="TipoAccesoId" ColumnName="TipoAccesoId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+                <ScalarProperty Name="DeactivatedBy" ColumnName="DeactivatedBy" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedFromPCName" ColumnName="LastModifiedFromPCName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

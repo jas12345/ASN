@@ -25,7 +25,7 @@ namespace ASN.Models
         public string Client_Name { get; set; }
         public Nullable<int> Program_Ident { get; set; }
         public string Program_Name { get; set; }
-        public Nullable<int> Contract_Type_Ident { get; set; }
+        public string Contract_Type_Ident { get; set; }
         public string Contract_Type { get; set; }
         public string ConceptoId { get; set; }
         public int TipoAccesoId { get; set; }
