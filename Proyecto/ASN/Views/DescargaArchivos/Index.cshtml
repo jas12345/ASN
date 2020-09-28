@@ -16,28 +16,52 @@
             <div class="col-lg-4">
                 @Html.Label("Período de nómina: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().DropDownList()
-                        .DataSource(source => source
-                            .Custom()
-                            .Transport( tr => tr
-                                .Read(read =>
-                                    {
-                                        read.Action("GetPeriodoNominaCMB", "DescargaArchivos").Data("parametroPeriodosNominaActualPasados");
-                                    }
+                                .DataSource(source => source
+                                    .Custom()
+                                    .Transport(tr => tr
+                                       .Read(read =>
+                                           {
+                                                read.Action("GetPeriodoNominaCMB", "DescargaArchivos").Data("parametroPeriodosNominaActualPasados");
+                                            }
+                                       )
+                                    )
                                 )
-                            )
-                        )
-                        .Filter("contains")
-                        .OptionLabel("- Seleccione Periodo de Nomina - ")
-                        .DataValueField("Ident")
-                        .DataTextField("Valor")
-                        .Name("PeriodoNomina_Id")
-                        .SelectedIndex(1)
-                        .Enable(true)
-                        .Events(e => e.Change("onDropDownChange"))
-                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
-                    )
+                                .Filter("contains")
+                                .OptionLabel("- Seleccione Periodo de Nomina - ")
+                                .DataValueField("Ident")
+                                .DataTextField("Valor")
+                                .Name("PeriodoNomina_Id")
+                                .SelectedIndex(1)
+                                .Enable(true)
+                                .Events(e => e.Change("onDropDownChange"))
+                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                )
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
+                @Html.Label("Empresa:", new { style = "font-size:15px" })
+                @(Html.Kendo().DropDownList()
+                                                                        .DataSource(source => source
+                                                                            .Custom()
+                                                                            .Transport(tr => tr
+                                                                               .Read(read =>
+                                                                               {
+                                                                                   read.Action("GetEmpresaCMB", "EnviaArchivoNomina");
+                                                                               }
+                                                                               )
+                                                                            )
+                                                                        )
+                                                                        //.Filter("contains")
+                                                                        .OptionLabel("- Seleccione una Empresa - ")
+                                                                        .DataValueField("ID_Empresa")
+                                                                        .DataTextField("Empresa")
+                                                                        .Name("ddlEmpresa")
+                                                                        .SelectedIndex(0)
+                                                                        .Enable(true)
+                                                                        .Events(e => e.Change("onEmpresaDropDownChange"))
+                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                )
+            </div>
+            <div class="col-lg-2">
                 @Html.Label("Descarga Archivo", new { style = "font-size: 15px" })
                 <input type="button" title="Descargar" name="btnDescargar" value="Descargar" onclick='onClickDescargarArchivo()' />
             </div>
@@ -62,6 +86,8 @@ else
 <script>
     var PeriodoNomina_Id_selected = 0;
     var PeriodoNomina_selected = '';
+    var Empresa_selected = '';
+    var EmpresaId_selected = 0;
 </script>
 
 @Scripts.Render("~/bundles/DescargaArchivos")

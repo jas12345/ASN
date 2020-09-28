@@ -44,7 +44,7 @@ function onDropDownChange(e) {
 }
 
 function onClickDescargarArchivo() {
-    window.location.href = '../DescargaArchivos/DownloadCSV?PeriodoNominaSelected=' + PeriodoNomina_selected + '&IdPeriodoNominaSelected=' + PeriodoNomina_Id_selected;
+    window.location.href = '../DescargaArchivos/DownloadCSV?PeriodoNominaSelected=' + PeriodoNomina_selected + '&IdPeriodoNominaSelected=' + PeriodoNomina_Id_selected + '&EmpresaIdSelected=' + EmpresaId_selected + '&EmpresaSelected=' + Empresa_selected;
 }
 
 function getPeriodoNomina() {
@@ -59,4 +59,7 @@ function getPeriodoNominaId() {
     };
 }
 
-
+function onEmpresaDropDownChange(e) {
+    Empresa_selected = $("#ddlEmpresa").data("kendoDropDownList").text();
+    EmpresaId_selected = $("#ddlEmpresa").data("kendoDropDownList").value();
+}

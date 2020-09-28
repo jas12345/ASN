@@ -437,7 +437,7 @@
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
           <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
-          <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
+          <Parameter Name="Contract_Type_Ident" Type="varchar" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -451,7 +451,7 @@
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
           <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
-          <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
+          <Parameter Name="Contract_Type_Ident" Type="varchar" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -703,6 +703,8 @@
           <Parameter Name="EmpleadoId" Type="int" Mode="In" />
           <Parameter Name="Activos" Type="int" Mode="In" />
           <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
+          <Parameter Name="ID_Empresa" Type="int" Mode="In" />
+          <Parameter Name="Empresa" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="DescargaArchivoSolicitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Activos" Type="bit" Mode="In" />
@@ -1553,6 +1555,8 @@
             <Parameter Name="EmpleadoId" Mode="In" Type="Int32" />
             <Parameter Name="Activos" Mode="In" Type="Int32" />
             <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Empresa" Mode="In" Type="Int32" />
+            <Parameter Name="Empresa" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ReporteGeneralDetalleSel" ReturnType="Collection(ASNModel.ReporteGeneralDetalleSel_Result)">
           <Parameter Name="FolioId" Mode="In" Type="Int32" />
@@ -1643,7 +1647,7 @@
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Client_Ident" Mode="In" Type="String" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="String" />
             <Parameter Name="ConceptoId" Mode="In" Type="String" />
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
@@ -1657,7 +1661,7 @@
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Client_Ident" Mode="In" Type="String" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="String" />
             <Parameter Name="ConceptoId" Mode="In" Type="String" />
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
@@ -1689,7 +1693,7 @@
             <Parameter Name="ID_Empresa" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatEmpresaByResponsableCMB" ReturnType="Collection(ASNModel.CatEmpresaByResponsableCMB_Result)">
-            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2580,6 +2584,7 @@
           <Property Type="String" Name="CONSECUENCIA" Nullable="false" MaxLength="12" />
           <Property Type="String" Name="CONTROL" Nullable="false" MaxLength="7" />
           <Property Type="String" Name="SEMANA" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="EMPRESA" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="ReporteIndividualDetalleSel_Result">
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
@@ -4075,6 +4080,7 @@
                 <ScalarProperty Name="CONSECUENCIA" ColumnName="CONSECUENCIA" />
                 <ScalarProperty Name="CONTROL" ColumnName="CONTROL" />
                 <ScalarProperty Name="SEMANA" ColumnName="SEMANA" />
+                <ScalarProperty Name="EMPRESA" ColumnName="EMPRESA" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
