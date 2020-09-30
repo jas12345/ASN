@@ -1012,6 +1012,40 @@ namespace ASN.Controllers
 
             }
         }
+        public ActionResult ValidaEmpleadoConceptoMonto(int? periodoNominaId, int? empleadoId, int? conceptoId)
+        {
+            try
+            {
+                var resultado = new List<ValEmpleadoConceptoMonto_Result>();
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    resultado = context.ValEmpleadoConceptoMonto(periodoNominaId,empleadoId,conceptoId).ToList();
+                }
+
+                return Json(resultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+
+           
+
+                //string qry = string.Format("  select 1 " +
+                //                           "  from app620.CatEmpleadosSolicitudes " +
+                //                           "  where FolioSolicitud                  = {0} " +
+                //                           "  and EstatusSolicitudid                =  'C'"
+                //                        , Folio);
+                //var sts = ctx.Database.SqlQuery<int>(qry).FirstOrDefault();
+
+                //return Content(sts.ToString());
+
+            
+        }
 
     }
 }

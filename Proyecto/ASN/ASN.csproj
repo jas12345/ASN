@@ -611,6 +611,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\ValEmpleadoConceptoMonto_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ValidaSolicitud_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

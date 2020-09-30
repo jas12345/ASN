@@ -1035,7 +1035,10 @@
         var urlCancelaEmpleadoSolicitud = '@Url.Action("CancelaEmpleadoSolicitud", "CapturaSolicitud")'
 
         var urlGetEvidencias = '@Url.Action("GetEvidencias","CapturaSolicitud")'
+
         var urlValidarfolioCanceladoEnCargaComedor = '@Url.Action("ValidarfolioCanceladoEnCargaComedor", "CapturaSolicitud")'
+
+        var urlValidaEmpleadoConceptoMonto = '@Url.Action("ValidaEmpleadoConceptoMonto", "CapturaSolicitud")'
     </script>
 }
 else
@@ -1053,6 +1056,10 @@ else
     function MostrarTotalesModal() {
 
         var mostrarDialog = $("#MostrarTotalesModal").data("kendoWindow");
+
+	    mostrarDialog.refresh({
+            url: '@Url.Action("GetMontosSolicitudes","CapturaSolicitud")/?FolioSolicitud=' + $("#folioId").val()
+        });
 
         mostrarDialog.open().center(true);
 
@@ -1082,6 +1089,7 @@ else
         dialog.center().open();
 
     }
+
     function onSuccess(e) {
 
         var folio = $("#FolioSolicitud").data("kendoNumericTextBox");
@@ -1090,12 +1098,14 @@ else
         actualizaGrid();
          //debugger;
         $.post(urlValidarfolioCanceladoEnCargaComedor + "?Folio=" + e.response, function (data) {
-                     
+
         if (data == 1) {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("Validar el folio tiene empleados canelados", "warning");
         }
-        
+            $("#EnviarSolicitud").show();
+            $("#MostrarTotales").show();
+            $("#folioId").val(e.response);
     });
 
 

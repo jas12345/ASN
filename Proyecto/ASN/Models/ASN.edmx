@@ -437,7 +437,7 @@
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
           <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
-          <Parameter Name="Contract_Type_Ident" Type="varchar" Mode="In" />
+          <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -451,7 +451,7 @@
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
           <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
-          <Parameter Name="Contract_Type_Ident" Type="varchar" Mode="In" />
+          <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -812,6 +812,11 @@
           <Parameter Name="EID" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
           <Parameter Name="Comentario" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="ValEmpleadoConceptoMonto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="PeriodoNominaId" Type="int" Mode="In" />
+          <Parameter Name="EmpleadoId" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
         </Function>
         <Function Name="ValidaSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
@@ -1647,7 +1652,7 @@
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Client_Ident" Mode="In" Type="String" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="String" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="String" />
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
@@ -1661,7 +1666,7 @@
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Client_Ident" Mode="In" Type="String" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="String" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="String" />
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
@@ -1694,6 +1699,11 @@
           </FunctionImport>
           <FunctionImport Name="CatEmpresaByResponsableCMB" ReturnType="Collection(ASNModel.CatEmpresaByResponsableCMB_Result)">
           <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ValEmpleadoConceptoMonto" ReturnType="Collection(ASNModel.ValEmpleadoConceptoMonto_Result)">
+            <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
+            <Parameter Name="EmpleadoId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2799,6 +2809,11 @@
         <ComplexType Name="CatEmpresaByResponsableCMB_Result">
           <Property Type="Int32" Name="ID_Empresa" Nullable="false" />
           <Property Type="String" Name="Empresa" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ValEmpleadoConceptoMonto_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="752" />
+          <Property Type="Decimal" Name="Monto" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
        
         </Schema>
@@ -4444,6 +4459,15 @@
               <ComplexTypeMapping TypeName="ASNModel.CatEmpresaByResponsableCMB_Result">
                 <ScalarProperty Name="ID_Empresa" ColumnName="ID_Empresa" />
                 <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ValEmpleadoConceptoMonto" FunctionName="ASNModel.Store.ValEmpleadoConceptoMonto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ValEmpleadoConceptoMonto_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
