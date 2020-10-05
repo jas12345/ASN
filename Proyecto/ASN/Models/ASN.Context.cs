@@ -2809,7 +2809,6 @@ namespace ASN.Models
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosSu", perfil_IdentParameter, nombrePerfilEmpleadosParameter, country_IdentParameter, city_IdentParameter, location_IdentParameter, client_IdentParameter, program_IdentParameter, contract_Type_IdentParameter, conceptoIdParameter, tipoAccesoIdParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
-
         public virtual ObjectResult<CatPerfilEmpleadosSi_Result> CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, Nullable<int> city_Ident, Nullable<int> location_Ident, string client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, string conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var nombrePerfilEmpleadosParameter = nombrePerfilEmpleados != null ?
@@ -2960,7 +2959,7 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ValEmpleadoConceptoMonto_Result>("ValEmpleadoConceptoMonto", periodoNominaIdParameter, empleadoIdParameter, conceptoIdParameter);
         }
     
-        public virtual ObjectResult<ReporteConceptoXEstatusSel_Result1> ReporteConceptoXEstatusSel(Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
+        public virtual ObjectResult<ReporteConceptoXEstatusSel_Result> ReporteConceptoXEstatusSel(Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
         {
             var periodoNominaParameter = periodoNomina.HasValue ?
                 new ObjectParameter("PeriodoNomina", periodoNomina) :
@@ -2974,7 +2973,7 @@ namespace ASN.Models
                 new ObjectParameter("EstatusConcepto", estatusConcepto) :
                 new ObjectParameter("EstatusConcepto", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoXEstatusSel_Result1>("ReporteConceptoXEstatusSel", periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoXEstatusSel_Result>("ReporteConceptoXEstatusSel", periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
         }
     }
 }

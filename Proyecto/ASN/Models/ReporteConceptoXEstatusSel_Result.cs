@@ -19,6 +19,6 @@ namespace ASN.Models
         public string Total { get; set; }
         public string EstatusSol { get; set; }
         public string EstatusCon { get; set; }
-        public string Empresa { get; set; }
+        public string Contrato { get; set; }
     }
 }
