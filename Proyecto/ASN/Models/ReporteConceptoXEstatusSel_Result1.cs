@@ -11,7 +11,7 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class ReporteConceptoXEstatusSel_Result
+    public partial class ReporteConceptoXEstatusSel_Result1
     {
         public string Ciudad { get; set; }
         public string Site { get; set; }

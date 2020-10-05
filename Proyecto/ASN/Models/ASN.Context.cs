@@ -2614,23 +2614,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoGeneralSel_Result>("ReporteConceptoGeneralSel");
         }
     
-        public virtual ObjectResult<ReporteConceptoXEstatusSel_Result> ReporteConceptoXEstatusSel(Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
-        {
-            var periodoNominaParameter = periodoNomina.HasValue ?
-                new ObjectParameter("PeriodoNomina", periodoNomina) :
-                new ObjectParameter("PeriodoNomina", typeof(int));
-    
-            var estatusSolicitudParameter = estatusSolicitud != null ?
-                new ObjectParameter("EstatusSolicitud", estatusSolicitud) :
-                new ObjectParameter("EstatusSolicitud", typeof(string));
-    
-            var estatusConceptoParameter = estatusConcepto != null ?
-                new ObjectParameter("EstatusConcepto", estatusConcepto) :
-                new ObjectParameter("EstatusConcepto", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoXEstatusSel_Result>("ReporteConceptoXEstatusSel", periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
-        }
-    
         public virtual ObjectResult<ReporteSolicitudXEstatusSel_Result> ReporteSolicitudXEstatusSel(Nullable<int> responsable_Ident, Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
         {
             var responsable_IdentParameter = responsable_Ident.HasValue ?
@@ -2773,105 +2756,105 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatContractTypeByProgramCMB_Result>("CatContractTypeByProgramCMB", countryParameter, cityIdParameter, siteIdParameter, clientIdParameter, programIdParameter);
         }
-    
+
         public virtual int CatPerfilEmpleadosSu(Nullable<int> perfil_Ident, string nombrePerfilEmpleados, Nullable<int> country_Ident, Nullable<int> city_Ident, Nullable<int> location_Ident, string client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, string conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
             var perfil_IdentParameter = perfil_Ident.HasValue ?
                 new ObjectParameter("Perfil_Ident", perfil_Ident) :
                 new ObjectParameter("Perfil_Ident", typeof(int));
-    
+
             var nombrePerfilEmpleadosParameter = nombrePerfilEmpleados != null ?
                 new ObjectParameter("NombrePerfilEmpleados", nombrePerfilEmpleados) :
                 new ObjectParameter("NombrePerfilEmpleados", typeof(string));
-    
+
             var country_IdentParameter = country_Ident.HasValue ?
                 new ObjectParameter("Country_Ident", country_Ident) :
                 new ObjectParameter("Country_Ident", typeof(int));
-    
+
             var city_IdentParameter = city_Ident.HasValue ?
                 new ObjectParameter("City_Ident", city_Ident) :
                 new ObjectParameter("City_Ident", typeof(int));
-    
+
             var location_IdentParameter = location_Ident.HasValue ?
                 new ObjectParameter("Location_Ident", location_Ident) :
                 new ObjectParameter("Location_Ident", typeof(int));
-    
+
             var client_IdentParameter = client_Ident != null ?
                 new ObjectParameter("Client_Ident", client_Ident) :
                 new ObjectParameter("Client_Ident", typeof(string));
-    
+
             var program_IdentParameter = program_Ident.HasValue ?
                 new ObjectParameter("Program_Ident", program_Ident) :
                 new ObjectParameter("Program_Ident", typeof(int));
-    
+
             var contract_Type_IdentParameter = contract_Type_Ident.HasValue ?
                 new ObjectParameter("Contract_Type_Ident", contract_Type_Ident) :
                 new ObjectParameter("Contract_Type_Ident", typeof(int));
-    
+
             var conceptoIdParameter = conceptoId != null ?
                 new ObjectParameter("ConceptoId", conceptoId) :
                 new ObjectParameter("ConceptoId", typeof(string));
-    
+
             var tipoAccesoIdParameter = tipoAccesoId.HasValue ?
                 new ObjectParameter("TipoAccesoId", tipoAccesoId) :
                 new ObjectParameter("TipoAccesoId", typeof(int));
-    
+
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
-    
+
             var activeParameter = active.HasValue ?
                 new ObjectParameter("Active", active) :
                 new ObjectParameter("Active", typeof(bool));
-    
+
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosSu", perfil_IdentParameter, nombrePerfilEmpleadosParameter, country_IdentParameter, city_IdentParameter, location_IdentParameter, client_IdentParameter, program_IdentParameter, contract_Type_IdentParameter, conceptoIdParameter, tipoAccesoIdParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
-    
+
         public virtual ObjectResult<CatPerfilEmpleadosSi_Result> CatPerfilEmpleadosSi(string nombrePerfilEmpleados, Nullable<int> country_Ident, Nullable<int> city_Ident, Nullable<int> location_Ident, string client_Ident, Nullable<int> program_Ident, Nullable<int> contract_Type_Ident, string conceptoId, Nullable<int> tipoAccesoId, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var nombrePerfilEmpleadosParameter = nombrePerfilEmpleados != null ?
                 new ObjectParameter("NombrePerfilEmpleados", nombrePerfilEmpleados) :
                 new ObjectParameter("NombrePerfilEmpleados", typeof(string));
-    
+
             var country_IdentParameter = country_Ident.HasValue ?
                 new ObjectParameter("Country_Ident", country_Ident) :
                 new ObjectParameter("Country_Ident", typeof(int));
-    
+
             var city_IdentParameter = city_Ident.HasValue ?
                 new ObjectParameter("City_Ident", city_Ident) :
                 new ObjectParameter("City_Ident", typeof(int));
-    
+
             var location_IdentParameter = location_Ident.HasValue ?
                 new ObjectParameter("Location_Ident", location_Ident) :
                 new ObjectParameter("Location_Ident", typeof(int));
-    
+
             var client_IdentParameter = client_Ident != null ?
                 new ObjectParameter("Client_Ident", client_Ident) :
                 new ObjectParameter("Client_Ident", typeof(string));
-    
+
             var program_IdentParameter = program_Ident.HasValue ?
                 new ObjectParameter("Program_Ident", program_Ident) :
                 new ObjectParameter("Program_Ident", typeof(int));
-    
+
             var contract_Type_IdentParameter = contract_Type_Ident.HasValue ?
                 new ObjectParameter("Contract_Type_Ident", contract_Type_Ident) :
                 new ObjectParameter("Contract_Type_Ident", typeof(int));
-    
+
             var conceptoIdParameter = conceptoId != null ?
                 new ObjectParameter("ConceptoId", conceptoId) :
                 new ObjectParameter("ConceptoId", typeof(string));
-    
+
             var tipoAccesoIdParameter = tipoAccesoId.HasValue ?
                 new ObjectParameter("TipoAccesoId", tipoAccesoId) :
                 new ObjectParameter("TipoAccesoId", typeof(int));
-    
+
             var userEmployeeIdParameter = userEmployeeId.HasValue ?
                 new ObjectParameter("UserEmployeeId", userEmployeeId) :
                 new ObjectParameter("UserEmployeeId", typeof(int));
-    
+
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosSi_Result>("CatPerfilEmpleadosSi", nombrePerfilEmpleadosParameter, country_IdentParameter, city_IdentParameter, location_IdentParameter, client_IdentParameter, program_IdentParameter, contract_Type_IdentParameter, conceptoIdParameter, tipoAccesoIdParameter, userEmployeeIdParameter, estatus);
         }
-    
+
         public virtual ObjectResult<ReporteFoliosContratoEmpresa_Result> ReporteFoliosContratoEmpresa(Nullable<int> periodoNomina)
         {
             var periodoNominaParameter = periodoNomina.HasValue ?
@@ -2975,6 +2958,23 @@ namespace ASN.Models
                 new ObjectParameter("ConceptoId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ValEmpleadoConceptoMonto_Result>("ValEmpleadoConceptoMonto", periodoNominaIdParameter, empleadoIdParameter, conceptoIdParameter);
+        }
+    
+        public virtual ObjectResult<ReporteConceptoXEstatusSel_Result1> ReporteConceptoXEstatusSel(Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
+        {
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
+    
+            var estatusSolicitudParameter = estatusSolicitud != null ?
+                new ObjectParameter("EstatusSolicitud", estatusSolicitud) :
+                new ObjectParameter("EstatusSolicitud", typeof(string));
+    
+            var estatusConceptoParameter = estatusConcepto != null ?
+                new ObjectParameter("EstatusConcepto", estatusConcepto) :
+                new ObjectParameter("EstatusConcepto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoXEstatusSel_Result1>("ReporteConceptoXEstatusSel", periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
         }
     }
 }
