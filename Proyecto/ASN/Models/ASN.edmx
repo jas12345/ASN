@@ -437,7 +437,7 @@
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
           <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
-          <Parameter Name="Contract_Type_Ident" Type="varchar" Mode="In" />
+          <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -451,7 +451,7 @@
           <Parameter Name="Location_Ident" Type="int" Mode="In" />
           <Parameter Name="Client_Ident" Type="varchar" Mode="In" />
           <Parameter Name="Program_Ident" Type="int" Mode="In" />
-          <Parameter Name="Contract_Type_Ident" Type="varchar" Mode="In" />
+          <Parameter Name="Contract_Type_Ident" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="varchar" Mode="In" />
           <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
@@ -1647,7 +1647,7 @@
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Client_Ident" Mode="In" Type="String" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="String" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="String" />
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
@@ -1661,7 +1661,7 @@
             <Parameter Name="Location_Ident" Mode="In" Type="Int32" />
             <Parameter Name="Client_Ident" Mode="In" Type="String" />
             <Parameter Name="Program_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="Contract_Type_Ident" Mode="In" Type="String" />
+            <Parameter Name="Contract_Type_Ident" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="String" />
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
@@ -2814,7 +2814,7 @@
           <Property Type="String" Name="Total" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="EstatusSol" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="EstatusCon" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Contrato" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Empresa" Nullable="true" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -4469,7 +4469,7 @@
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="EstatusSol" ColumnName="EstatusSol" />
                 <ScalarProperty Name="EstatusCon" ColumnName="EstatusCon" />
-                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
