@@ -1597,11 +1597,6 @@
           <Parameter Name="Activos" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="ReporteConceptoGeneralSel" ReturnType="Collection(ASNModel.ReporteConceptoGeneralSel_Result)" />
-          <FunctionImport Name="ReporteConceptoXEstatusSel" ReturnType="Collection(ASNModel.ReporteConceptoXEstatusSel_Result)">
-            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
-            <Parameter Name="EstatusSolicitud" Mode="In" Type="String" />
-            <Parameter Name="EstatusConcepto" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="ReporteSolicitudXEstatusSel" ReturnType="Collection(ASNModel.ReporteSolicitudXEstatusSel_Result)">
             <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
             <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
@@ -1704,6 +1699,11 @@
             <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
             <Parameter Name="EmpleadoId" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteConceptoXEstatusSel" ReturnType="Collection(ASNModel.ReporteConceptoXEstatusSel_Result)">
+            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
+            <Parameter Name="EstatusSolicitud" Mode="In" Type="String" />
+            <Parameter Name="EstatusConcepto" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2674,14 +2674,6 @@
           <Property Type="Int32" Name="MesId" Nullable="false" />
           <Property Type="String" Name="ConsecutivoId" Nullable="false" MaxLength="5" />
         </ComplexType>
-        <ComplexType Name="ReporteConceptoXEstatusSel_Result">
-          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Site" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Total" Nullable="true" MaxLength="4000" />
-          <Property Type="String" Name="EstatusSol" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="EstatusCon" Nullable="true" MaxLength="50" />
-          </ComplexType>
         <ComplexType Name="ReporteSolicitudXEstatusSel_Result">
           <Property Type="Int32" Name="Folio" Nullable="false" />
           <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
@@ -2814,6 +2806,15 @@
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="752" />
           <Property Type="Decimal" Name="Monto" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="ReporteConceptoXEstatusSel_Result">
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Site" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Total" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="EstatusSol" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EstatusCon" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Empresa" Nullable="true" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -4247,18 +4248,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ReporteConceptoXEstatusSel" FunctionName="ASNModel.Store.ReporteConceptoXEstatusSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.ReporteConceptoXEstatusSel_Result">
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Site" ColumnName="Site" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="EstatusSol" ColumnName="EstatusSol" />
-                <ScalarProperty Name="EstatusCon" ColumnName="EstatusCon" />
-                </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReporteSolicitudXEstatusSel" FunctionName="ASNModel.Store.ReporteSolicitudXEstatusSel">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.ReporteSolicitudXEstatusSel_Result">
@@ -4468,6 +4457,19 @@
                 <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteConceptoXEstatusSel" FunctionName="ASNModel.Store.ReporteConceptoXEstatusSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteConceptoXEstatusSel_Result">
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="EstatusSol" ColumnName="EstatusSol" />
+                <ScalarProperty Name="EstatusCon" ColumnName="EstatusCon" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
