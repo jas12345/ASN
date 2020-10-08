@@ -122,6 +122,7 @@
         .SelectedIndex(1)
         .Enable(true)
         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+        .Events(e => e.Change("onChangePeriodoNominId"))
                     )
                 </div>
                 <div class="col-lg-4">

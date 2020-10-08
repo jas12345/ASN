@@ -2230,6 +2230,7 @@ function parametrosAutorizadores() {
 
 function parametrosConceptos() {
     CCMSId = $("#CCMSIDSolicitado").val();
+    tipoNomina = $("#PeriodoNomina_Id").data("kendoDropDownList").text().substr($("#PeriodoNomina_Id").data("kendoDropDownList").text().length - 1, 1);
     var ValorCCMS = 0;
 
     if (CCMSId !== "") {
@@ -2241,6 +2242,7 @@ function parametrosConceptos() {
 
     return {
         Ident: ValorCCMS,
+        TipoNomina: tipoNomina
     };
 }
 
@@ -2343,3 +2345,7 @@ function uploadFile(e) {
     }
 }
 
+function onChangePeriodoNominId() {   
+    $("#CCMSIDSolicitado").data('kendoNumericTextBox').value('');
+    //$('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change')
+}
