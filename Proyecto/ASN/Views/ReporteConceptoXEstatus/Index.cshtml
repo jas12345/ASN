@@ -146,6 +146,7 @@
                                 columns.Bound(e => e.Total).Title("Total").Width(30);
                                 columns.Bound(e => e.EstatusSol).Title("Estatus solciitud").Width(30);
                                 columns.Bound(e => e.EstatusCon).Title("Estatus concepto").Width(30);
+                                columns.Bound(e => e.Contrato).Title("Contrato").Width(30);
                             })
                             .ToolBar(tools => tools.Excel().Text("Exportar"))
                             .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")).AllPages(true).Filterable(true))

@@ -21,7 +21,7 @@ namespace ASN.Controllers
             return View();
         }
 
-        public FileContentResult DownloadCSV(int IdPeriodoNominaSelected, string PeriodoNominaSelected) //, KendoDropDownListSelectedViewModel kddListSelectedView )
+        public FileContentResult DownloadCSV(int IdPeriodoNominaSelected, string PeriodoNominaSelected, int? EmpresaIdSelected, string EmpresaSelected) //, KendoDropDownListSelectedViewModel kddListSelectedView )
         {
             try
             {
@@ -34,12 +34,18 @@ namespace ASN.Controllers
 
                 string PeriodoNomina = "";
                 int IdPeriodoNomina = 0;
+                int IdEmpresa = 0;
+                string Empresa = "";
 
                 kddslv.IdPeriodoNomina = IdPeriodoNomina;
                 kddslv.PeriodoNomina = PeriodoNomina;
+                kddslv.IdEmpresa = IdEmpresa;
+                kddslv.Empresa = Empresa;
 
                 kddslv.IdPeriodoNomina = IdPeriodoNominaSelected;
                 kddslv.PeriodoNomina = PeriodoNominaSelected;
+                kddslv.IdEmpresa = EmpresaIdSelected;
+                kddslv.Empresa = EmpresaSelected;
 
                 using (ASNContext ctx = new ASNContext())
                 {
@@ -50,13 +56,13 @@ namespace ASN.Controllers
                     {
                         //strPeriodo = string.Format("_{0}", listPeriodoNomina[0].Valor);
                         kddslv.IdPeriodoNomina = listPeriodoNomina[0].Ident;
-                        kddslv.PeriodoNomina = string.Format("{0}", listPeriodoNomina[0].Valor); ;
+                        kddslv.PeriodoNomina = string.Format("{0}", listPeriodoNomina[0].Valor);
                     }
 
                     //lstActivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 1, IdPeriodoNomina).ToList();
-                    lstActivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 1, kddslv.IdPeriodoNomina).ToList();
+                    lstActivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 1, kddslv.IdPeriodoNomina, kddslv.IdEmpresa,kddslv.Empresa).ToList();
                     //lstInactivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 0, IdPeriodoNomina).ToList();
-                    lstInactivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 0, kddslv.IdPeriodoNomina).ToList();
+                    lstInactivos = ctx.DescargaArchivoSolicitud(usuario.UserInfo.Ident.Value, 0, kddslv.IdPeriodoNomina, kddslv.IdEmpresa,kddslv.Empresa).ToList();
                 }
 
 
@@ -102,7 +108,7 @@ namespace ASN.Controllers
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return null;
-            }            
+            }
         }
 
         /// <summary>

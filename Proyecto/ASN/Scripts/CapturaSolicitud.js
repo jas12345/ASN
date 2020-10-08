@@ -325,14 +325,22 @@ function agregarSolicitud() {
         }
 
     });
-
-
+   
+    tipoNomina = $("#PeriodoNomina_Id").data("kendoDropDownList").text().substr($("#PeriodoNomina_Id").data("kendoDropDownList").text().length - 1, 1);
     // Se validan valores de la solicitud
+
+   
     if ($("#CCMSIDSolicitado").val().length <= 0 || $("#Conceptos").val() == '' || $("#Parametro").val().length <= 0 || $("#Motivo").val() == '') {
+        var notificationDatos = $("#popupNotification").data("kendoNotification");        
+        notificationDatos.show("Existen campos requeridos que no han sido capturados.", "warning");
+        
+    }
+    else if (tipoNomina == "E" && ($("#ConceptoMotivo").val() == '' || $("#ConceptoMotivo").val() == '-1' || $("#CCMSIDIncidente").val().length <= 0 || $("#PeriodoIncidente").val() == '-1' || $("#PeriodoIncidente").val() == ''))
+    {
         var notificationDatos = $("#popupNotification").data("kendoNotification");
         notificationDatos.show("Existen campos requeridos que no han sido capturados.", "warning");
-    }
 
+    }
     else if (igualesTotales !== ConNivelesAutorizacion) {
         var notificationDatos = $("#popupNotification").data("kendoNotification");
         notificationDatos.show("Seleccione Autorizador en cada uno de los niveles del Concepto.", "warning");
@@ -385,6 +393,7 @@ function enviarSolicitud() {
     //console.log("Salvado");
     //debugger;
     //infoSolicitud();
+    FolioSolicitud = $("#FolioSolicitud").val();
     $.post(urlEnviaSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
         //debugger;
@@ -1638,8 +1647,13 @@ function onChangeMotivo() {
         $("#MotivoX").val(ConMotivoNombre);
         $("#MotivoX").text(ConMotivoNombre);
 
-        $("#ConceptoMotivo").val(-1);
-        $("#PeriodoIncidente").val(-1);
+        tipoNomina = $("#PeriodoNomina_Id").data("kendoDropDownList").text().substr($("#PeriodoNomina_Id").data("kendoDropDownList").text().length - 1, 1);
+        if (tipoNomina == 'O') {
+            $("#ConceptoMotivo").val(-1);
+            $("#PeriodoIncidente").val(-1);
+        } 
+        
+        
 
     }
     else {
@@ -1647,8 +1661,8 @@ function onChangeMotivo() {
         $("#MotivoX").text("");
 
     }
-
-    if ($("#Motivo").data('kendoDropDownList').text() == 'N/A') {
+    tipoNomina = $("#PeriodoNomina_Id").data("kendoDropDownList").text().substr($("#PeriodoNomina_Id").data("kendoDropDownList").text().length - 1, 1);
+    if ($("#Motivo").data('kendoDropDownList').text() == 'N/A' && tipoNomina == 'O') {
         //Se inicializa y deshabilita control Motivo de Solicitud
         $("#ConceptoMotivo").data('kendoDropDownList').value('-1');
         $("#ConceptoMotivo").data('kendoDropDownList').enable(false);
@@ -1740,6 +1754,52 @@ function onBlurParametro() {
         else {
             $("#dialogValidaMonto").data("kendoDialog").open();
         }
+
+        if ($('#Conceptos').val() == 12 && $('#Parametro').val() > 16) {
+            $("#Parametro").data('kendoNumericTextBox').value(16);
+            $("#ParametroX").text("16 Horas");
+            var parametro = $("#Parametro").data('kendoNumericTextBox')
+            parametro.focus();
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Parámetro/Monto solo permite 16 horas", "error");
+        }
+        // valida empleado, concepto, monto
+       
+        $.post(urlValidaEmpleadoConceptoMonto + "/?periodoNominaId=" + $("#PeriodoNomina_Id").val() + "&empleadoId=" + $("#CCMSIDSolicitado").val() + "&conceptoId=" + $("#Conceptos").val() , function (data) {
+            Folio = data[0].FolioSolicitud
+            Nombre = data[0].Nombre;
+            Monto = data[0].Monto;
+           
+            if (Folio != null && Folio != $("#FolioSolicitud").val() ) {
+                if (Monto == $("#Parametro").val()) {
+                    var notification = $("#popupNotification").data("kendoNotification");
+                    msj = 'Ya existe la incidencia, Solicitante: '+ Nombre + ',  Folio: ' + Folio,
+                    notification.show(msj, "error");
+                    var parametro = $("#Parametro").data('kendoNumericTextBox')
+                    parametro.focus();
+                }
+                else if (Monto != $("#Parametro").val()){
+                    var notification = $("#popupNotification").data("kendoNotification");
+                   
+                    msj = 'Ya existe la incidencia pero con monto diferente, Solicitante:' + Nombre +', Folio:' + Folio;
+                    notification.show(msj, "warning");
+                }
+            }
+            
+
+
+            //debugger;
+            $("#ResponsableCCMSIDX").val(responsableId);
+            $("#ResponsableCCMSIDX").text(responsableId);
+            $("#NombreRespoX").val(NombreResponsableIncidente);
+            $("#NombreRespoX").text(NombreResponsableIncidente);
+
+        }).fail(function (ex) {
+            //debugger;
+            console.log("fail" + ex);
+        });
+
+
     }
     else {
         $("#ParametroX").val("");
@@ -2170,6 +2230,7 @@ function parametrosAutorizadores() {
 
 function parametrosConceptos() {
     CCMSId = $("#CCMSIDSolicitado").val();
+    tipoNomina = $("#PeriodoNomina_Id").data("kendoDropDownList").text().substr($("#PeriodoNomina_Id").data("kendoDropDownList").text().length - 1, 1);
     var ValorCCMS = 0;
 
     if (CCMSId !== "") {
@@ -2181,6 +2242,7 @@ function parametrosConceptos() {
 
     return {
         Ident: ValorCCMS,
+        TipoNomina: tipoNomina
     };
 }
 
@@ -2283,3 +2345,7 @@ function uploadFile(e) {
     }
 }
 
+function onChangePeriodoNominId() {   
+    $("#CCMSIDSolicitado").data('kendoNumericTextBox').value('');
+    //$('#CCMSIDSolicitado').data('kendoNumericTextBox').trigger('change')
+}

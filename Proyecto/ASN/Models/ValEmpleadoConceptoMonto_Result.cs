@@ -11,14 +11,10 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class ReporteConceptoXEstatusSel_Result
+    public partial class ValEmpleadoConceptoMonto_Result
     {
-        public string Ciudad { get; set; }
-        public string Site { get; set; }
-        public string Concepto { get; set; }
-        public string Total { get; set; }
-        public string EstatusSol { get; set; }
-        public string EstatusCon { get; set; }
-        public string Contrato { get; set; }
+        public int FolioSolicitud { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<decimal> Monto { get; set; }
     }
 }

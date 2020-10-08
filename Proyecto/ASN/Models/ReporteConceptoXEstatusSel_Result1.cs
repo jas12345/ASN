@@ -11,7 +11,7 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class ReporteConceptoXEstatusSel_Result
+    public partial class ReporteConceptoXEstatusSel_Result1
     {
         public string Ciudad { get; set; }
         public string Site { get; set; }
@@ -19,6 +19,6 @@ namespace ASN.Models
         public string Total { get; set; }
         public string EstatusSol { get; set; }
         public string EstatusCon { get; set; }
-        public string Contrato { get; set; }
+        public string Empresa { get; set; }
     }
 }

@@ -190,7 +190,7 @@ namespace ASN.Controllers
                     var filePath = "z:" + FolderPathSubtring + "/" + nombreArchivo;
                     //ExecuteCommand(command, 5000);
                     
-                    return File(memoryStream.ToArray(), "application/txt", nombreArchivo);
+                
 
                     NetworkDrive oNetDrive = new NetworkDrive();
                     oNetDrive.Force = true;

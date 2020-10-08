@@ -9,5 +9,7 @@ namespace ASN.Models
     {
         public int IdPeriodoNomina { get; set; }
         public string PeriodoNomina { get; set; }
+        public int? IdEmpresa { get; set; }
+        public string Empresa { get; set; }
     }
 }
