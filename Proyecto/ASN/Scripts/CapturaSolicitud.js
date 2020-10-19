@@ -1542,7 +1542,7 @@ function inicializaAutorizadores(empleadoIdent, conceptoId) {
 
         var lista = data;
         var autorizadores = $("div[name='nivel']");
-
+       
         $(autorizadores).each(function (nivel) {
             //$("#AutorizadorNivel" + (nivel + 1)).val() = 0
 
@@ -1765,13 +1765,14 @@ function onBlurParametro() {
         }
         // valida empleado, concepto, monto
        
-        $.post(urlValidaEmpleadoConceptoMonto + "/?periodoNominaId=" + $("#PeriodoNomina_Id").val() + "&empleadoId=" + $("#CCMSIDSolicitado").val() + "&conceptoId=" + $("#Conceptos").val() , function (data) {
+        $.post(urlValidaEmpleadoConceptoMonto + "/?periodoNominaId=" + $("#PeriodoNomina_Id").val() + "&empleadoId=" + $("#CCMSIDSolicitado").val() + "&conceptoId=" + $("#Conceptos").val(), function (data) {
+        
             Folio = data[0].FolioSolicitud
             Nombre = data[0].Nombre;
             Monto = data[0].Monto;
            
             if (Folio != null && Folio != $("#FolioSolicitud").val() ) {
-                if (Monto == $("#Parametro").val()) {
+                if (Monto == $("#Parametro").val() || $("#Conceptos").val() == 12 ) {
                     var notification = $("#popupNotification").data("kendoNotification");
                     msj = 'Ya existe la incidencia, Solicitante: '+ Nombre + ',  Folio: ' + Folio,
                     notification.show(msj, "error");

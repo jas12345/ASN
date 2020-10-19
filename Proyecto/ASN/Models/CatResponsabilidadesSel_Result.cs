@@ -30,5 +30,7 @@ namespace ASN.Models
         public string EstatusId { get; set; }
         public string EstatusSolicitud { get; set; }
         public bool Active { get; set; }
+        public Nullable<int> Autorizador_Ident { get; set; }
+        public string Autorizador { get; set; }
     }
 }

@@ -612,10 +612,10 @@ namespace ASN.Controllers
                 //.Where(x=> x.Name.Contains(Convert.ToString(folioSolicitud)));
 
                 List<string> items = new List<string>();
-
+                string folio_ = string.Format("{0}_", folio);
                 foreach (var file in files)
                 {
-                    if (file.Name.Contains(Convert.ToString(folio)))
+                    if (file.Name.StartsWith(folio_))
                     {
                         items.Add(file.Name);
                     }

@@ -389,6 +389,9 @@
                             column.Bound(c => c.Monto).Title("Monto").Filterable(false).Width(70);
                             column.Bound(c => c.MotivosSolicitudDesc).Title("Motivo").Filterable(false).Width(70);
                             column.Bound(c => c.EstatusSolicitud).Title("Estatus").Filterable(false).Width(70);
+                            column.Bound(c => c.Autorizador).Title("Autorizador Asignado").Filterable(false).Width(70);
+                            column.Bound(c => c.Autorizador_Ident).Title("Autorizador CCMSID").Filterable(false).Width(70).Visible(false);
+
                         })
                         .Events(e => e.ExcelExport("excelExport"))
                         .ToolBar(tools => tools.Excel().Text("Excel solicitud"))
