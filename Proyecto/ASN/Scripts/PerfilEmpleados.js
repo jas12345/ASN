@@ -21,6 +21,9 @@ $(window).resize(function () {
 
 $(document).ready(function () {
     $(window).trigger("resize");
+
+   
+
 });
 
 function adjustDropDownWidth(e) {

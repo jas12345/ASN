@@ -7,6 +7,11 @@ using System.Configuration;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web.Mvc;
+using System.IO;
+using CsvHelper;
+using System.Web;
+using System.Reflection;
+using System.IO.Compression;
 
 namespace ASN.Controllers
 {
@@ -544,6 +549,154 @@ namespace ASN.Controllers
             //    var resultadoAccion = "Ocurrió un error al procesar la solicitud.";
             //    return Json(new { Id = 0, responseError = new { Errors = resultadoAccion }, status = "-1" }, JsonRequestBehavior.AllowGet);
             //}
+        }
+
+        public ActionResult Async_CreaPerfilEmpleadosMasiva(IEnumerable<HttpPostedFileBase>filesPE)
+        {
+
+            try
+            {
+                int solicitudIdActual = -1;
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                int.TryParse(User.Identity.Name, out int userEmployeeId);               
+
+                string Perfil = string.Empty;
+                string Pais = string.Empty;
+                string Ciudad = string.Empty;
+                string Cliente = string.Empty;
+                string Site = string.Empty;
+                string Programa = string.Empty;
+                string Contrato = string.Empty;
+                string Concepto = string.Empty;
+                string TpoAcceso = string.Empty;
+
+                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                ObjectParameter solicitudId = new ObjectParameter("FolioSolicitudOut", typeof(int));
+                resultado.Value = -1;
+
+                var lista = new List<CargaMasivaPerfilEmpleado>();
+                var listaRetorno = new List<CargaMasivaRetorno>();
+                listaRetorno.Add(new CargaMasivaRetorno() { NombrePerfil = "Nombre del Perfil", Campo = "Campo", Texto = "Error" });
+                byte[] result= null;
+
+                if (filesPE != null)
+                {
+                    foreach (var file in filesPE)
+                    {
+                        if (file != null)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var ext = Path.GetExtension(fileName);
+
+                            if (ext.ToUpper() == ".CSV")
+                            {
+                                var postedFile = file;
+
+                                if (postedFile.ContentLength > 0)
+                                {
+
+                                    using (var csvReader = new StreamReader(postedFile.InputStream))
+                                    {
+
+                                        using (var csv = new CsvReader(csvReader))
+                                        {
+
+                                            while (csv.Read())
+                                            {
+                                                var objeton = new CargaMasivaPerfilEmpleado();
+
+                                                if (csv.TryGetField(0, out Perfil) && csv.TryGetField(1, out Pais) && csv.TryGetField(2, out Ciudad) && csv.TryGetField(3, out Cliente)
+                                                    && csv.TryGetField(4, out Site) && csv.TryGetField(5, out Programa) && csv.TryGetField(6, out Contrato) && csv.TryGetField(7, out Concepto) && csv.TryGetField(8, out TpoAcceso))
+                                                {
+                                                    objeton.perfil = Perfil;
+                                                    objeton.pais = Pais;
+                                                    objeton.ciudad = Ciudad;
+                                                    objeton.cliente = Cliente;
+                                                    objeton.site = Site;
+                                                    objeton.programa = Programa;
+                                                    objeton.contrato = Contrato;
+                                                    objeton.concepto = Concepto;
+                                                    objeton.tpoAcceso = TpoAcceso;
+                                                    objeton.userEmployeeId = userEmployeeId;
+                                                    //objeton.catEmployeeId = 0;//ccmsId;
+
+                                                    if (Perfil != "Perfil" && Perfil != "")
+                                                    {
+                                                        lista.Add(objeton);
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                using (ASNContext context = new ASNContext())
+                                {
+
+
+                                    foreach (var obj in lista)
+                                    {
+                                        var parameters = new List<System.Data.SqlClient.SqlParameter>();
+                                        var p1 = new System.Data.SqlClient.SqlParameter("@P1", obj.perfil);
+                                        var p2 = new System.Data.SqlClient.SqlParameter("@P2", obj.pais);
+                                        var p3 = new System.Data.SqlClient.SqlParameter("@P3", obj.ciudad);
+                                        var p4 = new System.Data.SqlClient.SqlParameter("@P4", obj.cliente);
+                                        var p5 = new System.Data.SqlClient.SqlParameter("@P5", obj.site);
+                                        var p6 = new System.Data.SqlClient.SqlParameter("@P6", obj.programa);
+                                        var p7 = new System.Data.SqlClient.SqlParameter("@P7", obj.contrato);
+                                        var p8 = new System.Data.SqlClient.SqlParameter("@P8", obj.concepto);
+                                        var p9 = new System.Data.SqlClient.SqlParameter("@P9", obj.tpoAcceso);
+                                        var p10 = new System.Data.SqlClient.SqlParameter("@P10", obj.catEmployeeId) { DbType = System.Data.DbType.Int32 };
+                                        var p11 = new System.Data.SqlClient.SqlParameter("@P11", "") { DbType = System.Data.DbType.Int32, Direction = System.Data.ParameterDirection.Output };
+
+                                        parameters.Add(p1);
+                                        parameters.Add(p2);
+                                        parameters.Add(p3);
+                                        parameters.Add(p4);
+                                        parameters.Add(p5);
+                                        parameters.Add(p6);
+                                        parameters.Add(p7);
+                                        parameters.Add(p8);
+                                        parameters.Add(p9);
+                                        parameters.Add(p10);
+                                        //parameters.Add(p11);
+
+
+                                        var retorno = context.Database.SqlQuery<CargaMasivaRetorno>("EXEC app620.CatPerfilEmpleadosMasivo @P1, @P2, @P3, @P4, @P5, @P6, @P7, @P8, @P9, @P10", parameters.ToArray()).ToList<CargaMasivaRetorno>();
+                                        if (retorno.Count > 0)
+                                        {
+                                            listaRetorno.Add(retorno[0]);
+                                        }
+                                    }
+                                }                               
+
+                                return Json(listaRetorno, JsonRequestBehavior.AllowGet);
+                            
+                            }
+                        }
+                    }
+                }
+                
+                return null;
+                //return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(e, usuario.UserInfo.Ident.Value);
+
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+            }
+
+
+
+
+
+            // Return an empty string to signify success
+            //return Content("");
         }
 
     }

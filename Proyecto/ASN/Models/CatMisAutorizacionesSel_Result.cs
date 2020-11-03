@@ -22,5 +22,6 @@ namespace ASN.Models
         public Nullable<int> Autorizador_Ident { get; set; }
         public Nullable<int> PeriodoNominaId { get; set; }
         public string NombrePeriodo { get; set; }
+        public string Aautorizador { get; set; }
     }
 }

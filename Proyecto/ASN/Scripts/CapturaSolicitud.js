@@ -1327,7 +1327,7 @@ function onChangeCCMSId() {
         $.post(urlEmpleadoPuesto + "/?Ident=" + CCMSId, function (data) {
 
             //FolioSolicitud = data.FolioSolicitud;
-
+          
             EmpCCMSId = data[0].Ident
             EmpNombre = data[0].Nombre;
             EmpPosition_Code_Ident = data[0].Position_Code_Ident;
@@ -1408,7 +1408,11 @@ function onChangeCCMSId() {
                 notification.show("Este empleado no existe o no está activo.", "error");
                 deshabilitaControlesEdicion();
             }
-
+            if (EmpCCMSId == -3) {
+                var notification = $("#popupNotification").data("kendoNotification");
+                notification.show("No se puede capturar incidencia a si mismo", "error");
+                deshabilitaControlesEdicion();
+            }
             if (EmpCCMSId > 0) {
                 //$("#AgregarSolicitud").kendoButton({ enable: true });
                 $("#AgregarSolicitud").data("kendoButton").enable(true);

@@ -40,6 +40,7 @@
                                 column.Bound(c => c.EstatusSolicitud).Title("Estatus").Visible(true).Width(70);
                                 //column.Bound(c => c.PeriodoNominaId).Title("Período de Nómina").Visible(true).Filterable(true).Width(70);
                                 column.ForeignKey(c => c.PeriodoNominaId, (System.Collections.IEnumerable)ViewData["PeriodosNomina"], "Ident", "Valor").Title("Período de Nómina").Visible(true).Filterable(true).Width(70);
+                                column.Bound(c => c.Aautorizador).Title("Autorizador Asociado").Visible(true).Width(50);
 
                                 //column.Bound(c => c.Justificacion).Title("Justificanción").Visible(true).Width(70);
                             })
@@ -86,6 +87,29 @@
             </div>
         </div>
     </div>
+
+    @(Html.Kendo().Window()
+        .Title("Detalle del Folio")
+        .Name("MostrarTotalesModal")
+        .LoadContentFrom("DetalleAutorizacion", "MisAutorizaciones")
+        .Iframe(true)
+        .Actions(a => a
+        //.Minimize()
+        .Maximize()
+        .Close()
+        .Refresh()
+
+        )
+        .Resizable()
+        .Draggable()
+        .Width(960)
+        .Height(530)
+        .Visible(false)
+        .Modal(true)
+        
+
+        )
+
     <script>
         var urlSolicitud = '@Url.Action("Autorizar", "MisAutorizaciones")';
 		var urlEditar = '@Url.Action("Index", "AutorizaSolicitud")'
@@ -94,10 +118,11 @@
 else
 {
     <script type="text/javascript">
-$(function(){
-    window.location.href = "@Url.Action("Index","Inicio")";
-});
+        $(function(){
+            window.location.href = "@Url.Action("Index","Inicio")";
+        });
     </script>
 }
+
 
 @Scripts.Render("~/bundles/MisAutorizaciones")

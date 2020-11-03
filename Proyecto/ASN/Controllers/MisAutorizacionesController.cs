@@ -80,5 +80,25 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
+
+        public PartialViewResult DetalleAutorizacion(int? FolioSolicitud)
+        {
+            try
+            {
+                using ( ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    var lstSolicitudes = context.ConDetalleFolioAutorizacion(FolioSolicitud).ToList();
+                    return PartialView("DetalleAutorizacion", lstSolicitudes);
+                }
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return PartialView("");
+            }
+        }
     }
 }

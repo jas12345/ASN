@@ -105,6 +105,14 @@ namespace ASN.Controllers
 
                 int.TryParse(User.Identity.Name, out int solicitanteIdent);
 
+                if (Ident == solicitanteIdent)
+                {
+                    lstEmpleadoPuesto.Add(new CatEmpleadoPuestoSel_Result() { Ident = -3 });
+                    return Json(lstEmpleadoPuesto, JsonRequestBehavior.AllowGet);
+
+                }
+                
+
                 using (ASNContext context = new ASNContext())
                 {
                     lstEmpleadoPuesto = context.CatEmpleadoPuestoSel(Ident, solicitanteIdent).ToList();

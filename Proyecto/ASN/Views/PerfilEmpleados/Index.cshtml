@@ -20,15 +20,47 @@
         height: auto;
         height: 100%;
     }
+
+    .padding-0 {
+        margin: 0 !important;
+        padding: 0 !important;
+        
+    }
 </style>
 
 @if (User.Identity.IsAuthenticated)
 {
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 @Html.Label("Catálago de perfil de Empleados", new { id = "lblTitulo", style = "font-size: 18px" })
             </div>
+
+            @*<div class="col-lg-2">
+                    @Html.Label("Carga Masiva")
+                </div>*@
+            @if (@User.Identity.Name == "3818974")
+            {
+
+                <div class="col-lg-2 text-right h4">
+                    Carga Masiva
+                </div>
+                <div class="col-md-2 padding-0">
+                    @(Html.Kendo().Upload()
+                                .Name("filesPE")
+                                .Async(a => a
+                                    .Save("Async_CreaPerfilEmpleadosMasiva", "PerfilEmpleados")
+                                    .AutoUpload(true)
+                                     )
+                                .Events(e => e
+                                .Success("onSuccess")
+                                    )
+                                .Validation(val => val.AllowedExtensions(new string[] {".csv"}))
+                                )
+               
+
+                </div>
+            }
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -61,6 +93,7 @@
                         .Scrollable(sorteable => sorteable.Virtual(false))
                         .Sortable()
                         .Resizable(c => c.Columns(true))
+                        
                         //.Editable(editable => editable.Mode(GridEditMode.InCell))
                         .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("PerfilEmpleadosPopUp"))
                         .Events(eve => eve.Edit("edit"))
@@ -69,6 +102,7 @@
                             .Ajax()
                             .Batch(true)
                             .ServerOperation(false)
+                           
                             .Model(model =>
                             {
                                 model.Id(c => c.Perfil_Ident);
@@ -88,9 +122,20 @@
                             .Read(read => read.Action("GetPerfilEmpleados", "PerfilEmpleados"))
                             .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("MultiClientesMultiConceptos"))
                             .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("MultiClientesMultiConceptos"))
+                            
                             //.Copy(copy => create.Action("CopyPerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
                             .PageSize(10)
-                        .Events(ev => ev.Error("errorsote").RequestEnd("hola"))
+                        .Events(events => events
+                                        .Error("errorsote").RequestEnd("hola")
+                                        
+
+
+
+
+
+                                        
+                                )
+                        
                         )
                         .Navigatable()
                         .Pageable(pageable => pageable
@@ -120,10 +165,70 @@
             </div>
         </div>
     </div>
-
     <script>
         //Copia de Perfil de Empleados
         var urlCopyPerfilEmpleados = '@Url.Action("CopyPerfilEmpleados", "PerfilEmpleados")';
+
+        function onSuccess(e)
+        {
+                const jsonObject = JSON.stringify(e.response);
+                const csv = convertToCSV(jsonObject);
+                var d = new Date();
+            
+
+            const exportName = "Errores de la cara masiva_" + d.getDate + '-' + d.getMonth + '-' + d.getFullYear + '.csv';
+            const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+            if (navigator.msSaveBlob) {
+                navigator.msSaveBlob(blob, exportName);
+            } else {
+                const link = document.createElement("a");
+                if (link.download !== undefined) {
+                    const url = URL.createObjectURL(blob);
+                    link.setAttribute("href", url);
+                    link.setAttribute("download", exportName);
+                    link.style.visibility = "hidden";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            }
+                //const url = URL.createObjectURL(csv);
+                //// Create a new anchor element
+                //const a = document.createElement('a');
+                //a.href = url;
+                //a.download = 'Errores Carga Masiva_'+ fecha + '.csv';
+                //a.click();
+                //a.remove();
+            //});
+
+
+
+                //    $.ajax({
+                //        url: url
+                //        method: 'post',
+                //        contentType: 'application/json',
+                //        dataType: 'json',
+                //        data: JSON.stringify(data),
+                //        traditional: true,
+                //        success: function (d) {
+                //            //do stuff
+                //        }
+                //    });
+        }
+
+        function convertToCSV(objArray) {
+            const array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
+            let str = "";
+            for (let i = 0; i < array.length; i++) {
+                let line = "";
+                for (let index in array[i]) {
+                    if (line != "") line += ",";
+                    line += array[i][index];
+                }
+                str += line + "\r\n";
+            }
+            return str;
+        }
 
     </script>
 }

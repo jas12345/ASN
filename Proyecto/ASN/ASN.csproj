@@ -216,6 +216,7 @@
     <Compile Include="Models\AvisoSolicitantesManual_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CargaMasivaPerfilEmpleado.cs" />
     <Compile Include="Models\CargaMasivaRegistroViewModel.cs" />
     <Compile Include="Models\CatAdminSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
@@ -522,6 +523,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatUserInfoSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConDetalleFolioAutorizacion_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GeneraArchivoSolicitudSel_Button_Result.cs">
@@ -982,6 +986,7 @@
     <Content Include="Views\AutorizaSolicitud\GetEvidencias.cshtml" />
     <Content Include="Views\CapturaSolicitud\GetEvidencias.cshtml" />
     <Content Include="Views\ResponsableAutoriza\GetEvidencias.cshtml" />
+    <Content Include="Views\MisAutorizaciones\DetalleAutorizacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

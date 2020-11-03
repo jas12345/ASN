@@ -2039,15 +2039,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosPeopleSoftSu", conceptoIdParameter, descripcionParameter, descripcionPeopleSoftParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
-        public virtual ObjectResult<CatMisAutorizacionesSel_Result> CatMisAutorizacionesSel(Nullable<int> autorizante_Ident)
-        {
-            var autorizante_IdentParameter = autorizante_Ident.HasValue ?
-                new ObjectParameter("Autorizante_Ident", autorizante_Ident) :
-                new ObjectParameter("Autorizante_Ident", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisAutorizacionesSel_Result>("CatMisAutorizacionesSel", autorizante_IdentParameter);
-        }
-    
         public virtual ObjectResult<CatAutorizacionesSel_Result> CatAutorizacionesSel(Nullable<int> folioSolicitud, Nullable<int> autorizante_Ident)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
@@ -2829,15 +2820,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosSi_Result>("CatPerfilEmpleadosSi", nombrePerfilEmpleadosParameter, country_IdentParameter, city_IdentParameter, location_IdentParameter, client_IdentParameter, program_IdentParameter, contract_Type_IdentParameter, conceptoIdParameter, tipoAccesoIdParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual ObjectResult<ReporteFoliosContratoEmpresa_Result> ReporteFoliosContratoEmpresa(Nullable<int> periodoNomina)
-        {
-            var periodoNominaParameter = periodoNomina.HasValue ?
-                new ObjectParameter("PeriodoNomina", periodoNomina) :
-                new ObjectParameter("PeriodoNomina", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
-        }
-    
         public virtual ObjectResult<ReporteSolcitudSel_Result> ReporteSolcitudSel(Nullable<int> periodoNomina, Nullable<int> tipoContrato)
         {
             var periodoNominaParameter = periodoNomina.HasValue ?
@@ -2979,6 +2961,33 @@ namespace ASN.Models
                 new ObjectParameter("Responsable_Ident", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatResponsabilidadesSel_Result>("CatResponsabilidadesSel", folioSolicitudParameter, responsable_IdentParameter);
+        }
+    
+        public virtual ObjectResult<CatMisAutorizacionesSel_Result> CatMisAutorizacionesSel(Nullable<int> autorizante_Ident)
+        {
+            var autorizante_IdentParameter = autorizante_Ident.HasValue ?
+                new ObjectParameter("Autorizante_Ident", autorizante_Ident) :
+                new ObjectParameter("Autorizante_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisAutorizacionesSel_Result>("CatMisAutorizacionesSel", autorizante_IdentParameter);
+        }
+    
+        public virtual ObjectResult<ConDetalleFolioAutorizacion_Result> ConDetalleFolioAutorizacion(Nullable<int> folioSolicitud)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConDetalleFolioAutorizacion_Result>("ConDetalleFolioAutorizacion", folioSolicitudParameter);
+        }
+    
+        public virtual ObjectResult<ReporteFoliosContratoEmpresa_Result> ReporteFoliosContratoEmpresa(Nullable<int> periodoNomina)
+        {
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
         }
     }
 }

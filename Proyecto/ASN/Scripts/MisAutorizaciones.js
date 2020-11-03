@@ -21,6 +21,26 @@ $(window).resize(function () {
 
 $(document).ready(function () {
     $(window).trigger("resize");
+    //td: not(: first - child
+   
+    $("#gridSolicitud tbody").on('click', 'tr td', function (e) {
+
+        //var folio = $(this).find("td").eq(1).html()        
+        var col = $.trim($(this).text()); 
+        if (col !== 'Editar' )
+        {
+            
+            var folio = $(this).closest("tr").find("td").eq(1).text();
+
+            var mostrarDialog = $("#MostrarTotalesModal").data("kendoWindow");       
+            mostrarDialog.refresh({                
+                url: "../MisAutorizaciones/DetalleAutorizacion/?FolioSolicitud=" + folio 
+            });
+       
+            mostrarDialog.open().center(true);
+        }
+    })
+    
 });
 
 function edit(e) {

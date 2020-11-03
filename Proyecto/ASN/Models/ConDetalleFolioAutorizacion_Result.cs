@@ -11,12 +11,13 @@ namespace ASN.Models
 {
     using System;
     
-    public partial class ReporteFoliosContratoEmpresa_Result
+    public partial class ConDetalleFolioAutorizacion_Result
     {
-        public int Folio { get; set; }
-        public string Compañia { get; set; }
-        public string Contrato { get; set; }
-        public string Estatus { get; set; }
-        public Nullable<int> Total { get; set; }
+        public int FolioSolicitud { get; set; }
+        public string Descripcion { get; set; }
+        public string Solicitante { get; set; }
+        public string Autorizador_1 { get; set; }
+        public string Autorizador_2 { get; set; }
+        public string Autorizador_3 { get; set; }
     }
 }
