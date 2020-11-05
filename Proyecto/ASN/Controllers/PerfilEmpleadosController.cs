@@ -615,7 +615,7 @@ namespace ASN.Controllers
                                                     objeton.site = Site;
                                                     objeton.programa = Programa;
                                                     objeton.contrato = Contrato;
-                                                    objeton.concepto = Concepto;
+                                                    objeton.concepto = Concepto.Replace("�", "Ñ");
                                                     objeton.tpoAcceso = TpoAcceso;
                                                     objeton.userEmployeeId = userEmployeeId;
                                                     //objeton.catEmployeeId = 0;//ccmsId;

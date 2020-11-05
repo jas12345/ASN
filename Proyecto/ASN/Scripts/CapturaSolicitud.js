@@ -590,11 +590,17 @@ function habilitaControlesEdicion() {
     tempDL = $("#Motivo").data("kendoDropDownList");
     tempDL.enable(true);
 
-    tempDL = $("#ConceptoMotivo").data("kendoDropDownList");
-    tempDL.enable(true);
+    if (tempDL.text() == 'N/A') {
+        deshabilitaConceptoMotivoPeriodoOriginal();
+    } else {
+        habilitaConceptoMotivoPeriodoOriginal();
+    }
 
-    tempDL = $("#PeriodoIncidente").data("kendoDropDownList");
-    tempDL.enable(true);
+    //tempDL = $("#ConceptoMotivo").data("kendoDropDownList");
+    //tempDL.enable(true);
+
+    //tempDL = $("#PeriodoIncidente").data("kendoDropDownList");
+    //tempDL.enable(true);
 
     var Parametro = $("#Parametro").data("kendoNumericTextBox");
     Parametro.enable(true);
@@ -1683,6 +1689,7 @@ function onChangeMotivo() {
         //Se habilitan los controles Concepto Motivo y Período Original de Pago
         $("#ConceptoMotivo").data('kendoDropDownList').enable(true);
         $("#PeriodoIncidente").data('kendoDropDownList').enable(true);
+       
     }
 }
 
@@ -1947,6 +1954,7 @@ function habilitaConceptoMotivoPeriodoOriginal() {
 
     $("#ConceptoMotivo").data("kendoDropDownList").enable(true);
     $("#PeriodoIncidente").data("kendoDropDownList").enable(true);
+    
 
 }
 
