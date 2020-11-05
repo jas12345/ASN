@@ -12,6 +12,7 @@ using CsvHelper;
 using System.Web;
 using System.Reflection;
 using System.IO.Compression;
+using System.Text;
 
 namespace ASN.Controllers
 {
@@ -595,7 +596,7 @@ namespace ASN.Controllers
                                 if (postedFile.ContentLength > 0)
                                 {
 
-                                    using (var csvReader = new StreamReader(postedFile.InputStream))
+                                    using (var csvReader = new StreamReader(postedFile.InputStream, Encoding.Default,true))
                                     {
 
                                         using (var csv = new CsvReader(csvReader))
@@ -615,7 +616,7 @@ namespace ASN.Controllers
                                                     objeton.site = Site;
                                                     objeton.programa = Programa;
                                                     objeton.contrato = Contrato;
-                                                    objeton.concepto = Concepto.Replace("�", "Ñ");
+                                                    objeton.concepto = Concepto;  //convertTOUTF8(Concepto);
                                                     objeton.tpoAcceso = TpoAcceso;
                                                     objeton.userEmployeeId = userEmployeeId;
                                                     //objeton.catEmployeeId = 0;//ccmsId;
