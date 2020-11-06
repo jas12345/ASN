@@ -787,6 +787,7 @@
         <Function Name="ReporteIndividualSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="SolicitanteIdent" Type="int" Mode="In" />
         </Function>
+        <Function Name="ReportePendientesAutorizarYRechazados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="ReporteSolcitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
           <Parameter Name="TipoContrato" Type="int" Mode="In" />
@@ -1711,8 +1712,9 @@
           <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReporteFoliosContratoEmpresa" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresa_Result)">
-            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
+          <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ReportePendientesAutorizarYRechazados" ReturnType="Collection(ASNModel.ReportePendientesAutorizarYRechazados_Result)" />
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2835,6 +2837,19 @@
           <Property Type="String" Name="Contrato" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ReportePendientesAutorizarYRechazados_Result">
+          <Property Type="DateTime" Name="Fecha_Inicio" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha_Fin" Nullable="true" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Incidencias" Nullable="true" />
+          <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="19" />
+          <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="Autorizaciones_Pendientes" Nullable="true" />
+          <Property Type="String" Name="Autorizador_Que_Rechaza" Nullable="true" />
+          <Property Type="String" Name="Motivo_Del_Rechazo" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -4506,6 +4521,23 @@
                 <ScalarProperty Name="Contrato" ColumnName="Contrato" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReportePendientesAutorizarYRechazados" FunctionName="ASNModel.Store.ReportePendientesAutorizarYRechazados">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReportePendientesAutorizarYRechazados_Result">
+                <ScalarProperty Name="Fecha_Inicio" ColumnName="Fecha Inicio" />
+                <ScalarProperty Name="Fecha_Fin" ColumnName="Fecha Fin" />
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Incidencias" ColumnName="Incidencias" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Autorizaciones_Pendientes" ColumnName="Autorizaciones Pendientes" />
+                <ScalarProperty Name="Autorizador_Que_Rechaza" ColumnName="Autorizador Que Rechaza" />
+                <ScalarProperty Name="Motivo_Del_Rechazo" ColumnName="Motivo Del Rechazo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

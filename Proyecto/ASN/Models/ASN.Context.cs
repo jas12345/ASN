@@ -2989,5 +2989,10 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
         }
+    
+        public virtual ObjectResult<ReportePendientesAutorizarYRechazados_Result> ReportePendientesAutorizarYRechazados()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReportePendientesAutorizarYRechazados_Result>("ReportePendientesAutorizarYRechazados");
+        }
     }
 }

@@ -182,6 +182,11 @@ namespace ASN
             //ReporteSolicitud
             bundles.Add(new ScriptBundle("~/bundles/ReporteFoliosContratoEmpresa").Include(
             "~/Scripts/ReporteFoliosContratoEmpresa.js"));
+
+            //ReportePendientesAutorizarYRechazados
+            bundles.Add(new ScriptBundle("~/bundles/ReportePendientesAutorizarYRechazados").Include(
+            "~/Scripts/ReportePendientesAutorizarYRechazados.js"));
+
         }
     }
 }

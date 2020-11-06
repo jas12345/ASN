@@ -144,6 +144,7 @@
     <Compile Include="Controllers\ReporteAuditoriaController.cs" />
     <Compile Include="Controllers\ReporteGeneralController.cs" />
     <Compile Include="Controllers\ReporteIndividualController.cs" />
+    <Compile Include="Controllers\ReportePendientesAutorizarYRechazadosController.cs" />
     <Compile Include="Controllers\ReportePerfilController.cs" />
     <Compile Include="Controllers\ReporteroController.cs" />
     <Compile Include="Controllers\ReporteConceptoXEstatusController.cs" />
@@ -592,6 +593,9 @@
     <Compile Include="Models\ReporteIndividualSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReportePendientesAutorizarYRechazados_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReporteSolcitudSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -751,6 +755,7 @@
     <Content Include="Scripts\Comentarios.js" />
     <Content Include="Scripts\DescargaArchivos.js" />
     <Content Include="Scripts\EnviaArchivoNomina.js" />
+    <Content Include="Scripts\ReportePendientesAutorizarYRechazados.js" />
     <Content Include="Scripts\Reportero.js" />
     <Content Include="Scripts\ReporteAuditoria.js" />
     <Content Include="Scripts\Notificaciones.js" />
@@ -987,6 +992,7 @@
     <Content Include="Views\CapturaSolicitud\GetEvidencias.cshtml" />
     <Content Include="Views\ResponsableAutoriza\GetEvidencias.cshtml" />
     <Content Include="Views\MisAutorizaciones\DetalleAutorizacion.cshtml" />
+    <Content Include="Views\ReportePendientesAutorizarYRechazados\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
