@@ -787,7 +787,10 @@
         <Function Name="ReporteIndividualSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="SolicitanteIdent" Type="int" Mode="In" />
         </Function>
-        <Function Name="ReportePendientesAutorizarYRechazados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="ReportePendientesAutorizarYRechazados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="PeriodoNominaId" Type="int" Mode="In" />
+          <Parameter Name="Empresa" Type="int" Mode="In" />
+        </Function>
         <Function Name="ReporteSolcitudSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
           <Parameter Name="TipoContrato" Type="int" Mode="In" />
@@ -1714,7 +1717,10 @@
           <FunctionImport Name="ReporteFoliosContratoEmpresa" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresa_Result)">
           <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ReportePendientesAutorizarYRechazados" ReturnType="Collection(ASNModel.ReportePendientesAutorizarYRechazados_Result)" />
+          <FunctionImport Name="ReportePendientesAutorizarYRechazados" ReturnType="Collection(ASNModel.ReportePendientesAutorizarYRechazados_Result2)">
+            <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
+            <Parameter Name="Empresa" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2841,6 +2847,30 @@
         <ComplexType Name="ReportePendientesAutorizarYRechazados_Result">
           <Property Type="DateTime" Name="Fecha_Inicio" Nullable="true" />
           <Property Type="DateTime" Name="Fecha_Fin" Nullable="true" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Incidencias" Nullable="true" />
+          <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="19" />
+          <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="Autorizaciones_Pendientes" Nullable="true" />
+          <Property Type="String" Name="Autorizador_Que_Rechaza" Nullable="true" />
+          <Property Type="String" Name="Motivo_Del_Rechazo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ReportePendientesAutorizarYRechazados_Result1">
+          <Property Type="String" Name="PeriodoNomina" Nullable="false" MaxLength="84" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Incidencias" Nullable="true" />
+          <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="19" />
+          <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="Autorizaciones_Pendientes" Nullable="true" />
+          <Property Type="String" Name="Autorizador_Que_Rechaza" Nullable="true" />
+          <Property Type="String" Name="Motivo_Del_Rechazo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ReportePendientesAutorizarYRechazados_Result2">
+          <Property Type="String" Name="PeriodoNomina" Nullable="false" MaxLength="84" />
           <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
           <Property Type="Int32" Name="Incidencias" Nullable="true" />
           <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="250" />
@@ -4526,9 +4556,8 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReportePendientesAutorizarYRechazados" FunctionName="ASNModel.Store.ReportePendientesAutorizarYRechazados">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.ReportePendientesAutorizarYRechazados_Result">
-                <ScalarProperty Name="Fecha_Inicio" ColumnName="Fecha Inicio" />
-                <ScalarProperty Name="Fecha_Fin" ColumnName="Fecha Fin" />
+              <ComplexTypeMapping TypeName="ASNModel.ReportePendientesAutorizarYRechazados_Result2">
+                <ScalarProperty Name="PeriodoNomina" ColumnName="PeriodoNomina" />
                 <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
                 <ScalarProperty Name="Incidencias" ColumnName="Incidencias" />
                 <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />

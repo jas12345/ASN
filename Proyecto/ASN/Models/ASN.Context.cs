@@ -2990,9 +2990,17 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
         }
     
-        public virtual ObjectResult<ReportePendientesAutorizarYRechazados_Result> ReportePendientesAutorizarYRechazados()
+        public virtual ObjectResult<ReportePendientesAutorizarYRechazados_Result2> ReportePendientesAutorizarYRechazados(Nullable<int> periodoNominaId, Nullable<int> empresa)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReportePendientesAutorizarYRechazados_Result>("ReportePendientesAutorizarYRechazados");
+            var periodoNominaIdParameter = periodoNominaId.HasValue ?
+                new ObjectParameter("PeriodoNominaId", periodoNominaId) :
+                new ObjectParameter("PeriodoNominaId", typeof(int));
+    
+            var empresaParameter = empresa.HasValue ?
+                new ObjectParameter("Empresa", empresa) :
+                new ObjectParameter("Empresa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReportePendientesAutorizarYRechazados_Result2>("ReportePendientesAutorizarYRechazados", periodoNominaIdParameter, empresaParameter);
         }
     }
 }

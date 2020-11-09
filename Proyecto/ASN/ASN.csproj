@@ -596,6 +596,12 @@
     <Compile Include="Models\ReportePendientesAutorizarYRechazados_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReportePendientesAutorizarYRechazados_Result1.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportePendientesAutorizarYRechazados_Result2.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReporteSolcitudSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

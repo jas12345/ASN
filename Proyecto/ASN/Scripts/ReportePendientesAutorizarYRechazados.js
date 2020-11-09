@@ -31,3 +31,30 @@ function columnas(e) {
 $(document).ready(function () {
     $(window).trigger("resize");
 });
+
+
+//function onDropDownChange(e) {
+//    PeriodoNomina_selected = $("#PeriodoNomina_Id").data("kendoDropDownList").text();
+//    PeriodoNomina_Id_selected = $("#PeriodoNomina_Id").data("kendoDropDownList").value();
+//}
+
+//function onEmpresaDropDownChange(e) {
+//    Empresa_selected = $("#ddlEmpresa").data("kendoDropDownList").text();
+//    EmpresaId_selected = $("#ddlEmpresa").data("kendoDropDownList").value();
+//}
+
+function infoFiltrar() {
+    return {
+        periodoSelected : $("#PeriodoNomina_Id").data("kendoDropDownList").text(),
+        periodoNomina : $("#PeriodoNomina_Id").val(),
+        empresaSelected : $("#ddlEmpresa").data("kendoDropDownList").text(),
+        empresa: $("#ddlEmpresa").val()
+    }
+}
+
+function onClickFiltrar() {
+    //window.location.href = '../ReportePendientesAutorizarYRechazados/GetReporte?EmpresaIdSelected=' + EmpresaId_selected + '&PeriodoNominaIdSelected=' + PeriodoNomina_Id_selected ;
+    $('#grid').data('kendoGrid').dataSource.data([]);
+    $('#grid').data('kendoGrid').dataSource.read();
+    $('#grid').data('kendoGrid').refresh();
+}
