@@ -345,6 +345,7 @@
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("AutorizarSolicitudALL").Content("Autorizar").Icon("check")
                             .Events(x => x.Click("autorizarSolicitudALL")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+                            
                             )
                         </div>
                         @*boton mostrar*@
@@ -358,6 +359,7 @@
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("AutorizarTodaSolicitud").Content("Autorizar Toda Solicitud").Icon("check")
                             .Events(x => x.Click("autorizarTodaSolicitudDialog")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+                            
                             )
                         </div>
                         <div class="col-lg-3">
@@ -737,6 +739,8 @@
 
         // Función para calcular Perído de Nómina de Solicitud
         var urlConsultarPeriodoNominaSolicitud = '@Url.Action("ConsultarPeriodoNominaSolicitud", "AutorizaSolicitud")';
+
+        var urlBloquearAutorizacion = '@Url.Action("BloquearAutorizacion", "AutorizaSolicitud")';
 
         //debugger;
         //var urlSolicitud = grid.selectedKeyNames().join(", ");

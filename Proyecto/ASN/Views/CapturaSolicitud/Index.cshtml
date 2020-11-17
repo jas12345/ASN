@@ -21,6 +21,10 @@
     #gridSolicitud > .k-grid-content > table {
         width: 100% !important;
     }
+    #idDescripcion :focus {
+        border-color: red;
+        border-radius: 55px;
+    }
 </style>
 
 
@@ -264,6 +268,9 @@
                             <th scope="col">
                                 Concepto
                             </th>
+                            <th scope="col" class="Conceptos hidden">
+                                Descripcion
+                            </th>
                             <th scope="col">
                                 Parámetro/Monto
                             </th>
@@ -318,6 +325,17 @@
     .Enable(true)
     .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
+                                </div>
+                            </td>
+                            <td class="Conceptos hidden">   
+                                <div id="mensajeroDescripcion">
+
+                                    <input type="text" name="idDescripcion" id="idDescripcion" value="" class="k-textbox" />
+                                    @*@(Html.Kendo().TextBox()
+                                                .Name("idDescripcion") 
+                                                .Value("")
+                                                .HtmlAttributes(new { style = "text-align:center;width: 12em;", maxlength = "30", required = "required" })
+                                    )*@
                                 </div>
                             </td>
                             <td>
@@ -1040,6 +1058,9 @@
         var urlValidarfolioCanceladoEnCargaComedor = '@Url.Action("ValidarfolioCanceladoEnCargaComedor", "CapturaSolicitud")'
 
         var urlValidaEmpleadoConceptoMonto = '@Url.Action("ValidaEmpleadoConceptoMonto", "CapturaSolicitud")'
+
+        var urlObtieneSolicitudDetalle = '@Url.Action("ObtieneSolicitudDetalle", "CapturaSolicitud")'
+
     </script>
 }
 else

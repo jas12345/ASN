@@ -37,6 +37,8 @@ $(document).ready(function () {
 
     $("#EvidenciasAnchor").removeClass("k-button");
 
+    bloquearAutorizacion(FolioSolicitud);
+
     //grid.thead.on("click", ".k-checkbox", onChange);
 
     //$("#AutorizarSolicitud").hide();
@@ -1580,7 +1582,21 @@ function excelExport(e) {
 }
 
 function uploadFile(e) {
-    e.data = {
-        folioSolicitud: $("#folioId").val()
-    }
+        e.data = {
+            folioSolicitud: $("#folioId").val()
+        }
+}
+
+function bloquearAutorizacion(folio) {
+    $.post(urlBloquearAutorizacion + "?FolioSolicitud=" + folio , function (data)
+    {
+        console.log(data);
+        if (data == 0) {
+            $("#AutorizarSolicitudALL").hide();
+            $("#AutorizarTodaSolicitud").hide();
+        } else {
+            $("#AutorizarSolicitudALL").show();
+            $("#AutorizarTodaSolicitud").show();
+        }
+    })
 }

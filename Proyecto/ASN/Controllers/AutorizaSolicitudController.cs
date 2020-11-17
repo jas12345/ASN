@@ -18,6 +18,7 @@ namespace ASN.Controllers
         // GET: AutorizaSolicitud
         public ActionResult Index(int? FolioSolicitud, string estatus)
         {
+          
             var obj = new CatAutorizacionesSel_Result();
             obj.FolioSolicitud = (int)(FolioSolicitud ?? -1);
             obj.EstatusId = estatus;
@@ -29,7 +30,7 @@ namespace ASN.Controllers
         {
             MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             int.TryParse(User.Identity.Name, out int idAdmin);
-
+           
             try
             {
                 using (ASNContext context = new ASNContext())
@@ -640,6 +641,27 @@ namespace ASN.Controllers
             var FileVirtualPath = "~/Evidencias/" + EvidenciaFile;
 
             return File(FileVirtualPath, "application/force- download", Path.GetFileName(FileVirtualPath));
+        }
+
+        public JsonResult BloquearAutorizacion(int folioSolicitud)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+
+                   var result = context.BloqueAutorizaciones(folioSolicitud).FirstOrDefault();
+                    return Json(result.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al consultar Perído de Nómina.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
         }
     }
 }

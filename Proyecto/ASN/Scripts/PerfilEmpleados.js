@@ -1120,3 +1120,27 @@ function selectAllContratos(e) {
 //    //multiselect.value(selectedValues);
 //    multiselect.close();
 //}
+
+
+function GetPerfil() {
+    return {
+        perfil: $("#PerfilUsuarioId").val()
+    };
+}
+function onChangePerfil() {
+    var perfil = $("#PerfilUsuarioId").val()
+
+    $.post(urlGetPerfilEmpleados + "/?perfil=" + perfil, function (data) {
+        //debugger;
+        console.log(data);
+        //var notification = $("#popupNotification").data("kendoNotification");
+        //notification.show(data, "success");
+
+        actualizaGrid();
+
+        //grid.select("tr:eq(" + selectedRows(0) + ")");
+
+    }).fail(function (ex) {
+        console.log("fail" + ex);
+    });
+}

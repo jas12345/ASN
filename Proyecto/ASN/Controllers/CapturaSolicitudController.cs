@@ -536,7 +536,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CreateSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, string PeriodoNomina_Id, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
+        public ActionResult CreateSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, string PeriodoNomina_Id, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9, string MotivoDelConcepto)
         {
             try
             {
@@ -557,6 +557,9 @@ namespace ASN.Controllers
                     folioSolicitudOut.Value = 0;
 
                     int.TryParse(User.Identity.Name, out int idAdmin);
+
+                    MotivoDelConcepto = (MotivoDelConcepto != "") ? MotivoDelConcepto : null;                   
+                    
 
                     context.CatSolicitudesSi(
                           FolioSolicitud
@@ -579,6 +582,7 @@ namespace ASN.Controllers
                         , periodoNominaId
                         , true//active
                         , idAdmin
+                        , MotivoDelConcepto
                         , folioSolicitudOut
                         , resultado);
 
@@ -1053,6 +1057,20 @@ namespace ASN.Controllers
                 //return Content(sts.ToString());
 
             
+        }
+
+        public ActionResult ObtieneSolicitudDetalle(int ? folioSolicitud, int? empleado_ident, int? conceptoid) {
+
+            using (ASNContext ctx = new ASNContext())
+            {
+                var resultado = ctx.CatSolicitudEmpleadosDetalleSel(folioSolicitud, conceptoid, empleado_ident).FirstOrDefault();
+
+                return Json(resultado.MotivoDelConcepto);
+
+            }
+
+
+
         }
 
     }
