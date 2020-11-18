@@ -873,6 +873,175 @@ namespace ASN.Controllers
             //return Content("");
         }
 
+        [HttpPost]
+        public ActionResult Async_SaveBono(IEnumerable<HttpPostedFileBase> filesBono)
+        {
+            try
+            {
+                int? solicitudIdActual = -1;
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                int.TryParse(User.Identity.Name, out int userEmployeeId);
+                var lstLog = new List<CargaMasivaBonoCViewModel>();
+                int.TryParse(User.Identity.Name, out int solicitanteIdent);
+                //int userEmployeeId = usuario.UserNumerito;
+                string filenameresult;
+                var lstResult = new List<string>();
+                int ccmsId = 0;
+                string parametro = string.Empty;
+                decimal detalle = 0;
+
+                ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
+                ObjectParameter FolioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
+                string folioResult;
+                resultado.Value = -1;
+
+                var lista = new List<CargaMasivaRegistroViewModel>();
+
+                if (filesBono != null)
+                {
+                    foreach (var file in filesBono)
+                    {
+                        if (file != null)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var ext = Path.GetExtension(fileName);
+
+                            if (ext.ToUpper() == ".CSV")
+                            {
+                                var postedFile = file;
+
+                                if (postedFile.ContentLength > 0)
+                                {
+
+                                    using (var csvReader = new StreamReader(postedFile.InputStream))
+                                    {
+
+                                        using (var csv = new CsvReader(csvReader))
+                                        {
+                                            //var rowsExcel = csv.GetRecords<object>().ToList();
+                                            ////var registro = new CargaMasivaRegistroViewModel();
+                                            ////var todosReg = csv.EnumerateRecords(registro);
+                                            ////int recordsLength = todosReg.Count<CargaMasivaRegistroViewModel>();
+
+                                            //if (rowsExcel.Count() < 30)
+                                            //{
+                                            //    var msg = "El archivo tiene menos de 30 registros";
+                                            //    return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+                                            //}
+
+                                            while (csv.Read())
+                                            {
+                                                var objeton = new CargaMasivaRegistroViewModel();
+
+                                                if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
+                                                {
+                                                    objeton.parametro = parametro;
+                                                    objeton.detalle = detalle;
+                                                    objeton.solicitudId = -1;
+                                                    objeton.userEmployeeId = userEmployeeId;
+                                                    objeton.catEmployeeId = ccmsId;
+                                                    objeton.estatus = -1;
+
+                                                    lista.Add(objeton);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                using (ASNContext context = new ASNContext())
+                                {
+                                    int row = 1;
+                                    //if (lista.Count() < 30)
+                                    //{
+                                    //    var msg = "El archivo tiene menos de 30 registros";
+                                    //    //ModelState.AddModelError("error", msg);
+                                    //    //Error = new { Errors = msg };
+                                    //    //ModelState.AddModelError("error", "El archivo tiene menos de 30 registros");
+                                    //    return Content(msg.ToString());
+                                    //}
+                                    //else
+                                    //{
+                                        foreach (var obj in lista)
+                                        {
+                                            row = row + 1;
+                                            if (obj.solicitudId == -1)
+                                            {
+                                                obj.solicitudId = solicitudIdActual;
+
+                                            }
+
+                                            var lstLogx = context.CatSolicitudBonoCSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitanteIdent).ToList();
+                                            solicitudIdActual = lstLogx[0].FolioSolicitud;
+                                            var objetoResult = new CargaMasivaBonoCViewModel();
+                                            objetoResult.CCMSId = obj.catEmployeeId;
+                                            objetoResult.CreatedBy = obj.userEmployeeId;
+                                            objetoResult.Row = row;
+                                            objetoResult.Message = lstLogx[0].Mensaje;//string.Join(",", lstLogx.ToArray());
+
+                                            if (lstLogx[0].Result <= 0)
+                                            {
+                                                lstLog.Add(objetoResult);
+                                            }
+                                            // System.IO.File.WriteAllLines("log.txt", new string[] { lstLog.ToString() });
+
+                                            // objetoResult.Message=lstLogx[
+                                            if (solicitudIdActual > 0)
+                                                lstResult.Add(solicitudIdActual.ToString());
+                                        }
+
+                                        if (lstLog.Count > 0)
+                                        {
+                                            var filename = "Log" + "_" + solicitudIdActual.ToString() + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
+                                            var fullPath = Request.MapPath("~/LogCargaMasivaBonoC/" + filename);
+                                            var stringList = lstLog.OfType<string>();
+
+                                            using (System.IO.StreamWriter fs = new System.IO.StreamWriter(fullPath))
+                                            {
+                                                var header = " Row " + " CCMSId " + " CreatedBy " + " Message ";
+                                                fs.WriteLine(header);
+                                                foreach (var item in lstLog)
+                                                {
+                                                    var cadena =
+                                                        " " + item.Row.ToString() + " " + item.CCMSId.ToString() + " " + item.CreatedBy.ToString() + " " + item.Message.ToString();
+
+                                                    fs.WriteLine(cadena);
+                                                }
+                                                fs.Close();
+                                                filenameresult = filename;
+                                                lstResult.Add(filenameresult);
+                                            }
+                                            //DownLoadLogBonoC(filename);
+                                        }
+                                    //}
+                                }
+                            }
+                        }
+                    }
+                }
+                return Json(lstResult, JsonRequestBehavior.AllowGet);
+                //return Json(new { res = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(e, usuario.UserInfo.Ident.Value);
+
+                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public FileResult DownLoadLogBonoC(string filename)
+        {
+            var FileVirtualPath = new DirectoryInfo(Server.MapPath("~/LogCargaMasivaBonoC/" + filename));
+            // var FileVirtualPath = "~/LogCargaMasivaBonoC/" + filename;
+
+            return File(FileVirtualPath.ToString(), "application/force- download", Path.GetFileName(FileVirtualPath.ToString()));
+        }
+
+
         public ActionResult Async_SaveFiles(IEnumerable<HttpPostedFileBase> evidencias, int? folioSolicitud) //
         {
             try

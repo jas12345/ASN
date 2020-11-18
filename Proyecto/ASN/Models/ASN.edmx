@@ -552,6 +552,14 @@
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
           <Parameter Name="Empleado_Ident" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatSolicitudBonoCSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="ConceptoPS" Type="varchar" Mode="In" />
+          <Parameter Name="ConceptoMonto" Type="decimal" Mode="In" />
+          <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
+          <Parameter Name="CCMSIdSolicitante" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatSolicitudEmpleadosAutorizantesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
         </Function>
@@ -1756,6 +1764,14 @@
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatSolicitudBonoCSi" ReturnType="Collection(ASNModel.CatSolicitudBonoCSi_Result)">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoPS" Mode="In" Type="String" />
+            <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="CCMSIdSolicitante" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -2928,6 +2944,11 @@
           <Property Type="Int32" Name="Responsableid" Nullable="true" />
           <Property Type="Int32" Name="PeriodoOriginalid" Nullable="true" />
           <Property Type="String" Name="MotivoDelConcepto" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatSolicitudBonoCSi_Result">
+          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="800" />
+          <Property Type="Int32" Name="Result" Nullable="true" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -4638,6 +4659,15 @@
                 <ScalarProperty Name="Responsableid" ColumnName="Responsableid" />
                 <ScalarProperty Name="PeriodoOriginalid" ColumnName="PeriodoOriginalid" />
                 <ScalarProperty Name="MotivoDelConcepto" ColumnName="MotivoDelConcepto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatSolicitudBonoCSi" FunctionName="ASNModel.Store.CatSolicitudBonoCSi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudBonoCSi_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

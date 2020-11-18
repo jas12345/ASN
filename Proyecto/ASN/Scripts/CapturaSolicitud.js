@@ -40,6 +40,8 @@ $(document).ready(function () {
 
     $("#files").data("kendoUpload").enable(false);
 
+    $("#filesBono").data("kendoUpload").enable(false);
+
     $('#idDescripcion').on('blur', function () {
         if ($('#idDescripcion').val() == '' || $('#idDescripcion').val() == undefined)
         {
@@ -1557,6 +1559,15 @@ function onChangeConceptos(e) {
         else {
             $("#files").data("kendoUpload").enable(false);
 
+        }
+
+        if (ConConceptoIdent == 2) {
+            $("#filesBono").data("kendoUpload").enable(true);
+
+            console.log("prueba Concepto bono c");
+        }
+        else {
+            $("#filesBono").data("kendoUpload").enable(false);
         }
 
     }

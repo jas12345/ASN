@@ -41,41 +41,61 @@
 
 @if (User.Identity.IsAuthenticated)
 {
+    <div class="row">
+        <div class="col-lg-4">
+            @Html.Label("Captura de Solicitudes", new { style = "font-size: 18px" })
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-4">
-                @Html.Label("Captura de Solicitudes", new { style = "font-size: 18px" })
+            @*<div class="col-lg-4">
+            @Html.Label("Captura de Solicitudes", new { style = "font-size: 18px" })
+        </div>*@
+            <div class="col-sm-1">
+                @Html.Label("Carga Bono C")
+            </div>
+            <div class="col-lg-3">
+                @(Html.Kendo().Upload()
+                                                .Name("filesBono")
+                                                .Async(a => a
+                                                    .Save("Async_SaveBono", "CapturaSolicitud")
+                                                    .AutoUpload(true)
+                                                )
+                                                .Events(events => events
+                                                        .Success("onSuccessBono")
+                                                        .Error("errorsote"))
+                )
             </div>
             <div class="col-lg-1">
                 @Html.Label("Carga Comedores")
             </div>
             <div class="col-lg-3">
                 @(Html.Kendo().Upload()
-        .Name("files")
-        .Async(a => a
-            .Save("Async_Save", "CapturaSolicitud")
-            .AutoUpload(true)
-        )
-        .Events(events=>events
-                .Success("onSuccess") )
+                .Name("files")
+                .Async(a => a
+                    .Save("Async_Save", "CapturaSolicitud")
+                    .AutoUpload(true)
+                )
+                .Events(events => events
+                        .Success("onSuccess"))
                 )
                 @**@
             </div>
             <div class="col-lg-1">
                 @*<a @Url.Action("ObtenerEvidencias","Evidencias") id="evidenciasAnchor">Evidencias (40 MB máximo)</a>*@
                 @(Html.Kendo().Button().Name("EvidenciasAnchor").Content("Evidencias (40 MB máximo)").Icon("")
-                                .Events(x => x.Click("MostrarEvidenciasModal")).Tag("a") //type = "anchor"
-                                                                                         //.Events(x => x.Click("agregaEmpleado"))
-                                    )
+                                        .Events(x => x.Click("MostrarEvidenciasModal")).Tag("a") //type = "anchor"
+                                                                                                 //.Events(x => x.Click("agregaEmpleado"))
+                )
             </div>
             <div class="col-lg-3">
                 @(Html.Kendo().Upload()
-        .Name("evidencias")
-        .Async(a => a
-            .Save("Async_SaveFiles", "CapturaSolicitud")
-            .AutoUpload(true)
-        )
-        .Events(e => e.Upload("uploadFile"))
+                .Name("evidencias")
+                .Async(a => a
+                    .Save("Async_SaveFiles", "CapturaSolicitud")
+                    .AutoUpload(true)
+                )
+                .Events(e => e.Upload("uploadFile"))
                 )
             </div>
         </div>
@@ -1061,6 +1081,8 @@
 
         var urlObtieneSolicitudDetalle = '@Url.Action("ObtieneSolicitudDetalle", "CapturaSolicitud")'
 
+        var urlDownLoadLogBonoC = '@Url.Action("DownLoadLogBonoC","CapturaSolicitud")'
+
     </script>
 }
 else
@@ -1130,6 +1152,36 @@ else
             $("#folioId").val(e.response);
     });
 
+
+    }
+    function onSuccessBono(e) {
+        console.log("onSuccessBono")
+        console.log(e);
+        var folio = $("#FolioSolicitud").data("kendoNumericTextBox");
+        folio.value(e.response[0])
+        $("#Estatus").val("En Borrador");
+        // $.post(urlDownLoadLogBonoC + "?filename=" + e.response[1]);
+        var x = urlDownLoadLogBonoC + "?filename=" + e.response[1];
+        window.location = x;
+        actualizaGrid();
+        $("#EnviarSolicitud").show();
+        $("#MostrarTotales").show();
+        $("#folioId").val(e.response);
+
+    }
+
+    function errorsote(e) {
+        console.log("Errorsote");
+        console.log(e);
+
+        var notification = $("#popupNotification").data("kendoNotification");
+        notification.show("El archivo tiene menos de 30 registros", "warning");
+        //if (args.errors) {
+        //    $(document).ready(function () {
+        //        var notification = $("#popupNotification").data("kendoNotification");
+        //        notification.show(args.errors.error.errors[0], "error");
+        //    });
+        // }
 
     }
 </script>

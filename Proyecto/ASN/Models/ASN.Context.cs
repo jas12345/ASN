@@ -3051,5 +3051,34 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudEmpleadosDetalleSel_Result>("CatSolicitudEmpleadosDetalleSel", folioSolicitudParameter, conceptoIdParameter, empleado_IdentParameter);
         }
+    
+        public virtual ObjectResult<CatSolicitudBonoCSi_Result> CatSolicitudBonoCSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, string conceptoPS, Nullable<decimal> conceptoMonto, Nullable<int> userEmployeeId, Nullable<int> cCMSIdSolicitante)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var conceptoPSParameter = conceptoPS != null ?
+                new ObjectParameter("ConceptoPS", conceptoPS) :
+                new ObjectParameter("ConceptoPS", typeof(string));
+    
+            var conceptoMontoParameter = conceptoMonto.HasValue ?
+                new ObjectParameter("ConceptoMonto", conceptoMonto) :
+                new ObjectParameter("ConceptoMonto", typeof(decimal));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            var cCMSIdSolicitanteParameter = cCMSIdSolicitante.HasValue ?
+                new ObjectParameter("CCMSIdSolicitante", cCMSIdSolicitante) :
+                new ObjectParameter("CCMSIdSolicitante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudBonoCSi_Result>("CatSolicitudBonoCSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, cCMSIdSolicitanteParameter);
+        }
     }
 }

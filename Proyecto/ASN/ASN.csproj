@@ -217,6 +217,7 @@
     <Compile Include="Models\AvisoSolicitantesManual_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CargaMasivaBonoCViewModel.cs" />
     <Compile Include="Models\CargaMasivaPerfilEmpleado.cs" />
     <Compile Include="Models\CargaMasivaRegistroViewModel.cs" />
     <Compile Include="Models\CatAdminSel_Result.cs">
@@ -503,6 +504,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatSolicitudAutorizantesSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatSolicitudBonoCSi_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatSolicitudEmpleadosAutorizantesSel_Result.cs">
@@ -1009,6 +1013,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Evidencias\" />
+    <Folder Include="LogCargaMasivaBonoC\" />
     <Folder Include="Views\ResponsableDeSolicitudes\" />
     <Folder Include="Views\Upload\" />
     <Folder Include="Views\Usuario\" />
