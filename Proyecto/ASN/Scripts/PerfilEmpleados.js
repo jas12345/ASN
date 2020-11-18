@@ -855,6 +855,7 @@ function CargaPerfilEmpleado() {
 }
 
 function filterConcepto(pais, clientes) {
+    pais =  $("#PerfilUsuarioId").data("kendoDropDownList").value();
     return {
         country: pais,
         client: clientes
