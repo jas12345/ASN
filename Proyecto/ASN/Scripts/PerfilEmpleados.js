@@ -855,7 +855,7 @@ function CargaPerfilEmpleado() {
 }
 
 function filterConcepto(pais, clientes) {
-    pais =  $("#PerfilUsuarioId").data("kendoDropDownList").value();
+    pais = $("#PerfilUsuarioId").data("kendoDropDownList").value();   
     return {
         country: pais,
         client: clientes
@@ -863,9 +863,10 @@ function filterConcepto(pais, clientes) {
 }
 
 function filterConcepto2() {
+   
     return {
         country: $("#Country_Ident").val(),
-        client: $("#Client_Ident").val()
+        client: 0  //$("#Client_Ident").val()
     };
 }
 
@@ -958,14 +959,14 @@ function selectCliente(e) {
     var city = $("#City_Ident").val();
     var site = $("#Location_Ident").val();
     var clientes = texto; //selectedValues
-
+   
     programa.enable(true);
     programa.dataSource.read(filterProgram(country, city, site, clientes));
     programa.refresh();
     //programa.value("-1");
 
     multiConceptos.enable(true);
-    multiConceptos.dataSource.read(filterConcepto(country, clientes));
+    multiConceptos.dataSource.read(filterConcepto2());
     multiConceptos.refresh();
 }
 
