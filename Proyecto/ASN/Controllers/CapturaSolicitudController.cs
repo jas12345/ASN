@@ -974,7 +974,7 @@ namespace ASN.Controllers
 
                                             var lstLogx = context.CatSolicitudBonoCSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitanteIdent).ToList();
 
-                                            if (lstLogx[0].FolioSolicitud > 0 && solicitudIdActual==-1)
+                                            if (lstLogx[0].FolioSolicitud > 0 && solicitudIdActual == -1)
                                             {
                                                 solicitudIdActual = lstLogx[0].FolioSolicitud;
                                             }
@@ -1001,8 +1001,12 @@ namespace ASN.Controllers
                                         if (lstLog.Count > 0)
                                         {
                                             var filename = "Log" + "_" + solicitudIdActual.ToString() + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
-                                            var fullPath = Request.MapPath("~/LogCargaMasivaBonoC/" + filename);
-                                            var stringList = lstLog.OfType<string>();
+
+                                            var path= Request.MapPath("~/LogCargaMasivaBonoC/");
+
+                                            var fullPath = Path.Combine(Server.MapPath("~/LogCargaMasivaBonoC/"), Path.GetFileName(filename));
+
+                                            Directory.CreateDirectory(path);
 
                                             using (System.IO.StreamWriter fs = new System.IO.StreamWriter(fullPath))
                                             {
