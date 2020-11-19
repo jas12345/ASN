@@ -509,6 +509,9 @@
     <Compile Include="Models\CatSolicitudBonoCSi_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatSolicitudBonoCSi_Result1.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatSolicitudEmpleadosAutorizantesSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

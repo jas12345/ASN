@@ -1764,7 +1764,7 @@
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CatSolicitudBonoCSi" ReturnType="Collection(ASNModel.CatSolicitudBonoCSi_Result)">
+          <FunctionImport Name="CatSolicitudBonoCSi" ReturnType="Collection(ASNModel.CatSolicitudBonoCSi_Result1)">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoPS" Mode="In" Type="String" />
@@ -2946,6 +2946,11 @@
           <Property Type="String" Name="MotivoDelConcepto" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatSolicitudBonoCSi_Result">
+          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="800" />
+          <Property Type="Int32" Name="Result" Nullable="true" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CatSolicitudBonoCSi_Result1">
           <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="800" />
           <Property Type="Int32" Name="Result" Nullable="true" />
           <Property Type="Int32" Name="FolioSolicitud" Nullable="true" />
@@ -4664,7 +4669,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatSolicitudBonoCSi" FunctionName="ASNModel.Store.CatSolicitudBonoCSi">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudBonoCSi_Result">
+              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudBonoCSi_Result1">
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
                 <ScalarProperty Name="Result" ColumnName="Result" />
                 <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />

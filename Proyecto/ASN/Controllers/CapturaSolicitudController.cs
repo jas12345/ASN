@@ -111,7 +111,7 @@ namespace ASN.Controllers
                     return Json(lstEmpleadoPuesto, JsonRequestBehavior.AllowGet);
 
                 }
-                
+
 
                 using (ASNContext context = new ASNContext())
                 {
@@ -558,8 +558,8 @@ namespace ASN.Controllers
 
                     int.TryParse(User.Identity.Name, out int idAdmin);
 
-                    MotivoDelConcepto = (MotivoDelConcepto != "") ? MotivoDelConcepto : null;                   
-                    
+                    MotivoDelConcepto = (MotivoDelConcepto != "") ? MotivoDelConcepto : null;
+
 
                     context.CatSolicitudesSi(
                           FolioSolicitud
@@ -771,7 +771,7 @@ namespace ASN.Controllers
             //////        file.SaveAs(physicalPath);
             //////    }
             //////}
-          
+
             try
             {
                 int solicitudIdActual = -1;
@@ -952,19 +952,20 @@ namespace ASN.Controllers
                                 using (ASNContext context = new ASNContext())
                                 {
                                     int row = 1;
-                                    //if (lista.Count() < 30)
-                                    //{
-                                    //    var msg = "El archivo tiene menos de 30 registros";
-                                    //    //ModelState.AddModelError("error", msg);
-                                    //    //Error = new { Errors = msg };
-                                    //    //ModelState.AddModelError("error", "El archivo tiene menos de 30 registros");
-                                    //    return Content(msg.ToString());
-                                    //}
-                                    //else
-                                    //{
+                                    if (lista.Count() < 30)
+                                    {
+                                        var msg = "El archivo tiene menos de 30 registros";
+                                        //ModelState.AddModelError("error", msg);
+                                        //Error = new { Errors = msg };
+                                        //ModelState.AddModelError("error", "El archivo tiene menos de 30 registros");
+                                        return Content(msg.ToString());
+                                    }
+                                    else
+                                    {
                                         foreach (var obj in lista)
                                         {
                                             row = row + 1;
+
                                             if (obj.solicitudId == -1)
                                             {
                                                 obj.solicitudId = solicitudIdActual;
@@ -972,7 +973,10 @@ namespace ASN.Controllers
                                             }
 
                                             var lstLogx = context.CatSolicitudBonoCSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitanteIdent).ToList();
-                                            solicitudIdActual = lstLogx[0].FolioSolicitud;
+                                            if (lstLogx[0].FolioSolicitud > 0)
+                                            {
+                                                solicitudIdActual = lstLogx[0].FolioSolicitud;
+                                            }
                                             var objetoResult = new CargaMasivaBonoCViewModel();
                                             objetoResult.CCMSId = obj.catEmployeeId;
                                             objetoResult.CreatedBy = obj.userEmployeeId;
@@ -985,9 +989,12 @@ namespace ASN.Controllers
                                             }
                                             // System.IO.File.WriteAllLines("log.txt", new string[] { lstLog.ToString() });
 
-                                            // objetoResult.Message=lstLogx[
-                                            if (solicitudIdActual > 0)
-                                                lstResult.Add(solicitudIdActual.ToString());
+                                            // objetoResult.Message=lstLogx[                                          
+                                        }
+
+                                        if (solicitudIdActual > 0)
+                                        {
+                                            lstResult.Add(solicitudIdActual.ToString());
                                         }
 
                                         if (lstLog.Count > 0)
@@ -1013,7 +1020,7 @@ namespace ASN.Controllers
                                             }
                                             //DownLoadLogBonoC(filename);
                                         }
-                                    //}
+                                    }
                                 }
                             }
                         }
@@ -1139,35 +1146,35 @@ namespace ASN.Controllers
 
         public PartialViewResult GetEvidencias(int? folio)
         {
-                try
+            try
+            {
+                var dir = new DirectoryInfo(Server.MapPath("~/Evidencias/"));
+
+                FileInfo[] files = dir.GetFiles("*.*");
+                //.Where(x=> x.Name.Contains(Convert.ToString(folioSolicitud)));
+
+                List<string> items = new List<string>();
+                string folio_ = string.Format("{0}_", folio);
+                foreach (var file in files)
                 {
-                    var dir = new DirectoryInfo(Server.MapPath("~/Evidencias/"));
-
-                    FileInfo[] files = dir.GetFiles("*.*");
-                    //.Where(x=> x.Name.Contains(Convert.ToString(folioSolicitud)));
-
-                    List<string> items = new List<string>();
-                    string folio_ = string.Format("{0}_", folio);
-                    foreach (var file in files)
+                    if (file.Name.StartsWith(folio_))
                     {
-                        if (file.Name.StartsWith(folio_))
-                        {
-                            items.Add(file.Name);
-                        }
-
+                        items.Add(file.Name);
                     }
 
-                    return PartialView("GetEvidencias", items);
                 }
-                catch (Exception ex)
-                {
 
-                    MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
-                    LogError log = new LogError();
-                    log.RecordError(ex, usuario.UserInfo.Ident.Value);
-                    return PartialView("");
-                }
-      
+                return PartialView("GetEvidencias", items);
+            }
+            catch (Exception ex)
+            {
+
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return PartialView("");
+            }
+
         }
 
         public FileResult DownLoadEvidencia(string EvidenciaFile)
@@ -1177,17 +1184,18 @@ namespace ASN.Controllers
             return File(FileVirtualPath, "application/force- download", Path.GetFileName(FileVirtualPath));
         }
 
-        public ActionResult ValidarfolioCanceladoEnCargaComedor(string Folio) {
+        public ActionResult ValidarfolioCanceladoEnCargaComedor(string Folio)
+        {
 
             using (ASNContext ctx = new ASNContext())
             {
 
                 string qry = string.Format("  select 1 " +
-                                           "  from app620.CatEmpleadosSolicitudes "         +
+                                           "  from app620.CatEmpleadosSolicitudes " +
                                            "  where FolioSolicitud                  = {0} " +
                                            "  and EstatusSolicitudid                =  'C'"
                                         , Folio);
-                var sts= ctx.Database.SqlQuery<int>(qry).FirstOrDefault();
+                var sts = ctx.Database.SqlQuery<int>(qry).FirstOrDefault();
 
                 return Content(sts.ToString());
 
@@ -1201,7 +1209,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    resultado = context.ValEmpleadoConceptoMonto(periodoNominaId,empleadoId,conceptoId).ToList();
+                    resultado = context.ValEmpleadoConceptoMonto(periodoNominaId, empleadoId, conceptoId).ToList();
                 }
 
                 return Json(resultado, JsonRequestBehavior.AllowGet);
@@ -1214,21 +1222,22 @@ namespace ASN.Controllers
                 return Json("");
             }
 
-           
 
-                //string qry = string.Format("  select 1 " +
-                //                           "  from app620.CatEmpleadosSolicitudes " +
-                //                           "  where FolioSolicitud                  = {0} " +
-                //                           "  and EstatusSolicitudid                =  'C'"
-                //                        , Folio);
-                //var sts = ctx.Database.SqlQuery<int>(qry).FirstOrDefault();
 
-                //return Content(sts.ToString());
+            //string qry = string.Format("  select 1 " +
+            //                           "  from app620.CatEmpleadosSolicitudes " +
+            //                           "  where FolioSolicitud                  = {0} " +
+            //                           "  and EstatusSolicitudid                =  'C'"
+            //                        , Folio);
+            //var sts = ctx.Database.SqlQuery<int>(qry).FirstOrDefault();
 
-            
+            //return Content(sts.ToString());
+
+
         }
 
-        public ActionResult ObtieneSolicitudDetalle(int ? folioSolicitud, int? empleado_ident, int? conceptoid) {
+        public ActionResult ObtieneSolicitudDetalle(int? folioSolicitud, int? empleado_ident, int? conceptoid)
+        {
 
             using (ASNContext ctx = new ASNContext())
             {
