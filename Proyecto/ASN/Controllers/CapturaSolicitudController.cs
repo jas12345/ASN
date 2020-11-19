@@ -973,7 +973,8 @@ namespace ASN.Controllers
                                             }
 
                                             var lstLogx = context.CatSolicitudBonoCSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitanteIdent).ToList();
-                                            if (lstLogx[0].FolioSolicitud > 0)
+
+                                            if (lstLogx[0].FolioSolicitud > 0 && solicitudIdActual==-1)
                                             {
                                                 solicitudIdActual = lstLogx[0].FolioSolicitud;
                                             }
