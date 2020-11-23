@@ -117,20 +117,21 @@ namespace ASN.Controllers
         /// <returns></returns>
         public JsonResult GetPeriodoNominaCMB(int filtra=0)
         {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
             {
                 var listPeriodoNomina = new List<CatPeriodosNominaCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB(filtra).ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(filtra, usuario.UserInfo.Ident.Value).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json("");

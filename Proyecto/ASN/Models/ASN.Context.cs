@@ -874,15 +874,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPeriodicidadNominaSu", periodicidadNominaIdParameter, descripcionParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
-        public virtual ObjectResult<CatPeriodosNominaCMB_Result> CatPeriodosNominaCMB(Nullable<int> active)
-        {
-            var activeParameter = active.HasValue ?
-                new ObjectParameter("Active", active) :
-                new ObjectParameter("Active", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB", activeParameter);
-        }
-    
         public virtual int CatPeriodosNominaSu(Nullable<int> anioId, Nullable<int> mesId, string periodicidadNominaId, string consecutivo, string tipoPeriodo, string fechaInicio, string fechaFin, string fechaCaptura, string fechaCierre, string countryIdents, string nombrePeriodo, Nullable<int> userEmployeeId, Nullable<bool> active, ObjectParameter estatus)
         {
             var anioIdParameter = anioId.HasValue ?
@@ -3052,7 +3043,20 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudEmpleadosDetalleSel_Result>("CatSolicitudEmpleadosDetalleSel", folioSolicitudParameter, conceptoIdParameter, empleado_IdentParameter);
         }
     
-        public virtual ObjectResult<CatSolicitudBonoCSi_Result1> CatSolicitudBonoCSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, string conceptoPS, Nullable<decimal> conceptoMonto, Nullable<int> userEmployeeId, Nullable<int> cCMSIdSolicitante)
+        public virtual ObjectResult<CatPeriodosNominaCMB_Result> CatPeriodosNominaCMB(Nullable<int> active, Nullable<int> cCMSId)
+        {
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(int));
+    
+            var cCMSIdParameter = cCMSId.HasValue ?
+                new ObjectParameter("CCMSId", cCMSId) :
+                new ObjectParameter("CCMSId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB", activeParameter, cCMSIdParameter);
+        }
+    
+        public virtual ObjectResult<CatSolicitudBonoCSi_Result> CatSolicitudBonoCSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, string conceptoPS, Nullable<decimal> conceptoMonto, Nullable<int> userEmployeeId, Nullable<int> cCMSIdSolicitante)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -3078,7 +3082,7 @@ namespace ASN.Models
                 new ObjectParameter("CCMSIdSolicitante", cCMSIdSolicitante) :
                 new ObjectParameter("CCMSIdSolicitante", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudBonoCSi_Result1>("CatSolicitudBonoCSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, cCMSIdSolicitanteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudBonoCSi_Result>("CatSolicitudBonoCSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, cCMSIdSolicitanteParameter);
         }
     }
 }

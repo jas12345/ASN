@@ -23,11 +23,12 @@ namespace ASN.Controllers
 
         public FileContentResult DownloadCSV(int IdPeriodoNominaSelected, string PeriodoNominaSelected, int? EmpresaIdSelected, string EmpresaSelected) //, KendoDropDownListSelectedViewModel kddListSelectedView )
         {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
             {
                 var lstActivos = new List<DescargaArchivoSolicitud_Result>();
                 var lstInactivos = new List<DescargaArchivoSolicitud_Result>();
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                MyCustomIdentity user = (MyCustomIdentity)User.Identity;
                 var listPeriodoNomina = new List<CatPeriodosNominaCMB_Result>();
                 string strPeriodo = "";
                 KendoDropDownListSelectedViewModel kddslv = new KendoDropDownListSelectedViewModel();
@@ -50,7 +51,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = ctx.CatPeriodosNominaCMB(4).ToList();
+                    listPeriodoNomina = ctx.CatPeriodosNominaCMB(4,user.UserInfo.Ident.Value).ToList();
 
                     if (kddslv.IdPeriodoNomina == 0)
                     {
@@ -104,7 +105,7 @@ namespace ASN.Controllers
             catch (Exception ex)
             {
 
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return null;
@@ -117,20 +118,21 @@ namespace ASN.Controllers
         /// <returns></returns>
         public JsonResult GetPeriodoNominaCMB(int? active)
         {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
             {
                 var listPeriodoNomina = new List<CatPeriodosNominaCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB(active).ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(active,usuario.UserInfo.Ident.Value).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+               
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json("");

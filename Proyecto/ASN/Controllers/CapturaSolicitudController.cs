@@ -167,10 +167,11 @@ namespace ASN.Controllers
             try
             {
                 var listPeriodoNomina = new List<CatPeriodosNominaCMB_Result>();
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB(active).ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(active, usuario.UserInfo.Ident.Value).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);

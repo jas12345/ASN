@@ -333,19 +333,20 @@ namespace ASN.Controllers
 
         public JsonResult GetPeriodoNominaCMB()
         {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
             {
                 var lstCMB = new List<CatPeriodosNominaCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
-                    lstCMB = context.CatPeriodosNominaCMB(1).ToList();
+                    lstCMB = context.CatPeriodosNominaCMB(1, usuario.UserInfo.Ident.Value).ToList();
                 }
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
             }
             catch (Exception excepcion)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                
                 LogError log = new LogError();
                 log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
                 return Json("");

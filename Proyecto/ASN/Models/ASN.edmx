@@ -497,6 +497,7 @@
         </Function>
         <Function Name="CatPeriodosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Active" Type="int" Mode="In" />
+          <Parameter Name="CCMSId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatPeriodosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1112,9 +1113,6 @@
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatPeriodosNominaCMB" ReturnType="Collection(ASNModel.CatPeriodosNominaCMB_Result)" >
-          <Parameter Name="Active" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPeriodosNominaSu">
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
@@ -1764,7 +1762,11 @@
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CatSolicitudBonoCSi" ReturnType="Collection(ASNModel.CatSolicitudBonoCSi_Result1)">
+          <FunctionImport Name="CatPeriodosNominaCMB" ReturnType="Collection(ASNModel.CatPeriodosNominaCMB_Result)">
+            <Parameter Name="Active" Mode="In" Type="Int32" />
+            <Parameter Name="CCMSId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatSolicitudBonoCSi" ReturnType="Collection(ASNModel.CatSolicitudBonoCSi_Result)">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="ConceptoPS" Mode="In" Type="String" />
@@ -1947,10 +1949,6 @@
         <ComplexType Name="CatAnioFechasCMB_Result">
           <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="CatPeriodosNominaCMB_Result">
-          <Property Type="Int32" Name="Ident" Nullable="false" />
-          <Property Type="String" Name="Valor" Nullable="true" MaxLength="17" />
         </ComplexType>
         <ComplexType Name="CatPeriodosNominaSel_Result">
           <Property Type="Int32" Name="AnioId" Nullable="false" />
@@ -2945,12 +2943,11 @@
           <Property Type="Int32" Name="PeriodoOriginalid" Nullable="true" />
           <Property Type="String" Name="MotivoDelConcepto" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="CatSolicitudBonoCSi_Result">
-          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="800" />
-          <Property Type="Int32" Name="Result" Nullable="true" />
-          <Property Type="Int32" Name="FolioSolicitud" Nullable="true" />
+        <ComplexType Name="CatPeriodosNominaCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="CatSolicitudBonoCSi_Result1">
+        <ComplexType Name="CatSolicitudBonoCSi_Result">
           <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="800" />
           <Property Type="Int32" Name="Result" Nullable="true" />
           <Property Type="Int32" Name="FolioSolicitud" Nullable="true" />
@@ -3227,14 +3224,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaSi" FunctionName="ASNModel.Store.CatPeriodicidadNominaSi" />
           <FunctionImportMapping FunctionImportName="CatPeriodicidadNominaSu" FunctionName="ASNModel.Store.CatPeriodicidadNominaSu" />
-          <FunctionImportMapping FunctionImportName="CatPeriodosNominaCMB" FunctionName="ASNModel.Store.CatPeriodosNominaCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatPeriodosNominaCMB_Result">
-                <ScalarProperty Name="Ident" ColumnName="Ident" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPeriodosNominaSu" FunctionName="ASNModel.Store.CatPeriodosNominaSu" />
           <FunctionImportMapping FunctionImportName="CatPeriodosNominaSel" FunctionName="ASNModel.Store.CatPeriodosNominaSel">
             <ResultMapping>
@@ -4667,9 +4656,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodosNominaCMB" FunctionName="ASNModel.Store.CatPeriodosNominaCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPeriodosNominaCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatSolicitudBonoCSi" FunctionName="ASNModel.Store.CatSolicitudBonoCSi">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudBonoCSi_Result1">
+              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudBonoCSi_Result">
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
                 <ScalarProperty Name="Result" ColumnName="Result" />
                 <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
