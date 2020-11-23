@@ -3084,5 +3084,18 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudBonoCSi_Result>("CatSolicitudBonoCSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, cCMSIdSolicitanteParameter);
         }
+    
+        public virtual ObjectResult<ReporteDescuentosVarios_Result> ReporteDescuentosVarios(Nullable<int> periodoNominaId, Nullable<int> empresaid)
+        {
+            var periodoNominaIdParameter = periodoNominaId.HasValue ?
+                new ObjectParameter("PeriodoNominaId", periodoNominaId) :
+                new ObjectParameter("PeriodoNominaId", typeof(int));
+    
+            var empresaidParameter = empresaid.HasValue ?
+                new ObjectParameter("Empresaid", empresaid) :
+                new ObjectParameter("Empresaid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteDescuentosVarios_Result>("ReporteDescuentosVarios", periodoNominaIdParameter, empresaidParameter);
+        }
     }
 }

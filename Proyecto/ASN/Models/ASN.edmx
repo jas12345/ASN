@@ -793,6 +793,10 @@
           <Parameter Name="EstatusSolicitud" Type="varchar" Mode="In" />
           <Parameter Name="EstatusConcepto" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="ReporteDescuentosVarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="PeriodoNominaId" Type="int" Mode="In" />
+          <Parameter Name="Empresaid" Type="int" Mode="In" />
+        </Function>
         <Function Name="ReporteFoliosContratoEmpresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
         </Function>
@@ -1773,6 +1777,10 @@
             <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="CCMSIdSolicitante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteDescuentosVarios" ReturnType="Collection(ASNModel.ReporteDescuentosVarios_Result)">
+            <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
+            <Parameter Name="Empresaid" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2951,6 +2959,15 @@
           <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="800" />
           <Property Type="Int32" Name="Result" Nullable="true" />
           <Property Type="Int32" Name="FolioSolicitud" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ReporteDescuentosVarios_Result">
+          <Property Type="String" Name="PERIODO_DE_NOMINA" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="SITE" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="EMPLEADO" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="IMPORTE" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CONCEPTO" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="DESCRIPCION" Nullable="true" MaxLength="30" />
         </ComplexType>
        
         </Schema>
@@ -4670,6 +4687,19 @@
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
                 <ScalarProperty Name="Result" ColumnName="Result" />
                 <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteDescuentosVarios" FunctionName="ASNModel.Store.ReporteDescuentosVarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteDescuentosVarios_Result">
+                <ScalarProperty Name="PERIODO_DE_NOMINA" ColumnName="PERIODO DE NOMINA" />
+                <ScalarProperty Name="SITE" ColumnName="SITE" />
+                <ScalarProperty Name="EMPLEADO" ColumnName="EMPLEADO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
+                <ScalarProperty Name="CONCEPTO" ColumnName="CONCEPTO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

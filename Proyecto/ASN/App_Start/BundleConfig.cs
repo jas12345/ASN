@@ -187,6 +187,10 @@ namespace ASN
             bundles.Add(new ScriptBundle("~/bundles/ReportePendientesAutorizarYRechazados").Include(
             "~/Scripts/ReportePendientesAutorizarYRechazados.js"));
 
+            //ReporteDescuentosVarios
+            bundles.Add(new ScriptBundle("~/bundles/ReporteDescuentosVarios").Include(
+            "~/Scripts/ReporteDescuentosVarios.js"));
+
         }
     }
 }
