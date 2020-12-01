@@ -91,6 +91,8 @@ namespace ASN.Controllers
 
                 using (ASNContext ctx = new ASNContext())
                 {
+
+
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     //lstCMB = ctx.CatCityTodosCMB().ToList();
                     lstCMB = ctx.CatCityByCountryCMB(country).ToList();
@@ -130,10 +132,13 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetSitesCMB(int? country, int? city)
+        public JsonResult GetSitesCMB(int? country, string city)
         {
             try
             {
+                
+                city = (city.IndexOf("-1") > 0) ? "-1" : city;
+                city = (city == "") ? "-1" : city;
                 //var lstCMB = new List<CatLocationTodosCMB_Result>();
                 var lstCMB = new List<CatLocationByCityCMB_Result>();
 
@@ -155,12 +160,18 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetClientesCMB(int? country, int? city, int? site)
+        public JsonResult GetClientesCMB(int? country, string city, string site)
         {
             try
             {
                 //var lstCMB = new List<CatClientTodosCMB_Result>();
+                
+                city = (city.IndexOf("-1") > 0) ? "-1" : city;
+                site = (site.IndexOf("-1") > 0) ? "-1" : site;
+                city = (city == "") ? "-1" : city;
+                site = (site == "") ? "-1" : site;
                 var lstCMB = new List<CatClientBySiteCMB_Result>();
+
 
                 using (ASNContext ctx = new ASNContext())
                 {
@@ -205,11 +216,17 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetTiposContratoCMB(int? country, int? city, int? site, string client, int? program)
+        public JsonResult GetTiposContratoCMB(int? country, string city, string site, string client, int? program)
         {
             try
             {
                 //var lstCMB = new List<CatContractTypeTodosCMB_Result>();
+                city = (city.IndexOf("-1") > 0) ? "-1" : city;
+                site = (site.IndexOf("-1") > 0) ? "-1" : site;
+                city = (city == "") ? "-1" : city;
+                site = (site == "") ? "-1" : site;
+                client = (client.IndexOf("0") > 0) ? "-1" : client;
+
                 var lstCMB = new List<CatContractTypeByProgramCMB_Result>();
 
                 using (ASNContext ctx = new ASNContext())
@@ -301,7 +318,7 @@ namespace ASN.Controllers
                                 Country_Ident = (item.Country_Ident != null ? item.Country_Ident.ToString() : "-1"),
                                 NombrePerfilEmpleados = item.NombrePerfilEmpleados,
                                 Country_Full_Name = item.Country_Full_Name,
-                                City_Ident = item.City_Ident,
+                                City_Ident =item.City_Ident.ToString(),
                                 City_Name = item.City_Name,
                                 Location_Ident = (item.Location_Ident != null ? item.Location_Ident.ToString() : "-1"),
                                 Location_Name = item.Location_Name,
@@ -364,7 +381,8 @@ namespace ASN.Controllers
                                 (string.IsNullOrEmpty(obj.Country_Ident)?-1:int.Parse(obj.Country_Ident)),
                                 //obj.City_Ident,
                                 obj.City_Ident,
-                                (string.IsNullOrEmpty(obj.Location_Ident) ?-1:int.Parse(obj.Location_Ident)),
+                                //(string.IsNullOrEmpty(obj.Location_Ident) ?-1:int.Parse(obj.Location_Ident)),
+                                obj.Location_Ident,
                                 //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
                                 obj.Client_Ident,
                                 (string.IsNullOrEmpty(obj.Program_Ident)?-1:int.Parse(obj.Program_Ident)),
@@ -434,7 +452,8 @@ namespace ASN.Controllers
 
                                 (string.IsNullOrEmpty(obj.Country_Ident) ? -1 : int.Parse(obj.Country_Ident)),
                                 obj.City_Ident,
-                                (string.IsNullOrEmpty(obj.Location_Ident) ? -1 : int.Parse(obj.Location_Ident)),
+                                //(string.IsNullOrEmpty(obj.Location_Ident) ? -1 : int.Parse(obj.Location_Ident)),
+                                obj.Location_Ident,
                                 //(string.IsNullOrEmpty(obj.Client_Ident) ? -1 : int.Parse(obj.Client_Ident)),
                                 obj.Client_Ident,
                                 (string.IsNullOrEmpty(obj.Program_Ident) ? -1 : int.Parse(obj.Program_Ident)),

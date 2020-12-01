@@ -32,7 +32,7 @@
                         .OptionLabel("- Seleccione Pais -")
                         .Name("Country_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        //.Events(eve => eve.Change("CargaCiudad"))
+                        .Events(eve => eve.Change("CargaCiudad"))
                         .Events(eve => eve.Open("adjustDropDownWidth"))
             )
         </div>
@@ -40,7 +40,7 @@
             <label for="City_Ident">Ciudad</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.City_Ident)
+            @(Html.Kendo().MultiSelectFor(x => x.City_Ident)
                         .DataSource(source =>
                         {
                             source.Read(read =>
@@ -52,19 +52,23 @@
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
-                        .OptionLabel("- Seleccione Ciudad -")
+                        //.OptionLabel("- Seleccione Ciudad -")
                         .Name("City_Ident")
-                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        //.Events(eve => eve.Change("CargaSite"))
-                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth"))
-                        .CascadeFrom("Country_Ident")
+                        .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })                       
+                        .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth").Change("CargaSite"))
+                        //.CascadeFrom("Country_Ident")
+                        .ValuePrimitive(true)
+                        .AutoBind(true)
+                        .ClearButton(true)
+                        .Placeholder("- Seleccione Ciudad -")
+                        
             )
         </div>
         <div class="editor-label">
             <label for="Site">Site</label>
         </div>
         <div class="editor-field">
-            @(Html.Kendo().DropDownListFor(x => x.Location_Ident)
+            @(Html.Kendo().MultiSelectFor(x => x.Location_Ident)
                         .DataSource(source =>
                         {
                             source.Read(read =>
@@ -76,12 +80,16 @@
                         .Filter("contains")
                         .DataValueField("Id")
                         .DataTextField("Value")
-                        .OptionLabel("- Seleccione Site -")
+                        //.OptionLabel("- Seleccione Site -")
                         .Name("Location_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
                         //.Events(eve => eve.Change("CargaCliente"))
                         .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth").Select("selectAllClientes").Change("CargaCliente"))
-                        .CascadeFrom("City_Ident")
+                        //.CascadeFrom("City_Ident")
+                        .ValuePrimitive(true)
+                        .AutoBind(true)
+                        .ClearButton(true)
+                        .Placeholder("- Seleccione Site -")
             )
         </div>
         <div class="editor-label">
@@ -175,7 +183,7 @@
                         .OptionLabel("- Seleccione Programa -")
                         .Name("Program_Ident")
                         .HtmlAttributes(new { style = "text-align:center;width: 16.4em" })
-                        //.Events(eve => eve.Change("CargaContrato"))
+                        .Events(eve => eve.Change("CargaContrato"))
                         .Events(eve => eve.DataBound("validando").Open("adjustDropDownWidth").Select("selectPrograma"))
                         //.CascadeFrom("Client_Ident")
             )
