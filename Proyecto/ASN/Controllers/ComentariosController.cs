@@ -103,5 +103,84 @@ namespace ASN.Controllers
             }
         }
 
+        [HttpGet]
+        //public ActionResult GetMotivoR(int folioId, int eid, int conceptoId)
+        public ActionResult GetMotivoR(int folioId, int eid, int conceptoId)
+        {
+            int ccmsUser = 0;
+
+            int.TryParse(User.Identity.Name, out ccmsUser);
+
+            var list2 = new List<TraCommentSel_Result>();
+
+            TraComment obj = new TraComment();
+
+            obj.TraCommentId = -1;
+            obj.FolioId = folioId;
+            obj.EmployeeId = eid;
+            obj.ConceptoId = conceptoId;
+
+            list2.Add(obj);
+
+            return PartialView("CommentsMotivoR", list2);
+
+        }
+
+
+        public ActionResult GetMotivoRV(List<TraCommentSelViewModel> listonx)
+        {
+            var list2 = new List<TraCommentSel_Result>();
+
+            foreach (var item in listonx)
+            {
+                TraComment obj = new TraComment();
+
+                obj.TraCommentId = -1;
+                obj.FolioId = item.FolioSolicitud;
+                obj.EmployeeId = item.Empleado_Ident;
+                obj.ConceptoId = item.ConceptoId;
+                list2.Add(obj);
+            }
+
+            return PartialView("CommentsMotivoR", list2);
+        }
+
+        [HttpPost]
+        public ActionResult CreateCommentMotivo(int folioId, int eid, int conceptoId, string comment)
+        {
+            try
+            {
+                int ccmsUser = 0;
+
+                if (int.TryParse(User.Identity.Name, out ccmsUser) && comment.Length > 9 && !string.IsNullOrWhiteSpace(comment) && !string.IsNullOrEmpty(comment))
+                {
+                    using (ASNContext context = new ASNContext())
+                    {
+                        int ok = context.TraCommentSi(ccmsUser, folioId, eid, conceptoId, comment);
+
+                        if (ok == 1)
+                        {
+                            return Json(1, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            return Json(0, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                }
+                else
+                {
+                    return Json(2);
+                }
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json(0);
+            }
+
+        }
     }
 }

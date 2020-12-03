@@ -372,7 +372,7 @@ function getIdent() {
     return {
         Ident: ConEmpleadoident,
         Ident_Solicitante: Solicitante_Ident,
-        TipoNomina : 'O'
+        TipoNomina: 'O'
     };
 }
 
@@ -1073,7 +1073,14 @@ function rechazarSolicitudALL() {
         var listaR = [];
 
         rows.each(function (e) {
+
             var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+            var motivo = "";
+
+            while (motivo <= 9) {
+                motivo = prompt(`Motivo del Rechazo Empleado ${dataItem.Ident} (Al menos 10 caracteres) :`);
+            }
 
             var algo = {
                 FolioSolicitud: dataItem.FolioSolicitud,
@@ -1083,8 +1090,20 @@ function rechazarSolicitudALL() {
                 Accion: 3
             };
 
+            //folioId, int eid, int conceptoId, string comment
+
+            $.post(urlCreateCommentMotivo + "?folioId=" + algo.FolioSolicitud + "&eid=" + algo.Empleado_Ident + "&conceptoId=" + algo.ConceptoId + "&comment=" + motivo);
+
             listaR.push(algo);
+
         });
+
+        //for (var x = 0; x <= listaR.length; x++) {
+        //    openMotivoRechazo(x.FolioSolicitud, x.Empleado_Ident, x.ConceptoId);
+        //}
+
+        //listaR.forEach(element => openMotivoRechazo(element.FolioSolicitud, element.Empleado_Ident, element.ConceptoId));
+
 
         var listones = JSON.stringify({ 'liston': listaR });
 
@@ -1137,46 +1156,71 @@ function rechazarSolicitudALL() {
 function rechazarTodaSolicitud() {
     //Se rechazan todos los conceptos de la solicitud independientemente del grid
     var listaA = [];
-    var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+    var listaB = [];
 
-    var algo = {
-        FolioSolicitud: $("#FolioSolicitud").val(),
-        Autorizador_Ident: usuarioCCMSID,
-        ConceptoId: 0,
-        NivelAutorizacion: 0,
-        Accion: 6
-    };
+    //var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+    var rows = $("#gridAutorizacion").data("kendoGrid").dataSource.data();
 
-    listaA.push(algo);
+    for (var x = 0; x < rows.length; x++) {
+        var item = {
+            FolioSolicitud: rows[x].FolioSolicitud,
+            Empleado_Ident: rows[x].Ident,
+            ConceptoId: rows[x].ConceptoId,
+            NivelAutorizacion: 0
+        };
+        listaB.push(item);
+    }
 
-    var listones = JSON.stringify({ 'liston': listaA });
+    if (listaB.length > 0) {
 
-    $.when(
-        $.ajax({
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            type: 'POST',
-            url: urlRechazaSolicitud,
-            data: listones,
-            success: function () {
-                //$('#result').html('"PassThings()" successfully called.');
-                //console.log("todo bien");
-            },
-            failure: function (response) {
-                //$('#result').html(response);
-                //console.log("algo paso");
+        for (var indice of listaB) {
+            var motivo = "";
+
+            while (motivo <= 9) {
+                motivo = prompt(`Motivo del Rechazo Empleado ${indice.Empleado_Ident} (10 caracteres) :`);
             }
-        })
-    ).done(function () {
-        //console.log("finito_A");
-        var grid = $("#gridAutorizacion").data("kendoGrid");
-        grid._selectedIds = {};
-        grid.clearSelection();
-        calculaEstatusSolicitud();
-        calculaPeriodoNominaSolicitud();
-        actualizaGrid();
-    });
 
+            $.post(urlCreateCommentMotivo + "?folioId=" + indice.FolioSolicitud + "&eid=" + indice.Empleado_Ident + "&conceptoId=" + indice.ConceptoId + "&comment=" + motivo);
+
+        }
+    }
+        var algo = {
+            FolioSolicitud: $("#FolioSolicitud").val(),
+            Autorizador_Ident: usuarioCCMSID,
+            ConceptoId: 0,
+            NivelAutorizacion: 0,
+            Accion: 3//6
+        };
+
+        listaA.push(algo);
+
+        var listones = JSON.stringify({ 'liston': listaA });
+
+        $.when(
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: urlRechazaSolicitud,
+                data: listones,
+                success: function () {
+                    //$('#result').html('"PassThings()" successfully called.');
+                    //console.log("todo bien");
+                },
+                failure: function (response) {
+                    //$('#result').html(response);
+                    //console.log("algo paso");
+                }
+            })
+        ).done(function () {
+            //console.log("finito_A");
+            var grid = $("#gridAutorizacion").data("kendoGrid");
+            //grid._selectedIds = {};
+            //grid.clearSelection();
+            calculaEstatusSolicitud();
+            calculaPeriodoNominaSolicitud();
+            actualizaGrid();
+        });
 }
 
 function autorizarTodaSolicitudDialog() {
@@ -1582,14 +1626,13 @@ function excelExport(e) {
 }
 
 function uploadFile(e) {
-        e.data = {
-            folioSolicitud: $("#folioId").val()
-        }
+    e.data = {
+        folioSolicitud: $("#folioId").val()
+    }
 }
 
 function bloquearAutorizacion(folio) {
-    $.post(urlBloquearAutorizacion + "?FolioSolicitud=" + folio , function (data)
-    {
+    $.post(urlBloquearAutorizacion + "?FolioSolicitud=" + folio, function (data) {
         console.log(data);
         if (data == 0) {
             $("#AutorizarSolicitudALL").hide();

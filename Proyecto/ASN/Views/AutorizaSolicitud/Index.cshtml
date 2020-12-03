@@ -59,19 +59,19 @@
             <div class="col-lg-2">
                 @*<a href="../Evidencias/" target="_blank">Evidencias (40 MB máximo)</a>*@
                 @(Html.Kendo().Button().Name("EvidenciasAnchor").Content("Evidencias (40 MB máximo)").Icon("")
-                                .Events(x => x.Click("MostrarEvidenciasModal")).Tag("a") //type = "anchor"
-                                                                                         //.Events(x => x.Click("agregaEmpleado"))
-                                    )
+                                                .Events(x => x.Click("MostrarEvidenciasModal")).Tag("a") //type = "anchor"
+                                                                                                         //.Events(x => x.Click("agregaEmpleado"))
+                )
 
             </div>
             <div class="col-lg-3">
                 @(Html.Kendo().Upload()
-                    .Name("evidencias")
-                    .Async(a => a
-                        .Save("Async_SaveFiles", "AutorizaSolicitud")
-                        .AutoUpload(true)
-                    )
-                    .Events(e => e.Upload("uploadFile"))
+                                    .Name("evidencias")
+                                    .Async(a => a
+                                        .Save("Async_SaveFiles", "AutorizaSolicitud")
+                                        .AutoUpload(true)
+                                    )
+                                    .Events(e => e.Upload("uploadFile"))
                 )
             </div>
         </div>
@@ -81,15 +81,15 @@
             <div class="col-lg-4">
                 @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
-                    .Enable(false)
-                    .Spinners(false)
-                    .Decimals(0)
-                    .Format("0")
-                    .Min(0)
-                    .Events(e => e.Change("onChangeFolioSolicitud"))
-                    //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
-                    .Value(Model.FolioSolicitud)
-                    .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
+                                    .Enable(false)
+                                    .Spinners(false)
+                                    .Decimals(0)
+                                    .Format("0")
+                                    .Min(0)
+                                    .Events(e => e.Change("onChangeFolioSolicitud"))
+                                    //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
+                                    .Value(Model.FolioSolicitud)
+                                    .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
                 )
             </div>
             <div class="col-lg-4">
@@ -197,134 +197,134 @@
                         <tr>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                    .Name("CCMSIDSolicitado")
-                                    .Spinners(false)
-                                    .Decimals(0)
-                                    .Format("0.")
-                                    .Min(0)
-                                    .Events(e => e.Change("onChangeCCMSId"))
-                                    .Enable(false)
-                                    //.Step(5)
-                                    //.Value(0)
-                                    .HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
+.Name("CCMSIDSolicitado")
+.Spinners(false)
+.Decimals(0)
+.Format("0.")
+.Min(0)
+.Events(e => e.Change("onChangeCCMSId"))
+.Enable(false)
+//.Step(5)
+//.Value(0)
+.HtmlAttributes(new { style = "text-align:center;width: 9em;", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                    {
-                                    source.Read(read =>
-                                    {
-                                        read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "AutorizaSolicitud").Data("getIdent"); ;
-                                    }
-                                    );
-                                                //.ServerFiltering(true);
-                                            }
-                                    )
-                                    .Filter("contains")
-                                    .AutoBind(false)
-                                    .OptionLabel("- Conceptos - ")
-                                    .DataValueField("Ident")
-                                    .DataTextField("Valor")
-                                    .Name("Conceptos")
-                                    .Enable(false)
-                                    .Events(e => e.Change("onChangeConceptos"))
-                                    //.SelectedIndex(1)
-                                    .Enable(true)
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetConceptosxEmpleadoxSolicitanteCMB", "AutorizaSolicitud").Data("getIdent"); ;
+                                }
+                                            );
+                                //.ServerFiltering(true);
+                            }
+)
+.Filter("contains")
+.AutoBind(false)
+.OptionLabel("- Conceptos - ")
+.DataValueField("Ident")
+.DataTextField("Valor")
+.Name("Conceptos")
+.Enable(false)
+.Events(e => e.Change("onChangeConceptos"))
+//.SelectedIndex(1)
+.Enable(true)
+.HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                    .Name("Parametro")
-                                    .Enable(false)
-                                    .Events(e => e.Change("onChangeParametro"))
-                                    .Spinners(false)
-                                    .Decimals(2)
-                                    .Format("0.00")
-                                    .Min(0)
-                                    //.Step(5)
-                                    //.Value(0)
-                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+.Name("Parametro")
+.Enable(false)
+.Events(e => e.Change("onChangeParametro"))
+.Spinners(false)
+.Decimals(2)
+.Format("0.00")
+.Min(0)
+//.Step(5)
+//.Value(0)
+.HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                    {
-                                        source.Read(read =>
-                                        {
-                                            read.Action("GetMotivosCMB", "AutorizaSolicitud");
-                                        }
-                                    );
-                                                    //.ServerFiltering(true);
-                                                }
-                                                                                )
-                                    .Filter("contains")
-                                    .OptionLabel("- Motivo - ")
-                                    .DataValueField("Id")
-                                    .DataTextField("Valor")
-                                    .Name("Motivo")
-                                    .Enable(false)
-                                    .Events(e => e.Change("onChangeMotivo"))
-                                    //.SelectedIndex(1)
-                                    .Enable(true)
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetMotivosCMB", "AutorizaSolicitud");
+                                }
+                            );
+                                //.ServerFiltering(true);
+                            }
+                                )
+.Filter("contains")
+.OptionLabel("- Motivo - ")
+.DataValueField("Id")
+.DataTextField("Valor")
+.Name("Motivo")
+.Enable(false)
+.Events(e => e.Change("onChangeMotivo"))
+//.SelectedIndex(1)
+.Enable(true)
+.HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                    {
-                                        source.Read(read =>
-                                                    {
-                                                        read.Action("GetConceptosMotivosCMB", "AutorizaSolicitud");
-                                                    });
-                                                    //.ServerFiltering(true);
-                                                })
-                                    .Filter("contains")
-                                    .OptionLabel("- Concepto Motivo - ")
-                                    .DataValueField("Ident")
-                                    .DataTextField("Valor")
-                                    .Name("ConceptoMotivo")
-                                    .Enable(false)
-                                    .Events(e => e.Change("onChangeConceptoMotivo"))
-                                    //.SelectedIndex(1)
-                                    .Enable(true)
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetConceptosMotivosCMB", "AutorizaSolicitud");
+                                });
+                                //.ServerFiltering(true);
+                            })
+.Filter("contains")
+.OptionLabel("- Concepto Motivo - ")
+.DataValueField("Ident")
+.DataTextField("Valor")
+.Name("ConceptoMotivo")
+.Enable(false)
+.Events(e => e.Change("onChangeConceptoMotivo"))
+//.SelectedIndex(1)
+.Enable(true)
+.HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
-                                    .Name("CCMSIDIncidente")
-                                    .Enable(false)
+.Name("CCMSIDIncidente")
+.Enable(false)
 
-                                    .Spinners(false)
-                                    .Decimals(0)
-                                    .Format("0.")
-                                    .Min(0)
-                                    .Events(e => e.Change("onChangeCCMSIdIncidente"))
-                                    //.Step(5)
-                                    //.Value(0)
-                                    .HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
+.Spinners(false)
+.Decimals(0)
+.Format("0.")
+.Min(0)
+.Events(e => e.Change("onChangeCCMSIdIncidente"))
+//.Step(5)
+//.Value(0)
+.HtmlAttributes(new { style = "text-align:center;width: 9em", maxlength = "10" })
                                 )
                             </td>
                             <td>
                                 @(Html.Kendo().DropDownList().DataSource(source =>
-                                    {
-                                        source.Read(read =>
-                                                    {
-                                        read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
-                                    });
-                                                    //.ServerFiltering(true);
-                                                })
-                                    .Filter("contains")
-                                    .OptionLabel("- Período Incidente - ")
-                                    .DataValueField("Ident")
-                                    .DataTextField("Valor")
-                                    .Name("PeriodoIncidente")
-                                    //.Enable(false)
-                                    .Events(e => e.Change("onChangePeriodoIncidente"))
-                                    //.SelectedIndex(1)
-                                    .Enable(true)
-                                    .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetPeriodoNominaCMB", "AutorizaSolicitud");
+                                });
+                                //.ServerFiltering(true);
+                            })
+.Filter("contains")
+.OptionLabel("- Período Incidente - ")
+.DataValueField("Ident")
+.DataTextField("Valor")
+.Name("PeriodoIncidente")
+//.Enable(false)
+.Events(e => e.Change("onChangePeriodoIncidente"))
+//.SelectedIndex(1)
+.Enable(true)
+.HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
                             </td>
                         </tr>
@@ -344,32 +344,32 @@
                             </div>*@
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("AutorizarSolicitudALL").Content("Autorizar").Icon("check")
-                            .Events(x => x.Click("autorizarSolicitudALL")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
-                            
+.Events(x => x.Click("autorizarSolicitudALL")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+
                             )
                         </div>
                         @*boton mostrar*@
                         <div class="col-lg-3">
 
                             @(Html.Kendo().Button().Name("MostrarTotales").Content("Totales").Icon("")
-                                            .Events(x => x.Click("MostrarTotalesModal")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;", type = "button" })
-                                    //.Events(x => x.Click("agregaEmpleado"))
-                                    )
+            .Events(x => x.Click("MostrarTotalesModal")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;", type = "button" })
+                            //.Events(x => x.Click("agregaEmpleado"))
+                            )
                         </div>
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("AutorizarTodaSolicitud").Content("Autorizar Toda Solicitud").Icon("check")
-                            .Events(x => x.Click("autorizarTodaSolicitudDialog")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
-                            
+.Events(x => x.Click("autorizarTodaSolicitudDialog")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;" })
+
                             )
                         </div>
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("RechazarSolicitudALL").Content("Rechazar").Icon("close")
-                            .Events(x => x.Click("rechazarSolicitudALL")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+.Events(x => x.Click("rechazarSolicitudALL")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                             )
                         </div>
                         <div class="col-lg-3">
                             @(Html.Kendo().Button().Name("RechazarTodaSolicitud").Content("Rechazar Toda Solicitud").Icon("check")
-                            .Events(x => x.Click("rechazarTodaSolicitudDialog")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
+.Events(x => x.Click("rechazarTodaSolicitudDialog")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })
                             )
                         </div>
                     </div>
@@ -478,147 +478,171 @@
     </div>
 
     @(Html.Kendo().Window()
-        .Name("Comentarios")
-        .Title("Comentarios")
-        .Content("loading user info...")
-        //.LoadContentFrom("GetComments", "MisReferidos")
-        .Iframe(true)
-        .Actions(a => a
-            //.Minimize()
-            .Maximize()
-            .Close()
-        )
-        .Resizable()
-        .Draggable()
-        .Width(470)
-        .Height(530)
-        .Visible(false)
-        .Modal(true)
+                                                                        .Name("Comentarios")
+                                                                        .Title("Comentarios")
+                                                                        .Content("loading user info...")
+                                                                        //.LoadContentFrom("GetComments", "MisReferidos")
+                                                                        .Iframe(true)
+                                                                        .Actions(a => a
+                                                                            //.Minimize()
+                                                                            .Maximize()
+                                                                            .Close()
+                                                                        )
+                                                                        .Resizable()
+                                                                        .Draggable()
+                                                                        .Width(470)
+                                                                        .Height(530)
+                                                                        .Visible(false)
+                                                                        .Modal(true)
     )
 
     @(Html.Kendo().Window()
-        .Title("Totales")
-        .Name("MostrarTotalesModal")
-        .LoadContentFrom("GetMontosAutorizaciones", "AutorizaSolicitud",new { FolioSolicitud=folioId, AutorizateIdent=@User.Identity.Name})
-        .Iframe(true)
-        .Actions(a => a
-        //.Minimize()
-        .Maximize()
-        .Close()
-        )
-        .Resizable()
-        .Draggable()
-        .Width(600)
-        .Height(530)
-        .Visible(false)
-        .Modal(true)
-        )
+                                                                        .Name("MotivoRechazoDialog")
+                                                                        .Title("Motivo del Rechazo")
+                                                                        //.Content("loading user info...")
+                                                                        //.LoadContentFrom("Comentarios", "GetMotivoR", new { liston = regSelect })
+                                                                        .Iframe(true)
+                                                                        .Actions(a => a
+                                                                            //.Minimize()
+                                                                            .Maximize()
+                                                                            .Close()
+                                                                        )
+                                                                        //.Events(
+                                                                        //        ev => ev
+                                                                        //        .Open("getDataGridComentarios")
+                                                                        //           )
+                                                                        .Resizable()
+                                                                        .Draggable()
+                                                                        .Width(470)
+                                                                        .Height(530)
+                                                                        .Visible(false)
+                                                                        .Modal(true)
+
+    )
 
     @(Html.Kendo().Window()
-        .Title("Evidencias")
-        .Name("MostrarArchivosEvidencias")
-        .Iframe(true)
-        .Actions(a => a
-        //.Minimize()
-        .Maximize()
-        .Close()
-        )
-        .Resizable()
-        .Draggable()
-        .Width(600)
-        .Height(530)
-        .Visible(false)
-        .Modal(true)
-        )
+                                                                        .Title("Totales")
+                                                                        .Name("MostrarTotalesModal")
+                                                                        .LoadContentFrom("GetMontosAutorizaciones", "AutorizaSolicitud", new { FolioSolicitud = folioId, AutorizateIdent = @User.Identity.Name })
+                                                                        .Iframe(true)
+                                                                        .Actions(a => a
+                                                                        //.Minimize()
+                                                                        .Maximize()
+                                                                        .Close()
+                                                                        )
+                                                                        .Resizable()
+                                                                        .Draggable()
+                                                                        .Width(600)
+                                                                        .Height(530)
+                                                                        .Visible(false)
+                                                                        .Modal(true)
+    )
+
+    @(Html.Kendo().Window()
+                                                                        .Title("Evidencias")
+                                                                        .Name("MostrarArchivosEvidencias")
+                                                                        .Iframe(true)
+                                                                        .Actions(a => a
+                                                                        //.Minimize()
+                                                                        .Maximize()
+                                                                        .Close()
+                                                                        )
+                                                                        .Resizable()
+                                                                        .Draggable()
+                                                                        .Width(600)
+                                                                        .Height(530)
+                                                                        .Visible(false)
+                                                                        .Modal(true)
+    )
 
     @(Html.Kendo().Dialog()
-       .Name("dialogValidaMontoSelect")
-       .Title("Advertencia")
-       .Content("<p><strong>Se está autorizando un monto superior a 20,000...</strong></p><p><strong>¿Deseas continuar?</strong></p>")
-       .Width(400)
-       .Closable(false)
-       .Modal(true)
-       .Animation(true)
-       .Visible(false)
-       .Actions(actions =>
-       {
-           actions.Add()
-           .Text("Aceptar monto")
-           .Action("aceptarMontoSelect");
-           actions.Add()
-           .Text("Rechazar monto")
-           .Action("rechazarMontoSelect")
-           .Primary(true);
-       })
+                                                                       .Name("dialogValidaMontoSelect")
+                                                                       .Title("Advertencia")
+                                                                       .Content("<p><strong>Se está autorizando un monto superior a 20,000...</strong></p><p><strong>¿Deseas continuar?</strong></p>")
+                                                                       .Width(400)
+                                                                       .Closable(false)
+                                                                       .Modal(true)
+                                                                       .Animation(true)
+                                                                       .Visible(false)
+                                                                       .Actions(actions =>
+                                                                       {
+                                                                           actions.Add()
+                                                                           .Text("Aceptar monto")
+                                                                           .Action("aceptarMontoSelect");
+                                                                           actions.Add()
+                                                                           .Text("Rechazar monto")
+                                                                           .Action("rechazarMontoSelect")
+                                                                           .Primary(true);
+                                                                       })
     )
     @(Html.Kendo().Dialog()
-       .Name("dialogValidaMontoTodas")
-       .Title("Advertencia")
-       .Content("<p><strong>Se está autorizando un monto superior a 20,000...</strong></p><p><strong>¿Deseas continuar?</strong></p>")
-       .Width(400)
-       .Closable(false)
-       .Modal(true)
-       .Animation(true)
-       .Visible(false)
-       .Actions(actions =>
-       {
-           actions.Add()
-           .Text("Aceptar monto")
-           .Action("aceptarMontoTodas");
-           actions.Add()
-           .Text("Rechazar monto")
-           .Action("rechazarMontoTodas")
-           .Primary(true);
-       })
+                                                                       .Name("dialogValidaMontoTodas")
+                                                                       .Title("Advertencia")
+                                                                       .Content("<p><strong>Se está autorizando un monto superior a 20,000...</strong></p><p><strong>¿Deseas continuar?</strong></p>")
+                                                                       .Width(400)
+                                                                       .Closable(false)
+                                                                       .Modal(true)
+                                                                       .Animation(true)
+                                                                       .Visible(false)
+                                                                       .Actions(actions =>
+                                                                       {
+                                                                           actions.Add()
+                                                                           .Text("Aceptar monto")
+                                                                           .Action("aceptarMontoTodas");
+                                                                           actions.Add()
+                                                                           .Text("Rechazar monto")
+                                                                           .Action("rechazarMontoTodas")
+                                                                           .Primary(true);
+                                                                       })
     )
 
     @(Html.Kendo().Notification()
-        .Name("popupNotificationCom")
-        .Position(p => p.Pinned(true).Top(30).Right(30))
-        .Stacking(NotificationStackingSettings.Down)
-        .Events(e => e.Show("onShow"))
+                                                                        .Name("popupNotificationCom")
+                                                                        .Position(p => p.Pinned(true).Top(30).Right(30))
+                                                                        .Stacking(NotificationStackingSettings.Down)
+                                                                        .Events(e => e.Show("onShow"))
     //.HtmlAttributes( new { @style = "background:rgba(0%,60%,0%,.7);color:white;"})
     )
 
     @(Html.Kendo().Dialog()
-        .Name("dialogAutorizaTodo")
-        .Title("Advertencia")
-        .Content("<p><strong>Se van a autorizar todos los conceptos de la solicitud...</strong></p><p>No es posible deshacer esta operación.</p><p><strong>Deseas continuar?</strong></p>")
-        .Width(400)
-        .Modal(true)
-        .Animation(true)
-        .Visible(false)
-        .Actions(actions =>
-        {
-            actions.Add()
-            .Text("Autorizar Todo")
-            .Action("autorizarTodaSolicitud");
-            actions.Add()
-            .Text("No autorizar")
-            .Action("onCancel")
-            .Primary(true);
-        })
+                                                                        .Name("dialogAutorizaTodo")
+                                                                        .Title("Advertencia")
+                                                                        .Content("<p><strong>Se van a autorizar todos los conceptos de la solicitud...</strong></p><p>No es posible deshacer esta operación.</p><p><strong>Deseas continuar?</strong></p>")
+                                                                        .Width(400)
+                                                                        .Modal(true)
+                                                                        .Animation(true)
+                                                                        .Visible(false)
+                                                                        .Actions(actions =>
+                                                                        {
+                                                                            actions.Add()
+                                                                            .Text("Autorizar Todo")
+                                                                            .Action("autorizarTodaSolicitud");
+                                                                            actions.Add()
+                                                                            .Text("No autorizar")
+                                                                            .Action("onCancel")
+                                                                            .Primary(true);
+                                                                        })
     )
 
 
     @(Html.Kendo().Dialog()
-        .Name("dialogRechazaTodo")
-        .Title("Advertencia")
-        .Content("<p><strong>Se van a rechazar todos los conceptos de la solicitud...</strong></p><p>No es posible deshacer esta operación.</p><p><strong>Deseas continuar?</strong></p>")
-        .Width(400)
-        .Modal(true)
-        .Animation(true)
-        .Visible(false)
-        .Actions(actions =>
-        {
-            actions.Add()
-            .Text("Rechazar Todo")
-            .Action("rechazarTodaSolicitud");
-            actions.Add()
-            .Text("No rechazar")
-            .Action("onCancel")
-            .Primary(true);
-        })
+                                                                        .Name("dialogRechazaTodo")
+                                                                        .Title("Advertencia")
+                                                                        .Content("<p><strong>Se van a rechazar todos los conceptos de la solicitud...</strong></p><p>No es posible deshacer esta operación.</p><p><strong>Deseas continuar?</strong></p>")
+                                                                        .Width(400)
+                                                                        .Modal(true)
+                                                                        .Animation(true)
+                                                                        .Visible(false)
+                                                                        .Actions(actions =>
+                                                                        {
+                                                                            actions.Add()
+                                                                            .Text("Rechazar Todo")
+                                                                            .Action("rechazarTodaSolicitud");
+                                                                            actions.Add()
+                                                                            .Text("No rechazar")
+                                                                            .Action("onCancel")
+                                                                            .Primary(true);
+                                                                        })
     )
 
 
@@ -742,6 +766,11 @@
 
         var urlBloquearAutorizacion = '@Url.Action("BloquearAutorizacion", "AutorizaSolicitud")';
 
+        //var urlGetMotivoR = '@Url.Action("GetMotivoR", "Comentarios")';
+
+        var urlGetMotivoRV = '@Url.Action("GetMotivoRV", "Comentarios")'
+
+        var urlCreateCommentMotivo = '@Url.Action("CreateCommentMotivo","Comentarios")'
         //debugger;
         //var urlSolicitud = grid.selectedKeyNames().join(", ");
 
@@ -753,13 +782,15 @@ else
 {
     <script type="text/javascript">
         $(function () {
-            window.location.href = "@Url.Action("Index","Inicio", new { area = "" }, null)";
+            window.location.href = "@Url.Action("Index", "Inicio", new { area = "" }, null)";
         });
     </script>
 }
 
 <script>
-    var InfoCCMSID = '@Url.Action("GetUserInfo","AutorizaSolicitud")';
+
+   // var MotivoRechazo = document.querySelector("#MotivoRechazoDialog");
+    var InfoCCMSID = '@Url.Action("GetUserInfo", "AutorizaSolicitud")';
 
     function MostrarTotalesModal() {
 
@@ -772,10 +803,11 @@ else
     function MostrarEvidenciasModal() {
 
         var mostrarDialogEvidencias = $("#MostrarArchivosEvidencias").data("kendoWindow");
+        
         var folioEvidencias = $("#FolioSolicitud").val();
 
         mostrarDialogEvidencias.refresh({
-            url: '@Url.Action("GetEvidencias","AutorizaSolicitud")/?folio=' + folioEvidencias
+            url: '@Url.Action("GetEvidencias", "AutorizaSolicitud")/?folio=' + folioEvidencias
         })
 
         mostrarDialogEvidencias.open().center(true);
@@ -790,8 +822,65 @@ else
             url: '@Url.Action("GetComments", "Comentarios")/?folioId=' + a + '&eid=' + b + '&conceptoId=' + c,
         });
 
-        dialog.center().open();
+        dialog.open().center(true);
     }
+
+    function openMotivoRechazo(a,b,c) {
+
+        var dialog = $("#MotivoRechazoDialog").data("kendoWindow");
+
+        dialog.refresh({
+            url: '@Url.Action("GetMotivoR", "Comentarios")/?folioId=' + a + '&eid=' + b + '&conceptoId=' + c
+        })
+
+        dialog.open().center(true);
+
+    }
+
+    //function motivoRechazoComentarios() {
+    //    var listaR = [];
+
+    //    var listonesX = [];
+    //    var listaX = [];
+
+    //    var rows = $("#gridAutorizacion").data("kendoGrid").select();
+
+    //    if (rows.length > 0) {
+    //        rows.each(function (e) {
+    //            var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
+
+    //            var algo = {
+    //                FolioSolicitud: dataItem.FolioSolicitud,
+    //                Empleado_Ident: dataItem.Ident,
+    //                ConceptoId: dataItem.ConceptoId
+    //            };
+    //            listaR.push(algo);
+    //        });
+    //    }
+
+    //    var listones = JSON.stringify({ 'liston': listaR });
+
+    //    return listones;
+    //}
+
+    //function getDataGridComentarios() {
+
+    //    var liston = motivoRechazoComentarios();
+
+    //    console.log(liston);
+    //    $.ajax({
+    //        contentType: 'application/json; charset=utf-8',
+    //        //dataType: 'json',
+    //        type: 'POST',
+    //        url: urlGetMotivoR,
+    //        data: motivoRechazoComentarios(),
+    //        success: function (response) {
+    //            $("#MotivoRechazoDialog").html(response);
+
+    //        }
+    //    });
+    //}
+
 </script>
 
 @Scripts.Render("~/bundles/AutorizaSolicitud")

@@ -635,6 +635,7 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TraComment.cs" />
+    <Compile Include="Models\TraCommentSelViewModel.cs" />
     <Compile Include="Models\TraCommentSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -668,6 +669,7 @@
     <Content Include="Content\Bootstrap\sprite_kpi_2x.png" />
     <Content Include="Content\Catalogos.css" />
     <Content Include="Content\Comentarios.css" />
+    <Content Include="Content\ComentariosMotivoRechazo.css" />
     <Content Include="Content\Default\editor.png" />
     <Content Include="Content\Default\imagebrowser.png" />
     <Content Include="Content\Default\indeterminate.gif" />
@@ -1015,6 +1017,7 @@
     <Content Include="Views\MisAutorizaciones\DetalleAutorizacion.cshtml" />
     <Content Include="Views\ReportePendientesAutorizarYRechazados\Index.cshtml" />
     <Content Include="Views\ReporteDescuentosVarios\Index.cshtml" />
+    <Content Include="Views\Comentarios\CommentsMotivoR.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
