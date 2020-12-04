@@ -1076,11 +1076,22 @@ function rechazarSolicitudALL() {
 
             var dataItem = $("#gridAutorizacion").data("kendoGrid").dataItem(this);
 
-            var motivo = "";
+           var motivo = "";
 
-            while (motivo <= 9) {
+           while (motivo.length <= 9) {
                 motivo = prompt(`Motivo del Rechazo Empleado ${dataItem.Ident} (Al menos 10 caracteres) :`);
-            }
+               //$("#modalMensajeMotivo").modal('show');
+
+               //var motivo = $("#messageMotivotext").val();
+
+
+           // $("#enviarMotivoR").attr("disabled", true);
+
+
+            //if (motivo.length <= 9) {
+            //    $("#enviarMotivoR").attr("enable", true);
+            //}
+           }
 
             var algo = {
                 FolioSolicitud: dataItem.FolioSolicitud,
@@ -1174,10 +1185,14 @@ function rechazarTodaSolicitud() {
     if (listaB.length > 0) {
 
         for (var indice of listaB) {
+
             var motivo = "";
 
-            while (motivo <= 9) {
+            while (motivo.length <= 9) {
                 motivo = prompt(`Motivo del Rechazo Empleado ${indice.Empleado_Ident} (10 caracteres) :`);
+                //$("#modalMensajeMotivo").modal('show');
+
+                //var motivo = $("#messageMotivotext").val();
             }
 
             $.post(urlCreateCommentMotivo + "?folioId=" + indice.FolioSolicitud + "&eid=" + indice.Empleado_Ident + "&conceptoId=" + indice.ConceptoId + "&comment=" + motivo);
