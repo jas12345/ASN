@@ -737,6 +737,15 @@
         </Function>
         <Function Name="EnviaSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="Autorizador1" Type="int" Mode="In" />
+          <Parameter Name="Autorizador2" Type="int" Mode="In" />
+          <Parameter Name="Autorizador3" Type="int" Mode="In" />
+          <Parameter Name="Autorizador4" Type="int" Mode="In" />
+          <Parameter Name="Autorizador5" Type="int" Mode="In" />
+          <Parameter Name="Autorizador6" Type="int" Mode="In" />
+          <Parameter Name="Autorizador7" Type="int" Mode="In" />
+          <Parameter Name="Autorizador8" Type="int" Mode="In" />
+          <Parameter Name="Autorizador9" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="GeneraArchivoSolicitudSel_Button" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1442,10 +1451,6 @@
           <FunctionImport Name="CatPeriodosNominaCerradosCMB" ReturnType="Collection(ASNModel.CatPeriodosNominaCerradosCMB_Result)">
           <Parameter Name="Active" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="EnviaSolicitud">
-            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="CatEstatusSolicitudSel" ReturnType="Collection(ASNModel.CatEstatusSolicitudSel_Result)">
           <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1780,6 +1785,19 @@
             <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
             <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
             <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EnviaSolicitud">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador1" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador2" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador3" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador4" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador5" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador6" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador7" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador8" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador9" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -3945,7 +3963,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="EnviaSolicitud" FunctionName="ASNModel.Store.EnviaSolicitud" />
           <FunctionImportMapping FunctionImportName="CatEstatusSolicitudSel" FunctionName="ASNModel.Store.CatEstatusSolicitudSel">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatEstatusSolicitudSel_Result">
@@ -4703,6 +4720,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSu" FunctionName="ASNModel.Store.CatPerfilEmpleadosSu" />
+          <FunctionImportMapping FunctionImportName="EnviaSolicitud" FunctionName="ASNModel.Store.EnviaSolicitud" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

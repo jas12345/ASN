@@ -637,7 +637,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult EnviaSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud)
+        public ActionResult EnviaSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud ,Nullable <int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
         {
             try
             {
@@ -658,7 +658,7 @@ namespace ASN.Controllers
                     int.TryParse(User.Identity.Name, out int idAdmin);
 
                     // EnviarSolicitud A Autorizadores
-                    context.EnviaSolicitud(FolioSolicitud, resultado);
+                    context.EnviaSolicitud(FolioSolicitud,autorizadorNivel1,autorizadorNivel2,autorizadorNivel3,autorizadorNivel4,autorizadorNivel5,autorizadorNivel6,autorizadorNivel7,autorizadorNivel8,autorizadorNivel9, resultado);
 
                     int.TryParse(resultado.Value.ToString(), out res);
 

@@ -52,7 +52,7 @@
             @Html.Label("Captura de Solicitudes", new { style = "font-size: 18px" })
         </div>*@
             <div class="col-sm-1">
-                @Html.Label("Carga Bono C")
+                @Html.Label("Carga Bono C / Bono Cliente")
             </div>
             <div class="col-lg-3">
                 @(Html.Kendo().Upload()
@@ -1161,13 +1161,16 @@ else
         folio.value(e.response[0])
         $("#Estatus").val("En Borrador");
         // $.post(urlDownLoadLogBonoC + "?filename=" + e.response[1]);
-        var x = urlDownLoadLogBonoC + "?filename=" + e.response[1];
-        window.location = x;
+        if (e.response[1] != null) {
+            var x = urlDownLoadLogBonoC + "?filename=" + e.response[1];
+            window.location = x;
+        }
         actualizaGrid();
+        limpiaCampos();
         $("#EnviarSolicitud").show();
         $("#MostrarTotales").show();
         $("#folioId").val(e.response);
-
+        
     }
 
     function errorsote(e) {
@@ -1183,6 +1186,24 @@ else
         //    });
         // }
 
+    }
+
+    function limpiaCampos() {
+        $("#AutorizadorNivel1").data("kendoDropDownList").value(-1);
+        $("#AutorizadorNivel2").data("kendoDropDownList").value(-1);
+        $("#AutorizadorNivel3").data("kendoDropDownList").value(-1);
+        $("#AutorizadorNivel4").data("kendoDropDownList").value(-1);
+        $("#AutorizadorNivel5").data("kendoDropDownList").value(-1);
+        $("#AutorizadorNivel6").data("kendoDropDownList").value(-1);
+        $("#AutorizadorNivel7").data("kendoDropDownList").value(-1);
+        $("#AutorizadorNivel8").data("kendoDropDownList").value(-1);
+        $("#AutorizadorNivel9").data("kendoDropDownList").value(-1);
+        $("#CCMSIDSolicitado").data('kendoNumericTextBox').value('');
+        $("#Conceptos").val() == '';
+        $("#ConceptoMotivo").val() == '';
+        $("#Parametro").val() == '';
+        $("#Motivo").val() == '';
+        $("#PeriodoIncidente").val() == '-1'
     }
 </script>
 
