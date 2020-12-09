@@ -62,6 +62,7 @@
                                                     .AutoUpload(true)
                                                 )
                                                 .Events(events => events
+                                                        .Upload("OnUpload")
                                                         .Success("onSuccessBono")
                                                         .Error("errorsote"))
                 )
@@ -1157,20 +1158,16 @@ else
     function onSuccessBono(e) {
         console.log("onSuccessBono")
         console.log(e);
-        var folio = $("#FolioSolicitud").data("kendoNumericTextBox");
-        folio.value(e.response[0])
+        $("#FolioSolicitud").data("kendoNumericTextBox").value(e.response[0]);
+        FolioSolicitud = $("#FolioSolicitud").val();
         $("#Estatus").val("En Borrador");
-        // $.post(urlDownLoadLogBonoC + "?filename=" + e.response[1]);
         if (e.response[1] != null) {
             var x = urlDownLoadLogBonoC + "?filename=" + e.response[1];
             window.location = x;
         }
-        actualizaGrid();
-        limpiaCampos();
         $("#EnviarSolicitud").show();
-        $("#MostrarTotales").show();
-        $("#folioId").val(e.response);
-        
+        $("#MostrarTotales").show();   
+        actualizaGrid();
     }
 
     function errorsote(e) {
@@ -1188,23 +1185,37 @@ else
 
     }
 
-    function limpiaCampos() {
-        $("#AutorizadorNivel1").data("kendoDropDownList").value(-1);
-        $("#AutorizadorNivel2").data("kendoDropDownList").value(-1);
-        $("#AutorizadorNivel3").data("kendoDropDownList").value(-1);
-        $("#AutorizadorNivel4").data("kendoDropDownList").value(-1);
-        $("#AutorizadorNivel5").data("kendoDropDownList").value(-1);
-        $("#AutorizadorNivel6").data("kendoDropDownList").value(-1);
-        $("#AutorizadorNivel7").data("kendoDropDownList").value(-1);
-        $("#AutorizadorNivel8").data("kendoDropDownList").value(-1);
-        $("#AutorizadorNivel9").data("kendoDropDownList").value(-1);
-        $("#CCMSIDSolicitado").data('kendoNumericTextBox').value('');
-        $("#Conceptos").val() == '';
-        $("#ConceptoMotivo").val() == '';
-        $("#Parametro").val() == '';
-        $("#Motivo").val() == '';
-        $("#PeriodoIncidente").val() == '-1'
+    function OnUpload(e) {
+        e.data = {
+            autorizadorNivel1: $("#AutorizadorNivel1").val(),
+            autorizadorNivel2: $("#AutorizadorNivel2").val(),
+            autorizadorNivel3: $("#AutorizadorNivel3").val(),
+            autorizadorNivel4: $("#AutorizadorNivel4").val(),
+            autorizadorNivel5: $("#AutorizadorNivel5").val(),
+            autorizadorNivel6: $("#AutorizadorNivel6").val(),
+            autorizadorNivel7: $("#AutorizadorNivel7").val(),
+            autorizadorNivel8: $("#AutorizadorNivel8").val(),
+            autorizadorNivel9: $("#AutorizadorNivel9").val()
+        }
     }
+
+    //function limpiaCampos() {
+    //    $("#AutorizadorNivel1").data("kendoDropDownList").value(-1);
+    //    $("#AutorizadorNivel2").data("kendoDropDownList").value(-1);
+    //    $("#AutorizadorNivel3").data("kendoDropDownList").value(-1);
+    //    $("#AutorizadorNivel4").data("kendoDropDownList").value(-1);
+    //    $("#AutorizadorNivel5").data("kendoDropDownList").value(-1);
+    //    $("#AutorizadorNivel6").data("kendoDropDownList").value(-1);
+    //    $("#AutorizadorNivel7").data("kendoDropDownList").value(-1);
+    //    $("#AutorizadorNivel8").data("kendoDropDownList").value(-1);
+    //    $("#AutorizadorNivel9").data("kendoDropDownList").value(-1);
+    //    $("#CCMSIDSolicitado").data('kendoNumericTextBox').value('');
+    //    $("#Conceptos").val() == '';
+    //    $("#ConceptoMotivo").val() == '';
+    //    $("#Parametro").val() == '';
+    //    $("#Motivo").val() == '';
+    //    $("#PeriodoIncidente").val() == '-1'
+    //}
 </script>
 
 @Scripts.Render("~/bundles/CapturaSolicitud")

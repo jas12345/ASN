@@ -2894,35 +2894,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB", activeParameter, cCMSIdParameter);
         }
     
-        public virtual ObjectResult<CatSolicitudBonoCSi_Result> CatSolicitudBonoCSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, string conceptoPS, Nullable<decimal> conceptoMonto, Nullable<int> userEmployeeId, Nullable<int> cCMSIdSolicitante)
-        {
-            var folioSolicitudParameter = folioSolicitud.HasValue ?
-                new ObjectParameter("FolioSolicitud", folioSolicitud) :
-                new ObjectParameter("FolioSolicitud", typeof(int));
-    
-            var employeeIdParameter = employeeId.HasValue ?
-                new ObjectParameter("EmployeeId", employeeId) :
-                new ObjectParameter("EmployeeId", typeof(int));
-    
-            var conceptoPSParameter = conceptoPS != null ?
-                new ObjectParameter("ConceptoPS", conceptoPS) :
-                new ObjectParameter("ConceptoPS", typeof(string));
-    
-            var conceptoMontoParameter = conceptoMonto.HasValue ?
-                new ObjectParameter("ConceptoMonto", conceptoMonto) :
-                new ObjectParameter("ConceptoMonto", typeof(decimal));
-    
-            var userEmployeeIdParameter = userEmployeeId.HasValue ?
-                new ObjectParameter("UserEmployeeId", userEmployeeId) :
-                new ObjectParameter("UserEmployeeId", typeof(int));
-    
-            var cCMSIdSolicitanteParameter = cCMSIdSolicitante.HasValue ?
-                new ObjectParameter("CCMSIdSolicitante", cCMSIdSolicitante) :
-                new ObjectParameter("CCMSIdSolicitante", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudBonoCSi_Result>("CatSolicitudBonoCSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, cCMSIdSolicitanteParameter);
-        }
-    
         public virtual ObjectResult<ReporteDescuentosVarios_Result> ReporteDescuentosVarios(Nullable<int> periodoNominaId, Nullable<int> empresaid)
         {
             var periodoNominaIdParameter = periodoNominaId.HasValue ?
@@ -3089,11 +3060,31 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosSu", perfil_IdentParameter, nombrePerfilEmpleadosParameter, country_IdentParameter, city_IdentParameter, location_IdentParameter, client_IdentParameter, program_IdentParameter, contract_Type_IdentParameter, conceptoIdParameter, tipoAccesoIdParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
-        public virtual int EnviaSolicitud(Nullable<int> folioSolicitud, Nullable<int> autorizador1, Nullable<int> autorizador2, Nullable<int> autorizador3, Nullable<int> autorizador4, Nullable<int> autorizador5, Nullable<int> autorizador6, Nullable<int> autorizador7, Nullable<int> autorizador8, Nullable<int> autorizador9, ObjectParameter estatus)
+        public virtual ObjectResult<CatSolicitudBonoCSi_Result1> CatSolicitudBonoCSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, string conceptoPS, Nullable<decimal> conceptoMonto, Nullable<int> userEmployeeId, Nullable<int> cCMSIdSolicitante, Nullable<int> autorizador1, Nullable<int> autorizador2, Nullable<int> autorizador3, Nullable<int> autorizador4, Nullable<int> autorizador5, Nullable<int> autorizador6, Nullable<int> autorizador7, Nullable<int> autorizador8, Nullable<int> autorizador9)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
                 new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var conceptoPSParameter = conceptoPS != null ?
+                new ObjectParameter("ConceptoPS", conceptoPS) :
+                new ObjectParameter("ConceptoPS", typeof(string));
+    
+            var conceptoMontoParameter = conceptoMonto.HasValue ?
+                new ObjectParameter("ConceptoMonto", conceptoMonto) :
+                new ObjectParameter("ConceptoMonto", typeof(decimal));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            var cCMSIdSolicitanteParameter = cCMSIdSolicitante.HasValue ?
+                new ObjectParameter("CCMSIdSolicitante", cCMSIdSolicitante) :
+                new ObjectParameter("CCMSIdSolicitante", typeof(int));
     
             var autorizador1Parameter = autorizador1.HasValue ?
                 new ObjectParameter("Autorizador1", autorizador1) :
@@ -3131,7 +3122,16 @@ namespace ASN.Models
                 new ObjectParameter("Autorizador9", autorizador9) :
                 new ObjectParameter("Autorizador9", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EnviaSolicitud", folioSolicitudParameter, autorizador1Parameter, autorizador2Parameter, autorizador3Parameter, autorizador4Parameter, autorizador5Parameter, autorizador6Parameter, autorizador7Parameter, autorizador8Parameter, autorizador9Parameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudBonoCSi_Result1>("CatSolicitudBonoCSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, cCMSIdSolicitanteParameter, autorizador1Parameter, autorizador2Parameter, autorizador3Parameter, autorizador4Parameter, autorizador5Parameter, autorizador6Parameter, autorizador7Parameter, autorizador8Parameter, autorizador9Parameter);
+        }
+    
+        public virtual int EnviaSolicitud(Nullable<int> folioSolicitud, ObjectParameter estatus)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EnviaSolicitud", folioSolicitudParameter, estatus);
         }
     }
 }

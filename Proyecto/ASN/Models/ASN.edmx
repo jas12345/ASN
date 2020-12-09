@@ -560,6 +560,15 @@
           <Parameter Name="ConceptoMonto" Type="decimal" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="CCMSIdSolicitante" Type="int" Mode="In" />
+          <Parameter Name="Autorizador1" Type="int" Mode="In" />
+          <Parameter Name="Autorizador2" Type="int" Mode="In" />
+          <Parameter Name="Autorizador3" Type="int" Mode="In" />
+          <Parameter Name="Autorizador4" Type="int" Mode="In" />
+          <Parameter Name="Autorizador5" Type="int" Mode="In" />
+          <Parameter Name="Autorizador6" Type="int" Mode="In" />
+          <Parameter Name="Autorizador7" Type="int" Mode="In" />
+          <Parameter Name="Autorizador8" Type="int" Mode="In" />
+          <Parameter Name="Autorizador9" Type="int" Mode="In" />
         </Function>
         <Function Name="CatSolicitudEmpleadosAutorizantesSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
@@ -737,15 +746,6 @@
         </Function>
         <Function Name="EnviaSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
-          <Parameter Name="Autorizador1" Type="int" Mode="In" />
-          <Parameter Name="Autorizador2" Type="int" Mode="In" />
-          <Parameter Name="Autorizador3" Type="int" Mode="In" />
-          <Parameter Name="Autorizador4" Type="int" Mode="In" />
-          <Parameter Name="Autorizador5" Type="int" Mode="In" />
-          <Parameter Name="Autorizador6" Type="int" Mode="In" />
-          <Parameter Name="Autorizador7" Type="int" Mode="In" />
-          <Parameter Name="Autorizador8" Type="int" Mode="In" />
-          <Parameter Name="Autorizador9" Type="int" Mode="In" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
         <Function Name="GeneraArchivoSolicitudSel_Button" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1731,14 +1731,6 @@
             <Parameter Name="Active" Mode="In" Type="Int32" />
             <Parameter Name="CCMSId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CatSolicitudBonoCSi" ReturnType="Collection(ASNModel.CatSolicitudBonoCSi_Result)">
-            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
-            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="ConceptoPS" Mode="In" Type="String" />
-            <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="CCMSIdSolicitante" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ReporteDescuentosVarios" ReturnType="Collection(ASNModel.ReporteDescuentosVarios_Result)">
             <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
             <Parameter Name="Empresaid" Mode="In" Type="Int32" />
@@ -1787,8 +1779,13 @@
             <Parameter Name="Active" Mode="In" Type="Boolean" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="EnviaSolicitud">
+          <FunctionImport Name="CatSolicitudBonoCSi" ReturnType="Collection(ASNModel.CatSolicitudBonoCSi_Result1)">
             <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoPS" Mode="In" Type="String" />
+            <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="CCMSIdSolicitante" Mode="In" Type="Int32" />
             <Parameter Name="Autorizador1" Mode="In" Type="Int32" />
             <Parameter Name="Autorizador2" Mode="In" Type="Int32" />
             <Parameter Name="Autorizador3" Mode="In" Type="Int32" />
@@ -1798,6 +1795,9 @@
             <Parameter Name="Autorizador7" Mode="In" Type="Int32" />
             <Parameter Name="Autorizador8" Mode="In" Type="Int32" />
             <Parameter Name="Autorizador9" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EnviaSolicitud">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -2986,6 +2986,11 @@
           <Property Type="Int32" Name="LastModifiedBy" Nullable="false" />
           <Property Type="DateTime" Name="LastModifiedDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="LastModifiedFromPCName" Nullable="false" MaxLength="64" />
+        </ComplexType>
+        <ComplexType Name="CatSolicitudBonoCSi_Result1">
+          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="Result" Nullable="true" />
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -4649,15 +4654,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatSolicitudBonoCSi" FunctionName="ASNModel.Store.CatSolicitudBonoCSi">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudBonoCSi_Result">
-                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
-                <ScalarProperty Name="Result" ColumnName="Result" />
-                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReporteDescuentosVarios" FunctionName="ASNModel.Store.ReporteDescuentosVarios">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.ReporteDescuentosVarios_Result">
@@ -4720,6 +4716,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPerfilEmpleadosSu" FunctionName="ASNModel.Store.CatPerfilEmpleadosSu" />
+          <FunctionImportMapping FunctionImportName="CatSolicitudBonoCSi" FunctionName="ASNModel.Store.CatSolicitudBonoCSi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudBonoCSi_Result1">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="EnviaSolicitud" FunctionName="ASNModel.Store.EnviaSolicitud" />
           </EntityContainerMapping>
       </Mapping>

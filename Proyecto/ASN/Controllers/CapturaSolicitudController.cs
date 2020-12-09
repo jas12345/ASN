@@ -637,7 +637,7 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult EnviaSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud ,Nullable <int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
+        public ActionResult EnviaSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud )
         {
             try
             {
@@ -658,7 +658,7 @@ namespace ASN.Controllers
                     int.TryParse(User.Identity.Name, out int idAdmin);
 
                     // EnviarSolicitud A Autorizadores
-                    context.EnviaSolicitud(FolioSolicitud,autorizadorNivel1,autorizadorNivel2,autorizadorNivel3,autorizadorNivel4,autorizadorNivel5,autorizadorNivel6,autorizadorNivel7,autorizadorNivel8,autorizadorNivel9, resultado);
+                    context.EnviaSolicitud(FolioSolicitud,resultado);
 
                     int.TryParse(resultado.Value.ToString(), out res);
 
@@ -875,7 +875,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult Async_SaveBono(IEnumerable<HttpPostedFileBase> filesBono)
+        public ActionResult Async_SaveBono(IEnumerable<HttpPostedFileBase> filesBono,Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
         {
             try
             {
@@ -973,7 +973,7 @@ namespace ASN.Controllers
 
                                             }
 
-                                            var lstLogx = context.CatSolicitudBonoCSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitanteIdent).ToList();
+                                            var lstLogx = context.CatSolicitudBonoCSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitanteIdent,autorizadorNivel1, autorizadorNivel2, autorizadorNivel3, autorizadorNivel4, autorizadorNivel5,autorizadorNivel6, autorizadorNivel7,autorizadorNivel8, autorizadorNivel9).ToList();
 
                                             if (lstLogx[0].FolioSolicitud > 0 && solicitudIdActual == -1)
                                             {

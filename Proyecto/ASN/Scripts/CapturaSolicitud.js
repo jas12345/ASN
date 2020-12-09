@@ -362,6 +362,7 @@ function agregarSolicitud() {
 
     else {
         var motivoDelConcepto = $("#idDescripcion").val();
+
         $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&PeriodoNomina_Id=" + $("#PeriodoNomina_Id").val() + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9 +"&MotivoDelConcepto=" + motivoDelConcepto, function (data) {
             //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
 
@@ -403,48 +404,6 @@ function enviarSolicitud() {
     //console.log("Salvado");
     //debugger;
     //infoSolicitud();
-    ///////////////////
-
-    // Se valida que se seleccionen autorizadores en todos los niveles del Concepto
-    var autorizadores = $("div[name='nivel']");
-    var igualesTotales = 0;
-    var autorizadoresDistintos = true;
-
-    var mapaAutorizadores = new Map();
-
-    // Se valida que se seleccionen autorizadores en todos los niveles del Concepto
-    //debugger;
-    $(autorizadores).each(function (nivel) {
-        if (($("#AutorizadorNivel" + (nivel + 1)).val() !== "") && ((nivel) < ConNivelesAutorizacion)) {
-            igualesTotales++;
-            console.log(nivel);
-        }
-    });
-
-    $(autorizadores).each(function (nivel) {
-
-        if (mapaAutorizadores.get($("#AutorizadorNivel" + (nivel + 1)).val()) == undefined || ($("#AutorizadorNivel" + (nivel + 1)).val() == "")) {
-            if ($("#AutorizadorNivel" + (nivel + 1)).val() != "") {
-                mapaAutorizadores.set($("#AutorizadorNivel" + (nivel + 1)).val(), $("#AutorizadorNivel" + (nivel + 1)).val());
-            }
-            autorizadoresDistintos = autorizadoresDistintos && true
-        }
-        else {
-            autorizadoresDistintos = autorizadoresDistintos && false
-        }
-
-    });
-
-
-    if (igualesTotales !== ConNivelesAutorizacion) {
-        var notificationDatos = $("#popupNotification").data("kendoNotification");
-        notificationDatos.show("Seleccione Autorizador en cada uno de los niveles del Concepto.", "warning");
-    }
-    else if (!autorizadoresDistintos) {
-        var notificationDatos = $("#popupNotification").data("kendoNotification");
-        notificationDatos.show("Aparece el mismo autorizador en mas de un nivel.", "warning");
-    }
-    else {
         FolioSolicitud = $("#FolioSolicitud").val();
 
         $.post(urlEnviaSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9, function (data) {
@@ -461,10 +420,7 @@ function enviarSolicitud() {
             //debugger;
 
             window.location.href = '../MisSolicitudes/Index';
-        });
-    }
-    ///////////////////
-    
+        }); 
 }
 
 function cancelarSolicitud() {
@@ -1870,7 +1826,7 @@ function onBlurParametro() {
        
         $.post(urlValidaEmpleadoConceptoMonto + "/?periodoNominaId=" + $("#PeriodoNomina_Id").val() + "&empleadoId=" + $("#CCMSIDSolicitado").val() + "&conceptoId=" + $("#Conceptos").val(), function (data) {
             console.log(data);
-            Folio = data[0].FolioSolicitud
+            Folio = data[0].FolioSolicitud;
             Nombre = data[0].Nombre;
             Monto = data[0].Monto;
            
