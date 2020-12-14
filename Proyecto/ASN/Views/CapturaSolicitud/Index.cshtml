@@ -49,10 +49,10 @@
     <div class="container-fluid">
         <div class="row">
             @*<div class="col-lg-4">
-            @Html.Label("Captura de Solicitudes", new { style = "font-size: 18px" })
-        </div>*@
+                @Html.Label("Captura de Solicitudes", new { style = "font-size: 18px" })
+            </div>*@
             <div class="col-sm-1">
-                @Html.Label("Carga Bono C / Bono Cliente")
+                @Html.Label("Carga Bono C / Bono Cliente / Cafetería / Fripick")
             </div>
             <div class="col-lg-3">
                 @(Html.Kendo().Upload()
@@ -103,23 +103,23 @@
         <p></p>
 
         @*// + "/?folioSolictud=" + folioId          , new { folioSolictud = folioId })) //
-            //.SaveUrl(@Url.Action("Async_SaveFiles", "CapturaSolicitud")) //, new { folioSolictud = folioId }
-            //*@
-  
+        //.SaveUrl(@Url.Action("Async_SaveFiles", "CapturaSolicitud")) //, new { folioSolictud = folioId }
+        //*@
+
         <div class="col-lg-12 col-md-12">
             <div class="col-lg-9">
                 <div class="col-lg-3 divFolio ">
                     @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
                     @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
-        .Enable(false)
-        .Spinners(false)
-        .Decimals(0)
-        .Format("0")
-        .Min(0)
-        .Events(e => e.Change("onChangeFolioSolicitud"))
-        //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
-        .Value(Model.FolioSolicitud)
-        .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
+                        .Enable(false)
+                        .Spinners(false)
+                        .Decimals(0)
+                        .Format("0")
+                        .Min(0)
+                        .Events(e => e.Change("onChangeFolioSolicitud"))
+                        //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
+                        .Value(Model.FolioSolicitud)
+                        .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
                     )
                 </div>
                 <div class="col-lg-4">
@@ -168,7 +168,7 @@
                 </div>
             </div>
         </div>
-  
+
         <p></p>
 
         <table class="table" style="margin-bottom: 5px;">
@@ -301,6 +301,9 @@
                             <th scope="col">
                                 Concepto Motivo
                             </th>
+                            <th scope="col" class="Ticket hidden">
+                                Ticket
+                            </th>
                             <th scope="col">
                                 Responsable de Incidente (CCMSID)
                             </th>
@@ -348,15 +351,15 @@
                                 )
                                 </div>
                             </td>
-                            <td class="Conceptos hidden">   
+                            <td class="Conceptos hidden">
                                 <div id="mensajeroDescripcion">
 
                                     <input type="text" name="idDescripcion" id="idDescripcion" value="" class="k-textbox" />
                                     @*@(Html.Kendo().TextBox()
-                                                .Name("idDescripcion") 
-                                                .Value("")
-                                                .HtmlAttributes(new { style = "text-align:center;width: 12em;", maxlength = "30", required = "required" })
-                                    )*@
+                            .Name("idDescripcion")
+                            .Value("")
+                            .HtmlAttributes(new { style = "text-align:center;width: 12em;", maxlength = "30", required = "required" })
+                )*@
                                 </div>
                             </td>
                             <td>
@@ -412,6 +415,17 @@
         .Enable(true)
         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                                 )
+                            </td>
+                            <td class="Ticket hidden">
+                                <div id="ticket">
+
+                                    <input type="text" name="idTicket" id="idTicket" value="" class="k-textbox" style=" width:80px;" />
+                                    @*@(Html.Kendo().TextBox()
+                            .Name("idDescripcion")
+                            .Value("")
+                            .HtmlAttributes(new { style = "text-align:center;width: 12em;", maxlength = "30", required = "required" })
+                )*@
+                                </div>
                             </td>
                             <td>
                                 @(Html.Kendo().NumericTextBox()
@@ -1083,6 +1097,8 @@
         var urlObtieneSolicitudDetalle = '@Url.Action("ObtieneSolicitudDetalle", "CapturaSolicitud")'
 
         var urlDownLoadLogBonoC = '@Url.Action("DownLoadLogBonoC","CapturaSolicitud")'
+
+         var urlValidaTickets = '@Url.Action("ValidaTickets", "CapturaSolicitud")';
 
     </script>
 }

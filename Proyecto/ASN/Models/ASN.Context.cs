@@ -215,6 +215,7 @@ namespace ASN.Models
     
         public virtual ObjectResult<CatProgramCMB_Result> CatProgramCMB()
         {
+           
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatProgramCMB_Result>("CatProgramCMB");
         }
     
@@ -3060,7 +3061,25 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatPerfilEmpleadosSu", perfil_IdentParameter, nombrePerfilEmpleadosParameter, country_IdentParameter, city_IdentParameter, location_IdentParameter, client_IdentParameter, program_IdentParameter, contract_Type_IdentParameter, conceptoIdParameter, tipoAccesoIdParameter, userEmployeeIdParameter, activeParameter, estatus);
         }
     
-        public virtual ObjectResult<CatSolicitudBonoCSi_Result1> CatSolicitudBonoCSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, string conceptoPS, Nullable<decimal> conceptoMonto, Nullable<int> userEmployeeId, Nullable<int> cCMSIdSolicitante, Nullable<int> autorizador1, Nullable<int> autorizador2, Nullable<int> autorizador3, Nullable<int> autorizador4, Nullable<int> autorizador5, Nullable<int> autorizador6, Nullable<int> autorizador7, Nullable<int> autorizador8, Nullable<int> autorizador9)
+        public virtual int EnviaSolicitud(Nullable<int> folioSolicitud, ObjectParameter estatus)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EnviaSolicitud", folioSolicitudParameter, estatus);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> CatValidaTickets(Nullable<int> incident)
+        {
+            var incidentParameter = incident.HasValue ?
+                new ObjectParameter("Incident", incident) :
+                new ObjectParameter("Incident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CatValidaTickets", incidentParameter);
+        }
+    
+        public virtual ObjectResult<CatSolicitudBonoCSi_Result> CatSolicitudBonoCSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, string conceptoPS, Nullable<decimal> conceptoMonto, Nullable<int> userEmployeeId, Nullable<int> cCMSIdSolicitante, Nullable<int> autorizador1, Nullable<int> autorizador2, Nullable<int> autorizador3, Nullable<int> autorizador4, Nullable<int> autorizador5, Nullable<int> autorizador6, Nullable<int> autorizador7, Nullable<int> autorizador8, Nullable<int> autorizador9)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
                 new ObjectParameter("FolioSolicitud", folioSolicitud) :
@@ -3122,16 +3141,7 @@ namespace ASN.Models
                 new ObjectParameter("Autorizador9", autorizador9) :
                 new ObjectParameter("Autorizador9", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudBonoCSi_Result1>("CatSolicitudBonoCSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, cCMSIdSolicitanteParameter, autorizador1Parameter, autorizador2Parameter, autorizador3Parameter, autorizador4Parameter, autorizador5Parameter, autorizador6Parameter, autorizador7Parameter, autorizador8Parameter, autorizador9Parameter);
-        }
-    
-        public virtual int EnviaSolicitud(Nullable<int> folioSolicitud, ObjectParameter estatus)
-        {
-            var folioSolicitudParameter = folioSolicitud.HasValue ?
-                new ObjectParameter("FolioSolicitud", folioSolicitud) :
-                new ObjectParameter("FolioSolicitud", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EnviaSolicitud", folioSolicitudParameter, estatus);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudBonoCSi_Result>("CatSolicitudBonoCSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, cCMSIdSolicitanteParameter, autorizador1Parameter, autorizador2Parameter, autorizador3Parameter, autorizador4Parameter, autorizador5Parameter, autorizador6Parameter, autorizador7Parameter, autorizador8Parameter, autorizador9Parameter);
         }
     }
 }

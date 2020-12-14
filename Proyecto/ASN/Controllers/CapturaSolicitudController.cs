@@ -1257,5 +1257,13 @@ namespace ASN.Controllers
 
         }
 
+        public ActionResult ValidaTickets(int? Ticket)
+        {
+            using (ASNContext ctx = new ASNContext())
+            {
+                var resultado = ctx.CatValidaTickets(Ticket).FirstOrDefault();
+                return Json(resultado);
+            }
+        }
     }
 }

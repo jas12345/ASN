@@ -49,7 +49,20 @@ $(document).ready(function () {
             alert('La descripcion es obligatoria')
         }
     })   
-    
+
+
+    $('#idTicket').on('blur', function () {       
+       
+        $.post(urlValidaTickets + "/?Ticket=" + $("#idTicket").val(), function (data) {
+            if (data == 0) {
+                alert("El ticket: " + $("#idTicket").val() + " No es valido")                
+                $("#idTicket").focus();
+                return false;
+            }
+            
+        });
+    })
+    $(".Ticket").addClass('hidden');
     //.on("focus", function () {
     //    if (this.value == placeholder) {
 
@@ -638,6 +651,8 @@ function deshabilitaControlesEdicion() {
 
     var CCMSIDIncidente = $("#CCMSIDIncidente").data("kendoNumericTextBox");
     CCMSIDIncidente.enable(false);
+
+   
 
 }
 
@@ -1757,6 +1772,13 @@ function onChangeConceptoMotivo() {
 
         $("#ConceptoMotivoX").val(ConConceptoMotivo);
         $("#ConceptoMotivoX").text(ConConceptoMotivo);
+
+       
+        if (conceptoMotivoId == 7 || conceptoMotivoId == 8  || conceptoMotivoId == 9  || conceptoMotivoId == 10 || conceptoMotivoId == 11  || conceptoMotivoId == 12 || conceptoMotivoId == 13 || conceptoMotivoId == 14 || conceptoMotivoId == 15)
+        {
+           // $(".Ticket").removeClass('hidden');
+           
+        }
     }
     else {
         $("#ConceptoMotivoX").val("");
@@ -1825,26 +1847,30 @@ function onBlurParametro() {
         // valida empleado, concepto, monto
        
         $.post(urlValidaEmpleadoConceptoMonto + "/?periodoNominaId=" + $("#PeriodoNomina_Id").val() + "&empleadoId=" + $("#CCMSIDSolicitado").val() + "&conceptoId=" + $("#Conceptos").val(), function (data) {
-            console.log(data);
-            Folio = data[0].FolioSolicitud;
-            Nombre = data[0].Nombre;
-            Monto = data[0].Monto;
-           
-            if (Folio != null && Folio != $("#FolioSolicitud").val() ) {
-                if (Monto == $("#Parametro").val() || $("#Conceptos").val() == 12 ) {
-                    var notification = $("#popupNotification").data("kendoNotification");
-                    msj = 'Ya existe la incidencia, Solicitante: '+ Nombre + ',  Folio: ' + Folio,
-                    notification.show(msj, "error");
-                    var parametro = $("#Parametro").data('kendoNumericTextBox')
-                    parametro.focus();
-                }
-                else if (Monto != $("#Parametro").val()){
-                    var notification = $("#popupNotification").data("kendoNotification");
-                   
-                    msj = 'Ya existe la incidencia pero con monto diferente, Solicitante:' + Nombre +', Folio:' + Folio;
-                    notification.show(msj, "warning");
+            
+            if (data.length > 0) {
+
+                Folio = data[0].FolioSolicitud;
+                Nombre = data[0].Nombre;
+                Monto = data[0].Monto;
+
+                if (Folio != null && Folio != $("#FolioSolicitud").val()) {
+                    if (Monto == $("#Parametro").val() || $("#Conceptos").val() == 12) {
+                        var notification = $("#popupNotification").data("kendoNotification");
+                        msj = 'Ya existe la incidencia, Solicitante: ' + Nombre + ',  Folio: ' + Folio,
+                            notification.show(msj, "error");
+                        var parametro = $("#Parametro").data('kendoNumericTextBox')
+                        parametro.focus();
+                    }
+                    else if (Monto != $("#Parametro").val()) {
+                        var notification = $("#popupNotification").data("kendoNotification");
+
+                        msj = 'Ya existe la incidencia pero con monto diferente, Solicitante:' + Nombre + ', Folio:' + Folio;
+                        notification.show(msj, "warning");
+                    }
                 }
             }
+           
             
 
 
