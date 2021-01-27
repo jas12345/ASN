@@ -105,6 +105,9 @@
           <Parameter Name="FolioId" Type="int" Mode="In" />
           <Parameter Name="Justificacion" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="CatCierreSolicitudesMasivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Responsable_Ident" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatCityByCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Country" Type="int" Mode="In" />
         </Function>
@@ -672,6 +675,7 @@
           <Parameter Name="Active" Type="bit" Mode="In" />
           <Parameter Name="UserEmployeeId" Type="int" Mode="In" />
           <Parameter Name="MotivoDelConcepto" Type="varchar" Mode="In" />
+          <Parameter Name="Ticket" Type="int" Mode="In" />
           <Parameter Name="FolioSolicitudOut" Type="int" Mode="InOut" />
           <Parameter Name="Estatus" Type="int" Mode="InOut" />
         </Function>
@@ -859,6 +863,9 @@
         <Function Name="ValEmpleadoConceptoMonto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodoNominaId" Type="int" Mode="In" />
           <Parameter Name="EmpleadoId" Type="int" Mode="In" />
+          <Parameter Name="ConceptoId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ValidaConceptoMasivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
         </Function>
         <Function Name="ValidaSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1685,9 +1692,6 @@
           <FunctionImport Name="ConDetalleFolioAutorizacion" ReturnType="Collection(ASNModel.ConDetalleFolioAutorizacion_Result)">
           <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ReporteFoliosContratoEmpresa" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresa_Result)">
-          <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ReportePendientesAutorizarYRechazados" ReturnType="Collection(ASNModel.ReportePendientesAutorizarYRechazados_Result2)">
             <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
             <Parameter Name="Empresa" Mode="In" Type="Int32" />
@@ -1699,36 +1703,6 @@
           <FunctionImport Name="fnSplit" IsComposable="true" ReturnType="Collection(String)">
             <Parameter Name="sInputList" Mode="In" Type="String" />
             <Parameter Name="sDelimiter" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="CatSolicitudesSi">
-            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
-            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
-            <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
-            <Parameter Name="MotivosSolicitudId" Mode="In" Type="Int32" />
-            <Parameter Name="ConceptoMotivoId" Mode="In" Type="Int32" />
-            <Parameter Name="ResponsableId" Mode="In" Type="Int32" />
-            <Parameter Name="PeriododOriginalId" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador1" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador2" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador3" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador4" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador5" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador6" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador7" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador8" Mode="In" Type="Int32" />
-            <Parameter Name="Autorizador9" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoNomina_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Active" Mode="In" Type="Boolean" />
-            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
-            <Parameter Name="MotivoDelConcepto" Mode="In" Type="String" />
-            <Parameter Name="FolioSolicitudOut" Mode="InOut" Type="Int32" />
-            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CatSolicitudEmpleadosDetalleSel" ReturnType="Collection(ASNModel.CatSolicitudEmpleadosDetalleSel_Result)">
-            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
-            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
-            <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatPeriodosNominaCMB" ReturnType="Collection(ASNModel.CatPeriodosNominaCMB_Result)">
             <Parameter Name="Active" Mode="In" Type="Int32" />
@@ -1805,6 +1779,46 @@
             <Parameter Name="Autorizador7" Mode="In" Type="Int32" />
             <Parameter Name="Autorizador8" Mode="In" Type="Int32" />
             <Parameter Name="Autorizador9" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatSolicitudesSi">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoMonto" Mode="In" Type="Decimal" />
+            <Parameter Name="MotivosSolicitudId" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoMotivoId" Mode="In" Type="Int32" />
+            <Parameter Name="ResponsableId" Mode="In" Type="Int32" />
+            <Parameter Name="PeriododOriginalId" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador1" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador2" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador3" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador4" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador5" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador6" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador7" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador8" Mode="In" Type="Int32" />
+            <Parameter Name="Autorizador9" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodoNomina_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="UserEmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="MotivoDelConcepto" Mode="In" Type="String" />
+            <Parameter Name="Ticket" Mode="In" Type="Int32" />
+            <Parameter Name="FolioSolicitudOut" Mode="InOut" Type="Int32" />
+            <Parameter Name="Estatus" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatSolicitudEmpleadosDetalleSel" ReturnType="Collection(ASNModel.CatSolicitudEmpleadosDetalleSel_Result)">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
+            <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteFoliosContratoEmpresa" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresa_Result)">
+          <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatCierreSolicitudesMasivo" ReturnType="Collection(String)">
+          <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ValidaConceptoMasivo" ReturnType="Collection(Boolean)">
+            <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2886,13 +2900,6 @@
           <Property Type="String" Name="Autorizador_2" Nullable="false" MaxLength="750" />
           <Property Type="String" Name="Autorizador_3" Nullable="false" MaxLength="750" />
         </ComplexType>
-        <ComplexType Name="ReporteFoliosContratoEmpresa_Result">
-          <Property Type="Int32" Name="Folio" Nullable="false" />
-          <Property Type="String" Name="Compañia" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="Contrato" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Total" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="ReportePendientesAutorizarYRechazados_Result">
           <Property Type="DateTime" Name="Fecha_Inicio" Nullable="true" />
           <Property Type="DateTime" Name="Fecha_Fin" Nullable="true" />
@@ -2933,15 +2940,6 @@
         <ComplexType Name="CatPerfilEmpleadosAllCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="CatSolicitudEmpleadosDetalleSel_Result">
-          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
-          <Property Type="Int32" Name="Empleado_Ident" Nullable="false" />
-          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
-          <Property Type="Int32" Name="ConceptoMotivoid" Nullable="false" />
-          <Property Type="Int32" Name="Responsableid" Nullable="true" />
-          <Property Type="Int32" Name="PeriodoOriginalid" Nullable="true" />
-          <Property Type="String" Name="MotivoDelConcepto" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatPeriodosNominaCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
@@ -2992,6 +2990,25 @@
           <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="1000" />
           <Property Type="Int32" Name="Result" Nullable="true" />
           <Property Type="Int32" Name="FolioSolicitud" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CatSolicitudEmpleadosDetalleSel_Result">
+          <Property Type="Int32" Name="FolioSolicitud" Nullable="false" />
+          <Property Type="Int32" Name="Empleado_Ident" Nullable="false" />
+          <Property Type="Int32" Name="ConceptoId" Nullable="false" />
+          <Property Type="Int32" Name="ConceptoMotivoid" Nullable="false" />
+          <Property Type="Int32" Name="Responsableid" Nullable="true" />
+          <Property Type="Int32" Name="PeriodoOriginalid" Nullable="true" />
+          <Property Type="String" Name="MotivoDelConcepto" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Ticket" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ReporteFoliosContratoEmpresa_Result">
+          <Property Type="Int32" Name="Folio" Nullable="false" />
+          <Property Type="Int32" Name="Solicitante" Nullable="true" />
+          <Property Type="String" Name="Compañia" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Site" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Contrato" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -4596,17 +4613,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ReporteFoliosContratoEmpresa" FunctionName="ASNModel.Store.ReporteFoliosContratoEmpresa">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.ReporteFoliosContratoEmpresa_Result">
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Compañia" ColumnName="Compañia" />
-                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReportePendientesAutorizarYRechazados" FunctionName="ASNModel.Store.ReportePendientesAutorizarYRechazados">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.ReportePendientesAutorizarYRechazados_Result2">
@@ -4633,20 +4639,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="fnSplit" FunctionName="ASNModel.Store.fnSplit" />
-          <FunctionImportMapping FunctionImportName="CatSolicitudesSi" FunctionName="ASNModel.Store.CatSolicitudesSi" />
-          <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosDetalleSel" FunctionName="ASNModel.Store.CatSolicitudEmpleadosDetalleSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudEmpleadosDetalleSel_Result">
-                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
-                <ScalarProperty Name="Empleado_Ident" ColumnName="Empleado_Ident" />
-                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
-                <ScalarProperty Name="ConceptoMotivoid" ColumnName="ConceptoMotivoid" />
-                <ScalarProperty Name="Responsableid" ColumnName="Responsableid" />
-                <ScalarProperty Name="PeriodoOriginalid" ColumnName="PeriodoOriginalid" />
-                <ScalarProperty Name="MotivoDelConcepto" ColumnName="MotivoDelConcepto" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatPeriodosNominaCMB" FunctionName="ASNModel.Store.CatPeriodosNominaCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatPeriodosNominaCMB_Result">
@@ -4728,6 +4720,36 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatSolicitudesSi" FunctionName="ASNModel.Store.CatSolicitudesSi" />
+          <FunctionImportMapping FunctionImportName="CatSolicitudEmpleadosDetalleSel" FunctionName="ASNModel.Store.CatSolicitudEmpleadosDetalleSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatSolicitudEmpleadosDetalleSel_Result">
+                <ScalarProperty Name="FolioSolicitud" ColumnName="FolioSolicitud" />
+                <ScalarProperty Name="Empleado_Ident" ColumnName="Empleado_Ident" />
+                <ScalarProperty Name="ConceptoId" ColumnName="ConceptoId" />
+                <ScalarProperty Name="ConceptoMotivoid" ColumnName="ConceptoMotivoid" />
+                <ScalarProperty Name="Responsableid" ColumnName="Responsableid" />
+                <ScalarProperty Name="PeriodoOriginalid" ColumnName="PeriodoOriginalid" />
+                <ScalarProperty Name="MotivoDelConcepto" ColumnName="MotivoDelConcepto" />
+                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteFoliosContratoEmpresa" FunctionName="ASNModel.Store.ReporteFoliosContratoEmpresa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteFoliosContratoEmpresa_Result">
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
+                <ScalarProperty Name="Compañia" ColumnName="Compañia" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatCierreSolicitudesMasivo" FunctionName="ASNModel.Store.CatCierreSolicitudesMasivo" />
+          <FunctionImportMapping FunctionImportName="ValidaConceptoMasivo" FunctionName="ASNModel.Store.ValidaConceptoMasivo" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

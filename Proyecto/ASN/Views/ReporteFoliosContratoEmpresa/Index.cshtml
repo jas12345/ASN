@@ -97,11 +97,13 @@
                         .Name("grid")
                         .Columns(columns =>
                         {
-                            columns.Bound(e => e.Folio).Title("Folio Solicitud").Width(15);
+                            columns.Bound(e => e.Folio).Title("Folio Solicitud").Width(30);
+                            columns.Bound(e => e.Solicitante).Title("Solicitante").Width(30);
                             columns.Bound(e => e.Compañia).Title("Compañia").Width(30);
+                            columns.Bound(e => e.Site).Title("Site").Width(30);
                             columns.Bound(e => e.Contrato).Title("Contrato").Width(30); // Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
                             columns.Bound(e => e.Estatus).Title("Estatus").Width(30); // Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
-                            columns.Bound(e => e.Total).Title("Total").Width(15);  
+                            columns.Bound(e => e.Total).Title("Total").Width(30);  
 
                         })
                         .ToolBar(tools => tools.Excel().Text("Exportar"))

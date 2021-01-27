@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace ASN.Controllers
 {
-    [Authorize(Roles = "Responsable")]
+    [Authorize(Roles = "Responsable,Autorizante")]
     public class ReporteFoliosContratoEmpresaController : Controller
     {
         // GET: ReporteSolicitud

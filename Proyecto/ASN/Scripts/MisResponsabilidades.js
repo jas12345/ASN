@@ -21,6 +21,7 @@ $(window).resize(function () {
 
 $(document).ready(function () {
     $(window).trigger("resize");
+    
 });
 
 function edit(e) {
@@ -329,3 +330,47 @@ function rellenaFechasAnio() {
         });
     }
 }
+
+
+function cierreMasivo() {
+
+    $("#bar").removeClass('hidden');   
+    $.post(urlCierreMasivo , function (data) {       
+        
+        var d = new Date()
+
+        var date = (d.toISOString().split('T')[0]).replace('-','').replace('-','');       
+        var time = (d.toTimeString().split(' ')[0]).replace(':', '').replace(':', '');    
+        
+        var fileName = ['Reporte de Folios cerrados', date, time].join('_');
+        
+
+        
+        actualizaGrid();
+        //var fileName = 'Reporte de Folios cerrados_';// + 
+        //fileName.concat(date,time,'.txt');
+
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data));
+        element.setAttribute('download',  fileName);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+        $("#bar").addClass('hidden');
+        
+    });
+}
+
+function actualizaGrid() {
+    $("#grid").data("kendoGrid").dataSource.read();
+    $("#grid").data("kendoGrid").refresh();
+    //$("#Estatus").value = calculaEstatusSolicitud();
+    //debugger;
+   
+}
+
+

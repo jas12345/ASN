@@ -54,15 +54,16 @@ $(document).ready(function () {
     $('#idTicket').on('blur', function () {       
        
         $.post(urlValidaTickets + "/?Ticket=" + $("#idTicket").val(), function (data) {
-            if (data == 0) {
-                alert("El ticket: " + $("#idTicket").val() + " No es valido")                
+            if (data == 0) {                    
+                var notification = $("#popupNotification").data("kendoNotification");                
+                notification.show('El Ticket: : ' + $("#idTicket").val() + ' no es valido ', "error");
                 $("#idTicket").focus();
                 return false;
             }
             
         });
     })
-    $(".Ticket").addClass('hidden');
+   
     //.on("focus", function () {
     //    if (this.value == placeholder) {
 
@@ -372,11 +373,15 @@ function agregarSolicitud() {
         var notificationDatos = $("#popupNotification").data("kendoNotification");
         notificationDatos.show("Aparece el mismo autorizador en mas de un nivel.", "warning");
     }
-
+    else if (autorizadorNivel1 == null || autorizadorNivel1 == "" || autorizadorNivel1 == undefined || autorizadorNivel2 == null || autorizadorNivel2 == "" || autorizadorNivel2 == undefined) {
+        var notificationDatos = $("#popupNotification").data("kendoNotification");
+        notificationDatos.show("El autorizador 1 o el autorizador 2 nulos", "warning");
+    }
     else {
         var motivoDelConcepto = $("#idDescripcion").val();
-
-        $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&PeriodoNomina_Id=" + $("#PeriodoNomina_Id").val() + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9 +"&MotivoDelConcepto=" + motivoDelConcepto, function (data) {
+        var ticket = $("#idTicket").val();
+       
+        $.post(urlCrearSolicitud + "?FolioSolicitud=" + FolioSolicitud + "&Empleado_Ident=" + EmpCCMSId + "&ConceptoId=" + ConConceptoIdent + "&PeriodoNomina_Id=" + $("#PeriodoNomina_Id").val() + "&ParametroConceptoMonto=" + ConParametroConceptoMonto + "&MotivosSolicitudId=" + ConMotivoIdent + "&conceptoMotivoId=" + conceptoMotivoId + "&responsableId=" + responsableId + "&periododOriginalId=" + periododOriginalId + "&AutorizadorNivel1=" + autorizadorNivel1 + "&AutorizadorNivel2=" + autorizadorNivel2 + "&AutorizadorNivel3=" + autorizadorNivel3 + "&AutorizadorNivel4=" + autorizadorNivel4 + "&AutorizadorNivel5=" + autorizadorNivel5 + "&AutorizadorNivel6=" + autorizadorNivel6 + "&AutorizadorNivel7=" + autorizadorNivel7 + "&AutorizadorNivel8=" + autorizadorNivel8 + "&AutorizadorNivel9=" + autorizadorNivel9 +"&MotivoDelConcepto=" + motivoDelConcepto + "&Ticket=" + ticket, function (data) {
             //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
 
             FolioSolicitud = data.FolioSolicitud;
@@ -384,6 +389,10 @@ function agregarSolicitud() {
             if (data.res == -2) {
                 var notification = $("#popupNotification").data("kendoNotification");
                 notification.show("Ya existe un registro con este Empleado y Concepto", "error");
+            }
+            if (data.res == -1) {
+                var notification = $("#popupNotification").data("kendoNotification");
+                notification.show("No se agrego el folio por prolemas con los autorizantes", "error");
             }
 
             //if (ClaveEstatusEmpleadoSolicitud == "EB" || ClaveEstatusEmpleadoSolicitud == "R") {
@@ -406,6 +415,8 @@ function agregarSolicitud() {
 
             console.log(FolioSolicitud);
             $('#idDescripcion').val('');
+            $('#idTicket').val('');
+            $(".Ticket").addClass('hidden')
             getFolio();
             //debugger;
         });
@@ -1344,7 +1355,7 @@ function getIdent() {
 
 function onChangeCCMSId() {
     //debugger;
-
+   
     CCMSId = "";
     NombreEmpleado = "";
     PuestoEmpleado = "";
@@ -1579,14 +1590,23 @@ function onChangeConceptos(e) {
 
         }
 
-        if (ConConceptoIdent == 2 || ConConceptoIdent == 5 || ConConceptoIdent == 70 || ConConceptoIdent == 85) {
-            $("#filesBono").data("kendoUpload").enable(true);
+        $.post(urlConceptoMasivo + '?conceptoId=' + ConConceptoIdent, function (data) {
+            if (data == 1) {
+                $("#filesBono").data("kendoUpload").enable(true);
+            }
+            else {
+                $("#filesBono").data("kendoUpload").enable(false);
+            }
+        });
 
-            console.log("prueba Concepto bono c");
-        }
-        else {
-            $("#filesBono").data("kendoUpload").enable(false);
-        }
+        //if (ConConceptoIdent == 2 || ConConceptoIdent == 5 || ConConceptoIdent == 70 || ConConceptoIdent == 85 || ConConceptoIdent == 48 || ConConceptoIdent == 49) {
+        //    $("#filesBono").data("kendoUpload").enable(true);
+
+        //    console.log("prueba Concepto bono c");
+        //}
+        //else {
+        //    $("#filesBono").data("kendoUpload").enable(false);
+        //}
 
     }
     else {
@@ -1776,7 +1796,7 @@ function onChangeConceptoMotivo() {
        
         if (conceptoMotivoId == 7 || conceptoMotivoId == 8  || conceptoMotivoId == 9  || conceptoMotivoId == 10 || conceptoMotivoId == 11  || conceptoMotivoId == 12 || conceptoMotivoId == 13 || conceptoMotivoId == 14 || conceptoMotivoId == 15)
         {
-           // $(".Ticket").removeClass('hidden');
+            $(".Ticket").removeClass('hidden');
            
         }
     }
@@ -2439,12 +2459,16 @@ function onChangePeriodoNominId() {
 
 function obtieneSolicitudDetalle(folioSolicitud, ident, conceptoId) {
 
-    if (conceptoId == 18 || conceptoId == 19 || conceptoId == 37) {
+    //if (conceptoId == 18 || conceptoId == 19 || conceptoId == 37) {
         $.post(urlObtieneSolicitudDetalle + "/?folioSolicitud=" + folioSolicitud + "&empleado_ident=" + ident + "&conceptoid=" + conceptoId, function (data) {
-                        
-            $("#idDescripcion").val(data);
+            console.log(data);
+            if (data != null) {
+                $("#idDescripcion").val(data.MotivoDelConcepto);
+                $("#idTicket").val(data.Ticket);
+            }
+                    
         });
-    }
+   // }
     
 
 }

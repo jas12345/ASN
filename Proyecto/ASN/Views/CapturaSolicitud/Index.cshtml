@@ -418,7 +418,6 @@
                             </td>
                             <td class="Ticket hidden">
                                 <div id="ticket">
-
                                     <input type="text" name="idTicket" id="idTicket" value="" class="k-textbox" style=" width:80px;" />
                                     @*@(Html.Kendo().TextBox()
                             .Name("idDescripcion")
@@ -1098,7 +1097,8 @@
 
         var urlDownLoadLogBonoC = '@Url.Action("DownLoadLogBonoC","CapturaSolicitud")'
 
-         var urlValidaTickets = '@Url.Action("ValidaTickets", "CapturaSolicitud")';
+        var urlValidaTickets = '@Url.Action("ValidaTickets", "CapturaSolicitud")';
+        var urlConceptoMasivo = '@Url.Action("ValidaConceptoMasivo", "CapturaSolicitud")';
 
     </script>
 }
@@ -1172,8 +1172,15 @@ else
 
     }
     function onSuccessBono(e) {
-        console.log("onSuccessBono")
-        console.log(e);
+        
+        var valor = e.response.indexOf("Error:");
+        if (valor == 0) {
+            var resul = e.response.replace('Error:', '').replace('0', '');
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show(resul, "warning");
+            return false;
+        }
+       
         $("#FolioSolicitud").data("kendoNumericTextBox").value(e.response[0]);
         FolioSolicitud = $("#FolioSolicitud").val();
         $("#Estatus").val("En Borrador");

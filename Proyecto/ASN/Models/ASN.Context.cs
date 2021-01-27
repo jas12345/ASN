@@ -215,7 +215,6 @@ namespace ASN.Models
     
         public virtual ObjectResult<CatProgramCMB_Result> CatProgramCMB()
         {
-           
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatProgramCMB_Result>("CatProgramCMB");
         }
     
@@ -2726,15 +2725,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConDetalleFolioAutorizacion_Result>("ConDetalleFolioAutorizacion", folioSolicitudParameter);
         }
     
-        public virtual ObjectResult<ReporteFoliosContratoEmpresa_Result> ReporteFoliosContratoEmpresa(Nullable<int> periodoNomina)
-        {
-            var periodoNominaParameter = periodoNomina.HasValue ?
-                new ObjectParameter("PeriodoNomina", periodoNomina) :
-                new ObjectParameter("PeriodoNomina", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
-        }
-    
         public virtual ObjectResult<ReportePendientesAutorizarYRechazados_Result2> ReportePendientesAutorizarYRechazados(Nullable<int> periodoNominaId, Nullable<int> empresa)
         {
             var periodoNominaIdParameter = periodoNominaId.HasValue ?
@@ -2774,112 +2764,6 @@ namespace ASN.Models
                 new ObjectParameter("sDelimiter", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<string>("[ASNContext].[fnSplit](@sInputList, @sDelimiter)", sInputListParameter, sDelimiterParameter);
-        }
-    
-        public virtual int CatSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, Nullable<int> conceptoId, Nullable<decimal> conceptoMonto, Nullable<int> motivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizador1, Nullable<int> autorizador2, Nullable<int> autorizador3, Nullable<int> autorizador4, Nullable<int> autorizador5, Nullable<int> autorizador6, Nullable<int> autorizador7, Nullable<int> autorizador8, Nullable<int> autorizador9, Nullable<int> periodoNomina_Id, Nullable<bool> active, Nullable<int> userEmployeeId, string motivoDelConcepto, ObjectParameter folioSolicitudOut, ObjectParameter estatus)
-        {
-            var folioSolicitudParameter = folioSolicitud.HasValue ?
-                new ObjectParameter("FolioSolicitud", folioSolicitud) :
-                new ObjectParameter("FolioSolicitud", typeof(int));
-    
-            var employeeIdParameter = employeeId.HasValue ?
-                new ObjectParameter("EmployeeId", employeeId) :
-                new ObjectParameter("EmployeeId", typeof(int));
-    
-            var conceptoIdParameter = conceptoId.HasValue ?
-                new ObjectParameter("ConceptoId", conceptoId) :
-                new ObjectParameter("ConceptoId", typeof(int));
-    
-            var conceptoMontoParameter = conceptoMonto.HasValue ?
-                new ObjectParameter("ConceptoMonto", conceptoMonto) :
-                new ObjectParameter("ConceptoMonto", typeof(decimal));
-    
-            var motivosSolicitudIdParameter = motivosSolicitudId.HasValue ?
-                new ObjectParameter("MotivosSolicitudId", motivosSolicitudId) :
-                new ObjectParameter("MotivosSolicitudId", typeof(int));
-    
-            var conceptoMotivoIdParameter = conceptoMotivoId.HasValue ?
-                new ObjectParameter("ConceptoMotivoId", conceptoMotivoId) :
-                new ObjectParameter("ConceptoMotivoId", typeof(int));
-    
-            var responsableIdParameter = responsableId.HasValue ?
-                new ObjectParameter("ResponsableId", responsableId) :
-                new ObjectParameter("ResponsableId", typeof(int));
-    
-            var periododOriginalIdParameter = periododOriginalId.HasValue ?
-                new ObjectParameter("PeriododOriginalId", periododOriginalId) :
-                new ObjectParameter("PeriododOriginalId", typeof(int));
-    
-            var autorizador1Parameter = autorizador1.HasValue ?
-                new ObjectParameter("Autorizador1", autorizador1) :
-                new ObjectParameter("Autorizador1", typeof(int));
-    
-            var autorizador2Parameter = autorizador2.HasValue ?
-                new ObjectParameter("Autorizador2", autorizador2) :
-                new ObjectParameter("Autorizador2", typeof(int));
-    
-            var autorizador3Parameter = autorizador3.HasValue ?
-                new ObjectParameter("Autorizador3", autorizador3) :
-                new ObjectParameter("Autorizador3", typeof(int));
-    
-            var autorizador4Parameter = autorizador4.HasValue ?
-                new ObjectParameter("Autorizador4", autorizador4) :
-                new ObjectParameter("Autorizador4", typeof(int));
-    
-            var autorizador5Parameter = autorizador5.HasValue ?
-                new ObjectParameter("Autorizador5", autorizador5) :
-                new ObjectParameter("Autorizador5", typeof(int));
-    
-            var autorizador6Parameter = autorizador6.HasValue ?
-                new ObjectParameter("Autorizador6", autorizador6) :
-                new ObjectParameter("Autorizador6", typeof(int));
-    
-            var autorizador7Parameter = autorizador7.HasValue ?
-                new ObjectParameter("Autorizador7", autorizador7) :
-                new ObjectParameter("Autorizador7", typeof(int));
-    
-            var autorizador8Parameter = autorizador8.HasValue ?
-                new ObjectParameter("Autorizador8", autorizador8) :
-                new ObjectParameter("Autorizador8", typeof(int));
-    
-            var autorizador9Parameter = autorizador9.HasValue ?
-                new ObjectParameter("Autorizador9", autorizador9) :
-                new ObjectParameter("Autorizador9", typeof(int));
-    
-            var periodoNomina_IdParameter = periodoNomina_Id.HasValue ?
-                new ObjectParameter("PeriodoNomina_Id", periodoNomina_Id) :
-                new ObjectParameter("PeriodoNomina_Id", typeof(int));
-    
-            var activeParameter = active.HasValue ?
-                new ObjectParameter("Active", active) :
-                new ObjectParameter("Active", typeof(bool));
-    
-            var userEmployeeIdParameter = userEmployeeId.HasValue ?
-                new ObjectParameter("UserEmployeeId", userEmployeeId) :
-                new ObjectParameter("UserEmployeeId", typeof(int));
-    
-            var motivoDelConceptoParameter = motivoDelConcepto != null ?
-                new ObjectParameter("MotivoDelConcepto", motivoDelConcepto) :
-                new ObjectParameter("MotivoDelConcepto", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSi", folioSolicitudParameter, employeeIdParameter, conceptoIdParameter, conceptoMontoParameter, motivosSolicitudIdParameter, conceptoMotivoIdParameter, responsableIdParameter, periododOriginalIdParameter, autorizador1Parameter, autorizador2Parameter, autorizador3Parameter, autorizador4Parameter, autorizador5Parameter, autorizador6Parameter, autorizador7Parameter, autorizador8Parameter, autorizador9Parameter, periodoNomina_IdParameter, activeParameter, userEmployeeIdParameter, motivoDelConceptoParameter, folioSolicitudOut, estatus);
-        }
-    
-        public virtual ObjectResult<CatSolicitudEmpleadosDetalleSel_Result> CatSolicitudEmpleadosDetalleSel(Nullable<int> folioSolicitud, Nullable<int> conceptoId, Nullable<int> empleado_Ident)
-        {
-            var folioSolicitudParameter = folioSolicitud.HasValue ?
-                new ObjectParameter("FolioSolicitud", folioSolicitud) :
-                new ObjectParameter("FolioSolicitud", typeof(int));
-    
-            var conceptoIdParameter = conceptoId.HasValue ?
-                new ObjectParameter("ConceptoId", conceptoId) :
-                new ObjectParameter("ConceptoId", typeof(int));
-    
-            var empleado_IdentParameter = empleado_Ident.HasValue ?
-                new ObjectParameter("Empleado_Ident", empleado_Ident) :
-                new ObjectParameter("Empleado_Ident", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudEmpleadosDetalleSel_Result>("CatSolicitudEmpleadosDetalleSel", folioSolicitudParameter, conceptoIdParameter, empleado_IdentParameter);
         }
     
         public virtual ObjectResult<CatPeriodosNominaCMB_Result> CatPeriodosNominaCMB(Nullable<int> active, Nullable<int> cCMSId)
@@ -3142,6 +3026,143 @@ namespace ASN.Models
                 new ObjectParameter("Autorizador9", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudBonoCSi_Result>("CatSolicitudBonoCSi", folioSolicitudParameter, employeeIdParameter, conceptoPSParameter, conceptoMontoParameter, userEmployeeIdParameter, cCMSIdSolicitanteParameter, autorizador1Parameter, autorizador2Parameter, autorizador3Parameter, autorizador4Parameter, autorizador5Parameter, autorizador6Parameter, autorizador7Parameter, autorizador8Parameter, autorizador9Parameter);
+        }
+    
+        public virtual int CatSolicitudesSi(Nullable<int> folioSolicitud, Nullable<int> employeeId, Nullable<int> conceptoId, Nullable<decimal> conceptoMonto, Nullable<int> motivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizador1, Nullable<int> autorizador2, Nullable<int> autorizador3, Nullable<int> autorizador4, Nullable<int> autorizador5, Nullable<int> autorizador6, Nullable<int> autorizador7, Nullable<int> autorizador8, Nullable<int> autorizador9, Nullable<int> periodoNomina_Id, Nullable<bool> active, Nullable<int> userEmployeeId, string motivoDelConcepto, Nullable<int> ticket, ObjectParameter folioSolicitudOut, ObjectParameter estatus)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var conceptoMontoParameter = conceptoMonto.HasValue ?
+                new ObjectParameter("ConceptoMonto", conceptoMonto) :
+                new ObjectParameter("ConceptoMonto", typeof(decimal));
+    
+            var motivosSolicitudIdParameter = motivosSolicitudId.HasValue ?
+                new ObjectParameter("MotivosSolicitudId", motivosSolicitudId) :
+                new ObjectParameter("MotivosSolicitudId", typeof(int));
+    
+            var conceptoMotivoIdParameter = conceptoMotivoId.HasValue ?
+                new ObjectParameter("ConceptoMotivoId", conceptoMotivoId) :
+                new ObjectParameter("ConceptoMotivoId", typeof(int));
+    
+            var responsableIdParameter = responsableId.HasValue ?
+                new ObjectParameter("ResponsableId", responsableId) :
+                new ObjectParameter("ResponsableId", typeof(int));
+    
+            var periododOriginalIdParameter = periododOriginalId.HasValue ?
+                new ObjectParameter("PeriododOriginalId", periododOriginalId) :
+                new ObjectParameter("PeriododOriginalId", typeof(int));
+    
+            var autorizador1Parameter = autorizador1.HasValue ?
+                new ObjectParameter("Autorizador1", autorizador1) :
+                new ObjectParameter("Autorizador1", typeof(int));
+    
+            var autorizador2Parameter = autorizador2.HasValue ?
+                new ObjectParameter("Autorizador2", autorizador2) :
+                new ObjectParameter("Autorizador2", typeof(int));
+    
+            var autorizador3Parameter = autorizador3.HasValue ?
+                new ObjectParameter("Autorizador3", autorizador3) :
+                new ObjectParameter("Autorizador3", typeof(int));
+    
+            var autorizador4Parameter = autorizador4.HasValue ?
+                new ObjectParameter("Autorizador4", autorizador4) :
+                new ObjectParameter("Autorizador4", typeof(int));
+    
+            var autorizador5Parameter = autorizador5.HasValue ?
+                new ObjectParameter("Autorizador5", autorizador5) :
+                new ObjectParameter("Autorizador5", typeof(int));
+    
+            var autorizador6Parameter = autorizador6.HasValue ?
+                new ObjectParameter("Autorizador6", autorizador6) :
+                new ObjectParameter("Autorizador6", typeof(int));
+    
+            var autorizador7Parameter = autorizador7.HasValue ?
+                new ObjectParameter("Autorizador7", autorizador7) :
+                new ObjectParameter("Autorizador7", typeof(int));
+    
+            var autorizador8Parameter = autorizador8.HasValue ?
+                new ObjectParameter("Autorizador8", autorizador8) :
+                new ObjectParameter("Autorizador8", typeof(int));
+    
+            var autorizador9Parameter = autorizador9.HasValue ?
+                new ObjectParameter("Autorizador9", autorizador9) :
+                new ObjectParameter("Autorizador9", typeof(int));
+    
+            var periodoNomina_IdParameter = periodoNomina_Id.HasValue ?
+                new ObjectParameter("PeriodoNomina_Id", periodoNomina_Id) :
+                new ObjectParameter("PeriodoNomina_Id", typeof(int));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            var userEmployeeIdParameter = userEmployeeId.HasValue ?
+                new ObjectParameter("UserEmployeeId", userEmployeeId) :
+                new ObjectParameter("UserEmployeeId", typeof(int));
+    
+            var motivoDelConceptoParameter = motivoDelConcepto != null ?
+                new ObjectParameter("MotivoDelConcepto", motivoDelConcepto) :
+                new ObjectParameter("MotivoDelConcepto", typeof(string));
+    
+            var ticketParameter = ticket.HasValue ?
+                new ObjectParameter("Ticket", ticket) :
+                new ObjectParameter("Ticket", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudesSi", folioSolicitudParameter, employeeIdParameter, conceptoIdParameter, conceptoMontoParameter, motivosSolicitudIdParameter, conceptoMotivoIdParameter, responsableIdParameter, periododOriginalIdParameter, autorizador1Parameter, autorizador2Parameter, autorizador3Parameter, autorizador4Parameter, autorizador5Parameter, autorizador6Parameter, autorizador7Parameter, autorizador8Parameter, autorizador9Parameter, periodoNomina_IdParameter, activeParameter, userEmployeeIdParameter, motivoDelConceptoParameter, ticketParameter, folioSolicitudOut, estatus);
+        }
+    
+        public virtual ObjectResult<CatSolicitudEmpleadosDetalleSel_Result> CatSolicitudEmpleadosDetalleSel(Nullable<int> folioSolicitud, Nullable<int> conceptoId, Nullable<int> empleado_Ident)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var empleado_IdentParameter = empleado_Ident.HasValue ?
+                new ObjectParameter("Empleado_Ident", empleado_Ident) :
+                new ObjectParameter("Empleado_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudEmpleadosDetalleSel_Result>("CatSolicitudEmpleadosDetalleSel", folioSolicitudParameter, conceptoIdParameter, empleado_IdentParameter);
+        }
+    
+        public virtual ObjectResult<ReporteFoliosContratoEmpresa_Result> ReporteFoliosContratoEmpresa(Nullable<int> periodoNomina)
+        {
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
+        }
+    
+        public virtual ObjectResult<string> CatCierreSolicitudesMasivo(Nullable<int> responsable_Ident)
+        {
+            var responsable_IdentParameter = responsable_Ident.HasValue ?
+                new ObjectParameter("Responsable_Ident", responsable_Ident) :
+                new ObjectParameter("Responsable_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CatCierreSolicitudesMasivo", responsable_IdentParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<bool>> ValidaConceptoMasivo(Nullable<int> conceptoId)
+        {
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("ValidaConceptoMasivo", conceptoIdParameter);
         }
     }
 }

@@ -20,5 +20,6 @@ namespace ASN.Models
         public Nullable<int> Responsableid { get; set; }
         public Nullable<int> PeriodoOriginalid { get; set; }
         public string MotivoDelConcepto { get; set; }
+        public Nullable<int> Ticket { get; set; }
     }
 }

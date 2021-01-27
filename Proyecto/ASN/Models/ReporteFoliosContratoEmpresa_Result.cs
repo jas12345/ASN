@@ -14,7 +14,9 @@ namespace ASN.Models
     public partial class ReporteFoliosContratoEmpresa_Result
     {
         public int Folio { get; set; }
+        public Nullable<int> Solicitante { get; set; }
         public string Compañia { get; set; }
+        public string Site { get; set; }
         public string Contrato { get; set; }
         public string Estatus { get; set; }
         public Nullable<int> Total { get; set; }

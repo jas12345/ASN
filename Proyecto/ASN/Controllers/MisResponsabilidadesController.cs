@@ -79,5 +79,53 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
+        [HttpPost]
+        public FileResult CierreMasivo()
+        {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+
+            List<string> resultado = new List<string>();
+            try
+            { 
+                using (ASNContext context = new ASNContext())
+                {
+                    //int.TryParse(User.Identity.Name, out int idAdmin);
+                    var CCMSId = usuario.UserInfo.Ident.Value;
+
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    resultado = context.CatCierreSolicitudesMasivo(CCMSId).ToList();
+                    
+                }
+                using (var memStream = new System.IO.MemoryStream())
+                {
+                    //var nombreArchivo = "Reporte de Folios Cerrados_" + DateTime.Now.ToString("YYYY-mm-dd 24HH:MM:ss") + ".TXT";
+                    var streamWriter = new System.IO.StreamWriter(memStream);
+
+                    //for (int i = 0; i < 6; i++)
+                    //    streamWriter.WriteLine("TEST");
+                    foreach (var item in resultado)
+                    {
+                        streamWriter.WriteLine(item);
+                    }
+
+
+                    streamWriter.Flush();
+                    memStream.Seek(0, System.IO.SeekOrigin.Begin);
+                    return File(memStream.ToArray(), "application/txt", "Reporte de Folios.txt");
+
+                }
+            }
+            catch (Exception ex)
+            {               
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return null;
+            }
+
+            return null;
+
+            
+        }
+            
     }
 }

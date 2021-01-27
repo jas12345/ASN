@@ -537,12 +537,21 @@ namespace ASN.Controllers
             }
         }
 
-        public ActionResult CreateSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, string PeriodoNomina_Id, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9, string MotivoDelConcepto)
+        public ActionResult CreateSolicitud([DataSourceRequest] DataSourceRequest request, int FolioSolicitud, int Empleado_Ident, int ConceptoId, string PeriodoNomina_Id, decimal ParametroConceptoMonto, int MotivosSolicitudId, Nullable<int> conceptoMotivoId, Nullable<int> responsableId, Nullable<int> periododOriginalId, Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9, string MotivoDelConcepto, int? Ticket )
         {
+
+            if (autorizadorNivel1 == null || autorizadorNivel2 == null )
+            {
+                return Json(new { FolioSolicitud, res = -1 }, JsonRequestBehavior.AllowGet);
+            }
+
             try
             {
                 using (ASNContext context = new ASNContext())
                 {
+
+                    context.Database.ExecuteSqlCommand("insert into guest.CatAutvacios values({0},{1},{2},{3},{4},{5})", FolioSolicitud, Empleado_Ident, ConceptoId, autorizadorNivel1, autorizadorNivel2, autorizadorNivel3);
+
                     int res = 0;
                     int ccmsidAdmin = 0;
                     int periodoNominaId = 0;
@@ -584,6 +593,7 @@ namespace ASN.Controllers
                         , true//active
                         , idAdmin
                         , MotivoDelConcepto
+                        , Ticket
                         , folioSolicitudOut
                         , resultado);
 
@@ -887,9 +897,11 @@ namespace ASN.Controllers
                 //int userEmployeeId = usuario.UserNumerito;
                 string filenameresult;
                 var lstResult = new List<string>();
+                var strCCMSID = "";
                 int ccmsId = 0;
                 string parametro = string.Empty;
                 decimal detalle = 0;
+                var strDetalle = "";
 
                 ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                 ObjectParameter FolioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
@@ -914,7 +926,8 @@ namespace ASN.Controllers
                                 if (postedFile.ContentLength > 0)
                                 {
 
-                                    using (var csvReader = new StreamReader(postedFile.InputStream))
+                                    //using (var csvReader = new StreamReader(postedFile.InputStream,System.Text.Encoding.Default,true))
+                                    using (var csvReader = new StreamReader(postedFile.InputStream, System.Text.Encoding.Default,true))
                                     {
 
                                         using (var csv = new CsvReader(csvReader))
@@ -934,16 +947,22 @@ namespace ASN.Controllers
                                             {
                                                 var objeton = new CargaMasivaRegistroViewModel();
 
-                                                if (csv.TryGetField(0, out ccmsId) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out detalle))
+                                                if (csv.TryGetField(0, out strCCMSID) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out strDetalle))
                                                 {
-                                                    objeton.parametro = parametro;
-                                                    objeton.detalle = detalle;
-                                                    objeton.solicitudId = -1;
-                                                    objeton.userEmployeeId = userEmployeeId;
-                                                    objeton.catEmployeeId = ccmsId;
-                                                    objeton.estatus = -1;
+                                                    if (strCCMSID != "ccmsId")
+                                                    {                                                        
+                                                        ccmsId = Convert.ToInt32(strCCMSID.Trim());
+                                                        detalle = Convert.ToInt32(strDetalle.Trim());
+                                                        objeton.parametro = parametro;
+                                                        objeton.detalle = detalle;
+                                                        objeton.solicitudId = -1;
+                                                        objeton.userEmployeeId = userEmployeeId;
+                                                        objeton.catEmployeeId = ccmsId;
+                                                        objeton.estatus = -1;
 
-                                                    lista.Add(objeton);
+                                                        lista.Add(objeton);
+                                                    }
+                                                    
                                                 }
                                             }
                                         }
@@ -985,6 +1004,14 @@ namespace ASN.Controllers
                                             objetoResult.Row = row;
                                             objetoResult.Message = lstLogx[0].Mensaje;//string.Join(",", lstLogx.ToArray());
 
+                                            // hace un retorno porque el concepto del excel no es validao o no se permite en masivo                                           
+                                            if (lstLogx[0].Mensaje.IndexOf("El Concepto") == 0)
+                                            {
+                                                var msg = string.Format("Error:{0}",lstLogx[0].Mensaje);                                              
+                                                return Json(msg.ToString());
+                                               
+                                            }
+
                                             if (lstLogx[0].Result <= 0)
                                             {
                                                 lstLog.Add(objetoResult);
@@ -994,10 +1021,10 @@ namespace ASN.Controllers
                                             // objetoResult.Message=lstLogx[                                          
                                         }
 
-                                        if (solicitudIdActual > 0)
-                                        {
+                                       // if (solicitudIdActual > 0)
+                                       // {
                                             lstResult.Add(solicitudIdActual.ToString());
-                                        }
+                                       // }
 
                                         if (lstLog.Count > 0)
                                         {
@@ -1249,7 +1276,7 @@ namespace ASN.Controllers
             {
                 var resultado = ctx.CatSolicitudEmpleadosDetalleSel(folioSolicitud, conceptoid, empleado_ident).FirstOrDefault();
 
-                return Json(resultado.MotivoDelConcepto);
+                return Json(resultado);
 
             }
 
@@ -1264,6 +1291,16 @@ namespace ASN.Controllers
                 var resultado = ctx.CatValidaTickets(Ticket).FirstOrDefault();
                 return Json(resultado);
             }
+        }
+
+        public ActionResult ValidaConceptoMasivo(int? conceptoId) 
+        {
+            using (ASNContext ctx = new ASNContext())
+            {
+                var resultado = ctx.ValidaConceptoMasivo(conceptoId).FirstOrDefault();
+                return Json(resultado);
+            }
+            
         }
     }
 }
