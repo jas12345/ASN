@@ -150,7 +150,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listMotivos = context.CatMotivoSolicitudCMB().ToList();
+                    //listMotivos = context.CatMotivoSolicitudCMB().ToList();
                 }
 
                 return Json(listMotivos, JsonRequestBehavior.AllowGet);

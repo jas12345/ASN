@@ -191,6 +191,11 @@ namespace ASN
             bundles.Add(new ScriptBundle("~/bundles/ReporteDescuentosVarios").Include(
             "~/Scripts/ReporteDescuentosVarios.js"));
 
+
+            //Reporte para Cognos
+            bundles.Add(new ScriptBundle("~/bundles/ReporteParaCognos").Include(
+            "~/Scripts/ReporteParaCognos.js"));
+
         }
     }
 }

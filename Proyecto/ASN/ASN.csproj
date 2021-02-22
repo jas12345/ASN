@@ -140,6 +140,7 @@
     <Compile Include="Controllers\AdministradoresController.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\DescargaArchivosController.cs" />
+    <Compile Include="Controllers\ReporteParaCognosController.cs" />
     <Compile Include="Controllers\EnviaArchivoNominaController.cs" />
     <Compile Include="Controllers\ReporteAuditoriaController.cs" />
     <Compile Include="Controllers\ReporteDescuentosVariosController.cs" />
@@ -607,6 +608,9 @@
     <Compile Include="Models\ReporteIndividualSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReporteParaCognos_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReportePendientesAutorizarYRechazados_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -776,6 +780,7 @@
     <Content Include="Scripts\Administradores.js" />
     <Content Include="Scripts\Comentarios.js" />
     <Content Include="Scripts\DescargaArchivos.js" />
+    <Content Include="Scripts\ReporteParaCognos.js" />
     <Content Include="Scripts\EnviaArchivoNomina.js" />
     <Content Include="Scripts\ReporteDescuentosVarios.js" />
     <Content Include="Scripts\ReportePendientesAutorizarYRechazados.js" />
@@ -1018,6 +1023,7 @@
     <Content Include="Views\ReportePendientesAutorizarYRechazados\Index.cshtml" />
     <Content Include="Views\ReporteDescuentosVarios\Index.cshtml" />
     <Content Include="Views\Comentarios\CommentsMotivoR.cshtml" />
+    <Content Include="Views\ReporteParaCognos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

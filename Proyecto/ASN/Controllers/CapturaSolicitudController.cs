@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Globalization;
 
 namespace ASN.Controllers
 {
@@ -141,6 +142,7 @@ namespace ASN.Controllers
 
                 using (ASNContext context = new ASNContext())
                 {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                     lstEmpleadoAutorizantes = context.CatSolicitudAutorizantesSel(FolioSolicitud, Conceptoid, Empleado_Ident).ToList();
                 }
 
@@ -287,22 +289,23 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetMotivosCMB()
+        public JsonResult GetMotivosCMB(int? PeriodoNominaId)
         {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
             {
                 var listPeriodoNomina = new List<CatMotivoSolicitudCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatMotivoSolicitudCMB().OrderBy(x => x.Valor).ToList();
+                    listPeriodoNomina = context.CatMotivoSolicitudCMB(PeriodoNominaId, usuario.UserInfo.Ident.Value).OrderBy(x => x.Valor).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+               
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json("");
@@ -745,6 +748,7 @@ namespace ASN.Controllers
                 {
                     if (int.TryParse(folioId, out foliId))
                     {
+                        context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
                         lstAutorizadoresxEmpleadoxConcepto = context.NivelesAutorizacionxEmpleadoxConcepto(EmpleadoIdent, ConceptoId, foliId).ToList();
                     }
                 }
@@ -907,7 +911,7 @@ namespace ASN.Controllers
                 ObjectParameter FolioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
                 string folioResult;
                 resultado.Value = -1;
-
+                CultureInfo mxCulture = new CultureInfo("es-MX");
                 var lista = new List<CargaMasivaRegistroViewModel>();
 
                 if (filesBono != null)
@@ -942,17 +946,18 @@ namespace ASN.Controllers
                                             //    var msg = "El archivo tiene menos de 30 registros";
                                             //    return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
                                             //}
-
+                                            int canRegistros = 0;
                                             while (csv.Read())
                                             {
                                                 var objeton = new CargaMasivaRegistroViewModel();
 
                                                 if (csv.TryGetField(0, out strCCMSID) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out strDetalle))
                                                 {
-                                                    if (strCCMSID != "ccmsId")
-                                                    {                                                        
+                                                    //if (strCCMSID != "ccmsId")
+                                                     if (canRegistros > 0)
+                                                       {                                                        
                                                         ccmsId = Convert.ToInt32(strCCMSID.Trim());
-                                                        detalle = Convert.ToInt32(strDetalle.Trim());
+                                                        detalle = Convert.ToDecimal(strDetalle.Trim(), mxCulture);
                                                         objeton.parametro = parametro;
                                                         objeton.detalle = detalle;
                                                         objeton.solicitudId = -1;
@@ -962,7 +967,7 @@ namespace ASN.Controllers
 
                                                         lista.Add(objeton);
                                                     }
-                                                    
+                                                    canRegistros++;
                                                 }
                                             }
                                         }

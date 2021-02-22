@@ -1485,11 +1485,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatSolicitudEmpleadosDetalleSi", solicitudIdParameter, catEmpleadoIdParameter, conceptoMotivoIdParameter, periodoNominaParameter, reponsableIdParameter, montoParameter, detalleParameter, tTConceptoMotivoIdParameter, tTManager_IdentParameter, tTMontoParameter, tTDetalleParameter, tTPeriodoNominaParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual ObjectResult<CatMotivoSolicitudCMB_Result> CatMotivoSolicitudCMB()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMotivoSolicitudCMB_Result>("CatMotivoSolicitudCMB");
-        }
-    
         public virtual int CatSolicitudesArchivosSi(Nullable<int> folioSolicitud, string nombreArchivo, Nullable<int> userEmployeeId, ObjectParameter estatus)
         {
             var folioSolicitudParameter = folioSolicitud.HasValue ?
@@ -3163,6 +3158,28 @@ namespace ASN.Models
                 new ObjectParameter("ConceptoId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("ValidaConceptoMasivo", conceptoIdParameter);
+        }
+    
+        public virtual ObjectResult<CatMotivoSolicitudCMB_Result> CatMotivoSolicitudCMB(Nullable<int> periodoNominaId, Nullable<int> cCMSID)
+        {
+            var periodoNominaIdParameter = periodoNominaId.HasValue ?
+                new ObjectParameter("PeriodoNominaId", periodoNominaId) :
+                new ObjectParameter("PeriodoNominaId", typeof(int));
+    
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMotivoSolicitudCMB_Result>("CatMotivoSolicitudCMB", periodoNominaIdParameter, cCMSIDParameter);
+        }
+    
+        public virtual ObjectResult<ReporteParaCognos_Result> ReporteParaCognos(Nullable<int> periodoNomina)
+        {
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteParaCognos_Result>("ReporteParaCognos", periodoNominaParameter);
         }
     }
 }

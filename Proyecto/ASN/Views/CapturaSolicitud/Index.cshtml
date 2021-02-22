@@ -380,7 +380,7 @@
                             {
                                 source.Read(read =>
                                 {
-                                    read.Action("GetMotivosCMB", "CapturaSolicitud");
+                                    read.Action("GetMotivosCMB", "CapturaSolicitud").Data("dataMotivos");
                                 }
                                 );
                                 //.ServerFiltering(true);
@@ -418,7 +418,7 @@
                             </td>
                             <td class="Ticket hidden">
                                 <div id="ticket">
-                                    <input type="text" name="idTicket" id="idTicket" value="" class="k-textbox" style=" width:80px;" />
+                                    <input type="number" name="idTicket" id="idTicket" value="" class="k-textbox" style=" width:95px;"/>
                                     @*@(Html.Kendo().TextBox()
                             .Name("idDescripcion")
                             .Value("")
