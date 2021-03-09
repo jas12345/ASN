@@ -137,7 +137,8 @@ $(document).ready(function () {
 function excelExport(e) {
     var cont = 0;
     var suma = 0;
-    var moneda = 'MXN';
+    var moneda = '';
+    var arrMoneda = ['CRC','DOP','USD','GTQ','MXN']
     var status = 'Cancelada';
     var back = "#0707BE"; //"#A7A5A4";
 
@@ -220,8 +221,11 @@ function excelExport(e) {
         var data = e.data;
         for (var i = 0; i < data.length; i++) {
             var rowCells = [];
-            var existe = data[i].Monto.indexOf(moneda);
+            var mon = data[i].Monto.substr(data[i].Monto.length - 3, 3)           
+            //var existe = data[i].Monto.indexOf(moneda);
+            var existe = arrMoneda.indexOf(mon);
             if (data[i].EstatusSolicitud != status && existe > -1) {
+                moneda = mon;
                 cont = cont + 1;
                 suma = suma + parseFloat(data[i].Monto.replace(moneda, ''));
             }
@@ -272,8 +276,11 @@ function excelExport(e) {
         var data = e.data;
         for (var i = 0; i < data.length; i++) {
             var rowCells = [];
-            var existe = data[i].Monto.indexOf(moneda);
+            var mon = data[i].Monto.substr(data[i].Monto.length - 3, 3)           
+            //var existe = data[i].Monto.indexOf(moneda);
+            var existe = arrMoneda.indexOf(mon);
             if (data[i].EstatusSolicitud != status && existe > -1) {
+                moneda = mon;
                 cont = cont + 1;
                 suma = suma + parseFloat(data[i].Monto.replace(moneda, ''));
             }
@@ -2517,4 +2524,68 @@ function habTicket(conceptoMotivoId)
         $(".Ticket").removeClass('hidden');
 
     }
+}
+
+
+function parametrosAutorizadores1() {
+    //var Empleado = $("#CCMSIDSolicitado").val();
+    //var Concepto = $("#CCMSIDSolicitado").val();
+    var Empleado = dataItem_Ident;
+    var Concepto = dataItem_ConceptoId;
+
+    if (Empleado == "") {
+        Empleado = $("#CCMSIDSolicitado").val();
+    }
+
+    if (Concepto == "") {
+        Concepto = $("#Conceptos").val();
+    }
+
+    return {
+        EmpleadoIdent: Empleado,
+        ConceptoId: Concepto,
+        Nivel: 1
+    };
+}
+
+function parametrosAutorizadores2() {
+    //var Empleado = $("#CCMSIDSolicitado").val();
+    //var Concepto = $("#CCMSIDSolicitado").val();
+    var Empleado = dataItem_Ident;
+    var Concepto = dataItem_ConceptoId;
+
+    if (Empleado == "") {
+        Empleado = $("#CCMSIDSolicitado").val();
+    }
+
+    if (Concepto == "") {
+        Concepto = $("#Conceptos").val();
+    }
+
+    return {
+        EmpleadoIdent: Empleado,
+        ConceptoId: Concepto,
+        Nivel: 2
+    };
+}
+
+function parametrosAutorizadores3() {
+    //var Empleado = $("#CCMSIDSolicitado").val();
+    //var Concepto = $("#CCMSIDSolicitado").val();
+    var Empleado = dataItem_Ident;
+    var Concepto = dataItem_ConceptoId;
+
+    if (Empleado == "") {
+        Empleado = $("#CCMSIDSolicitado").val();
+    }
+
+    if (Concepto == "") {
+        Concepto = $("#Conceptos").val();
+    }
+
+    return {
+        EmpleadoIdent: Empleado,
+        ConceptoId: Concepto,
+        Nivel: 3
+    };
 }

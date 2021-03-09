@@ -2014,19 +2014,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CatConceptosNivelAutorizadorSi", conceptoIdParameter, nivelIdParameter, autorizadorIdentParameter, userEmployeeIdParameter, estatus);
         }
     
-        public virtual ObjectResult<AutorizadoresxEmpleadoxConceptoCMB_Result> AutorizadoresxEmpleadoxConceptoCMB(Nullable<int> empleadoIdent, Nullable<int> conceptoId)
-        {
-            var empleadoIdentParameter = empleadoIdent.HasValue ?
-                new ObjectParameter("EmpleadoIdent", empleadoIdent) :
-                new ObjectParameter("EmpleadoIdent", typeof(int));
-    
-            var conceptoIdParameter = conceptoId.HasValue ?
-                new ObjectParameter("ConceptoId", conceptoId) :
-                new ObjectParameter("ConceptoId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizadoresxEmpleadoxConceptoCMB_Result>("AutorizadoresxEmpleadoxConceptoCMB", empleadoIdentParameter, conceptoIdParameter);
-        }
-    
         public virtual ObjectResult<CatConceptosxEmpleadoSolicitanteCMB_Result> CatConceptosxEmpleadoSolicitanteCMB(Nullable<int> ident, Nullable<int> ident_Solicitante)
         {
             var identParameter = ident.HasValue ?
@@ -3173,13 +3160,34 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMotivoSolicitudCMB_Result>("CatMotivoSolicitudCMB", periodoNominaIdParameter, cCMSIDParameter);
         }
     
-        public virtual ObjectResult<ReporteParaCognos_Result> ReporteParaCognos(Nullable<int> periodoNomina)
+        public virtual ObjectResult<ReporteParaCognos_Result> ReporteParaCognos(Nullable<int> periodoNomina, Nullable<int> empresa)
         {
             var periodoNominaParameter = periodoNomina.HasValue ?
                 new ObjectParameter("PeriodoNomina", periodoNomina) :
                 new ObjectParameter("PeriodoNomina", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteParaCognos_Result>("ReporteParaCognos", periodoNominaParameter);
+            var empresaParameter = empresa.HasValue ?
+                new ObjectParameter("Empresa", empresa) :
+                new ObjectParameter("Empresa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteParaCognos_Result>("ReporteParaCognos", periodoNominaParameter, empresaParameter);
+        }
+    
+        public virtual ObjectResult<AutorizadoresxEmpleadoxConceptoCMB_Result> AutorizadoresxEmpleadoxConceptoCMB(Nullable<int> empleadoIdent, Nullable<int> conceptoId, Nullable<int> nivel)
+        {
+            var empleadoIdentParameter = empleadoIdent.HasValue ?
+                new ObjectParameter("EmpleadoIdent", empleadoIdent) :
+                new ObjectParameter("EmpleadoIdent", typeof(int));
+    
+            var conceptoIdParameter = conceptoId.HasValue ?
+                new ObjectParameter("ConceptoId", conceptoId) :
+                new ObjectParameter("ConceptoId", typeof(int));
+    
+            var nivelParameter = nivel.HasValue ?
+                new ObjectParameter("Nivel", nivel) :
+                new ObjectParameter("Nivel", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizadoresxEmpleadoxConceptoCMB_Result>("AutorizadoresxEmpleadoxConceptoCMB", empleadoIdentParameter, conceptoIdParameter, nivelParameter);
         }
     }
 }

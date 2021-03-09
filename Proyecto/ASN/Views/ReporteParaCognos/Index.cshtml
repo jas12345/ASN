@@ -42,8 +42,31 @@
                                                                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                 )
         </div>
-     
-        <div class="col-lg-2">            
+        <div class="col-lg-4">
+            @Html.Label("Empresa:", new { style = "font-size:15px" })
+            @(Html.Kendo().DropDownList()
+                                                                        .DataSource(source => source
+                                                                            .Custom()
+                                                                            .Transport(tr => tr
+                                                                               .Read(read =>
+                                                                               {
+                                                                                   read.Action("GetEmpresaCMB", "ReporteParaCognos");
+                                                                               }
+                                                                               )
+                                                                            )
+                                                                        )
+                                                                        //.Filter("contains")
+                                                                        .OptionLabel("- Seleccione una Empresa - ")
+                                                                        .DataValueField("ID_Empresa")
+                                                                        .DataTextField("Empresa")
+                                                                        .Name("ddlEmpresa")
+                                                                        .SelectedIndex(0)
+                                                                        .Enable(true)
+                                                                        .Events(e => e.Change("onEmpresaDropDownChange"))
+                                                                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
+                )
+        </div>
+        <div class="col-lg-2">
             <input type="button" title="Enviar Archivo" name="btnEnviarArchivoNomina" value="Enviar" onclick='onClickEnviaArchivo()' />
         </div>
 
@@ -92,8 +115,10 @@ else
 }
 
 <script>
-    var PeriodoNomina_Id_selected = 0;
-    var PeriodoNomina_selected = '';    
+    var PeriodoNomina_Id_selected   = 0;
+    var PeriodoNomina_selected      = '';   
+    var Empresa_selected            = '';
+    var EmpresaId_selected          = 0;
 </script>
 
 @Scripts.Render("~/bundles/ReporteParaCognos")

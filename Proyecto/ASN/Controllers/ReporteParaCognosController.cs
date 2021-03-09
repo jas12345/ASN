@@ -74,11 +74,12 @@ namespace ASN.Controllers
             }
         }
 
-        public FileContentResult EnviaArchivo(int? PeriodoNominaIdSelected, string periodoNominaNombre)
+        public FileContentResult EnviaArchivo(int? PeriodoNominaIdSelected, string periodoNominaNombre, int EmpresaId)
         {
-            var estado = string.Empty;
-            var mensajeAccion = string.Empty;
-            string IP = Request.UserHostAddress;            
+            var estado          = string.Empty;
+            var mensajeAccion   = string.Empty;
+            string IP           = Request.UserHostAddress;
+            string empresa      = string.Empty;
 
             try
             {
@@ -91,7 +92,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    Resultado = ctx.ReporteParaCognos(PeriodoNominaIdSelected).ToList();
+                    Resultado = ctx.ReporteParaCognos(PeriodoNominaIdSelected,EmpresaId).ToList();
                 }
 
                 var bonosArchivo = new List<RafToolObj1>();
@@ -122,7 +123,7 @@ namespace ASN.Controllers
                     foreach (var obj in Resultado)
                     {
                         //string numeroDeSemana = obj.T_EX_DOB_SEM.ToString() == "1" ? "1" : "";
-
+                        
                         var bono = new RafToolObj1();
 
                         bono.Payroll_Processed                  = obj.Payroll_Processed;
@@ -139,7 +140,7 @@ namespace ASN.Controllers
                         bono.Descripcion                        = obj.Descripcion;
                         bono.Manger_ID                          = obj.Manger_ID.ToString();
                         bono.Nombre                             = obj.Nombre;
-                        
+                        empresa                                 = obj.Empresa;
 
                         bonosArchivo.Add(bono);
 
@@ -173,6 +174,7 @@ namespace ASN.Controllers
 
                     var result = WriteCsvToMemory(bonosArchivo);
                     var memoryStream = new MemoryStream(result);
+                    
 
                     /// El numero 10 es simbolicos, solo es para comprobar que tegno registros, tratandose de Miles
                     /// deberia tener mas de 10 registros pues es segun los empleados que hay en la compañia con Miles.
@@ -189,7 +191,7 @@ namespace ASN.Controllers
                     //var folder = "//TP/INCID/013/CONTACT";
                     var FolderPath = string.Format(@" \Temp\files\{0}", periodoNominaNombre.Substring(0, 4)); // "\\files\\2021";    //lstBonos[0].Folder.ToUpper();
                     //var FolderPathSubtring = folder.Substring(4, folder.Length - 4);
-                    var nombreArchivo = string.Format("MO_CRC_{0}{1}", periodoNominaNombre,extension);     //IdentificadorArchivo + "_" + TipoNominas + "_" + Compania + "_" + ID_REP + "_" + Ciudad + "_" + TipoIncidencia + "_" + FechaDeCreacion + extension;
+                    var nombreArchivo = string.Format("MO_{2}_{0}{1}", periodoNominaNombre,extension,empresa);     //IdentificadorArchivo + "_" + TipoNominas + "_" + Compania + "_" + ID_REP + "_" + Ciudad + "_" + TipoIncidencia + "_" + FechaDeCreacion + extension;
                    
                     var serverPath = server + FolderPath + "\\" + nombreArchivo;
                     var filePath = "z:" + FolderPath + "/" + nombreArchivo;
@@ -248,7 +250,7 @@ namespace ASN.Controllers
 
 
             using (var memoryStream = new MemoryStream())
-            using (var streamWriter = new StreamWriter(memoryStream))
+            using (var streamWriter = new StreamWriter(memoryStream,System.Text.Encoding.Default))
             //using (var csvWriter = new CsvWriter(streamWriter))
             {
                 Type itemType = typeof(RafToolObj1);

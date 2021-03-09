@@ -217,15 +217,19 @@ namespace ASN.Controllers
         /// Método que devuelve todos los periodos de nomina para un ComboBox
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetEmpleadosPerfilAutorizadoresCMB(string EmpleadoIdent, string ConceptoId)
+        public JsonResult GetEmpleadosPerfilAutorizadoresCMB(string EmpleadoIdent, string ConceptoId, string Nivel)
         {
+            if (string.IsNullOrEmpty(Nivel))
+            {
+                return null;
+            }
             try
             {
                 var listPeriodoNomina = new List<AutorizadoresxEmpleadoxConceptoCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.AutorizadoresxEmpleadoxConceptoCMB(int.Parse(EmpleadoIdent), int.Parse(ConceptoId)).ToList();
+                    listPeriodoNomina = context.AutorizadoresxEmpleadoxConceptoCMB(int.Parse(EmpleadoIdent), int.Parse(ConceptoId),int.Parse(Nivel)).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
@@ -1073,7 +1077,9 @@ namespace ASN.Controllers
                 LogError log = new LogError();
                 log.RecordError(e, usuario.UserInfo.Ident.Value);
 
-                return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
+                var msg = "Error1:El archivo no fue procesado correctamente";
+                return Json(msg.ToString());
+                //return Json(new { res = -1 }, JsonRequestBehavior.AllowGet);
             }
         }
 

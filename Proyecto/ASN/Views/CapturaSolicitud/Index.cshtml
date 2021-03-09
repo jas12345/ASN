@@ -488,7 +488,7 @@
                                 {
                                     source.Read(read =>
                                     {
-                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores1");
                                     });
                                 })
         .Filter("contains")
@@ -512,7 +512,7 @@
                                 {
                                     source.Read(read =>
                                     {
-                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores2");
                                     });
                                 })
         .Filter("contains")
@@ -536,7 +536,7 @@
                                 {
                                     source.Read(read =>
                                     {
-                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores");
+                                        read.Action("GetEmpleadosPerfilAutorizadoresCMB", "CapturaSolicitud").Data("parametrosAutorizadores3");
                                     });
                                 })
         .Filter("contains")
@@ -1176,6 +1176,14 @@ else
         var valor = e.response.indexOf("Error:");
         if (valor == 0) {
             var resul = e.response.replace('Error:', '').replace('0', '');
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show(resul, "warning");
+            return false;
+        }
+
+        var valor = e.response.indexOf("Error1:");
+        if (valor == 0) {
+            var resul = e.response.replace('Error1:', '');
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show(resul, "warning");
             return false;
