@@ -12,7 +12,7 @@ namespace ASN.Controllers
 {
     public class ReportePendientesAutorizarYRechazadosController : Controller
     {
-        [Authorize(Roles = "Responsable")]
+        [Authorize(Roles = "Responsable,Consultante")]
 
         public ActionResult Index()
         {

@@ -126,7 +126,9 @@
         <Function Name="CatConceptosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Perfil" Type="int" Mode="In" />
         </Function>
-        <Function Name="CatConceptosMotivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="CatConceptosMotivoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="CCMSID" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatConceptosMotivosSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatConceptosMotivosSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -763,6 +765,9 @@
           <Parameter Name="PeriodoNominaId" Type="int" Mode="In" />
           <Parameter Name="ID_Empresa" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetEmpleadosDuplicados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+        </Function>
         <Function Name="NivelesAutorizacionxEmpleadoxConcepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="EmpleadoIdent" Type="int" Mode="In" />
           <Parameter Name="ConceptoId" Type="int" Mode="In" />
@@ -1089,7 +1094,6 @@
             <Parameter Name="MesId" Mode="In" Type="Int32" />
             <Parameter Name="AnioId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CatConceptosMotivoCMB" ReturnType="Collection(ASNModel.CatConceptosMotivoCMB_Result)" />
           <FunctionImport Name="CatConceptosMotivosSel" ReturnType="Collection(ASNModel.CatConceptosMotivosSel_Result)" />
           <FunctionImport Name="CatConceptosMotivosSi">
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -1610,12 +1614,6 @@
           <Parameter Name="Activos" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="ReporteConceptoGeneralSel" ReturnType="Collection(ASNModel.ReporteConceptoGeneralSel_Result)" />
-          <FunctionImport Name="ReporteSolicitudXEstatusSel" ReturnType="Collection(ASNModel.ReporteSolicitudXEstatusSel_Result)">
-            <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
-            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
-            <Parameter Name="EstatusSolicitud" Mode="In" Type="String" />
-            <Parameter Name="EstatusConcepto" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="CatSiteCMB" ReturnType="Collection(ASNModel.CatSiteCMB_Result)" />
           <FunctionImport Name="CatEmpleadoSolicitanteCMB" ReturnType="Collection(ASNModel.CatEmpleadoSolicitanteCMB_Result)" />
           <FunctionImport Name="CatEstatusCMB" ReturnType="Collection(ASNModel.CatEstatusCMB_Result)" />
@@ -1836,6 +1834,18 @@
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Nivel" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetEmpleadosDuplicados" ReturnType="Collection(ASNModel.GetEmpleadosDuplicados_Result)">
+          <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteSolicitudXEstatusSel" ReturnType="Collection(ASNModel.ReporteSolicitudXEstatusSel_Result)">
+            <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
+            <Parameter Name="EstatusSolicitud" Mode="In" Type="String" />
+            <Parameter Name="EstatusConcepto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CatConceptosMotivoCMB" ReturnType="Collection(ASNModel.CatConceptosMotivoCMB_Result)">
+            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -1998,10 +2008,6 @@
         <ComplexType Name="CatMesesFechasCMB_Result">
           <Property Type="String" Name="FechaInicio" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FechaCierre" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="CatConceptosMotivoCMB_Result">
-          <Property Type="Int32" Name="Ident" Nullable="false" />
-          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="CatConceptosMotivosSel_Result">
           <Property Type="Int32" Name="ConceptoMotivoId" Nullable="false" />
@@ -2751,17 +2757,6 @@
           <Property Type="Int32" Name="MesId" Nullable="false" />
           <Property Type="String" Name="ConsecutivoId" Nullable="false" MaxLength="5" />
         </ComplexType>
-        <ComplexType Name="ReporteSolicitudXEstatusSel_Result">
-          <Property Type="Int32" Name="Folio" Nullable="false" />
-          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Total" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Site" Nullable="true" MaxLength="250" />
-          <Property Type="Int32" Name="SolicitanteCCMSID" Nullable="true" />
-          <Property Type="String" Name="EstatusSol" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="EstatusCon" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Periodo" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="CatSiteCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
@@ -3043,6 +3038,32 @@
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="true" MaxLength="752" />
         </ComplexType>
+        <ComplexType Name="GetEmpleadosDuplicados_Result">
+          <Property Type="Int32" Name="Folio_Solicitud" Nullable="false" />
+          <Property Type="Int32" Name="Empleado" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Monto" Nullable="false" />
+          <Property Type="String" Name="Periodo_Nomina" Nullable="false" MaxLength="16" />
+        </ComplexType>
+        <ComplexType Name="ReporteSolicitudXEstatusSel_Result">
+          <Property Type="Int32" Name="Folio" Nullable="false" />
+          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Total" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Ciudad" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Site" Nullable="false" MaxLength="18" />
+          <Property Type="String" Name="Periodo" Nullable="false" MaxLength="17" />
+          <Property Type="String" Name="EstatusSol" Nullable="false" MaxLength="14" />
+          <Property Type="Int32" Name="SolicitanteCCMSID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Aut_1" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Aut_2" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Aut_3" Nullable="false" MaxLength="11" />
+        </ComplexType>
+        <ComplexType Name="CatConceptosMotivoCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
        
         </Schema>
     </edmx:ConceptualModels>
@@ -3260,14 +3281,6 @@
               <ComplexTypeMapping TypeName="ASNModel.CatMesesFechasCMB_Result">
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CatConceptosMotivoCMB" FunctionName="ASNModel.Store.CatConceptosMotivoCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatConceptosMotivoCMB_Result">
-                <ScalarProperty Name="Ident" ColumnName="Ident" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4387,21 +4400,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ReporteSolicitudXEstatusSel" FunctionName="ASNModel.Store.ReporteSolicitudXEstatusSel">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.ReporteSolicitudXEstatusSel_Result">
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Site" ColumnName="Site" />
-                <ScalarProperty Name="SolicitanteCCMSID" ColumnName="SolicitanteCCMSID" />
-                <ScalarProperty Name="EstatusSol" ColumnName="EstatusSol" />
-                <ScalarProperty Name="EstatusCon" ColumnName="EstatusCon" />
-                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatSiteCMB" FunctionName="ASNModel.Store.CatSiteCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatSiteCMB_Result">
@@ -4800,6 +4798,44 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.AutorizadoresxEmpleadoxConceptoCMB_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmpleadosDuplicados" FunctionName="ASNModel.Store.GetEmpleadosDuplicados">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.GetEmpleadosDuplicados_Result">
+                <ScalarProperty Name="Folio_Solicitud" ColumnName="Folio_Solicitud" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Periodo_Nomina" ColumnName="Periodo_Nomina" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteSolicitudXEstatusSel" FunctionName="ASNModel.Store.ReporteSolicitudXEstatusSel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteSolicitudXEstatusSel_Result">
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="EstatusSol" ColumnName="EstatusSol" />
+                <ScalarProperty Name="SolicitanteCCMSID" ColumnName="SolicitanteCCMSID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Aut_1" ColumnName="Aut_1" />
+                <ScalarProperty Name="Aut_2" ColumnName="Aut_2" />
+                <ScalarProperty Name="Aut_3" ColumnName="Aut_3" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatConceptosMotivoCMB" FunctionName="ASNModel.Store.CatConceptosMotivoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatConceptosMotivoCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>
             </ResultMapping>

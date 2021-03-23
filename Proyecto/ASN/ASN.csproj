@@ -544,6 +544,9 @@
     <Compile Include="Models\GeneraArchivoSolicitudSel_Button_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetEmpleadosDuplicados_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\KendoDropDownListSelectedViewModel.cs" />
     <Compile Include="Models\DescargaArchivoSolicitudSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
@@ -1024,6 +1027,7 @@
     <Content Include="Views\ReporteDescuentosVarios\Index.cshtml" />
     <Content Include="Views\Comentarios\CommentsMotivoR.cshtml" />
     <Content Include="Views\ReporteParaCognos\Index.cshtml" />
+    <Content Include="Views\AutorizaSolicitud\GetEmpleadosDuplicados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

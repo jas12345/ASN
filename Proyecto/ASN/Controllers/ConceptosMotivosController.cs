@@ -44,20 +44,21 @@ namespace ASN.Controllers
 
         public JsonResult GetConceptosMotivosCMB()
         {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
             {
                 var listConceptosMotivo = new List<CatConceptosMotivoCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listConceptosMotivo = context.CatConceptosMotivoCMB().ToList();
+                    listConceptosMotivo = context.CatConceptosMotivoCMB(usuario.UserInfo.Ident.Value).ToList();
                 }
 
                 return Json(listConceptosMotivo, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json("");

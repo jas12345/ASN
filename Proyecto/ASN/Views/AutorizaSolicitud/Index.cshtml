@@ -374,6 +374,13 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
+
+                        @(Html.Kendo()
+                              .Button()
+                              .Name("Duplicados").Content("Empleados Duplicados").Icon("")
+                             .Events(x => x.Click("EmpleadosDuplicados"))
+                                           .HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;", type = "button" })
+                                    )
                     </div>
                 </div>
             </div>
@@ -646,6 +653,29 @@
     )
 
 
+
+    @(Html.Kendo().Window()
+        .Title("Obtiene Empleados Duplicados")
+        .Name("getEmpleadosDuplicados")
+        .LoadContentFrom("GetEmpleadosDuplicados", "AutorizaSolicitud")
+        .Iframe(true)
+        .Actions(a => a
+        //.Minimize()
+        .Maximize()
+        .Close()
+        .Refresh()
+
+        )
+        .Resizable()
+        .Draggable()
+        .Width(960)
+        .Height(530)
+        .Visible(false)
+        .Modal(true)
+
+
+        )
+
     <script>
                 @*var urlCrearSolicitud = '@Url.Action("CreateSolicitud", "Solicitudes")';*@
                 var urlSolicitudEmpleados = '@Url.Action("GuardaEmpleados", "Solicitudes")';
@@ -653,7 +683,7 @@
                 var urlGridEmpleadosAutorizadores = '@Url.Action("GridEmpleadosAutorizantes", "EmpleadosSolicitudes")';
     </script>
 
-    <script>
+                        <script>
                 //var listaEmpleados = "";
                 //var selectedEmpleados = new Array();
                 var grid = $('#grid');
@@ -776,15 +806,15 @@
 
         var usuarioCCMSID = '@User.Identity.Name';
         var estatusId = '@Model.EstatusId';
-    </script>
+                        </script>
 }
 else
 {
-    <script type="text/javascript">
+                        <script type="text/javascript">
         $(function () {
             window.location.href = "@Url.Action("Index", "Inicio", new { area = "" }, null)";
         });
-    </script>
+                        </script>
 }
 
 <script>
@@ -803,7 +833,7 @@ else
     function MostrarEvidenciasModal() {
 
         var mostrarDialogEvidencias = $("#MostrarArchivosEvidencias").data("kendoWindow");
-        
+
         var folioEvidencias = $("#FolioSolicitud").val();
 
         mostrarDialogEvidencias.refresh({

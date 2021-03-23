@@ -44,7 +44,13 @@ function infoSolicitud() {
 }
 
 function searchSolicitud() {
+
+    $('#bar').removeClass('hidden')
     $('#grid').data('kendoGrid').dataSource.data([]);
     $('#grid').data('kendoGrid').dataSource.read();
     $('#grid').data('kendoGrid').refresh();
+   
+}
+function request_end() {
+     $('#bar').addClass('hidden')
 }

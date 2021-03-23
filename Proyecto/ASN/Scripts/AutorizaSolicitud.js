@@ -39,6 +39,7 @@ $(document).ready(function () {
 
     bloquearAutorizacion(FolioSolicitud);
 
+
     //grid.thead.on("click", ".k-checkbox", onChange);
 
     //$("#AutorizarSolicitud").hide();
@@ -181,7 +182,7 @@ function calculaEstatusSolicitud() {
     $.post(urlConsultarEstatusSolicitud + "?FolioSolicitud=" + FolioSolicitud, function (data) {
         //"&ConceptoId=" + ConceptoId + "@ParametroConceptoMonto=" + ParametroConceptoMonto                                      , int conceptoMotivoId, int responsableId, int periododOriginalId
         //debugger;
-
+       
         if (data.res == -1) {
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("Error al Calcular Estatus", "error");
@@ -204,6 +205,13 @@ function calculaPeriodoNominaSolicitud() {
         }
         //debugger;
         $("#PeriodoNomina").val(data[0].NombrePeriodo);
+    
+        tipoNomina = $('#PeriodoNomina').val().substr($('#PeriodoNomina').val().length - 1, 1)
+        
+        $('#Duplicados').hide();
+        if (tipoNomina != 'O') {
+            $('#Duplicados').show();
+        }
         //debugger;
     });
 }
@@ -1657,4 +1665,14 @@ function bloquearAutorizacion(folio) {
             $("#AutorizarTodaSolicitud").show();
         }
     })
+}
+
+function EmpleadosDuplicados() {
+
+    var mostrarDialog = $("#getEmpleadosDuplicados").data("kendoWindow");
+
+    mostrarDialog.refresh(
+        { url: "../AutorizaSolicitud/GetEmpleadosDuplicados/?FolioSolicitud=" + $("#FolioSolicitud").val() }
+    );
+    mostrarDialog.open().center(true);
 }

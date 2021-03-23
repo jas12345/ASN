@@ -123,7 +123,18 @@ namespace ASN.Controllers
                     foreach (var obj in lstBonos)
                     {
                         string numeroDeSemana = obj.T_EX_DOB_SEM.ToString() == "1" ? "1" : "";
+                        if (numeroDeSemana == "1")
+                        {
+                            var ContadorTE = (from f in bonosArchivo
+                                              where f.Empleado == obj.EMPLEADO.ToString() && f.Concepto == "T EX DOB SEM"
+                                              select f).Count();
+                            if (ContadorTE == 1)
+                            {
+                                numeroDeSemana = "2";
+                            }
 
+                        }
+                       
                         var bono = new RafToolObj();
 
                         bono.Empleado = obj.EMPLEADO.ToString();
@@ -183,15 +194,18 @@ namespace ASN.Controllers
                     var Compania = lstBonos[0].Compania.ToUpper();
                     var ID_REP = lstBonos[0].ID_REP;
                     var Ciudad = "ALL";
+                    if (ID_REP == "ELO")
+                    {
+                        Ciudad = "AGE";
+                    }
                     var TipoIncidencia = "IMA";
                     var FolderPath = lstBonos[0].Folder.ToUpper();
                     var FolderPathSubtring = FolderPath.Substring(4, FolderPath.Length - 4);
                     var nombreArchivo = IdentificadorArchivo + "_" + TipoNominas + "_" + Compania + "_" + ID_REP + "_" + Ciudad + "_" + TipoIncidencia + "_" + FechaDeCreacion + extension;
                     var serverPath = @"\\10.152.32.164\tp" + FolderPathSubtring.Replace("\\", "/") + "\\" + nombreArchivo;
                     var filePath = "z:" + FolderPathSubtring + "/" + nombreArchivo;
-                    //ExecuteCommand(command, 5000);
+                    //ExecuteCommand(command, 5000);                  
                     
-                
 
                     NetworkDrive oNetDrive = new NetworkDrive();
                     oNetDrive.Force = true;

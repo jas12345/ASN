@@ -291,19 +291,20 @@ namespace ASN.Controllers
 
         public JsonResult GetConceptosMotivoCMB()
         {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
             {
                 var lstCMB = new List<CatConceptosMotivoCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
-                    lstCMB = context.CatConceptosMotivoCMB().ToList();
+                    lstCMB = context.CatConceptosMotivoCMB(usuario.UserInfo.Ident.Value).ToList();
                 }
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
             }
             catch (Exception excepcion)
             {
                 ModelState.AddModelError("error", "Ocurrió un error al procesar la solicitud.");
-                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+               
                 LogError log = new LogError();
                 log.RecordError(excepcion, usuario.UserInfo.Ident.Value);
                 return Json("");

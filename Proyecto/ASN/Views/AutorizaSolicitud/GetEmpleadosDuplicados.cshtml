@@ -1,0 +1,42 @@
+﻿
+@using ASN.Models
+@{
+    var perfil = ViewBag.perfilId;
+}
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th data-field="FolioSolicitud">Folio Solicitud</th>
+                <th data-field="Empleado">Empleado</th>
+                <th data-field="Nombre">Nombre</th>
+                <th data-field="Concepto">Conepto</th>
+                <th data-field="Monto">Monto</th>
+                <th data-field="Periodo">Periodo Nomina</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Folio_Solicitud</td>
+                    <td>@item.Empleado</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Concepto</td>
+                    <td>@item.Monto</td>
+                    <td>@item.Periodo_Nomina</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Styles.Render("~/Content/kendo/css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/kendo")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/AutorizaSolicitud")

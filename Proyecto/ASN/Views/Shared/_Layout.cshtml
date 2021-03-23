@@ -155,6 +155,12 @@
                         <li>@Html.ActionLink("Reporte Folios Pendientes de Autorizar y Rechazados", "Index", "ReportePendientesAutorizarYRechazados")</li>
                         <li>@Html.ActionLink("Reporte Descuentos Varios", "Index", "ReporteDescuentosVarios")</li>
                     }
+                    if (User.IsInRole("Consultante"))
+                    {
+                        <li>@Html.ActionLink("Reporte Solicitud por Estatus", "Index", "ReporteSolicitudXEstatus")</li>
+                        <li>@Html.ActionLink("Reporte Folios Contrato Empresa", "Index", "ReporteFoliosContratoEmpresa")</li>
+                        <li>@Html.ActionLink("Reporte Folios Pendientes de Autorizar y Rechazados", "Index", "ReportePendientesAutorizarYRechazados")</li>                        
+                    }
 
                     if (User.IsInRole("Consultante") || User.IsInRole("Administrador") || User.IsInRole("Responsable"))
                     {

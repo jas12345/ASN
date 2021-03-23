@@ -691,11 +691,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMesesFechasCMB_Result>("CatMesesFechasCMB", mesIdParameter, anioIdParameter);
         }
     
-        public virtual ObjectResult<CatConceptosMotivoCMB_Result> CatConceptosMotivoCMB()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosMotivoCMB_Result>("CatConceptosMotivoCMB");
-        }
-    
         public virtual ObjectResult<CatConceptosMotivosSel_Result> CatConceptosMotivosSel()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosMotivosSel_Result>("CatConceptosMotivosSel");
@@ -2428,27 +2423,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteConceptoGeneralSel_Result>("ReporteConceptoGeneralSel");
         }
     
-        public virtual ObjectResult<ReporteSolicitudXEstatusSel_Result> ReporteSolicitudXEstatusSel(Nullable<int> responsable_Ident, Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
-        {
-            var responsable_IdentParameter = responsable_Ident.HasValue ?
-                new ObjectParameter("Responsable_Ident", responsable_Ident) :
-                new ObjectParameter("Responsable_Ident", typeof(int));
-    
-            var periodoNominaParameter = periodoNomina.HasValue ?
-                new ObjectParameter("PeriodoNomina", periodoNomina) :
-                new ObjectParameter("PeriodoNomina", typeof(int));
-    
-            var estatusSolicitudParameter = estatusSolicitud != null ?
-                new ObjectParameter("EstatusSolicitud", estatusSolicitud) :
-                new ObjectParameter("EstatusSolicitud", typeof(string));
-    
-            var estatusConceptoParameter = estatusConcepto != null ?
-                new ObjectParameter("EstatusConcepto", estatusConcepto) :
-                new ObjectParameter("EstatusConcepto", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolicitudXEstatusSel_Result>("ReporteSolicitudXEstatusSel", responsable_IdentParameter, periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
-        }
-    
         public virtual ObjectResult<CatSiteCMB_Result> CatSiteCMB()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSiteCMB_Result>("CatSiteCMB");
@@ -3188,6 +3162,45 @@ namespace ASN.Models
                 new ObjectParameter("Nivel", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizadoresxEmpleadoxConceptoCMB_Result>("AutorizadoresxEmpleadoxConceptoCMB", empleadoIdentParameter, conceptoIdParameter, nivelParameter);
+        }
+    
+        public virtual ObjectResult<GetEmpleadosDuplicados_Result> GetEmpleadosDuplicados(Nullable<int> folioSolicitud)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEmpleadosDuplicados_Result>("GetEmpleadosDuplicados", folioSolicitudParameter);
+        }
+    
+        public virtual ObjectResult<ReporteSolicitudXEstatusSel_Result> ReporteSolicitudXEstatusSel(Nullable<int> responsable_Ident, Nullable<int> periodoNomina, string estatusSolicitud, string estatusConcepto)
+        {
+            var responsable_IdentParameter = responsable_Ident.HasValue ?
+                new ObjectParameter("Responsable_Ident", responsable_Ident) :
+                new ObjectParameter("Responsable_Ident", typeof(int));
+    
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
+    
+            var estatusSolicitudParameter = estatusSolicitud != null ?
+                new ObjectParameter("EstatusSolicitud", estatusSolicitud) :
+                new ObjectParameter("EstatusSolicitud", typeof(string));
+    
+            var estatusConceptoParameter = estatusConcepto != null ?
+                new ObjectParameter("EstatusConcepto", estatusConcepto) :
+                new ObjectParameter("EstatusConcepto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteSolicitudXEstatusSel_Result>("ReporteSolicitudXEstatusSel", responsable_IdentParameter, periodoNominaParameter, estatusSolicitudParameter, estatusConceptoParameter);
+        }
+    
+        public virtual ObjectResult<CatConceptosMotivoCMB_Result> CatConceptosMotivoCMB(Nullable<int> cCMSID)
+        {
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosMotivoCMB_Result>("CatConceptosMotivoCMB", cCMSIDParameter);
         }
     }
 }
