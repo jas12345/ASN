@@ -49,7 +49,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = ctx.CatPeriodosNominaCMB(4, usuario.UserInfo.Ident.Value).ToList();
+                    listPeriodoNomina = ctx.CatPeriodosNominaCMB(4, usuario.UserInfo.Ident.Value,0).ToList();
 
                     if (kddslv.IdPeriodoNomina == 0)
                     {
@@ -132,7 +132,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB(active, usuario.UserInfo.Ident.Value).ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(active, usuario.UserInfo.Ident.Value,0).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);

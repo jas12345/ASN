@@ -507,6 +507,7 @@
         <Function Name="CatPeriodosNominaCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="Active" Type="int" Mode="In" />
           <Parameter Name="CCMSId" Type="int" Mode="In" />
+          <Parameter Name="Pais" Type="int" Mode="In" />
         </Function>
         <Function Name="CatPeriodosNominaSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatPeriodosNominaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1705,10 +1706,6 @@
             <Parameter Name="sInputList" Mode="In" Type="String" />
             <Parameter Name="sDelimiter" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="CatPeriodosNominaCMB" ReturnType="Collection(ASNModel.CatPeriodosNominaCMB_Result)">
-            <Parameter Name="Active" Mode="In" Type="Int32" />
-            <Parameter Name="CCMSId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ReporteDescuentosVarios" ReturnType="Collection(ASNModel.ReporteDescuentosVarios_Result)">
             <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
             <Parameter Name="Empresaid" Mode="In" Type="Int32" />
@@ -1844,7 +1841,12 @@
             <Parameter Name="EstatusConcepto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CatConceptosMotivoCMB" ReturnType="Collection(ASNModel.CatConceptosMotivoCMB_Result)">
-            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatPeriodosNominaCMB" ReturnType="Collection(ASNModel.CatPeriodosNominaCMB_Result)">
+            <Parameter Name="Active" Mode="In" Type="Int32" />
+            <Parameter Name="CCMSId" Mode="In" Type="Int32" />
+            <Parameter Name="Pais" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -2944,10 +2946,6 @@
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="CatPeriodosNominaCMB_Result">
-          <Property Type="Int32" Name="Ident" Nullable="false" />
-          <Property Type="String" Name="Valor" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="ReporteDescuentosVarios_Result">
           <Property Type="String" Name="PERIODO_DE_NOMINA" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="SITE" Nullable="true" MaxLength="30" />
@@ -3063,6 +3061,10 @@
         <ComplexType Name="CatConceptosMotivoCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="CatPeriodosNominaCMB_Result">
+          <Property Type="Int32" Name="Ident" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" />
         </ComplexType>
        
         </Schema>
@@ -4654,14 +4656,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="fnSplit" FunctionName="ASNModel.Store.fnSplit" />
-          <FunctionImportMapping FunctionImportName="CatPeriodosNominaCMB" FunctionName="ASNModel.Store.CatPeriodosNominaCMB">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.CatPeriodosNominaCMB_Result">
-                <ScalarProperty Name="Ident" ColumnName="Ident" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReporteDescuentosVarios" FunctionName="ASNModel.Store.ReporteDescuentosVarios">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.ReporteDescuentosVarios_Result">
@@ -4835,6 +4829,14 @@
           <FunctionImportMapping FunctionImportName="CatConceptosMotivoCMB" FunctionName="ASNModel.Store.CatConceptosMotivoCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatConceptosMotivoCMB_Result">
+                <ScalarProperty Name="Ident" ColumnName="Ident" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatPeriodosNominaCMB" FunctionName="ASNModel.Store.CatPeriodosNominaCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatPeriodosNominaCMB_Result">
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
               </ComplexTypeMapping>

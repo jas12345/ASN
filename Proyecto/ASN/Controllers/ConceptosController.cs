@@ -340,7 +340,7 @@ namespace ASN.Controllers
                 var lstCMB = new List<CatPeriodosNominaCMB_Result>();
                 using (ASNContext context = new ASNContext())
                 {
-                    lstCMB = context.CatPeriodosNominaCMB(1, usuario.UserInfo.Ident.Value).ToList();
+                    lstCMB = context.CatPeriodosNominaCMB(1, usuario.UserInfo.Ident.Value,0).ToList();
                 }
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
             }

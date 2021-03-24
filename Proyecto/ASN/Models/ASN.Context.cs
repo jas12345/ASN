@@ -2722,19 +2722,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<string>("[ASNContext].[fnSplit](@sInputList, @sDelimiter)", sInputListParameter, sDelimiterParameter);
         }
     
-        public virtual ObjectResult<CatPeriodosNominaCMB_Result> CatPeriodosNominaCMB(Nullable<int> active, Nullable<int> cCMSId)
-        {
-            var activeParameter = active.HasValue ?
-                new ObjectParameter("Active", active) :
-                new ObjectParameter("Active", typeof(int));
-    
-            var cCMSIdParameter = cCMSId.HasValue ?
-                new ObjectParameter("CCMSId", cCMSId) :
-                new ObjectParameter("CCMSId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB", activeParameter, cCMSIdParameter);
-        }
-    
         public virtual ObjectResult<ReporteDescuentosVarios_Result> ReporteDescuentosVarios(Nullable<int> periodoNominaId, Nullable<int> empresaid)
         {
             var periodoNominaIdParameter = periodoNominaId.HasValue ?
@@ -3201,6 +3188,23 @@ namespace ASN.Models
                 new ObjectParameter("CCMSID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosMotivoCMB_Result>("CatConceptosMotivoCMB", cCMSIDParameter);
+        }
+    
+        public virtual ObjectResult<CatPeriodosNominaCMB_Result> CatPeriodosNominaCMB(Nullable<int> active, Nullable<int> cCMSId, Nullable<int> pais)
+        {
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(int));
+    
+            var cCMSIdParameter = cCMSId.HasValue ?
+                new ObjectParameter("CCMSId", cCMSId) :
+                new ObjectParameter("CCMSId", typeof(int));
+    
+            var paisParameter = pais.HasValue ?
+                new ObjectParameter("Pais", pais) :
+                new ObjectParameter("Pais", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB", activeParameter, cCMSIdParameter, paisParameter);
         }
     }
 }
