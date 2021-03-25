@@ -3206,5 +3206,14 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPeriodosNominaCMB_Result>("CatPeriodosNominaCMB", activeParameter, cCMSIdParameter, paisParameter);
         }
+    
+        public virtual ObjectResult<CatCountryByPerfilCMB_Result> CatCountryByPerfilCMB(Nullable<int> cCMSID)
+        {
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCountryByPerfilCMB_Result>("CatCountryByPerfilCMB", cCMSIDParameter);
+        }
     }
 }

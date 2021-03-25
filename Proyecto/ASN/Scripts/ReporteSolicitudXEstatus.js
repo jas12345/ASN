@@ -21,6 +21,8 @@ $(window).resize(function () {
 
 $(document).ready(function () {
     $(window).trigger("resize");
+    $("#paisID").closest('.k-dropdown').addClass('mandatory');
+   
 
     //$("#FechaInicio").attr("readonly", true);
     //$("#FechaFin").attr("readonly", true);
@@ -45,12 +47,25 @@ function infoSolicitud() {
 
 function searchSolicitud() {
 
-    $('#bar').removeClass('hidden')
+    $("#bar").removeClass('hidden'); 
     $('#grid').data('kendoGrid').dataSource.data([]);
     $('#grid').data('kendoGrid').dataSource.read();
     $('#grid').data('kendoGrid').refresh();
    
 }
 function request_end() {
-     $('#bar').addClass('hidden')
+    $("#bar").add("hidden");
+}
+function onChangePais()
+{
+    //$('#PeriodoNomina').data('kendoGrid').dataSource.data([]);
+    $("#PeriodoNomina").data("kendoDropDownList").dataSource.read(),
+    $("#PeriodoNomina").data("kendoDropDownList").refresh();
+   
+}
+
+function parametrosConceptos() {   
+    return {
+        PaisId: $("#PaisId").val()
+    }
 }

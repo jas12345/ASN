@@ -277,6 +277,9 @@
           <Parameter Name="ProgramId" Type="int" Mode="In" />
           <Parameter Name="CrontactId" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatCountryByPerfilCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="CCMSID" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatEmpleadoPuestoSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
@@ -1848,6 +1851,9 @@
             <Parameter Name="CCMSId" Mode="In" Type="Int32" />
             <Parameter Name="Pais" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CatCountryByPerfilCMB" ReturnType="Collection(ASNModel.CatCountryByPerfilCMB_Result)">
+            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -3065,6 +3071,10 @@
         <ComplexType Name="CatPeriodosNominaCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CatCountryByPerfilCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="150" />
         </ComplexType>
        
         </Schema>
@@ -4839,6 +4849,14 @@
               <ComplexTypeMapping TypeName="ASNModel.CatPeriodosNominaCMB_Result">
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatCountryByPerfilCMB" FunctionName="ASNModel.Store.CatCountryByPerfilCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCountryByPerfilCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

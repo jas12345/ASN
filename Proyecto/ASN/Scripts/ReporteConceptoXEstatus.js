@@ -40,7 +40,25 @@ function infoSolicitud() {
 }
 
 function searchSolicitud() {
+    $("#bar").removeClass("hidden"); 
     $('#grid').data('kendoGrid').dataSource.data([]);
     $('#grid').data('kendoGrid').dataSource.read();
     $('#grid').data('kendoGrid').refresh();
+}
+
+function request_end() {
+    $("#bar").addClass("hidden")  
+}
+
+function onChangePais() {
+    //$('#PeriodoNomina').data('kendoGrid').dataSource.data([]);
+    $("#PeriodoNomina").data("kendoDropDownList").dataSource.read(),
+        $("#PeriodoNomina").data("kendoDropDownList").refresh();
+
+}
+
+function parametrosConceptos() {
+    return {
+        PaisId: $("#PaisId").val()
+    }
 }

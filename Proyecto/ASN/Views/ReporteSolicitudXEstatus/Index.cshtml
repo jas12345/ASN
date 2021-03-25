@@ -20,6 +20,7 @@
     body {
         height: 100%;
     }
+   
 </style>
 
 @if (User.Identity.IsAuthenticated)
@@ -39,96 +40,112 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-10 col-md-10 col-sm-10">
+        
+
+       
+
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            @if (ViewBag.MostrarPais == 1)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    @Html.Label("Pais ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().DropDownList()
+                        .OptionLabel("- Pais Incidente - ")
+                        .DataTextField("Value")
+                        .DataValueField("Id")
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                        {
+                            read.Action("GetCountryByPerfilCMB", "ReporteSolicitudXEstatus");
+                        });
+                        })
+                        .Name("PaisId")
+                        .HtmlAttributes(new { style = "width: 20em;text-align:center;" })
+                        .Events(e => e.Change("onChangePais"))
+                    )
+
+                </div>
+
+
+            }
             <div class="col-lg-4 col-md-4 col-sm-4">
                 @Html.Label("Periodos ", new { style = "font-size: 15px" })
                 @(Html.Kendo().DropDownList()
                         .OptionLabel("- Período Incidente - ")
                         .DataTextField("Valor")
                         .DataValueField("Ident")
+
                         .DataSource(source =>
                         {
                             source.Read(read =>
-                        {
-                            read.Action("GetPeriodosNominaCMB", "ReporteSolicitudXEstatus");
-                        });
+                            {
+                                read.Action("GetPeriodosNominaCMB", "ReporteSolicitudXEstatus").Data("parametrosConceptos");
+                            });
                         })
+
                         .Name("PeriodoNomina")
                         .HtmlAttributes(new { style = "width: 20em;text-align:center;" })
                     )
-                @*@Html.Label("Fecha inicial ", new { style = "font-size: 15px" })
-                    @(Html.Kendo().DatePicker()
-                                .Name("FechaInicio")
-                                .Format("yyyy-MM-dd")
-                                .ParseFormats(new string[] {
-                                    "ddd, M/d/yyyy",
-                                    "ddd, MM/dd/yyyy",
-                                    "ddd, M/dd/yyyy"
-                                })
-                                //.Min(DateTime.Now.AddMonths(-6))
-                                .Max(DateTime.Now)
-                                .Value(DateTime.Now.AddMonths(-1))
-                                //.Events(x => x.Change("delimitaRango"))
-                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em" })
-                    )*@
+
             </div>
             @*<div class="col-lg-3 col-md-3 col-sm-3">
-                    @Html.Label("Fecha final ", new { style = "font-size: 15px" })
-                    @(Html.Kendo().DatePicker()
-                                .Name("FechaFin")
-                                .Format("yyyy-MM-dd")requ
-                                .ParseFormats(new string[] {
-                                    "ddd, M/d/yyyy",
-                                    "ddd, MM/dd/yyyy",
-                                    "ddd, M/dd/yyyy"
-                                })
-                                //.Min(DateTime.Now.AddMonths(-6))
-                                .Max(DateTime.Now)
-                                .Value(DateTime.Now)
-                                //.Events(x => x.Change("delimitaRango"))
-                                .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em" })
-                    )
-                </div>*@
+            @Html.Label("Fecha final ", new { style = "font-size: 15px" })
+            @(Html.Kendo().DatePicker()
+                        .Name("FechaFin")
+                        .Format("yyyy-MM-dd")requ
+                        .ParseFormats(new string[] {
+                            "ddd, M/d/yyyy",
+                            "ddd, MM/dd/yyyy",
+                            "ddd, M/dd/yyyy"
+                        })
+                        //.Min(DateTime.Now.AddMonths(-6))
+                        .Max(DateTime.Now)
+                        .Value(DateTime.Now)
+                        //.Events(x => x.Change("delimitaRango"))
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em" })
+            )
+        </div>*@
             @*<div class="col-lg-3 col-md-3 col-sm-3">
-                @Html.Label("Estatus solicitud: ", new { style = "font-size: 15px" })
-                @(Html.Kendo().DropDownList().DataSource(source =>
+            @Html.Label("Estatus solicitud: ", new { style = "font-size: 15px" })
+            @(Html.Kendo().DropDownList().DataSource(source =>
+                            {
+                                source.Read(read =>
                                 {
-                                    source.Read(read =>
-                                    {
-                                        read.Action("GetEstatusCMB", "ReporteSolicitudXEstatus");
-                                    }
-                                    );
-                                    //.ServerFiltering(true);
-                                })
-                                .Filter("contains")
-                                .OptionLabel("- Seleccione - ")
-                                .DataValueField("Id")
-                                .DataTextField("Value")
-                                .Name("EstatusSol")
-                                //.SelectedIndex(1)
-                                .HtmlAttributes(new { style = "text-align:center;width: 10em" })
-                    )
-            </div>*@
+                                    read.Action("GetEstatusCMB", "ReporteSolicitudXEstatus");
+                                }
+                                );
+                                //.ServerFiltering(true);
+                            })
+                            .Filter("contains")
+                            .OptionLabel("- Seleccione - ")
+                            .DataValueField("Id")
+                            .DataTextField("Value")
+                            .Name("EstatusSol")
+                            //.SelectedIndex(1)
+                            .HtmlAttributes(new { style = "text-align:center;width: 10em" })
+                )
+        </div>*@
             @*<div class="col-lg-3 col-md-3 col-sm-3">
-                @Html.Label("Estatus concepto: ", new { style = "font-size: 15px" })
-                @(Html.Kendo().DropDownList().DataSource(source =>
+            @Html.Label("Estatus concepto: ", new { style = "font-size: 15px" })
+            @(Html.Kendo().DropDownList().DataSource(source =>
+                            {
+                                source.Read(read =>
                                 {
-                                    source.Read(read =>
-                                    {
-                                        read.Action("GetEstatusCMB", "ReporteSolicitudXEstatus");
-                                    }
-                                    );
-                                    //.ServerFiltering(true);
-                                })
-                                .Filter("contains")
-                                .OptionLabel("- Seleccione - ")
-                                .DataValueField("Id")
-                                .DataTextField("Value")
-                                .Name("EstatusCon")
-                                //.SelectedIndex(1)
-                                .HtmlAttributes(new { style = "text-align:center;width: 10em" })
-                    )
-            </div>*@
+                                    read.Action("GetEstatusCMB", "ReporteSolicitudXEstatus");
+                                }
+                                );
+                                //.ServerFiltering(true);
+                            })
+                            .Filter("contains")
+                            .OptionLabel("- Seleccione - ")
+                            .DataValueField("Id")
+                            .DataTextField("Value")
+                            .Name("EstatusCon")
+                            //.SelectedIndex(1)
+                            .HtmlAttributes(new { style = "text-align:center;width: 10em" })
+                )
+        </div>*@
             <div class="col-lg-2 col-md-2 col-sm-2">
                 @(Html.Kendo().Button().Name("Buscar").Content("Buscar").Icon("search")
                             .Events(x => x.Click("searchSolicitud"))
@@ -138,13 +155,13 @@
         </div>
         @*<div class="col-lg-2 col-md-2 col-sm-2">
 
-            </div>*@
+        </div>*@
     </div>
-    <br />
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div id="parent">
-                @(Html.Kendo().Grid<ASN.Models.ReporteSolicitudXEstatusSel_Result>()
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="parent">
+                        @(Html.Kendo().Grid<ASN.Models.ReporteSolicitudXEstatusSel_Result>()
                                 .Name("grid")
                                 .Columns(columns =>
                                 {
@@ -209,10 +226,10 @@
                                     })
                                 )
                     )
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 }
 else
 {

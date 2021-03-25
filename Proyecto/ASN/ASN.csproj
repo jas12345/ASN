@@ -333,6 +333,9 @@
     <Compile Include="Models\CatCountryByCascadeCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatCountryByPerfilCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatCountryCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
