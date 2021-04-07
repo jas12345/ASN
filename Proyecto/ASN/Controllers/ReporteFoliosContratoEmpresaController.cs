@@ -18,6 +18,17 @@ namespace ASN.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                ViewBag.MostrarPais = 0;
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    var lista = ctx.CatCountryByPerfilCMB(usuario.UserInfo.Ident.Value).ToList();
+                    if (lista.Count > 1)
+                    {
+                        ViewBag.MostrarPais = 1;
+                    }
+                }
                 return View();
             }
             else
@@ -47,7 +58,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetPeriodosNominaCMB()
+        public JsonResult GetPeriodosNominaCMB(int? PaisId)
         {
             MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
@@ -57,7 +68,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatPeriodosNominaCMB(4,usuario.UserInfo.Ident.Value,0).ToList();
+                    lstCMB = ctx.CatPeriodosNominaCMB(4,usuario.UserInfo.Ident.Value,PaisId).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);
@@ -88,6 +99,31 @@ namespace ASN.Controllers
             catch (Exception ex)
             {
                 MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
+
+
+        public JsonResult GetCountryByPerfilCMB()
+        {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            try
+            {
+                var lstCMB = new List<CatCountryByPerfilCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatCountryByPerfilCMB(usuario.UserInfo.Ident.Value).ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return Json("");

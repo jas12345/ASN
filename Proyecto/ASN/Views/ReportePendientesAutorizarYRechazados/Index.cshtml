@@ -25,20 +25,50 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <div class="container-fluid">
-        <div class="col-lg-12 col-md-12">
-            <div class="row">
-                @Html.Label("Reporte", new { style = "font-size: 18px" })
-            </div>
-            <div class="col-lg-4">
-                @Html.Label("Período de nómina: ", new { style = "font-size: 15px" })
+<div class="container-fluid">
+
+    <div id="bar" class="hidden">
+        <div class="k-loading-mask" style="width: 100%; height: 100%; top: 0px; left: 0px;">
+            <span class="k-loading-text">Loading...</span>
+            <div class="k-loading-image"></div>
+            <div class="k-loading-color"></div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12">
+        <div class="row">
+            @Html.Label("Reporte", new { style = "font-size: 18px" })
+        </div>
+        @if (ViewBag.MostrarPais == 1)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                @Html.Label("Pais ", new { style = "font-size: 15px" })
                 @(Html.Kendo().DropDownList()
+                        .OptionLabel("- Pais Incidente - ")
+                        .DataTextField("Value")
+                        .DataValueField("Id")
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                        {
+                            read.Action("GetCountryByPerfilCMB", "ReporteFoliosContratoEmpresa");
+                        });
+                        })
+                        .Name("PaisId")
+                        .HtmlAttributes(new { style = "width: 20em;text-align:center;" })
+                        .Events(e => e.Change("onChangePais"))
+                    )
+
+            </div>
+        }
+        <div class="col-lg-3">
+            @Html.Label("Período de nómina: ", new { style = "font-size: 15px" })
+            @(Html.Kendo().DropDownList()
                                                                                 .DataSource(source => source
                                                                                     .Custom()
                                                                                     .Transport(tr => tr
                                                                                        .Read(read =>
                                                                                        {
-                                                                                           read.Action("GetPeriodoNominaCMB", "ReportePendientesAutorizarYRechazados");
+                                                                                           read.Action("GetPeriodoNominaCMB", "ReportePendientesAutorizarYRechazados").Data("parametrosConceptos");
                                                                                        }
                                                                                        )
                                                                                     )
@@ -53,10 +83,10 @@
                                                                                 //.Events(e => e.Change("onDropDownChange"))
                                                                                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                 )
-            </div>
-            <div class="col-lg-4">
-                @Html.Label("Empresa:", new { style = "font-size:15px" })
-                @(Html.Kendo().DropDownList()
+        </div>
+        <div class="col-lg-2">
+            @Html.Label("Empresa:", new { style = "font-size:15px" })
+            @(Html.Kendo().DropDownList()
                                                                                 .DataSource(source => source
                                                                                     .Custom()
                                                                                     .Transport(tr => tr
@@ -77,41 +107,43 @@
                                                                                 //.Events(e => e.Change("onEmpresaDropDownChange"))
                                                                                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                 )
-            </div>
-            <div class="col-lg-2">
-                @*@Html.Label("Enviar Archivo Nómina", new { style = "font-size: 15px" })*@
-                @(Html.Kendo().Button().Name("Buscar").Content("Buscar").Icon("search")
+        </div>
+        <div class="col-lg-2">
+            @*@Html.Label("Enviar Archivo Nómina", new { style = "font-size: 15px" })*@
+            <div style="padding-top:25px;"></div>
+            @(Html.Kendo().Button().Name("Buscar").Content("Buscar").Icon("search")
                                                 .Events(x => x.Click("onClickFiltrar"))
                                                 .HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;" })
                 )
-            </div>
         </div>
-        <br />
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div id="parent">
-                    @(Html.Kendo().Grid<ASN.Models.ReportePendientesAutorizarYRechazados_Result2>()
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div id="parent">
+                @(Html.Kendo().Grid<ASN.Models.ReportePendientesAutorizarYRechazados_Result2>()
                                         .Name("grid")
                                         .Columns(columns =>
                                         {
                                             //columns.Bound(e => e.PeriodoNomina).Title("Fecha Inicio").Format("{0:yyyy-MM-dd}").Filterable(true).Width(30).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
                                             //columns.Bound(e => e.PeriodoNominaId).Width(25).Title("Periodo").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
                                             columns.Bound(e => e.PeriodoNomina).Title("Periodo Nomina").Width(50).Filterable(true);
-                                            columns.Bound(e => e.FolioSolicitud).Width(15).Title("Folio").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
-                                            columns.Bound(e => e.Incidencias).Width(25).Title("Incidencias").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
-                                            columns.Bound(e => e.Location_Name).Width(30).Title("Locación").Filterable(true);
-                                            columns.Bound(e => e.Concepto).Width(30).Title("Concepto").Filterable(true);
+                                            columns.Bound(e => e.FolioSolicitud).Width(35).Title("Folio").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                                            columns.Bound(e => e.Incidencias).Width(35).Title("Incidencias").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
+                                            columns.Bound(e => e.Location_Name).Width(35).Title("Locación").Filterable(true);
+                                            columns.Bound(e => e.Concepto).Width(35).Title("Concepto").Filterable(true);
                                             columns.Bound(e => e.Estatus).Width(35).Title("Estatus").Filterable(true);
                                             columns.Bound(e => e.Importe).Width(45).Title("Importe").Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
-                                            columns.Bound(e => e.Autorizaciones_Pendientes).Width(70).Title("Autorizaciones Pendientes");
-                                            columns.Bound(e => e.Autorizador_Que_Rechaza).Width(70).Title("Autorizador Que Rechaza");
-                                            columns.Bound(e => e.Motivo_Del_Rechazo).Width(70).Title("Motivo del Rechazo");
+                                            columns.Bound(e => e.Autorizaciones_Pendientes).Width(60).Title("Autorizaciones Pendientes");
+                                            columns.Bound(e => e.Autorizador_Que_Rechaza).Width(60).Title("Autorizador Que Rechaza");
+                                            columns.Bound(e => e.Motivo_Del_Rechazo).Width(60).Title("Motivo del Rechazo");
                                         })
                                         .ToolBar(tools => tools.Excel().Text("Exportar a Excel"))
                                         .Excel(excel => excel.FileName(DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")).AllPages(true).Filterable(true))
                                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                         .Sortable()
                                         .Scrollable()
+                                        .AutoBind(false)
                                         //.HtmlAttributes(new { style = "height: 775px;" })
                                         .DataSource(dataSource => dataSource
                                             .Ajax()
@@ -122,6 +154,7 @@
                                                 model.Id(c => c.FolioSolicitud);
                                             })
                                             .Read(read => read.Action("GetReporte", "ReportePendientesAutorizarYRechazados").Data("infoFiltrar"))
+                                             .Events(events => events.RequestEnd("request_end"))
                                         )
                                         .Navigatable()
                                         //.Events(e => e.DataBound("dataBound").ExcelExport("excelexport").DetailInit("detailInit"))
@@ -150,11 +183,11 @@
                                             })
                                         )
                     )
-                </div>
-
             </div>
+
         </div>
     </div>
+</div>
 }
 else
 {

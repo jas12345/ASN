@@ -3,6 +3,7 @@
 $(document).ready(function () {
     //debugger;
     FolioSolicitud = $("#FolioSolicitud").val();
+    BloquearAutorizacion(FolioSolicitud)
     calculaEstatusSolicitud();
     actualizaGrid();
 
@@ -50,7 +51,7 @@ $(document).ready(function () {
         }
     })   
 
-
+    
     $('#idTicket').on('blur', function () {       
         
         if ($("#idTicket").val() > 0 ) {
@@ -1239,9 +1240,10 @@ function borrarEmpleadoSolicitud(e) {
 function onDataBound(e) {
     var grid = $("#gridSolicitud").data("kendoGrid");
     var gridData = grid.dataSource.view();
-
-    //debugger;
-
+    var folio = $("#FolioSolicitud").val();
+    //debugger;   
+   
+   
     for (var i = 0; i < gridData.length; i++) {
         var currentUid = gridData[i].uid;
         var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
@@ -1257,7 +1259,12 @@ function onDataBound(e) {
             ComentariosButton.hide();
         }
         else if (gridData[i].EstatusId == "R") {
-            EditButton.show();
+           
+            if (Bloqueo) {
+                EditButton.show();
+            } else {
+                EditButton.hide();
+            }  
             DeleteButton.hide();
             ViewButton.hide();
             ComentariosButton.show();
@@ -1895,6 +1902,16 @@ function onBlurParametro() {
             parametro.focus();
             var notification = $("#popupNotification").data("kendoNotification");
             notification.show("Parámetro/Monto solo permite 16 horas", "error");
+        }
+        var porcentaje = $("#ParametroX").text().indexOf('Porcentaje');
+        //($('#Conceptos').val() == 27 || $('#Conceptos').val() == 36 || $('#Conceptos').val() == 51 
+        if (porcentaje >= 0 && $('#Parametro').val() > 32) {
+            $("#Parametro").data('kendoNumericTextBox').value(0);
+            $("#ParametroX").text("0 Porcentaje");
+            var parametro = $("#Parametro").data('kendoNumericTextBox')
+            parametro.focus();
+            var notification = $("#popupNotification").data("kendoNotification");
+            notification.show("Parámetro/Monto es porcentaje y solo acepta 50 %", "error");
         }
         // valida empleado, concepto, monto
        
@@ -2588,4 +2605,16 @@ function parametrosAutorizadores3() {
         ConceptoId: Concepto,
         Nivel: 3
     };
+}
+
+function BloquearAutorizacion(folio) {
+
+    Bloqueo = false;
+    $.post(urlBloquearAutorizacion + "?FolioSolicitud=" + folio, function (data) {
+
+        if (data == 1) {
+            Bloqueo = true;
+        } 
+
+    })
 }

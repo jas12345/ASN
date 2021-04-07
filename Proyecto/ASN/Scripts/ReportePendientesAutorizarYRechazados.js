@@ -54,7 +54,26 @@ function infoFiltrar() {
 
 function onClickFiltrar() {
     //window.location.href = '../ReportePendientesAutorizarYRechazados/GetReporte?EmpresaIdSelected=' + EmpresaId_selected + '&PeriodoNominaIdSelected=' + PeriodoNomina_Id_selected ;
+    $("#bar").removeClass('hidden'); 
     $('#grid').data('kendoGrid').dataSource.data([]);
     $('#grid').data('kendoGrid').dataSource.read();
     $('#grid').data('kendoGrid').refresh();
+}
+
+function onChangePais() {
+    //$('#PeriodoNomina').data('kendoGrid').dataSource.data([]);
+    $("#PeriodoNomina_Id").data("kendoDropDownList").dataSource.read(),
+        $("#PeriodoNomina_Id").data("kendoDropDownList").refresh();
+
+}
+
+
+function parametrosConceptos() {
+    return {
+        PaisId: $("#PaisId").val()
+    }
+}
+
+function request_end() {
+    $("#bar").addClass("hidden");
 }

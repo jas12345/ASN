@@ -53,9 +53,11 @@ function searchSolicitud() {
     $('#grid').data('kendoGrid').refresh();
    
 }
+
 function request_end() {
-    $("#bar").add("hidden");
+    $("#bar").addClass("hidden");
 }
+
 function onChangePais()
 {
     //$('#PeriodoNomina').data('kendoGrid').dataSource.data([]);

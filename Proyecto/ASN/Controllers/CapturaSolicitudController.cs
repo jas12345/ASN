@@ -1314,5 +1314,27 @@ namespace ASN.Controllers
             }
             
         }
+
+
+        public JsonResult BloquearAutorizacion(int folioSolicitud)
+        {
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+
+                    var result = context.BloqueAutorizaciones(folioSolicitud).FirstOrDefault();
+                    return Json(result.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al consultar Perído de Nómina.");
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
     }
 }
