@@ -3215,5 +3215,35 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCountryByPerfilCMB_Result>("CatCountryByPerfilCMB", cCMSIDParameter);
         }
+    
+        public virtual ObjectResult<string> CatCambiaFolioDePeriodo(Nullable<int> folioSolicitud, Nullable<int> periodoNominaID, Nullable<int> cCMSID)
+        {
+            var folioSolicitudParameter = folioSolicitud.HasValue ?
+                new ObjectParameter("FolioSolicitud", folioSolicitud) :
+                new ObjectParameter("FolioSolicitud", typeof(int));
+    
+            var periodoNominaIDParameter = periodoNominaID.HasValue ?
+                new ObjectParameter("PeriodoNominaID", periodoNominaID) :
+                new ObjectParameter("PeriodoNominaID", typeof(int));
+    
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CatCambiaFolioDePeriodo", folioSolicitudParameter, periodoNominaIDParameter, cCMSIDParameter);
+        }
+    
+        public virtual ObjectResult<CatCountryByTipoAccesoCMB_Result> CatCountryByTipoAccesoCMB(Nullable<int> cCMSID, Nullable<int> tipoAccesoId)
+        {
+            var cCMSIDParameter = cCMSID.HasValue ?
+                new ObjectParameter("CCMSID", cCMSID) :
+                new ObjectParameter("CCMSID", typeof(int));
+    
+            var tipoAccesoIdParameter = tipoAccesoId.HasValue ?
+                new ObjectParameter("TipoAccesoId", tipoAccesoId) :
+                new ObjectParameter("TipoAccesoId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatCountryByTipoAccesoCMB_Result>("CatCountryByTipoAccesoCMB", cCMSIDParameter, tipoAccesoIdParameter);
+        }
     }
 }

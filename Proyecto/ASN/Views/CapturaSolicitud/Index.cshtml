@@ -473,13 +473,17 @@
                                 )
                             </td>
                             @*boton mostrar*@
-                            <td style="width : 8em">
+                        <td style="width : 16em">
 
-                                @(Html.Kendo().Button().Name("MostrarTotales").Content("Totales").Icon("")
-                .Events(x => x.Click("MostrarTotalesModal")).HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;", type = "button" })
-                                    //.Events(x => x.Click("agregaEmpleado"))
+                            @(Html.Kendo().Button().Name("MostrarTotales").Content("Totales").Icon("")
+                                        .Events(x => x.Click("MostrarTotalesModal"))
+                                        .HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;", type = "button" })
                                     )
-                            </td>
+                            @(Html.Kendo().Button().Name("CambiarPeriodo").Content("Cambiar Período").Icon("")
+                                        .Events(x => x.Click("CambiarPeriodo"))
+                                        .HtmlAttributes(new { style = "background-color:green;color:white;font-weight:bold;", type = "button" })
+                                    )
+                        </td>
                             <td>
                                 <div name="nivel" id="1">
                                     <label class="primerLabel" id="lblAutorizadorNivel1">        Autorizador     Nivel 1:</label>
@@ -1101,7 +1105,7 @@
         var urlConceptoMasivo = '@Url.Action("ValidaConceptoMasivo", "CapturaSolicitud")';
         var urlBloquearAutorizacion = '@Url.Action("BloquearAutorizacion", "CapturaSolicitud")';
        var Bloqueo = false;
-
+       var urlCambiarPeriodo = '@Url.Action("CambiarPeriodo", "CapturaSolicitud")';
     </script>
 }
 else

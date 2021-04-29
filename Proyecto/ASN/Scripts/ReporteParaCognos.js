@@ -2,7 +2,8 @@
     var Active = 6;
 
     return {
-        Active: Active
+        Active: Active,
+        PaisId: $('#PaisId').val()
     };
 }
 function onDropDownChange(e) {
@@ -19,3 +20,9 @@ function onClickEnviaArchivo() {
     window.location.href = '../ReporteParaCognos/EnviaArchivo?PeriodoNominaIdSelected='+ PeriodoNomina_Id_selected + '&periodoNominaNombre=' + PeriodoNomina_selected + '&EmpresaId=' + EmpresaId_selected;
 }
 
+
+function onChangePais() {   
+    $("#PeriodoNomina_Id").data("kendoDropDownList").dataSource.read(),
+        $("#PeriodoNomina_Id").data("kendoDropDownList").refresh();
+
+}

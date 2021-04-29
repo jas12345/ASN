@@ -2,7 +2,8 @@
     var Active = 4;
 
     return {
-        Active: Active
+        Active: Active,
+        PaisId: $("#PaisId").val()
     };
 }
 function onDropDownChange(e) {
@@ -19,3 +20,10 @@ function onClickEnviaArchivo() {
     window.location.href = '../EnviaArchivoNomina/EnviaArchivo?EmpresaIdSelected=' + EmpresaId_selected + '&PeriodoNominaIdSelected=' + PeriodoNomina_Id_selected + '&periodoNominaNombre=' + PeriodoNomina_selected;
 }
 
+
+function onChangePais() {
+    //$('#PeriodoNomina').data('kendoGrid').dataSource.data([]);
+    $("#PeriodoNomina_Id").data("kendoDropDownList").dataSource.read(),
+        $("#PeriodoNomina_Id").data("kendoDropDownList").refresh();
+
+}

@@ -34,7 +34,8 @@ function parametroPeriodosNominaActualPasados() {
     var Active = 4;
 
     return {
-        Active: Active
+        Active: Active,
+        PaisId: $("#PaisId").val()
     };
 };
 
@@ -62,4 +63,12 @@ function getPeriodoNominaId() {
 function onEmpresaDropDownChange(e) {
     Empresa_selected = $("#ddlEmpresa").data("kendoDropDownList").text();
     EmpresaId_selected = $("#ddlEmpresa").data("kendoDropDownList").value();
+}
+
+
+function onChangePais() {
+    //$('#PeriodoNomina').data('kendoGrid').dataSource.data([]);
+    $("#PeriodoNomina_Id").data("kendoDropDownList").dataSource.read(),
+        $("#PeriodoNomina_Id").data("kendoDropDownList").refresh();
+
 }

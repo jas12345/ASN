@@ -24,17 +24,46 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <div class="container-fluid">
-        <div class="col-lg-12 col-md-12">
-            <div class="row">
-                @Html.Label("Reporte solicitud", new { style = "font-size: 18px" })
-            </div>
+<div class="container-fluid">
+    <div id="bar" class="hidden">
+        <div class="k-loading-mask" style="width: 100%; height: 100%; top: 0px; left: 0px;">
+            <span class="k-loading-text">Loading...</span>
+            <div class="k-loading-image"></div>
+            <div class="k-loading-color"></div>
         </div>
+    </div>
+    <div class="col-lg-12 col-md-12">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+            @Html.Label("Reporte solicitud", new { style = "font-size: 18px" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            @if (ViewBag.MostrarPais == 1)
+            {
                 <div class="col-lg-3 col-md-3 col-sm-3">
-                    @Html.Label("Periodos ", new { style = "font-size: 15px" })
+                    @Html.Label("Pais ", new { style = "font-size: 15px" })
                     @(Html.Kendo().DropDownList()
+                        .OptionLabel("- Pais Incidente - ")
+                        .DataTextField("Value")
+                        .DataValueField("Id")
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                        {
+                            read.Action("GetCountryByPerfilCMB", "ReporteFoliosContratoEmpresa");
+                        });
+                        })
+                        .Name("PaisId")
+                        .HtmlAttributes(new { style = "width: 20em;text-align:center;" })
+                        .Events(e => e.Change("onChangePais"))
+                    )
+
+                </div>
+            }
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                @Html.Label("Periodos ", new { style = "font-size: 15px" })
+                @(Html.Kendo().DropDownList()
             .OptionLabel(" Año_Mes_NumeroDePago ")
             .DataTextField("Valor")
             .DataValueField("Ident")
@@ -42,32 +71,18 @@
             {
                 source.Read(read =>
                 {
-                    read.Action("GetPeriodosNominaCMB", "ReporteSolicitud");
+                    read.Action("GetPeriodosNominaCMB", "ReporteSolicitud").Data("parametrosConceptos"); 
                 });
             })
             .Name("PeriodoNomina")
             .HtmlAttributes(new { style = "width: 20em;text-align:center;" })
                     )
-                    @*@Html.Label("Fecha inicial ", new { style = "font-size: 15px" })
-                        @(Html.Kendo().DatePicker()
-                            .Name("FechaInicio")
-                            .Format("yyyy-MM-dd")
-                            .ParseFormats(new string[] {
-                                "ddd, M/d/yyyy",
-                                "ddd, MM/dd/yyyy",
-                                "ddd, M/dd/yyyy"
-                            })
-                            //.Min(DateTime.Now.AddMonths(-6))
-                            .Max(DateTime.Now)
-                            .Value(DateTime.Now.AddMonths(-1))
-                            //.Events(x => x.Change("delimitaRango"))
-                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 20.4em" })
-                        )*@
-                </div>
-                @*Combo Tipo de contrato*@
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    @Html.Label("Tipo de Contrato", new { style = "font-size:15px" })
-                    @(Html.Kendo().DropDownList()
+                
+            </div>
+            
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                @Html.Label("Tipo de Contrato", new { style = "font-size:15px" })
+                @(Html.Kendo().DropDownList()
                             .OptionLabel("Selecciona Tipo de Contrato")
                             .DataTextField("Value")
                             .DataValueField("Id")
@@ -81,37 +96,22 @@
                             .Name("TipoContrato")
                             .HtmlAttributes(new { style="width:20em;text-align:center;"})
                             )
-                </div>
-                @*<div class="col-lg-4 col-md-4 col-sm-4">
-                        @Html.Label("Fecha final ", new { style = "font-size: 15px" })
-                        @(Html.Kendo().DatePicker()
-                            .Name("FechaFin")
-                            .Format("yyyy-MM-dd")
-                            .ParseFormats(new string[] {
-                                "ddd, M/d/yyyy",
-                                "ddd, MM/dd/yyyy",
-                                "ddd, M/dd/yyyy"
-                            })
-                            //.Min(DateTime.Now.AddMonths(-6))
-                            .Max(DateTime.Now)
-                            .Value(DateTime.Now)
-                            //.Events(x => x.Change("delimitaRango"))
-                            .HtmlAttributes(new { required = "required", style = "text-align:center;width: 20.4em" })
-                        )
-                    </div>*@
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    @(Html.Kendo().Button().Name("Buscar").Content("Buscar").Icon("search")
+            </div>
+            
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div style="padding-top:25px;"></div>
+                @(Html.Kendo().Button().Name("Buscar").Content("Buscar").Icon("search")
                     .Events(x => x.Click("searchSolicitud"))
                     .HtmlAttributes(new { style = "background-color:blue;color:white;font-weight:bold;" })
                     )
-                </div>
             </div>
         </div>
-        <br />
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div id="parent">
-                    @(Html.Kendo().Grid<ASN.Models.ReporteSolcitudSel_Result>()
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div id="parent">
+                @(Html.Kendo().Grid<ASN.Models.ReporteSolcitudSel_Result>()
                         .Name("grid")
                         .Columns(columns =>
                         {
@@ -139,6 +139,7 @@
                             })
                             .Read(read => read.Action("GetSolicitudes", "ReporteSolicitud").Data("infoSolicitud"))
                             .PageSize(20)
+                            .Events(events=>events.RequestEnd("request_end"))
                         )
                         .Navigatable()
                         //.Events(e => e.DataBound("dataBound").ExcelExport("excelexport").DetailInit("detailInit"))
@@ -167,10 +168,10 @@
                             })
                         )
                     )
-                </div>
             </div>
         </div>
     </div>
+</div>
 }
 else
 {

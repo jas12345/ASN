@@ -12,7 +12,29 @@
 {
     <div class="container-fluid">
         <div class="col-lg-12 col-md-12">
-            <div class="col-lg-4">
+            @if (ViewBag.MostrarPais == 1)
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    @Html.Label("Pais ", new { style = "font-size: 15px" })
+                    @(Html.Kendo().DropDownList()
+                        .OptionLabel("- Pais Incidente - ")
+                        .DataTextField("Value")
+                        .DataValueField("Id")
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                        {
+                            read.Action("GetCountryByTipoAccesoCMB", "EnviaArchivoNomina");
+                        });
+                        })
+                        .Name("PaisId")
+                        .HtmlAttributes(new { style = "width: 20em;text-align:center;" })
+                        .Events(e => e.Change("onChangePais"))
+                    )
+
+                </div>
+            }
+            <div class="col-lg-3">
                 @Html.Label("Período de nómina: ", new { style = "font-size: 15px" })
                 @(Html.Kendo().DropDownList()
                                                                 .DataSource(source => source
@@ -36,7 +58,7 @@
                                                                 .HtmlAttributes(new { required = "required", style = "text-align:center;width: 14em", validationMessage = "Este campo es requerido." })
                 )
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 @Html.Label("Empresa:", new { style = "font-size:15px" })
                 @(Html.Kendo().DropDownList()
                                                                 .DataSource(source => source

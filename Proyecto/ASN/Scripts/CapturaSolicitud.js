@@ -16,12 +16,14 @@ $(document).ready(function () {
         $("#evidencias").data("kendoUpload").enable(false);
         $("#EvidenciasAnchor").data("kendoButton").enable(false);
         $("#MostrarTotales").hide();
+        $("#CambiarPeriodo").hide();
     }
     else {
         $("#EnviarSolicitud").show();
         $("#evidencias").data("kendoUpload").enable(true);
         $("#EvidenciasAnchor").data("kendoButton").enable(true);
         $("#MostrarTotales").show();
+        $("#CambiarPeriodo").show();
     }
 
     // Activar / Desactivar botón Cancelar
@@ -2617,4 +2619,13 @@ function BloquearAutorizacion(folio) {
         } 
 
     })
+}
+
+function CambiarPeriodo() {
+    var FolioSolicitud = $("#FolioSolicitud").val();
+
+    $.post(urlCambiarPeriodo + "?FolioSolicitud=" + FolioSolicitud + "&PeriodoNominaId=" + $("#PeriodoNomina_Id").val(), function (data) {
+        var notificationDatos = $("#popupNotification").data("kendoNotification");
+        notificationDatos.show(data, "warning");
+    });
 }

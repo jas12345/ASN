@@ -19,6 +19,17 @@ namespace ASN.Controllers
         // GET: EnviaArchivoNomina
         public ActionResult Index()
         {
+            ViewBag.MostrarPais = 0;
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            using (ASNContext ctx = new ASNContext())
+            {
+                ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                var lista = ctx.CatCountryByTipoAccesoCMB(usuario.UserInfo.Ident.Value, 3).ToList();
+                if (lista.Count > 1)
+                {
+                    ViewBag.MostrarPais = 1;
+                }
+            }
             return View();
         }
 
@@ -26,7 +37,7 @@ namespace ASN.Controllers
         /// Método que devuelve periodos de nomina para un ComboBox
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetPeriodoNominaCMB(int? active)
+        public JsonResult GetPeriodoNominaCMB(int? active, int? PaisId)
         {
             MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
@@ -35,7 +46,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatPeriodosNominaCMB(active,usuario.UserInfo.Ident.Value,0).ToList();
+                    listPeriodoNomina = context.CatPeriodosNominaCMB(active,usuario.UserInfo.Ident.Value, PaisId).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
@@ -301,6 +312,30 @@ namespace ASN.Controllers
             command = " copy \"" + filePath + "\"  \"" + directory + filenameToSave + "\"";
 
             ExecuteCommand(command, 5000);
+        }
+
+        public JsonResult GetCountryByTipoAccesoCMB()
+        {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            try
+            {
+                var lstCMB = new List<CatCountryByTipoAccesoCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.CatCountryByTipoAccesoCMB(usuario.UserInfo.Ident.Value, 3).ToList();
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
         }
     }
    

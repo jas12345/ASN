@@ -18,6 +18,17 @@ namespace ASN.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                ViewBag.MostrarPais = 0;
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    var lista = ctx.CatCountryByPerfilCMB(usuario.UserInfo.Ident.Value).ToList();
+                    if (lista.Count > 1)
+                    {
+                        ViewBag.MostrarPais = 1;
+                    }
+                }
                 return View();
             }
             else
@@ -47,7 +58,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetPeriodosNominaCMB()
+        public JsonResult GetPeriodosNominaCMB(int? PaisId)
         {
             MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
             try
@@ -57,7 +68,7 @@ namespace ASN.Controllers
                 using (ASNContext ctx = new ASNContext())
                 {
                     ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    lstCMB = ctx.CatPeriodosNominaCMB(4,usuario.UserInfo.Ident.Value,0).ToList();
+                    lstCMB = ctx.CatPeriodosNominaCMB(4,usuario.UserInfo.Ident.Value,PaisId).ToList();
                 }
 
                 return Json(lstCMB, JsonRequestBehavior.AllowGet);

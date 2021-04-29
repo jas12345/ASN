@@ -834,8 +834,8 @@ function excelExport(e) {
         color: "#ffffff"
     }];
     sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 30 });
-
-    if (cols == 6) {
+   
+    if (cols == 7) {
         sheet1.splice(0, 0, { cells: myHeaders, type: "header", height: 30 });
         for (var i = 2; i < sheet.rows.length; i++) {
             var row = sheet.rows[i];

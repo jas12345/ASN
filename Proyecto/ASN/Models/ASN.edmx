@@ -86,6 +86,11 @@
           <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
           <Parameter Name="Autorizante_Ident" Type="int" Mode="In" />
         </Function>
+        <Function Name="CatCambiaFolioDePeriodo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="FolioSolicitud" Type="int" Mode="In" />
+          <Parameter Name="PeriodoNominaID" Type="int" Mode="In" />
+          <Parameter Name="CCMSID" Type="int" Mode="In" />
+        </Function>
         <Function Name="CatCargaRapidaSd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CargaRapidaId" Type="int" Mode="In" />
         </Function>
@@ -279,6 +284,10 @@
         </Function>
         <Function Name="CatCountryByPerfilCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="CCMSID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CatCountryByTipoAccesoCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="CCMSID" Type="int" Mode="In" />
+          <Parameter Name="TipoAccesoId" Type="int" Mode="In" />
         </Function>
         <Function Name="CatCountryCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="CatCountryTodosCMB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
@@ -1852,7 +1861,16 @@
             <Parameter Name="Pais" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatCountryByPerfilCMB" ReturnType="Collection(ASNModel.CatCountryByPerfilCMB_Result)">
+          <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatCambiaFolioDePeriodo" ReturnType="Collection(String)">
+            <Parameter Name="FolioSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="PeriodoNominaID" Mode="In" Type="Int32" />
             <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CatCountryByTipoAccesoCMB" ReturnType="Collection(ASNModel.CatCountryByTipoAccesoCMB_Result)">
+            <Parameter Name="CCMSID" Mode="In" Type="Int32" />
+            <Parameter Name="TipoAccesoId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -3073,6 +3091,10 @@
           <Property Type="String" Name="Valor" Nullable="false" />
         </ComplexType>
         <ComplexType Name="CatCountryByPerfilCMB_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="CatCountryByTipoAccesoCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="150" />
         </ComplexType>
@@ -4855,6 +4877,15 @@
           <FunctionImportMapping FunctionImportName="CatCountryByPerfilCMB" FunctionName="ASNModel.Store.CatCountryByPerfilCMB">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ASNModel.CatCountryByPerfilCMB_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CatCambiaFolioDePeriodo" FunctionName="ASNModel.Store.CatCambiaFolioDePeriodo" />
+          <FunctionImportMapping FunctionImportName="CatCountryByTipoAccesoCMB" FunctionName="ASNModel.Store.CatCountryByTipoAccesoCMB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.CatCountryByTipoAccesoCMB_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
               </ComplexTypeMapping>

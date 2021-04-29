@@ -1336,5 +1336,27 @@ namespace ASN.Controllers
                 return Json("");
             }
         }
+
+        public JsonResult CambiarPeriodo(int? FolioSolicitud, int? PeriodoNominaId)
+        {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            try
+            {
+                using (ASNContext context = new ASNContext())
+                {
+                    context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    var result = context.CatCambiaFolioDePeriodo(FolioSolicitud, PeriodoNominaId, usuario.UserInfo.Ident.Value).FirstOrDefault();
+                    return Json(result.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", "Ocurrió un error al consultar Perído de Nómina.");
+                
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
     }
 }
