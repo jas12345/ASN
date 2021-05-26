@@ -107,9 +107,43 @@
         //*@
 
         <div class="col-lg-12 col-md-12">
-            <div class="col-lg-9">
+            <div class="col-lg-10">
+                @if (ViewBag.MostrarPais == 1)
+                {
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        @Html.Label("Pais ", new { style = "font-size: 15px" })
+                        @(Html.Kendo().DropDownList()
+                        .OptionLabel("- Pais Incidente - ")
+                        .DataTextField("Value")
+                        .DataValueField("Id")
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                        {
+                            read.Action("GetCountryByPerfilCMB", "CapturaSolicitud");
+                        });
+                        })
+                        .Name("PaisId")
+                        .HtmlAttributes(new { style = "width: 12em;text-align:center;" })
+                        .Events(e => e.Change("onChangePais"))
+                    )
+
+                    </div>
+                    <div class="col-lg-1">
+                        @Html.Label(" ", new { style = "font-size: 15px;" })
+
+                    </div>
+
+                }
+                else
+                {
+                    <div class="col-lg-offset-3"></div>
+                  
+                }
+
+
                 <div class="col-lg-3 divFolio ">
-                    @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px" })
+                    @Html.Label("Folio de Solicitud: ", new { style = "font-size: 15px;" })
                     @(Html.Kendo().NumericTextBox().Name("FolioSolicitud")
                         .Enable(false)
                         .Spinners(false)
@@ -119,10 +153,13 @@
                         .Events(e => e.Change("onChangeFolioSolicitud"))
                         //.Value(string.IsNullOrEmpty(Model.FolioSolicitud.ToString()) ? "Nuevo" : Model.FolioSolicitud.ToString())
                         .Value(Model.FolioSolicitud)
-                        .HtmlAttributes(new { style = "text-align:center;width: 6em;", maxlength = "10" })
+                        .HtmlAttributes(new { style = "text-align:center;width: 8em;", maxlength = "10" })
                     )
                 </div>
-                <div class="col-lg-4">
+
+
+
+                <div class="col-lg-3">
                     @Html.Label("Periodo de nómina: ", new { style = "font-size: 15px" })
                     @(Html.Kendo().DropDownList()
         .DataSource(source => source
@@ -137,7 +174,7 @@
                }
                )
             )
-        //.ServerFiltering(true);parametroPeriodosNominaTodos
+        //.ServerFiltering(true)
         )
         .Filter("contains")
         .OptionLabel("- Seleccione Periodo de Nomina - ")
@@ -150,12 +187,12 @@
         .Events(e => e.Change("onChangePeriodoNominId"))
                     )
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-1">
                     @Html.Label("Estatus: ", new { style = "font-size: 15px" })
                     @Html.TextBox("Estatus", "", new { disabled = "disabled", style = "width:13em;" })
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <div class="col-lg-12" style="text-align:right;">
                     @(Html.Kendo().Button().Name("CancelarSolicitud").Content("Cancelar solicitud").Icon("close")
                 .Events(x => x.Click("cancelarSolicitud")).HtmlAttributes(new { style = "background-color:red;color:white;font-weight:bold;" })

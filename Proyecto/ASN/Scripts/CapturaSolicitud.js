@@ -1913,7 +1913,7 @@ function onBlurParametro() {
             var parametro = $("#Parametro").data('kendoNumericTextBox')
             parametro.focus();
             var notification = $("#popupNotification").data("kendoNotification");
-            notification.show("Parámetro/Monto es porcentaje y solo acepta 50 %", "error");
+            notification.show("Parámetro/Monto es porcentaje y solo acepta 32 %", "error");
         }
         // valida empleado, concepto, monto
        
@@ -2416,7 +2416,8 @@ function parametroPeriodosNominaActualFuturos() {
     var Active = 1;
 
     return {
-        Active: Active
+        Active: Active,
+        paisId: $('#PaisId').val()
     };
 };
 
@@ -2424,7 +2425,8 @@ function parametroPeriodosNominaPasados() {
     var Active = 5;
    
     return {
-        Active: Active
+        Active: Active,
+        paisId: $('#PaisId').val()
     };
 };
 
@@ -2628,4 +2630,13 @@ function CambiarPeriodo() {
         var notificationDatos = $("#popupNotification").data("kendoNotification");
         notificationDatos.show(data, "warning");
     });
+}
+
+
+function onChangePais() {
+
+    //$("#PeriodoNomina_Id").data("kendoDropDownList").dataSource.data([]);
+    $("#PeriodoNomina_Id").data("kendoDropDownList").dataSource.read(),
+    $("#PeriodoNomina_Id").data("kendoDropDownList").refresh()
+    
 }
