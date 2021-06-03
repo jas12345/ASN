@@ -13,5 +13,6 @@ namespace ASN.Models
         public int ?solicitudId { get; set; }
         public int userEmployeeId { get; set; }
         public int catEmployeeId { get; set; }
+        public string Motivo { get; set; }
     }
 }

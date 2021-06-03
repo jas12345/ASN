@@ -216,7 +216,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident, int Ident_Solicitante,string TipoNomina)
+        public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident, int Ident_Solicitante,int PeriodoNominaId)
         {
             try
             {
@@ -227,7 +227,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatConceptosxEmpleadoxSolicitanteCMB(ident, Ident_Solicitante, TipoNomina).OrderBy(x => x.Valor).ToList();
+                    listPeriodoNomina = context.CatConceptosxEmpleadoxSolicitanteCMB(ident, Ident_Solicitante, PeriodoNominaId).OrderBy(x => x.Valor).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);

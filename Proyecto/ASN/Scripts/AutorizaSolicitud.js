@@ -380,7 +380,7 @@ function getIdent() {
     return {
         Ident: ConEmpleadoident,
         Ident_Solicitante: Solicitante_Ident,
-        TipoNomina: 'O'
+        PeriodoNominaId: $('#PeriodoNomina').val()
     };
 }
 

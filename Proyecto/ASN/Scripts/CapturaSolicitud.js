@@ -1622,7 +1622,9 @@ function onChangeConceptos(e) {
         //    //debugger;
         //    console.log("fail" + ex);
         //});
-        
+
+       
+
         if (ConConceptoIdent == 14 || ConConceptoIdent == 15 || ConConceptoIdent == 16 || ConConceptoIdent == 17) {
             $("#files").data("kendoUpload").enable(true);
 
@@ -1746,8 +1748,7 @@ function conceptoParametroConcepto(conceptoIdent) {
             $("#ConceptoX").val(ConConceptoNombre);
             $("#ConceptoX").text(ConConceptoNombre);
             $("#ParametroX").val(ConParametroNombre);
-            $("#ParametroX").text(ConParametroNombre);
-           
+            $("#ParametroX").text(ConParametroNombre);            
             
             if (ConConceptoIdent == 18  || ConConceptoIdent == 19 || ConConceptoIdent == 37) {
                 $(".Conceptos").removeClass('hidden');
@@ -1756,6 +1757,17 @@ function conceptoParametroConcepto(conceptoIdent) {
                
             }
 
+            var porcentaje = $("#ParametroX").text().indexOf('Porcentaje');
+
+            //($('#Conceptos').val() == 27 || $('#Conceptos').val() == 36 || $('#Conceptos').val() == 51 
+            if (porcentaje >= 0 && $('#Parametro').val() > 32) {
+                $("#Parametro").data('kendoNumericTextBox').value(0);
+                $("#ParametroX").text("0 Porcentaje");
+                var parametro = $("#Parametro").data('kendoNumericTextBox')
+                parametro.focus();
+                var notification = $("#popupNotification").data("kendoNotification");
+                notification.show("Parámetro/Monto es porcentaje y solo acepta 32 %", "error");
+            }
 
         }).fail(function (ex) {
             //debugger;
@@ -2388,7 +2400,8 @@ function parametrosAutorizadores() {
 
 function parametrosConceptos() {
     CCMSId = $("#CCMSIDSolicitado").val();
-    tipoNomina = $("#PeriodoNomina_Id").data("kendoDropDownList").text().substr($("#PeriodoNomina_Id").data("kendoDropDownList").text().length - 1, 1);
+    periodoNominaId = $("#PeriodoNomina_Id").val();
+    //tipoNomina = $("#PeriodoNomina_Id").data("kendoDropDownList").text().substr($("#PeriodoNomina_Id").data("kendoDropDownList").text().length - 1, 1);
     var ValorCCMS = 0;
 
     if (CCMSId !== "") {
@@ -2400,7 +2413,7 @@ function parametrosConceptos() {
 
     return {
         Ident: ValorCCMS,
-        TipoNomina: tipoNomina
+        PeriodoNominaId: periodoNominaId
     };
 }
 

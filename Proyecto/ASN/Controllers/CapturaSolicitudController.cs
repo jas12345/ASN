@@ -284,7 +284,7 @@ namespace ASN.Controllers
             }
         }
 
-        public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident, string TipoNomina)
+        public JsonResult GetConceptosxEmpleadoxSolicitanteCMB(int ident, int PeriodoNominaId)
         {
             try
             {
@@ -294,7 +294,7 @@ namespace ASN.Controllers
                 using (ASNContext context = new ASNContext())
                 {
                     context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                    listPeriodoNomina = context.CatConceptosxEmpleadoxSolicitanteCMB(ident, ident_Solicitante, TipoNomina).OrderBy(x => x.Valor).ToList();
+                    listPeriodoNomina = context.CatConceptosxEmpleadoxSolicitanteCMB(ident, ident_Solicitante, PeriodoNominaId).OrderBy(x => x.Valor).ToList();
                 }
 
                 return Json(listPeriodoNomina, JsonRequestBehavior.AllowGet);
@@ -909,7 +909,7 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult Async_SaveBono(IEnumerable<HttpPostedFileBase> filesBono,Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9)
+        public ActionResult Async_SaveBono(IEnumerable<HttpPostedFileBase> filesBono,Nullable<int> autorizadorNivel1, Nullable<int> autorizadorNivel2, Nullable<int> autorizadorNivel3, Nullable<int> autorizadorNivel4, Nullable<int> autorizadorNivel5, Nullable<int> autorizadorNivel6, Nullable<int> autorizadorNivel7, Nullable<int> autorizadorNivel8, Nullable<int> autorizadorNivel9, Nullable<int> periodoId)
         {
             try
             {
@@ -926,6 +926,7 @@ namespace ASN.Controllers
                 string parametro = string.Empty;
                 decimal detalle = 0;
                 var strDetalle = "";
+                var strMotivo = "";
 
                 ObjectParameter resultado = new ObjectParameter("Estatus", typeof(int));
                 ObjectParameter FolioSolicitudOut = new ObjectParameter("FolioSolicitudOut", typeof(int));
@@ -933,8 +934,20 @@ namespace ASN.Controllers
                 resultado.Value = -1;
                 CultureInfo mxCulture = new CultureInfo("es-MX");
                 var lista = new List<CargaMasivaRegistroViewModel>();
+                var TipoPeriodo = "";
+                using (ASNContext ctx= new ASNContext())
+                {
+                    string qry = string.Format("  select TipoPeriodo " +
+                                               "  from app620.CatPeriodosNomina " +
+                                               "  where PeriodoNominaid  = {0} "
+                                            , periodoId);
+                    TipoPeriodo = ctx.Database.SqlQuery<string>(qry).FirstOrDefault();
+                     
 
-                if (filesBono != null)
+                }
+
+
+                    if (filesBono != null)
                 {
                     foreach (var file in filesBono)
                     {
@@ -970,25 +983,70 @@ namespace ASN.Controllers
                                             while (csv.Read())
                                             {
                                                 var objeton = new CargaMasivaRegistroViewModel();
-
-                                                if (csv.TryGetField(0, out strCCMSID) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out strDetalle))
+                                                if (TipoPeriodo == "O")
                                                 {
-                                                    //if (strCCMSID != "ccmsId")
-                                                     if (canRegistros > 0)
-                                                       {                                                        
-                                                        ccmsId = Convert.ToInt32(strCCMSID.Trim());
-                                                        detalle = Convert.ToDecimal(strDetalle.Trim(), mxCulture);
-                                                        objeton.parametro = parametro;
-                                                        objeton.detalle = detalle;
-                                                        objeton.solicitudId = -1;
-                                                        objeton.userEmployeeId = userEmployeeId;
-                                                        objeton.catEmployeeId = ccmsId;
-                                                        objeton.estatus = -1;
+                                                    if (csv.TryGetField(0, out strCCMSID) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out strDetalle))
+                                                    {
+                                                        //if (strCCMSID != "ccmsId")
+                                                        if (canRegistros > 0)
+                                                        {
+                                                            ccmsId = Convert.ToInt32(strCCMSID.Trim());
+                                                            detalle = Convert.ToDecimal(strDetalle.Trim(), mxCulture);
+                                                            objeton.parametro = parametro;
+                                                            objeton.detalle = detalle;                                                          
+                                                            objeton.solicitudId = -1;
+                                                            objeton.userEmployeeId = userEmployeeId;
+                                                            objeton.catEmployeeId = ccmsId;
+                                                            objeton.estatus = -1;
 
-                                                        lista.Add(objeton);
+                                                            lista.Add(objeton);
+                                                        }
+                                                        canRegistros++;
                                                     }
-                                                    canRegistros++;
                                                 }
+                                                else
+                                                {
+                                                    if (csv.TryGetField(0, out strCCMSID) && csv.TryGetField(1, out parametro) && csv.TryGetField(2, out strDetalle) && csv.TryGetField(3, out strMotivo))
+                                                    {
+                                                        //if (strCCMSID != "ccmsId")
+                                                        if (canRegistros > 0)
+                                                        {
+                                                            ccmsId = Convert.ToInt32(strCCMSID.Trim());
+                                                            detalle = Convert.ToDecimal(strDetalle.Trim(), mxCulture);
+                                                            objeton.parametro = parametro;
+                                                            objeton.detalle = detalle;
+                                                            objeton.Motivo = strMotivo.Trim();
+                                                            objeton.solicitudId = -1;
+                                                            objeton.userEmployeeId = userEmployeeId;
+                                                            objeton.catEmployeeId = ccmsId;
+                                                            objeton.estatus = -1;
+
+                                                            lista.Add(objeton);
+                                                        }
+                                                        canRegistros++;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (canRegistros > 0)
+                                                        {
+                                                            ccmsId = Convert.ToInt32(strCCMSID.Trim());
+                                                            detalle = Convert.ToDecimal(strDetalle.Trim(), mxCulture);
+                                                            objeton.parametro = parametro;
+                                                            objeton.detalle = detalle;
+                                                            objeton.Motivo = strMotivo.Trim();
+                                                            objeton.solicitudId = -1;
+                                                            objeton.userEmployeeId = userEmployeeId;
+                                                            objeton.catEmployeeId = ccmsId;
+                                                            objeton.estatus = -1;
+
+                                                            lista.Add(objeton);
+                                                        }
+                                                        canRegistros++;
+
+                                                    }
+
+                                                }        
+                                               
                                             }
                                         }
                                     }
@@ -1017,7 +1075,24 @@ namespace ASN.Controllers
 
                                             }
 
-                                            var lstLogx = context.CatSolicitudBonoCSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitanteIdent,autorizadorNivel1, autorizadorNivel2, autorizadorNivel3, autorizadorNivel4, autorizadorNivel5,autorizadorNivel6, autorizadorNivel7,autorizadorNivel8, autorizadorNivel9).ToList();
+                                            var lstLogx = new List<CatSolicitudBonoCSi_Result>();
+                                            if (TipoPeriodo == "O")
+                                            {
+                                                lstLogx = context.CatSolicitudBonoCSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitanteIdent, autorizadorNivel1, autorizadorNivel2, autorizadorNivel3, autorizadorNivel4, autorizadorNivel5, autorizadorNivel6, autorizadorNivel7, autorizadorNivel8, autorizadorNivel9,periodoId, obj.Motivo).ToList();
+                                            }
+                                            else
+                                            {
+                                                if (string.IsNullOrEmpty(obj.Motivo))
+                                                {
+                                                    lstLogx.Add(new CatSolicitudBonoCSi_Result() { FolioSolicitud = -1, Mensaje = "La nomina es Extemporanea y requiere motivo de error", Result = 0 });
+                                                }
+                                                else 
+                                                {
+                                                    lstLogx = context.CatSolicitudBonoCSi(obj.solicitudId, obj.catEmployeeId, obj.parametro, obj.detalle, obj.userEmployeeId, solicitanteIdent, autorizadorNivel1, autorizadorNivel2, autorizadorNivel3, autorizadorNivel4, autorizadorNivel5, autorizadorNivel6, autorizadorNivel7, autorizadorNivel8, autorizadorNivel9,periodoId, obj.Motivo).ToList();
+                                                }                                                
+
+                                            }
+                                            
 
                                             if (lstLogx[0].FolioSolicitud > 0 && solicitudIdActual == -1)
                                             {
@@ -1041,15 +1116,10 @@ namespace ASN.Controllers
                                             {
                                                 lstLog.Add(objetoResult);
                                             }
-                                            // System.IO.File.WriteAllLines("log.txt", new string[] { lstLog.ToString() });
-
-                                            // objetoResult.Message=lstLogx[                                          
-                                        }
-
-                                       // if (solicitudIdActual > 0)
-                                       // {
-                                            lstResult.Add(solicitudIdActual.ToString());
-                                       // }
+                                                                               
+                                        }                                     
+                                        
+                                        lstResult.Add(solicitudIdActual.ToString());                                       
 
                                         if (lstLog.Count > 0)
                                         {
