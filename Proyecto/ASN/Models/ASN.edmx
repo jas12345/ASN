@@ -1801,9 +1801,6 @@
             <Parameter Name="ConceptoId" Mode="In" Type="Int32" />
             <Parameter Name="Empleado_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ReporteFoliosContratoEmpresa" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresa_Result)">
-          <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="CatCierreSolicitudesMasivo" ReturnType="Collection(String)">
           <Parameter Name="Responsable_Ident" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1875,6 +1872,9 @@
             <Parameter Name="Ident" Mode="In" Type="Int32" />
             <Parameter Name="Ident_Solicitante" Mode="In" Type="Int32" />
             <Parameter Name="PeriodoNominaId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteFoliosContratoEmpresa" ReturnType="Collection(ASNModel.ReporteFoliosContratoEmpresa_Result)">
+            <Parameter Name="PeriodoNomina" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -3021,15 +3021,6 @@
           <Property Type="String" Name="MotivoDelConcepto" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Ticket" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="ReporteFoliosContratoEmpresa_Result">
-          <Property Type="Int32" Name="Folio" Nullable="false" />
-          <Property Type="Int32" Name="Solicitante" Nullable="true" />
-          <Property Type="String" Name="Compañia" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="Site" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Contrato" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Total" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="CatMotivoSolicitudCMB_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
@@ -3101,6 +3092,15 @@
         <ComplexType Name="CatConceptosxEmpleadoxSolicitanteCMB_Result">
           <Property Type="Int32" Name="Ident" Nullable="false" />
           <Property Type="String" Name="Valor" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ReporteFoliosContratoEmpresa_Result">
+          <Property Type="Int32" Name="Folio" Nullable="false" />
+          <Property Type="Int32" Name="Solicitante" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="String" Name="Site" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Contrato" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
         </ComplexType>
        
         </Schema>
@@ -4763,19 +4763,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ReporteFoliosContratoEmpresa" FunctionName="ASNModel.Store.ReporteFoliosContratoEmpresa">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ASNModel.ReporteFoliosContratoEmpresa_Result">
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
-                <ScalarProperty Name="Compañia" ColumnName="Compañia" />
-                <ScalarProperty Name="Site" ColumnName="Site" />
-                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CatCierreSolicitudesMasivo" FunctionName="ASNModel.Store.CatCierreSolicitudesMasivo" />
           <FunctionImportMapping FunctionImportName="ValidaConceptoMasivo" FunctionName="ASNModel.Store.ValidaConceptoMasivo" />
           <FunctionImportMapping FunctionImportName="CatMotivoSolicitudCMB" FunctionName="ASNModel.Store.CatMotivoSolicitudCMB">
@@ -4892,6 +4879,19 @@
               <ComplexTypeMapping TypeName="ASNModel.CatConceptosxEmpleadoxSolicitanteCMB_Result">
                 <ScalarProperty Name="Ident" ColumnName="Ident" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteFoliosContratoEmpresa" FunctionName="ASNModel.Store.ReporteFoliosContratoEmpresa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteFoliosContratoEmpresa_Result">
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

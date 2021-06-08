@@ -2999,15 +2999,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatSolicitudEmpleadosDetalleSel_Result>("CatSolicitudEmpleadosDetalleSel", folioSolicitudParameter, conceptoIdParameter, empleado_IdentParameter);
         }
     
-        public virtual ObjectResult<ReporteFoliosContratoEmpresa_Result> ReporteFoliosContratoEmpresa(Nullable<int> periodoNomina)
-        {
-            var periodoNominaParameter = periodoNomina.HasValue ?
-                new ObjectParameter("PeriodoNomina", periodoNomina) :
-                new ObjectParameter("PeriodoNomina", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
-        }
-    
         public virtual ObjectResult<string> CatCierreSolicitudesMasivo(Nullable<int> responsable_Ident)
         {
             var responsable_IdentParameter = responsable_Ident.HasValue ?
@@ -3252,6 +3243,15 @@ namespace ASN.Models
                 new ObjectParameter("PeriodoNominaId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosxEmpleadoxSolicitanteCMB_Result>("CatConceptosxEmpleadoxSolicitanteCMB", identParameter, ident_SolicitanteParameter, periodoNominaIdParameter);
+        }
+    
+        public virtual ObjectResult<ReporteFoliosContratoEmpresa_Result> ReporteFoliosContratoEmpresa(Nullable<int> periodoNomina)
+        {
+            var periodoNominaParameter = periodoNomina.HasValue ?
+                new ObjectParameter("PeriodoNomina", periodoNomina) :
+                new ObjectParameter("PeriodoNomina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
         }
     }
 }
