@@ -1938,7 +1938,7 @@ function onBlurParametro() {
                 Monto = data[0].Monto;
 
                 if (Folio != null && Folio != $("#FolioSolicitud").val()) {
-                    if (Monto == $("#Parametro").val() || $("#Conceptos").val() == 12) {
+                    if (Monto == $("#Parametro").val() || $("#Conceptos").val() == 12 || $("#Conceptos").val() == 51) {
                         var notification = $("#popupNotification").data("kendoNotification");
                         msj = 'Ya existe la incidencia, Solicitante: ' + Nombre + ',  Folio: ' + Folio,
                             notification.show(msj, "error");
