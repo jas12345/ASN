@@ -1879,15 +1879,6 @@ namespace ASN.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatEmpleadosPerfilNivelAccesoSel_Result>("CatEmpleadosPerfilNivelAccesoSel", perfil_IdentParameter);
         }
     
-        public virtual ObjectResult<CatMisSolicitudesSel_Result> CatMisSolicitudesSel(Nullable<int> solicitante_Ident)
-        {
-            var solicitante_IdentParameter = solicitante_Ident.HasValue ?
-                new ObjectParameter("Solicitante_Ident", solicitante_Ident) :
-                new ObjectParameter("Solicitante_Ident", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisSolicitudesSel_Result>("CatMisSolicitudesSel", solicitante_IdentParameter);
-        }
-    
         public virtual ObjectResult<CatConceptosPeopleSoftSel_Result> CatConceptosPeopleSoftSel()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatConceptosPeopleSoftSel_Result>("CatConceptosPeopleSoftSel");
@@ -3252,6 +3243,29 @@ namespace ASN.Models
                 new ObjectParameter("PeriodoNomina", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteFoliosContratoEmpresa_Result>("ReporteFoliosContratoEmpresa", periodoNominaParameter);
+        }
+    
+        public virtual ObjectResult<catEmpleadosPerfilEmpleadosAccesosCMB_Result> catEmpleadosPerfilEmpleadosAccesosCMB()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<catEmpleadosPerfilEmpleadosAccesosCMB_Result>("catEmpleadosPerfilEmpleadosAccesosCMB");
+        }
+    
+        public virtual ObjectResult<CatPerfilEmpleadosSel_ByEmpleado_Result> CatPerfilEmpleadosSel_ByEmpleado(Nullable<int> ident)
+        {
+            var identParameter = ident.HasValue ?
+                new ObjectParameter("Ident", ident) :
+                new ObjectParameter("Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatPerfilEmpleadosSel_ByEmpleado_Result>("CatPerfilEmpleadosSel_ByEmpleado", identParameter);
+        }
+    
+        public virtual ObjectResult<CatMisSolicitudesSel_Result> CatMisSolicitudesSel(Nullable<int> solicitante_Ident)
+        {
+            var solicitante_IdentParameter = solicitante_Ident.HasValue ?
+                new ObjectParameter("Solicitante_Ident", solicitante_Ident) :
+                new ObjectParameter("Solicitante_Ident", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisSolicitudesSel_Result>("CatMisSolicitudesSel", solicitante_IdentParameter);
         }
     }
 }

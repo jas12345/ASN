@@ -17,7 +17,9 @@ namespace ASN.Models
         public Nullable<int> Solicitante_Ident { get; set; }
         public Nullable<System.DateTime> Fecha_Solicitud { get; set; }
         public string EstatusSolicitudId { get; set; }
-        public string Justificacion { get; set; }
         public string EstatusSolicitud { get; set; }
+        public string Justificacion { get; set; }
+        public Nullable<int> PeriodoNominaId { get; set; }
+        public string NombrePeriodo { get; set; }
     }
 }

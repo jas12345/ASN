@@ -24,30 +24,31 @@
     .padding-0 {
         margin: 0 !important;
         padding: 0 !important;
-        
     }
 </style>
 
 @if (User.Identity.IsAuthenticated)
 {
+    @Html.Hidden("PerfilGrid")
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-lg-8">
                 @Html.Label("Catálago de perfil de Empleados", new { id = "lblTitulo", style = "font-size: 18px" })
             </div>
 
             @*<div class="col-lg-2">
-            @Html.Label("Carga Masiva")
-        </div>*@
+                    @Html.Label("Carga Masiva")
+                </div>*@
 
-        <div class="row">
-            <div class="col-lg-5">
-                <div class="k-form-field">
-                    <div class="col-lg-4">
-                        Seleccion de perfil
-                    </div>
-                    <div class="editor-field">
-                        @(Html.Kendo().DropDownList()
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="k-form-field">
+                        <div class="col-lg-4">
+                            Seleccion de perfil
+                        </div>
+                        <div class="editor-field">
+                            @(Html.Kendo().DropDownList()
                         .DataSource(source =>
                         {
                             source.Read(read =>
@@ -63,17 +64,44 @@
                         .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
                         .Events(e=>e.Change("onChangePerfil"))
                     )
+                        </div>
                     </div>
                 </div>
-            </div>
-            @if (@User.Identity.Name == "3818974")
-            {
 
-                <div class="col-lg-2 text-right k-align">
-                    Carga Masiva
+                <div class="col-lg-5">
+                    <div class="k-form-field">
+                        <div class="col-lg-4">
+                            Seleccion de Empleados
+                        </div>
+                        <div class="editor-field">
+                            @(Html.Kendo().DropDownList()
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetEmpleadoPerfilEmpleadosAccesosCMB", "PerfilEmpleados");
+                            });
+                        })
+                        .Filter("contains")
+                        .OptionLabel("- Seleccione Empleados - ")
+                        .DataValueField("Ident")
+                        .DataTextField("Valor")
+                        .Name("EmpleadoPerfil")
+                        .HtmlAttributes(new { required = "required", style = "text-align:center;width: 22.4em", validationMessage = "Este campo es requerido." })
+                        .Events(e=>e.Change("onChangeEmpleado"))
+                    )
+                        </div>
+                    </div>
                 </div>
-                <div class=" col-sm-2 ">
-                    @(Html.Kendo().Upload()
+
+                @if (@User.Identity.Name == "3818974")
+                {
+
+                    <div class="col-lg-2 text-right k-align">
+                        Carga Masiva
+                    </div>
+                    <div class=" col-sm-2 ">
+                        @(Html.Kendo().Upload()
                                 .Name("filesPE")
                                 .Async(a => a
                                     .Save("Async_CreaPerfilEmpleadosMasiva", "PerfilEmpleados")
@@ -86,22 +114,22 @@
                                 )
 
 
-                </div>
-                <div class=" col-lg-offset-3">
+                    </div>
+                    <div class=" col-lg-offset-3">
 
-                </div>
-            }
-            else
-            {
-                <div class=" col-lg-offset-7">
+                    </div>
+                }
+                else
+                {
+                    <div class=" col-lg-offset-7">
 
-                </div>
-            }
+                    </div>
+                }
 
-        </div>
+            </div>
 
 
-          
+
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -134,7 +162,7 @@
                         .Scrollable(sorteable => sorteable.Virtual(false))
                         .Sortable()
                         .Resizable(c => c.Columns(true))
-                        
+
                         //.Editable(editable => editable.Mode(GridEditMode.InCell))
                         .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("PerfilEmpleadosPopUp"))
                         .Events(eve => eve.Edit("edit"))
@@ -143,7 +171,7 @@
                             .Ajax()
                             .Batch(true)
                             .ServerOperation(false)
-                           
+
                             .Model(model =>
                             {
                                 model.Id(c => c.Perfil_Ident);
@@ -163,20 +191,20 @@
                             .Read(read => read.Action("GetPerfilEmpleados", "PerfilEmpleados").Data("GetPerfil"))
                             .Update(update => update.Action("UpdatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("MultiClientesMultiConceptos"))
                             .Create(create => create.Action("CreatePerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post).Data("MultiClientesMultiConceptos"))
-                            
+
                             //.Copy(copy => create.Action("CopyPerfilEmpleados", "PerfilEmpleados").Type(HttpVerbs.Post))
                             .PageSize(10)
                         .Events(events => events
                                         .Error("errorsote").RequestEnd("hola")
-                                        
 
 
 
 
 
-                                        
+
+
                                 )
-                        
+
                         )
                         .Navigatable()
                         .Pageable(pageable => pageable
@@ -209,7 +237,8 @@
     <script>
         //Copia de Perfil de Empleados
         var urlCopyPerfilEmpleados = '@Url.Action("CopyPerfilEmpleados", "PerfilEmpleados")';
-         var urlGetPerfilEmpleados = '@Url.Action("GetPerfilEmpleados", "PerfilEmpleados")';
+        var urlGetPerfilEmpleados = '@Url.Action("GetPerfilEmpleados", "PerfilEmpleados")';
+
 
         function onSuccess(e)
         {

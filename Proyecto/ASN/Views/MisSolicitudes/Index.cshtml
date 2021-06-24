@@ -48,12 +48,13 @@
                                         .Name("grid")
                                         .Columns(column =>
                                         {
-                                            column.Command(command => { command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span> Editar").Click("EditaSolicitud"); }).Width(40);
+                                            column.Command(command => { command.Custom("Editar").Text("<span class='k-icon k-i-edit'></span> Editar").Click("EditaSolicitud"); }).Width(30);
                                             column.Bound(c => c.FolioSolicitud).Width(40).Title("Folio de Solicitud").Visible(true).Filterable(ftb => ftb.Cell(cell => cell.Template("gridFilterIntegerNumericTextbox").ShowOperators(false)));
                                             column.Bound(c => c.Fecha_Solicitud).Title("Fecha de Solicitud").Visible(true).Format("{0:yyyy-MM-dd}").Filterable(true).Width(50).Filterable(fil => fil.Cell(cc => cc.ShowOperators(false).Template("dateFilter")));
-                                            column.Bound(c => c.EstatusSolicitud).Title("Estatus").Visible(true).Width(70);
-                                                    //column.Bound(c => c.Justificacion).Title("Justificanción").Visible(true).Width(70);
-                                                })
+                                            column.Bound(c => c.EstatusSolicitud).Title("Estatus").Visible(true).Width(40);
+                                            column.Bound(c => c.NombrePeriodo).Width(40).Title("Nombre del Periodo").Visible(true);
+                                            //column.Bound(c => c.Justificacion).Title("Justificanción").Visible(true).Width(70);
+                                        })
                                         //.HtmlAttributes(new { style = "height: 475px;" })
                                         .Scrollable(sorteable => sorteable.Virtual(false))
                                         .Sortable()
@@ -67,8 +68,8 @@
                                             {
                                                 model.Id(c => c.FolioSolicitud);
                                                 model.Field(c => c.FolioSolicitud);
-                                                        //model.Field(c => c.Justificacion).Editable(false);
-                                                    })
+                                                //model.Field(c => c.Justificacion).Editable(false);
+                                            })
                                             .Read(read => read.Action("getSolicitudes", "MisSolicitudes"))
                                         )
                                         .Navigatable()

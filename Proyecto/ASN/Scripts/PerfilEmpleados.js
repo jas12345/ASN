@@ -58,7 +58,9 @@ function edit(e) {
     //var conceptoId = $("#ConceptoId").data("kendoDropDownList");
     var MultiConcepto = $("#Concepto").data("kendoMultiSelect");
     //var f = $("#Concepto").data("kendoMultiSelect");
-
+    
+    $("#PerfilGrid").val(e.model.Perfil_Ident);
+   
     if (e.model.isNew() === false) {
 
         $("#City_Ident").val(e.model.City_Ident).change();
@@ -828,7 +830,13 @@ function CargaPerfilEmpleado() {
 }
 
 function filterConcepto(pais, clientes) {
-    pais = $("#PerfilUsuarioId").data("kendoDropDownList").value();   
+    pais = $("#PerfilUsuarioId").data("kendoDropDownList").value();
+  
+    //pais = $('#PerfilGrid').val();
+    //if (pais == '' || pais == null || pais == undefined) {
+    //    pais = $('#PerfilGrid').val();
+    //}
+    
     return {
         country: pais,
         client: clientes
@@ -1101,24 +1109,39 @@ function selectAllContratos(e) {
 
 
 function GetPerfil() {
+    
     return {
-        perfil: $("#PerfilUsuarioId").val()
+        perfil: $("#PerfilUsuarioId").val(),
+        CCMSId: $("#EmpleadoPerfil").val()
     };
 }
+
 function onChangePerfil() {
-    var perfil = $("#PerfilUsuarioId").val()
 
-    $.post(urlGetPerfilEmpleados + "/?perfil=" + perfil, function (data) {
-        //debugger;
-        console.log(data);
-        //var notification = $("#popupNotification").data("kendoNotification");
-        //notification.show(data, "success");
+    var dropdownlist = $("#EmpleadoPerfil").data("kendoDropDownList");
+    dropdownlist.select(0);
 
-        actualizaGrid();
+    actualizaGrid();
+    //var perfil = $("#PerfilUsuarioId").val()
 
-        //grid.select("tr:eq(" + selectedRows(0) + ")");
+    //$.post(urlGetPerfilEmpleados + "/?perfil=" + perfil, function (data) {
+    //    //debugger;
+    //    console.log(data);
+    //    //var notification = $("#popupNotification").data("kendoNotification");
+    //    //notification.show(data, "success");
 
-    }).fail(function (ex) {
-        console.log("fail" + ex);
-    });
+    //    actualizaGrid();
+
+    //    //grid.select("tr:eq(" + selectedRows(0) + ")");
+
+    //}).fail(function (ex) {
+    //    console.log("fail" + ex);
+    //});
+}
+
+function onChangeEmpleado() {
+    var dropdownlist = $("#PerfilUsuarioId").data("kendoDropDownList");
+    dropdownlist.select(0);
+    
+    actualizaGrid()
 }

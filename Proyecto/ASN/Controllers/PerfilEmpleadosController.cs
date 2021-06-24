@@ -298,47 +298,90 @@ namespace ASN.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetPerfilEmpleados([DataSourceRequest] DataSourceRequest request,string perfil)
+        public ActionResult GetPerfilEmpleados([DataSourceRequest] DataSourceRequest request,string perfil, int? CCMSId)
         {
             try
             {
-                if (!string.IsNullOrEmpty(perfil))
+                if ((!string.IsNullOrEmpty(perfil)) || (CCMSId > 0)) 
                 {
-                   
+
                     using (ASNContext context = new ASNContext())
                     {
-                        context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
-                        var list2 = context.CatPerfilEmpleadosSel(Convert.ToInt32(perfil)).ToList();
-                        List<CatPerfilEmpleadosViewModel> listado = new List<CatPerfilEmpleadosViewModel>();
-                        foreach (var item in list2)
-                        {
-                            CatPerfilEmpleadosViewModel element = new CatPerfilEmpleadosViewModel()
-                            {
-                                Perfil_Ident = item.Perfil_Ident,
-                                Country_Ident = (item.Country_Ident != null ? item.Country_Ident.ToString() : "-1"),
-                                NombrePerfilEmpleados = item.NombrePerfilEmpleados,
-                                Country_Full_Name = item.Country_Full_Name,
-                                City_Ident =item.City_Ident.ToString(),
-                                City_Name = item.City_Name,
-                                Location_Ident = (item.Location_Ident != null ? item.Location_Ident.ToString() : "-1"),
-                                Location_Name = item.Location_Name,
-                                Client_Ident = item.Client_Ident,
-                                Client_Name = item.Client_Name,
-                                Program_Ident = (item.Program_Ident != null ? item.Program_Ident.ToString() : "-1"),
-                                Program_Name = item.Program_Name,
-                                Contract_Type_Ident = (item.Contract_Type_Ident != null ? item.Contract_Type_Ident.ToString() : "-1"),
-                                Contract_Type = item.Contract_Type,
-                                ConceptoId = (item.ConceptoId != null ? item.ConceptoId.ToString() : "-1"),
-                                ConceptoNombre = item.ConceptoNombre,
-                                TipoAccesoId = item.TipoAccesoId,
-                                TipoAcceso = item.TipoAcceso,
-                                Active = item.Active
-                            };
-                            listado.Add(element);
-                        }
-                        DataSourceResult ok = listado.ToDataSourceResult(request);
 
-                        return Json(ok);
+                        
+                        List<CatPerfilEmpleadosViewModel> listado = new List<CatPerfilEmpleadosViewModel>();
+                        List<CatPerfilEmpleadosSel_Result> list2 = new List<CatPerfilEmpleadosSel_Result>();
+                        List<CatPerfilEmpleadosSel_ByEmpleado_Result> list3 = new List<CatPerfilEmpleadosSel_ByEmpleado_Result>();
+                        if (!string.IsNullOrEmpty(perfil))
+                        {
+                            context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                            list2 = context.CatPerfilEmpleadosSel(Convert.ToInt32(perfil)).ToList();
+                            foreach (var item in list2)
+                            {
+                                CatPerfilEmpleadosViewModel element = new CatPerfilEmpleadosViewModel()
+                                {
+                                    Perfil_Ident = item.Perfil_Ident,
+                                    Country_Ident = (item.Country_Ident != null ? item.Country_Ident.ToString() : "-1"),
+                                    NombrePerfilEmpleados = item.NombrePerfilEmpleados,
+                                    Country_Full_Name = item.Country_Full_Name,
+                                    City_Ident = item.City_Ident.ToString(),
+                                    City_Name = item.City_Name,
+                                    Location_Ident = (item.Location_Ident != null ? item.Location_Ident.ToString() : "-1"),
+                                    Location_Name = item.Location_Name,
+                                    Client_Ident = item.Client_Ident,
+                                    Client_Name = item.Client_Name,
+                                    Program_Ident = (item.Program_Ident != null ? item.Program_Ident.ToString() : "-1"),
+                                    Program_Name = item.Program_Name,
+                                    Contract_Type_Ident = (item.Contract_Type_Ident != null ? item.Contract_Type_Ident.ToString() : "-1"),
+                                    Contract_Type = item.Contract_Type,
+                                    ConceptoId = (item.ConceptoId != null ? item.ConceptoId.ToString() : "-1"),
+                                    ConceptoNombre = item.ConceptoNombre,
+                                    TipoAccesoId = item.TipoAccesoId,
+                                    TipoAcceso = item.TipoAcceso,
+                                    Active = item.Active
+                                };
+                                listado.Add(element);
+                            }
+                            DataSourceResult ok = listado.ToDataSourceResult(request);
+                            return Json(ok);
+
+                        }
+                        else
+                        {
+                            context.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                           list3 = context.CatPerfilEmpleadosSel_ByEmpleado(CCMSId).ToList();
+                            foreach (var item in list3)
+                            {
+                                CatPerfilEmpleadosViewModel element = new CatPerfilEmpleadosViewModel()
+                                {
+                                    Perfil_Ident = item.Perfil_Ident,
+                                    Country_Ident = (item.Country_Ident != null ? item.Country_Ident.ToString() : "-1"),
+                                    NombrePerfilEmpleados = item.NombrePerfilEmpleados,
+                                    Country_Full_Name = item.Country_Full_Name,
+                                    City_Ident = item.City_Ident.ToString(),
+                                    City_Name = item.City_Name,
+                                    Location_Ident = (item.Location_Ident != null ? item.Location_Ident.ToString() : "-1"),
+                                    Location_Name = item.Location_Name,
+                                    Client_Ident = item.Client_Ident,
+                                    Client_Name = item.Client_Name,
+                                    Program_Ident = (item.Program_Ident != null ? item.Program_Ident.ToString() : "-1"),
+                                    Program_Name = item.Program_Name,
+                                    Contract_Type_Ident = (item.Contract_Type_Ident != null ? item.Contract_Type_Ident.ToString() : "-1"),
+                                    Contract_Type = item.Contract_Type,
+                                    ConceptoId = (item.ConceptoId != null ? item.ConceptoId.ToString() : "-1"),
+                                    ConceptoNombre = item.ConceptoNombre,
+                                    TipoAccesoId = item.TipoAccesoId,
+                                    TipoAcceso = item.TipoAcceso,
+                                    Active = item.Active
+                                };
+                                listado.Add(element);
+                            }
+                            DataSourceResult ok = listado.ToDataSourceResult(request);
+                            return Json(ok);
+                        }
+
+
+                      
                     }
                 }
                 else
@@ -751,5 +794,27 @@ namespace ASN.Controllers
             }
         }
 
+        public JsonResult GetEmpleadoPerfilEmpleadosAccesosCMB()
+        {
+            try
+            {
+                var lstCMB = new List<catEmpleadosPerfilEmpleadosAccesosCMB_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    lstCMB = ctx.catEmpleadosPerfilEmpleadosAccesosCMB().ToList(); ;
+                }
+
+                return Json(lstCMB, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return Json("");
+            }
+        }
     }
 }

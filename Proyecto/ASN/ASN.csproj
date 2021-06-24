@@ -360,6 +360,9 @@
     <Compile Include="Models\CatEmpleadosPerfilAccesoCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\catEmpleadosPerfilEmpleadosAccesosCMB_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CatEmpleadosPerfilEmpleadosCMB_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
@@ -451,6 +454,9 @@
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatPerfilEmpleadoSel_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatPerfilEmpleadosSel_ByEmpleado_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatPerfilEmpleadosSel_Result.cs">
@@ -1074,7 +1080,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53407</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53407/</IISUrl>
+          <IISUrl>http://localhost:53408/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
