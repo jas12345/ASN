@@ -349,3 +349,9 @@ function rellenaFechasAnio() {
         });
     }
 }
+
+
+function onClickReporte() {
+    var Estatus = 'PA';
+    window.location.href = '../MisAutorizaciones/ReporteAutorizadorEstatus?EstatusSolicitudId=' + Estatus;
+}

@@ -599,6 +599,9 @@
     <Compile Include="Models\ReporteAuditoriasSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReporteAutorizadorEstatus_Result.cs">
+      <DependentUpon>ASN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReporteConceptoGeneralSel_Result.cs">
       <DependentUpon>ASN.tt</DependentUpon>
     </Compile>

@@ -10,7 +10,6 @@
         <WinAuthDomain />
         <ServerName>10.152.32.165</ServerName>
         <PathOnServer>/SSISDB/ASN_ARCHIVOS/ASN_Archivos</PathOnServer>
-        <Run64BitRuntime>false</Run64BitRuntime>
         <UserIDs />
         <UserPasswords />
         <OfflineMode>false</OfflineMode>

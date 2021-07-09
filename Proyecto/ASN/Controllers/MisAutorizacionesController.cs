@@ -7,6 +7,10 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
+using System.Text;
+
+	
 
 namespace ASN.Controllers
 {
@@ -100,6 +104,56 @@ namespace ASN.Controllers
                 LogError log = new LogError();
                 log.RecordError(ex, usuario.UserInfo.Ident.Value);
                 return PartialView("");
+            }
+        }
+
+        public FileContentResult ReporteAutorizadorEstatus(string EstatusSolicitudId) //, KendoDropDownListSelectedViewModel kddListSelectedView )
+        {
+            MyCustomIdentity usuario = (MyCustomIdentity)User.Identity;
+            try
+            {
+               //List<ReporteAutorizadorEstatus_Result>  
+               var ResultadoLst     = new List<ReporteAutorizadorEstatus_Result>();
+
+                using (ASNContext ctx = new ASNContext())
+                {
+                    ctx.Database.CommandTimeout = int.Parse(ConfigurationManager.AppSettings["TimeOutMinutes"]);
+                    ResultadoLst = ctx.ReporteAutorizadorEstatus(usuario.UserInfo.Ident.Value, EstatusSolicitudId).ToList();
+                   
+                }
+
+
+                using (var memoryStream = new MemoryStream())
+                {
+                   
+                       // var file1 = archive.CreateEntry(string.Format("NominaManual_Activos_{0}.csv", kddslv.PeriodoNomina));
+                        using (var streamWriter = new StreamWriter(memoryStream, Encoding.UTF8))
+                        {
+                            Type itemType = typeof(ReporteAutorizadorEstatus_Result);
+                          
+                            var props = itemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+
+                            IEnumerable<string> header = typeof(ReporteAutorizadorEstatus_Result).GetProperties().Select(prop => prop.Name);                          
+                            streamWriter.WriteLine(string.Join(",", header).Replace("_"," "));
+                       
+                            foreach (var item in ResultadoLst)
+                                {
+                                    streamWriter.WriteLine(string.Join(",", props.Select(p => string.Format("\"{0}\"", p.GetValue(item, null)))));
+                                }
+                                streamWriter.Flush();
+                            }                  
+
+                    return File(memoryStream.ToArray(), "application/csv", string.Format("Reporte folios pendientes de autorizar_{0}_{1}.csv",DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HHmmss")));
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+
+                LogError log = new LogError();
+                log.RecordError(ex, usuario.UserInfo.Ident.Value);
+                return null;
             }
         }
     }

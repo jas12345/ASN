@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="PC1015238228 ASN sa"
+  DTS:DTSID="{3F4F7A5D-C3EC-4671-976F-08EE384CB55C}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=PC1015238228;User ID=sa;Initial Catalog=ASN;Persist Security Info=True;Application Name=SSIS-ASN_Archivos-{3F4F7A5D-C3EC-4671-976F-08EE384CB55C}PC1015238228.ASN.sa1;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAABFHgnA2CEUanlNTVeHh5HQAAAAACAAAAAAAQZgAAAAEAACAAAABOpU5Rank50lH4wiGM8/FZYE2n6J1Ko3v7cD4c1788NQAAAAAOgAAAAAIAACAAAAD90e7HE53dSVDcmj0s1utuG+7o8/YD99BVOyWvE70rJYAAAADvoDZMULqy+zT6+4zA0oLyLzzFt0c5fhQB975ogV9cgxXOg7A+6uhSFEP0lq0aC0DY/ZvGtrmarDOm7OFtXhmww81eB8nRe+qTuH7iN0sX9ob0+ZIGIOnaGkBrMim3baepH8gaWkQZe6L07EvMNvflyRZUqla+j3qemX6myDVE1EAAAACVu5uqdwpCmj61zxYm2fw1M6d5C73oJ2qdWKZgGKDwN7Dpcfgw8nHGeAeuzNehFJrySvmhTqPuO6ipP/TZwKQM</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

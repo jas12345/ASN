@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="10/10/2019 3:52:32 PM"
@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Bonos"
   DTS:PackageType="5"
-  DTS:VersionBuild="74"
-  DTS:VersionGUID="{E6B79414-EF7A-41AE-8AE1-378037E80F55}">
+  DTS:VersionBuild="68"
+  DTS:VersionGUID="{213CBE8F-C334-448E-9949-99BE1335711F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -44,7 +44,17 @@
       DTS:Namespace="User"
       DTS:ObjectName="Extension">
       <DTS:VariableValue
-        DTS:DataType="8">.txt</DTS:VariableValue>
+        DTS:DataType="8">.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DC605F5F-CF57-43B6-A0B8-543F9FB1FEB0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="NombrePeriodo">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -90,15 +100,6 @@
           </SOAP-ENV:Body>
         </SOAP-ENV:Envelope>
       </DTS:VariableValue>
-    </DTS:Variable>
-    <DTS:Variable
-      DTS:CreationName=""
-      DTS:DTSID="{DC605F5F-CF57-43B6-A0B8-543F9FB1FEB0}"
-      DTS:IncludeInDebugDump="2345"
-      DTS:Namespace="User"
-      DTS:ObjectName="TipoPeriodo">
-      <DTS:VariableValue
-        DTS:DataType="8">O</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -179,24 +180,14 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Enviar Archivo o Depositar Archivo"
           DTS:ThreadHint="0">
-          <DTS:Variables>
-            <DTS:Variable
-              DTS:CreationName=""
-              DTS:DTSID="{D33E5513-617B-4BE6-8AEB-69F54910D0CF}"
-              DTS:IncludeInDebugDump="2345"
-              DTS:Namespace="User"
-              DTS:ObjectName="NombrePeriodo">
-              <DTS:VariableValue
-                DTS:DataType="8">E</DTS:VariableValue>
-            </DTS:Variable>
-          </DTS:Variables>
+          <DTS:Variables />
           <DTS:ObjectData>
             <ScriptProject
               Name="ST_e851fcfedf22481580807873c773a266"
               VSTAMajorVersion="3"
               VSTAMinorVersion="0"
               Language="CSharp"
-              ReadOnlyVariables="User::ConexionBD,User::Extension,User::TablaBonos,User::TipoPeriodo,User::Unidad">
+              ReadOnlyVariables="User::NombrePeriodo,User::ConexionBD,User::Extension,User::TablaBonos,User::Unidad">
               <ProjectItem
                 Name="Properties\Settings.settings"
                 Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
@@ -353,21 +344,20 @@ namespace ST_b5c21392dbc540afa85f849020efe0d2
 {
     public class RafToolObj
     {
-        public string Empleado { get; set; }
-        public string Reg { get; set; }
-        public string Concepto { get; set; }
-        public string Accion { get; set; }
-        public string Unidad { get; set; }
-        public string Importe { get; set; }
-        public string Porcentaje { get; set; }
-        public string Fecha { get; set; }
-        public string Semana { get; set; }
-        public string Fecha_Ini { get; set; }
-        public string Fecha_Fin { get; set; }
-        public string Duracion { get; set; }
-        public string Folio { get; set; }
-        public string Consecuencia { get; set; }
-        public string Control { get; set; }
+        public string Payroll_Processed { get; set; }
+        public string Payroll_Period { get; set; }
+        public string CCMSID { get; set; }
+        public string Type { get; set; }
+        public string Amount { get; set; }
+        public string Detail { get; set; }
+        public string Concept { get; set; }
+        public string Error { get; set; }
+        public string Responsible_of_requests_name { get; set; }
+        public string Responsible_of_requests_Department { get; set; }
+        public string Responsible_of_requests_Position { get; set; }
+        public string Descripcion { get; set; }
+        public string Manger_ID { get; set; }
+        public string Nombre { get; set; }
     }
 }]]></ProjectItem>
               <ProjectItem
@@ -404,53 +394,31 @@ namespace ST_b5c21392dbc540afa85f849020efe0d2.Properties {
                 Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
 <c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
 	<msb:PropertyGroup>
-		<msb:Language>msBuild</msb:Language>
 		<msb:CodeName>ST_b5c21392dbc540afa85f849020efe0d2</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
 		<msb:DisplayName>ST_b5c21392dbc540afa85f849020efe0d2</msb:DisplayName>
 		<msb:ProjectId>{A3DDDEB1-E98D-4AC1-9980-1641336997C6}</msb:ProjectId>
 	</msb:PropertyGroup>
 	<msb:ItemGroup>
 		<msb:Project Include="ST_e851fcfedf22481580807873c773a266.csproj"/>
-		<msb:File Include="Properties\Settings.settings"/>
 		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
 		<msb:File Include="Properties\Resources.resx"/>
-		<msb:File Include="MailHelper.cs"/>
 		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="MailHelper.cs"/>
 		<msb:File Include="Properties\Settings.Designer.cs"/>
-		<msb:File Include="LogError.cs"/>
 		<msb:File Include="ScriptMain.cs"/>
+		<msb:File Include="LogError.cs"/>
 		<msb:File Include="RafToolBonos.cs"/>
 		<msb:File Include="RafToolObj.cs"/>
 		<msb:File Include="BonoInfo.cs"/>
-		<msb:Breakpoint Include="c34f8cf744d445cca90dfb3ae6f66e64">
-			<msb:FileName>ScriptMain.cs</msb:FileName>
-			<msb:ColumnNumber>13</msb:ColumnNumber>
-			<msb:Enabled>True</msb:Enabled>
-			<msb:LineNumber>106</msb:LineNumber>
-			<msb:Condition></msb:Condition>
-			<msb:ConditionType>1</msb:ConditionType>
-			<msb:Language>C#</msb:Language>
-			<msb:HitCountType>1</msb:HitCountType>
-			<msb:HitCountTarget>1</msb:HitCountTarget>
-		</msb:Breakpoint>
 		<msb:Breakpoint Include="41d7659cb7a54370a51a9ad575f8127c">
 			<msb:FileName>ScriptMain.cs</msb:FileName>
+			<msb:LineNumber>155</msb:LineNumber>
 			<msb:ColumnNumber>21</msb:ColumnNumber>
 			<msb:Enabled>True</msb:Enabled>
-			<msb:LineNumber>162</msb:LineNumber>
-			<msb:Condition></msb:Condition>
 			<msb:ConditionType>1</msb:ConditionType>
-			<msb:Language>C#</msb:Language>
-			<msb:HitCountType>1</msb:HitCountType>
-			<msb:HitCountTarget>1</msb:HitCountTarget>
-		</msb:Breakpoint>
-		<msb:Breakpoint Include="d497b4bcb6ea48d4a3e78f4b28d5be9d">
-			<msb:FileName>ScriptMain.cs</msb:FileName>
-			<msb:ColumnNumber>29</msb:ColumnNumber>
-			<msb:Enabled>True</msb:Enabled>
-			<msb:LineNumber>287</msb:LineNumber>
 			<msb:Condition></msb:Condition>
-			<msb:ConditionType>1</msb:ConditionType>
 			<msb:Language>C#</msb:Language>
 			<msb:HitCountType>1</msb:HitCountType>
 			<msb:HitCountTarget>1</msb:HitCountTarget>
@@ -468,28 +436,21 @@ namespace ST_b5c21392dbc540afa85f849020efe0d2
 {
     public class NMBonos
     {
-        public string Empleado { get; set; }
-		public string Reg { get; set; }
-		public string Concepto { get; set; }
-		public string Accion { get; set; }
-        public string Unidad { get; set; }
-        public string Importe { get; set; }
-        public string Porcentaje { get; set; }
-        public string Fecha { get; set; }
-	    public string Semana { get; set; }
-		public string Fecha_Ini { get; set; }
-        public string Fecha_Fin { get; set; }
-        public string Duracion { get; set; }
-        public string Folio { get; set; }
-        public string Consecuencia { get; set; }
-        public string Control { get; set; }
-        public string ID_Empresa { get; set; }
-        public string CIA_IDReporteo { get; set; }
-        public string Folder { get; set; }
-        public string Compania { get; set; }
-        public string ID_REP { get; set; }
-        public string T_EX_DOB_SEM { get; set; }
-        public string T_EXTRA_EXEN { get; set; }
+        public string Payroll_Processed { get; set; }
+        public string Payroll_Period { get; set; }
+        public string CCMSID { get; set; }
+        public string Type { get; set; }
+        public string Amount { get; set; }
+        public string Detail { get; set; }
+        public string Concept { get; set; }
+        public string Error { get; set; }
+        public string Responsible_of_requests_name { get; set; }
+        public string Responsible_of_requests_Department { get; set; }
+        public string Responsible_of_requests_Position { get; set; }
+        public string Descripcion { get; set; }
+        public string Manger_ID { get; set; }
+        public string Nombre { get; set; }
+        public string Empresa { get; set; }
     }
 }]]></ProjectItem>
               <ProjectItem
@@ -700,7 +661,7 @@ namespace ST_b5c21392dbc540afa85f849020efe0d2
             var connections = Dts.Variables["User::ConexionBD"].Value.ToString();
             var unidad = Dts.Variables["User::Unidad"].Value.ToString();
             var extension = Dts.Variables["User::Extension"].Value.ToString();
-            var TipoPeriodo = Dts.Variables["User::TipoPeriodo"].Value.ToString();
+            var NombrePeriodo = Dts.Variables["User::NombrePeriodo"].Value.ToString();
 
             try
             {
@@ -725,32 +686,25 @@ namespace ST_b5c21392dbc540afa85f849020efe0d2
 
                     foreach (DataRow dr in dt.Rows)
                     {
-                        var p = new NMBonos();
+                        var p1 = new NMBonos();
 
-                        p.Empleado = dr["Empleado"].ToString();
-                        p.Reg = dr["Reg"].ToString();
-                        p.Concepto = dr["Concepto"].ToString();
-                        p.Accion = dr["Accion"].ToString();
-                        p.Unidad = dr["Unidad"].ToString();
-                        p.Importe = dr["Importe"].ToString();
-                        p.Porcentaje = dr["Porcentaje"].ToString();
-                        p.Fecha = dr["Fecha"].ToString();
-                        p.Semana = dr["Semana"].ToString();
-                        p.Fecha_Ini = dr["Fecha_Ini"].ToString();
-                        p.Fecha_Fin = dr["Fecha_Fin"].ToString();
-                        p.Duracion = dr["Duracion"].ToString();
-                        p.Folio = dr["Folio"].ToString();
-                        p.Consecuencia = dr["Consecuencia"].ToString();
-                        p.Control = dr["Control"].ToString();
-                        p.ID_Empresa = dr["ID_Empresa"].ToString();
-                        p.CIA_IDReporteo = dr["CIA_IDReporteo"].ToString();
-                        p.Folder = dr["Folder"].ToString();
-                        p.Compania = dr["Compania"].ToString();
-                        p.ID_REP = dr["ID_REP"].ToString();
-                        p.T_EX_DOB_SEM = dr["T_EX_DOB_SEM"].ToString();
-                        p.T_EXTRA_EXEN = dr["T_EXTRA_EXEN"].ToString();
+                        p1.Payroll_Processed = "Payroll_Processed";
+                        p1.Payroll_Period = "Payroll_Period";
+                        p1.CCMSID = "CCMSID";
+                        p1.Type = "Type";
+                        p1.Amount = "Amount";
+                        p1.Detail = "Detail";
+                        p1.Concept = "Concept";
+                        p1.Error = "Error";
+                        p1.Responsible_of_requests_name = "Responsible_of_requests_name";
+                        p1.Responsible_of_requests_Department = "Responsible_of_requests_Department";
+                        p1.Responsible_of_requests_Position = "Responsible_of_requests_Position";
+                        p1.Descripcion = "Descripcion";
+                        p1.Manger_ID = "Manger_ID";
+                        p1.Nombre = "Nombre";
+                        p1.Empresa = "Empresa";
 
-                        records.Add(p);
+                        records.Add(p1);
                     }
 
                     if (records.Count > 0)
@@ -759,28 +713,28 @@ namespace ST_b5c21392dbc540afa85f849020efe0d2
                         var listaDeBonoInfo = new List<BonoInfo>();
 
                         listaDeCIA = records
-                                      .GroupBy(p => p.CIA_IDReporteo)
-                                      .Select(g => g.First().CIA_IDReporteo)
+                                      .GroupBy(p => p.Empresa)
+                                      .Select(g => g.First().Empresa)
                                       .ToList();
 
-                        foreach (var CIA in listaDeCIA)
-                        {
-                            var elBonoInfo = records.Where(v => v.CIA_IDReporteo == CIA).Take(1).Select(c =>
-                               new BonoInfo
-                               {
-                                   ID = contador,
-                                   CIA_IDReporteo = c.CIA_IDReporteo,
-                                   Compania = c.Compania,
-                                   Folder = c.Folder,
-                                   ID_Empresa = c.ID_Empresa,
-                                   ID_REP = c.ID_REP
-                               }
-                           ).SingleOrDefault();
+                        //foreach (var CIA in listaDeCIA)
+                        //{
+                        //    var elBonoInfo = records.Where(v => v.CIA_IDReporteo == CIA).Take(1).Select(c =>
+                        //       new BonoInfo
+                        //       {
+                        //           ID = contador,
+                        //           CIA_IDReporteo = c.CIA_IDReporteo,
+                        //           Compania = c.Compania,
+                        //           Folder = c.Folder,
+                        //           ID_Empresa = c.ID_Empresa,
+                        //           ID_REP = c.ID_REP
+                        //       }
+                        //   ).SingleOrDefault();
 
-                            contador++;
+                        //    contador++;
 
-                            listaDeBonoInfo.Add(elBonoInfo);
-                        }
+                        //    listaDeBonoInfo.Add(elBonoInfo);
+                        //}
 
 
                         foreach (var IDCIA in listaDeCIA)
@@ -790,87 +744,49 @@ namespace ST_b5c21392dbc540afa85f849020efe0d2
 
                             var p1 = new RafToolObj();
 
-                            p1.Empleado = "EMPLEADO";
-                            p1.Reg = "REG";
-                            p1.Concepto = "CONCEPTO";
-                            p1.Accion = "ACCION";
-                            p1.Unidad = "UNIDAD";
-                            p1.Importe = "IMPORTE";
-                            p1.Porcentaje = "PORCENTAJE";
-                            p1.Fecha = "FECHA";
-                            p1.Semana = "SEMANA";
-                            p1.Fecha_Ini = "FECHA_INI";
-                            p1.Fecha_Fin = "FECHA_FIN";
-                            p1.Duracion = "DURACION";
-                            p1.Folio = "FOLIO";
-                            p1.Consecuencia = "CONSECUENCIA";
-                            p1.Control = "CONTROL";
+                            p1.Payroll_Processed = "Payroll_Processed";
+                            p1.Payroll_Period = "Payroll_Period";
+                            p1.CCMSID = "CCMSID";
+                            p1.Type = "Type";
+                            p1.Amount = "Amount";
+                            p1.Detail = "Detail";
+                            p1.Concept = "Concept";
+                            p1.Error = "Error";
+                            p1.Responsible_of_requests_name = "Responsible_of_requests_name";
+                            p1.Responsible_of_requests_Department = "Responsible_of_requests_Department";
+                            p1.Responsible_of_requests_Position = "Responsible_of_requests_Position";
+                            p1.Descripcion = "Descripcion";
+                            p1.Manger_ID = "Manger_ID";
+                            p1.Nombre = "Nombre";
+
 
                             bonosArchivo.Add(p1);
 
-                            liston = records.Where(morro => morro.CIA_IDReporteo == IDCIA).ToList();
+                            liston = records.Where(morro => morro.Empresa == IDCIA).ToList();
 
                             foreach(var obj  in liston)
                             {
-                                string numeroDeSemana = obj.T_EX_DOB_SEM == "1" ? "1" : "";
-
+                                
                                 var bono = new RafToolObj();
 
-                                bono.Empleado = obj.Empleado;
-                                bono.Reg = obj.Reg;
-                                bono.Concepto = obj.Concepto.ToUpper();
-                                bono.Accion = obj.Accion;
-                                bono.Unidad = obj.Unidad;
-                                bono.Importe = obj.Importe;
-                                bono.Porcentaje = obj.Porcentaje;
-                                bono.Fecha = obj.Fecha;
-                                bono.Semana = numeroDeSemana;
-                                bono.Fecha_Ini = obj.Fecha_Ini;
-                                bono.Fecha_Fin = obj.Fecha_Fin;
-                                bono.Duracion = obj.Duracion;
-                                bono.Folio = obj.Folio;
-                                bono.Consecuencia = obj.Consecuencia;
-                                bono.Control = obj.Control;
+                                bono.Payroll_Processed = obj.Payroll_Processed;
+                                bono.Payroll_Period = obj.Payroll_Period;
+                                bono.CCMSID = obj.CCMSID.ToString();
+                                bono.Type = obj.Type;
+                                bono.Amount = obj.Amount;
+                                bono.Detail = obj.Detail;
+                                bono.Concept = obj.Concept;
+                                bono.Error = obj.Error;
+                                bono.Responsible_of_requests_name = obj.Responsible_of_requests_name;
+                                bono.Responsible_of_requests_Department = obj.Responsible_of_requests_Department;
+                                bono.Responsible_of_requests_Position = obj.Responsible_of_requests_Position;
+                                bono.Descripcion = obj.Descripcion;
+                                bono.Manger_ID = obj.Manger_ID.ToString();
+                                bono.Nombre = obj.Nombre;
+                                //empresa = obj.Empresa;
 
                                 bonosArchivo.Add(bono);
-
-                                //Estos dos siempre van juntos cuando se ponga el concepto de “T EX DOB SEM” siempre 
-                                //debe ir acompañado de “T EXTRA EXEN” además de que en la columna de semana siempre va 
-                                //el número 1 en ambos conceptos. Para el concepto “T EXTRA EXEN” la columna unidad va vacia.
-                                //-Mireya Cavazos  Diciembre 2019
-                                if (obj.T_EX_DOB_SEM == "1")
-                                {
-                                    if (numeroDeSemana == "1")
-                                    {
-                                        var ContadorTE = (from f in bonosArchivo
-                                                          where f.Empleado == obj.Empleado.ToString() && f.Concepto == "T EX DOB SEM"
-                                                          select f).Count();
-                                        if (ContadorTE == 1)
-                                        {
-                                            numeroDeSemana = "2";
-                                        }
-
-                                    }
-                                    var bonoTExtra = new RafToolObj();
-
-                                    bonoTExtra.Empleado = obj.Empleado;
-                                    bonoTExtra.Reg = obj.Reg;
-                                    bonoTExtra.Concepto = obj.T_EXTRA_EXEN;
-                                    bonoTExtra.Accion = obj.Accion;
-                                    bonoTExtra.Unidad = "";
-                                    bonoTExtra.Importe = obj.Importe;
-                                    bonoTExtra.Porcentaje = obj.Porcentaje;
-                                    bonoTExtra.Fecha = obj.Fecha;
-                                    bonoTExtra.Semana = numeroDeSemana;
-                                    bonoTExtra.Fecha_Ini = obj.Fecha_Ini;
-                                    bonoTExtra.Fecha_Fin = obj.Fecha_Fin;
-                                    bonoTExtra.Duracion = obj.Duracion;
-                                    bonoTExtra.Folio = obj.Folio;
-                                    bonoTExtra.Consecuencia = obj.Consecuencia;
-                                    bonoTExtra.Control = obj.Control;
-
-                                    bonosArchivo.Add(bonoTExtra);
-                                }
+                               
                             }
 
                             var result = WriteCsvToMemory(bonosArchivo);
@@ -880,23 +796,18 @@ namespace ST_b5c21392dbc540afa85f849020efe0d2
                             /// deberia tener mas de 10 registros pues es segun los empleados que hay en la compañia con Miles.
                             if (records.Count > 0)
                             {
-                                var IdentificadorArchivo = "TP_INCID";
-                                var TipoNominas = "N" + TipoPeriodo;
-                                var Compania = listaDeBonoInfo.Where(r => r.ID == numerin).SingleOrDefault().Compania.ToUpper();
-                                var ID_REP = listaDeBonoInfo.Where(r => r.ID == numerin).SingleOrDefault().ID_REP.ToUpper();
-                                var Ciudad = "ALL";
-                                if (ID_REP == "ELO")
-                                {
-                                    Ciudad = "AGE";
-                                }
-                                var TipoIncidencia = "IMA";
-                                var FolderPath = listaDeBonoInfo.Where(r => r.ID == numerin).SingleOrDefault().Folder.ToUpper();
-                                var FolderPathSubtring = FolderPath.Substring(4, FolderPath.Length - 4);
-                                var nombreArchivo = IdentificadorArchivo + "_" + TipoNominas + "_" + Compania + "_" + ID_REP + "_" + Ciudad + "_" + TipoIncidencia + "_" + FechaDeCreacion + extension;
 
+                                // 10.156.42.40 =  mty - cvo - cgn03.tpnsn.com
+                                //var server = @"\\10.156.42.40\Payroll_Analysis";
+                                var server = @"\\10.152.32.164\tp";
+                                var FolderPath = string.Format(@" \Temp\files\{0}", NombrePeriodo.Substring(0, 4));                                                                                                                          
+                                var nombreArchivo = string.Format("MO_{2}_{0}{1}", NombrePeriodo, extension, IDCIA);
+
+                                var serverPath = server + FolderPath + "\\" + nombreArchivo;
+                                var filePath = unidad + FolderPath + "/" + nombreArchivo;
                                 //using (FileStream fs = new FileStream("Z:\\MILES\\ML_Miles_" + FechaDeCreacion + ".csv", FileMode.Create))
                                 //using (FileStream fs = new FileStream("C:" + "//RafArchivo/basura/basuron" + "/" + nombreArchivo, FileMode.Create))
-                                using (FileStream fs = new FileStream(unidad + FolderPathSubtring + "/" + nombreArchivo, FileMode.Create))
+                                using (FileStream fs = new FileStream(filePath, FileMode.Create))
                                 {
                                     numerin++;
                                     memoryStream.Seek(0, SeekOrigin.Begin);
@@ -1195,14 +1106,14 @@ namespace ST_b5c21392dbc540afa85f849020efe0d2
               <BinaryItem
                 Name="ST_e851fcfedf22481580807873c773a266.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
-ZGUuDQ0KJAAAAAAAAABQRQAATAEDAMLv3GAAAAAAAAAAAOAAIiALATAAAFQAAAAIAAAAAAAAwnIA
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAGAw3mAAAAAAAAAAAOAAIiALATAAAEgAAAAIAAAAAAAAimYA
 AAAgAAAAgAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAADAAAAAAgAAAAAAAAMAQIUAABAA
-ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAHByAABPAAAAAIAAAHgEAAAAAAAAAAAAAAAAAAAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAADhmAABPAAAAAIAAAHgEAAAAAAAAAAAAAAAAAAAA
 AAAAAKAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAyFIAAAAgAAAAVAAAAAIA
-AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAgAAAAAYAAABWAAAAAAAAAAAAAAAAAABAAABA
-LnJlbG9jAAAMAAAAAKAAAAACAAAAXAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACk
-cgAAAAAAAEgAAAACAAUAmDUAACA8AAABAAAAAAAAALhxAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAkEYAAAAgAAAASAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAgAAAAAYAAABKAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAKAAAAACAAAAUAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAABs
+ZgAAAAAAAEgAAAACAAUABC8AAHw2AAABAAAAAAAAAIBlAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CewEAAAQqIgIDfQEAAAQqHgJ7AgAABCoiAgN9AgAABCoe
 AnsDAAAEKiICA30DAAAEKh4CewQAAAQqIgIDfQQAAAQqHgJ7BQAABCoiAgN9BQAABCoeAnsGAAAE
 KiICA30GAAAEKh4CKBAAAAoqHgJ7BwAABCoiAgN9BwAABCoeAnsIAAAEKiICA30IAAAEKh4CewkA
@@ -1211,18 +1122,18 @@ ABFyAQAAcANvEQAACgNvEgAACigTAAAKbxQAAAooFQAACgoDbxYAAAosJwZyXwAAcANvFgAACm8R
 AAAKA28WAAAKbxcAAAooGAAACigZAAAKCgVzGgAACgtzGwAACiVygQAAcG8cAAAKJRpvHQAACiVv
 HgAACnKlAABwHxZvHwAACgZvIAAACiVvHgAACnLHAABwHxZvHwAACgNvFwAACm8gAAAKJW8eAAAK
 ct8AAHAfFm8fAAAKcvUAAHBvIAAACiVvHgAACnILAQBwHxZvHwAACnIdAQBwbyAAAAolbx4AAApy
-JwEAcB5vHwAACheMNgAAAW8gAAAKJQdvIQAACiUgWAIAAG8iAAAKB28jAAAKbyQAAAomB28lAAAK
+JwEAcB5vHwAACheMNQAAAW8gAAAKJQdvIQAACiUgWAIAAG8iAAAKB28jAAAKbyQAAAomB28lAAAK
 3gMm3gAqAAAAQRwAAAAAAAAAAAAAHQEAAB0BAAADAAAAEAAAAR4CexUAAAQqIgIDfRUAAAQqHgJ7
 FgAABCoiAgN9FgAABCoeAnsXAAAEKiICA30XAAAEKh4CexgAAAQqIgIDfRgAAAQqHgJ7GQAABCoi
 AgN9GQAABCoeAnsaAAAEKiICA30aAAAEKh4CexsAAAQqIgIDfRsAAAQqHgJ7HAAABCoiAgN9HAAA
 BCoTMAIAXQAAAAAAAAACKBAAAAoCcj0BAHB9DQAABAIfGX0OAAAEAnJTAQBwcyYAAAp9EgAABAJy
 iwEAcH0PAAAEAnKLAQBwfRAAAAQCF30RAAAEAnKNAQBwfRMAAAQCcpEBAHB9FAAABCoAAAAbMAUA
-VQIAAAIAABEUCnMnAAAKCwJ7EwAABHLXAQBwKCgAAAosRwJ7FAAABBeNLgAAASUWctsBAHCiF28p
-AAAKDRYTBCseCREEmhMFB28qAAAKEQVzJgAACm8rAAAKEQQXWBMEEQQJjmky2ytFAigaAAAGF40u
+VQIAAAIAABEUCnMnAAAKCwJ7EwAABHLXAQBwKCgAAAosRwJ7FAAABBeNLQAAASUWctsBAHCiF28p
+AAAKDRYTBCseCREEmhMFB28qAAAKEQVzJgAACm8rAAAKEQQXWBMEEQQJjmky2ytFAigaAAAGF40t
 AAABJRZy2wEAcKIXbykAAAoNFhMEKx4JEQSaEwYHbyoAAAoRBnMmAAAKbysAAAoRBBdYEwQRBAmO
 aTLbBwIoIAAABm8sAAAKBwJ7EgAABG8tAAAKBwIoIgAABm8uAAAKBwIoJAAABm8vAAAKAnsTAAAE
-ctcBAHAoMAAACjmaAAAAAigcAAAGKDEAAAotQAIoHAAABheNLgAAASUWctsBAHCiF28pAAAKDRYT
-BCsZCREEmhMHB28yAAAKEQdvMwAAChEEF1gTBBEECY5pMuACKB4AAAYoMQAACi1AAigeAAAGF40u
+ctcBAHAoMAAACjmaAAAAAigcAAAGKDEAAAotQAIoHAAABheNLQAAASUWctsBAHCiF28pAAAKDRYT
+BCsZCREEmhMHB28yAAAKEQdvMwAAChEEF1gTBBEECY5pMuACKB4AAAYoMQAACi1AAigeAAAGF40t
 AAABJRZy2wEAcKIXbykAAAoNFhMEKxkJEQSaEwgHbzQAAAoRCG8zAAAKEQQXWBMEEQQJjmky4AJ7
 DQAABAJ7DgAABHM1AAAKDAIoJgAABigxAAAKLTACKCYAAAYoNgAACiwjAigmAAAGczcAAAoKBnLf
 AQBwbzgAAAoHbzkAAAoGbzoAAAoCKCgAAAYsEQdvOQAACgIoKAAABm86AAAKAnsPAAAEbzsAAAoW
@@ -1236,377 +1147,323 @@ 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
-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
-AAYlA29SAAAGbwwAAAYqPgNvAQAABgJ7SQAABP4BKkoDb0wAAAYCe04AAAQoKAAACipKA29MAAAG
-AntPAAAEKCgAAAoqwgNvWQAABgJ7UAAABG8sAAAGb0gAAAooKAAACiwRA29dAAAGcu0FAHAoKAAA
-CioWKi5zjgAABoBRAAAEKh4Db0wAAAYqMgMoDgAAK29MAAAGKjoDAntUAAAEFG+KAAAKKgAAAEJT
-SkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAAOAbAAAjfgAATBwAAHAUAAAjU3RyaW5n
-cwAAAAC8MAAACAYAACNVUwDENgAAEAAAACNHVUlEAAAA1DYAAEwFAAAjQmxvYgAAAAAAAAACAAAB
-Vx2iCQkLAAAA+gEzABYAAAEAAABQAAAAEAAAAFQAAACSAAAARwAAAIoAAAADAAAAvgAAAAQAAAAH
-AAAAOwAAAHQAAAARAAAAAQAAAAYAAAABAAAABwAAAA4AAAAAAMkMAQAAAAAABgCaCqcQBgApC6cQ
-BgDmCYwQDwAbEQAABgATCh8OBgB9Ch8OBgBeCh8OBgAQCx8OBgC6Ch8OBgDTCh8OBgAqCh8OBgBF
-CnwLBgCMEmANBgCuCacQBgCDAGANBgDMDmANCgC1DvYSDgAgEq0MDgAzE60MDgCyB60MDgAME60M
-EgDuChEMEgAVCREMBgC3AFADBgCGCGANBgBlEMkRCgDBEy8DBgAnCGANYwB0EAAABgDkAGANBgBF
-DWQCBgA6DWQCBgCOAFADBgAvEGQCBgBMDx8OBgCpAFADBgBwDWANFgDrAKcPBgDJCYwQBgDVD8cQ
-BgA3DwoODgCBCZcMDgD6CZcMDgBMCfUNBgBSFEwMBgCYC2ANCgBUB/YSCgBKB9YOCgDHCC8DCgBF
-DvYSCgAiEPYSCgC5CC8DCgAWENYOBgC+AGANCgCoDtYOBgDoEWANDgBcDq0MBgCcAGYMBgB4CGQC
-DgBkCa0MDgByDq0MDgA6DLISDgBsE7ISEgCFDBEMGgB2EY8IGgATCI8ICgC9Ei8DCgAJCC8DCgAx
-Di8DCgCHDi8DCgAxCS8DFgAcCKcPBgCdB2QCBgBLDWQCBgCtDWQCBgDOCGANBgAzCGANBgCAER8O
-BgA8EGQCBgAOFB8OAAAAALYBAAAAAAEAAQABABAAQw/3ADUAAQABAAAAEABcEPcANQAHAA4AAAAQ
-AOUP9wA1AAwAGgABABAA+xH3ADUAHQAsAAEAEADeC/cANQAzAFkAAQAQAKIN9wBdAEIAeAAAABAA
-zhAqETUAQgB7AAABEACNESoRsQBEAH8AAwEAAFASAACVAEUAggADARAAFwAAADUASACCAAMBEABu
-AAAANQBOAIcAAwEQAMQAAAA1AE8AiQADARAAGwEAADUAUACLAAMhEABEAwAANQBRAI0AAwEQACwA
-AAA1AFQAkQABALADhAMBAJ0EhwMBAC8GhwMBAJkGhwMBAGsEhwMBAB4EhwMBAO0EhwMBANEEhwMB
-AMoGhwMBALEGhwMBABkHigNRgJYThAMhAH8ThwMhAF8ThAMhAPgPhwMhABIShwMhADUNkQMhAMkP
-lAMhAKkLhwMhAL0MhwMBAP4GhwMBAJMDhwMBAAAEhwMBAOUGhwMBADQHhwMBAJMFkQMBACoFhwMB
-AIAGmAMBABUGhwMBAGMFhwMBAGYGhwMBAP0FhwMBALkEhwMBAEoFhwMBAA4FhwMBADYEhwMBAIUE
-hwMBAHgFhwMBAMgFhwMBAOMFhwMBAE8GhwMBAE0EhwMBAK8FhwMBAJ0EhwMBAC8GhwMBAJkGhwMB
-AGsEhwMBAB4EhwMBAMQDhwMBAOIDhwMBABUGhwMBAGMFhwMBAGYGhwMBAP0FhwMBALkEhwMBAEoF
-hwMBAA4FhwMBADYEhwMBAIUEhwMBAHgFhwMBAMgFhwMBAOMFhwMBAE8GhwMBAE0EhwMBAK8FhwMR
-AHUNnAMRAAUJoQMRAIIHpgMGBqMChANWgBgSqgNWgOUIqgMGAEcQhAMGAL0NhAMGADABrgMGAHwB
-uAMGAI4BuAMGAKABuAMGAMEBhwMGAL8BhwMGAOkLwQM2ALIBxQMWAAEAyQMWAFgA0gMGAFsN4QNQ
-IAAAAACGCPABaAABAFggAAAAAIYI9wEBAAEAYSAAAAAAhggRAyIAAgBpIAAAAACGCCADEAACAHIg
-AAAAAIYIEQ8iAAMAeiAAAAAAhggkDxAAAwCDIAAAAACGCLMPIgAEAIsgAAAAAIYIvg8QAAQAlCAA
-AAAAhgjhAiIABQCcIAAAAACGCO4CEAAFAKUgAAAAAIYIbgIiAAYArSAAAAAAhgh5AhAABgC2IAAA
-AACGGH8QBgAHAL4gAAAAAIYIvgciAAcAxiAAAAAAhgjSBxAABwDPIAAAAACGCGQHIgAIANcgAAAA
-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
-AGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQL
-AAABAMkTAAACAOwBAAADANwRAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAAB
-AGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQL
-AAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAAB
-AGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQL
-AAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAABAGQLAAAB
-AGQLAAABAJ8QAAABAGQLAAABAGkDAAABAIoQAAABAIoQAAABAIoQAAABALcTAAABAG0PAAABAGoL
-AAABAKUPAAABAK8LAAABAKUPCQB/EAEAEQB/EAYAGQB/EAoAKQB/EBAAMQB/EBAAOQB/EBAAQQB/
-EBAASQB/EBAAUQB/EBAAWQB/EBAAYQB/EBAAcQB/EAYAsQB/EAYAOQF/EAYAWQF/EBUAaQB/EAYA
-gQCmByIAgQCSByIAaQFKEyYAaQF9CCIAcQGFEiwAgQDDDjQAgQBkByIAcQGFEjkAcQF+EkAAiQB/
-EBAAeQF/EAYAgQGnExAAgQHDCEYAeQEDEk0AkQGPA1MAqQFRC10AeQGZDmIAgQGLEwEAuQGBDQYA
-gQEXFGgAuQFzCQYAkQB/EBAAoQB/EAYAcQE4FHwAcQHFEoIAoQDpDowADACPA5oAoQCfEhAAoQBn
-DaAAoQABFBAAoQAADaYAcQFEFHwAcQFiFKsAoQDFAYwAyQGPAxAAoQBIA4wAqQB/ELAA2QFuEqsA
-mQB/EBAA4QFrAxAAoQBeErYAFACPA5oAcQG3C2gAqQCmEaYA8QF/EMQAqQCWEcoAqQAnDaYAqQBf
-B9EA4QF5CQYAoQB5CQYAqQB5CQYAuQBIEjwBAQJyEUIBCQJSDUgBEQJHC08BaQCWCyIAHAB/EAYA
-yQC5E1oByQCWC18BCQLAEWQBIQJ/EAYAGQJnEWkBKQJSDW8BIQJ1EnYBOQJxEHwB0QA+E08B2QBS
-DYEBHACPA5oA0QCeE4YB4QB5CQYAHABVE2gAJAB/EAYALAB/EAYANAB/EJ8BQQLoE6UBPAB/EJ8B
-QQKrEtoBQQJlEwACJABxEBUCRAA+EyQCTAB/EJ8BQQLTCDECQQIECE8CVAB/EJ8BQQLXEnICLACP
-A5oARACeE4YBXAB/EAYAXACPA5oAHABxEBUCZAA+EyQCcQHwDyIAbAB/EJ8BQQJZE58CZACeE4YB
-+QB/EKsCdAB/EJ8BcQGfC7kCcQF+Er8CcQF+EsUCAQF/EM0CUQLtC9UCUQLwDt0CUQKxCwYAAQLn
-EgEA+QB/EAYAEQF/EN0CYQJFCPsCYQJZEQQDfABxEBYDhAA+EyQCjAB/EJ8BcQG4DTgDeQKvCBAA
-eQKxCwYA+QDwE0kDuQB/EAYAYQIKFE4DQQF/EFQDYQF/EAYAQQKFE3ICGQFbC1wDCAAwAHUDCAAY
-AXoDCAAcAX8DIABjAH8DIQBjAH8DLgALAI0ELgATAJYELgAbALUELgAjAL4ELgArAOcELgAzAOcE
-LgA7AOcELgBDAL4ELgBLAO0ELgBTAOcELgBbAAQFQABjAH8DQQBjAH8DYABjAH8DYQBjAH8DgABj
-AH8DgQBjAH8DoABjAH8DoQBjAH8DwABjAH8DwQBjAH8D4ABjAH8D4QBjAH8D4wBrAH8DAAFjAH8D
-AQFjAH8DAwFzAH8DIAFjAH8DIQFjAH8DQAFjAH8DQQFjAH8DYAFjAH8DYQFjAH8DYwFjAH8DgAFj
-AH8DgwFjAH8DowFjAH8DwAFjAH8DwwFjAH8D4AFjAH8D4wFjAH8DAAJjAH8DAwJjAH8DIAJjAH8D
-QAJjAH8DYAJjAH8DgAJjAH8DoAJjAH8DoQJjAH8DwAJjAH8DwQJjAH8D4AJjAH8D4QJjAH8DAQNj
-AH8DIQNjAH8DQANjAH8DQQNjAH8DYANjAH8DYQNjAH8DgANjAH8DgQNjAH8DoANjAH8DoQNjAH8D
-wANjAH8DwQNjAH8D4ANjAH8D4QNjAH8DAARjAH8DAQRjAH8DIARjAH8DIQRjAH8DQARjAH8DQQRj
-AH8DYARjAH8DYQRjAH8DgARjAH8DgQRjAH8DoARjAH8DoQRjAH8DwARjAH8DwQRjAH8D4ARjAH8D
-4QRjAH8DAAVjAH8DAQVjAH8DIAVjAH8DIQVjAH8DQQVjAH8DYQVjAH8DgAVjAH8DgQVjAH8DoAVj
-AH8DoQVjAH8DwAVjAH8DwQVjAH8D4AVjAH8D4QVjAH8DAAZjAH8DAQZjAH8DIAZjAH8DIQZjAH8D
-QAZjAH8DQQZjAH8DYAZjAH8DYQZjAH8DgAZjAH8DgQZjAH8DoAZjAH8DoQZjAH8DwAZjAH8DwQZj
-AH8D4AZjAH8D4QZjAH8DAAdjAH8DAQdjAH8DIAdjAH8DIQdjAH8DKQd7ALUEQAdjAH8DQQdjAH8D
-SQd7ALUEYAdjAH8DYQdjAH8DgAdjAH8DgQdjAH8DoAdjAH8DoQdjAH8DwAdjAH8DwQdjAH8D4Adj
-AH8D4QdjAH8DAAhjAH8DAQhjAH8DIAhjAH8DIQhjAH8DQAhjAH8DYAhjAH8DgAhjAH8DgQhjAH8D
-oAhjAH8DwAhjAH8D4AhjAH8DAAljAH8DIAljAH8DQAljAH8DYAljAH8DgAljAH8DoAljAH8DwAlj
-AH8D4AljAH8DAApjAH8DIApjAH8DQApjAH8DYApjAH8DgApjAH8DoApjAH8DwApjAH8D4ApjAH8D
-IAtjAH8DQAtjAH8DYAtjAH8DgAtjAH8DoAtjAH8DwAtjAH8D4AtjAH8DAAxjAH8DIAxjAH8DQAxj
-AH8DYAxjAH8DgAxjAH8DoAxjAH8DwAxjAH8D4AxjAH8DAA1jAH8DIA1jAH8DQA1jAH8DYA1jAH8D
-gA1jAH8DoA1jAH8DwA1jAH8D4A1jAH8DAA5jAH8DIA5jAH8DQA5jAH8DYA5jAH8DgA5jAH8DoA5j
-AH8DwA5jAH8DHABsANcA5AICAAEAAwAHAAQADAAFABQABgAqAAgAOQAJADsAAAD7AWMEAAAkA2cE
-AAAoD2cEAADCD2cEAADyAmcEAAB9AmcEAADWB2cEAAB3B2cEAAA+EmcEAAAOEGcEAADeE2sEAAAp
-E2cEAADgAWcEAABXAmcEAACjEmcEAAAFFGcEAAAEDXMEAABuCGcEAACdD3cEAAAID2cEAAB4C2cE
-AACED2cEAADuDWcEAACIA2cEAACmCWcEAAD5B2cEAAC5AmcEAAAKA2cEAADUC2cEAACYDWcEAADW
-DWcEAABnD2cEAADUAmcEAAAfDWcEAAAkA2cEAAAoD2cEAADCD2cEAADyAmcEAAB9AmcEAAATAmcE
-AAA1AmcEAAAID2cEAAB4C2cEAACED2cEAADuDWcEAACIA2cEAACmCWcEAAD5B2cEAAC5AmcEAAAK
-A2cEAADUC2cEAACYDWcEAADWDWcEAABnD2cEAADUAmcEAAAfDWcEAADVD3wEAAANCYIEAADfEogE
-AgABAAMAAQACAAMAAgADAAUAAQAEAAUAAgAFAAcAAQAGAAcAAgAHAAkAAQAIAAkAAgAJAAsAAQAK
-AAsAAgALAA0AAQAMAA0AAgAOAA8AAQAPAA8AAgAQABEAAQARABEAAgASABMAAQATABMAAgAUABUA
-AQAVABUAAgAWABcAAQAXABcAAgAaABkAAQAbABkAAgAcABsAAQAdABsAAgAeAB0AAQAfAB0AAgAg
-AB8AAQAhAB8AAgAiACEAAQAjACEAAgAkACMAAQAlACMAAgAmACUAAQAnACUAAgAoACcAAQApACcA
-AgAsACkAAQAtACkAAgAuACsAAQAvACsAAgAwAC0AAQAxAC0AAgAyAC8AAQAzAC8AAgA0ADEAAQA1
-ADEAAgA2ADMAAQA3ADMAAgA4ADUAAQA5ADUAAgA6ADcAAQA7ADcAAgA8ADkAAQA9ADkAAgA+ADsA
-AQA/ADsAAgBAAD0AAQBBAD0AAgBCAD8AAQBDAD8AAgBEAEEAAQBFAEEAAgBGAEMAAQBHAEMAAgBI
-AEUAAQBJAEUAAgBKAEcAAQBLAEcAAgBMAEkAAQBNAEkAAgBOAEsAAQBPAEsAAgBQAE0AAQBRAE0A
-AgBSAE8AAQBTAE8AAgBUAFEAAQBVAFEAAgBWAFMAAQBXAFMAAgBZAFUAAQBaAFUAAgBbAFcAAQBc
-AFcAAgBdAFkAAQBeAFkAAgBfAFsAAQBgAFsAAgBhAF0AAQBiAF0AAgBjAF8AAQBkAF8AAgBlAGEA
-AQBmAGEAAgBnAGMAAQBoAGMAAgBpAGUAAQBqAGUAAgBrAGcAAQBsAGcAAgBtAGkAAQBuAGkAAgBv
-AGsAAQBwAGsAAgBxAG0AAQByAG0AAgBzAG8AAQB0AG8AAgB1AHEAAQB2AHEAAgB8AHMAAgB9AHUA
-AQB+AHUAAgB/AHcAkgC8AFMBigGQAZcBzAEeAikCYgKEAosCkgKxAg4DIAMoAwSAAAABAAAAqx64
-egAAAAAAAFgBAAAEAAAAAAAAAAAAAABjAzsDAAAAAAQAAAAAAAAAAAAAAGMDLwMAAAAABAAAAAAA
-AAAAAAAAYwNgDQAAAAAMAAAAAAAAAAAAAABsA/ILAAAAAAQAAAAAAAAAAAAAAGMD2QgAAAAADAAA
-AAAAAAAAAAAAbAOEAgAAAAAAAAAAAQAAANgQAAAKAAcACwAHAAwABwANAAcADgAHAA8ABwAQAAcA
-twDGAbsA9AG9ABECxQBKAscASgK7AGsCywB/Ar0ASgLFAJoC3QCaAsUAfwK7ADEDAwFFAxMBSgIA
-AAAAADw+OV9fMF8wADxNYWluPmJfXzBfMAA8PmNfX0Rpc3BsYXlDbGFzczBfMAA8PmNfX0Rpc3Bs
-YXlDbGFzczFfMAA8V3JpdGVDc3ZUb01lbW9yeT5iX18wADw+OV9fMF8xADxNYWluPmJfXzBfMQA8
-PmNfX0Rpc3BsYXlDbGFzczBfMQBOdWxsYWJsZWAxAElFbnVtZXJhYmxlYDEAQ29sbGVjdGlvbmAx
-AElFbnVtZXJhdG9yYDEATGlzdGAxAEludDMyADw+Y19fRGlzcGxheUNsYXNzMF8yADxNYWluPmJf
-XzIARnVuY2AyAElHcm91cGluZ2AyAFNUX2I1YzIxMzkyZGJjNTQwYWZhODVmODQ5MDIwZWZlMGQy
-ADw+Y19fRGlzcGxheUNsYXNzMF8zADw+OV9fMwA8TWFpbj5iX18zADxNYWluPmJfXzQAPE1haW4+
-Yl9fNQBTVF9lODUxZmNmZWRmMjI0ODE1ODA4MDc4NzNjNzczYTI2NgA8PjlfXzYAPE1haW4+Yl9f
-NgA8PjlfXzcAPE1haW4+Yl9fNwA8PjlfXzgAPE1haW4+Yl9fOAA8PjkAPE1vZHVsZT4ASURDSUEA
-Z2V0X0NDAGdldF9SZWNpcGllbnRDQwBzZXRfUmVjaXBpZW50Q0MARUlEAGdldF9JRABzZXRfSUQA
-Z2V0X1RfRVhfRE9CX1NFTQBzZXRfVF9FWF9ET0JfU0VNAGdldF9UX0VYVFJBX0VYRU4Ac2V0X1Rf
-RVhUUkFfRVhFTgBnZXRfUmVjaXBpZW50Q0NPAHNldF9SZWNpcGllbnRDQ08AU3lzdGVtLklPAGdl
-dF9JRF9SRVAAc2V0X0lEX1JFUABNaWNyb3NvZnQuU3FsU2VydmVyLk1hbmFnZWREVFMAdmFsdWVf
-XwBnZXRfRmVjaGEAc2V0X0ZlY2hhAGdldF9Db25zZWN1ZW5jaWEAc2V0X0NvbnNlY3VlbmNpYQBn
-ZXRfQ29tcGFuaWEAc2V0X0NvbXBhbmlhAGdldF9TZW1hbmEAc2V0X1NlbWFuYQBnZXRfSURfRW1w
-cmVzYQBzZXRfSURfRW1wcmVzYQBTeXN0ZW0uRGF0YQBtc2NvcmxpYgA8PmMAZ2V0X0JjYwBTeXN0
-ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYwBzZXRfQ29udGVudElkAGdldF9VbmlkYWQAc2V0X1VuaWRh
-ZABBZGQAPFJlY2lwaWVudENDPmtfX0JhY2tpbmdGaWVsZAA8SUQ+a19fQmFja2luZ0ZpZWxkADxU
-X0VYX0RPQl9TRU0+a19fQmFja2luZ0ZpZWxkADxUX0VYVFJBX0VYRU4+a19fQmFja2luZ0ZpZWxk
-ADxSZWNpcGllbnRDQ08+a19fQmFja2luZ0ZpZWxkADxJRF9SRVA+a19fQmFja2luZ0ZpZWxkADxG
-ZWNoYT5rX19CYWNraW5nRmllbGQAPENvbnNlY3VlbmNpYT5rX19CYWNraW5nRmllbGQAPENvbXBh
-bmlhPmtfX0JhY2tpbmdGaWVsZAA8U2VtYW5hPmtfX0JhY2tpbmdGaWVsZAA8SURfRW1wcmVzYT5r
-X19CYWNraW5nRmllbGQAPFVuaWRhZD5rX19CYWNraW5nRmllbGQAPFN0YWNrVHJhY2U+a19fQmFj
-a2luZ0ZpZWxkADxMb2dFcnJvck1lc3NhZ2U+a19fQmFja2luZ0ZpZWxkADxQb3JjZW50YWplPmtf
-X0JhY2tpbmdGaWVsZAA8QXR0YWNobWVudEZpbGU+a19fQmFja2luZ0ZpZWxkADxJbXBvcnRlPmtf
-X0JhY2tpbmdGaWVsZAA8UmVnPmtfX0JhY2tpbmdGaWVsZAA8RmVjaGFfSW5pPmtfX0JhY2tpbmdG
-aWVsZAA8SXNCb2R5SHRtbD5rX19CYWNraW5nRmllbGQAPENvbnRyb2w+a19fQmFja2luZ0ZpZWxk
-ADxGZWNoYV9GaW4+a19fQmFja2luZ0ZpZWxkADxEdXJhY2lvbj5rX19CYWNraW5nRmllbGQAPEFj
-Y2lvbj5rX19CYWNraW5nRmllbGQAPEVtcGxlYWRvPmtfX0JhY2tpbmdGaWVsZAA8Q0lBX0lEUmVw
-b3J0ZW8+a19fQmFja2luZ0ZpZWxkADxGb2xpbz5rX19CYWNraW5nRmllbGQAPENvbmNlcHRvPmtf
-X0JhY2tpbmdGaWVsZAA8YXJjaGl2bz5rX19CYWNraW5nRmllbGQAPEZvbGRlcj5rX19CYWNraW5n
-RmllbGQAPEJyb3dzZXI+a19fQmFja2luZ0ZpZWxkADxJcEFkZHJlc3M+a19fQmFja2luZ0ZpZWxk
-ADxTdWJqZWN0PmtfX0JhY2tpbmdGaWVsZAA8UmVjaXBpZW50PmtfX0JhY2tpbmdGaWVsZAA8Q3Jl
-YXRlZEJ5PmtfX0JhY2tpbmdGaWVsZAA8Qm9keT5rX19CYWNraW5nRmllbGQARGJDb21tYW5kAFNx
-bENvbW1hbmQAU2VuZABnZXRfU3RhY2tUcmFjZQBzZXRfU3RhY2tUcmFjZQBkZWZhdWx0SW5zdGFu
-Y2UAZ2V0X1NvdXJjZQBGaWxlTW9kZQBnZXRfTWVzc2FnZQBNYWlsTWVzc2FnZQBnZXRfTG9nRXJy
-b3JNZXNzYWdlAHNldF9Mb2dFcnJvck1lc3NhZ2UAZ2V0X1BvcmNlbnRhamUAc2V0X1BvcmNlbnRh
-amUAVGFrZQBEYXRhVGFibGUAVmFyaWFibGUARW51bWVyYWJsZQBJRGlzcG9zYWJsZQBSdW50aW1l
-VHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBnZXRfQXR0YWNobWVudEZpbGUAc2V0X0F0dGFj
-aG1lbnRGaWxlAGdldF9OYW1lAERhdGVUaW1lAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlJ1bnRp
-bWUAV3JpdGVMaW5lAFNxbERiVHlwZQBzZXRfQ29tbWFuZFR5cGUAV2hlcmUAU3lzdGVtLkNvcmUA
-RmFpbHVyZQBnZXRfQ3VsdHVyZQBzZXRfQ3VsdHVyZQByZXNvdXJjZUN1bHR1cmUAVlNUQVJUU2Ny
-aXB0T2JqZWN0TW9kZWxCYXNlAEludGVybmFsRGF0YUNvbGxlY3Rpb25CYXNlAEFwcGxpY2F0aW9u
-U2V0dGluZ3NCYXNlAEF0dGFjaG1lbnRCYXNlAENsb3NlAERpc3Bvc2UARWRpdG9yQnJvd3NhYmxl
-U3RhdGUAZ2V0X0ltcG9ydGUAc2V0X0ltcG9ydGUAQ29tcGlsZXJHZW5lcmF0ZWRBdHRyaWJ1dGUA
-RGVidWdnZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0cmlidXRlAEVkaXRvckJy
-b3dzYWJsZUF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJr
-QXR0cmlidXRlAFRhcmdldEZyYW1ld29ya0F0dHJpYnV0ZQBBc3NlbWJseUNvbmZpZ3VyYXRpb25B
-dHRyaWJ1dGUAQXNzZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBDb21waWxhdGlvblJlbGF4YXRp
-b25zQXR0cmlidXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvcHlyaWdodEF0
-dHJpYnV0ZQBTU0lTU2NyaXB0VGFza0VudHJ5UG9pbnRBdHRyaWJ1dGUAQXNzZW1ibHlDb21wYW55
-QXR0cmlidXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAGdldF9WYWx1ZQBzZXRfVmFs
-dWUAR2V0VmFsdWUAdmFsdWUAZgBnZXRfUmVnAHNldF9SZWcAU3lzdGVtLlJ1bnRpbWUuVmVyc2lv
-bmluZwBUb1N0cmluZwBTdWJzdHJpbmcAdGVzdGluZwBGbHVzaABnZXRfTGVuZ3RoAGdldF9GZWNo
-YV9JbmkAc2V0X0ZlY2hhX0luaQBSYWZUb29sT2JqAG9iagBTZWVrAE1pY3Jvc29mdC5TcWxTZXJ2
-ZXIuU2NyaXB0VGFzawBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5UYXNrcy5TY3JpcHRUYXNrAE5l
-dHdvcmtDcmVkZW50aWFsAFN5c3RlbS5TZWN1cml0eS5QcmluY2lwYWwAU3lzdGVtLkNvbGxlY3Rp
-b25zLk9iamVjdE1vZGVsAFNjcmlwdE9iamVjdE1vZGVsAFN5c3RlbS5Db21wb25lbnRNb2RlbABT
-eXN0ZW0uTmV0Lk1haWwAdGVzdGluZ01haWwAU1RfZTg1MWZjZmVkZjIyNDgxNTgwODA3ODczYzc3
-M2EyNjYuZGxsAGdldF9Jc0JvZHlIdG1sAHNldF9Jc0JvZHlIdG1sAGdldF9Db250cm9sAHNldF9D
-b250cm9sAHNldF9FbmFibGVTc2wAX3NzbABGaWxlU3RyZWFtAE1lbW9yeVN0cmVhbQBnZXRfSXRl
-bQBpdGVtAFN5c3RlbQBzZXRfRnJvbQBFbnVtAHJlc291cmNlTWFuAE9wZW4AZ2V0X0ZlY2hhX0Zp
-bgBzZXRfRmVjaGFfRmluAFNjcmlwdE1haW4AU2Vla09yaWdpbgBKb2luAG51bWVyaW4AZ2V0X0R1
-cmFjaW9uAHNldF9EdXJhY2lvbgBnZXRfQWNjaW9uAHNldF9BY2Npb24AU3lzdGVtLkNvbmZpZ3Vy
-YXRpb24AU3lzdGVtLkdsb2JhbGl6YXRpb24AU3lzdGVtLlJlZmxlY3Rpb24ARGF0YVRhYmxlQ29s
-bGVjdGlvbgBTcWxQYXJhbWV0ZXJDb2xsZWN0aW9uAE1haWxBZGRyZXNzQ29sbGVjdGlvbgBBdHRh
-Y2htZW50Q29sbGVjdGlvbgBEYXRhUm93Q29sbGVjdGlvbgBzZXRfQ29ubmVjdGlvbgBEYkNvbm5l
-Y3Rpb24AU3FsQ29ubmVjdGlvbgBnZXRfSW5uZXJFeGNlcHRpb24AU3lzdGVtLkRhdGEuQ29tbW9u
-AGdldF9UbwBDb3B5VG8AZ2V0X0VtcGxlYWRvAHNldF9FbXBsZWFkbwBnZXRfQ0lBX0lEUmVwb3J0
-ZW8Ac2V0X0NJQV9JRFJlcG9ydGVvAEN1bHR1cmVJbmZvAEJvbm9JbmZvAFByb3BlcnR5SW5mbwBn
-ZXRfRm9saW8Ac2V0X0ZvbGlvAG1vcnJvAGdldF9Db25jZXB0bwBzZXRfQ29uY2VwdG8AZ2V0X2Fy
-Y2hpdm8Ac2V0X2FyY2hpdm8AcABTeXN0ZW0uTGlucQBnZXRfRm9sZGVyAHNldF9Gb2xkZXIAX3Nl
-bmRlcgBnZXRfUmVzb3VyY2VNYW5hZ2VyAE1haWxIZWxwZXIAVG9VcHBlcgBfdXNlcgBnZXRfQnJv
-d3NlcgBzZXRfQnJvd3NlcgBEYlBhcmFtZXRlcgBTcWxQYXJhbWV0ZXIAU3RyZWFtV3JpdGVyAFRl
-eHRXcml0ZXIAY29udGFkb3IAUmVjb3JkRXJyb3IATG9nRXJyb3IASUVudW1lcmF0b3IAR2V0RW51
-bWVyYXRvcgAuY3RvcgAuY2N0b3IAU3lzdGVtLkRpYWdub3N0aWNzAHJlY29yZHMAU3lzdGVtLlJ1
-bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3VyY2VzAFNUX2I1YzIxMzkyZGJjNTQw
-YWZhODVmODQ5MDIwZWZlMGQyLlByb3BlcnRpZXMuUmVzb3VyY2VzLnJlc291cmNlcwBEZWJ1Z2dp
-bmdNb2RlcwBTVF9iNWMyMTM5MmRiYzU0MGFmYTg1Zjg0OTAyMGVmZTBkMi5Qcm9wZXJ0aWVzAEdl
-dFByb3BlcnRpZXMAZ2V0X1RhYmxlcwBnZXRfVmFyaWFibGVzAEJpbmRpbmdGbGFncwBTZXR0aW5n
-cwBzZXRfQ3JlZGVudGlhbHMAc2V0X1VzZURlZmF1bHRDcmVkZW50aWFscwBDb250YWlucwBTeXN0
-ZW0uQ29sbGVjdGlvbnMAY29ubmVjdGlvbnMAU3RyaW5nU3BsaXRPcHRpb25zAE5NQm9ub3MAZ2V0
-X1BhcmFtZXRlcnMAX3Bhc3MAU3VjY2VzcwBNYWlsQWRkcmVzcwBnZXRfSXBBZGRyZXNzAHNldF9J
-cEFkZHJlc3MAZ2V0X0R0cwBTY3JpcHRSZXN1bHRzAGdldF9BdHRhY2htZW50cwBFeGlzdHMAZ2V0
-X1Jvd3MAQ29uY2F0AEZvcm1hdABPYmplY3QAZ2V0X1N1YmplY3QAc2V0X1N1YmplY3QAU2VsZWN0
-AFN5c3RlbS5OZXQARGF0YVNldABTcGxpdABnZXRfRGVmYXVsdABTaW5nbGVPckRlZmF1bHQAc2V0
-X1Rhc2tSZXN1bHQAU3lzdGVtLkRhdGEuU3FsQ2xpZW50AFNtdHBDbGllbnQAZ2V0X1JlY2lwaWVu
-dABzZXRfUmVjaXBpZW50AEF0dGFjaG1lbnQAZ2V0X0N1cnJlbnQAR2V0Q3VycmVudABnZXRfQ291
-bnQAX3BvcnQAVG9MaXN0AElDcmVkZW50aWFsc0J5SG9zdABfaG9zdABGaXJzdABzZXRfQ29tbWFu
-ZFRpbWVvdXQATW92ZU5leHQAc2V0X0NvbW1hbmRUZXh0AHYAZ2V0X05vdwBEYXRhUm93AGV4AGdl
-dF9DcmVhdGVkQnkAc2V0X0NyZWF0ZWRCeQBHcm91cEJ5AFRvQXJyYXkAZ2V0X0JvZHkAc2V0X0Jv
-ZHkAZ2V0X0Fzc2VtYmx5AEV4ZWN1dGVOb25RdWVyeQBXcml0ZUNzdlRvTWVtb3J5AG9wX0VxdWFs
-aXR5AG9wX0luZXF1YWxpdHkAV2luZG93c0lkZW50aXR5AElzTnVsbE9yRW1wdHkAAF1bAEUAeABl
-AGMAVQBzAGUAcgA6AHsAMgB9AF0AOgBfADoAWwBlAHgALgBNAHMAZwA6ACAAewAwAH0AXQA6AF8A
-OgBbAGUAeAAuAFMAcgBjADoAIAB7ADEAfQBdAAAhOgBfADoAWwB7ADAAfQBdADoAXwA6AFsAewAx
-AH0AXQAAIzYAMAAxAC4AQwBhAHQATABvAGcARQByAHIAbwByAFMAaQAAIUAATABvAGcARQByAHIA
-bwByAE0AZQBzAHMAYQBnAGUAABdAAFMAdABhAGMAawBUAHIAYQBjAGUAABVAAEkAcABBAGQAZABy
-AGUAcwBzAAAVQQB0AHUAbwBtAGEAdABpAGMAbwAAEUAAQgByAG8AdwBzAGUAcgAACVMAUwBJAFMA
-ABVAAEMAcgBlAGEAdABlAGQAQgB5AAAVMQAwAC4ANgAuADUALgAyADQAMAAAN1IAQQBGAFQAbwBv
-AGwAQAB0AGUAbABlAHAAZQByAGYAbwByAG0AYQBuAGMAZQAuAGMAbwBtAAABAAMwAABFagBhAHYA
-aQBlAHIALgByAGEAeQBnAG8AegBhAEAAdABlAGwAZQBwAGUAcgBmAG8AcgBtAGEAbgBjAGUALgBj
-AG8AbQAAAzEAAAM7AAAPaQBtAGEAZwBlAG4AcwAAIVUAcwBlAHIAOgA6AEMAbwBuAGUAeABpAG8A
-bgBCAEQAABlVAHMAZQByADoAOgBVAG4AaQBkAGEAZAAAH1UAcwBlAHIAOgA6AEUAeAB0AGUAbgBz
-AGkAbwBuAAAjVQBzAGUAcgA6ADoAVABpAHAAbwBQAGUAcgBpAG8AZABvAAAReQB5AHkAeQBNAE0A
-ZABkAAAhVQBzAGUAcgA6ADoAVABhAGIAbABhAEIAbwBuAG8AcwAAC1QAYQBiAGwAZQAAEUUAbQBw
-AGwAZQBhAGQAbwAAB1IAZQBnAAARQwBvAG4AYwBlAHAAdABvAAANQQBjAGMAaQBvAG4AAA1VAG4A
-aQBkAGEAZAAAD0kAbQBwAG8AcgB0AGUAABVQAG8AcgBjAGUAbgB0AGEAagBlAAALRgBlAGMAaABh
-AAANUwBlAG0AYQBuAGEAABNGAGUAYwBoAGEAXwBJAG4AaQAAE0YAZQBjAGgAYQBfAEYAaQBuAAAR
-RAB1AHIAYQBjAGkAbwBuAAALRgBvAGwAaQBvAAAZQwBvAG4AcwBlAGMAdQBlAG4AYwBpAGEAAA9D
-AG8AbgB0AHIAbwBsAAAVSQBEAF8ARQBtAHAAcgBlAHMAYQAAHUMASQBBAF8ASQBEAFIAZQBwAG8A
-cgB0AGUAbwAADUYAbwBsAGQAZQByAAARQwBvAG0AcABhAG4AaQBhAAANSQBEAF8AUgBFAFAAABlU
-AF8ARQBYAF8ARABPAEIAXwBTAEUATQAAGVQAXwBFAFgAVABSAEEAXwBFAFgARQBOAAARRQBNAFAA
-TABFAEEARABPAAAHUgBFAEcAABFDAE8ATgBDAEUAUABUAE8AAA1BAEMAQwBJAE8ATgAADVUATgBJ
-AEQAQQBEAAAPSQBNAFAATwBSAFQARQAAFVAATwBSAEMARQBOAFQAQQBKAEUAAAtGAEUAQwBIAEEA
-AA1TAEUATQBBAE4AQQAAE0YARQBDAEgAQQBfAEkATgBJAAATRgBFAEMASABBAF8ARgBJAE4AABFE
-AFUAUgBBAEMASQBPAE4AAAtGAE8ATABJAE8AABlDAE8ATgBTAEUAQwBVAEUATgBDAEkAQQAAD0MA
-TwBOAFQAUgBPAEwAAAMyAAARVABQAF8ASQBOAEMASQBEAAADTgAAB0EATABMAAAHRQBMAE8AAAdB
-AEcARQAAB0kATQBBAAADXwAAAy8AAAMsAABxUwBUAF8AYgA1AGMAMgAxADMAOQAyAGQAYgBjADUA
-NAAwAGEAZgBhADgANQBmADgANAA5ADAAMgAwAGUAZgBlADAAZAAyAC4AUAByAG8AcABlAHIAdABp
-AGUAcwAuAFIAZQBzAG8AdQByAGMAZQBzAAAZVAAgAEUAWAAgAEQATwBCACAAUwBFAE0AAABDbi/A
-ksvQS7N49vF2xawhAAQgAQEIAyAAAQUgAQEREQQgAQEOBiABARGAqQUHAg4SRQMgAA4FAAASgLUH
-AAQODhwcHAQgABJBBgADDg4cHAUAAg4ODgYgAQERgMUFIAASgMkJIAISgM0OEYDRBCABARwFIAEB
-EkUDIAAIDwcJEk0SURJVHQ4IDg4ODgUAAgIODgkgAh0OHQ4RgOEFIAASgOUHFRKA6QESSQUgAQET
-AAUgAQESSQQgAQECBAABAg4FIAIBDggFIAASgPUHFRKA6QESTQUgAgEODgYgAQESgP0FIAEBElFk
-BygODg4OEiwVEmEBEhQOEWUSaRJtEhQScRUSYQEOFRJhARIIFRF1AQ4SMBIIFRJ5AhIUEggIEjQV
-EmEBEhgSGBJ9FRF1ARIUEjgOEhgSGA4ODg4ODg4ODhUSeQISCAISgIESQQUgABKBAQUgABKBBQYg
-ARKBCRwDIAAcBhUSYQESFAQAABFlBCABDg4EIAECHAUgABKBFQYgARKBEQ4FIAASgRkEIAASaQQg
-ARwOAyAAAgUVEmEBDgYVEmEBEggHFRJ5AhIUDgUgAgEcGCAQAgIVEoCFARUSgJkCHgEeABUSgIUB
-HgAVEnkCHgAeAQUKAhIUDg0VEnkCFRKAmQIOEhQOGRACAhUSgIUBHgEVEoCFAR4AFRJ5Ah4AHgEL
-CgIVEoCZAg4SFA4QEAEBFRJhAR4AFRKAhQEeAAMKAQ4IIAAVEXUBEwAFFRF1AQ4EIAATAAcVEnkC
-EhQCGBABAhUSgIUBHgAVEoCFAR4AFRJ5Ah4AAgQKARIUEhABAhUSgIUBHgAVEoCFAR4ACAgVEnkC
-EhQSCAYKAhIUEggMEAEBHgAVEoCFAR4ABAoBEggGFRJhARIYBhURdQESFAcVEnkCEhgCBAoBEhgL
-EAEBCBUSgIUBHgAFIAEBHQUHFRJ5AhIIAgUgAg4ICAUAAQ4dDgcABA4ODg4OByACAQ4RgSUHIAIK
-ChGBLQYgAQESgSkWBwYSfRKAiR0SgI0VEoCRARIYEkAdBQgAARKBMRGBNQkgAR0SgI0RgTkHFRKA
-hQESGAkgABUSgJEBEwAHFRKAkQESGAgVEnkCEoCNHAYKAhKAjRwMEAECDg4VEoCFAR4AAwoBHAQg
-AB0FBSAAEoFBByACAQ4SgUEGIAIcHB0cCLd6XFYZNOCJCImEXc2AgMyRBCC/AgAEAAAAAAQBAAAA
-AgYIAgYOBgYVET0BCAIGAgMGEkkDBhJNBAYSgKEEBhKApQMGEiQDBhEoCQYVEnkCEhQSCAgGFRJ5
-AhIIAgMGEhQDBhI8CAYVEnkCEhQODgYVEnkCFRKAmQIOEhQOAwYSGAcgABURPQEICCABARURPQEI
-ByADARJBCA4EIAASTQUgAQESTQsgAR0FFRKAhQESGAUAABKAoQUAABKApQYAAQESgKUEAAASJAMA
-AAEGIAESCBIUBSABAhIIBSABAhIUBSABAhIYBSABDhIUCyABDhUSgJkCDhIUBiABHBKAjQMoAAgD
-KAAOBygAFRE9AQgDKAACBCgAEk0FCAASgKEFCAASgKUECAASJAgBAAgAAAAAAB4BAAEAVAIWV3Jh
-cE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAjU1RfYjVjMjEzOTJkYmM1NDBhZmE4NWY4
-NDkwMjBlZmUwZDIAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAgMjAxOAAARwEAGi5ORVRGcmFtZXdv
-cmssVmVyc2lvbj12NC4wAQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFtZRAuTkVUIEZyYW1ld29yayA0
-tAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVhZGVyLCBtc2Nvcmxp
-YiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1
-YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAA
-AABQQURQQURQtAAAAJhyAAAAAAAAAAAAALJyAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkcgAA
-AAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAA
-ADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABYgAAAGgQAAAAAAAAAAAAAGgQ0AAAAVgBTAF8A
-VgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E7/4AAAEAAAABALh6qx4AAAEAuHqrHj8AAAAA
-AAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQA
-BAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAAAACwBHoDAAABAFMAdAByAGkAbgBnAEYAaQBs
-AGUASQBuAGYAbwAAAFYDAAABADAAMAAwADAAMAA0AGIAMAAAABoAAQABAEMAbwBtAG0AZQBuAHQA
-cwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEAbgB5AE4AYQBtAGUAAAAAAAAAAABwACQAAQBGAGkAbABl
-AEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBUAF8AYgA1AGMAMgAxADMAOQAyAGQAYgBjADUA
-NAAwAGEAZgBhADgANQBmADgANAA5ADAAMgAwAGUAZgBlADAAZAAyAAAAPgAPAAEARgBpAGwAZQBW
-AGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAuADcAOAA1ADEALgAzADEANAAxADYAAAAAAHAAKAABAEkA
-bgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBUAF8AZQA4ADUAMQBmAGMAZgBlAGQAZgAyADIANAA4
-ADEANQA4ADAAOAAwADcAOAA3ADMAYwA3ADcAMwBhADIANgA2AC4AZABsAGwAAABIABIAAQBMAGUA
-ZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABDAG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAx
-ADgAAAAqAAEAAQBMAGUAZwBhAGwAVAByAGEAZABlAG0AYQByAGsAcwAAAAAAAAAAAHgAKAABAE8A
-cgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABTAFQAXwBlADgANQAxAGYAYwBmAGUAZABm
-ADIAMgA0ADgAMQA1ADgAMAA4ADAANwA4ADcAMwBjADcANwAzAGEAMgA2ADYALgBkAGwAbAAAAGgA
-JAABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAAAAAAUwBUAF8AYgA1AGMAMgAxADMAOQAyAGQAYgBj
-ADUANAAwAGEAZgBhADgANQBmADgANAA5ADAAMgAwAGUAZgBlADAAZAAyAAAAQgAPAAEAUAByAG8A
-ZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA3ADgANQAxAC4AMwAxADQAMQA2AAAAAABG
-AA8AAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA3ADgANQAxAC4A
-MwAxADQAMQA2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAQqIgIDfTcAAAQqHgJ7OAAABCoiAgN9OAAABCoeAns5AAAEKiICA305AAAEKgAAABswBQBDBQAA
+AwAAEQIoRAAACm9FAAAKcu8BAHBvRgAACm9HAAAKb0gAAAoKAihEAAAKb0UAAApyEQIAcG9GAAAK
+b0cAAApvSAAACgsCKEQAAApvRQAACnIrAgBwb0YAAApvRwAACm9IAAAKDAIoRAAACm9FAAAKcksC
+AHBvRgAACm9HAAAKb0gAAAoNc0kAAAoTBChKAAAKEwYSBnJzAgBwKEsAAAomFxMFAihEAAAKb0UA
+AApyhQIAcG9MAAAKOWoEAAACKEQAAApvRQAACnKFAgBwb0YAAApvRwAACnRCAAABc00AAAomb04A
+AApypwIAcG9PAAAKb1AAAApvUQAAChMHONEAAAARB29SAAAKdEcAAAEmc0oAAAYTCBEIcrMCAHBv
+LQAABhEIctcCAHBvLwAABhEIcvUCAHBvMQAABhEIcgMDAHBvMwAABhEIcg0DAHBvNQAABhEIchsD
+AHBvNwAABhEIcikDAHBvOQAABhEIcjkDAHBvOwAABhEIckUDAHBvPQAABhEIcn8DAHBvPwAABhEI
+csUDAHBvQQAABhEIcgcEAHBvQwAABhEIch8EAHBvRQAABhEIcjMEAHBvRwAABhEIckEEAHBvSQAA
+BhEEEQhvUwAAChEHb1QAAAo6I////94VEQd1GwAAARMJEQksBxEJb1UAAArcEQRvVgAAChY+JAMA
+AHNXAAAKJnNYAAAKJhEEfkIAAAQlLRcmfkEAAAT+BnYAAAZzWQAACiWAQgAABCgBAAArfkMAAAQl
+LRcmfkEAAAT+BncAAAZzWwAACiWAQwAABCgCAAArKAMAACtvXgAAChMKOKECAABzcgAABhMLEQsS
+CihfAAAKfUAAAARzSQAACiZzYAAAChMMc2cAAAYTDRENcrMCAHBvTAAABhENctcCAHBvTgAABhEN
+cvUCAHBvUAAABhENcgMDAHBvUgAABhENcg0DAHBvVAAABhENchsDAHBvVgAABhENcikDAHBvWAAA
+BhENcjkDAHBvWgAABhENckUDAHBvXAAABhENcn8DAHBvXgAABhENcsUDAHBvYAAABhENcgcEAHBv
+YgAABhENch8EAHBvZAAABhENcjMEAHBvZgAABhEMEQ1vYQAAChEEEQv+BnMAAAZzYgAACigEAAAr
+KAUAACtvZAAAChMPOOcAAAASDyhlAAAKExBzZwAABhMREREREG8sAAAGb0wAAAYREREQby4AAAZv
+TgAABhERERBvMAAABm9IAAAKb1AAAAYREREQbzIAAAZvUgAABhERERBvNAAABm9UAAAGEREREG82
+AAAGb1YAAAYREREQbzgAAAZvWAAABhERERBvOgAABm9aAAAGEREREG88AAAGb1wAAAYREREQbz4A
+AAZvXgAABhERERBvQAAABm9gAAAGEREREG9CAAAGb2IAAAYREREQb0QAAAZvSAAACm9kAAAGERER
+EG9GAAAGb2YAAAYRDBERb2EAAAoSDyhmAAAKOg3////eDhIP/hYLAAAbb1UAAArcAhEMKGkAAAZz
+ZwAAChMOEQRvVgAAChY+gwAAAHJRBABwcncEAHAJFhpvaAAACihpAAAKExJymQQAcAkIEQt7QAAA
+BCgVAAAKExMREnK1BABwERMoagAACiYHERJyuQQAcBETKGoAAAoYc2sAAAoTFBEFF1gTBREOFmoW
+b2wAAAomEQ4RFG9tAAAKERRvbgAACt4MERQsBxEUb1UAAArcEgoobwAACjpT/f//3g4SCv4WCAAA
+G29VAAAK3N4SExVzGQAABhEVFwZvGAAABt4AAihEAAAKFm9wAAAKKgBBfAAAAgAAAPgAAADkAAAA
+3AEAABUAAAAAAAAAAgAAAF8DAAD6AAAAWQQAAA4AAAAAAAAAAgAAANcEAAAjAAAA+gQAAAwAAAAA
+AAAAAgAAAGACAAC0AgAAFAUAAA4AAAAAAAAAAAAAAIAAAACkBAAAJAUAABIAAAAQAAABGzAFAJoA
+AAAEAAARc3EAAAoKBnNyAAAKC9AGAAACKHMAAAofFG90AAAKDANvdQAACg0rN3N4AAAGEwQRBAlv
+dgAACn1EAAAEB3K9BABwCBEE/gZ5AAAGc3cAAAooBgAAKygHAAArb3kAAAoJb1QAAAotwd4KCSwG
+CW9VAAAK3AdvegAACgZvewAAChMF3hQHLAYHb1UAAArcBiwGBm9VAAAK3BEFKgAAASgAAAIAJgBD
+aQAKAAAAAAIADQB2gwAKAAAAAAIABgCHjQAKAAAAAB4CKHwAAAoqrn46AAAELR5ywQQAcNAIAAAC
+KHMAAApvfQAACnN+AAAKgDoAAAR+OgAABCoafjsAAAQqHgKAOwAABCoafjwAAAQqHgIofwAACiou
+c3AAAAaAPAAABCpKA29IAAAGAntAAAAEKCgAAAoqLnN1AAAGgEEAAAQqHgNvSAAABioyAygIAAAr
+b0gAAAYqOgMCe0QAAAQUb4EAAAoqAAAAQlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkAAAAABQBs
+AAAAEBgAACN+AAB8GAAAGBQAACNTdHJpbmdzAAAAAJQsAAA0BQAAI1VTAMgxAAAQAAAAI0dVSUQA
+AADYMQAApAQAACNCbG9iAAAAAAAAAAIAAAFXHaIJCQsAAAD6ATMAFgAAAQAAAFAAAAANAAAARAAA
+AHkAAAA5AAAAgQAAAAMAAACjAAAABAAAAAcAAAAzAAAAZAAAAA4AAAABAAAABgAAAAEAAAAEAAAA
+CAAAAAAATAwBAAAAAAAGADkK4w8GAMgK4w8GAIUJyA8PAFcQAAAGALIJVg0GABwKVg0GAP0JVg0G
+AK8KVg0GAFkKVg0GAHIKVg0GAMkJVg0GAOQJCQsGAMgRywwGAE0J4w8GAG4AywwGAE0OywwKAOwN
+IhIOAFwRGgwOAF8SGgwOACIHGgwOADgSGgwSAI0KfgsSAMwIfgsGAKIAbQIGABUIywwGAKEPBREG
+AHQHywxjALAPAAAGALAMtQEGAKUMtQEGAHkAbQIGAGAPtQEGALMOVg0GAJQAbQIGANsMywwGALoA
+ywwWAMEA4A4GAGgJyA8GAA4PAxAGAJ4OQQ0OADgJBAwOAJkJBAwOAAMJLA0GAPgTuQsGACULywwK
+AJ4GIhIKAJQGVw4KAGgITAIKAHwNIhIKAFMPIhIKAFoITAIKAEcPVw4GAKkAywwKAN8NVw4GACQR
+ywwOAJMNGgwGAIcA0wsGAMUHtQEOABsJGgwOAKkNGgwOAKcL7hEOABQT7hESAPILfgsaALIQHgga
+AGAHHggKAPkRTAIKAFYHTAIKAGgNTAIKAL4NTAIKAOgITAIKAGcTTAIWAGkH4A4GAA0HtQEGALYM
+tQEGAPwMtQEGAG8IywwGAIAHywwGALwQVg0GAG0PtQEGALQTVg0AAAAAGQEAAAAAAQABAAEAEACq
+Ds0ANQABAAEAAAAQAJgPzQA1AAcADgAAABAAHg/NADUADAAaAAEAEAA3Ec0ANQAdACwAAQAQAE8L
+zQA1ACwASwABABAA8QzNAF0AOgBoAAAAEAAKEGYQNQA6AGsAAAEQAMkQZhCtADwAbwADAQAAjBEA
+AI0APQByAAMBEAAXAAAANQBAAHIAAyEQAGECAAA1AEEAdAADARAALAAAADUARAB4AAEA4wIFAwEA
+kwMIAwEALgUIAwEAZwUIAwEAYAMIAwEASAMIAwEADgQIAwEA8gMIAwEArwUIAwEAfwUIAwEAYwYL
+A1GAPhMFAyEAJxMIAyEABxMFAyEAKQ8IAyEAThEIAyEAoAwSAyEAAg8VAyEANgsIAyEAKgwIAwEA
+4wUIAwEAxgIIAwEAKgMIAwEAygUIAwEAfgYIAwEAwwQSAwEALwQIAwEATgUZAwEArwMIAwEA0gMI
+AwEA9wIIAwEAfQQIAwEAMgYIAwEAqwQIAwEASgYIAwEAmAUIAwEATwQIAwEA/gUIAwEA/AQIAwEA
+3wQIAwEADwMIAwEAkwQIAwEAegMIAwEArwMIAwEA0gMIAwEA9wIIAwEAfQQIAwEAMgYIAwEAqwQI
+AwEASgYIAwEAmAUIAwEATwQIAwEA/gUIAwEA/AQIAwEA3wQIAwEADwMIAwEAkwQIAxEA4AwdAxEA
+vAgiAxEA8gYnAwYG9AEFA1aAVBErA1aAnAgrAwYAIgEIAzYAFQEvAxYAAQAzAxYAWAA9AwYAxgxN
+A1AgAAAAAIYIhQFoAAEAWCAAAAAAhgiMAQEAAQBhIAAAAACGCBYCIgACAGkgAAAAAIYIJQIQAAIA
+ciAAAAAAhgh4DiIAAwB6IAAAAACGCIsOEAADAIMgAAAAAIYI7A4iAAQAiyAAAAAAhgj3DhAABACU
+IAAAAACGCPwBIgAFAJwgAAAAAIYICQIQAAUApSAAAAAAhgi/ASIABgCtIAAAAACGCMoBEAAGALYg
+AAAAAIYYuw8GAAcAviAAAAAAhgguByIABwDGIAAAAACGCEIHEAAHAM8gAAAAAIYI1AYiAAgA1yAA
+AAAAhgjjBhAACADgIAAAAACGCGgRIgAJAOggAAAAAIYIdhEQAAkA8SAAAAAAhggvDyIACgD5IAAA
+AACGCDsPEAAKAAIhAAAAAIYIchNRAwsACiEAAAAAhgiAE1kDCwAUIQAAAACGAIwPYgMMALYgAAAA
+AIYYuw8GAA8AYCIAAAAAhghDEiIADwBoIgAAAACGCFESEAAPAHEiAAAAAIYILwEiABAAeSIAAAAA
+hgg/ARAAEACCIgAAAACGCJMBIgARAIoiAAAAAIYIpAEQABEAkyIAAAAAhgjPESIAEgCbIgAAAACG
+CNsREAASAKQiAAAAAIYInhMiABMArCIAAAAAhginExAAEwC1IgAAAACGCHQMUwEUAL0iAAAAAIYI
+gwymABQAxiIAAAAAhgikByIAFQDOIgAAAACGCLcHEAAVANciAAAAAIYIxg5qAxYA3yIAAAAAhgjS
+Dm8DFgDoIgAAAACGGLsPBgAXAFQjAAAAAIYAqQYGABcA1CUAAAAAhgiaAiIAFwDcJQAAAACGCLAC
+EAAXAOUlAAAAAIYIrgYiABgA7SUAAAAAhgjBBhAAGAD2JQAAAACGCFMBIgAZAP4lAAAAAIYIXgEQ
+ABkAByYAAAAAhghICCIAGgAPJgAAAACGCFEIEAAaABgmAAAAAIYI2RIiABsAICYAAAAAhgjkEhAA
+GwApJgAAAACGCDYMIgAcADEmAAAAAIYIQQwQABwAOiYAAAAAhgjvEiIAHQBCJgAAAACGCPsSEAAd
+AEsmAAAAAIYIeA8iAB4AUyYAAAAAhgiCDxAAHgBcJgAAAACGCNMHIgAfAGQmAAAAAIYI9AcQAB8A
+bSYAAAAAhghqEiIAIAB1JgAAAACGCJESEAAgAH4mAAAAAIYI+g0iACEAhiYAAAAAhggfDhAAIQCP
+JgAAAACGCAwNIgAiAJcmAAAAAIYIHA0QACIAoCYAAAAAhghpASIAIwCoJgAAAACGCHcBEAAjALEm
+AAAAAIYIdAgiACQAuSYAAAAAhgh/CBAAJADCJgAAAACGCDQCIgAlAMomAAAAAIYIQAIQACUAtiAA
+AAAAhhi7DwYAJgDTJgAAAACGCJoCIgAmANsmAAAAAIYIsAIQACYA5CYAAAAAhgiuBiIAJwDsJgAA
+AACGCMEGEAAnAPUmAAAAAIYIUwEiACgA/SYAAAAAhgheARAAKAAGJwAAAACGCEgIIgApAA4nAAAA
+AIYIUQgQACkAFycAAAAAhgjZEiIAKgAfJwAAAACGCOQSEAAqACgnAAAAAIYINgwiACsAMCcAAAAA
+hghBDBAAKwA5JwAAAACGCO8SIgAsAEEnAAAAAIYI+xIQACwASicAAAAAhgh4DyIALQBSJwAAAACG
+CIIPEAAtAFsnAAAAAIYI0wciAC4AYycAAAAAhgj0BxAALgBsJwAAAACGCGoSIgAvAHQnAAAAAIYI
+kRIQAC8AfScAAAAAhgj6DSIAMACFJwAAAACGCB8OEAAwAI4nAAAAAIYIDA0iADEAlicAAAAAhggc
+DRAAMQCfJwAAAACGCGkBIgAyAKcnAAAAAIYIdwEQADIAsCcAAAAAhgh0CCIAMwC4JwAAAACGCH8I
+EAAzALYgAAAAAIYYuw8GADQAxCcAAAAAhgD3DAYANACQLQAAAACGAM0TdQM0AGAuAAAAAIYYuw8G
+ADUAtiAAAAAAgxi7DwYANQBoLgAAAACTCAoPgAM1AJQuAAAAAJMIpAiGAzUAmy4AAAAAkwiwCIwD
+NQCjLgAAAACWCAcSkwM2AKouAAAAAIYYuw8GADYAsi4AAAAAkRjBD5gDNgC2IAAAAACGGLsPBgA2
+AL4uAAAAAIMArwCcAzYA0S4AAAAAkRjBD5gDNwC2IAAAAACGGLsPBgA3AN0uAAAAAIMACgCiAzcA
+5S4AAAAAgwBhAKgDOAC2IAAAAACGGLsPBgA5APIuAAAAAIMAQQC0AzkAAAABAAMLAAABAAMLAAAB
+AAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAG8T
+AAACAE8BAAADABgRAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAAB
+AAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAML
+AAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAAB
+AAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAMLAAABAAML
+AAABAAMLAAABANsPAAABAAMLAAABAMAOAAABAN4OAAABADwLAAABAN4OCQC7DwEAEQC7DwYAGQC7
+DwoAKQC7DxAAMQC7DxAAOQC7DxAAQQC7DxAASQC7DxAAUQC7DxAAWQC7DxAAYQC7DxAAcQC7DwYA
+sQC7DwYAMQG7DwYAUQG7DxUAaQC7DwYAgQAWByIAgQACByIAYQHEEiYAYQHKByIAaQHBESwAgQBE
+DjQAgQDUBiIAaQHBETkAaQG6EUAAiQC7DxAAcQG7DwYAeQFPExAAeQFkCEYAcQE/EU0AiQGWAlMA
+oQHwCl0AcQHQDWIAeQEzEwEAsQHsDAYAeQG9E2gAsQEqCQYAkQC7DxAAoQC7DwYAaQHeE3wAaQEB
+EoIAoQBqDowADACWApoAoQDbERAAoQDSDKAAoQCnExAAoQCDDKYAaQHqE3wAaQEIFKsAoQAoAYwA
+wQGWAhAAoQBlAowAqQC7D7AA0QGqEasAmQC7DxAA2QGIAhAAoQCaEbYAFACWApoAaQFEC2gAqQDi
+EKYA6QG7D8QAqQDSEMoAqQCSDKYAqQCpBtEA2QEwCQYAoQAwCQYAqQAwCQYAuQCEEQ4B+QGuEBQB
+AQK9DBoBCQLmCiEBaQAjCyIAHAC7DwYAyQBfEywByQAjCzEBAQL8EDYBGQK7DwYAEQKjEDsBIQK9
+DEEBGQKxEUgBMQKtD04B0QC4EiEBHACWApoA0QBGE1MB2QAwCQYAHADPEmgAJAC7DwYALAC7DwYA
+NAC7D20BQQKOE3MBPAC7D20BQQLnEagBQQINE80BJACtD+EBRAC4EvABTAC7DwYATACWApoAVAC7
+D20BQQKKCAUCHACtD+EBXAC4EvABXABGE1MB6QC7DykCaQEsCy8CaQHBETUCaQG6ETsC8QC7D0MC
+UQJaC0sCUQJxDlMCUQI+CwYARABGE1MB+QETEgEA6QC7DwYAAQG7D1MCYQKSB3ECYQKVEHoCZACt
+D4sCbAC4EvABdAC7D20BaQEHDa4CeQI+CBAAeQI+CwYA6QCWE74CuQC7DwYAYQKwE8MCOQG7D8kC
+WQG7DwYAQQItE9ECCQH6Ct0CCAAwAPYCCAD4APsCCAD8AAADIABjAAADIQBjAAADLgALAOUDLgAT
+AO4DLgAbAA0ELgAjABYELgArAD8ELgAzAD8ELgA7AD8ELgBDABYELgBLAEUELgBTAD8ELgBbAFwE
+QABjAAADQQBjAAADYABjAAADYQBjAAADgABjAAADgQBjAAADoABjAAADoQBjAAADwABjAAADwQBj
+AAAD4ABjAAAD4QBjAAAD4wBrAAADAAFjAAADAQFjAAADAwFzAAADIAFjAAADIQFjAAADQAFjAAAD
+QQFjAAADYAFjAAADYQFjAAADYwFjAAADgAFjAAADgwFjAAADowFjAAADwAFjAAAD4AFjAAADAAJj
+AAADIAJjAAADQAJjAAADYAJjAAADgAJjAAADoAJjAAADoQJjAAADwAJjAAADwQJjAAAD4AJjAAAD
+4QJjAAADAQNjAAADIQNjAAADQANjAAADQQNjAAADYANjAAADYQNjAAADgANjAAADgQNjAAADoANj
+AAADoQNjAAADwANjAAADwQNjAAAD4ANjAAAD4QNjAAADAARjAAADAQRjAAADIARjAAADIQRjAAAD
+QARjAAADQQRjAAADYARjAAADYQRjAAADgARjAAADgQRjAAADoARjAAADoQRjAAADwARjAAADwQRj
+AAAD4ARjAAAD4QRjAAADAAVjAAADAQVjAAADIAVjAAADIQVjAAADQQVjAAADYQVjAAADgAVjAAAD
+gQVjAAADoAVjAAADoQVjAAADwAVjAAADwQVjAAAD4AVjAAAD4QVjAAADAAZjAAADAQZjAAADIAZj
+AAADIQZjAAADKQZ7AA0EQAZjAAADQQZjAAADSQZ7AA0EYAZjAAADYQZjAAADgAZjAAADgQZjAAAD
+oAZjAAADoQZjAAADwAZjAAADwQZjAAAD4AZjAAAD4QZjAAADAAdjAAADAQdjAAADIAdjAAADIQdj
+AAADQAdjAAADYAdjAAADgAdjAAADgQdjAAADoAdjAAADwAdjAAAD4AdjAAADAAhjAAADIAhjAAAD
+QAhjAAADYAhjAAADgAhjAAADoAhjAAADwAhjAAAD4AhjAAADAAljAAADIAljAAADYAljAAADgAlj
+AAADoAljAAADwAljAAAD4AljAAADAApjAAADIApjAAADQApjAAADYApjAAADgApjAAADoApjAAAD
+wApjAAAD4ApjAAADAAtjAAADIAtjAAADQAtjAAADYAtjAAADgAtjAAADoAtjAAADwAtjAAAD4Atj
+AAADAAxjAAADIAxjAAADQAxjAAADYAxjAAADgAxjAAADoAxjAAADwAxjAAADHABsANcAWgICAAEA
+AwAHAAQADAAFABQABgAjAAgAMQAJADMAAACQAbsDAAApAr8DAACPDr8DAAD7Dr8DAAANAr8DAADO
+Ab8DAABGB78DAADnBr8DAAB6Eb8DAAA/D78DAACEE8MDAABVEr8DAABDAb8DAACoAb8DAADfEb8D
+AACrE78DAACHDMsDAAC7B78DAADWDs8DAAC0Ar8DAADFBr8DAABiAb8DAABvCL8DAADoEr8DAABF
+DL8DAAD/Er8DAACbD78DAAD4B78DAACVEr8DAAAjDr8DAAAgDb8DAAB7Ab8DAACDCL8DAABEAr8D
+AAC0Ar8DAADFBr8DAABiAb8DAABvCL8DAADoEr8DAABFDL8DAAD/Er8DAACbD78DAAD4B78DAACV
+Er8DAAAjDr8DAAAgDb8DAAB7Ab8DAACDCL8DAAAOD9QDAADECNoDAAALEuADAgABAAMAAQACAAMA
+AgADAAUAAQAEAAUAAgAFAAcAAQAGAAcAAgAHAAkAAQAIAAkAAgAJAAsAAQAKAAsAAgALAA0AAQAM
+AA0AAgAOAA8AAQAPAA8AAgAQABEAAQARABEAAgASABMAAQATABMAAgAUABUAAQAVABUAAgAWABcA
+AQAXABcAAgAaABkAAQAbABkAAgAcABsAAQAdABsAAgAeAB0AAQAfAB0AAgAgAB8AAQAhAB8AAgAi
+ACEAAQAjACEAAgAkACMAAQAlACMAAgAmACUAAQAnACUAAgAoACcAAQApACcAAgAsACkAAQAtACkA
+AgAuACsAAQAvACsAAgAwAC0AAQAxAC0AAgAyAC8AAQAzAC8AAgA0ADEAAQA1ADEAAgA2ADMAAQA3
+ADMAAgA4ADUAAQA5ADUAAgA6ADcAAQA7ADcAAgA8ADkAAQA9ADkAAgA+ADsAAQA/ADsAAgBAAD0A
+AQBBAD0AAgBCAD8AAQBDAD8AAgBEAEEAAQBFAEEAAgBGAEMAAQBHAEMAAgBIAEUAAQBJAEUAAgBL
+AEcAAQBMAEcAAgBNAEkAAQBOAEkAAgBPAEsAAQBQAEsAAgBRAE0AAQBSAE0AAgBTAE8AAQBUAE8A
+AgBVAFEAAQBWAFEAAgBXAFMAAQBYAFMAAgBZAFUAAQBaAFUAAgBbAFcAAQBcAFcAAgBdAFkAAQBe
+AFkAAgBfAFsAAQBgAFsAAgBhAF0AAQBiAF0AAgBjAF8AAQBkAF8AAgBlAGEAAQBmAGEAAgBsAGMA
+AgBtAGUAAQBuAGUAAgBvAGcAkgC8ACUBVwFdAWQBmQHqAfUB/AEiAoQClQKdAgSAAAABAAAArB5H
+cgAAAAAAAPEAAAAEAAAAAAAAAAAAAADkAlgCAAAAAAQAAAAAAAAAAAAAAOQCTAIAAAAABAAAAAAA
+AAAAAAAA5ALLDAAAAAAMAAAAAAAAAAAAAADtAl8LAAAAAAQAAAAAAAAAAAAAAOQCkAgAAAAADAAA
+AAAAAAAAAAAA7QLVAQAAAAAAAAAAAQAAABQQAAAKAAcACwAHAAwABwANAAcAtQCTAbkAwQG7AN0B
+xwAdArsAHQK5AKcC8QC6AgEBHQIAAAA8PjlfXzBfMAA8TWFpbj5iX18wXzAAPD5jX19EaXNwbGF5
+Q2xhc3MwXzAAPD5jX19EaXNwbGF5Q2xhc3MxXzAAPFdyaXRlQ3N2VG9NZW1vcnk+Yl9fMAA8Pjlf
+XzBfMQA8TWFpbj5iX18wXzEATnVsbGFibGVgMQBJRW51bWVyYWJsZWAxAENvbGxlY3Rpb25gMQBJ
+RW51bWVyYXRvcmAxAExpc3RgMQBJbnQzMgA8TWFpbj5iX18yAEZ1bmNgMgBJR3JvdXBpbmdgMgBT
+VF9iNWMyMTM5MmRiYzU0MGFmYTg1Zjg0OTAyMGVmZTBkMgBTVF9lODUxZmNmZWRmMjI0ODE1ODA4
+MDc4NzNjNzczYTI2NgA8PjkAPE1vZHVsZT4ASURDSUEAZ2V0X0NDAGdldF9SZWNpcGllbnRDQwBz
+ZXRfUmVjaXBpZW50Q0MARUlEAGdldF9DQ01TSUQAc2V0X0NDTVNJRABnZXRfTWFuZ2VyX0lEAHNl
+dF9NYW5nZXJfSUQAZ2V0X0lEAHNldF9JRABnZXRfUmVjaXBpZW50Q0NPAHNldF9SZWNpcGllbnRD
+Q08AU3lzdGVtLklPAGdldF9JRF9SRVAAc2V0X0lEX1JFUABNaWNyb3NvZnQuU3FsU2VydmVyLk1h
+bmFnZWREVFMAdmFsdWVfXwBnZXRfQ29tcGFuaWEAc2V0X0NvbXBhbmlhAGdldF9JRF9FbXByZXNh
+AHNldF9JRF9FbXByZXNhAGdldF9FbXByZXNhAHNldF9FbXByZXNhAFN5c3RlbS5EYXRhAG1zY29y
+bGliADw+YwBnZXRfQmNjAFN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljAHNldF9Db250ZW50SWQA
+QWRkAGdldF9QYXlyb2xsX1Byb2Nlc3NlZABzZXRfUGF5cm9sbF9Qcm9jZXNzZWQAPFJlY2lwaWVu
+dENDPmtfX0JhY2tpbmdGaWVsZAA8SUQ+a19fQmFja2luZ0ZpZWxkADxDQ01TSUQ+a19fQmFja2lu
+Z0ZpZWxkADxNYW5nZXJfSUQ+a19fQmFja2luZ0ZpZWxkADxSZWNpcGllbnRDQ08+a19fQmFja2lu
+Z0ZpZWxkADxJRF9SRVA+a19fQmFja2luZ0ZpZWxkADxDb21wYW5pYT5rX19CYWNraW5nRmllbGQA
+PEVtcHJlc2E+a19fQmFja2luZ0ZpZWxkADxJRF9FbXByZXNhPmtfX0JhY2tpbmdGaWVsZAA8UGF5
+cm9sbF9Qcm9jZXNzZWQ+a19fQmFja2luZ0ZpZWxkADxQYXlyb2xsX1BlcmlvZD5rX19CYWNraW5n
+RmllbGQAPFN0YWNrVHJhY2U+a19fQmFja2luZ0ZpZWxkADxMb2dFcnJvck1lc3NhZ2U+a19fQmFj
+a2luZ0ZpZWxkADxBdHRhY2htZW50RmlsZT5rX19CYWNraW5nRmllbGQAPFJlc3BvbnNpYmxlX29m
+X3JlcXVlc3RzX25hbWU+a19fQmFja2luZ0ZpZWxkADxUeXBlPmtfX0JhY2tpbmdGaWVsZAA8Tm9t
+YnJlPmtfX0JhY2tpbmdGaWVsZAA8RGV0YWlsPmtfX0JhY2tpbmdGaWVsZAA8SXNCb2R5SHRtbD5r
+X19CYWNraW5nRmllbGQAPERlc2NyaXBjaW9uPmtfX0JhY2tpbmdGaWVsZAA8UmVzcG9uc2libGVf
+b2ZfcmVxdWVzdHNfUG9zaXRpb24+a19fQmFja2luZ0ZpZWxkADxDSUFfSURSZXBvcnRlbz5rX19C
+YWNraW5nRmllbGQAPGFyY2hpdm8+a19fQmFja2luZ0ZpZWxkADxGb2xkZXI+a19fQmFja2luZ0Zp
+ZWxkADxCcm93c2VyPmtfX0JhY2tpbmdGaWVsZAA8RXJyb3I+a19fQmFja2luZ0ZpZWxkADxJcEFk
+ZHJlc3M+a19fQmFja2luZ0ZpZWxkADxTdWJqZWN0PmtfX0JhY2tpbmdGaWVsZAA8UmVjaXBpZW50
+PmtfX0JhY2tpbmdGaWVsZAA8UmVzcG9uc2libGVfb2ZfcmVxdWVzdHNfRGVwYXJ0bWVudD5rX19C
+YWNraW5nRmllbGQAPEFtb3VudD5rX19CYWNraW5nRmllbGQAPENvbmNlcHQ+a19fQmFja2luZ0Zp
+ZWxkADxDcmVhdGVkQnk+a19fQmFja2luZ0ZpZWxkADxCb2R5PmtfX0JhY2tpbmdGaWVsZABEYkNv
+bW1hbmQAU3FsQ29tbWFuZABTZW5kAGdldF9QYXlyb2xsX1BlcmlvZABzZXRfUGF5cm9sbF9QZXJp
+b2QAZ2V0X1N0YWNrVHJhY2UAc2V0X1N0YWNrVHJhY2UAZGVmYXVsdEluc3RhbmNlAGdldF9Tb3Vy
+Y2UARmlsZU1vZGUAZ2V0X01lc3NhZ2UATWFpbE1lc3NhZ2UAZ2V0X0xvZ0Vycm9yTWVzc2FnZQBz
+ZXRfTG9nRXJyb3JNZXNzYWdlAERhdGFUYWJsZQBWYXJpYWJsZQBFbnVtZXJhYmxlAElEaXNwb3Nh
+YmxlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAGdldF9BdHRhY2htZW50Rmls
+ZQBzZXRfQXR0YWNobWVudEZpbGUAZ2V0X05hbWUAZ2V0X1Jlc3BvbnNpYmxlX29mX3JlcXVlc3Rz
+X25hbWUAc2V0X1Jlc3BvbnNpYmxlX29mX3JlcXVlc3RzX25hbWUARGF0ZVRpbWUATWljcm9zb2Z0
+LlNxbFNlcnZlci5EdHMuUnVudGltZQBXcml0ZUxpbmUAZ2V0X1R5cGUAc2V0X1R5cGUAU3FsRGJU
+eXBlAHNldF9Db21tYW5kVHlwZQBnZXRfTm9tYnJlAHNldF9Ob21icmUAV2hlcmUAU3lzdGVtLkNv
+cmUARmFpbHVyZQBnZXRfQ3VsdHVyZQBzZXRfQ3VsdHVyZQByZXNvdXJjZUN1bHR1cmUAVlNUQVJU
+U2NyaXB0T2JqZWN0TW9kZWxCYXNlAEludGVybmFsRGF0YUNvbGxlY3Rpb25CYXNlAEFwcGxpY2F0
+aW9uU2V0dGluZ3NCYXNlAEF0dGFjaG1lbnRCYXNlAENsb3NlAERpc3Bvc2UARWRpdG9yQnJvd3Nh
+YmxlU3RhdGUAQ29tcGlsZXJHZW5lcmF0ZWRBdHRyaWJ1dGUARGVidWdnZXJOb25Vc2VyQ29kZUF0
+dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0cmlidXRlAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBBc3Nl
+bWJseVRpdGxlQXR0cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJrQXR0cmlidXRlAFRhcmdldEZyYW1l
+d29ya0F0dHJpYnV0ZQBBc3NlbWJseUNvbmZpZ3VyYXRpb25BdHRyaWJ1dGUAQXNzZW1ibHlEZXNj
+cmlwdGlvbkF0dHJpYnV0ZQBDb21waWxhdGlvblJlbGF4YXRpb25zQXR0cmlidXRlAEFzc2VtYmx5
+UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvcHlyaWdodEF0dHJpYnV0ZQBTU0lTU2NyaXB0VGFz
+a0VudHJ5UG9pbnRBdHRyaWJ1dGUAQXNzZW1ibHlDb21wYW55QXR0cmlidXRlAFJ1bnRpbWVDb21w
+YXRpYmlsaXR5QXR0cmlidXRlAGdldF9WYWx1ZQBzZXRfVmFsdWUAR2V0VmFsdWUAdmFsdWUAU3lz
+dGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUb1N0cmluZwBTdWJzdHJpbmcAdGVzdGluZwBGbHVzaABn
+ZXRfTGVuZ3RoAFJhZlRvb2xPYmoAU2VlawBNaWNyb3NvZnQuU3FsU2VydmVyLlNjcmlwdFRhc2sA
+TWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3MuU2NyaXB0VGFzawBOZXR3b3JrQ3JlZGVudGlh
+bABTeXN0ZW0uU2VjdXJpdHkuUHJpbmNpcGFsAFN5c3RlbS5Db2xsZWN0aW9ucy5PYmplY3RNb2Rl
+bABTY3JpcHRPYmplY3RNb2RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAU3lzdGVtLk5ldC5NYWls
+AHRlc3RpbmdNYWlsAGdldF9EZXRhaWwAc2V0X0RldGFpbABTVF9lODUxZmNmZWRmMjI0ODE1ODA4
+MDc4NzNjNzczYTI2Ni5kbGwAZ2V0X0lzQm9keUh0bWwAc2V0X0lzQm9keUh0bWwAc2V0X0VuYWJs
+ZVNzbABfc3NsAEZpbGVTdHJlYW0ATWVtb3J5U3RyZWFtAGdldF9JdGVtAGl0ZW0AU3lzdGVtAHNl
+dF9Gcm9tAEVudW0AcmVzb3VyY2VNYW4AT3BlbgBTY3JpcHRNYWluAFNlZWtPcmlnaW4ASm9pbgBn
+ZXRfRGVzY3JpcGNpb24Ac2V0X0Rlc2NyaXBjaW9uAFN5c3RlbS5Db25maWd1cmF0aW9uAFN5c3Rl
+bS5HbG9iYWxpemF0aW9uAFN5c3RlbS5SZWZsZWN0aW9uAERhdGFUYWJsZUNvbGxlY3Rpb24AU3Fs
+UGFyYW1ldGVyQ29sbGVjdGlvbgBNYWlsQWRkcmVzc0NvbGxlY3Rpb24AQXR0YWNobWVudENvbGxl
+Y3Rpb24ARGF0YVJvd0NvbGxlY3Rpb24Ac2V0X0Nvbm5lY3Rpb24ARGJDb25uZWN0aW9uAFNxbENv
+bm5lY3Rpb24AZ2V0X1Jlc3BvbnNpYmxlX29mX3JlcXVlc3RzX1Bvc2l0aW9uAHNldF9SZXNwb25z
+aWJsZV9vZl9yZXF1ZXN0c19Qb3NpdGlvbgBnZXRfSW5uZXJFeGNlcHRpb24AU3lzdGVtLkRhdGEu
+Q29tbW9uAGdldF9UbwBDb3B5VG8AZ2V0X0NJQV9JRFJlcG9ydGVvAHNldF9DSUFfSURSZXBvcnRl
+bwBDdWx0dXJlSW5mbwBCb25vSW5mbwBQcm9wZXJ0eUluZm8AbW9ycm8AZ2V0X2FyY2hpdm8Ac2V0
+X2FyY2hpdm8AcABTeXN0ZW0uTGlucQBnZXRfRm9sZGVyAHNldF9Gb2xkZXIAX3NlbmRlcgBnZXRf
+UmVzb3VyY2VNYW5hZ2VyAE1haWxIZWxwZXIAX3VzZXIAZ2V0X0Jyb3dzZXIAc2V0X0Jyb3dzZXIA
+RGJQYXJhbWV0ZXIAU3FsUGFyYW1ldGVyAFN0cmVhbVdyaXRlcgBUZXh0V3JpdGVyAGdldF9FcnJv
+cgBzZXRfRXJyb3IAUmVjb3JkRXJyb3IATG9nRXJyb3IASUVudW1lcmF0b3IAR2V0RW51bWVyYXRv
+cgAuY3RvcgAuY2N0b3IAU3lzdGVtLkRpYWdub3N0aWNzAHJlY29yZHMAU3lzdGVtLlJ1bnRpbWUu
+Q29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3VyY2VzAFNUX2I1YzIxMzkyZGJjNTQwYWZhODVm
+ODQ5MDIwZWZlMGQyLlByb3BlcnRpZXMuUmVzb3VyY2VzLnJlc291cmNlcwBEZWJ1Z2dpbmdNb2Rl
+cwBTVF9iNWMyMTM5MmRiYzU0MGFmYTg1Zjg0OTAyMGVmZTBkMi5Qcm9wZXJ0aWVzAEdldFByb3Bl
+cnRpZXMAZ2V0X1RhYmxlcwBnZXRfVmFyaWFibGVzAEJpbmRpbmdGbGFncwBTZXR0aW5ncwBzZXRf
+Q3JlZGVudGlhbHMAc2V0X1VzZURlZmF1bHRDcmVkZW50aWFscwBDb250YWlucwBTeXN0ZW0uQ29s
+bGVjdGlvbnMAY29ubmVjdGlvbnMAU3RyaW5nU3BsaXRPcHRpb25zAE5NQm9ub3MAZ2V0X1BhcmFt
+ZXRlcnMAX3Bhc3MAU3VjY2VzcwBNYWlsQWRkcmVzcwBnZXRfSXBBZGRyZXNzAHNldF9JcEFkZHJl
+c3MAZ2V0X0R0cwBTY3JpcHRSZXN1bHRzAGdldF9BdHRhY2htZW50cwBFeGlzdHMAZ2V0X1Jvd3MA
+Q29uY2F0AEZvcm1hdABPYmplY3QAZ2V0X1N1YmplY3QAc2V0X1N1YmplY3QAU2VsZWN0AFN5c3Rl
+bS5OZXQARGF0YVNldABTcGxpdABnZXRfRGVmYXVsdABzZXRfVGFza1Jlc3VsdABTeXN0ZW0uRGF0
+YS5TcWxDbGllbnQAU210cENsaWVudABnZXRfUmVjaXBpZW50AHNldF9SZWNpcGllbnQAQXR0YWNo
+bWVudABnZXRfUmVzcG9uc2libGVfb2ZfcmVxdWVzdHNfRGVwYXJ0bWVudABzZXRfUmVzcG9uc2li
+bGVfb2ZfcmVxdWVzdHNfRGVwYXJ0bWVudABnZXRfQ3VycmVudABHZXRDdXJyZW50AGdldF9Db3Vu
+dABnZXRfQW1vdW50AHNldF9BbW91bnQAZ2V0X0NvbmNlcHQAc2V0X0NvbmNlcHQAX3BvcnQAVG9M
+aXN0AElDcmVkZW50aWFsc0J5SG9zdABfaG9zdABGaXJzdABzZXRfQ29tbWFuZFRpbWVvdXQATW92
+ZU5leHQAc2V0X0NvbW1hbmRUZXh0AGdldF9Ob3cARGF0YVJvdwBleABnZXRfQ3JlYXRlZEJ5AHNl
+dF9DcmVhdGVkQnkAR3JvdXBCeQBUb0FycmF5AGdldF9Cb2R5AHNldF9Cb2R5AGdldF9Bc3NlbWJs
+eQBFeGVjdXRlTm9uUXVlcnkAV3JpdGVDc3ZUb01lbW9yeQBvcF9FcXVhbGl0eQBvcF9JbmVxdWFs
+aXR5AFdpbmRvd3NJZGVudGl0eQBJc051bGxPckVtcHR5AAAAAF1bAEUAeABlAGMAVQBzAGUAcgA6
+AHsAMgB9AF0AOgBfADoAWwBlAHgALgBNAHMAZwA6ACAAewAwAH0AXQA6AF8AOgBbAGUAeAAuAFMA
+cgBjADoAIAB7ADEAfQBdAAAhOgBfADoAWwB7ADAAfQBdADoAXwA6AFsAewAxAH0AXQAAIzYAMAAx
+AC4AQwBhAHQATABvAGcARQByAHIAbwByAFMAaQAAIUAATABvAGcARQByAHIAbwByAE0AZQBzAHMA
+YQBnAGUAABdAAFMAdABhAGMAawBUAHIAYQBjAGUAABVAAEkAcABBAGQAZAByAGUAcwBzAAAVQQB0
+AHUAbwBtAGEAdABpAGMAbwAAEUAAQgByAG8AdwBzAGUAcgAACVMAUwBJAFMAABVAAEMAcgBlAGEA
+dABlAGQAQgB5AAAVMQAwAC4ANgAuADUALgAyADQAMAAAN1IAQQBGAFQAbwBvAGwAQAB0AGUAbABl
+AHAAZQByAGYAbwByAG0AYQBuAGMAZQAuAGMAbwBtAAABAAMwAABFagBhAHYAaQBlAHIALgByAGEA
+eQBnAG8AegBhAEAAdABlAGwAZQBwAGUAcgBmAG8AcgBtAGEAbgBjAGUALgBjAG8AbQAAAzEAAAM7
+AAAPaQBtAGEAZwBlAG4AcwAAIVUAcwBlAHIAOgA6AEMAbwBuAGUAeABpAG8AbgBCAEQAABlVAHMA
+ZQByADoAOgBVAG4AaQBkAGEAZAAAH1UAcwBlAHIAOgA6AEUAeAB0AGUAbgBzAGkAbwBuAAAnVQBz
+AGUAcgA6ADoATgBvAG0AYgByAGUAUABlAHIAaQBvAGQAbwAAEXkAeQB5AHkATQBNAGQAZAAAIVUA
+cwBlAHIAOgA6AFQAYQBiAGwAYQBCAG8AbgBvAHMAAAtUAGEAYgBsAGUAACNQAGEAeQByAG8AbABs
+AF8AUAByAG8AYwBlAHMAcwBlAGQAAB1QAGEAeQByAG8AbABsAF8AUABlAHIAaQBvAGQAAA1DAEMA
+TQBTAEkARAAACVQAeQBwAGUAAA1BAG0AbwB1AG4AdAAADUQAZQB0AGEAaQBsAAAPQwBvAG4AYwBl
+AHAAdAAAC0UAcgByAG8AcgAAOVIAZQBzAHAAbwBuAHMAaQBiAGwAZQBfAG8AZgBfAHIAZQBxAHUA
+ZQBzAHQAcwBfAG4AYQBtAGUAAEVSAGUAcwBwAG8AbgBzAGkAYgBsAGUAXwBvAGYAXwByAGUAcQB1
+AGUAcwB0AHMAXwBEAGUAcABhAHIAdABtAGUAbgB0AABBUgBlAHMAcABvAG4AcwBpAGIAbABlAF8A
+bwBmAF8AcgBlAHEAdQBlAHMAdABzAF8AUABvAHMAaQB0AGkAbwBuAAAXRABlAHMAYwByAGkAcABj
+AGkAbwBuAAATTQBhAG4AZwBlAHIAXwBJAEQAAA1OAG8AbQBiAHIAZQAAD0UAbQBwAHIAZQBzAGEA
+ACVcAFwAMQAwAC4AMQA1ADIALgAzADIALgAxADYANABcAHQAcAAAISAAXABUAGUAbQBwAFwAZgBp
+AGwAZQBzAFwAewAwAH0AABtNAE8AXwB7ADIAfQBfAHsAMAB9AHsAMQB9AAADXAAAAy8AAAMsAABx
+UwBUAF8AYgA1AGMAMgAxADMAOQAyAGQAYgBjADUANAAwAGEAZgBhADgANQBmADgANAA5ADAAMgAw
+AGUAZgBlADAAZAAyAC4AUAByAG8AcABlAHIAdABpAGUAcwAuAFIAZQBzAG8AdQByAGMAZQBzAAAA
+AcTmaEbc30+nxRzNkYkG5wAEIAEBCAMgAAEFIAEBEREEIAEBDgYgAQERgKUFBwIOEkUDIAAOBQAA
+EoCxBwAEDg4cHBwEIAASQQYAAw4OHBwFAAIODg4GIAEBEYDBBSAAEoDFCSACEoDJDhGAzQQgAQEc
+BSABARJFAyAACA8HCRJNElESVR0OCA4ODg4FAAICDg4JIAIdDh0OEYDdBSAAEoDhBxUSgOUBEkkF
+IAEBEwAFIAEBEkkEIAEBAgQAAQIOBSACAQ4IBSAAEoDxBxUSgOUBEk0FIAIBDg4GIAEBEoD5BSAB
+ARJRNgcWDg4ODhUSYQESFAgRZRJpEhQSbRURcQEOEiwVEmEBEhgSGBJ1FRFxARIUEhQSGA4OEnkS
+QQUgABKA/QUgABKBAQYgARKBBRwDIAAcBhUSYQESFAQAABFlBCABDg4EIAECHAUgABKBEQYgARKB
+DQ4FIAASgRUEIAASaQMgAAIFFRJhAQ4GFRJhARIICBUSgJECEhQOBSACARwYHxACAhUSfQEVEoCV
+Ah4BHgAVEn0BHgAVEoCRAh4AHgEFCgISFA4OFRKAkQIVEoCVAg4SFA4YEAICFRJ9AR4BFRJ9AR4A
+FRKAkQIeAB4BCwoCFRKAlQIOEhQODxABARUSYQEeABUSfQEeAAMKAQ4IIAAVEXEBEwAFFRFxAQ4E
+IAATAAYVEmEBEhgIFRKAkQISFAIXEAECFRJ9AR4AFRJ9AR4AFRKAkQIeAAIECgESFAYVEXEBEhQF
+IAEBHQUFIAIOCAgFAAIODhwHAAQODg4ODgcgAgEOEYElByACCgoRgS0GIAEBEoEpFgcGEnUSgIEd
+EoCFFRKAiQESGBI0HQUIAAESgTERgTUJIAEdEoCFEYE5BhUSfQESGAkgABUSgIkBEwAHFRKAiQES
+GAkVEoCRAhKAhRwGCgISgIUcCxABAg4OFRJ9AR4AAwoBHAQgAB0FBSAAEoFBByACAQ4SgUELEAEB
+HgAVEn0BHgAGIAIcHB0cCLd6XFYZNOCJCImEXc2AgMyRBCC/AgAEAAAAAAQBAAAAAgYIAgYOBgYV
+ET0BCAIGAgMGEkkDBhJNBAYSgJ0EBhKAoQMGEiQDBhEoAwYSMAkGFRKAkQISFA4PBhUSgJECFRKA
+lQIOEhQOAwYSGAcgABURPQEICCABARURPQEIByADARJBCA4EIAASTQUgAQESTQogAR0FFRJ9ARIY
+BQAAEoCdBQAAEoChBgABARKAoQQAABIkAwAAAQUgAQISFAUgAQ4SFAsgAQ4VEoCVAg4SFAYgARwS
+gIUDKAAIAygADgcoABURPQEIAygAAgQoABJNBQgAEoCdBQgAEoChBAgAEiQIAQAIAAAAAAAeAQAB
+AFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAAKAEAI1NUX2I1YzIxMzkyZGJjNTQw
+YWZhODVmODQ5MDIwZWZlMGQyAAAFAQAAAAAWAQARQ29weXJpZ2h0IEAgIDIwMTgAAEcBABouTkVU
+RnJhbWV3b3JrLFZlcnNpb249djQuMAEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUQLk5FVCBGcmFt
+ZXdvcmsgNLQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRlciwg
+bXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tl
+bj1iNzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0AgAA
+AAAAAAAAAAAAUEFEUEFEULQAAABgZgAAAAAAAAAAAAB6ZgAAACAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAbGYAAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA/yUAIAAQAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAcAAADAAAAMQyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAA
+AAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABYgAAAGgQAAAAAAAAAAAAAGgQ0AAAA
+VgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E7/4AAAEAAAABAEdyrB4AAAEAR3Ks
+Hj8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8A
+AAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAAAACwBHoDAAABAFMAdAByAGkAbgBn
+AEYAaQBsAGUASQBuAGYAbwAAAFYDAAABADAAMAAwADAAMAA0AGIAMAAAABoAAQABAEMAbwBtAG0A
+ZQBuAHQAcwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEAbgB5AE4AYQBtAGUAAAAAAAAAAABwACQAAQBG
+AGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBUAF8AYgA1AGMAMgAxADMAOQAyAGQA
+YgBjADUANAAwAGEAZgBhADgANQBmADgANAA5ADAAMgAwAGUAZgBlADAAZAAyAAAAPgAPAAEARgBp
+AGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAuADcAOAA1ADIALgAyADkAMgA1ADUAAAAAAHAA
+KAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBUAF8AZQA4ADUAMQBmAGMAZgBlAGQAZgAy
+ADIANAA4ADEANQA4ADAAOAAwADcAOAA3ADMAYwA3ADcAMwBhADIANgA2AC4AZABsAGwAAABIABIA
+AQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABDAG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAg
+ADIAMAAxADgAAAAqAAEAAQBMAGUAZwBhAGwAVAByAGEAZABlAG0AYQByAGsAcwAAAAAAAAAAAHgA
+KAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABTAFQAXwBlADgANQAxAGYAYwBm
+AGUAZABmADIAMgA0ADgAMQA1ADgAMAA4ADAANwA4ADcAMwBjADcANwAzAGEAMgA2ADYALgBkAGwA
+bAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAAAAAAUwBUAF8AYgA1AGMAMgAxADMAOQAy
+AGQAYgBjADUANAAwAGEAZgBhADgANQBmADgANAA5ADAAMgAwAGUAZgBlADAAZAAyAAAAQgAPAAEA
+UAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA3ADgANQAyAC4AMgA5ADIANQA1
+AAAAAABGAA8AAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA3ADgA
+NQAyAC4AMgA5ADIANQA1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAYAAADAAAAIw2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -1615,22 +1472,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAA==</BinaryItem>
+AAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
               <Breakpoint
                 Enabled="True"
                 File="ScriptMain.cs"
-                Line="106"
-                Column="13" />
-              <Breakpoint
-                Enabled="True"
-                File="ScriptMain.cs"
-                Line="162"
+                Line="155"
                 Column="21" />
-              <Breakpoint
-                Enabled="True"
-                File="ScriptMain.cs"
-                Line="287"
-                Column="29" />
             </ScriptProject>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -1647,11 +1494,14 @@ AAAAAAAAAAAAAA==</BinaryItem>
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{587138F2-3508-4AB4-A5EF-A514BA53DA3D}"
-              SQLTask:SqlStatementSource="SELECT&#x9;top 1  TipoPeriodo&#xA;FROM&#x9;[app620].[CatPeriodosNomina]&#xA;WHERE&#x9;convert(date,getdate()) between convert(date,FechaInicio) and convert(date,FechaCierre)&#xA;      AND  countryidents = @PaisId&#xA;ORDER BY FechaCierre asc"
+              SQLTask:SqlStatementSource="SELECT&#x9;top 1 PeriodoNominaId, NombrePeriodo&#xA;FROM&#x9;[app620].[CatPeriodosNomina]&#xA;WHERE&#x9;convert(date,getdate()) between convert(date,FechaInicio) and convert(date,FechaCierre)&#xA;      AND  countryidents = 239&#xA;ORDER BY FechaCierre asc"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="0"
-                SQLTask:DtsVariableName="User::TipoPeriodo" />
+                SQLTask:DtsVariableName="User::PeriodoNominaId" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="1"
+                SQLTask:DtsVariableName="User::NombrePeriodo" />
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@PaisId"
                 SQLTask:DtsVariableName="User::PaisId"
@@ -1675,7 +1525,8 @@ AAAAAAAAAAAAAA==</BinaryItem>
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{587138F2-3508-4AB4-A5EF-A514BA53DA3D}"
-              SQLTask:SqlStatementSource="EXEC  [app620].[GeneraArchivoSolicitudSel_ByPais] 239"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="EXEC  [app620].[GeneraArchivoSolicitudSel_ByPais] 165"
               SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="0"
@@ -1754,39 +1605,43 @@ AAAAAAAAAAAAAA==</BinaryItem>
           Id="Package\Data Flow Task"
           TopLeft="623.642857142857,81.6428571428572" />
         <NodeLayout
-          Size="249,42"
+          Size="241,42"
           Id="Package\Sequence Container\Enviar Archivo o Depositar Archivo"
-          TopLeft="27,165" />
+          TopLeft="25,166" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Sequence Container\Execute SQL Task"
+          TopLeft="94.4999999999999,4.5" />
         <NodeLayout
           Size="168,42"
           Id="Package\Sequence Container\Obtener Bonos NM"
-          TopLeft="72.6666666666666,97.5" />
+          TopLeft="73.6666666666666,70.5" />
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
-          TopLeft="185,44.5">
+          TopLeft="176,46.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-28.3333333333333,53"
+              EndConnector="-18.3333333333333,24"
               Start="0,0"
-              End="-28.3333333333333,45.5">
+              End="-18.3333333333333,16.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.5" />
+                    End="0,8" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.5"
-                    Point2="0,26.5"
-                    Point3="-4,26.5" />
+                    Point1="0,8"
+                    Point2="0,12"
+                    Point3="-4,12" />
                   <mssgle:LineSegment
-                    End="-24.3333333333333,26.5" />
+                    End="-14.3333333333333,12" />
                   <mssgle:CubicBezierSegment
-                    Point1="-24.3333333333333,26.5"
-                    Point2="-28.3333333333333,26.5"
-                    Point3="-28.3333333333333,30.5" />
+                    Point1="-14.3333333333333,12"
+                    Point2="-18.3333333333333,12"
+                    Point3="-18.3333333333333,16" />
                   <mssgle:LineSegment
-                    End="-28.3333333333333,45.5" />
+                    End="-18.3333333333333,16.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1797,18 +1652,30 @@ AAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
-          TopLeft="154.083333333333,139.5">
+          TopLeft="157.666666666667,112.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,25.5"
+              EndConnector="-12.1666666666666,53.5"
               Start="0,0"
-              End="0,18">
+              End="-12.1666666666666,46">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18" />
+                    End="0,22.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.75"
+                    Point2="0,26.75"
+                    Point3="-4,26.75" />
+                  <mssgle:LineSegment
+                    End="-8.1666666666666,26.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.1666666666666,26.75"
+                    Point2="-12.1666666666666,26.75"
+                    Point3="-12.1666666666666,30.75" />
+                  <mssgle:LineSegment
+                    End="-12.1666666666666,46" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1817,50 +1684,46 @@ AAAAAAAAAAAAAA==</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="163,42"
-          Id="Package\Sequence Container\Execute SQL Task"
-          TopLeft="103.5,2.5" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="289,263"
           Size="289,306"
           Id="Package\Sequence Container"
-          TopLeft="253.857142857143,57.5714285714286" />
+          TopLeft="252.857142857143,58.5714285714286" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="398.357142857143,363.571428571429">
+          TopLeft="397.357142857143,364.571428571429">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-195.857142857143,47.7857142857144"
+              EndConnector="-194.857142857143,46.7857142857144"
               Start="0,0"
-              End="-195.857142857143,40.2857142857144">
+              End="-194.857142857143,39.2857142857144">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.8928571428572" />
+                    End="0,19.3928571428572" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,19.8928571428572"
-                    Point2="0,23.8928571428572"
-                    Point3="-4,23.8928571428572" />
+                    Point1="0,19.3928571428572"
+                    Point2="0,23.3928571428572"
+                    Point3="-4,23.3928571428572" />
                   <mssgle:LineSegment
-                    End="-191.857142857143,23.8928571428572" />
+                    End="-190.857142857143,23.3928571428572" />
                   <mssgle:CubicBezierSegment
-                    Point1="-191.857142857143,23.8928571428572"
-                    Point2="-195.857142857143,23.8928571428572"
-                    Point3="-195.857142857143,27.8928571428572" />
+                    Point1="-190.857142857143,23.3928571428572"
+                    Point2="-194.857142857143,23.3928571428572"
+                    Point3="-194.857142857143,27.3928571428572" />
                   <mssgle:LineSegment
-                    End="-195.857142857143,40.2857142857144" />
+                    End="-194.857142857143,39.2857142857144" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-123.233024553572,28.8928571428572,50.60890625,11.609375"
+              BoundingBox="-122.733024553572,28.3928571428572,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1870,20 +1733,20 @@ AAAAAAAAAAAAAA==</BinaryItem>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="119.071428571429,35.7857142857143"
+              EndConnector="118.071428571429,36.7857142857143"
               Start="0,0"
-              End="119.071428571429,28.2857142857143">
+              End="118.071428571429,29.2857142857143">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="115.071428571429,0" />
+                    End="114.071428571429,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="115.071428571429,0"
-                    Point2="119.071428571429,0"
-                    Point3="119.071428571429,4" />
+                    Point1="114.071428571429,0"
+                    Point2="118.071428571429,0"
+                    Point3="118.071428571429,4" />
                   <mssgle:LineSegment
-                    End="119.071428571429,28.2857142857143" />
+                    End="118.071428571429,29.2857142857143" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

@@ -3267,5 +3267,18 @@ namespace ASN.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CatMisSolicitudesSel_Result>("CatMisSolicitudesSel", solicitante_IdentParameter);
         }
+    
+        public virtual ObjectResult<ReporteAutorizadorEstatus_Result> ReporteAutorizadorEstatus(Nullable<int> autorizador_ident, string estatusSolicitudid)
+        {
+            var autorizador_identParameter = autorizador_ident.HasValue ?
+                new ObjectParameter("Autorizador_ident", autorizador_ident) :
+                new ObjectParameter("Autorizador_ident", typeof(int));
+    
+            var estatusSolicitudidParameter = estatusSolicitudid != null ?
+                new ObjectParameter("EstatusSolicitudid", estatusSolicitudid) :
+                new ObjectParameter("EstatusSolicitudid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteAutorizadorEstatus_Result>("ReporteAutorizadorEstatus", autorizador_identParameter, estatusSolicitudidParameter);
+        }
     }
 }

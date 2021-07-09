@@ -20,12 +20,18 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <div class="container-fluid">
-        <div class="col-lg-12 col-md-12">
-            <div class="row">
-                @Html.Label("Mis Autorizaciones", new { style = "font-size: 18px" })
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 col-md-8">
+            @Html.Label("Mis Autorizaciones", new { style = "font-size: 18px" })
         </div>
+       
+        <div class="col-lg-4 col-md-4">
+            @Html.Label("Reporte folios pendientes x autorizar", new { style = "font-size: 15px" })
+            <input class="btn-primary" type="button" title="Reporte" name="btnReporte" value="Reporte" onclick='onClickReporte()' />
+        </div>
+
+    </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div id="parent">

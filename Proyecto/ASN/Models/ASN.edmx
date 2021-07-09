@@ -831,6 +831,10 @@
           <Parameter Name="FolioId" Type="int" Mode="In" />
         </Function>
         <Function Name="ReporteAuditoriasSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
+        <Function Name="ReporteAutorizadorEstatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
+          <Parameter Name="Autorizador_ident" Type="int" Mode="In" />
+          <Parameter Name="EstatusSolicitudid" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="ReporteConceptoGeneralSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620" />
         <Function Name="ReporteConceptoXEstatusSel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="app620">
           <Parameter Name="PeriodoNomina" Type="int" Mode="In" />
@@ -1882,7 +1886,11 @@
           <Parameter Name="Ident" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CatMisSolicitudesSel" ReturnType="Collection(ASNModel.CatMisSolicitudesSel_Result)">
-            <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
+          <Parameter Name="Solicitante_Ident" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteAutorizadorEstatus" ReturnType="Collection(ASNModel.ReporteAutorizadorEstatus_Result)">
+            <Parameter Name="Autorizador_ident" Mode="In" Type="Int32" />
+            <Parameter Name="EstatusSolicitudid" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="CatClientCMB_Result">
@@ -3136,6 +3144,15 @@
           <Property Type="String" Name="Justificacion" Nullable="false" MaxLength="1" />
           <Property Type="Int32" Name="PeriodoNominaId" Nullable="true" />
           <Property Type="String" Name="NombrePeriodo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ReporteAutorizadorEstatus_Result">
+          <Property Type="Int32" Name="Folio_Solicitud" Nullable="false" />
+          <Property Type="Int32" Name="Empleado" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="752" />
+          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Monto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Motivo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Estatus_Solicitud" Nullable="false" MaxLength="50" />
         </ComplexType>
        
         </Schema>
@@ -4962,6 +4979,19 @@
                 <ScalarProperty Name="Justificacion" ColumnName="Justificacion" />
                 <ScalarProperty Name="PeriodoNominaId" ColumnName="PeriodoNominaId" />
                 <ScalarProperty Name="NombrePeriodo" ColumnName="NombrePeriodo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteAutorizadorEstatus" FunctionName="ASNModel.Store.ReporteAutorizadorEstatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASNModel.ReporteAutorizadorEstatus_Result">
+                <ScalarProperty Name="Folio_Solicitud" ColumnName="Folio Solicitud" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="Estatus_Solicitud" ColumnName="Estatus Solicitud" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
